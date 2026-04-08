@@ -46,7 +46,7 @@ const SP500=new Set(["AAPL","ABBV","ABT","ACN","ADBE","ADI","ADM","ADP","ADSK","
 let allStocks=[],stockMeta={};
 Promise.all([
   fetch("/api/theme_ranking.json").then(r=>r.json()),
-  fetch("/api/stock_meta.json").then(r=>r.json()).catch(()=>({}))
+  fetch("/api/stock_meta.json?v=2").then(r=>r.json()).catch(()=>({}))
 ]).then(([data,meta])=>{
   allStocks=(data.all_themes||[]).filter(t=>t.isIndividualTicker);
   stockMeta=meta;
