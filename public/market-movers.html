@@ -5,6 +5,17 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>銘柄ランキング | 米国株テーマトラッカー</title>
   <link rel="stylesheet" href="/styles.css?v=13">
+  <style>
+.stock-info{display:flex;flex-direction:column;gap:1px;flex:1;min-width:0;overflow:hidden}
+.stock-ticker{font-size:15px;font-weight:700;color:var(--text-main);display:flex;align-items:center;gap:4px}
+.stock-company{font-size:11px;color:var(--text-sub);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stock-tags{display:flex;gap:3px;flex-wrap:wrap;margin-top:1px}
+.stock-tag{font-size:8px;padding:1px 4px;border-radius:2px;white-space:nowrap}
+.stock-tag.sector{background:rgba(0,82,204,0.08);color:#0052cc}
+.stock-tag.mc{background:rgba(0,0,0,0.05);color:var(--text-sub)}
+.stock-tag.index{background:rgba(0,200,83,0.1);color:#00c853}
+.stock-price{font-size:11px;color:var(--text-sub);text-align:right}
+</style>
 </head>
 <body>
   <header>
@@ -26,9 +37,17 @@
 let period="1日",dir="up";
 const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-let allStocks=[];
-fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
+const SEC_JA={"Technology":"テクノロジー","Healthcare":"ヘルスケア","Financial Services":"金融","Energy":"エネルギー",
+  "Consumer Cyclical":"一般消費財","Consumer Defensive":"生活必需品","Industrials":"資本財","Basic Materials":"素材",
+  "Real Estate":"不動産","Utilities":"公益","Communication Services":"通信"};
+const SP500=new Set(["AAPL","ABBV","ABT","ACN","ADBE","ADI","ADM","ADP","ADSK","AEE","AEP","AES","AFL","AIG","AIZ","AJG","AKAM","ALB","ALGN","ALK","ALL","ALLE","AMAT","AMCR","AMD","AME","AMGN","AMP","AMT","AMZN","ANET","ANSS","AON","AOS","APA","APD","APH","APTV","ARE","ATO","ATVI","AVGO","AVY","AWK","AXP","AZO","BA","BAC","BAX","BBWI","BBY","BDX","BEN","BF.B","BIO","BIIB","BK","BKNG","BKR","BLK","BMY","BR","BRK.B","BRO","BSX","BWA","BX","BXP","C","CAG","CAH","CARR","CAT","CB","CBOE","CBRE","CCI","CCL","CDAY","CDNS","CDW","CE","CEG","CF","CFG","CHD","CHRW","CHTR","CI","CINF","CL","CLX","CMA","CMCSA","CME","CMG","CMI","CMS","CNC","CNP","COF","COO","COP","COST","CPB","CPRT","CPT","CRL","CRM","CRWD","CSCO","CSGP","CSX","CTAS","CTLT","CTRA","CTSH","CTVA","CVS","CVX","CZR","D","DAL","DD","DE","DECK","DFS","DG","DGX","DHI","DHR","DIS","DISH","DLR","DLTR","DOV","DOW","DPZ","DRI","DTE","DUK","DVA","DVN","DXC","DXCM","EA","EBAY","ECL","ED","EFX","EIX","EL","EMN","EMR","ENPH","EOG","EPAM","EQIX","EQR","EQT","ES","ESS","ETN","ETR","EVRG","EW","EXC","EXPD","EXPE","EXR","F","FANG","FAST","FBHS","FCX","FDS","FDX","FE","FFIV","FI","FICO","FIS","FISV","FITB","FLT","FMC","FOX","FOXA","FRC","FRT","FTNT","FTV","GD","GE","GEHC","GEN","GILD","GIS","GL","GLW","GM","GNRC","GOOG","GOOGL","GPC","GPN","GRMN","GS","GWW","HAL","HAS","HBAN","HCA","HD","HOLX","HON","HPE","HPQ","HRL","HSIC","HST","HSY","HUM","HWM","IBM","ICE","IDXX","IEX","IFF","ILMN","INCY","INTC","INTU","INVH","IP","IPG","IQV","IR","IRM","ISRG","IT","ITW","IVZ","J","JBHT","JCI","JKHY","JNJ","JNPR","JPM","K","KDP","KEY","KEYS","KHC","KIM","KLAC","KMB","KMI","KMX","KO","KR","KVUE","L","LDOS","LEN","LH","LHX","LIN","LKQ","LLY","LMT","LNC","LNT","LOW","LRCX","LULU","LUV","LVS","LW","LYB","LYV","MA","MAA","MAR","MAS","MCD","MCHP","MCK","MCO","MDLZ","MDT","MELI","MET","META","MGM","MHK","MKC","MKTX","MLM","MMC","MMM","MNST","MO","MOH","MOS","MPC","MPWR","MRK","MRNA","MRO","MS","MSCI","MSFT","MSI","MTB","MTCH","MTD","MU","NCLH","NDAQ","NDSN","NEE","NEM","NFLX","NI","NKE","NOC","NOW","NRG","NSC","NTAP","NTRS","NUE","NVDA","NVR","NWL","NWS","NWSA","NXPI","O","ODFL","OGN","OKE","OMC","ON","ORCL","ORLY","OTIS","OXY","PANW","PARA","PAYC","PAYX","PCAR","PCG","PDD","PEAK","PEG","PEP","PFE","PFG","PG","PGR","PH","PHM","PKG","PKI","PLD","PM","PNC","PNR","PNW","POOL","PPG","PPL","PRU","PSA","PSX","PTC","PVH","PWR","PXD","PYPL","QCOM","QRVO","RCL","RE","REG","REGN","RF","RHI","RJF","RL","RMD","ROK","ROL","ROP","ROST","RSG","RTX","RVTY","SBAC","SBNY","SBUX","SCHW","SEE","SHW","SIVB","SJM","SLB","SNA","SNPS","SO","SPG","SPGI","SRE","STE","STLD","STT","STX","STZ","SWK","SWKS","SYF","SYK","SYY","T","TAP","TDG","TDY","TECH","TEL","TER","TFC","TFX","TGT","TJX","TMO","TMUS","TPR","TRGP","TRMB","TROW","TRV","TSCO","TSLA","TSN","TT","TTWO","TXN","TXT","TYL","UAL","UDR","UHS","ULTA","UNH","UNP","UPS","URI","USB","V","VFC","VICI","VLO","VMC","VRSK","VRSN","VRTX","VTR","VTRS","VZ","WAB","WAT","WBA","WBD","WDC","WEC","WELL","WFC","WHR","WM","WMB","WMT","WRB","WRK","WST","WTW","WY","WYNN","XEL","XOM","XRAY","XYL","YUM","ZBH","ZBRA","ZION","ZTS"]);
+let allStocks=[],stockMeta={};
+Promise.all([
+  fetch("/api/theme_ranking.json").then(r=>r.json()),
+  fetch("/api/stock_meta.json").then(r=>r.json()).catch(()=>({}))
+]).then(([data,meta])=>{
   allStocks=(data.all_themes||[]).filter(t=>t.isIndividualTicker);
+  stockMeta=meta;
   const periods=(data.all_periods||[]).filter(p=>p!=="日中");
   document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setPeriod(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
   renderMovers();
@@ -42,10 +61,33 @@ function renderMovers(){
   let h='<div class="section-label '+(dir==="up"?"top":"bottom")+'">'+label+' TOP 30</div>';
   items.forEach((s,i)=>{
     const r=s[period];const d=r>=0?"up":"down";
+    const meta=stockMeta[s.name]||{};
+    const nameJa=meta.name_ja||meta.name||"";
+    const sector=SEC_JA[meta.sector]||meta.sector||"";
+    const industry=meta.industry||"";
+    const mc=meta.mc||"";
+    const price=meta.price?("$"+meta.price.toLocaleString()):"";
+    const inSP=SP500.has(s.name);
+    const r1y=s["1年"];
+    const r1yCls=(r1y??0)>=0?"positive":"negative";
+
     h+='<div class="theme-item '+d+'"><div class="theme-item-row">';
     h+='<div class="rank '+(i<3?"top3 "+d:"")+'">'+( i+1)+'</div>';
-    h+='<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
-    h+='<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
+    h+='<div class="stock-info">';
+    h+='<div class="stock-ticker">'+s.name;
+    if(mc) h+=' <span class="stock-tag mc">'+mc+'</span>';
+    if(inSP) h+=' <span class="stock-tag index">S&P500</span>';
+    h+='</div>';
+    h+='<div class="stock-company">'+nameJa+'</div>';
+    h+='<div class="stock-tags">';
+    if(sector) h+='<span class="stock-tag sector">'+sector+'</span>';
+    if(industry) h+='<span class="stock-tag mc">'+industry+'</span>';
+    h+='</div></div>';
+    h+='<div class="return-cell">';
+    h+='<div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div>';
+    h+='<div class="stock-price">'+price+'</div>';
+    if(r1y!=null) h+='<div class="return-sub '+r1yCls+'">'+fmt(r1y)+' /1Y</div>';
+    h+='</div>';
     h+='<div class="chevron">›</div></div></div>';
   });
   document.getElementById("mvMain").innerHTML=h;
