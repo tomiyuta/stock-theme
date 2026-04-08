@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>銘柄 | 米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <div class="header-title">値動き銘柄<span class="header-badge">Self-Hosted</span></div>
+    </div>
+    <div class="period-bar" id="pbar"></div>
+  </header>
+  <main id="mvMain" style="padding:0"></main>
+  <nav class="bottom-nav">
+    <a class="nav-item" href="/"><span class="nav-icon">🏠</span>ホーム</a>
+    <a class="nav-item" href="/map"><span class="nav-icon">🗺</span>マップ</a>
+    <a class="nav-item active" href="/market-movers"><span class="nav-icon">📈</span>銘柄</a>
+    <a class="nav-item" href="/infographic"><span class="nav-icon">🌐</span>マクロテーマ</a>
+    <a class="nav-item" href="/mypage"><span class="nav-icon">👤</span>ログイン</a>
+  </nav>
+  <script>
+let period = "1日";
+const PL = {"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
+const fmt = v => v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+let allStocks = [];
+fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
+  allStocks = (data.all_themes||[]).filter(t=>t.isIndividualTicker);
+  const periods = data.all_periods||data.periods||[];
+  document.getElementById("pbar").innerHTML = periods.filter(p=>p!=="日中").map(p=>
+    '<button class="period-btn'+(p===period?" active":"")+'" onclick="setPeriod(this,\''+p+'\')">'+((PL[p])||p)+'</button>'
+  ).join("");
+  renderMovers();
+});
+function setPeriod(btn, p) {
+  period = p;
+  document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderMovers();
+}
+function renderMovers() {
+  const sorted = [...allStocks].filter(s=>s[period]!=null).sort((a,b)=>(b[period]||0)-(a[period]||0));
+  const top20 = sorted.slice(0, 20);
+  const bot20 = sorted.slice(-20).reverse();
+  let h = '<div class="section-label top">TOP 20 銘柄</div>';
+  top20.forEach((s,i) => {
+    const r = s[period]; const dir = r>=0?"up":"down";
+    h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
+    h += '<div class="rank '+(i<3?"top3 "+dir:"")+'">'+( i+1)+'</div>';
+    h += '<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
+    h += '<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
+    h += '<div class="chevron">›</div></div></div>';
+  });
+  h += '<div class="section-label bottom">BOTTOM 20 銘柄</div>';
+  bot20.forEach((s,i) => {
+    const r = s[period]; const dir = r>=0?"up":"down";
+    h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
+    h += '<div class="rank">'+( sorted.length-19+i)+'</div>';
+    h += '<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
+    h += '<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
+    h += '<div class="chevron">›</div></div></div>';
+  });
+  document.getElementById("mvMain").innerHTML = h;
+}
+  </script>
+</body>
+</html>

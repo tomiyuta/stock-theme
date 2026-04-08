@@ -2,6 +2,11 @@
   "buildCommand": null,
   "outputDirectory": "public",
   "framework": null,
+  "rewrites": [
+    { "source": "/theme/:slug", "destination": "/theme.html" },
+    { "source": "/map", "destination": "/map.html" },
+    { "source": "/market-movers", "destination": "/market-movers.html" }
+  ],
   "headers": [
     {
       "source": "/api/(.*)",
