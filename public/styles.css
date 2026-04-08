@@ -119,3 +119,91 @@ header { background: var(--bg-color); position: sticky; top: 0; z-index: 100; bo
 .market-toggle { display: flex; background: rgba(0,0,0,0.04); border-radius: 6px; overflow: hidden; }
 .mt-btn { border: none; background: transparent; padding: 4px 10px; font-size: 12px; font-weight: 500; color: var(--text-sub); cursor: pointer; font-family: inherit; transition: all 0.15s; }
 .mt-btn.active { background: var(--text-main); color: #fff; border-radius: 5px; }
+
+
+/* ── Mobile: iPhone SE ~ iPhone 16 Pro Max ──── */
+@media (max-width:767px) {
+  body { font-size: 13px; }
+  .header-top { padding: 12px 10px 6px; }
+  .header-title { font-size: 15px; }
+  .header-meta { padding: 0 10px 6px; }
+
+  /* Period tabs: horizontal scroll on small screens */
+  .period-bar { overflow-x: auto; -webkit-overflow-scrolling: touch; scroll-snap-type: x mandatory; }
+  .period-bar::-webkit-scrollbar { display: none; }
+  .period-btn { flex: 0 0 auto; padding: 10px 10px; font-size: 13px; min-width: 40px; scroll-snap-align: center; }
+
+  /* Radio filters: scroll if needed */
+  .radio-filters { overflow-x: auto; -webkit-overflow-scrolling: touch; flex-wrap: nowrap; }
+  .radio-filters::-webkit-scrollbar { display: none; }
+  .rf { flex: 0 0 auto; }
+  .rf span { font-size: 12px; padding: 6px 10px; }
+
+  /* Toolbar: ensure scrollable */
+  .toolbar { padding: 6px 6px 4px; gap: 4px; }
+  .toolbar-btn { font-size: 12px; padding: 6px 8px; min-height: 36px; }
+  .toolbar-select { font-size: 12px; min-height: 36px; }
+
+  /* Theme cards */
+  .theme-item { padding: 0 2px 0 4px; }
+  .theme-item-row { min-height: 60px; }
+  .theme-name-primary { font-size: 15px; }
+  .theme-name-secondary { font-size: 10px; }
+  .sparkline-wrap { width: 70px; flex: 0 0 70px; height: 56px; }
+  .return-value { font-size: 15px; }
+  .return-cell { min-width: 54px; padding-right: 4px; }
+  .return-sub { font-size: 9px; }
+  .rank { width: 18px; height: 18px; font-size: 8px; margin-right: 5px; }
+  .chevron { font-size: 11px; }
+
+  /* Period breakdown: tighter on mobile */
+  .period-breakdown { padding: 0 2px 4px 24px; }
+  .pb-item { padding: 1px 4px; }
+  .pb-label { font-size: 8px; }
+  .pb-val { font-size: 10px; }
+
+  /* Ticker tags */
+  .ticker-tags { padding: 2px 4px 4px 24px; }
+  .ticker-tag { font-size: 9px; padding: 2px 4px; }
+
+  /* Bottom nav: larger touch targets */
+  .bottom-nav { padding: 8px 0; padding-bottom: max(8px, env(safe-area-inset-bottom)); }
+  .nav-item { font-size: 10px; padding: 4px 6px; min-height: 44px; justify-content: center; }
+  .nav-icon { font-size: 18px; }
+
+  /* Section labels */
+  .section-label { padding: 8px 10px 4px; font-size: 10px; }
+
+  /* Show more buttons */
+  .show-more { padding: 10px 8px; gap: 6px; }
+  .show-more-btn { padding: 8px 12px; font-size: 11px; }
+
+  /* Market toggle */
+  .mt-btn { padding: 4px 8px; font-size: 11px; }
+
+  /* Detail page */
+  .detail-title { font-size: 18px; }
+  .detail-periods { grid-template-columns: repeat(3, 1fr); gap: 4px; }
+  .dp-box { padding: 6px 3px; }
+  .dp-label { font-size: 9px; }
+  .dp-value { font-size: 13px; }
+  .dt-row { padding: 7px 0; }
+  .dt-name { font-size: 12px; }
+  .dt-return { font-size: 13px; }
+}
+
+/* Extra small: iPhone SE (375px) */
+@media (max-width:380px) {
+  .theme-name-primary { font-size: 14px; }
+  .return-value { font-size: 14px; }
+  .sparkline-wrap { width: 60px; flex: 0 0 60px; }
+  .period-btn { padding: 10px 8px; font-size: 12px; min-width: 36px; }
+  .rf span { font-size: 11px; padding: 5px 6px; }
+}
+
+/* Prevent horizontal overflow globally */
+html, body { overflow-x: hidden; max-width: 100vw; }
+main { overflow-x: hidden; }
+
+/* Safe area padding for notched iPhones */
+header { padding-top: env(safe-area-inset-top); }
