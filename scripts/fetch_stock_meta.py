@@ -21,6 +21,9 @@ def get_all_tickers():
         if t.get("isIndividualTicker"): tickers.add(t["name"])
     return sorted(tickers)
 
+EX_JA = {"NMS":"NASDAQ","NGM":"NASDAQ","NCM":"NASDAQ","NYQ":"NYSE","PCX":"NYSE Arca","BTS":"BATS","ASE":"AMEX","OQB":"OTC"}
+NDX100 = set("AAPL,ABNB,ADBE,ADI,ADP,ADSK,AEP,AMAT,AMGN,AMZN,ANSS,APP,ARM,ASML,AVGO,AZN,BIIB,BKNG,BKR,CDNS,CDW,CEG,CHTR,CMCSA,COIN,COST,CPRT,CRWD,CSGP,CSCO,CTAS,CTSH,DASH,DDOG,DLTR,DXCM,EA,EXC,FANG,FAST,FTNT,GEHC,GFS,GILD,GOOG,GOOGL,HON,IDXX,ILMN,INTC,INTU,ISRG,KDP,KHC,KLAC,LIN,LRCX,LULU,MAR,MCHP,MDB,MDLZ,MELI,META,MNST,MRNA,MRVL,MSFT,MU,NFLX,NVDA,NXPI,ODFL,ON,ORLY,PANW,PAYX,PCAR,PDD,PEP,PYPL,QCOM,REGN,ROST,SBUX,SMCI,SNPS,TEAM,TMUS,TSLA,TTD,TTWO,TXN,VRSK,VRTX,WBD,WDAY,XEL,ZS".split(","))
+
 def mc_label(mc):
     if mc is None: return ""
     if mc >= 200e9: return "超大型"
@@ -36,16 +39,22 @@ def fetch_meta(tickers):
             print(f"  [{i}/{total}] ...")
         try:
             info = yf.Ticker(tk).info
+            ex_raw = info.get("exchange", "")
+            indices = []
+            if tk in NDX100: indices.append("NASDAQ-100")
             meta[tk] = {
                 "name": info.get("longName") or info.get("shortName") or tk,
                 "sector": info.get("sector") or "",
                 "industry": info.get("industry") or "",
                 "mc": mc_label(info.get("marketCap")),
                 "price": round(info.get("previousClose") or 0, 2),
+                "exchange": EX_JA.get(ex_raw, ex_raw),
+                "quoteType": info.get("quoteType") or "",
+                "indices": indices,
             }
         except Exception as e:
             print(f"  WARN: {tk} -> {e}")
-            meta[tk] = {"name": tk, "sector": "", "industry": "", "mc": "", "price": 0}
+            meta[tk] = {"name": tk, "sector": "", "industry": "", "mc": "", "price": 0, "exchange": "", "quoteType": "", "indices": []}
         time.sleep(0.05)
     return meta
 
