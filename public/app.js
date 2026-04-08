@@ -76,14 +76,16 @@ function renderList() {
   const main = document.getElementById("main");
   let items = filterByCat([...STATE.themes]);
   const p = STATE.activePeriod;
-  if (STATE.sortBy==="desc"||STATE.sortBy==="asc") {
-    items.sort((a,b)=> STATE.sortBy==="desc"?(b[p]??-Infinity)-(a[p]??-Infinity):(a[p]??Infinity)-(b[p]??Infinity));
+  // top-bottom モードでは常に選択期間の騰落率でソート
+  if (STATE.displayMode==="top-bottom") {
+    items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity));
   }
+  const periodLabel = PL[p]||p;
   let html = "";
   if (STATE.displayMode==="top-bottom") {
     const top10 = items.slice(0,10);
     const bot10 = items.slice(-10);
-    html += '<div class="section-label top">TOP 10</div>';
+    html += `<div class="section-label top">${periodLabel} 騰落率 TOP 10</div>`;
     html += top10.map((t,i)=>renderItem(t,i+1)).join("");
     // S&P500 benchmark (#10 same style as regular cards)
     const spy = STATE.etfs.find(e=>e.name==="SPY");
@@ -91,9 +93,11 @@ function renderList() {
       const sr = spy[p]; const sd = (sr||0)>=0?"up":"down";
       html += `<div class="theme-item ${sd}"><div class="theme-item-row"><div class="rank ${sd}">—</div><div class="theme-name"><div class="theme-name-primary">S&P500</div><div class="theme-name-secondary">SPY</div></div><div class="return-cell"><div class="return-value ${sd==="up"?"positive":"negative"}">${fmtRet(sr)}</div><div class="return-sub">${fmtRet(spy["1年"])} /1Y</div></div><div class="chevron"></div></div></div>`;
     }
-    html += '<div class="section-label bottom">BOTTOM 10</div>';
+    html += `<div class="section-label bottom">${periodLabel} 騰落率 BOTTOM 10</div>`;
     html += bot10.map((t,i)=>renderItem(t,items.length-9+i)).join("");
   } else {
+    if (STATE.sortBy==="desc") items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity));
+    else if (STATE.sortBy==="asc") items.sort((a,b)=>(a[p]??Infinity)-(b[p]??Infinity));
     const limit = STATE.displayMode==="all"?items.length:STATE.displayMode==="top20"?20:10;
     html += items.slice(0,limit).map((t,i)=>renderItem(t,i+1)).join("");
   }
