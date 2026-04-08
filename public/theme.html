@@ -16,8 +16,15 @@
 .stock-card .theme-name-primary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .mc-tag{font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,0,0,0.06);color:var(--text-sub);margin-left:3px;flex-shrink:0}
 .sector-tag{font-size:9px;color:var(--text-sub);margin-left:3px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;max-width:80px;white-space:nowrap}
-@media(max-width:767px){.sector-tag{max-width:50px}.mc-tag{font-size:8px;padding:0 3px}}
-@media(max-width:380px){.sector-tag{display:none}.mc-tag{display:none}}
+.idx-tag{font-size:8px;padding:1px 4px;border-radius:2px;margin-left:3px;flex-shrink:0;white-space:nowrap}
+.idx-tag.sp{background:rgba(0,200,83,0.1);color:#00c853}
+.idx-tag.ndx{background:rgba(0,82,204,0.1);color:#0052cc}
+.idx-tag.ex{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.stock-sub{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-top:1px}
+.stock-sector{font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,82,204,0.08);color:#0052cc}
+.stock-industry{font-size:9px;color:var(--text-sub)}
+@media(max-width:767px){.sector-tag{max-width:50px}.mc-tag{font-size:8px;padding:0 3px}.idx-tag{font-size:7px;padding:0 3px}}
+@media(max-width:380px){.sector-tag{display:none}.mc-tag{display:none}.idx-tag{display:none}}
 </style>
 </head>
 <body>
@@ -36,6 +43,8 @@
   <script>
 const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+const SEC_JA={"Technology":"テクノロジー","Healthcare":"ヘルスケア","Financial Services":"金融","Energy":"エネルギー","Consumer Cyclical":"一般消費財","Consumer Defensive":"生活必需品","Industrials":"資本財","Basic Materials":"素材","Real Estate":"不動産","Utilities":"公益","Communication Services":"通信"};
+const SP500=new Set(["AAPL","ABBV","ABT","ACN","ADBE","ADI","ADM","ADP","ADSK","AEP","AMAT","AMD","AMGN","AMT","AMZN","ANET","ANSS","AON","APD","APH","AVGO","AXP","BA","BAC","BK","BKNG","BKR","BLK","BMY","BR","BRK.B","BSX","BX","C","CAT","CB","CDNS","CEG","CHTR","CI","CL","CMCSA","CME","CMG","CMS","CNP","COF","COP","COST","CRM","CRWD","CSCO","CTAS","CTSH","CVS","CVX","D","DD","DE","DHR","DIS","DLR","DOW","DUK","DVN","DXCM","EA","ECL","EMR","ENPH","EOG","EQIX","ETN","EW","EXC","EXPE","F","FANG","FAST","FCX","FDX","FI","FISV","FTNT","GD","GE","GEHC","GILD","GIS","GLW","GM","GOOG","GOOGL","GS","GWW","HAL","HCA","HD","HON","HPQ","HUM","IBM","ICE","IDXX","INTC","INTU","ISRG","ITW","JCI","JNJ","JPM","KHC","KLAC","KMB","KO","KR","LEN","LIN","LLY","LMT","LOW","LRCX","LULU","LYV","MA","MAR","MCD","MCHP","MCK","MCO","MDLZ","MDT","MELI","MET","META","MMM","MNST","MO","MOH","MPC","MPWR","MRK","MRNA","MS","MSCI","MSFT","MSI","MU","NCLH","NEE","NFLX","NKE","NOC","NOW","NSC","NVDA","NVR","NXPI","O","ODFL","OKE","ON","ORCL","ORLY","OXY","PANW","PAYC","PAYX","PEP","PFE","PG","PGR","PLD","PM","PNC","POOL","PPG","PRU","PSA","PSX","PYPL","QCOM","RCL","REGN","RMD","ROP","ROST","RTX","SBUX","SCHW","SHW","SLB","SNPS","SO","SPG","SRE","STE","STZ","SYK","T","TDG","TGT","TJX","TMO","TMUS","TSLA","TSN","TT","TTD","TTWO","TXN","TYL","UNH","UNP","UPS","URI","USB","V","VICI","VLO","VRSK","VRTX","VZ","WBA","WBD","WEC","WELL","WFC","WM","WMT","WST","XOM","XYL","YUM","ZBH","ZTS"]);
 const slug=location.pathname.replace("/theme/","").replace(/\/$/,"");
 Promise.all([
   fetch("/api/theme_ranking.json").then(r=>r.json()),
@@ -76,18 +85,23 @@ Promise.all([
     const dir=(s.r1d??0)>=0?"up":"down";
     const rankClass=i<3?"top3 "+dir:"";
     const mcLabel=s.meta.mc?'<span class="mc-tag">'+s.meta.mc+'</span>':"";
-    const sectorLabel=s.meta.industry?'<span class="sector-tag">'+s.meta.industry+'</span>':"";    const companyName=s.meta.name_ja||s.meta.name||s.tk;
-    const price=s.meta.price?s.meta.price.toLocaleString():"—";
+    const sectorLabel=s.meta.industry?'<span class="sector-tag">'+s.meta.industry+'</span>':"";
+    const ex=s.meta.exchange||"";
+    const exTag=ex?'<span class="idx-tag ex">'+ex+'</span>':"";
+    const spTag=SP500.has(s.tk)?'<span class="idx-tag sp">S&P500</span>':"";
+    const ndxTag=(s.meta.indices||[]).map(idx=>'<span class="idx-tag ndx">'+idx+'</span>').join("");
+    const sectorJa=SEC_JA[s.meta.sector]||s.meta.sector||"";
+    const companyName=s.meta.name_ja||s.meta.name||s.tk;
+    const price=s.meta.price?("$"+s.meta.price.toLocaleString()):"—";
     const r1dStr=fmt(s.r1d);
-    const r1yStr=fmt(s.r1y);
     const r1dCls=(s.r1d??0)>=0?"positive":"negative";
-    const r1yCls=(s.r1y??0)>=0?"positive":"negative";
 
     stockHtml+=`<div class="stock-card ${dir}"><div class="stock-row">
       <div class="rank ${rankClass}">${i+1}</div>
       <div class="theme-name" style="flex:1;min-width:0">
-        <div class="theme-name-primary" style="display:flex;align-items:center;gap:0">${s.tk}${mcLabel}${sectorLabel}</div>
+        <div class="theme-name-primary" style="display:flex;align-items:center;gap:0">${s.tk}${mcLabel}${exTag}${spTag}${ndxTag}</div>
         <div class="theme-name-secondary">${companyName}</div>
+        <div class="stock-sub">${sectorJa?'<span class="stock-sector">'+sectorJa+'</span>':''}${s.meta.industry?'<span class="stock-industry">'+s.meta.industry+'</span>':''}</div>
       </div>
       <div class="sparkline-wrap"><canvas data-tk="${s.tk}" height="52"></canvas></div>
       <div class="return-cell">
