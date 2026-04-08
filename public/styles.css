@@ -100,7 +100,7 @@ header{background:var(--bg-color);position:sticky;top:0;z-index:100;border-botto
 .dt-row:last-child{border-bottom:none}
 .dt-name{font-size:13px;font-weight:600}.dt-sub{font-size:11px;color:var(--text-sub);margin-top:1px}
 .dt-return{font-size:14px;font-weight:700;font-variant-numeric:tabular-nums}
-.detail-chart-wrap{height:160px;margin-bottom:16px}
+.detail-chart-wrap{height:160px;margin-bottom:16px;width:100%;position:relative}
 .hidden{display:none!important}
 .loading{text-align:center;padding:60px 16px;color:var(--text-sub);font-size:13px}
 /* Macro dashboard cards */
