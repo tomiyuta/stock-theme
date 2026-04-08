@@ -3,7 +3,7 @@
     --bg-color:#ffffff; --card-bg:#f5f5f5; --card-radius:2px; --card-gap:1px;
     --text-main:#1a1a1a; --text-sub:#6b7280; --accent-blue:#0052cc;
     --positive:#00c853; --negative:#ff1744;
-    --positive-bg:rgba(0,200,83,0.08); --negative-bg:rgba(255,23,68,0.08);
+    --positive-bg:rgba(0,200,83,0.15); --negative-bg:rgba(255,23,68,0.15);
     --border:rgba(0,0,0,0.07);
 }
 *{-webkit-tap-highlight-color:transparent;margin:0;padding:0;box-sizing:border-box}
