@@ -52,11 +52,6 @@ function bindEvents() {
   document.getElementById("sortSelect").addEventListener("change",function(){STATE.sortBy=this.value;sortThemes();renderList();});
   // Radio → ミニマップ切替（ランキングには影響しない）
   document.querySelectorAll('input[name="cat"]').forEach(r=>r.addEventListener("change",function(){STATE.mapCat=this.value||"sector";renderMiniMap();}));
-  // #7 Market toggle
-  document.querySelectorAll(".mt-btn").forEach(b=>b.addEventListener("click",function(){
-    document.querySelectorAll(".mt-btn").forEach(x=>x.classList.remove("active"));
-    this.classList.add("active");
-  }));
 }
 
 function render() { renderPeriodBar(); renderList(); renderMiniMap(); }
