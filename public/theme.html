@@ -49,8 +49,8 @@ const slug=location.pathname.replace("/theme/","").replace(/\/$/,"");
 Promise.all([
   fetch("/api/theme_ranking.json").then(r=>r.json()),
   fetch("/api/stock_meta.json?v=2").then(r=>r.json()).catch(()=>({})),
-  fetch("/api/alpha_beta.json").then(r=>r.json()).catch(()=>({})),
-  fetch("/api/theme-details/"+slug+".json").then(r=>r.json()).catch(()=>null)
+  fetch("/api/alpha_beta.json?v=2").then(r=>r.json()).catch(()=>({})),
+  fetch("/api/theme-details/"+slug+".json?v=2").then(r=>r.json()).catch(()=>null)
 ]).then(([ranking, stockMeta, abAll, detail])=>{
   const all=ranking.all_themes||[];
   const theme=all.find(t=>t.slug===slug);
