@@ -34,7 +34,7 @@ const CATS={
 const NAMES={XLB:"素材",XLC:"通信",XLE:"エネルギー",XLF:"金融",XLI:"資本財",XLK:"テクノロジー",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLV:"ヘルスケア",XLY:"一般消費財",SPY:"S&P500",QQQ:"NASDAQ100",IWM:"小型株",RSP:"均等加重",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",TLT:"長期国債",IEF:"中期国債",SHY:"短期国債",HYG:"ハイイールド",IBIT:"ビットコイン",EWJ:"日本",MCHI:"中国",INDA:"インド",EWZ:"ブラジル",EWY:"韓国"};
 let allEtfs=[];
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);return v>=0?`rgba(34,197,94,${0.3+a*0.7})`:`rgba(239,68,68,${0.3+a*0.7})`}
+function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);if(v>=0){const r=Math.round(129+(34-129)*a),g=Math.round(199+(197-199)*a),b=Math.round(132+(94-132)*a);return`rgb(${r},${g},${b})`}else{const r=Math.round(237+(239-237)*a),g=Math.round(129+(68-129)*a),b=Math.round(134+(68-134)*a);return`rgb(${r},${g},${b})`}}
 fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
   allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
   const periods=(data.all_periods||[]).filter(p=>p!=="日中");
