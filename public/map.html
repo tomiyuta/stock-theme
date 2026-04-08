@@ -46,7 +46,7 @@ function setP(btn,p){period=p;document.querySelectorAll(".period-btn").forEach(b
 function renderMap(){
   const items=CATS[cat]?.items||[];
   const tiles=items.map(tk=>{const e=allEtfs.find(x=>x.name===tk);return{tk,name:NAMES[tk]||tk,ret:e?e[period]:null}}).sort((a,b)=>(b.ret||0)-(a.ret||0));
-  document.getElementById("mapMain").innerHTML='<div class="map-viewport">'+tiles.map(t=>'<div class="map-tile" style="background:'+tileColor(t.ret)+'" onclick="location.href=\'/\'"><div class="map-tile-name">'+t.name+'</div><div class="map-tile-change">'+fmt(t.ret)+'</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:2px">'+t.tk+'</div></div>').join("")+'</div>';
+  document.getElementById("mapMain").innerHTML='<div class="map-viewport">'+tiles.map(t=>'<div class="map-tile" style="background:'+tileColor(t.ret)+'" onclick="window.open(\'https://finance.yahoo.com/quote/'+t.tk+'\',\'_blank\')"><div class="map-tile-name">'+t.name+'</div><div class="map-tile-change">'+fmt(t.ret)+'</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:2px">'+t.tk+'</div></div>').join("")+'</div>';
 }
   </script>
 </body>

@@ -170,6 +170,6 @@ function renderMiniMap() {
     return {tk, name:ETF_NAMES[tk]||tk, ret:e?e[p]:null};
   }).sort((a,b)=>(b.ret||0)-(a.ret||0));
   el.innerHTML = '<div class="map-viewport">' + tiles.map(t =>
-    `<div class="map-tile" style="background:${tileColor(t.ret)}"><div class="map-tile-name">${t.name}</div><div class="map-tile-change">${fmtRet(t.ret)}</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:1px">${t.tk}</div></div>`
+    `<div class="map-tile" style="background:${tileColor(t.ret)};cursor:pointer" onclick="window.open('https://finance.yahoo.com/quote/${t.tk}','_blank')"><div class="map-tile-name">${t.name}</div><div class="map-tile-change">${fmtRet(t.ret)}</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:1px">${t.tk}</div></div>`
   ).join('') + '</div>';
 }
