@@ -59,7 +59,7 @@ function render() { renderPeriodBar(); renderList(); renderMiniMap(); }
 function renderPeriodBar() {
   const bar = document.getElementById("periodBar");
   bar.innerHTML = STATE.allPeriods.map(p=>`<button class="period-btn${p===STATE.activePeriod?" active":""}" data-p="${p}">${PL[p]||p}</button>`).join("");
-  bar.onclick = e => { const b=e.target.closest(".period-btn"); if(!b)return; STATE.activePeriod=b.dataset.p; sortThemes(); renderPeriodBar(); renderList(); };
+  bar.onclick = e => { const b=e.target.closest(".period-btn"); if(!b)return; STATE.activePeriod=b.dataset.p; sortThemes(); renderPeriodBar(); renderList(); renderMiniMap(); };
 }
 
 function renderList() {
