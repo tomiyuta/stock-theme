@@ -85,7 +85,7 @@ function renderList() {
   else items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity)); // ランク順 = 選択期間の騰落率順
 
   // セクションラベル
-  const sortLabels = {desc:`${periodLabel} 騰落率↑`, asc:`${periodLabel} 騰落率↓`, name:"名前順", rank:`${periodLabel} 騰落率`};
+  const sortLabels = {desc:`${periodLabel} 暴騰率↑`, asc:`${periodLabel} 暴落率↓`, name:"名前順", rank:`${periodLabel} 騰落率`};
   const sortLabel = sortLabels[STATE.sortBy]||periodLabel;
 
   let html = "";
