@@ -1,6 +1,6 @@
 /* stock-themes.com Clone — App Logic v3 */
 const STATE = { themes:[], etfs:[], stocks:[], sparklines:{}, allPeriods:[], activePeriod:"1日",
-  showChart:true, showTickers:false, mapCat:"sector", sortBy:"rank", displayMode:"top-bottom" };
+  showChart:true, showTickers:false, mapCat:"sector", sortBy:"desc", displayMode:"top-bottom" };
 const PL = {"日中":"日中","1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
 const BP = ["5日","10日","1ヶ月","2ヶ月","3ヶ月","半年","1年"];
 const MINI_MAP = {
@@ -43,7 +43,7 @@ function sortThemes() {
   if(STATE.sortBy==="desc") STATE.themes.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity));
   else if(STATE.sortBy==="asc") STATE.themes.sort((a,b)=>(a[p]??Infinity)-(b[p]??Infinity));
   else if(STATE.sortBy==="name") STATE.themes.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
-  else STATE.themes.sort((a,b)=>(a.rank??999)-(b.rank??999));
+  else STATE.themes.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity));
 }
 
 function bindEvents() {
@@ -72,10 +72,10 @@ function renderList() {
   if (STATE.sortBy==="desc") items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity));
   else if (STATE.sortBy==="asc") items.sort((a,b)=>(a[p]??Infinity)-(b[p]??Infinity));
   else if (STATE.sortBy==="name") items.sort((a,b)=>a.name.localeCompare(b.name,"ja"));
-  else items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity)); // ランク順 = 選択期間の騰落率順
+  else items.sort((a,b)=>(b[p]??-Infinity)-(a[p]??-Infinity)); // デフォルト = 暴騰率↑
 
   // セクションラベル
-  const sortLabels = {desc:`${periodLabel} 暴騰率↑`, asc:`${periodLabel} 暴落率↓`, name:"名前順", rank:`${periodLabel} 騰落率`};
+  const sortLabels = {desc:`${periodLabel} 暴騰率↑`, asc:`${periodLabel} 暴落率↓`, name:"名前順"};
   const sortLabel = sortLabels[STATE.sortBy]||periodLabel;
   const topLabel = `${periodLabel} 暴騰率 TOP 5`;
   const botLabel = `${periodLabel} 暴落率 BOTTOM 5`;
@@ -84,7 +84,7 @@ function renderList() {
   if (STATE.displayMode==="top-bottom") {
     const top5 = items.slice(0,5);
     const bot5 = items.slice(-5);
-    html += `<div class="section-label top">${STATE.sortBy==="asc"?sortLabel+" TOP 5":topLabel}</div>`;
+    html += `<div class="section-label top">${topLabel}</div>`;
     html += top5.map((t,i)=>renderItem(t,i+1)).join("");
     // S&P500 benchmark (#10 same style as regular cards)
     const spy = STATE.etfs.find(e=>e.name==="SPY");
@@ -92,7 +92,7 @@ function renderList() {
       const sr = spy[p]; const sd = (sr||0)>=0?"up":"down";
       html += `<div class="theme-item ${sd}"><div class="theme-item-row"><div class="rank ${sd}">—</div><div class="theme-name"><div class="theme-name-primary">S&P500</div><div class="theme-name-secondary">SPY</div></div><div class="return-cell"><div class="return-value ${sd==="up"?"positive":"negative"}">${fmtRet(sr)}</div><div class="return-sub">${fmtRet(spy["1年"])} /1Y</div></div><div class="chevron"></div></div></div>`;
     }
-    html += `<div class="section-label bottom">${STATE.sortBy==="asc"?sortLabel+" BOTTOM 5":botLabel}</div>`;
+    html += `<div class="section-label bottom">${botLabel}</div>`;
     html += bot5.map((t,i)=>renderItem(t,items.length-4+i)).join("");
   } else {
     const limit = STATE.displayMode==="all"?items.length:STATE.displayMode==="top20"?20:10;
