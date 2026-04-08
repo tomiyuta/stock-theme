@@ -1,0 +1,7322 @@
+{
+ "A": {
+  "name": "Agilent Technologies, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 114.84,
+  "name_ja": "Agilent"
+ },
+ "AA": {
+  "name": "Alcoa Corporation",
+  "sector": "Basic Materials",
+  "industry": "Aluminum",
+  "mc": "大型",
+  "price": 71.01,
+  "name_ja": "Alcoa"
+ },
+ "AAL": {
+  "name": "American Airlines Group Inc.",
+  "sector": "Industrials",
+  "industry": "Airlines",
+  "mc": "中型",
+  "price": 10.9,
+  "name_ja": "American Airlines"
+ },
+ "AAOI": {
+  "name": "Applied Optoelectronics, Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "中型",
+  "price": 107.45,
+  "name_ja": "Applied Optoelectronics"
+ },
+ "AAPL": {
+  "name": "Apple Inc.",
+  "sector": "Technology",
+  "industry": "Consumer Electronics",
+  "mc": "超大型",
+  "price": 258.86,
+  "name_ja": "アップル"
+ },
+ "ABBV": {
+  "name": "AbbVie Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 206.69,
+  "name_ja": "アッヴィ"
+ },
+ "ABEV": {
+  "name": "Ambev S.A.",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Brewers",
+  "mc": "大型",
+  "price": 2.99,
+  "name_ja": "Ambev"
+ },
+ "ABNB": {
+  "name": "Airbnb, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 126.81,
+  "name_ja": "エアビーアンドビー"
+ },
+ "ABSI": {
+  "name": "Absci Corporation",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "小型",
+  "price": 2.96,
+  "name_ja": "Absci"
+ },
+ "ACA": {
+  "name": "Arcosa, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 106.28,
+  "name_ja": "Arcosa"
+ },
+ "ACDC": {
+  "name": "ProFrac Holding Corp.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "小型",
+  "price": 5.94,
+  "name_ja": "ProFrac Holding"
+ },
+ "ACHR": {
+  "name": "Archer Aviation Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 5.54,
+  "name_ja": "Archer Aviation"
+ },
+ "ACLS": {
+  "name": "Axcelis Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 97.5,
+  "name_ja": "Axcelis"
+ },
+ "ACM": {
+  "name": "AECOM",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 84.98,
+  "name_ja": "AECOM"
+ },
+ "ACN": {
+  "name": "Accenture plc",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "大型",
+  "price": 198.95,
+  "name_ja": "アクセンチュア"
+ },
+ "ADBE": {
+  "name": "Adobe Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 244.35,
+  "name_ja": "アドビ"
+ },
+ "ADI": {
+  "name": "Analog Devices, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 327.36,
+  "name_ja": "アナログ・デバイセズ"
+ },
+ "ADM": {
+  "name": "Archer-Daniels-Midland Company",
+  "sector": "Consumer Defensive",
+  "industry": "Farm Products",
+  "mc": "大型",
+  "price": 73.38,
+  "name_ja": "Archer-Daniels-Midland"
+ },
+ "ADSK": {
+  "name": "Autodesk, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 237.72,
+  "name_ja": "オートデスク"
+ },
+ "AEC": {
+  "name": "Anfield Energy Inc.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "小型",
+  "price": 5.48,
+  "name_ja": "Anfield Energy"
+ },
+ "AEE": {
+  "name": "Ameren Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 111.44,
+  "name_ja": "Ameren"
+ },
+ "AEHR": {
+  "name": "Aehr Test Systems, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "小型",
+  "price": 52.16,
+  "name_ja": "Aehr Test Systems"
+ },
+ "AEIS": {
+  "name": "Advanced Energy Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "大型",
+  "price": 331.9,
+  "name_ja": "Advanced Energy Industries"
+ },
+ "AEM": {
+  "name": "Agnico Eagle Mines Limited",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 208.5,
+  "name_ja": "Agnico Eagle Mines"
+ },
+ "AEO": {
+  "name": "American Eagle Outfitters, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "中型",
+  "price": 17.48,
+  "name_ja": "American Eagle Outfitters"
+ },
+ "AEP": {
+  "name": "American Electric Power Company, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 132.36,
+  "name_ja": "American Electric Power"
+ },
+ "AER": {
+  "name": "AerCap Holdings N.V.",
+  "sector": "Industrials",
+  "industry": "Rental & Leasing Services",
+  "mc": "大型",
+  "price": 141.5,
+  "name_ja": "AerCap"
+ },
+ "AES": {
+  "name": "The AES Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Diversified",
+  "mc": "大型",
+  "price": 14.33,
+  "name_ja": "The AES"
+ },
+ "AFL": {
+  "name": "Aflac Incorporated",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "大型",
+  "price": 110.26,
+  "name_ja": "Aflac"
+ },
+ "AFRM": {
+  "name": "Affirm Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 48.45,
+  "name_ja": "アファーム"
+ },
+ "AG": {
+  "name": "First Majestic Silver Corp.",
+  "sector": "Basic Materials",
+  "industry": "Silver",
+  "mc": "大型",
+  "price": 21.4,
+  "name_ja": "First Majestic Silver"
+ },
+ "AGI": {
+  "name": "Alamos Gold Inc.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 46.31,
+  "name_ja": "Alamos Gold"
+ },
+ "AIG": {
+  "name": "American International Group, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Diversified",
+  "mc": "大型",
+  "price": 76.42,
+  "name_ja": "American"
+ },
+ "AIR": {
+  "name": "AAR Corp.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 114.0,
+  "name_ja": "AAR"
+ },
+ "AJG": {
+  "name": "Arthur J. Gallagher & Co.",
+  "sector": "Financial Services",
+  "industry": "Insurance Brokers",
+  "mc": "大型",
+  "price": 219.27,
+  "name_ja": "Arthur J. Gallagher &"
+ },
+ "AKAM": {
+  "name": "Akamai Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 114.6,
+  "name_ja": "Akamai"
+ },
+ "ALAB": {
+  "name": "Astera Labs, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 117.99,
+  "name_ja": "アサテラ"
+ },
+ "ALB": {
+  "name": "Albemarle Corporation",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 173.03,
+  "name_ja": "アルベマール"
+ },
+ "ALGM": {
+  "name": "Allegro MicroSystems, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 32.81,
+  "name_ja": "Allegro MicroSystems"
+ },
+ "ALK": {
+  "name": "Alaska Air Group, Inc.",
+  "sector": "Industrials",
+  "industry": "Airlines",
+  "mc": "中型",
+  "price": 37.98,
+  "name_ja": "Alaska Air"
+ },
+ "ALL": {
+  "name": "The Allstate Corporation",
+  "sector": "Financial Services",
+  "industry": "Insurance - Property & Casualty",
+  "mc": "大型",
+  "price": 208.36,
+  "name_ja": "The Allstate"
+ },
+ "ALLE": {
+  "name": "Allegion plc",
+  "sector": "Industrials",
+  "industry": "Security & Protection Services",
+  "mc": "大型",
+  "price": 140.18,
+  "name_ja": "Allegion"
+ },
+ "ALLY": {
+  "name": "Ally Financial Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 40.32,
+  "name_ja": "Ally Financial"
+ },
+ "ALNY": {
+  "name": "Alnylam Pharmaceuticals, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 330.34,
+  "name_ja": "Alnylam Pharmaceuticals"
+ },
+ "ALV": {
+  "name": "Autoliv, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "中型",
+  "price": 105.24,
+  "name_ja": "Autoliv"
+ },
+ "AMAT": {
+  "name": "Applied Materials, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "超大型",
+  "price": 352.62,
+  "name_ja": "アプライドマテリアルズ"
+ },
+ "AMBA": {
+  "name": "Ambarella, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 51.0,
+  "name_ja": "Ambarella"
+ },
+ "AMBQ": {
+  "name": "Ambiq Micro, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "小型",
+  "price": 28.28,
+  "name_ja": "Ambiq Micro"
+ },
+ "AMD": {
+  "name": "Advanced Micro Devices, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 220.18,
+  "name_ja": "AMD"
+ },
+ "AME": {
+  "name": "AMETEK, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 218.42,
+  "name_ja": "AMETEK"
+ },
+ "AMGN": {
+  "name": "Amgen Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 342.57,
+  "name_ja": "アムジェン"
+ },
+ "AMKR": {
+  "name": "Amkor Technology, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "大型",
+  "price": 47.03,
+  "name_ja": "Amkor"
+ },
+ "AMPX": {
+  "name": "Amprius Technologies, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "中型",
+  "price": 17.56,
+  "name_ja": "Amprius"
+ },
+ "AMR": {
+  "name": "Alpha Metallurgical Resources, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Coking Coal",
+  "mc": "中型",
+  "price": 208.14,
+  "name_ja": "Alpha Metallurgical Resources"
+ },
+ "AMRC": {
+  "name": "Ameresco, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "小型",
+  "price": 24.0,
+  "name_ja": "Ameresco"
+ },
+ "AMSC": {
+  "name": "American Superconductor Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "小型",
+  "price": 32.62,
+  "name_ja": "American Superconductor"
+ },
+ "AMT": {
+  "name": "American Tower Corporation",
+  "sector": "Real Estate",
+  "industry": "REIT - Specialty",
+  "mc": "大型",
+  "price": 176.14,
+  "name_ja": "アメリカンタワー"
+ },
+ "AMTM": {
+  "name": "Amentum Holdings, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Business Services",
+  "mc": "中型",
+  "price": 27.06,
+  "name_ja": "Amentum"
+ },
+ "AMZN": {
+  "name": "Amazon.com, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Internet Retail",
+  "mc": "超大型",
+  "price": 212.79,
+  "name_ja": "アマゾン"
+ },
+ "AN": {
+  "name": "AutoNation, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto & Truck Dealerships",
+  "mc": "中型",
+  "price": 196.82,
+  "name_ja": "AutoNation"
+ },
+ "ANET": {
+  "name": "Arista Networks, Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 126.25,
+  "name_ja": "アリスタ"
+ },
+ "ANF": {
+  "name": "Abercrombie & Fitch Co.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "中型",
+  "price": 97.41,
+  "name_ja": "Abercrombie & Fitch"
+ },
+ "AON": {
+  "name": "Aon plc",
+  "sector": "Financial Services",
+  "industry": "Insurance Brokers",
+  "mc": "大型",
+  "price": 326.17,
+  "name_ja": "Aon"
+ },
+ "APD": {
+  "name": "Air Products and Chemicals, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 294.12,
+  "name_ja": "エアープロダクツ"
+ },
+ "APG": {
+  "name": "APi Group Corporation",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 42.21,
+  "name_ja": "APi"
+ },
+ "APH": {
+  "name": "Amphenol Corporation",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 126.49,
+  "name_ja": "アンフェノール"
+ },
+ "APLD": {
+  "name": "Applied Digital Corporation",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 25.19,
+  "name_ja": "Applied Digital"
+ },
+ "APO": {
+  "name": "Apollo Global Management, Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 106.11,
+  "name_ja": "Apollo Global Management"
+ },
+ "APP": {
+  "name": "AppLovin Corporation",
+  "sector": "Communication Services",
+  "industry": "Advertising Agencies",
+  "mc": "大型",
+  "price": 412.68,
+  "name_ja": "AppLovin"
+ },
+ "APPF": {
+  "name": "AppFolio, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 159.49,
+  "name_ja": "AppFolio"
+ },
+ "APTV": {
+  "name": "Aptiv PLC",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 60.36,
+  "name_ja": "アプティブ"
+ },
+ "AR": {
+  "name": "Antero Resources Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 40.36,
+  "name_ja": "Antero Resources"
+ },
+ "ARBE": {
+  "name": "Arbe Robotics Ltd.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "小型",
+  "price": 0.68,
+  "name_ja": "Arbe Robotics"
+ },
+ "AREC": {
+  "name": "American Resources Corporation",
+  "sector": "Basic Materials",
+  "industry": "Coking Coal",
+  "mc": "小型",
+  "price": 2.42,
+  "name_ja": "American Resources"
+ },
+ "ARES": {
+  "name": "Ares Management Corporation",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 102.83,
+  "name_ja": "Ares Management"
+ },
+ "ARGT": {
+  "name": "Global X MSCI Argentina ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 92.97,
+  "name_ja": "Global X MSCI Argentina ETF"
+ },
+ "ARGX": {
+  "name": "argenx SE",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 748.25,
+  "name_ja": "argenx"
+ },
+ "ARLP": {
+  "name": "Alliance Resource Partners, L.P.",
+  "sector": "Energy",
+  "industry": "Thermal Coal",
+  "mc": "中型",
+  "price": 28.18,
+  "name_ja": "Alliance Resource Partners"
+ },
+ "ARM": {
+  "name": "Arm Holdings plc",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 148.77,
+  "name_ja": "Arm"
+ },
+ "AS": {
+  "name": "Amer Sports, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Leisure",
+  "mc": "大型",
+  "price": 33.9,
+  "name_ja": "Amer Sports"
+ },
+ "ASML": {
+  "name": "ASML Holding N.V.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "超大型",
+  "price": 1304.01,
+  "name_ja": "ASML"
+ },
+ "ASTS": {
+  "name": "AST SpaceMobile, Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "大型",
+  "price": 94.81,
+  "name_ja": "AST SpaceMobile"
+ },
+ "ASX": {
+  "name": "ASE Technology Holding Co., Ltd.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 22.55,
+  "name_ja": "A  Holding"
+ },
+ "ATI": {
+  "name": "ATI Inc.",
+  "sector": "Industrials",
+  "industry": "Metal Fabrication",
+  "mc": "大型",
+  "price": 147.96,
+  "name_ja": "ATI"
+ },
+ "ATLX": {
+  "name": "Atlas Lithium Corporation",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 4.7,
+  "name_ja": "Atlas Lithium"
+ },
+ "ATO": {
+  "name": "Atmos Energy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "大型",
+  "price": 187.81,
+  "name_ja": "Atmos Energy"
+ },
+ "ATR": {
+  "name": "AptarGroup, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "中型",
+  "price": 126.01,
+  "name_ja": "Aptar"
+ },
+ "ATRO": {
+  "name": "Astronics Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 71.47,
+  "name_ja": "Astronics"
+ },
+ "AU": {
+  "name": "AngloGold Ashanti plc",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 101.49,
+  "name_ja": "AngloGold Ashanti"
+ },
+ "AUR": {
+  "name": "Aurora Innovation, Inc.",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 4.2,
+  "name_ja": "Aurora Innovation"
+ },
+ "AVAV": {
+  "name": "AeroVironment, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 189.26,
+  "name_ja": "AeroVironment"
+ },
+ "AVGO": {
+  "name": "Broadcom Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 314.43,
+  "name_ja": "ブロードコム"
+ },
+ "AVTR": {
+  "name": "Avantor, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "中型",
+  "price": 7.98,
+  "name_ja": "Avantor"
+ },
+ "AVY": {
+  "name": "Avery Dennison Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 169.35,
+  "name_ja": "Avery Dennison"
+ },
+ "AWI": {
+  "name": "Armstrong World Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "中型",
+  "price": 166.1,
+  "name_ja": "Armstrong World Industries"
+ },
+ "AWK": {
+  "name": "American Water Works Company, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Water",
+  "mc": "大型",
+  "price": 137.91,
+  "name_ja": "American Water Works"
+ },
+ "AXON": {
+  "name": "Axon Enterprise, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 413.07,
+  "name_ja": "Axon Enterprise"
+ },
+ "AXP": {
+  "name": "American Express Company",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "超大型",
+  "price": 305.73,
+  "name_ja": "アメックス"
+ },
+ "AXTI": {
+  "name": "AXT, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 41.99,
+  "name_ja": "AXT"
+ },
+ "AYI": {
+  "name": "Acuity Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "中型",
+  "price": 268.2,
+  "name_ja": "Acuity"
+ },
+ "AZN": {
+  "name": "AstraZeneca PLC",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 202.83,
+  "name_ja": "AstraZeneca"
+ },
+ "AZO": {
+  "name": "AutoZone, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 3438.35,
+  "name_ja": "AutoZone"
+ },
+ "B": {
+  "name": "Barrick Mining Corporation",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 41.08,
+  "name_ja": "Barrick Mining"
+ },
+ "BA": {
+  "name": "The Boeing Company",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 212.3,
+  "name_ja": "ボーイング"
+ },
+ "BABA": {
+  "name": "Alibaba Group Holding Limited",
+  "sector": "Consumer Cyclical",
+  "industry": "Internet Retail",
+  "mc": "超大型",
+  "price": 122.31,
+  "name_ja": "アリババ"
+ },
+ "BAC": {
+  "name": "Bank of America Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Diversified",
+  "mc": "超大型",
+  "price": 50.06,
+  "name_ja": "バンクオブアメリカ"
+ },
+ "BAH": {
+  "name": "Booz Allen Hamilton Holding Corporation",
+  "sector": "Industrials",
+  "industry": "Consulting Services",
+  "mc": "大型",
+  "price": 83.71,
+  "name_ja": "Booz Allen Hamilton Holding"
+ },
+ "BALL": {
+  "name": "Ball Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 59.73,
+  "name_ja": "Ball"
+ },
+ "BC": {
+  "name": "Brunswick Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Recreational Vehicles",
+  "mc": "中型",
+  "price": 73.4,
+  "name_ja": "Brunswick"
+ },
+ "BE": {
+  "name": "Bloom Energy Corporation",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "大型",
+  "price": 135.0,
+  "name_ja": "Bloom Energy"
+ },
+ "BEP": {
+  "name": "Brookfield Renewable Partners L.P.",
+  "sector": "Utilities",
+  "industry": "Utilities - Renewable",
+  "mc": "大型",
+  "price": 33.42,
+  "name_ja": "Brookfield Renewable Partners L.P."
+ },
+ "BG": {
+  "name": "Bunge Global SA",
+  "sector": "Consumer Defensive",
+  "industry": "Farm Products",
+  "mc": "大型",
+  "price": 128.47,
+  "name_ja": "Bunge Global SA"
+ },
+ "BHP": {
+  "name": "BHP Group Limited",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "大型",
+  "price": 72.79,
+  "name_ja": "BHPグループ"
+ },
+ "BIDU": {
+  "name": "Baidu, Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "大型",
+  "price": 111.28,
+  "name_ja": "Baidu"
+ },
+ "BIIB": {
+  "name": "Biogen Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 172.34,
+  "name_ja": "バイオジェン"
+ },
+ "BIPC": {
+  "name": "Brookfield Infrastructure Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 40.53,
+  "name_ja": "Brookfield Infrastructure"
+ },
+ "BIRK": {
+  "name": "Birkenstock Holding plc",
+  "sector": "Consumer Cyclical",
+  "industry": "Footwear & Accessories",
+  "mc": "中型",
+  "price": 35.19,
+  "name_ja": "Birkenstock Holding"
+ },
+ "BKNG": {
+  "name": "Booking Holdings Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 176.19,
+  "name_ja": "ブッキング"
+ },
+ "BKR": {
+  "name": "Baker Hughes Company",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "大型",
+  "price": 60.7,
+  "name_ja": "ベーカーヒューズ"
+ },
+ "BKSY": {
+  "name": "BlackSky Technology Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Business Services",
+  "mc": "小型",
+  "price": 30.93,
+  "name_ja": "BlackSky"
+ },
+ "BLDR": {
+  "name": "Builders FirstSource, Inc.",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "中型",
+  "price": 82.06,
+  "name_ja": "Builders FirstSource"
+ },
+ "BLSH": {
+  "name": "Bullish",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 37.35,
+  "name_ja": "Bullish"
+ },
+ "BMI": {
+  "name": "Badger Meter, Inc.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "中型",
+  "price": 155.42,
+  "name_ja": "Badger Meter"
+ },
+ "BMY": {
+  "name": "Bristol-Myers Squibb Company",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 59.33,
+  "name_ja": "ブリストルマイヤーズ"
+ },
+ "BP": {
+  "name": "BP p.l.c.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "大型",
+  "price": 47.48,
+  "name_ja": "BP p.l.c."
+ },
+ "BPOP": {
+  "name": "Popular, Inc.",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 139.9,
+  "name_ja": "Popular"
+ },
+ "BRKR": {
+  "name": "Bruker Corporation",
+  "sector": "Healthcare",
+  "industry": "Medical Devices",
+  "mc": "中型",
+  "price": 36.74,
+  "name_ja": "Bruker"
+ },
+ "BRO": {
+  "name": "Brown & Brown, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance Brokers",
+  "mc": "大型",
+  "price": 66.52,
+  "name_ja": "Brown & Brown"
+ },
+ "BROS": {
+  "name": "Dutch Bros Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "中型",
+  "price": 53.03,
+  "name_ja": "Dutch Bros"
+ },
+ "BSY": {
+  "name": "Bentley Systems, Incorporated",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 35.09,
+  "name_ja": "Bentley Systems"
+ },
+ "BTI": {
+  "name": "British American Tobacco p.l.c.",
+  "sector": "Consumer Defensive",
+  "industry": "Tobacco",
+  "mc": "大型",
+  "price": 58.71,
+  "name_ja": "British American Tobacco p.l.c."
+ },
+ "BTU": {
+  "name": "Peabody Energy Corporation",
+  "sector": "Energy",
+  "industry": "Thermal Coal",
+  "mc": "中型",
+  "price": 33.03,
+  "name_ja": "Peabody Energy"
+ },
+ "BUD": {
+  "name": "Anheuser-Busch InBev SA/NV",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Brewers",
+  "mc": "大型",
+  "price": 72.53,
+  "name_ja": "Anheuser-Busch InBev SA/NV"
+ },
+ "BURL": {
+  "name": "Burlington Stores, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "大型",
+  "price": 337.97,
+  "name_ja": "Burlington Stores"
+ },
+ "BWA": {
+  "name": "BorgWarner Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 53.06,
+  "name_ja": "BorgWarner"
+ },
+ "BWXT": {
+  "name": "BWX Technologies, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 215.98,
+  "name_ja": "BWX"
+ },
+ "BX": {
+  "name": "Blackstone Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 112.24,
+  "name_ja": "ブラックストーン"
+ },
+ "C": {
+  "name": "Citigroup Inc.",
+  "sector": "Financial Services",
+  "industry": "Banks - Diversified",
+  "mc": "超大型",
+  "price": 117.36,
+  "name_ja": "シティグループ"
+ },
+ "CACI": {
+  "name": "CACI International Inc",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "大型",
+  "price": 571.93,
+  "name_ja": "CACI  Inc"
+ },
+ "CAG": {
+  "name": "Conagra Brands, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "中型",
+  "price": 15.78,
+  "name_ja": "Conagra Brands"
+ },
+ "CAH": {
+  "name": "Cardinal Health, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Distribution",
+  "mc": "大型",
+  "price": 212.62,
+  "name_ja": "Cardinal Health"
+ },
+ "CAMT": {
+  "name": "Camtek Ltd.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 159.12,
+  "name_ja": "Camtek"
+ },
+ "CARR": {
+  "name": "Carrier Global Corporation",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 55.59,
+  "name_ja": "Carrier Global"
+ },
+ "CART": {
+  "name": "Maplebear Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Internet Retail",
+  "mc": "大型",
+  "price": 41.02,
+  "name_ja": "Maplebear"
+ },
+ "CAT": {
+  "name": "Caterpillar Inc.",
+  "sector": "Industrials",
+  "industry": "Farm & Heavy Construction Machinery",
+  "mc": "超大型",
+  "price": 721.24,
+  "name_ja": "キャタピラー"
+ },
+ "CB": {
+  "name": "Chubb Limited",
+  "sector": "Financial Services",
+  "industry": "Insurance - Property & Casualty",
+  "mc": "大型",
+  "price": 326.9,
+  "name_ja": "Chubb"
+ },
+ "CBRE": {
+  "name": "CBRE Group, Inc.",
+  "sector": "Real Estate",
+  "industry": "Real Estate Services",
+  "mc": "大型",
+  "price": 136.19,
+  "name_ja": "CBRE"
+ },
+ "CC": {
+  "name": "The Chemours Company",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "中型",
+  "price": 21.7,
+  "name_ja": "The Chemours"
+ },
+ "CCI": {
+  "name": "Crown Castle Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Specialty",
+  "mc": "大型",
+  "price": 86.57,
+  "name_ja": "Crown Castle"
+ },
+ "CCJ": {
+  "name": "Cameco Corporation",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "大型",
+  "price": 110.48,
+  "name_ja": "Cameco"
+ },
+ "CCK": {
+  "name": "Crown Holdings, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 103.22,
+  "name_ja": "Crown"
+ },
+ "CCL": {
+  "name": "Carnival Corporation & plc",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 25.97,
+  "name_ja": "カーニバル"
+ },
+ "CDE": {
+  "name": "Coeur Mining, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 18.59,
+  "name_ja": "Coeur Mining"
+ },
+ "CDNS": {
+  "name": "Cadence Design Systems, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 279.39,
+  "name_ja": "ケイデンス"
+ },
+ "CEG": {
+  "name": "Constellation Energy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Independent Power Producers",
+  "mc": "大型",
+  "price": 275.16,
+  "name_ja": "コンステレーション"
+ },
+ "CELH": {
+  "name": "Celsius Holdings, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Non-Alcoholic",
+  "mc": "中型",
+  "price": 36.13,
+  "name_ja": "Celsius"
+ },
+ "CENX": {
+  "name": "Century Aluminum Company",
+  "sector": "Basic Materials",
+  "industry": "Aluminum",
+  "mc": "中型",
+  "price": 64.54,
+  "name_ja": "Century Aluminum"
+ },
+ "CERT": {
+  "name": "Certara, Inc.",
+  "sector": "Healthcare",
+  "industry": "Health Information Services",
+  "mc": "小型",
+  "price": 5.46,
+  "name_ja": "Certara"
+ },
+ "CF": {
+  "name": "CF Industries Holdings, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Agricultural Inputs",
+  "mc": "大型",
+  "price": 130.98,
+  "name_ja": "CFインダストリーズ"
+ },
+ "CFG": {
+  "name": "Citizens Financial Group, Inc.",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "大型",
+  "price": 61.41,
+  "name_ja": "Citizens Financial"
+ },
+ "CFR": {
+  "name": "Cullen/Frost Bankers, Inc.",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 139.94,
+  "name_ja": "Cullen/Frost Bankers"
+ },
+ "CG": {
+  "name": "The Carlyle Group Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 46.87,
+  "name_ja": "The Carlyle"
+ },
+ "CGNX": {
+  "name": "Cognex Corporation",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "中型",
+  "price": 49.52,
+  "name_ja": "Cognex"
+ },
+ "CHD": {
+  "name": "Church & Dwight Co., Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 93.13,
+  "name_ja": "Church & Dwight"
+ },
+ "CHKP": {
+  "name": "Check Point Software Technologies Ltd.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 148.19,
+  "name_ja": "Check Point Software"
+ },
+ "CHRW": {
+  "name": "C.H. Robinson Worldwide, Inc.",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "大型",
+  "price": 169.01,
+  "name_ja": "C.H. Robinson Worldwide"
+ },
+ "CHTR": {
+  "name": "Charter Communications, Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "大型",
+  "price": 219.98,
+  "name_ja": "チャーター"
+ },
+ "CI": {
+  "name": "The Cigna Group",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "大型",
+  "price": 275.69,
+  "name_ja": "シグナ"
+ },
+ "CIEN": {
+  "name": "Ciena Corporation",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "大型",
+  "price": 434.26,
+  "name_ja": "Ciena"
+ },
+ "CIFR": {
+  "name": "Cipher Digital Inc.",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 13.35,
+  "name_ja": "Cipher Digital"
+ },
+ "CL": {
+  "name": "Colgate-Palmolive Company",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 84.53,
+  "name_ja": "コルゲート"
+ },
+ "CLF": {
+  "name": "Cleveland-Cliffs Inc.",
+  "sector": "Basic Materials",
+  "industry": "Steel",
+  "mc": "中型",
+  "price": 8.53,
+  "name_ja": "Cleveland-Cliffs"
+ },
+ "CLH": {
+  "name": "Clean Harbors, Inc.",
+  "sector": "Industrials",
+  "industry": "Waste Management",
+  "mc": "大型",
+  "price": 299.64,
+  "name_ja": "Clean Harbors"
+ },
+ "CLOV": {
+  "name": "Clover Health Investments, Corp.",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "小型",
+  "price": 1.87,
+  "name_ja": "Clover Health Investments"
+ },
+ "CLS": {
+  "name": "Celestica Inc.",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 292.3,
+  "name_ja": "Celestica"
+ },
+ "CLSK": {
+  "name": "CleanSpark, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 9.1,
+  "name_ja": "クリーンスパーク"
+ },
+ "CLX": {
+  "name": "The Clorox Company",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 104.89,
+  "name_ja": "The Clorox"
+ },
+ "CMC": {
+  "name": "Commercial Metals Company",
+  "sector": "Industrials",
+  "industry": "Metal Fabrication",
+  "mc": "中型",
+  "price": 61.27,
+  "name_ja": "Commercial Metals"
+ },
+ "CMCSA": {
+  "name": "Comcast Corporation",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "大型",
+  "price": 27.66,
+  "name_ja": "コムキャスト"
+ },
+ "CMG": {
+  "name": "Chipotle Mexican Grill, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 33.5,
+  "name_ja": "チポトレ"
+ },
+ "CMI": {
+  "name": "Cummins Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 551.99,
+  "name_ja": "Cummins"
+ },
+ "CMS": {
+  "name": "CMS Energy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 78.33,
+  "name_ja": "CMSエナジー"
+ },
+ "CNC": {
+  "name": "Centene Corporation",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "大型",
+  "price": 35.4,
+  "name_ja": "Centene"
+ },
+ "CNI": {
+  "name": "Canadian National Railway Company",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 105.08,
+  "name_ja": "Canadian National Railway"
+ },
+ "CNP": {
+  "name": "CenterPoint Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 43.59,
+  "name_ja": "センターポイント"
+ },
+ "CNR": {
+  "name": "Core Natural Resources, Inc.",
+  "sector": "Energy",
+  "industry": "Thermal Coal",
+  "mc": "中型",
+  "price": 104.05,
+  "name_ja": "Core Natural Resources"
+ },
+ "COF": {
+  "name": "Capital One Financial Corporation",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 184.21,
+  "name_ja": "キャピタルワン"
+ },
+ "COHR": {
+  "name": "Coherent Corp.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "大型",
+  "price": 253.22,
+  "name_ja": "Coherent"
+ },
+ "COHU": {
+  "name": "Cohu, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "小型",
+  "price": 32.48,
+  "name_ja": "Cohu"
+ },
+ "COIN": {
+  "name": "Coinbase Global, Inc.",
+  "sector": "Financial Services",
+  "industry": "Financial Data & Stock Exchanges",
+  "mc": "大型",
+  "price": 174.79,
+  "name_ja": "コインベース"
+ },
+ "COMP": {
+  "name": "Compass, Inc.",
+  "sector": "Real Estate",
+  "industry": "Real Estate Services",
+  "mc": "中型",
+  "price": 6.8,
+  "name_ja": "Compass"
+ },
+ "COP": {
+  "name": "ConocoPhillips",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 131.64,
+  "name_ja": "コノコフィリップス"
+ },
+ "COR": {
+  "name": "Cencora, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Distribution",
+  "mc": "大型",
+  "price": 320.96,
+  "name_ja": "Cencora"
+ },
+ "CORZ": {
+  "name": "Core Scientific, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 16.29,
+  "name_ja": "Core Scientific"
+ },
+ "COST": {
+  "name": "Costco Wholesale Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "超大型",
+  "price": 1018.55,
+  "name_ja": "コストコ"
+ },
+ "CP": {
+  "name": "Canadian Pacific Kansas City Limited",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 79.5,
+  "name_ja": "Canadian Pacific Kansas City"
+ },
+ "CPB": {
+  "name": "The Campbell's Company",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "中型",
+  "price": 22.02,
+  "name_ja": "The Campbell's"
+ },
+ "CPER": {
+  "name": "United States Copper Index Fund, LP",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 34.3,
+  "name_ja": "United States Copper Index Fund, LP"
+ },
+ "CRCL": {
+  "name": "Circle Internet Group",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "大型",
+  "price": 92.15,
+  "name_ja": "Circle Internet"
+ },
+ "CRDO": {
+  "name": "Credo Technology Group Holding Ltd",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 102.46,
+  "name_ja": "Credo   Holding Ltd"
+ },
+ "CRH": {
+  "name": "CRH plc",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "大型",
+  "price": 106.33,
+  "name_ja": "CRH"
+ },
+ "CRL": {
+  "name": "Charles River Laboratories International, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "中型",
+  "price": 168.22,
+  "name_ja": "Charles River Laboratories"
+ },
+ "CRM": {
+  "name": "Salesforce, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 185.03,
+  "name_ja": "セールスフォース"
+ },
+ "CRML": {
+  "name": "Critical Metals Corp.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 8.1,
+  "name_ja": "Critical Metals"
+ },
+ "CRSP": {
+  "name": "CRISPR Therapeutics AG",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "中型",
+  "price": 49.15,
+  "name_ja": "クリスパー"
+ },
+ "CRWD": {
+  "name": "CrowdStrike Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 398.61,
+  "name_ja": "クラウドストライク"
+ },
+ "CRWV": {
+  "name": "CoreWeave, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 80.94,
+  "name_ja": "CoreWeave"
+ },
+ "CSCO": {
+  "name": "Cisco Systems, Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "超大型",
+  "price": 80.44,
+  "name_ja": "シスコ"
+ },
+ "CSGP": {
+  "name": "CoStar Group, Inc.",
+  "sector": "Real Estate",
+  "industry": "Real Estate Services",
+  "mc": "大型",
+  "price": 41.17,
+  "name_ja": "CoStar"
+ },
+ "CSIQ": {
+  "name": "Canadian Solar Inc.",
+  "sector": "Technology",
+  "industry": "Solar",
+  "mc": "小型",
+  "price": 12.8,
+  "name_ja": "Canadian Solar"
+ },
+ "CSL": {
+  "name": "Carlisle Companies Incorporated",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 331.54,
+  "name_ja": "Carlisle Companies"
+ },
+ "CSX": {
+  "name": "CSX Corporation",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 41.48,
+  "name_ja": "CSX"
+ },
+ "CTAS": {
+  "name": "Cintas Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Business Services",
+  "mc": "大型",
+  "price": 171.69,
+  "name_ja": "シンタス"
+ },
+ "CTRA": {
+  "name": "Coterra Energy Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 34.67,
+  "name_ja": "Coterra Energy"
+ },
+ "CTS": {
+  "name": "CTS Corporation",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "小型",
+  "price": 48.4,
+  "name_ja": "CTS"
+ },
+ "CTSH": {
+  "name": "Cognizant Technology Solutions Corporation",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "大型",
+  "price": 62.35,
+  "name_ja": "Cognizant  Solutions"
+ },
+ "CTVA": {
+  "name": "Corteva, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Agricultural Inputs",
+  "mc": "大型",
+  "price": 84.25,
+  "name_ja": "Corteva"
+ },
+ "CVLT": {
+  "name": "Commvault Systems, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 78.97,
+  "name_ja": "Commvault Systems"
+ },
+ "CVNA": {
+  "name": "Carvana Co.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto & Truck Dealerships",
+  "mc": "大型",
+  "price": 316.85,
+  "name_ja": "Carvana"
+ },
+ "CVS": {
+  "name": "CVS Health Corporation",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "大型",
+  "price": 73.28,
+  "name_ja": "CVSヘルス"
+ },
+ "CVX": {
+  "name": "Chevron Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "超大型",
+  "price": 198.86,
+  "name_ja": "シェブロン"
+ },
+ "CW": {
+  "name": "Curtiss-Wright Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 699.12,
+  "name_ja": "Curtiss-Wright"
+ },
+ "CWEN": {
+  "name": "Clearway Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Renewable",
+  "mc": "中型",
+  "price": 39.64,
+  "name_ja": "Clearway Energy"
+ },
+ "D": {
+  "name": "Dominion Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 62.22,
+  "name_ja": "ドミニオン"
+ },
+ "DAL": {
+  "name": "Delta Air Lines, Inc.",
+  "sector": "Industrials",
+  "industry": "Airlines",
+  "mc": "大型",
+  "price": 66.78,
+  "name_ja": "Delta Air Lines"
+ },
+ "DASH": {
+  "name": "DoorDash, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Internet Retail",
+  "mc": "大型",
+  "price": 155.07,
+  "name_ja": "DoorDash"
+ },
+ "DCO": {
+  "name": "Ducommun Incorporated",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 130.0,
+  "name_ja": "Ducommun"
+ },
+ "DDOG": {
+  "name": "Datadog, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 116.5,
+  "name_ja": "データドッグ"
+ },
+ "DE": {
+  "name": "Deere & Company",
+  "sector": "Industrials",
+  "industry": "Farm & Heavy Construction Machinery",
+  "mc": "大型",
+  "price": 575.09,
+  "name_ja": "ディア"
+ },
+ "DECK": {
+  "name": "Deckers Outdoor Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Footwear & Accessories",
+  "mc": "大型",
+  "price": 101.64,
+  "name_ja": "Deckers Outdoor"
+ },
+ "DELL": {
+  "name": "Dell Technologies Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 173.18,
+  "name_ja": "Dell"
+ },
+ "DEO": {
+  "name": "Diageo plc",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Wineries & Distilleries",
+  "mc": "大型",
+  "price": 74.94,
+  "name_ja": "Diageo"
+ },
+ "DG": {
+  "name": "Dollar General Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "大型",
+  "price": 124.42,
+  "name_ja": "ダラーゼネラル"
+ },
+ "DHI": {
+  "name": "D.R. Horton, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "大型",
+  "price": 141.72,
+  "name_ja": "D.R. Horton"
+ },
+ "DHR": {
+  "name": "Danaher Corporation",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 192.12,
+  "name_ja": "ダナハー"
+ },
+ "DINO": {
+  "name": "HF Sinclair Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "大型",
+  "price": 61.18,
+  "name_ja": "HF Sinclair"
+ },
+ "DIOD": {
+  "name": "Diodes Incorporated",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 73.62,
+  "name_ja": "Diodes"
+ },
+ "DIS": {
+  "name": "The Walt Disney Company",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 96.28,
+  "name_ja": "ディズニー"
+ },
+ "DK": {
+  "name": "Delek US Holdings, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "中型",
+  "price": 45.29,
+  "name_ja": "Delek US"
+ },
+ "DLR": {
+  "name": "Digital Realty Trust, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Specialty",
+  "mc": "大型",
+  "price": 181.99,
+  "name_ja": "Digital Realty Trust"
+ },
+ "DLTR": {
+  "name": "Dollar Tree, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "大型",
+  "price": 111.09,
+  "name_ja": "ダラーツリー"
+ },
+ "DNN": {
+  "name": "Denison Mines Corp.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "中型",
+  "price": 3.61,
+  "name_ja": "Denison Mines"
+ },
+ "DOCN": {
+  "name": "DigitalOcean Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 87.07,
+  "name_ja": "DigitalOcean"
+ },
+ "DOCU": {
+  "name": "DocuSign, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 48.05,
+  "name_ja": "ドキュサイン"
+ },
+ "DOV": {
+  "name": "Dover Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 207.48,
+  "name_ja": "Dover"
+ },
+ "DOW": {
+  "name": "Dow Inc.",
+  "sector": "Basic Materials",
+  "industry": "Chemicals",
+  "mc": "大型",
+  "price": 40.56,
+  "name_ja": "ダウ"
+ },
+ "DPRO": {
+  "name": "Draganfly Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "小型",
+  "price": 5.15,
+  "name_ja": "Draganfly"
+ },
+ "DPZ": {
+  "name": "Domino's Pizza, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 380.77,
+  "name_ja": "Domino's Pizza"
+ },
+ "DRI": {
+  "name": "Darden Restaurants, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 196.57,
+  "name_ja": "Darden Restaurants"
+ },
+ "DT": {
+  "name": "Dynatrace, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 37.47,
+  "name_ja": "Dynatrace"
+ },
+ "DTE": {
+  "name": "DTE Energy Company",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 147.67,
+  "name_ja": "DTE Energy"
+ },
+ "DUK": {
+  "name": "Duke Energy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 131.41,
+  "name_ja": "デューク"
+ },
+ "DV": {
+  "name": "DoubleVerify Holdings, Inc.",
+  "sector": "Communication Services",
+  "industry": "Advertising Agencies",
+  "mc": "小型",
+  "price": 10.06,
+  "name_ja": "DoubleVerify"
+ },
+ "DVA": {
+  "name": "DaVita Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Care Facilities",
+  "mc": "大型",
+  "price": 150.12,
+  "name_ja": "DaVita"
+ },
+ "DY": {
+  "name": "Dycom Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 348.63,
+  "name_ja": "Dycom Industries"
+ },
+ "EAF": {
+  "name": "GrafTech International Ltd.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 6.87,
+  "name_ja": "GrafTech"
+ },
+ "ED": {
+  "name": "Consolidated Edison, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 114.61,
+  "name_ja": "Consolidated Edison"
+ },
+ "EHC": {
+  "name": "Encompass Health Corporation",
+  "sector": "Healthcare",
+  "industry": "Medical Care Facilities",
+  "mc": "大型",
+  "price": 105.15,
+  "name_ja": "Encompass Health"
+ },
+ "EIDO": {
+  "name": "iShares MSCI Indonesia ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 15.38,
+  "name_ja": "iShares MSCI Indonesia ETF"
+ },
+ "EIS": {
+  "name": "iShares MSCI Israel ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 118.36,
+  "name_ja": "iShares MSCI Israel ETF"
+ },
+ "EL": {
+  "name": "The Estée Lauder Companies Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 70.91,
+  "name_ja": "エスティローダー"
+ },
+ "ELF": {
+  "name": "e.l.f. Beauty, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "中型",
+  "price": 63.22,
+  "name_ja": "e.l.f. Beauty"
+ },
+ "ELV": {
+  "name": "Elevance Health, Inc.",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "大型",
+  "price": 302.61,
+  "name_ja": "Elevance Health"
+ },
+ "ELVA": {
+  "name": "Electrovaya Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 8.06,
+  "name_ja": "Electrovaya"
+ },
+ "ELVR": {
+  "name": "Elevra Lithium Limited",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 58.94,
+  "name_ja": "Elevra Lithium"
+ },
+ "EME": {
+  "name": "EMCOR Group, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 757.54,
+  "name_ja": "EMCOR"
+ },
+ "EMR": {
+  "name": "Emerson Electric Co.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 132.66,
+  "name_ja": "エマソン"
+ },
+ "ENPH": {
+  "name": "Enphase Energy, Inc.",
+  "sector": "Technology",
+  "industry": "Solar",
+  "mc": "中型",
+  "price": 33.64,
+  "name_ja": "エンフェーズ"
+ },
+ "ENS": {
+  "name": "EnerSys",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "中型",
+  "price": 176.65,
+  "name_ja": "EnerSys"
+ },
+ "ENTG": {
+  "name": "Entegris, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "大型",
+  "price": 115.68,
+  "name_ja": "Entegris"
+ },
+ "ENVX": {
+  "name": "Enovix Corporation",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 5.75,
+  "name_ja": "Enovix"
+ },
+ "EOSE": {
+  "name": "Eos Energy Enterprises, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 4.84,
+  "name_ja": "Eos Energy Enterprises"
+ },
+ "EPHE": {
+  "name": "iShares MSCI Philippines ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 24.79,
+  "name_ja": "iShares MSCI Philippines ETF"
+ },
+ "EQIX": {
+  "name": "Equinix, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Specialty",
+  "mc": "大型",
+  "price": 1016.08,
+  "name_ja": "エクイニクス"
+ },
+ "EQT": {
+  "name": "EQT Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 60.4,
+  "name_ja": "EQT"
+ },
+ "ERO": {
+  "name": "Ero Copper Corp.",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "中型",
+  "price": 28.36,
+  "name_ja": "Ero Copper"
+ },
+ "ES": {
+  "name": "Eversource Energy",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 69.44,
+  "name_ja": "Eversource Energy"
+ },
+ "ET": {
+  "name": "Energy Transfer LP",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 18.96,
+  "name_ja": "Energy Transfer LP"
+ },
+ "ETN": {
+  "name": "Eaton Corporation plc",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 363.89,
+  "name_ja": "イートン"
+ },
+ "ETR": {
+  "name": "Entergy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 114.57,
+  "name_ja": "Entergy"
+ },
+ "EU": {
+  "name": "enCore Energy Corp.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "小型",
+  "price": 1.88,
+  "name_ja": "enCore Energy"
+ },
+ "EVEX": {
+  "name": "Eve Holding, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "小型",
+  "price": 2.69,
+  "name_ja": "Eve Holding"
+ },
+ "EVR": {
+  "name": "Evercore Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "大型",
+  "price": 304.79,
+  "name_ja": "Evercore"
+ },
+ "EVTL": {
+  "name": "Vertical Aerospace Ltd.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "小型",
+  "price": 2.31,
+  "name_ja": "Vertical Aerospace"
+ },
+ "EWA": {
+  "name": "iShares MSCI Australia ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 28.22,
+  "name_ja": "iShares MSCI Australia ETF"
+ },
+ "EWC": {
+  "name": "iShares MSCI Canada ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 55.49,
+  "name_ja": "iShares MSCI Canada ETF"
+ },
+ "EWH": {
+  "name": "iShares MSCI Hong Kong ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 23.27,
+  "name_ja": "iShares MSCI Hong Kong ETF"
+ },
+ "EWJ": {
+  "name": "iShares MSCI Japan ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 85.57,
+  "name_ja": "iShares MSCI Japan ETF"
+ },
+ "EWL": {
+  "name": "iShares MSCI Switzerland ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 59.32,
+  "name_ja": "iShares MSCI Switzerland ETF"
+ },
+ "EWM": {
+  "name": "iShares MSCI Malaysia ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 28.22,
+  "name_ja": "iShares MSCI Malaysia ETF"
+ },
+ "EWS": {
+  "name": "iShares MSCI Singapore ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 28.46,
+  "name_ja": "iShares MSCI Singapore ETF"
+ },
+ "EWT": {
+  "name": "iShares MSCI Taiwan ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 71.29,
+  "name_ja": "iShares MSCI Taiwan ETF"
+ },
+ "EWU": {
+  "name": "iShares MSCI United Kingdom ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 46.42,
+  "name_ja": "iShares MSCI United Kingdom ETF"
+ },
+ "EWW": {
+  "name": "iShares MSCI Mexico ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 76.2,
+  "name_ja": "iShares MSCI Mexico ETF"
+ },
+ "EWY": {
+  "name": "iShares MSCI South Korea ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 125.94,
+  "name_ja": "iShares MSCI South Korea ETF"
+ },
+ "EWZ": {
+  "name": "iShares MSCI Brazil ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 38.54,
+  "name_ja": "iShares MSCI Brazil ETF"
+ },
+ "EXC": {
+  "name": "Exelon Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 48.94,
+  "name_ja": "Exelon"
+ },
+ "EXE": {
+  "name": "Expand Energy Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 103.55,
+  "name_ja": "Expand Energy"
+ },
+ "EXP": {
+  "name": "Eagle Materials Inc.",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "中型",
+  "price": 185.66,
+  "name_ja": "Eagle Materials"
+ },
+ "EXPD": {
+  "name": "Expeditors International of Washington, Inc.",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "大型",
+  "price": 145.47,
+  "name_ja": "Expeditors  of Washington"
+ },
+ "EXPE": {
+  "name": "Expedia Group, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 229.04,
+  "name_ja": "エクスペディア"
+ },
+ "EZA": {
+  "name": "iShares MSCI South Africa ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 68.16,
+  "name_ja": "iShares MSCI South Africa ETF"
+ },
+ "EZU": {
+  "name": "iShares MSCI Eurozone ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 63.57,
+  "name_ja": "iShares MSCI Eurozone ETF"
+ },
+ "F": {
+  "name": "Ford Motor Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 11.61,
+  "name_ja": "フォード"
+ },
+ "FAST": {
+  "name": "Fastenal Company",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 45.87,
+  "name_ja": "ファスナル"
+ },
+ "FBIN": {
+  "name": "Fortune Brands Innovations, Inc.",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "中型",
+  "price": 37.74,
+  "name_ja": "Fortune Brands Innovations"
+ },
+ "FCFS": {
+  "name": "FirstCash Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "中型",
+  "price": 190.39,
+  "name_ja": "FirstCash"
+ },
+ "FCX": {
+  "name": "Freeport-McMoRan Inc.",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "大型",
+  "price": 61.05,
+  "name_ja": "フリーポート"
+ },
+ "FDX": {
+  "name": "FedEx Corporation",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "大型",
+  "price": 358.84,
+  "name_ja": "フェデックス"
+ },
+ "FERG": {
+  "name": "Ferguson Enterprises Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 239.1,
+  "name_ja": "Ferguson Enterprises"
+ },
+ "FHN": {
+  "name": "First Horizon Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "大型",
+  "price": 23.28,
+  "name_ja": "First Horizon"
+ },
+ "FIG": {
+  "name": "Figma, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 21.42,
+  "name_ja": "Figma"
+ },
+ "FIGR": {
+  "name": "Figure Technology Solutions, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 32.3,
+  "name_ja": "Figure  Solutions"
+ },
+ "FIVN": {
+  "name": "Five9, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "小型",
+  "price": 15.17,
+  "name_ja": "Five9"
+ },
+ "FIX": {
+  "name": "Comfort Systems USA, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 1434.09,
+  "name_ja": "Comfort Systems USA"
+ },
+ "FLEX": {
+  "name": "Flex Ltd.",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 67.7,
+  "name_ja": "Flex"
+ },
+ "FLNC": {
+  "name": "Fluence Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Renewable",
+  "mc": "中型",
+  "price": 13.2,
+  "name_ja": "Fluence Energy"
+ },
+ "FLS": {
+  "name": "Flowserve Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "中型",
+  "price": 75.92,
+  "name_ja": "Flowserve"
+ },
+ "FLY": {
+  "name": "Firefly Aerospace Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 34.85,
+  "name_ja": "Firefly Aerospace"
+ },
+ "FN": {
+  "name": "Fabrinet",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 554.35,
+  "name_ja": "Fabrinet"
+ },
+ "FND": {
+  "name": "Floor & Decor Holdings, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Home Improvement Retail",
+  "mc": "中型",
+  "price": 49.38,
+  "name_ja": "Floor & Decor"
+ },
+ "FNV": {
+  "name": "Franco-Nevada Corporation",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 256.45,
+  "name_ja": "Franco-Nevada"
+ },
+ "FOXA": {
+  "name": "Fox Corporation",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 59.3,
+  "name_ja": "Fox"
+ },
+ "FROG": {
+  "name": "JFrog Ltd.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 49.31,
+  "name_ja": "JFrog"
+ },
+ "FSLR": {
+  "name": "First Solar, Inc.",
+  "sector": "Technology",
+  "industry": "Solar",
+  "mc": "大型",
+  "price": 195.57,
+  "name_ja": "First Solar"
+ },
+ "FSLY": {
+  "name": "Fastly, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 31.54,
+  "name_ja": "Fastly"
+ },
+ "FSTR": {
+  "name": "L.B. Foster Company",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "小型",
+  "price": 30.12,
+  "name_ja": "L.B. Foster"
+ },
+ "FTAI": {
+  "name": "FTAI Aviation Ltd.",
+  "sector": "Industrials",
+  "industry": "Rental & Leasing Services",
+  "mc": "大型",
+  "price": 246.82,
+  "name_ja": "FTAI Aviation"
+ },
+ "FTI": {
+  "name": "TechnipFMC plc",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "大型",
+  "price": 71.59,
+  "name_ja": "TechnipFMC"
+ },
+ "FTNT": {
+  "name": "Fortinet, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 82.29,
+  "name_ja": "フォーティネット"
+ },
+ "FWONK": {
+  "name": "Formula One Group",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 86.2,
+  "name_ja": "Formula One"
+ },
+ "FXA": {
+  "name": "Invesco CurrencyShares Australian Dollar Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 68.53,
+  "name_ja": "Invesco CurrencyShares Australian Dollar Trust"
+ },
+ "FXB": {
+  "name": "Invesco CurrencyShares British Pound Sterling Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 127.17,
+  "name_ja": "Invesco CurrencyShares British Pound Sterling Trust"
+ },
+ "FXC": {
+  "name": "Invesco CurrencyShares Canadian Dollar Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 70.2,
+  "name_ja": "Invesco CurrencyShares Canadian Dollar Trust"
+ },
+ "FXE": {
+  "name": "Invesco CurrencyShares Euro Currency Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 106.56,
+  "name_ja": "Invesco CurrencyShares Euro Currency Trust"
+ },
+ "FXF": {
+  "name": "Invesco CurrencyShares Swiss Franc Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 110.6,
+  "name_ja": "Invesco CurrencyShares Swiss Franc Trust"
+ },
+ "FXY": {
+  "name": "Invesco CurrencyShares Japanese Yen Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 57.53,
+  "name_ja": "Invesco CurrencyShares Japanese Yen Trust"
+ },
+ "GAP": {
+  "name": "The Gap, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "中型",
+  "price": 25.35,
+  "name_ja": "The Gap"
+ },
+ "GATX": {
+  "name": "GATX Corporation",
+  "sector": "Industrials",
+  "industry": "Rental & Leasing Services",
+  "mc": "中型",
+  "price": 172.93,
+  "name_ja": "GATX"
+ },
+ "GBX": {
+  "name": "The Greenbrier Companies, Inc.",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "小型",
+  "price": 48.36,
+  "name_ja": "The Greenbrier Companies"
+ },
+ "GD": {
+  "name": "General Dynamics Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 351.39,
+  "name_ja": "ゼネラルダイナミクス"
+ },
+ "GDS": {
+  "name": "GDS Holdings Limited",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 39.23,
+  "name_ja": "GDS"
+ },
+ "GE": {
+  "name": "GE Aerospace",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "超大型",
+  "price": 288.69,
+  "name_ja": "GEエアロスペース"
+ },
+ "GEV": {
+  "name": "GE Vernova Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "超大型",
+  "price": 897.36,
+  "name_ja": "GE Vernova"
+ },
+ "GFI": {
+  "name": "Gold Fields Limited",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 46.68,
+  "name_ja": "Gold Fields"
+ },
+ "GFL": {
+  "name": "GFL Environmental Inc.",
+  "sector": "Industrials",
+  "industry": "Waste Management",
+  "mc": "大型",
+  "price": 44.88,
+  "name_ja": "GFL Environmental"
+ },
+ "GFS": {
+  "name": "GLOBALFOUNDRIES Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 43.61,
+  "name_ja": "GLOBALFOUNDRIES"
+ },
+ "GH": {
+  "name": "Guardant Health, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 89.66,
+  "name_ja": "Guardant Health"
+ },
+ "GILD": {
+  "name": "Gilead Sciences, Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 140.13,
+  "name_ja": "ギリアド"
+ },
+ "GIS": {
+  "name": "General Mills, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "大型",
+  "price": 37.67,
+  "name_ja": "ゼネラルミルズ"
+ },
+ "GL": {
+  "name": "Globe Life Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "大型",
+  "price": 143.36,
+  "name_ja": "Globe Life"
+ },
+ "GLD": {
+  "name": "SPDR Gold Shares",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 427.65,
+  "name_ja": "SPDR Gold Shares"
+ },
+ "GLW": {
+  "name": "Corning Incorporated",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 146.5,
+  "name_ja": "コーニング"
+ },
+ "GM": {
+  "name": "General Motors Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 73.43,
+  "name_ja": "GM"
+ },
+ "GNRC": {
+  "name": "Generac Holdings Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 195.52,
+  "name_ja": "Generac"
+ },
+ "GNTX": {
+  "name": "Gentex Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "中型",
+  "price": 21.5,
+  "name_ja": "Gentex"
+ },
+ "GOLF": {
+  "name": "Acushnet Holdings Corp.",
+  "sector": "Consumer Cyclical",
+  "industry": "Leisure",
+  "mc": "中型",
+  "price": 94.9,
+  "name_ja": "Acushnet"
+ },
+ "GOOGL": {
+  "name": "Alphabet Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "超大型",
+  "price": 299.99,
+  "name_ja": "アルファベット"
+ },
+ "GPC": {
+  "name": "Genuine Parts Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 105.15,
+  "name_ja": "Genuine Parts"
+ },
+ "GPK": {
+  "name": "Graphic Packaging Holding Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "中型",
+  "price": 9.6,
+  "name_ja": "Graphic Packaging Holding"
+ },
+ "GS": {
+  "name": "The Goldman Sachs Group, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "超大型",
+  "price": 866.05,
+  "name_ja": "ゴールドマン"
+ },
+ "GSAT": {
+  "name": "Globalstar, Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "中型",
+  "price": 72.66,
+  "name_ja": "Globalstar"
+ },
+ "GSK": {
+  "name": "GSK plc",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 56.37,
+  "name_ja": "GSK"
+ },
+ "GTLB": {
+  "name": "GitLab Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 22.76,
+  "name_ja": "GitLab"
+ },
+ "GWH": {
+  "name": "ESS Tech, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 1.2,
+  "name_ja": "ESS Tech"
+ },
+ "GWRE": {
+  "name": "Guidewire Software, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 147.83,
+  "name_ja": "Guidewire Software"
+ },
+ "GWW": {
+  "name": "W.W. Grainger, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 1117.24,
+  "name_ja": "W.W. Grainger"
+ },
+ "GXO": {
+  "name": "GXO Logistics, Inc.",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "中型",
+  "price": 53.02,
+  "name_ja": "GXO Logistics"
+ },
+ "H": {
+  "name": "Hyatt Hotels Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Lodging",
+  "mc": "大型",
+  "price": 145.99,
+  "name_ja": "Hyatt Hotels"
+ },
+ "HAL": {
+  "name": "Halliburton Company",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "大型",
+  "price": 37.82,
+  "name_ja": "ハリバートン"
+ },
+ "HAS": {
+  "name": "Hasbro, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Leisure",
+  "mc": "大型",
+  "price": 90.42,
+  "name_ja": "Hasbro"
+ },
+ "HBM": {
+  "name": "Hudbay Minerals Inc.",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "中型",
+  "price": 21.74,
+  "name_ja": "Hudbay Minerals"
+ },
+ "HCA": {
+  "name": "HCA Healthcare, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Care Facilities",
+  "mc": "大型",
+  "price": 483.92,
+  "name_ja": "HCAヘルスケア"
+ },
+ "HCC": {
+  "name": "Warrior Met Coal, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Coking Coal",
+  "mc": "中型",
+  "price": 94.6,
+  "name_ja": "Warrior Met Coal"
+ },
+ "HD": {
+  "name": "The Home Depot, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Home Improvement Retail",
+  "mc": "超大型",
+  "price": 326.65,
+  "name_ja": "ホームデポ"
+ },
+ "HEI": {
+  "name": "HEICO Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 276.77,
+  "name_ja": "HEICO"
+ },
+ "HIG": {
+  "name": "The Hartford Insurance Group, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Diversified",
+  "mc": "大型",
+  "price": 136.42,
+  "name_ja": "The Hartford Insurance"
+ },
+ "HII": {
+  "name": "Huntington Ingalls Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 407.66,
+  "name_ja": "Huntington Ingalls Industries"
+ },
+ "HL": {
+  "name": "Hecla Mining Company",
+  "sector": "Basic Materials",
+  "industry": "Other Precious Metals & Mining",
+  "mc": "大型",
+  "price": 19.12,
+  "name_ja": "Hecla Mining"
+ },
+ "HLN": {
+  "name": "Haleon plc",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - Specialty & Generic",
+  "mc": "大型",
+  "price": 9.92,
+  "name_ja": "Haleon"
+ },
+ "HLT": {
+  "name": "Hilton Worldwide Holdings Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Lodging",
+  "mc": "大型",
+  "price": 306.88,
+  "name_ja": "Hilton Worldwide"
+ },
+ "HMY": {
+  "name": "Harmony Gold Mining Company Limited",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 15.93,
+  "name_ja": "Harmony Gold Mining"
+ },
+ "HNRG": {
+  "name": "Hallador Energy Company",
+  "sector": "Energy",
+  "industry": "Thermal Coal",
+  "mc": "小型",
+  "price": 16.08,
+  "name_ja": "Hallador Energy"
+ },
+ "HON": {
+  "name": "Honeywell International Inc.",
+  "sector": "Industrials",
+  "industry": "Conglomerates",
+  "mc": "大型",
+  "price": 228.21,
+  "name_ja": "ハネウェル"
+ },
+ "HOOD": {
+  "name": "Robinhood Markets, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "大型",
+  "price": 69.78,
+  "name_ja": "Robinhood Markets"
+ },
+ "HP": {
+  "name": "Helmerich & Payne, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Drilling",
+  "mc": "中型",
+  "price": 34.92,
+  "name_ja": "Helmerich & Payne"
+ },
+ "HPE": {
+  "name": "Hewlett Packard Enterprise Company",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "大型",
+  "price": 24.58,
+  "name_ja": "Hewlett Packard Enterprise"
+ },
+ "HSIC": {
+  "name": "Henry Schein, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Distribution",
+  "mc": "中型",
+  "price": 74.86,
+  "name_ja": "Henry Schein"
+ },
+ "HSY": {
+  "name": "The Hershey Company",
+  "sector": "Consumer Defensive",
+  "industry": "Confectioners",
+  "mc": "大型",
+  "price": 207.97,
+  "name_ja": "The Hershey"
+ },
+ "HUBB": {
+  "name": "Hubbell Incorporated",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "大型",
+  "price": 499.2,
+  "name_ja": "Hubbell"
+ },
+ "HUBS": {
+  "name": "HubSpot, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 245.14,
+  "name_ja": "HubSpot"
+ },
+ "HUM": {
+  "name": "Humana Inc.",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "大型",
+  "price": 182.65,
+  "name_ja": "ヒューマナ"
+ },
+ "HUT": {
+  "name": "Hut 8 Corp.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 49.58,
+  "name_ja": "Hut 8"
+ },
+ "HWC": {
+  "name": "Hancock Whitney Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 65.05,
+  "name_ja": "Hancock Whitney"
+ },
+ "HWM": {
+  "name": "Howmet Aerospace Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 236.57,
+  "name_ja": "Howmet Aerospace"
+ },
+ "HXL": {
+  "name": "Hexcel Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 79.52,
+  "name_ja": "Hexcel"
+ },
+ "HYG": {
+  "name": "iShares iBoxx $ High Yield Corporate Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 79.7,
+  "name_ja": "iShares iBoxx $ High Yield Corporate Bond ETF"
+ },
+ "IAG": {
+  "name": "IAMGOLD Corporation",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 18.97,
+  "name_ja": "IAMGOLD"
+ },
+ "IBIT": {
+  "name": "iShares Bitcoin Trust ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 39.52,
+  "name_ja": "iSharesビットコインETF"
+ },
+ "IBM": {
+  "name": "International Business Machines Corporation",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "超大型",
+  "price": 246.74,
+  "name_ja": "IBM"
+ },
+ "ICHR": {
+  "name": "Ichor Holdings, Ltd.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "小型",
+  "price": 47.76,
+  "name_ja": "Ichor"
+ },
+ "ICLR": {
+  "name": "ICON Public Limited Company",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "中型",
+  "price": 109.62,
+  "name_ja": "ICON Public"
+ },
+ "IDR": {
+  "name": "Idaho Strategic Resources, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "小型",
+  "price": 35.02,
+  "name_ja": "Idaho Strategic Resources"
+ },
+ "IE": {
+  "name": "Ivanhoe Electric Inc.",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "小型",
+  "price": 12.23,
+  "name_ja": "Ivanhoe Electric"
+ },
+ "IEF": {
+  "name": "iShares 7-10 Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 95.01,
+  "name_ja": "iShares 7-10 Year Treasury Bond ETF"
+ },
+ "IEI": {
+  "name": "iShares 3-7 Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 118.07,
+  "name_ja": "iShares 3-7 Year Treasury Bond ETF"
+ },
+ "IHG": {
+  "name": "InterContinental Hotels Group PLC",
+  "sector": "Consumer Cyclical",
+  "industry": "Lodging",
+  "mc": "大型",
+  "price": 134.86,
+  "name_ja": "InterContinental Hotels"
+ },
+ "IJH": {
+  "name": "iShares Core S&P Mid-Cap ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 68.46,
+  "name_ja": "iShares Core S&P Mid-Cap ETF"
+ },
+ "IJJ": {
+  "name": "iShares S&P Mid-Cap 400 Value ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 134.03,
+  "name_ja": "iShares S&P Mid-Cap 400 Value ETF"
+ },
+ "IJK": {
+  "name": "iShares S&P Mid-Cap 400 Growth ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 102.16,
+  "name_ja": "iShares S&P Mid-Cap 400 Growth ETF"
+ },
+ "ILMN": {
+  "name": "Illumina, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 127.74,
+  "name_ja": "Illumina"
+ },
+ "INCY": {
+  "name": "Incyte Corporation",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 94.86,
+  "name_ja": "Incyte"
+ },
+ "INDA": {
+  "name": "iShares MSCI India ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 47.25,
+  "name_ja": "iShares MSCI India ETF"
+ },
+ "INSM": {
+  "name": "Insmed Incorporated",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 163.81,
+  "name_ja": "Insmed"
+ },
+ "INTC": {
+  "name": "Intel Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 50.78,
+  "name_ja": "インテル"
+ },
+ "INTU": {
+  "name": "Intuit Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 417.36,
+  "name_ja": "インテュイット"
+ },
+ "IONQ": {
+  "name": "IonQ, Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 29.24,
+  "name_ja": "IonQ"
+ },
+ "IONR": {
+  "name": "ioneer Ltd",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 3.8,
+  "name_ja": "ioneer Ltd"
+ },
+ "IP": {
+  "name": "International Paper Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 34.93,
+  "name_ja": "Paper"
+ },
+ "IPX": {
+  "name": "IperionX Limited",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 26.89,
+  "name_ja": "IperionX"
+ },
+ "IQV": {
+  "name": "IQVIA Holdings Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 170.72,
+  "name_ja": "IQVIA"
+ },
+ "IRDM": {
+  "name": "Iridium Communications Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "中型",
+  "price": 32.79,
+  "name_ja": "Iridium Communications"
+ },
+ "IREN": {
+  "name": "IREN Limited",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "大型",
+  "price": 35.13,
+  "name_ja": "IREN"
+ },
+ "ISOU": {
+  "name": "IsoEnergy Ltd.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "小型",
+  "price": 10.72,
+  "name_ja": "IsoEnergy"
+ },
+ "ISRG": {
+  "name": "Intuitive Surgical, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "大型",
+  "price": 452.58,
+  "name_ja": "インテュイティブ"
+ },
+ "ITRI": {
+  "name": "Itron, Inc.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "中型",
+  "price": 91.12,
+  "name_ja": "Itron"
+ },
+ "ITW": {
+  "name": "Illinois Tool Works Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 258.48,
+  "name_ja": "イリノイツールワークス"
+ },
+ "IVE": {
+  "name": "iShares S&P 500 Value ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 212.74,
+  "name_ja": "iShares S&P 500 Value ETF"
+ },
+ "IVW": {
+  "name": "iShares S&P 500 Growth ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 115.15,
+  "name_ja": "iShares S&P 500 Growth ETF"
+ },
+ "IWM": {
+  "name": "iShares Russell 2000 ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 252.36,
+  "name_ja": "iShares Russell 2000 ETF"
+ },
+ "IWN": {
+  "name": "iShares Russell 2000 Value ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 192.89,
+  "name_ja": "iShares Russell 2000 Value ETF"
+ },
+ "IWO": {
+  "name": "iShares Russell 2000 Growth ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 319.69,
+  "name_ja": "iShares Russell 2000 Growth ETF"
+ },
+ "J": {
+  "name": "Jacobs Solutions Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 128.04,
+  "name_ja": "Jacobs Solutions"
+ },
+ "JBHT": {
+  "name": "J.B. Hunt Transport Services, Inc.",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "大型",
+  "price": 217.37,
+  "name_ja": "J.B. Hunt Transport Services"
+ },
+ "JBL": {
+  "name": "Jabil Inc.",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 267.47,
+  "name_ja": "Jabil"
+ },
+ "JCI": {
+  "name": "Johnson Controls International plc",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 133.75,
+  "name_ja": "ジョンソンコントロールズ"
+ },
+ "JEF": {
+  "name": "Jefferies Financial Group Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 41.99,
+  "name_ja": "Jefferies Financial"
+ },
+ "JHX": {
+  "name": "James Hardie Industries plc",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "大型",
+  "price": 19.02,
+  "name_ja": "James Hardie Industries"
+ },
+ "JLL": {
+  "name": "Jones Lang LaSalle Incorporated",
+  "sector": "Real Estate",
+  "industry": "Real Estate Services",
+  "mc": "大型",
+  "price": 306.78,
+  "name_ja": "Jones Lang LaSalle"
+ },
+ "JNJ": {
+  "name": "Johnson & Johnson",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 240.97,
+  "name_ja": "ジョンソン&ジョンソン"
+ },
+ "JOBY": {
+  "name": "Joby Aviation, Inc.",
+  "sector": "Industrials",
+  "industry": "Airports & Air Services",
+  "mc": "中型",
+  "price": 8.7,
+  "name_ja": "Joby Aviation"
+ },
+ "JPM": {
+  "name": "JPMorgan Chase & Co.",
+  "sector": "Financial Services",
+  "industry": "Banks - Diversified",
+  "mc": "超大型",
+  "price": 295.45,
+  "name_ja": "JPモルガン"
+ },
+ "KBH": {
+  "name": "KB Home",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "中型",
+  "price": 51.34,
+  "name_ja": "KB Home"
+ },
+ "KBR": {
+  "name": "KBR, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 37.63,
+  "name_ja": "KBR"
+ },
+ "KC": {
+  "name": "Kingsoft Cloud Holdings Limited",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 13.57,
+  "name_ja": "Kingsoft Cloud"
+ },
+ "KDP": {
+  "name": "Keurig Dr Pepper Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Non-Alcoholic",
+  "mc": "大型",
+  "price": 25.7,
+  "name_ja": "Keurig Dr Pepper"
+ },
+ "KE": {
+  "name": "Kimball Electronics, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 23.86,
+  "name_ja": "Kimball Electronics"
+ },
+ "KEY": {
+  "name": "KeyCorp",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "大型",
+  "price": 20.66,
+  "name_ja": "KeyCorp"
+ },
+ "KEYS": {
+  "name": "Keysight Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "大型",
+  "price": 292.92,
+  "name_ja": "Keysight"
+ },
+ "KGC": {
+  "name": "Kinross Gold Corporation",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 31.36,
+  "name_ja": "Kinross Gold"
+ },
+ "KHC": {
+  "name": "The Kraft Heinz Company",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "大型",
+  "price": 23.57,
+  "name_ja": "クラフトハインツ"
+ },
+ "KKR": {
+  "name": "KKR & Co. Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 91.05,
+  "name_ja": "KKR &"
+ },
+ "KLAC": {
+  "name": "KLA Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "超大型",
+  "price": 1540.06,
+  "name_ja": "KLA"
+ },
+ "KLAR": {
+  "name": "Klarna Group plc",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 13.17,
+  "name_ja": "Klarna"
+ },
+ "KMB": {
+  "name": "Kimberly-Clark Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 96.99,
+  "name_ja": "キンバリークラーク"
+ },
+ "KMI": {
+  "name": "Kinder Morgan, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 33.19,
+  "name_ja": "Kinder Morgan"
+ },
+ "KMX": {
+  "name": "CarMax, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto & Truck Dealerships",
+  "mc": "中型",
+  "price": 42.61,
+  "name_ja": "CarMax"
+ },
+ "KNF": {
+  "name": "Knife River Corporation",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "中型",
+  "price": 74.82,
+  "name_ja": "Knife River"
+ },
+ "KO": {
+  "name": "The Coca-Cola Company",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Non-Alcoholic",
+  "mc": "超大型",
+  "price": 77.22,
+  "name_ja": "コカコーラ"
+ },
+ "KR": {
+  "name": "The Kroger Co.",
+  "sector": "Consumer Defensive",
+  "industry": "Grocery Stores",
+  "mc": "大型",
+  "price": 73.03,
+  "name_ja": "クローガー"
+ },
+ "KRMN": {
+  "name": "Karman Holdings Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 86.1,
+  "name_ja": "Karman"
+ },
+ "KSA": {
+  "name": "iShares MSCI Saudi Arabia ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 39.25,
+  "name_ja": "iShares MSCI Saudi Arabia ETF"
+ },
+ "KTOS": {
+  "name": "Kratos Defense & Security Solutions, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 74.09,
+  "name_ja": "Kratos Defense & Security Solutions"
+ },
+ "KVUE": {
+  "name": "Kenvue Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 17.3,
+  "name_ja": "キュービュー"
+ },
+ "KVYO": {
+  "name": "Klaviyo, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 19.21,
+  "name_ja": "Klaviyo"
+ },
+ "LAC": {
+  "name": "Lithium Americas Corp.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 4.03,
+  "name_ja": "Lithium Americas"
+ },
+ "LAD": {
+  "name": "Lithia Motors, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto & Truck Dealerships",
+  "mc": "中型",
+  "price": 257.57,
+  "name_ja": "Lithia Motors"
+ },
+ "LAZ": {
+  "name": "Lazard, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 41.51,
+  "name_ja": "Lazard"
+ },
+ "LBRT": {
+  "name": "Liberty Energy Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "中型",
+  "price": 27.67,
+  "name_ja": "Liberty Energy"
+ },
+ "LDOS": {
+  "name": "Leidos Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "大型",
+  "price": 159.47,
+  "name_ja": "Leidos"
+ },
+ "LEA": {
+  "name": "Lear Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "中型",
+  "price": 118.31,
+  "name_ja": "Lear"
+ },
+ "LEN": {
+  "name": "Lennar Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "大型",
+  "price": 88.57,
+  "name_ja": "レナー"
+ },
+ "LEU": {
+  "name": "Centrus Energy Corp.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "中型",
+  "price": 183.53,
+  "name_ja": "Centrus Energy"
+ },
+ "LEVI": {
+  "name": "Levi Strauss & Co.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Manufacturing",
+  "mc": "中型",
+  "price": 19.65,
+  "name_ja": "Levi Strauss &"
+ },
+ "LHX": {
+  "name": "L3Harris Technologies, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 358.73,
+  "name_ja": "L3Harris"
+ },
+ "LI": {
+  "name": "Li Auto Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 18.46,
+  "name_ja": "Li Auto"
+ },
+ "LII": {
+  "name": "Lennox International Inc.",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 453.59,
+  "name_ja": "Lennox"
+ },
+ "LIN": {
+  "name": "Linde plc",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "超大型",
+  "price": 499.47,
+  "name_ja": "リンデ"
+ },
+ "LITE": {
+  "name": "Lumentum Holdings Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "大型",
+  "price": 772.28,
+  "name_ja": "Lumentum"
+ },
+ "LLY": {
+  "name": "Eli Lilly and Company",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 927.06,
+  "name_ja": "イーライリリー"
+ },
+ "LMND": {
+  "name": "Lemonade, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Property & Casualty",
+  "mc": "中型",
+  "price": 61.94,
+  "name_ja": "Lemonade"
+ },
+ "LMT": {
+  "name": "Lockheed Martin Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 637.9,
+  "name_ja": "ロッキード"
+ },
+ "LNG": {
+  "name": "Cheniere Energy, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 284.05,
+  "name_ja": "Cheniere Energy"
+ },
+ "LOAR": {
+  "name": "Loar Holdings Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 58.44,
+  "name_ja": "Loar"
+ },
+ "LOW": {
+  "name": "Lowe's Companies, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Home Improvement Retail",
+  "mc": "大型",
+  "price": 235.2,
+  "name_ja": "ロウズ"
+ },
+ "LRCX": {
+  "name": "Lam Research Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "超大型",
+  "price": 220.65,
+  "name_ja": "ラムリサーチ"
+ },
+ "LSCC": {
+  "name": "Lattice Semiconductor Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 97.24,
+  "name_ja": "Lattice Semiconductor"
+ },
+ "LULU": {
+  "name": "lululemon athletica inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "大型",
+  "price": 156.18,
+  "name_ja": "ルルレモン"
+ },
+ "LUNR": {
+  "name": "Intuitive Machines, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 22.92,
+  "name_ja": "Intuitive Machines"
+ },
+ "LUV": {
+  "name": "Southwest Airlines Co.",
+  "sector": "Industrials",
+  "industry": "Airlines",
+  "mc": "大型",
+  "price": 38.18,
+  "name_ja": "サウスウエスト"
+ },
+ "LYB": {
+  "name": "LyondellBasell Industries N.V.",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 78.62,
+  "name_ja": "LyondellBasell Industries"
+ },
+ "LYFT": {
+  "name": "Lyft, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 13.7,
+  "name_ja": "Lyft"
+ },
+ "LYV": {
+  "name": "Live Nation Entertainment, Inc.",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 160.12,
+  "name_ja": "ライブネーション"
+ },
+ "MA": {
+  "name": "Mastercard Incorporated",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "超大型",
+  "price": 501.5,
+  "name_ja": "マスターカード"
+ },
+ "MANH": {
+  "name": "Manhattan Associates, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 136.42,
+  "name_ja": "Manhattan Associates"
+ },
+ "MAR": {
+  "name": "Marriott International, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Lodging",
+  "mc": "大型",
+  "price": 338.0,
+  "name_ja": "マリオット"
+ },
+ "MARA": {
+  "name": "MARA Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 8.85,
+  "name_ja": "マラソンデジタル"
+ },
+ "MAS": {
+  "name": "Masco Corporation",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 59.69,
+  "name_ja": "Masco"
+ },
+ "MAT": {
+  "name": "Mattel, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Leisure",
+  "mc": "中型",
+  "price": 14.51,
+  "name_ja": "Mattel"
+ },
+ "MBB": {
+  "name": "iShares MBS ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 94.66,
+  "name_ja": "iShares MBS ETF"
+ },
+ "MBLY": {
+  "name": "Mobileye Global Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "中型",
+  "price": 7.34,
+  "name_ja": "Mobileye Global"
+ },
+ "MCD": {
+  "name": "McDonald's Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "超大型",
+  "price": 309.76,
+  "name_ja": "マクドナルド"
+ },
+ "MCHI": {
+  "name": "iShares MSCI China ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 55.83,
+  "name_ja": "iShares MSCI China ETF"
+ },
+ "MCHP": {
+  "name": "Microchip Technology Incorporated",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 67.22,
+  "name_ja": "マイクロチップ"
+ },
+ "MCK": {
+  "name": "McKesson Corporation",
+  "sector": "Healthcare",
+  "industry": "Medical Distribution",
+  "mc": "大型",
+  "price": 856.77,
+  "name_ja": "マッケソン"
+ },
+ "MDB": {
+  "name": "MongoDB, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 255.01,
+  "name_ja": "MongoDB"
+ },
+ "MDLZ": {
+  "name": "Mondelez International, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Confectioners",
+  "mc": "大型",
+  "price": 58.38,
+  "name_ja": "モンデリーズ"
+ },
+ "MDU": {
+  "name": "MDU Resources Group, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 21.4,
+  "name_ja": "MDU Resources"
+ },
+ "MEDP": {
+  "name": "Medpace Holdings, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 496.0,
+  "name_ja": "Medpace"
+ },
+ "MET": {
+  "name": "MetLife, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "大型",
+  "price": 71.04,
+  "name_ja": "メットライフ"
+ },
+ "META": {
+  "name": "Meta Platforms, Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "超大型",
+  "price": 573.02,
+  "name_ja": "メタ"
+ },
+ "METC": {
+  "name": "Ramaco Resources, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Coking Coal",
+  "mc": "小型",
+  "price": 15.8,
+  "name_ja": "Ramaco Resources"
+ },
+ "MFC": {
+  "name": "Manulife Financial Corporation",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "大型",
+  "price": 35.18,
+  "name_ja": "Manulife Financial"
+ },
+ "MGA": {
+  "name": "Magna International Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 54.67,
+  "name_ja": "Magna"
+ },
+ "MGNI": {
+  "name": "Magnite, Inc.",
+  "sector": "Communication Services",
+  "industry": "Advertising Agencies",
+  "mc": "小型",
+  "price": 12.16,
+  "name_ja": "Magnite"
+ },
+ "MIDD": {
+  "name": "The Middleby Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "中型",
+  "price": 135.0,
+  "name_ja": "The Middleby"
+ },
+ "MKC": {
+  "name": "McCormick & Company, Incorporated",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "大型",
+  "price": 50.8,
+  "name_ja": "マコーミック"
+ },
+ "MKSI": {
+  "name": "MKS Inc.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "大型",
+  "price": 236.98,
+  "name_ja": "MKS"
+ },
+ "MLM": {
+  "name": "Martin Marietta Materials, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "大型",
+  "price": 598.48,
+  "name_ja": "Martin Marietta Materials"
+ },
+ "MMC": {
+  "name": "MMC",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 0,
+  "name_ja": "MMC"
+ },
+ "MNDY": {
+  "name": "monday.com Ltd.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 67.7,
+  "name_ja": "monday.com"
+ },
+ "MNST": {
+  "name": "Monster Beverage Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Non-Alcoholic",
+  "mc": "大型",
+  "price": 74.16,
+  "name_ja": "モンスター"
+ },
+ "MO": {
+  "name": "Altria Group, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Tobacco",
+  "mc": "大型",
+  "price": 66.55,
+  "name_ja": "アルトリア"
+ },
+ "MOD": {
+  "name": "Modine Manufacturing Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 214.88,
+  "name_ja": "Modine Manufacturing"
+ },
+ "MOG.A": {
+  "name": "MOG.A",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 0,
+  "name_ja": "MOG.A"
+ },
+ "MP": {
+  "name": "MP Materials Corp.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "中型",
+  "price": 51.17,
+  "name_ja": "MP Materials"
+ },
+ "MPC": {
+  "name": "Marathon Petroleum Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "大型",
+  "price": 241.4,
+  "name_ja": "マラソン石油"
+ },
+ "MPWR": {
+  "name": "Monolithic Power Systems, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 1180.03,
+  "name_ja": "Monolithic Power Systems"
+ },
+ "MRCY": {
+  "name": "Mercury Systems, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 75.75,
+  "name_ja": "Mercury Systems"
+ },
+ "MRK": {
+  "name": "Merck & Co., Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 120.85,
+  "name_ja": "メルク"
+ },
+ "MRNA": {
+  "name": "Moderna, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 48.77,
+  "name_ja": "モデルナ"
+ },
+ "MRVL": {
+  "name": "Marvell Technology, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 109.51,
+  "name_ja": "マーベル"
+ },
+ "MS": {
+  "name": "Morgan Stanley",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "超大型",
+  "price": 166.55,
+  "name_ja": "モルガンスタンレー"
+ },
+ "MSFT": {
+  "name": "Microsoft Corporation",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "超大型",
+  "price": 372.88,
+  "name_ja": "マイクロソフト"
+ },
+ "MSI": {
+  "name": "Motorola Solutions, Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "大型",
+  "price": 441.39,
+  "name_ja": "モトローラ"
+ },
+ "MSM": {
+  "name": "MSC Industrial Direct Co., Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "中型",
+  "price": 90.69,
+  "name_ja": "MSC Industrial Direct"
+ },
+ "MSTR": {
+  "name": "Strategy Inc",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 127.69,
+  "name_ja": "Strategy Inc"
+ },
+ "MTB": {
+  "name": "M&T Bank Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "大型",
+  "price": 212.02,
+  "name_ja": "M&T Bank"
+ },
+ "MTD": {
+  "name": "Mettler-Toledo International Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 1266.63,
+  "name_ja": "Mettler-Toledo"
+ },
+ "MTH": {
+  "name": "Meritage Homes Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "中型",
+  "price": 63.08,
+  "name_ja": "Meritage Homes"
+ },
+ "MTSI": {
+  "name": "MACOM Technology Solutions Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 233.04,
+  "name_ja": "MACOM  Solutions"
+ },
+ "MTZ": {
+  "name": "MasTec, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 337.27,
+  "name_ja": "MasTec"
+ },
+ "MU": {
+  "name": "Micron Technology, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 377.76,
+  "name_ja": "マイクロン"
+ },
+ "MVST": {
+  "name": "Microvast Holdings, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "小型",
+  "price": 1.6,
+  "name_ja": "Microvast"
+ },
+ "MYRG": {
+  "name": "MYR Group Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 288.06,
+  "name_ja": "MYR"
+ },
+ "NB": {
+  "name": "NioCorp Developments Ltd.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 4.94,
+  "name_ja": "NioCorp Developments"
+ },
+ "NBIS": {
+  "name": "Nebius Group N.V.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "大型",
+  "price": 112.54,
+  "name_ja": "Nebius"
+ },
+ "NCLH": {
+  "name": "Norwegian Cruise Line Holdings Ltd.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "中型",
+  "price": 19.37,
+  "name_ja": "ノルウェージャンクルーズ"
+ },
+ "NE": {
+  "name": "Noble Corporation plc",
+  "sector": "Energy",
+  "industry": "Oil & Gas Drilling",
+  "mc": "中型",
+  "price": 49.52,
+  "name_ja": "Noble"
+ },
+ "NEE": {
+  "name": "NextEra Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 92.73,
+  "name_ja": "ネクステラ"
+ },
+ "NEM": {
+  "name": "Newmont Corporation",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 112.83,
+  "name_ja": "Newmont"
+ },
+ "NET": {
+  "name": "Cloudflare, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 211.78,
+  "name_ja": "クラウドフレア"
+ },
+ "NFG": {
+  "name": "National Fuel Gas Company",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "中型",
+  "price": 94.4,
+  "name_ja": "National Fuel Gas"
+ },
+ "NFLX": {
+  "name": "Netflix, Inc.",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "超大型",
+  "price": 98.93,
+  "name_ja": "ネットフリックス"
+ },
+ "NGG": {
+  "name": "National Grid plc",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 87.06,
+  "name_ja": "National Grid"
+ },
+ "NI": {
+  "name": "NiSource Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "大型",
+  "price": 47.14,
+  "name_ja": "NiSource"
+ },
+ "NIO": {
+  "name": "NIO Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 6.24,
+  "name_ja": "NIO"
+ },
+ "NJR": {
+  "name": "New Jersey Resources Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 55.84,
+  "name_ja": "New Jersey Resources"
+ },
+ "NKE": {
+  "name": "NIKE, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Footwear & Accessories",
+  "mc": "大型",
+  "price": 44.03,
+  "name_ja": "ナイキ"
+ },
+ "NMG": {
+  "name": "Nouveau Monde Graphite Inc.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 2.26,
+  "name_ja": "Nouveau Monde Graphite"
+ },
+ "NOC": {
+  "name": "Northrop Grumman Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 695.79,
+  "name_ja": "ノースロップ"
+ },
+ "NOV": {
+  "name": "NOV Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "中型",
+  "price": 18.83,
+  "name_ja": "NOV"
+ },
+ "NOW": {
+  "name": "ServiceNow, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 102.42,
+  "name_ja": "サービスナウ"
+ },
+ "NRG": {
+  "name": "NRG Energy, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Independent Power Producers",
+  "mc": "大型",
+  "price": 149.8,
+  "name_ja": "NRG Energy"
+ },
+ "NSC": {
+  "name": "Norfolk Southern Corporation",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 288.05,
+  "name_ja": "ノーフォーク"
+ },
+ "NTAP": {
+  "name": "NetApp, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 100.9,
+  "name_ja": "NetApp"
+ },
+ "NTR": {
+  "name": "Nutrien Ltd.",
+  "sector": "Basic Materials",
+  "industry": "Agricultural Inputs",
+  "mc": "大型",
+  "price": 75.81,
+  "name_ja": "Nutrien"
+ },
+ "NTRA": {
+  "name": "Natera, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 204.87,
+  "name_ja": "Natera"
+ },
+ "NUAI": {
+  "name": "New Era Energy & Digital, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "小型",
+  "price": 4.19,
+  "name_ja": "New Era Energy & Digital"
+ },
+ "NUE": {
+  "name": "Nucor Corporation",
+  "sector": "Basic Materials",
+  "industry": "Steel",
+  "mc": "大型",
+  "price": 169.59,
+  "name_ja": "ニューコア"
+ },
+ "NVDA": {
+  "name": "NVIDIA Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 177.64,
+  "name_ja": "エヌビディア"
+ },
+ "NVO": {
+  "name": "Novo Nordisk A/S",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 36.67,
+  "name_ja": "ノボノルディスク"
+ },
+ "NVR": {
+  "name": "NVR, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "大型",
+  "price": 6715.45,
+  "name_ja": "NVR"
+ },
+ "NVS": {
+  "name": "Novartis AG",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "超大型",
+  "price": 152.84,
+  "name_ja": "Novartis AG"
+ },
+ "NVT": {
+  "name": "nVent Electric plc",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "大型",
+  "price": 117.41,
+  "name_ja": "nVent Electric"
+ },
+ "NVX": {
+  "name": "NOVONIX Limited",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 0.69,
+  "name_ja": "NOVONIX"
+ },
+ "NWS": {
+  "name": "News Corporation",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 28.14,
+  "name_ja": "News"
+ },
+ "NXE": {
+  "name": "NexGen Energy Ltd.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "中型",
+  "price": 11.5,
+  "name_ja": "NexGen Energy"
+ },
+ "NXPI": {
+  "name": "NXP Semiconductors N.V.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 197.08,
+  "name_ja": "NXP"
+ },
+ "NXT": {
+  "name": "Nextpower Inc.",
+  "sector": "Technology",
+  "industry": "Solar",
+  "mc": "大型",
+  "price": 108.06,
+  "name_ja": "Nextpower"
+ },
+ "O": {
+  "name": "Realty Income Corporation",
+  "sector": "Real Estate",
+  "industry": "REIT - Retail",
+  "mc": "大型",
+  "price": 61.83,
+  "name_ja": "Realty Income"
+ },
+ "OC": {
+  "name": "Owens Corning",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "中型",
+  "price": 106.28,
+  "name_ja": "Owens Corning"
+ },
+ "ODFL": {
+  "name": "Old Dominion Freight Line, Inc.",
+  "sector": "Industrials",
+  "industry": "Trucking",
+  "mc": "大型",
+  "price": 202.18,
+  "name_ja": "オールドドミニオン"
+ },
+ "OGS": {
+  "name": "ONE Gas, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 88.55,
+  "name_ja": "ONE Gas"
+ },
+ "OKE": {
+  "name": "ONEOK, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 88.5,
+  "name_ja": "ONEOK"
+ },
+ "OKLO": {
+  "name": "Oklo Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Independent Power Producers",
+  "mc": "中型",
+  "price": 48.76,
+  "name_ja": "Oklo"
+ },
+ "OKTA": {
+  "name": "Okta, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 80.56,
+  "name_ja": "Okta"
+ },
+ "OLLI": {
+  "name": "Ollie's Bargain Outlet Holdings, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "中型",
+  "price": 97.21,
+  "name_ja": "Ollie's Bargain Outlet"
+ },
+ "OMF": {
+  "name": "OneMain Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "中型",
+  "price": 54.97,
+  "name_ja": "OneMain"
+ },
+ "ON": {
+  "name": "ON Semiconductor Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 63.49,
+  "name_ja": "オンセミ"
+ },
+ "ONDS": {
+  "name": "Ondas Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "中型",
+  "price": 9.52,
+  "name_ja": "Ondas"
+ },
+ "ONON": {
+  "name": "On Holding AG",
+  "sector": "Consumer Cyclical",
+  "industry": "Footwear & Accessories",
+  "mc": "大型",
+  "price": 33.67,
+  "name_ja": "On Holding AG"
+ },
+ "ONTO": {
+  "name": "Onto Innovation Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "大型",
+  "price": 221.17,
+  "name_ja": "Onto Innovation"
+ },
+ "OPEN": {
+  "name": "Opendoor Technologies Inc.",
+  "sector": "Real Estate",
+  "industry": "Real Estate Services",
+  "mc": "中型",
+  "price": 4.61,
+  "name_ja": "Opendoor"
+ },
+ "ORCL": {
+  "name": "Oracle Corporation",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "超大型",
+  "price": 145.54,
+  "name_ja": "オラクル"
+ },
+ "ORLY": {
+  "name": "O'Reilly Automotive, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "大型",
+  "price": 92.13,
+  "name_ja": "O'Reilly Automotive"
+ },
+ "OSCR": {
+  "name": "Oscar Health, Inc.",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "中型",
+  "price": 12.76,
+  "name_ja": "Oscar Health"
+ },
+ "OSK": {
+  "name": "Oshkosh Corporation",
+  "sector": "Industrials",
+  "industry": "Farm & Heavy Construction Machinery",
+  "mc": "中型",
+  "price": 148.0,
+  "name_ja": "Oshkosh"
+ },
+ "OTIS": {
+  "name": "Otis Worldwide Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 78.11,
+  "name_ja": "Otis Worldwide"
+ },
+ "OUST": {
+  "name": "Ouster, Inc.",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "小型",
+  "price": 19.31,
+  "name_ja": "Ouster"
+ },
+ "OWL": {
+  "name": "Blue Owl Capital Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 8.45,
+  "name_ja": "Blue Owl Capital"
+ },
+ "OXY": {
+  "name": "Occidental Petroleum Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 62.96,
+  "name_ja": "オキシデンタル"
+ },
+ "PAAS": {
+  "name": "Pan American Silver Corp.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 55.96,
+  "name_ja": "Pan American Silver"
+ },
+ "PANW": {
+  "name": "Palo Alto Networks, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 161.95,
+  "name_ja": "パロアルト"
+ },
+ "PARR": {
+  "name": "Par Pacific Holdings, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "中型",
+  "price": 64.79,
+  "name_ja": "Par Pacific"
+ },
+ "PATH": {
+  "name": "UiPath, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 11.15,
+  "name_ja": "UiPath"
+ },
+ "PB": {
+  "name": "Prosperity Bancshares, Inc.",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 67.22,
+  "name_ja": "Prosperity Bancshares"
+ },
+ "PBF": {
+  "name": "PBF Energy Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "中型",
+  "price": 46.37,
+  "name_ja": "PBF Energy"
+ },
+ "PBR": {
+  "name": "Petróleo Brasileiro S.A. - Petrobras",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "大型",
+  "price": 20.86,
+  "name_ja": "Petróleo Brasileiro  - Petrobras"
+ },
+ "PCOR": {
+  "name": "Procore Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 57.24,
+  "name_ja": "Procore"
+ },
+ "PEG": {
+  "name": "Public Service Enterprise Group Incorporated",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 81.05,
+  "name_ja": "Public Service Enterprise"
+ },
+ "PEP": {
+  "name": "PepsiCo, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Non-Alcoholic",
+  "mc": "超大型",
+  "price": 156.73,
+  "name_ja": "ペプシコ"
+ },
+ "PFE": {
+  "name": "Pfizer Inc.",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 27.83,
+  "name_ja": "ファイザー"
+ },
+ "PFGC": {
+  "name": "Performance Food Group Company",
+  "sector": "Consumer Defensive",
+  "industry": "Food Distribution",
+  "mc": "大型",
+  "price": 85.97,
+  "name_ja": "Performance Food"
+ },
+ "PFSI": {
+  "name": "PennyMac Financial Services, Inc.",
+  "sector": "Financial Services",
+  "industry": "Mortgage Finance",
+  "mc": "中型",
+  "price": 90.38,
+  "name_ja": "PennyMac Financial Services"
+ },
+ "PG": {
+  "name": "The Procter & Gamble Company",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "超大型",
+  "price": 142.77,
+  "name_ja": "P&G"
+ },
+ "PGR": {
+  "name": "The Progressive Corporation",
+  "sector": "Financial Services",
+  "industry": "Insurance - Property & Casualty",
+  "mc": "大型",
+  "price": 196.38,
+  "name_ja": "プログレッシブ"
+ },
+ "PH": {
+  "name": "Parker-Hannifin Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 912.1,
+  "name_ja": "Parker-Hannifin"
+ },
+ "PHM": {
+  "name": "PulteGroup, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "大型",
+  "price": 119.83,
+  "name_ja": "Pulte"
+ },
+ "PINS": {
+  "name": "Pinterest, Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "大型",
+  "price": 18.25,
+  "name_ja": "Pinterest"
+ },
+ "PKG": {
+  "name": "Packaging Corporation of America",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 205.4,
+  "name_ja": "Packaging  of America"
+ },
+ "PL": {
+  "name": "Planet Labs PBC",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 35.02,
+  "name_ja": "Planet Labs PBC"
+ },
+ "PLAB": {
+  "name": "Photronics, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 40.49,
+  "name_ja": "Photronics"
+ },
+ "PLD": {
+  "name": "Prologis, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Industrial",
+  "mc": "大型",
+  "price": 132.35,
+  "name_ja": "プロロジス"
+ },
+ "PLTR": {
+  "name": "Palantir Technologies Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "超大型",
+  "price": 147.93,
+  "name_ja": "パランティア"
+ },
+ "PM": {
+  "name": "Philip Morris International Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Tobacco",
+  "mc": "超大型",
+  "price": 160.34,
+  "name_ja": "フィリップモリス"
+ },
+ "POET": {
+  "name": "POET Technologies Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "小型",
+  "price": 6.08,
+  "name_ja": "POET"
+ },
+ "POOL": {
+  "name": "Pool Corporation",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "中型",
+  "price": 204.69,
+  "name_ja": "プール"
+ },
+ "POWL": {
+  "name": "Powell Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "中型",
+  "price": 186.72,
+  "name_ja": "Powell Industries"
+ },
+ "PPC": {
+  "name": "Pilgrim's Pride Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Packaged Foods",
+  "mc": "中型",
+  "price": 36.97,
+  "name_ja": "Pilgrim's Pride"
+ },
+ "PPG": {
+  "name": "PPG Industries, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 103.86,
+  "name_ja": "PPG Industries"
+ },
+ "PPTA": {
+  "name": "Perpetua Resources Corp.",
+  "sector": "Basic Materials",
+  "industry": "Other Precious Metals & Mining",
+  "mc": "中型",
+  "price": 29.16,
+  "name_ja": "Perpetua Resources"
+ },
+ "PRI": {
+  "name": "Primerica, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "中型",
+  "price": 253.76,
+  "name_ja": "Primerica"
+ },
+ "PRU": {
+  "name": "Prudential Financial, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Life",
+  "mc": "大型",
+  "price": 97.82,
+  "name_ja": "Prudential Financial"
+ },
+ "PSN": {
+  "name": "Parsons Corporation",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 56.38,
+  "name_ja": "Parsons"
+ },
+ "PSTG": {
+  "name": "Everpure, Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 61.17,
+  "name_ja": "Everpure"
+ },
+ "PSX": {
+  "name": "Phillips 66",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "大型",
+  "price": 177.33,
+  "name_ja": "フィリップス66"
+ },
+ "PTEN": {
+  "name": "Patterson-UTI Energy, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Drilling",
+  "mc": "中型",
+  "price": 10.59,
+  "name_ja": "Patterson-UTI Energy"
+ },
+ "PUMP": {
+  "name": "ProPetro Holding Corp.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "小型",
+  "price": 13.73,
+  "name_ja": "ProPetro Holding"
+ },
+ "PWR": {
+  "name": "Quanta Services, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 554.38,
+  "name_ja": "Quanta Services"
+ },
+ "PYPL": {
+  "name": "PayPal Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 45.48,
+  "name_ja": "ペイパル"
+ },
+ "Q": {
+  "name": "Qnity Electronics, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "大型",
+  "price": 118.87,
+  "name_ja": "Qnity Electronics"
+ },
+ "QBTS": {
+  "name": "D-Wave Quantum Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "中型",
+  "price": 14.14,
+  "name_ja": "D-Wave Quantum"
+ },
+ "QCOM": {
+  "name": "QUALCOMM Incorporated",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 125.73,
+  "name_ja": "クアルコム"
+ },
+ "QQQ": {
+  "name": "Invesco QQQ Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "超大型",
+  "price": 588.5,
+  "name_ja": "NASDAQ100ETF"
+ },
+ "QRVO": {
+  "name": "Qorvo, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 79.43,
+  "name_ja": "Qorvo"
+ },
+ "QS": {
+  "name": "QuantumScape Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "中型",
+  "price": 6.34,
+  "name_ja": "QuantumScape"
+ },
+ "QSR": {
+  "name": "Restaurant Brands International Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 77.23,
+  "name_ja": "Restaurant Brands"
+ },
+ "QUBT": {
+  "name": "Quantum Computing Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "小型",
+  "price": 6.86,
+  "name_ja": "Quantum Computing"
+ },
+ "QXO": {
+  "name": "QXO, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 19.02,
+  "name_ja": "QXO"
+ },
+ "RAIL": {
+  "name": "FreightCar America, Inc.",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "小型",
+  "price": 8.45,
+  "name_ja": "FreightCar America"
+ },
+ "RBRK": {
+  "name": "Rubrik, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 50.9,
+  "name_ja": "Rubrik"
+ },
+ "RCAT": {
+  "name": "Red Cat Holdings, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "小型",
+  "price": 13.06,
+  "name_ja": "Red Cat"
+ },
+ "RCL": {
+  "name": "Royal Caribbean Cruises Ltd.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 275.7,
+  "name_ja": "Royal Caribbean Cruises"
+ },
+ "RDDT": {
+  "name": "Reddit, Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "大型",
+  "price": 138.34,
+  "name_ja": "Reddit"
+ },
+ "RDW": {
+  "name": "Redwire Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "小型",
+  "price": 9.91,
+  "name_ja": "Redwire"
+ },
+ "REGN": {
+  "name": "Regeneron Pharmaceuticals, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 763.04,
+  "name_ja": "リジェネロン"
+ },
+ "REYN": {
+  "name": "Reynolds Consumer Products Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "中型",
+  "price": 21.36,
+  "name_ja": "Reynolds Consumer Products"
+ },
+ "REZI": {
+  "name": "Resideo Technologies, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "中型",
+  "price": 34.86,
+  "name_ja": "Resideo"
+ },
+ "RF": {
+  "name": "Regions Financial Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "大型",
+  "price": 26.74,
+  "name_ja": "Regions Financial"
+ },
+ "RGEN": {
+  "name": "Repligen Corporation",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "中型",
+  "price": 116.95,
+  "name_ja": "Repligen"
+ },
+ "RGLD": {
+  "name": "Royal Gold, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 260.58,
+  "name_ja": "Royal Gold"
+ },
+ "RGTI": {
+  "name": "Rigetti Computing, Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "中型",
+  "price": 14.2,
+  "name_ja": "Rigetti Computing"
+ },
+ "RIG": {
+  "name": "Transocean Ltd.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Drilling",
+  "mc": "中型",
+  "price": 6.59,
+  "name_ja": "Transocean"
+ },
+ "RIO": {
+  "name": "Rio Tinto Group",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "大型",
+  "price": 94.01,
+  "name_ja": "Rio Tinto"
+ },
+ "RJF": {
+  "name": "Raymond James Financial, Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 141.74,
+  "name_ja": "Raymond James Financial"
+ },
+ "RKLB": {
+  "name": "Rocket Lab Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 67.67,
+  "name_ja": "Rocket Lab"
+ },
+ "RKT": {
+  "name": "Rocket Companies, Inc.",
+  "sector": "Financial Services",
+  "industry": "Mortgage Finance",
+  "mc": "大型",
+  "price": 15.03,
+  "name_ja": "Rocket Companies"
+ },
+ "RL": {
+  "name": "Ralph Lauren Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Manufacturing",
+  "mc": "大型",
+  "price": 358.59,
+  "name_ja": "Ralph Lauren"
+ },
+ "RLAY": {
+  "name": "Relay Therapeutics, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "中型",
+  "price": 12.45,
+  "name_ja": "Relay Therapeutics"
+ },
+ "RMBS": {
+  "name": "Rambus Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 92.22,
+  "name_ja": "Rambus"
+ },
+ "RNG": {
+  "name": "RingCentral, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 38.08,
+  "name_ja": "RingCentral"
+ },
+ "ROAD": {
+  "name": "Construction Partners, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 108.88,
+  "name_ja": "Construction Partners"
+ },
+ "ROK": {
+  "name": "Rockwell Automation, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 367.18,
+  "name_ja": "Rockwell Automation"
+ },
+ "ROKU": {
+  "name": "Roku, Inc.",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 98.2,
+  "name_ja": "ロク"
+ },
+ "ROL": {
+  "name": "Rollins, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Personal Services",
+  "mc": "大型",
+  "price": 54.13,
+  "name_ja": "Rollins"
+ },
+ "ROP": {
+  "name": "Roper Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 360.19,
+  "name_ja": "ローパー"
+ },
+ "ROST": {
+  "name": "Ross Stores, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "大型",
+  "price": 221.21,
+  "name_ja": "ロスストアーズ"
+ },
+ "RR": {
+  "name": "Richtech Robotics Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "小型",
+  "price": 2.02,
+  "name_ja": "Richtech Robotics"
+ },
+ "RRC": {
+  "name": "Range Resources Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas E&P",
+  "mc": "大型",
+  "price": 43.67,
+  "name_ja": "Range Resources"
+ },
+ "RRX": {
+  "name": "Regal Rexnord Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 185.33,
+  "name_ja": "Regal Rexnord"
+ },
+ "RS": {
+  "name": "Reliance, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Steel",
+  "mc": "大型",
+  "price": 306.1,
+  "name_ja": "Reliance"
+ },
+ "RSG": {
+  "name": "Republic Services, Inc.",
+  "sector": "Industrials",
+  "industry": "Waste Management",
+  "mc": "大型",
+  "price": 220.86,
+  "name_ja": "Republic Services"
+ },
+ "RSP": {
+  "name": "Invesco S&P 500 Equal Weight ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 193.92,
+  "name_ja": "S&P500均等ETF"
+ },
+ "RTO": {
+  "name": "Rentokil Initial plc",
+  "sector": "Industrials",
+  "industry": "Specialty Business Services",
+  "mc": "大型",
+  "price": 32.85,
+  "name_ja": "Rentokil Initial"
+ },
+ "RTX": {
+  "name": "RTX Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "超大型",
+  "price": 198.41,
+  "name_ja": "RTX"
+ },
+ "RVTY": {
+  "name": "Revvity, Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "中型",
+  "price": 88.32,
+  "name_ja": "Revvity"
+ },
+ "RXRX": {
+  "name": "Recursion Pharmaceuticals, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "小型",
+  "price": 3.15,
+  "name_ja": "Recursion Pharmaceuticals"
+ },
+ "RYAN": {
+  "name": "Ryan Specialty Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Specialty",
+  "mc": "中型",
+  "price": 34.16,
+  "name_ja": "Ryan Specialty"
+ },
+ "S": {
+  "name": "SentinelOne, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 13.51,
+  "name_ja": "SentinelOne"
+ },
+ "SANM": {
+  "name": "Sanmina Corporation",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "中型",
+  "price": 129.29,
+  "name_ja": "Sanmina"
+ },
+ "SATL": {
+  "name": "Satellogic Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "小型",
+  "price": 7.05,
+  "name_ja": "Satellogic"
+ },
+ "SATS": {
+  "name": "EchoStar Corporation",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "大型",
+  "price": 126.95,
+  "name_ja": "EchoStar"
+ },
+ "SBS": {
+  "name": "Companhia de Saneamento Básico do Estado de São Paulo - SABESP",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Water",
+  "mc": "大型",
+  "price": 30.27,
+  "name_ja": "Companhia de Saneamento Básico do Estado de São Paulo - SABESP"
+ },
+ "SBUX": {
+  "name": "Starbucks Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 94.78,
+  "name_ja": "スターバックス"
+ },
+ "SCCO": {
+  "name": "Southern Copper Corporation",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "大型",
+  "price": 176.67,
+  "name_ja": "Southern Copper"
+ },
+ "SDGR": {
+  "name": "Schrödinger, Inc.",
+  "sector": "Healthcare",
+  "industry": "Health Information Services",
+  "mc": "小型",
+  "price": 11.52,
+  "name_ja": "Schrödinger"
+ },
+ "SERV": {
+  "name": "Serve Robotics Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "小型",
+  "price": 8.35,
+  "name_ja": "Serve Robotics"
+ },
+ "SES": {
+  "name": "SES AI Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "小型",
+  "price": 1.01,
+  "name_ja": "S AI"
+ },
+ "SEZL": {
+  "name": "Sezzle Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "中型",
+  "price": 68.81,
+  "name_ja": "Sezzle"
+ },
+ "SGI": {
+  "name": "Somnigroup International Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Furnishings, Fixtures & Appliances",
+  "mc": "大型",
+  "price": 74.37,
+  "name_ja": "Somnigroup"
+ },
+ "SGML": {
+  "name": "Sigma Lithium Corporation",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 14.51,
+  "name_ja": "Sigma Lithium"
+ },
+ "SHAK": {
+  "name": "Shake Shack Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "中型",
+  "price": 92.37,
+  "name_ja": "Shake Shack"
+ },
+ "SHEL": {
+  "name": "Shell plc",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "超大型",
+  "price": 93.64,
+  "name_ja": "Shell"
+ },
+ "SHOP": {
+  "name": "Shopify Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 118.8,
+  "name_ja": "ショッピファイ"
+ },
+ "SHV": {
+  "name": "iShares 0–1 Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 110.13,
+  "name_ja": "iShares 0–1 Year Treasury Bond ETF"
+ },
+ "SHW": {
+  "name": "The Sherwin-Williams Company",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 316.39,
+  "name_ja": "シャーウィンウィリアムズ"
+ },
+ "SHY": {
+  "name": "iShares 1-3 Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 82.28,
+  "name_ja": "iShares 1-3 Year Treasury Bond ETF"
+ },
+ "SITE": {
+  "name": "SiteOne Landscape Supply, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "中型",
+  "price": 130.37,
+  "name_ja": "SiteOne Landscape Supply"
+ },
+ "SITM": {
+  "name": "SiTime Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 363.94,
+  "name_ja": "SiTime"
+ },
+ "SKYT": {
+  "name": "SkyWater Technology, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "小型",
+  "price": 28.54,
+  "name_ja": "SkyWater"
+ },
+ "SLAB": {
+  "name": "Silicon Laboratories Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 209.49,
+  "name_ja": "Silicon Laboratories"
+ },
+ "SLB": {
+  "name": "SLB N.V.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "大型",
+  "price": 49.78,
+  "name_ja": "シュルンベルジェ"
+ },
+ "SLDP": {
+  "name": "Solid Power, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Parts",
+  "mc": "小型",
+  "price": 2.91,
+  "name_ja": "Solid Power"
+ },
+ "SLI": {
+  "name": "Standard Lithium Ltd.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 3.39,
+  "name_ja": "Standard Lithium"
+ },
+ "SLM": {
+  "name": "SLM Corporation",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "中型",
+  "price": 22.16,
+  "name_ja": "SLM"
+ },
+ "SLV": {
+  "name": "iShares Silver Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 66.09,
+  "name_ja": "iShares Silver Trust"
+ },
+ "SMCI": {
+  "name": "Super Micro Computer, Inc.",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 22.05,
+  "name_ja": "スーパーマイクロ"
+ },
+ "SMR": {
+  "name": "NuScale Power Corporation",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "中型",
+  "price": 10.17,
+  "name_ja": "NuScale Power"
+ },
+ "SN": {
+  "name": "SharkNinja, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Furnishings, Fixtures & Appliances",
+  "mc": "大型",
+  "price": 108.48,
+  "name_ja": "SharkNinja"
+ },
+ "SNAP": {
+  "name": "Snap Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "中型",
+  "price": 4.71,
+  "name_ja": "スナップ"
+ },
+ "SNDK": {
+  "name": "Sandisk Corporation",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 724.63,
+  "name_ja": "Sandisk"
+ },
+ "SNOW": {
+  "name": "Snowflake Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 149.38,
+  "name_ja": "Snowflake"
+ },
+ "SNPS": {
+  "name": "Synopsys, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 397.07,
+  "name_ja": "シノプシス"
+ },
+ "SNY": {
+  "name": "Sanofi",
+  "sector": "Healthcare",
+  "industry": "Drug Manufacturers - General",
+  "mc": "大型",
+  "price": 47.6,
+  "name_ja": "Sanofi"
+ },
+ "SO": {
+  "name": "The Southern Company",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 96.94,
+  "name_ja": "サザン"
+ },
+ "SOFI": {
+  "name": "SoFi Technologies, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 16.27,
+  "name_ja": "SoFi"
+ },
+ "SOLS": {
+  "name": "Solstice Advanced Materials, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 78.03,
+  "name_ja": "Solstice Advanced Materials"
+ },
+ "SON": {
+  "name": "Sonoco Products Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "中型",
+  "price": 54.18,
+  "name_ja": "Sonoco Products"
+ },
+ "SPG": {
+  "name": "Simon Property Group, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Retail",
+  "mc": "大型",
+  "price": 190.23,
+  "name_ja": "サイモンプロパティ"
+ },
+ "SPIR": {
+  "name": "Spire Global, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Business Services",
+  "mc": "小型",
+  "price": 15.47,
+  "name_ja": "Spire Global"
+ },
+ "SPY": {
+  "name": "State Street SPDR S&P 500 ETF Trust",
+  "sector": "",
+  "industry": "",
+  "mc": "超大型",
+  "price": 658.93,
+  "name_ja": "S&P500ETF"
+ },
+ "SQM": {
+  "name": "Sociedad Química y Minera de Chile S.A.",
+  "sector": "Basic Materials",
+  "industry": "Specialty Chemicals",
+  "mc": "大型",
+  "price": 80.45,
+  "name_ja": "Sociedad Química y Minera de Chile"
+ },
+ "SR": {
+  "name": "Spire Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 92.28,
+  "name_ja": "Spire"
+ },
+ "SRE": {
+  "name": "Sempra",
+  "sector": "Utilities",
+  "industry": "Utilities - Diversified",
+  "mc": "大型",
+  "price": 98.01,
+  "name_ja": "センプラ"
+ },
+ "SSB": {
+  "name": "SouthState Bank Corporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 94.15,
+  "name_ja": "SouthState Bank"
+ },
+ "STAG": {
+  "name": "STAG Industrial, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Industrial",
+  "mc": "中型",
+  "price": 36.38,
+  "name_ja": "STAG Industrial"
+ },
+ "STEM": {
+  "name": "Stem, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Renewable",
+  "mc": "小型",
+  "price": 9.07,
+  "name_ja": "Stem"
+ },
+ "STLA": {
+  "name": "Stellantis N.V.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 7.48,
+  "name_ja": "Stellantis"
+ },
+ "STLD": {
+  "name": "Steel Dynamics, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Steel",
+  "mc": "大型",
+  "price": 176.53,
+  "name_ja": "Steel Dynamics"
+ },
+ "STN": {
+  "name": "Stantec Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 88.1,
+  "name_ja": "Stantec"
+ },
+ "STRL": {
+  "name": "Sterling Infrastructure, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "大型",
+  "price": 393.71,
+  "name_ja": "Sterling Infrastructure"
+ },
+ "STX": {
+  "name": "Seagate Technology Holdings plc",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 453.3,
+  "name_ja": "Seagate"
+ },
+ "STZ": {
+  "name": "Constellation Brands, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Brewers",
+  "mc": "大型",
+  "price": 155.25,
+  "name_ja": "コンステレーションブランズ"
+ },
+ "SW": {
+  "name": "Smurfit Westrock Plc",
+  "sector": "Consumer Cyclical",
+  "industry": "Packaging & Containers",
+  "mc": "大型",
+  "price": 40.11,
+  "name_ja": "Smurfit Westrock Plc"
+ },
+ "SWK": {
+  "name": "Stanley Black & Decker, Inc.",
+  "sector": "Industrials",
+  "industry": "Tools & Accessories",
+  "mc": "大型",
+  "price": 67.98,
+  "name_ja": "Stanley Black & Decker"
+ },
+ "SWKS": {
+  "name": "Skyworks Solutions, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 55.97,
+  "name_ja": "Skyworks Solutions"
+ },
+ "SWX": {
+  "name": "Southwest Gas Holdings, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 89.06,
+  "name_ja": "Southwest Gas"
+ },
+ "SXC": {
+  "name": "SunCoke Energy, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Coking Coal",
+  "mc": "小型",
+  "price": 6.42,
+  "name_ja": "SunCoke Energy"
+ },
+ "SYF": {
+  "name": "Synchrony Financial",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "大型",
+  "price": 69.26,
+  "name_ja": "Synchrony Financial"
+ },
+ "SYM": {
+  "name": "Symbotic Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 53.3,
+  "name_ja": "Symbotic"
+ },
+ "SYNA": {
+  "name": "Synaptics Incorporated",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "中型",
+  "price": 74.97,
+  "name_ja": "Synaptics"
+ },
+ "SYY": {
+  "name": "Sysco Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Food Distribution",
+  "mc": "大型",
+  "price": 73.24,
+  "name_ja": "Sysco"
+ },
+ "T": {
+  "name": "AT&T Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "大型",
+  "price": 28.32,
+  "name_ja": "AT&T"
+ },
+ "TAP": {
+  "name": "Molson Coors Beverage Company",
+  "sector": "Consumer Defensive",
+  "industry": "Beverages - Brewers",
+  "mc": "中型",
+  "price": 44.46,
+  "name_ja": "Molson Coors Beverage"
+ },
+ "TDG": {
+  "name": "TransDigm Group Incorporated",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 1189.64,
+  "name_ja": "トランスダイム"
+ },
+ "TE": {
+  "name": "T1 Energy Inc.",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "小型",
+  "price": 4.05,
+  "name_ja": "T1 Energy"
+ },
+ "TEAM": {
+  "name": "Atlassian Corporation",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 68.09,
+  "name_ja": "Atlassian"
+ },
+ "TECH": {
+  "name": "Bio-Techne Corporation",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "中型",
+  "price": 53.8,
+  "name_ja": "Bio-Techne"
+ },
+ "TECK": {
+  "name": "Teck Resources Limited",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "大型",
+  "price": 52.86,
+  "name_ja": "Teck Resources"
+ },
+ "TEL": {
+  "name": "TE Connectivity plc",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "大型",
+  "price": 209.73,
+  "name_ja": "TE Connectivity"
+ },
+ "TEM": {
+  "name": "Tempus AI, Inc.",
+  "sector": "Healthcare",
+  "industry": "Health Information Services",
+  "mc": "中型",
+  "price": 47.3,
+  "name_ja": "Tempus AI"
+ },
+ "TENB": {
+  "name": "Tenable Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 18.46,
+  "name_ja": "Tenable"
+ },
+ "TER": {
+  "name": "Teradyne, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "大型",
+  "price": 315.43,
+  "name_ja": "Teradyne"
+ },
+ "TGB": {
+  "name": "Taseko Mines Limited",
+  "sector": "Basic Materials",
+  "industry": "Copper",
+  "mc": "中型",
+  "price": 6.77,
+  "name_ja": "Taseko Mines"
+ },
+ "TGT": {
+  "name": "Target Corporation",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "大型",
+  "price": 122.21,
+  "name_ja": "ターゲット"
+ },
+ "THC": {
+  "name": "Tenet Healthcare Corporation",
+  "sector": "Healthcare",
+  "industry": "Medical Care Facilities",
+  "mc": "大型",
+  "price": 190.28,
+  "name_ja": "Tenet Healthcare"
+ },
+ "THD": {
+  "name": "iShares MSCI Thailand ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 68.37,
+  "name_ja": "iShares MSCI Thailand ETF"
+ },
+ "THO": {
+  "name": "THOR Industries, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Recreational Vehicles",
+  "mc": "中型",
+  "price": 77.3,
+  "name_ja": "THOR Industries"
+ },
+ "THR": {
+  "name": "Thermon Group Holdings, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "小型",
+  "price": 50.99,
+  "name_ja": "Thermon"
+ },
+ "TJX": {
+  "name": "The TJX Companies, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "大型",
+  "price": 161.82,
+  "name_ja": "TJX"
+ },
+ "TKO": {
+  "name": "TKO Group Holdings, Inc.",
+  "sector": "Communication Services",
+  "industry": "Entertainment",
+  "mc": "大型",
+  "price": 197.02,
+  "name_ja": "TKO"
+ },
+ "TLH": {
+  "name": "iShares 10-20 Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 100.53,
+  "name_ja": "iShares 10-20 Year Treasury Bond ETF"
+ },
+ "TLN": {
+  "name": "Talen Energy Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Independent Power Producers",
+  "mc": "大型",
+  "price": 324.09,
+  "name_ja": "Talen Energy"
+ },
+ "TLT": {
+  "name": "iShares 20+ Year Treasury Bond ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 86.65,
+  "name_ja": "iShares 20+ Year Treasury Bond ETF"
+ },
+ "TMC": {
+  "name": "TMC the metals company Inc.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "中型",
+  "price": 4.59,
+  "name_ja": "TMC the metals company"
+ },
+ "TMHC": {
+  "name": "Taylor Morrison Home Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "中型",
+  "price": 58.6,
+  "name_ja": "Taylor Morrison Home"
+ },
+ "TMO": {
+  "name": "Thermo Fisher Scientific Inc.",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 488.19,
+  "name_ja": "サーモフィッシャー"
+ },
+ "TMQ": {
+  "name": "Trilogy Metals Inc.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 3.83,
+  "name_ja": "Trilogy Metals"
+ },
+ "TMRC": {
+  "name": "Texas Mineral Resources Corp.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 0.66,
+  "name_ja": "Texas Mineral Resources"
+ },
+ "TMUS": {
+  "name": "T-Mobile US, Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "超大型",
+  "price": 198.61,
+  "name_ja": "Tモバイル"
+ },
+ "TNC": {
+  "name": "Tennant Company",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "小型",
+  "price": 70.77,
+  "name_ja": "Tennant"
+ },
+ "TOL": {
+  "name": "Toll Brothers, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Residential Construction",
+  "mc": "大型",
+  "price": 137.81,
+  "name_ja": "Toll Brothers"
+ },
+ "TOST": {
+  "name": "Toast, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 27.02,
+  "name_ja": "Toast"
+ },
+ "TPC": {
+  "name": "Tutor Perini Corporation",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 77.66,
+  "name_ja": "Tutor Perini"
+ },
+ "TPG": {
+  "name": "TPG Inc.",
+  "sector": "Financial Services",
+  "industry": "Asset Management",
+  "mc": "大型",
+  "price": 37.93,
+  "name_ja": "TPG"
+ },
+ "TPR": {
+  "name": "Tapestry, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Luxury Goods",
+  "mc": "大型",
+  "price": 143.7,
+  "name_ja": "Tapestry"
+ },
+ "TRGP": {
+  "name": "Targa Resources Corp.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 245.65,
+  "name_ja": "Targa Resources"
+ },
+ "TRIP": {
+  "name": "Tripadvisor, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "小型",
+  "price": 10.85,
+  "name_ja": "Tripadvisor"
+ },
+ "TRMB": {
+  "name": "Trimble Inc.",
+  "sector": "Technology",
+  "industry": "Scientific & Technical Instruments",
+  "mc": "大型",
+  "price": 65.07,
+  "name_ja": "Trimble"
+ },
+ "TRN": {
+  "name": "Trinity Industries, Inc.",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "中型",
+  "price": 32.21,
+  "name_ja": "Trinity Industries"
+ },
+ "TRP": {
+  "name": "TC Energy Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 62.65,
+  "name_ja": "TC Energy"
+ },
+ "TRV": {
+  "name": "The Travelers Companies, Inc.",
+  "sector": "Financial Services",
+  "industry": "Insurance - Property & Casualty",
+  "mc": "大型",
+  "price": 295.55,
+  "name_ja": "The Travelers Companies"
+ },
+ "TS": {
+  "name": "Tenaris S.A.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "大型",
+  "price": 58.53,
+  "name_ja": "Tenaris"
+ },
+ "TSCO": {
+  "name": "Tractor Supply Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Specialty Retail",
+  "mc": "大型",
+  "price": 45.39,
+  "name_ja": "Tractor Supply"
+ },
+ "TSEM": {
+  "name": "Tower Semiconductor Ltd.",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 190.19,
+  "name_ja": "Tower Semiconductor"
+ },
+ "TSLA": {
+  "name": "Tesla, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "超大型",
+  "price": 352.82,
+  "name_ja": "テスラ"
+ },
+ "TSM": {
+  "name": "Taiwan Semiconductor Manufacturing Company Limited",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "超大型",
+  "price": 341.76,
+  "name_ja": "TSMC"
+ },
+ "TSN": {
+  "name": "Tyson Foods, Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Farm Products",
+  "mc": "大型",
+  "price": 64.5,
+  "name_ja": "タイソン"
+ },
+ "TT": {
+  "name": "Trane Technologies plc",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 430.89,
+  "name_ja": "トレインテクノロジーズ"
+ },
+ "TTAN": {
+  "name": "ServiceTitan, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 63.01,
+  "name_ja": "ServiceTitan"
+ },
+ "TTC": {
+  "name": "The Toro Company",
+  "sector": "Industrials",
+  "industry": "Tools & Accessories",
+  "mc": "中型",
+  "price": 93.46,
+  "name_ja": "The Toro"
+ },
+ "TTD": {
+  "name": "The Trade Desk, Inc.",
+  "sector": "Communication Services",
+  "industry": "Advertising Agencies",
+  "mc": "中型",
+  "price": 22.21,
+  "name_ja": "トレードデスク"
+ },
+ "TTE": {
+  "name": "TotalEnergies SE",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "大型",
+  "price": 92.25,
+  "name_ja": "TotalEnergies"
+ },
+ "TTEK": {
+  "name": "Tetra Tech, Inc.",
+  "sector": "Industrials",
+  "industry": "Engineering & Construction",
+  "mc": "中型",
+  "price": 31.19,
+  "name_ja": "Tetra Tech"
+ },
+ "TWLO": {
+  "name": "Twilio Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 131.53,
+  "name_ja": "Twilio"
+ },
+ "TXG": {
+  "name": "10x Genomics, Inc.",
+  "sector": "Healthcare",
+  "industry": "Health Information Services",
+  "mc": "中型",
+  "price": 21.89,
+  "name_ja": "10x Genomics"
+ },
+ "TXN": {
+  "name": "Texas Instruments Incorporated",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 199.42,
+  "name_ja": "テキサスインスツルメンツ"
+ },
+ "TXRH": {
+  "name": "Texas Roadhouse, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 163.28,
+  "name_ja": "Texas Roadhouse"
+ },
+ "TXT": {
+  "name": "Textron Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 88.54,
+  "name_ja": "Textron"
+ },
+ "TYL": {
+  "name": "Tyler Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 337.2,
+  "name_ja": "Tyler"
+ },
+ "U": {
+  "name": "Unity Software Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "中型",
+  "price": 21.99,
+  "name_ja": "ユニティ"
+ },
+ "UAE": {
+  "name": "iShares MSCI UAE ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 18.37,
+  "name_ja": "iShares MSCI UAE ETF"
+ },
+ "UAL": {
+  "name": "United Airlines Holdings, Inc.",
+  "sector": "Industrials",
+  "industry": "Airlines",
+  "mc": "大型",
+  "price": 90.97,
+  "name_ja": "United Airlines"
+ },
+ "UAMY": {
+  "name": "United States Antimony Corporation",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 8.28,
+  "name_ja": "United States Antimony"
+ },
+ "UBER": {
+  "name": "Uber Technologies, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 72.17,
+  "name_ja": "ウーバー"
+ },
+ "UCTT": {
+  "name": "Ultra Clean Holdings, Inc.",
+  "sector": "Technology",
+  "industry": "Semiconductor Equipment & Materials",
+  "mc": "中型",
+  "price": 63.3,
+  "name_ja": "Ultra Clean"
+ },
+ "UEC": {
+  "name": "Uranium Energy Corp.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "中型",
+  "price": 13.36,
+  "name_ja": "Uranium Energy"
+ },
+ "UGI": {
+  "name": "UGI Corporation",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Gas",
+  "mc": "中型",
+  "price": 36.3,
+  "name_ja": "UGI"
+ },
+ "UHS": {
+  "name": "Universal Health Services, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Care Facilities",
+  "mc": "大型",
+  "price": 181.33,
+  "name_ja": "Universal Health Services"
+ },
+ "UL": {
+  "name": "Unilever PLC",
+  "sector": "Consumer Defensive",
+  "industry": "Household & Personal Products",
+  "mc": "大型",
+  "price": 56.03,
+  "name_ja": "Unilever"
+ },
+ "ULTA": {
+  "name": "Ulta Beauty, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Specialty Retail",
+  "mc": "大型",
+  "price": 542.65,
+  "name_ja": "Ulta Beauty"
+ },
+ "UMC": {
+  "name": "United Microelectronics Corporation",
+  "sector": "Technology",
+  "industry": "Semiconductors",
+  "mc": "大型",
+  "price": 8.69,
+  "name_ja": "United Microelectronics"
+ },
+ "UNG": {
+  "name": "United States Natural Gas Fund, LP",
+  "sector": "",
+  "industry": "",
+  "mc": "小型",
+  "price": 11.37,
+  "name_ja": "United States Natural Gas Fund, LP"
+ },
+ "UNH": {
+  "name": "UnitedHealth Group Incorporated",
+  "sector": "Healthcare",
+  "industry": "Healthcare Plans",
+  "mc": "超大型",
+  "price": 281.36,
+  "name_ja": "ユナイテッドヘルス"
+ },
+ "UNP": {
+  "name": "Union Pacific Corporation",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 245.54,
+  "name_ja": "ユニオンパシフィック"
+ },
+ "UPS": {
+  "name": "United Parcel Service, Inc.",
+  "sector": "Industrials",
+  "industry": "Integrated Freight & Logistics",
+  "mc": "大型",
+  "price": 97.16,
+  "name_ja": "UPS"
+ },
+ "UPST": {
+  "name": "Upstart Holdings, Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "中型",
+  "price": 26.91,
+  "name_ja": "Upstart"
+ },
+ "URBN": {
+  "name": "Urban Outfitters, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Retail",
+  "mc": "中型",
+  "price": 66.53,
+  "name_ja": "Urban Outfitters"
+ },
+ "URG": {
+  "name": "Ur-Energy Inc.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "小型",
+  "price": 1.5,
+  "name_ja": "Ur-Energy"
+ },
+ "URI": {
+  "name": "United Rentals, Inc.",
+  "sector": "Industrials",
+  "industry": "Rental & Leasing Services",
+  "mc": "大型",
+  "price": 736.5,
+  "name_ja": "ユナイテッドレンタルズ"
+ },
+ "UROY": {
+  "name": "Uranium Royalty Corp.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "小型",
+  "price": 3.63,
+  "name_ja": "Uranium Royalty"
+ },
+ "USAR": {
+  "name": "USA Rare Earth, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "中型",
+  "price": 15.28,
+  "name_ja": "USA Rare Earth"
+ },
+ "USFD": {
+  "name": "US Foods Holding Corp.",
+  "sector": "Consumer Defensive",
+  "industry": "Food Distribution",
+  "mc": "大型",
+  "price": 90.91,
+  "name_ja": "US Foods Holding"
+ },
+ "USLM": {
+  "name": "United States Lime & Minerals, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "中型",
+  "price": 131.84,
+  "name_ja": "United States Lime & Minerals"
+ },
+ "USO": {
+  "name": "United States Oil Fund, LP",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 138.94,
+  "name_ja": "United States Oil Fund, LP"
+ },
+ "UUUU": {
+  "name": "Energy Fuels Inc.",
+  "sector": "Energy",
+  "industry": "Uranium",
+  "mc": "中型",
+  "price": 17.83,
+  "name_ja": "Energy Fuels"
+ },
+ "UWMC": {
+  "name": "UWM Holdings Corporation",
+  "sector": "Financial Services",
+  "industry": "Mortgage Finance",
+  "mc": "中型",
+  "price": 3.75,
+  "name_ja": "UWM"
+ },
+ "V": {
+  "name": "Visa Inc.",
+  "sector": "Financial Services",
+  "industry": "Credit Services",
+  "mc": "超大型",
+  "price": 303.33,
+  "name_ja": "ビザ"
+ },
+ "VAL": {
+  "name": "Valaris Limited",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "中型",
+  "price": 97.44,
+  "name_ja": "Valaris"
+ },
+ "VALE": {
+  "name": "Vale S.A.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "大型",
+  "price": 16.14,
+  "name_ja": "Vale"
+ },
+ "VFC": {
+  "name": "V.F. Corporation",
+  "sector": "Consumer Cyclical",
+  "industry": "Apparel Manufacturing",
+  "mc": "中型",
+  "price": 17.06,
+  "name_ja": "V.F."
+ },
+ "VG": {
+  "name": "Venture Global, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 15.94,
+  "name_ja": "Venture Global"
+ },
+ "VIAV": {
+  "name": "Viavi Solutions Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "中型",
+  "price": 35.87,
+  "name_ja": "Viavi Solutions"
+ },
+ "VICR": {
+  "name": "Vicor Corporation",
+  "sector": "Technology",
+  "industry": "Electronic Components",
+  "mc": "中型",
+  "price": 155.71,
+  "name_ja": "Vicor"
+ },
+ "VIK": {
+  "name": "Viking Holdings Ltd",
+  "sector": "Consumer Cyclical",
+  "industry": "Travel Services",
+  "mc": "大型",
+  "price": 73.44,
+  "name_ja": "Viking  Ltd"
+ },
+ "VKTX": {
+  "name": "Viking Therapeutics, Inc.",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "中型",
+  "price": 33.93,
+  "name_ja": "Viking Therapeutics"
+ },
+ "VLO": {
+  "name": "Valero Energy Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Refining & Marketing",
+  "mc": "大型",
+  "price": 245.58,
+  "name_ja": "バレロ"
+ },
+ "VLTO": {
+  "name": "Veralto Corporation",
+  "sector": "Industrials",
+  "industry": "Pollution & Treatment Controls",
+  "mc": "大型",
+  "price": 88.73,
+  "name_ja": "Veralto"
+ },
+ "VMC": {
+  "name": "Vulcan Materials Company",
+  "sector": "Basic Materials",
+  "industry": "Building Materials",
+  "mc": "大型",
+  "price": 281.63,
+  "name_ja": "Vulcan Materials"
+ },
+ "VNET": {
+  "name": "VNET Group, Inc.",
+  "sector": "Technology",
+  "industry": "Information Technology Services",
+  "mc": "中型",
+  "price": 8.1,
+  "name_ja": "VNET"
+ },
+ "VNM": {
+  "name": "VanEck Vietnam ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 17.15,
+  "name_ja": "VanEck Vietnam ETF"
+ },
+ "VRT": {
+  "name": "Vertiv Holdings Co",
+  "sector": "Industrials",
+  "industry": "Electrical Equipment & Parts",
+  "mc": "大型",
+  "price": 258.73,
+  "name_ja": "Vertiv  Co"
+ },
+ "VRTX": {
+  "name": "Vertex Pharmaceuticals Incorporated",
+  "sector": "Healthcare",
+  "industry": "Biotechnology",
+  "mc": "大型",
+  "price": 434.3,
+  "name_ja": "バーテックス"
+ },
+ "VSAT": {
+  "name": "Viasat, Inc.",
+  "sector": "Technology",
+  "industry": "Communication Equipment",
+  "mc": "中型",
+  "price": 52.1,
+  "name_ja": "Viasat"
+ },
+ "VSEC": {
+  "name": "VSE Corporation",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 190.79,
+  "name_ja": "V"
+ },
+ "VST": {
+  "name": "Vistra Corp.",
+  "sector": "Utilities",
+  "industry": "Utilities - Independent Power Producers",
+  "mc": "大型",
+  "price": 151.59,
+  "name_ja": "Vistra"
+ },
+ "VTOL": {
+  "name": "Bristow Group Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "小型",
+  "price": 47.93,
+  "name_ja": "Bristow"
+ },
+ "VTR": {
+  "name": "Ventas, Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Healthcare Facilities",
+  "mc": "大型",
+  "price": 82.95,
+  "name_ja": "Ventas"
+ },
+ "VUZI": {
+  "name": "Vuzix Corporation",
+  "sector": "Technology",
+  "industry": "Consumer Electronics",
+  "mc": "小型",
+  "price": 2.5,
+  "name_ja": "Vuzix"
+ },
+ "VVX": {
+  "name": "V2X, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "中型",
+  "price": 70.59,
+  "name_ja": "V2X"
+ },
+ "VZ": {
+  "name": "Verizon Communications Inc.",
+  "sector": "Communication Services",
+  "industry": "Telecom Services",
+  "mc": "超大型",
+  "price": 49.15,
+  "name_ja": "ベライゾン"
+ },
+ "W": {
+  "name": "Wayfair Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Internet Retail",
+  "mc": "中型",
+  "price": 71.95,
+  "name_ja": "ウェイフェア"
+ },
+ "WAB": {
+  "name": "Westinghouse Air Brake Technologies Corporation",
+  "sector": "Industrials",
+  "industry": "Railroads",
+  "mc": "大型",
+  "price": 254.03,
+  "name_ja": "Westinghouse Air Brake"
+ },
+ "WAL": {
+  "name": "Western Alliance Bancorporation",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 73.08,
+  "name_ja": "Western Alliance Bancorporation"
+ },
+ "WAT": {
+  "name": "Waters Corporation",
+  "sector": "Healthcare",
+  "industry": "Diagnostics & Research",
+  "mc": "大型",
+  "price": 304.09,
+  "name_ja": "Waters"
+ },
+ "WCC": {
+  "name": "WESCO International, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 279.12,
+  "name_ja": "WESCO"
+ },
+ "WCN": {
+  "name": "Waste Connections, Inc.",
+  "sector": "Industrials",
+  "industry": "Waste Management",
+  "mc": "大型",
+  "price": 165.5,
+  "name_ja": "Waste Connections"
+ },
+ "WDAY": {
+  "name": "Workday, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 129.72,
+  "name_ja": "ワークデイ"
+ },
+ "WDC": {
+  "name": "Western Digital Corporation",
+  "sector": "Technology",
+  "industry": "Computer Hardware",
+  "mc": "大型",
+  "price": 304.15,
+  "name_ja": "Western Digital"
+ },
+ "WEC": {
+  "name": "WEC Energy Group, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 116.73,
+  "name_ja": "WECエナジー"
+ },
+ "WELL": {
+  "name": "Welltower Inc.",
+  "sector": "Real Estate",
+  "industry": "REIT - Healthcare Facilities",
+  "mc": "大型",
+  "price": 200.91,
+  "name_ja": "ウェルタワー"
+ },
+ "WEN": {
+  "name": "The Wendy's Company",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "小型",
+  "price": 7.09,
+  "name_ja": "The Wendy's"
+ },
+ "WFC": {
+  "name": "Wells Fargo & Company",
+  "sector": "Financial Services",
+  "industry": "Banks - Diversified",
+  "mc": "超大型",
+  "price": 81.85,
+  "name_ja": "ウェルズファーゴ"
+ },
+ "WFRD": {
+  "name": "Weatherford International plc",
+  "sector": "Energy",
+  "industry": "Oil & Gas Equipment & Services",
+  "mc": "中型",
+  "price": 94.9,
+  "name_ja": "Weatherford"
+ },
+ "WH": {
+  "name": "Wyndham Hotels & Resorts, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Lodging",
+  "mc": "中型",
+  "price": 83.32,
+  "name_ja": "Wyndham Hotels & Resorts"
+ },
+ "WING": {
+  "name": "Wingstop Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "中型",
+  "price": 164.83,
+  "name_ja": "Wingstop"
+ },
+ "WM": {
+  "name": "Waste Management, Inc.",
+  "sector": "Industrials",
+  "industry": "Waste Management",
+  "mc": "大型",
+  "price": 233.8,
+  "name_ja": "ウェイストマネジメント"
+ },
+ "WMB": {
+  "name": "The Williams Companies, Inc.",
+  "sector": "Energy",
+  "industry": "Oil & Gas Midstream",
+  "mc": "大型",
+  "price": 72.59,
+  "name_ja": "The Williams Companies"
+ },
+ "WMS": {
+  "name": "Advanced Drainage Systems, Inc.",
+  "sector": "Industrials",
+  "industry": "Building Products & Equipment",
+  "mc": "大型",
+  "price": 140.72,
+  "name_ja": "Advanced Drainage Systems"
+ },
+ "WMT": {
+  "name": "Walmart Inc.",
+  "sector": "Consumer Defensive",
+  "industry": "Discount Stores",
+  "mc": "超大型",
+  "price": 126.79,
+  "name_ja": "ウォルマート"
+ },
+ "WPM": {
+  "name": "Wheaton Precious Metals Corp.",
+  "sector": "Basic Materials",
+  "industry": "Gold",
+  "mc": "大型",
+  "price": 134.09,
+  "name_ja": "Wheaton Precious Metals"
+ },
+ "WRBY": {
+  "name": "Warby Parker Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "中型",
+  "price": 21.05,
+  "name_ja": "Warby Parker"
+ },
+ "WSM": {
+  "name": "Williams-Sonoma, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Specialty Retail",
+  "mc": "大型",
+  "price": 182.62,
+  "name_ja": "Williams-Sonoma"
+ },
+ "WSO": {
+  "name": "Watsco, Inc.",
+  "sector": "Industrials",
+  "industry": "Industrial Distribution",
+  "mc": "大型",
+  "price": 378.52,
+  "name_ja": "Watsco"
+ },
+ "WST": {
+  "name": "West Pharmaceutical Services, Inc.",
+  "sector": "Healthcare",
+  "industry": "Medical Instruments & Supplies",
+  "mc": "大型",
+  "price": 256.85,
+  "name_ja": "ウエスト"
+ },
+ "WTRG": {
+  "name": "Essential Utilities, Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Water",
+  "mc": "大型",
+  "price": 40.89,
+  "name_ja": "Essential Utilities"
+ },
+ "WTS": {
+  "name": "Watts Water Technologies, Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "中型",
+  "price": 287.95,
+  "name_ja": "Watts Water"
+ },
+ "WTW": {
+  "name": "Willis Towers Watson Public Limited Company",
+  "sector": "Financial Services",
+  "industry": "Insurance Brokers",
+  "mc": "大型",
+  "price": 291.03,
+  "name_ja": "Willis Towers Watson Public"
+ },
+ "WULF": {
+  "name": "TeraWulf Inc.",
+  "sector": "Financial Services",
+  "industry": "Capital Markets",
+  "mc": "中型",
+  "price": 15.55,
+  "name_ja": "TeraWulf"
+ },
+ "WWD": {
+  "name": "Woodward, Inc.",
+  "sector": "Industrials",
+  "industry": "Aerospace & Defense",
+  "mc": "大型",
+  "price": 378.88,
+  "name_ja": "Woodward"
+ },
+ "WWR": {
+  "name": "Westwater Resources, Inc.",
+  "sector": "Basic Materials",
+  "industry": "Other Industrial Metals & Mining",
+  "mc": "小型",
+  "price": 0.63,
+  "name_ja": "Westwater Resources"
+ },
+ "XEL": {
+  "name": "Xcel Energy Inc.",
+  "sector": "Utilities",
+  "industry": "Utilities - Regulated Electric",
+  "mc": "大型",
+  "price": 80.39,
+  "name_ja": "Xcel Energy"
+ },
+ "XLB": {
+  "name": "State Street Materials Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 50.22,
+  "name_ja": "State Street Materials Select Sector SPDR ETF"
+ },
+ "XLC": {
+  "name": "State Street Communication Services Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 111.76,
+  "name_ja": "State Street Communication Services Select Sector SPDR ETF"
+ },
+ "XLE": {
+  "name": "State Street Energy Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 59.68,
+  "name_ja": "State Street Energy Select Sector SPDR ETF"
+ },
+ "XLF": {
+  "name": "State Street Financial Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 49.88,
+  "name_ja": "State Street Financial Select Sector SPDR ETF"
+ },
+ "XLI": {
+  "name": "State Street Industrial Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 164.61,
+  "name_ja": "State Street Industrial Select Sector SPDR ETF"
+ },
+ "XLK": {
+  "name": "State Street Technology Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 136.78,
+  "name_ja": "State Street  Select Sector SPDR ETF"
+ },
+ "XLP": {
+  "name": "State Street Consumer Staples Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 82.66,
+  "name_ja": "State Street Consumer Staples Select Sector SPDR ETF"
+ },
+ "XLRE": {
+  "name": "State Street Real Estate Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "",
+  "price": 41.76,
+  "name_ja": "State Street Real Estate Select Sector SPDR ETF"
+ },
+ "XLU": {
+  "name": "State Street Utilities Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "中型",
+  "price": 46.17,
+  "name_ja": "State Street Utilities Select Sector SPDR ETF"
+ },
+ "XLV": {
+  "name": "State Street Health Care Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 146.28,
+  "name_ja": "State Street Health Care Select Sector SPDR ETF"
+ },
+ "XLY": {
+  "name": "State Street Consumer Discretionary Select Sector SPDR ETF",
+  "sector": "",
+  "industry": "",
+  "mc": "大型",
+  "price": 109.04,
+  "name_ja": "State Street Consumer Discretionary Select Sector SPDR ETF"
+ },
+ "XOM": {
+  "name": "Exxon Mobil Corporation",
+  "sector": "Energy",
+  "industry": "Oil & Gas Integrated",
+  "mc": "超大型",
+  "price": 163.37,
+  "name_ja": "エクソンモービル"
+ },
+ "XPEV": {
+  "name": "XPeng Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Auto Manufacturers",
+  "mc": "大型",
+  "price": 17.4,
+  "name_ja": "XPeng"
+ },
+ "XPO": {
+  "name": "XPO, Inc.",
+  "sector": "Industrials",
+  "industry": "Trucking",
+  "mc": "大型",
+  "price": 205.12,
+  "name_ja": "XPO"
+ },
+ "XYL": {
+  "name": "Xylem Inc.",
+  "sector": "Industrials",
+  "industry": "Specialty Industrial Machinery",
+  "mc": "大型",
+  "price": 123.85,
+  "name_ja": "ザイレム"
+ },
+ "XYZ": {
+  "name": "Block, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 60.68,
+  "name_ja": "Block"
+ },
+ "YUM": {
+  "name": "Yum! Brands, Inc.",
+  "sector": "Consumer Cyclical",
+  "industry": "Restaurants",
+  "mc": "大型",
+  "price": 157.36,
+  "name_ja": "ヤムブランズ"
+ },
+ "Z": {
+  "name": "Zillow Group, Inc.",
+  "sector": "Communication Services",
+  "industry": "Internet Content & Information",
+  "mc": "中型",
+  "price": 41.65,
+  "name_ja": "Zillow"
+ },
+ "ZETA": {
+  "name": "Zeta Global Holdings Corp.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "中型",
+  "price": 15.81,
+  "name_ja": "Zeta Global"
+ },
+ "ZION": {
+  "name": "Zions Bancorporation, National Association",
+  "sector": "Financial Services",
+  "industry": "Banks - Regional",
+  "mc": "中型",
+  "price": 58.97,
+  "name_ja": "Zions Bancorporation, National Association"
+ },
+ "ZM": {
+  "name": "Zoom Communications, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Application",
+  "mc": "大型",
+  "price": 82.68,
+  "name_ja": "ズーム"
+ },
+ "ZS": {
+  "name": "Zscaler, Inc.",
+  "sector": "Technology",
+  "industry": "Software - Infrastructure",
+  "mc": "大型",
+  "price": 139.52,
+  "name_ja": "ゼットスケーラー"
+ }
+}

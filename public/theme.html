@@ -6,6 +6,13 @@
   <title>テーマ詳細 | 米国株テーマトラッカー</title>
   <link rel="stylesheet" href="/styles.css?v=10">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <style>
+.column-header{display:flex;align-items:center;padding:6px 12px;font-size:10px;color:var(--text-sub);border-bottom:1px solid var(--border)}
+.column-header .ch-left{flex:1}.column-header .ch-right{display:flex;gap:16px}
+.stock-card{background:var(--card-bg);border-radius:var(--card-radius);border-left:3px solid rgba(0,0,0,0.08);margin:var(--card-gap) 0;padding:0 6px 0 4px;min-height:72px;display:flex;flex-direction:column}
+.stock-card.up{border-left-color:var(--positive)}.stock-card.down{border-left-color:var(--negative)}
+.stock-row{display:flex;align-items:center;gap:0;min-height:72px}
+</style>
 </head>
 <body>
   <header>
@@ -13,7 +20,7 @@
       <a href="/" style="text-decoration:none;color:var(--text-sub);font-size:14px">← テーマ一覧</a>
     </div>
   </header>
-  <main id="detailMain" style="padding:12px"><div class="loading">読み込み中...</div></main>
+  <main id="detailMain" style="padding:0"><div class="loading" style="padding:60px 16px">読み込み中...</div></main>
   <nav class="bottom-nav">
     <a class="nav-item active" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
     <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
@@ -27,37 +34,88 @@ const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
 const slug=location.pathname.replace("/theme/","").replace(/\/$/,"");
 Promise.all([
   fetch("/api/theme_ranking.json").then(r=>r.json()),
+  fetch("/api/stock_meta.json").then(r=>r.json()).catch(()=>({})),
   fetch("/api/alpha_beta.json").then(r=>r.json()).catch(()=>({})),
   fetch("/api/theme-details/"+slug+".json").then(r=>r.json()).catch(()=>null)
-]).then(([ranking,abAll,detail])=>{
+]).then(([ranking, stockMeta, abAll, detail])=>{
   const all=ranking.all_themes||[];
   const theme=all.find(t=>t.slug===slug);
   if(!theme){document.getElementById("detailMain").innerHTML='<div class="loading">テーマが見つかりません</div>';return}
   document.title=theme.name+" | 米国株テーマトラッカー";
   const periods=(ranking.all_periods||[]).filter(p=>p!=="日中");
   const ab=(abAll["3ヶ月"]||{})[slug]||{};
-  const tickerCount=theme.related?theme.related.split(",").filter(t=>t.trim()).length:0;
-  const pgHtml=periods.map(p=>{const v=theme[p];const cls=v>0?"positive":v<0?"negative":"";return'<div class="dp-box"><div class="dp-label">'+(PL[p]||p)+'</div><div class="dp-value '+cls+'">'+fmt(v)+'</div></div>'}).join("");
+  const tickers=theme.related?theme.related.split(",").filter(t=>t.trim()).map(t=>t.trim()):[];
   const tp=theme.tickerPerformances||{};
+  // Period grid
+  const pgHtml=periods.map(p=>{const v=theme[p];const cls=v>0?"positive":v<0?"negative":"";return'<div class="dp-box"><div class="dp-label">'+(PL[p]||p)+'</div><div class="dp-value '+cls+'">'+fmt(v)+'</div></div>'}).join("");
+
+  // Sort stocks by 1D return
   const p="1日";
-  const rows=Object.entries(tp).map(([tk,d])=>({tk,r:d[p]??null})).sort((a,b)=>(b.r??-Infinity)-(a.r??-Infinity));
-  const rowsHtml=rows.map(t=>{
-    const cls=(t.r??0)>=0?"positive":"negative";
-    const abd=ab[t.tk];
-    const abStr=abd?'<div class="dt-sub">α'+(abd.alpha>0?"+":"")+abd.alpha+' β'+abd.beta+' R²'+abd.r2+'</div>':"";
-    return'<div class="dt-row"><div><div class="dt-name">'+t.tk+'</div>'+abStr+'</div><div class="dt-return '+cls+'">'+fmt(t.r)+'</div></div>'
-  }).join("");
+  const rows=tickers.map(tk=>{
+    const perf=tp[tk]||{};
+    const meta=stockMeta[tk]||{};
+    const r1d=perf[p]??null;
+    const r1y=perf["1年"]??null;
+    return {tk, r1d, r1y, meta, perf};
+  }).sort((a,b)=>(b.r1d??-Infinity)-(a.r1d??-Infinity));
+
+  // Build chart HTML
   let chartHtml="";
-  if(detail&&detail.prices&&detail.prices.length>0)chartHtml='<div class="detail-chart-wrap"><canvas id="dChart"></canvas></div>';
-  document.getElementById("detailMain").innerHTML=
+  if(detail&&detail.prices&&detail.prices.length>0){
+    chartHtml='<div class="detail-chart-wrap" style="height:160px;margin:0 12px 12px"><canvas id="dChart"></canvas></div>';
+  }
+
+  // Build stock cards (本家準拠)
+  let stockHtml='<div class="column-header"><div class="ch-left">終値：'+(ranking.latest_stock_date||"—")+'</div><div class="ch-right"><span>1年間推移</span><span>1日騰落率</span></div></div>';
+  rows.forEach((s,i)=>{
+    const dir=(s.r1d??0)>=0?"up":"down";
+    const rankClass=i<3?"top3 "+dir:"";
+    const mcLabel=s.meta.mc?'<span style="font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,0,0,0.06);color:var(--text-sub);margin-left:3px">'+s.meta.mc+'</span>':"";
+    const sectorLabel=s.meta.industry?'<span style="font-size:9px;color:var(--text-sub);margin-left:3px">'+s.meta.industry+'</span>':"";
+    const companyName=s.meta.name_ja||s.meta.name||s.tk;
+    const price=s.meta.price?s.meta.price.toLocaleString():"—";
+    const r1dStr=fmt(s.r1d);
+    const r1yStr=fmt(s.r1y);
+    const r1dCls=(s.r1d??0)>=0?"positive":"negative";
+    const r1yCls=(s.r1y??0)>=0?"positive":"negative";
+
+    stockHtml+=`<div class="stock-card ${dir}"><div class="stock-row">
+      <div class="rank ${rankClass}">${i+1}</div>
+      <div class="theme-name" style="flex:1;min-width:0">
+        <div class="theme-name-primary" style="display:flex;align-items:center;gap:0">${s.tk}${mcLabel}${sectorLabel}</div>
+        <div class="theme-name-secondary">${companyName}</div>
+      </div>
+      <div style="text-align:right;min-width:70px;padding-right:4px">
+        <div class="return-value ${r1dCls}" style="font-size:15px">${r1dStr}</div>
+        <div style="font-size:11px;color:var(--text-sub)">${price}</div>
+      </div>
+      <div style="text-align:right;min-width:50px">
+        <div style="font-size:12px;font-weight:600" class="${r1yCls}">${r1yStr}</div>
+        <div style="font-size:9px;color:var(--text-sub)">/1Y</div>
+      </div>
+    </div></div>`;
+  });
+
+
+  // Assemble final HTML
+  document.getElementById("detailMain").innerHTML =
+    '<div style="padding:12px">'+
     '<div class="detail-title">'+theme.name+'</div>'+
-    '<div class="detail-meta">'+theme.industry+' › '+theme.theme1+' › '+theme.theme2+' · '+tickerCount+'銘柄</div>'+
-    '<div class="detail-periods">'+pgHtml+'</div>'+chartHtml+
-    '<div class="detail-section">構成銘柄 (1D)</div>'+rowsHtml;
-  if(detail&&detail.prices&&detail.prices.length>0&&detail.tickers.length>0){
+    '<div class="detail-meta">'+theme.industry+' › '+theme.theme1+' › '+theme.theme2+' · '+tickers.length+'銘柄</div>'+
+    '<div class="detail-periods">'+pgHtml+'</div>'+
+    '</div>'+chartHtml+stockHtml;
+
+  // Render chart
+  if(detail&&detail.prices&&detail.prices.length>0&&detail.tickers&&detail.tickers.length>0){
     const ctx=document.getElementById("dChart");
-    if(ctx){const dates=detail.prices.map(p=>p.date);const tk0=detail.tickers[0];const base=detail.prices.find(p=>p[tk0])?.[tk0]||1;const vals=detail.prices.map(p=>(((p[tk0]||base)/base)-1)*100);
-    new Chart(ctx,{type:"line",data:{labels:dates,datasets:[{data:vals,borderColor:"#0052cc",borderWidth:1.5,fill:false,pointRadius:0,tension:0.3}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{ticks:{callback:v=>v.toFixed(0)+"%"}}},animation:false}})}
+    if(ctx){
+      const dates=detail.prices.map(p=>p.date);
+      const tk0=detail.tickers[0];
+      const base=detail.prices.find(p=>p[tk0])?.[tk0]||1;
+      const vals=detail.prices.map(p=>(((p[tk0]||base)/base)-1)*100);
+      new Chart(ctx,{type:"line",data:{labels:dates,datasets:[{data:vals,borderColor:"#0052cc",borderWidth:1.5,fill:false,pointRadius:0,tension:0.3}]},
+        options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{display:false},y:{ticks:{callback:v=>v.toFixed(0)+"%"}}},animation:false}});
+    }
   }
 });
   </script>
