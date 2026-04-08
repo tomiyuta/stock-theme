@@ -1,12 +1,16 @@
-/* stock-themes.com Clone — App Logic v2 */
+/* stock-themes.com Clone — App Logic v3 */
 const STATE = { themes:[], etfs:[], stocks:[], sparklines:{}, allPeriods:[], activePeriod:"1日",
-  showChart:true, showTickers:false, catFilter:"", sortBy:"rank", displayMode:"top-bottom" };
+  showChart:true, showTickers:false, mapCat:"sector", sortBy:"rank", displayMode:"top-bottom" };
 const PL = {"日中":"日中","1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
 const BP = ["5日","10日","1ヶ月","2ヶ月","3ヶ月","半年","1年"];
-const CAT_MAP = {
-  sector: ["テクノロジー","ヘルスケア","金融","エネルギー","消費者一般","消費者必需品","資本財","素材","不動産","公益","通信","その他"],
-  style: [], commodity: ["エネルギー","素材"], bond: ["金融"]
+const MINI_MAP = {
+  sector:{label:"セクター",items:["XLB","XLC","XLE","XLF","XLI","XLK","XLP","XLRE","XLU","XLV","XLY"]},
+  style:{label:"スタイル",items:["IJH","IJJ","IJK","IVE","IVW","IWM","IWN","IWO","QQQ","RSP","SPY"]},
+  commodity:{label:"商品",items:["CPER","GLD","SLV","UNG","USO"]},
+  bond:{label:"金利",items:["HYG","IEF","IEI","MBB","SHV","SHY","TLH","TLT"]}
 };
+const ETF_NAMES={XLB:"素材",XLC:"通信",XLE:"エネルギー",XLF:"金融",XLI:"資本財",XLK:"テクノロジー",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLV:"ヘルスケア",XLY:"一般消費財",SPY:"S&P500",QQQ:"NASDAQ100",IWM:"小型株",RSP:"均等加重",IJH:"中型",IJJ:"中型V",IJK:"中型G",IVE:"大型V",IVW:"大型G",IWN:"小型V",IWO:"小型G",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",TLT:"長期国債",TLH:"中長期",IEF:"中期",IEI:"中短期",SHY:"短期",SHV:"超短期",HYG:"ハイイールド",MBB:"MBS"};
+function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);return v>=0?`rgba(34,197,94,${0.3+a*0.7})`:`rgba(239,68,68,${0.3+a*0.7})`;}
 const fmtRet = v => { if(v==null) return "—"; const p=(v*100).toFixed(1); return v>=0?`+${p}%`:`${p}%`; };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -46,8 +50,8 @@ function bindEvents() {
   document.getElementById("chartToggle").addEventListener("click",function(){STATE.showChart=!STATE.showChart;this.classList.toggle("active",STATE.showChart);renderList();});
   document.getElementById("tickerToggle").addEventListener("click",function(){STATE.showTickers=!STATE.showTickers;this.classList.toggle("active",STATE.showTickers);renderList();});
   document.getElementById("sortSelect").addEventListener("change",function(){STATE.sortBy=this.value;sortThemes();renderList();});
-  // #6 Radio filter
-  document.querySelectorAll('input[name="cat"]').forEach(r=>r.addEventListener("change",function(){STATE.catFilter=this.value;renderList();}));
+  // Radio → ミニマップ切替（ランキングには影響しない）
+  document.querySelectorAll('input[name="cat"]').forEach(r=>r.addEventListener("change",function(){STATE.mapCat=this.value||"sector";renderMiniMap();}));
   // #7 Market toggle
   document.querySelectorAll(".mt-btn").forEach(b=>b.addEventListener("click",function(){
     document.querySelectorAll(".mt-btn").forEach(x=>x.classList.remove("active"));
@@ -55,7 +59,7 @@ function bindEvents() {
   }));
 }
 
-function render() { renderPeriodBar(); renderList(); }
+function render() { renderPeriodBar(); renderList(); renderMiniMap(); }
 
 function renderPeriodBar() {
   const bar = document.getElementById("periodBar");
@@ -63,18 +67,9 @@ function renderPeriodBar() {
   bar.onclick = e => { const b=e.target.closest(".period-btn"); if(!b)return; STATE.activePeriod=b.dataset.p; sortThemes(); renderPeriodBar(); renderList(); };
 }
 
-function filterByCat(items) {
-  if (!STATE.catFilter) return items;
-  if (STATE.catFilter==="sector") return items;
-  if (STATE.catFilter==="commodity") return items.filter(t=>["エネルギー","素材"].includes(t.industry));
-  if (STATE.catFilter==="bond") return items.filter(t=>t.industry==="金融");
-  if (STATE.catFilter==="style") return items.filter(t=>["消費者一般","消費者必需品"].includes(t.industry));
-  return items;
-}
-
 function renderList() {
   const main = document.getElementById("main");
-  let items = filterByCat([...STATE.themes]);
+  let items = [...STATE.themes];
   const p = STATE.activePeriod;
   const periodLabel = PL[p]||p;
 
@@ -166,3 +161,18 @@ function drawSparkline(canvas, data) {
 }
 
 window.setDisplay = function(mode) { STATE.displayMode=mode; renderList(); };
+
+function renderMiniMap() {
+  const el = document.getElementById("miniMap");
+  if (!el) return;
+  const p = STATE.activePeriod;
+  const cat = MINI_MAP[STATE.mapCat];
+  if (!cat) return;
+  const tiles = cat.items.map(tk => {
+    const e = STATE.etfs.find(x=>x.name===tk);
+    return {tk, name:ETF_NAMES[tk]||tk, ret:e?e[p]:null};
+  }).sort((a,b)=>(b.ret||0)-(a.ret||0));
+  el.innerHTML = '<div class="map-viewport">' + tiles.map(t =>
+    `<div class="map-tile" style="background:${tileColor(t.ret)}"><div class="map-tile-name">${t.name}</div><div class="map-tile-change">${fmtRet(t.ret)}</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:1px">${t.tk}</div></div>`
+  ).join('') + '</div>';
+}
