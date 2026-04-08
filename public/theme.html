@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>テーマ詳細 | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=10">
+  <link rel="stylesheet" href="/styles.css?v=11">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
 .column-header{display:flex;align-items:center;padding:6px 12px;font-size:10px;color:var(--text-sub);border-bottom:1px solid var(--border)}
@@ -86,9 +86,9 @@ Promise.all([
         <div class="theme-name-secondary">${companyName}</div>
       </div>
       <div class="sparkline-wrap"><canvas data-tk="${s.tk}" height="52"></canvas></div>
-      <div style="text-align:right;min-width:70px;padding-right:4px">
-        <div class="return-value ${r1dCls}" style="font-size:15px">${r1dStr}</div>
-        <div style="font-size:11px;color:var(--text-sub)">${price}</div>
+      <div class="return-cell">
+        <div class="return-value ${r1dCls}">${r1dStr}</div>
+        <div class="return-sub">${price}</div>
       </div>
     </div></div>`;
   });
