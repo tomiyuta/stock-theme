@@ -10,7 +10,7 @@ const MINI_MAP = {
   bond:{label:"金利",items:["HYG","IEF","IEI","MBB","SHV","SHY","TLH","TLT"]}
 };
 const ETF_NAMES={XLB:"素材",XLC:"通信",XLE:"エネルギー",XLF:"金融",XLI:"資本財",XLK:"テクノロジー",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLV:"ヘルスケア",XLY:"一般消費財",SPY:"S&P500",QQQ:"NASDAQ100",IWM:"小型株",RSP:"均等加重",IJH:"中型",IJJ:"中型V",IJK:"中型G",IVE:"大型V",IVW:"大型G",IWN:"小型V",IWO:"小型G",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",TLT:"長期国債",TLH:"中長期",IEF:"中期",IEI:"中短期",SHY:"短期",SHV:"超短期",HYG:"ハイイールド",MBB:"MBS"};
-function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);if(v>=0){const r=Math.round(129+(34-129)*a),g=Math.round(199+(197-199)*a),b=Math.round(132+(94-132)*a);return`rgb(${r},${g},${b})`}else{const r=Math.round(237+(239-237)*a),g=Math.round(129+(68-129)*a),b=Math.round(134+(68-134)*a);return`rgb(${r},${g},${b})`}}
+function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);return v>=0?`rgba(0,200,83,${0.35+a*0.65})`:`rgba(255,23,68,${0.35+a*0.65})`;}
 const fmtRet = v => { if(v==null) return "—"; const p=(v*100).toFixed(1); return v>=0?`+${p}%`:`${p}%`; };
 
 document.addEventListener("DOMContentLoaded", async () => {
@@ -152,7 +152,7 @@ function renderItem(theme, displayRank) {
 function drawSparkline(canvas, data) {
   const ctx=canvas.getContext("2d"); const vals=data.values||[];
   if(vals.length<2)return;
-  const last=vals[vals.length-1]; const color=last>=0?"#22c55e":"#ef4444";
+  const last=vals[vals.length-1]; const color=last>=0?"#00c853":"#ff1744";
   new Chart(ctx,{type:"line",data:{labels:vals.map((_,i)=>i),datasets:[{data:vals,borderColor:color,borderWidth:1.5,fill:{target:"origin",above:color+"12",below:color+"12"},pointRadius:0,tension:0.3}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},animation:false}});
 }
