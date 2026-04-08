@@ -25,6 +25,11 @@ jobs:
       - name: Run data pipeline
         run: python scripts/build_for_vercel.py
 
+      - name: Update stock metadata
+        run: |
+          python scripts/fetch_stock_meta.py
+          python scripts/add_ja_names.py
+
       - name: Check for changes
         id: changes
         run: |
@@ -37,4 +42,5 @@ jobs:
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add public/api/
           git commit -m "data: $(date -u +%Y-%m-%d) daily update"
+          git pull --rebase origin main
           git push
