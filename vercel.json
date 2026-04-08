@@ -5,7 +5,8 @@
   "rewrites": [
     { "source": "/theme/:slug", "destination": "/theme.html" },
     { "source": "/map", "destination": "/map.html" },
-    { "source": "/market-movers", "destination": "/market-movers.html" }
+    { "source": "/market-movers", "destination": "/market-movers.html" },
+    { "source": "/infographic", "destination": "/infographic.html" }
   ],
   "headers": [
     {

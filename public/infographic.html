@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>マクロテーマ | 米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header>
+    <div class="header-top">
+      <div class="header-title">マクロテーマ</div>
+    </div>
+    <div class="period-bar" id="pbar"></div>
+  </header>
+  <main id="macroMain" style="padding:0"></main>
+  <nav class="bottom-nav">
+    <a class="nav-item" href="/"><span class="nav-icon">🏠</span>ホーム</a>
+    <a class="nav-item" href="/map"><span class="nav-icon">🗺</span>マップ</a>
+    <a class="nav-item" href="/market-movers"><span class="nav-icon">📈</span>銘柄</a>
+    <a class="nav-item active" href="/infographic"><span class="nav-icon">🌐</span>マクロテーマ</a>
+  </nav>
+  <script>
+let period = "1ヶ月";
+const PL = {"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
+const fmt = v => v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+const MACRO = {
+  "市場指数": {etfs:["SPY","QQQ","IWM","RSP"], label:"主要インデックスETF"},
+  "セクター": {etfs:["XLK","XLE","XLF","XLV","XLI","XLC","XLY","XLP","XLRE","XLU","XLB"], label:"S&P500セクターETF"},
+  "債券・金利": {etfs:["TLT","TLH","IEF","IEI","SHY","SHV","HYG","MBB"], label:"米国債・社債ETF"},
+  "コモディティ": {etfs:["GLD","SLV","USO","UNG","CPER"], label:"金・銀・原油・天然ガス・銅"},
+  "暗号資産": {etfs:["IBIT"], label:"ビットコインETF"},
+  "国際": {etfs:["EWJ","MCHI","INDA","EWZ","EWY","EWT","EWU","EZU","EWC","EWA"], label:"主要国ETF"}
+};
+let allEtfs = [];
+fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
+  allEtfs = (data.all_themes||[]).filter(t=>t.isETF);
+  const periods = (data.all_periods||data.periods||[]).filter(p=>p!=="日中");
+  document.getElementById("pbar").innerHTML = periods.map(p=>
+    '<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>'
+  ).join("");
+  renderMacro();
+});
+function setP(btn, p) {
+  period = p;
+  document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));
+  btn.classList.add("active");
+  renderMacro();
+}
+function renderMacro() {
+  let h = "";
+  for (const [cat, info] of Object.entries(MACRO)) {
+    h += '<div class="section-label">' + cat + '</div>';
+    h += '<div style="padding:0 12px 4px;font-size:11px;color:var(--text-sub)">' + info.label + '</div>';
+    info.etfs.forEach(tk => {
+      const e = allEtfs.find(x=>x.name===tk);
+      if (!e) return;
+      const r = e[period];
+      const dir = (r||0)>=0?"up":"down";
+      h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
+      h += '<div class="rank '+dir+'">'+tk.substring(0,2)+'</div>';
+      h += '<div class="theme-name"><div class="theme-name-primary">'+tk+'</div></div>';
+      h += '<div class="return-cell"><div class="return-value '+(dir==="up"?"positive":"negative")+'">'+fmt(r)+'</div>';
+      h += '<div class="return-sub">'+fmt(e["1年"])+' /1Y</div></div>';
+      h += '<div class="chevron">›</div></div></div>';
+    });
+  }
+  document.getElementById("macroMain").innerHTML = h;
+}
+  </script>
+</body>
+</html>
