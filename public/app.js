@@ -103,7 +103,7 @@ function renderList() {
     <button class="show-more-btn${STATE.displayMode==="top20"?" active":""}" onclick="setDisplay('top20')">上下20テーマ</button>
     <button class="show-more-btn${STATE.displayMode==="all"?" active":""}" onclick="setDisplay('all')">全テーマ表示</button>
   </div>`;
-  html += '<div class="footer-attr">出所：<a href="#">yfinance</a> | Self-Hosted Clone</div>';
+  html += '<div class="footer-attr">出所：<a href="#">yfinance</a></div>';
   main.innerHTML = html;
   if (STATE.showChart) {
     requestAnimationFrame(()=>{
