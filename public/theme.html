@@ -7,11 +7,17 @@
   <link rel="stylesheet" href="/styles.css?v=11">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
-.column-header{display:flex;align-items:center;padding:6px 12px;font-size:10px;color:var(--text-sub);border-bottom:1px solid var(--border)}
-.column-header .ch-left{flex:1}.column-header .ch-right{display:flex;gap:16px}
-.stock-card{background:var(--card-bg);border-radius:var(--card-radius);border-left:3px solid rgba(0,0,0,0.08);margin:var(--card-gap) 0;padding:0 6px 0 4px;min-height:72px;display:flex;flex-direction:column}
+.column-header{display:flex;align-items:center;padding:6px 12px;font-size:10px;color:var(--text-sub);border-bottom:1px solid var(--border);width:100%;box-sizing:border-box}
+.column-header .ch-left{flex:1;min-width:0}.column-header .ch-right{display:flex;gap:16px;flex-shrink:0}
+.stock-card{background:var(--card-bg);border-radius:var(--card-radius);border-left:3px solid rgba(0,0,0,0.08);margin:var(--card-gap) 0;padding:0 6px 0 4px;min-height:64px;display:flex;flex-direction:column;width:100%;box-sizing:border-box;overflow:hidden}
 .stock-card.up{border-left-color:var(--positive)}.stock-card.down{border-left-color:var(--negative)}
-.stock-row{display:flex;align-items:center;gap:0;min-height:72px}
+.stock-row{display:flex;align-items:center;gap:0;min-height:64px;width:100%}
+.stock-card .theme-name{flex:1 1 0;min-width:0;overflow:hidden}
+.stock-card .theme-name-primary{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.mc-tag{font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,0,0,0.06);color:var(--text-sub);margin-left:3px;flex-shrink:0}
+.sector-tag{font-size:9px;color:var(--text-sub);margin-left:3px;flex-shrink:0;overflow:hidden;text-overflow:ellipsis;max-width:80px;white-space:nowrap}
+@media(max-width:767px){.sector-tag{max-width:50px}.mc-tag{font-size:8px;padding:0 3px}}
+@media(max-width:380px){.sector-tag{display:none}.mc-tag{display:none}}
 </style>
 </head>
 <body>
@@ -20,7 +26,7 @@
       <a href="/" style="text-decoration:none;color:var(--text-sub);font-size:14px">← テーマ一覧</a>
     </div>
   </header>
-  <main id="detailMain" style="padding:0"><div class="loading" style="padding:60px 16px">読み込み中...</div></main>
+  <main id="detailMain" style="padding:0;overflow-x:hidden;max-width:100vw"><div class="loading" style="padding:60px 16px">読み込み中...</div></main>
   <nav class="bottom-nav">
     <a class="nav-item active" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
     <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
@@ -70,9 +76,8 @@ Promise.all([
   rows.forEach((s,i)=>{
     const dir=(s.r1d??0)>=0?"up":"down";
     const rankClass=i<3?"top3 "+dir:"";
-    const mcLabel=s.meta.mc?'<span style="font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,0,0,0.06);color:var(--text-sub);margin-left:3px">'+s.meta.mc+'</span>':"";
-    const sectorLabel=s.meta.industry?'<span style="font-size:9px;color:var(--text-sub);margin-left:3px">'+s.meta.industry+'</span>':"";
-    const companyName=s.meta.name_ja||s.meta.name||s.tk;
+    const mcLabel=s.meta.mc?'<span class="mc-tag">'+s.meta.mc+'</span>':"";
+    const sectorLabel=s.meta.industry?'<span class="sector-tag">'+s.meta.industry+'</span>':"";    const companyName=s.meta.name_ja||s.meta.name||s.tk;
     const price=s.meta.price?s.meta.price.toLocaleString():"—";
     const r1dStr=fmt(s.r1d);
     const r1yStr=fmt(s.r1y);
