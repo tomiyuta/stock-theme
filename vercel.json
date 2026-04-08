@@ -6,7 +6,8 @@
     { "source": "/theme/:slug", "destination": "/theme.html" },
     { "source": "/map", "destination": "/map.html" },
     { "source": "/market-movers", "destination": "/market-movers.html" },
-    { "source": "/infographic", "destination": "/infographic.html" }
+    { "source": "/infographic", "destination": "/infographic.html" },
+    { "source": "/favorites", "destination": "/favorites.html" }
   ],
   "headers": [
     {

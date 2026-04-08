@@ -90,25 +90,25 @@ function renderList() {
 
   let html = "";
   if (STATE.displayMode==="top-bottom") {
-    const top10 = items.slice(0,10);
-    const bot10 = items.slice(-10);
-    html += `<div class="section-label top">${sortLabel} TOP 10</div>`;
-    html += top10.map((t,i)=>renderItem(t,i+1)).join("");
+    const top5 = items.slice(0,5);
+    const bot5 = items.slice(-5);
+    html += `<div class="section-label top">${sortLabel} TOP 5</div>`;
+    html += top5.map((t,i)=>renderItem(t,i+1)).join("");
     // S&P500 benchmark (#10 same style as regular cards)
     const spy = STATE.etfs.find(e=>e.name==="SPY");
     if (spy) {
       const sr = spy[p]; const sd = (sr||0)>=0?"up":"down";
       html += `<div class="theme-item ${sd}"><div class="theme-item-row"><div class="rank ${sd}">—</div><div class="theme-name"><div class="theme-name-primary">S&P500</div><div class="theme-name-secondary">SPY</div></div><div class="return-cell"><div class="return-value ${sd==="up"?"positive":"negative"}">${fmtRet(sr)}</div><div class="return-sub">${fmtRet(spy["1年"])} /1Y</div></div><div class="chevron"></div></div></div>`;
     }
-    html += `<div class="section-label bottom">${sortLabel} BOTTOM 10</div>`;
-    html += bot10.map((t,i)=>renderItem(t,items.length-9+i)).join("");
+    html += `<div class="section-label bottom">${sortLabel} BOTTOM 5</div>`;
+    html += bot5.map((t,i)=>renderItem(t,items.length-4+i)).join("");
   } else {
     const limit = STATE.displayMode==="all"?items.length:STATE.displayMode==="top20"?20:10;
     html += items.slice(0,limit).map((t,i)=>renderItem(t,i+1)).join("");
   }
   // #11 show more buttons with 上下10 as default
   html += `<div class="show-more">
-    <button class="show-more-btn${STATE.displayMode==="top-bottom"?" active":""}" onclick="setDisplay('top-bottom')">上下10テーマ</button>
+    <button class="show-more-btn${STATE.displayMode==="top-bottom"?" active":""}" onclick="setDisplay('top-bottom')">上下5テーマ</button>
     <button class="show-more-btn${STATE.displayMode==="top20"?" active":""}" onclick="setDisplay('top20')">上下20テーマ</button>
     <button class="show-more-btn${STATE.displayMode==="all"?" active":""}" onclick="setDisplay('all')">全テーマ表示</button>
   </div>`;
@@ -160,7 +160,7 @@ function renderItem(theme, displayRank) {
 function drawSparkline(canvas, data) {
   const ctx=canvas.getContext("2d"); const vals=data.values||[];
   if(vals.length<2)return;
-  const last=vals[vals.length-1]; const color=last>=0?"#16a34a":"#dc2626";
+  const last=vals[vals.length-1]; const color=last>=0?"#22c55e":"#ef4444";
   new Chart(ctx,{type:"line",data:{labels:vals.map((_,i)=>i),datasets:[{data:vals,borderColor:color,borderWidth:1.5,fill:{target:"origin",above:color+"12",below:color+"12"},pointRadius:0,tension:0.3}]},
     options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false},tooltip:{enabled:false}},scales:{x:{display:false},y:{display:false}},animation:false}});
 }

@@ -3,66 +3,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>銘柄 | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=2">
+  <title>銘柄ランキング | 米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css?v=10">
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <div class="header-title">値動き銘柄</div>
-    </div>
+    <div class="header-top"><div class="header-title">銘柄ランキング</div></div>
     <div class="period-bar" id="pbar"></div>
+    <div class="movers-toggle" id="moversToggle">
+      <button class="active" onclick="setDir(this,'up')">上昇</button>
+      <button onclick="setDir(this,'down')">下落</button>
+    </div>
   </header>
   <main id="mvMain" style="padding:0"></main>
   <nav class="bottom-nav">
-    <a class="nav-item" href="/"><span class="nav-icon">🏠</span>ホーム</a>
-    <a class="nav-item" href="/map"><span class="nav-icon">🗺</span>マップ</a>
-    <a class="nav-item active" href="/market-movers"><span class="nav-icon">📈</span>銘柄</a>
-    <a class="nav-item" href="/infographic"><span class="nav-icon">🌐</span>マクロテーマ</a>
-
+    <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+    <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+    <a class="nav-item active" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
+    <a class="nav-item" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロテーマ</a>
+    <a class="nav-item" href="/favorites"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 23 9 17 14 19 22 12 17 5 22 7 14 1 9 9 9"/></svg></span>お気に入り</a>
   </nav>
   <script>
-let period = "1日";
-const PL = {"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
-const fmt = v => v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-let allStocks = [];
+let period="1日",dir="up";
+const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
+const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+let allStocks=[];
 fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
-  allStocks = (data.all_themes||[]).filter(t=>t.isIndividualTicker);
-  const periods = data.all_periods||data.periods||[];
-  document.getElementById("pbar").innerHTML = periods.filter(p=>p!=="日中").map(p=>
-    '<button class="period-btn'+(p===period?" active":"")+'" onclick="setPeriod(this,\''+p+'\')">'+((PL[p])||p)+'</button>'
-  ).join("");
+  allStocks=(data.all_themes||[]).filter(t=>t.isIndividualTicker);
+  const periods=(data.all_periods||[]).filter(p=>p!=="日中");
+  document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setPeriod(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
   renderMovers();
 });
-function setPeriod(btn, p) {
-  period = p;
-  document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  renderMovers();
-}
-function renderMovers() {
-  const sorted = [...allStocks].filter(s=>s[period]!=null).sort((a,b)=>(b[period]||0)-(a[period]||0));
-  const top20 = sorted.slice(0, 20);
-  const bot20 = sorted.slice(-20).reverse();
-  let h = '<div class="section-label top">TOP 20 銘柄</div>';
-  top20.forEach((s,i) => {
-    const r = s[period]; const dir = r>=0?"up":"down";
-    h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
-    h += '<div class="rank '+(i<3?"top3 "+dir:"")+'">'+( i+1)+'</div>';
-    h += '<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
-    h += '<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
-    h += '<div class="chevron">›</div></div></div>';
+function setPeriod(btn,p){period=p;document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderMovers()}
+function setDir(btn,d){dir=d;document.querySelectorAll(".movers-toggle button").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderMovers()}
+function renderMovers(){
+  let sorted=[...allStocks].filter(s=>s[period]!=null).sort((a,b)=>dir==="up"?(b[period]||0)-(a[period]||0):(a[period]||0)-(b[period]||0));
+  const items=sorted.slice(0,30);
+  const label=dir==="up"?"上昇":"下落";
+  let h='<div class="section-label '+(dir==="up"?"top":"bottom")+'">'+label+' TOP 30</div>';
+  items.forEach((s,i)=>{
+    const r=s[period];const d=r>=0?"up":"down";
+    h+='<div class="theme-item '+d+'"><div class="theme-item-row">';
+    h+='<div class="rank '+(i<3?"top3 "+d:"")+'">'+( i+1)+'</div>';
+    h+='<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
+    h+='<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
+    h+='<div class="chevron">›</div></div></div>';
   });
-  h += '<div class="section-label bottom">BOTTOM 20 銘柄</div>';
-  bot20.forEach((s,i) => {
-    const r = s[period]; const dir = r>=0?"up":"down";
-    h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
-    h += '<div class="rank">'+( sorted.length-19+i)+'</div>';
-    h += '<div class="theme-name"><div class="theme-name-primary">'+s.name+'</div></div>';
-    h += '<div class="return-cell"><div class="return-value '+(r>=0?"positive":"negative")+'">'+fmt(r)+'</div></div>';
-    h += '<div class="chevron">›</div></div></div>';
-  });
-  document.getElementById("mvMain").innerHTML = h;
+  document.getElementById("mvMain").innerHTML=h;
 }
   </script>
 </body>

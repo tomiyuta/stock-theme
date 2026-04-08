@@ -3,51 +3,52 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>マップ | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=2">
+  <title>マップ｜米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css?v=10">
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <div class="header-title">テーママップ</div>
-    </div>
+    <div class="header-top"><div class="header-title">マップ</div></div>
+    <div class="period-bar" id="pbar"></div>
+    <div class="radio-filters" id="catFilter"></div>
   </header>
-  <main id="mapMain" style="padding:12px"></main>
+  <main id="mapMain" style="padding:0"></main>
   <nav class="bottom-nav">
-    <a class="nav-item" href="/"><span class="nav-icon">🏠</span>ホーム</a>
-    <a class="nav-item active" href="/map"><span class="nav-icon">🗺</span>マップ</a>
-    <a class="nav-item" href="/market-movers"><span class="nav-icon">📈</span>銘柄</a>
-    <a class="nav-item" href="/infographic"><span class="nav-icon">🌐</span>マクロテーマ</a>
-
+    <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+    <a class="nav-item active" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+    <a class="nav-item" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
+    <a class="nav-item" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロテーマ</a>
+    <a class="nav-item" href="/favorites"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 23 9 17 14 19 22 12 17 5 22 7 14 1 9 9 9"/></svg></span>お気に入り</a>
   </nav>
   <script>
-const CATS = {
-  "セクター": ["XLB","XLC","XLE","XLF","XLI","XLK","XLP","XLRE","XLU","XLV","XLY"],
-  "スタイル": ["IJH","IJJ","IJK","IVE","IVW","IWM","IWN","IWO","QQQ","RSP","SPY"],
-  "コモディティ": ["CPER","GLD","SLV","UNG","USO"],
-  "金利": ["HYG","IEF","IEI","MBB","SHV","SHY","TLH","TLT"]
+let period="1日",cat="sector";
+const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
+const CATS={
+  sector:{label:"セクター",items:["XLB","XLC","XLE","XLF","XLI","XLK","XLP","XLRE","XLU","XLV","XLY"]},
+  style:{label:"スタイル",items:["IJH","IJJ","IJK","IVE","IVW","IWM","IWN","IWO","QQQ","RSP","SPY"]},
+  commodity:{label:"コモディティ",items:["CPER","GLD","SLV","UNG","USO"]},
+  bond:{label:"金利",items:["HYG","IEF","IEI","MBB","SHV","SHY","TLH","TLT"]},
+  crypto:{label:"暗号資産",items:["IBIT"]},
+  country:{label:"国別",items:["EWJ","MCHI","INDA","EWZ","EWY","EWT","EWU","EZU","EWC","EWA"]}
 };
+const NAMES={XLB:"素材",XLC:"通信",XLE:"エネルギー",XLF:"金融",XLI:"資本財",XLK:"テクノロジー",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLV:"ヘルスケア",XLY:"一般消費財",SPY:"S&P500",QQQ:"NASDAQ100",IWM:"小型株",RSP:"均等加重",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",TLT:"長期国債",IEF:"中期国債",SHY:"短期国債",HYG:"ハイイールド",IBIT:"ビットコイン",EWJ:"日本",MCHI:"中国",INDA:"インド",EWZ:"ブラジル",EWY:"韓国"};
+let allEtfs=[];
+const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+function tileColor(v){if(v==null)return"#888";const a=Math.min(Math.abs(v*100)/5,1);return v>=0?`rgba(34,197,94,${0.3+a*0.7})`:`rgba(239,68,68,${0.3+a*0.7})`}
 fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
-  const etfs = (data.all_themes||[]).filter(t=>t.isETF);
-  const fmt = v => v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-  let h = "";
-  for (const [cat, tickers] of Object.entries(CATS)) {
-    h += '<div class="section-label">' + cat + '</div>';
-    tickers.forEach(tk => {
-      const e = etfs.find(x=>x.name===tk);
-      if (!e) return;
-      const r1d = e["1日"], r1m = e["1ヶ月"], r1y = e["1年"];
-      const dir = (r1d||0)>=0?"up":"down";
-      h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
-      h += '<div class="rank '+dir+'">'+tk.substring(0,2)+'</div>';
-      h += '<div class="theme-name"><div class="theme-name-primary">'+tk+'</div></div>';
-      h += '<div class="return-cell"><div class="return-value '+(dir==="up"?"positive":"negative")+'">'+fmt(r1d)+'</div>';
-      h += '<div class="return-sub">'+fmt(r1y)+' /1Y</div></div>';
-      h += '<div class="chevron">›</div></div></div>';
-    });
-  }
-  document.getElementById("mapMain").innerHTML = h;
+  allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
+  const periods=(data.all_periods||[]).filter(p=>p!=="日中");
+  document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
+  document.getElementById("catFilter").innerHTML=Object.entries(CATS).map(([k,v])=>'<label class="rf"><input type="radio" name="mc" value="'+k+'"'+(k===cat?" checked":"")+'><span>'+v.label+'</span></label>').join("");
+  document.querySelectorAll('input[name="mc"]').forEach(r=>r.addEventListener("change",function(){cat=this.value;renderMap()}));
+  renderMap();
 });
+function setP(btn,p){period=p;document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderMap()}
+function renderMap(){
+  const items=CATS[cat]?.items||[];
+  const tiles=items.map(tk=>{const e=allEtfs.find(x=>x.name===tk);return{tk,name:NAMES[tk]||tk,ret:e?e[period]:null}}).sort((a,b)=>(b.ret||0)-(a.ret||0));
+  document.getElementById("mapMain").innerHTML='<div class="map-viewport">'+tiles.map(t=>'<div class="map-tile" style="background:'+tileColor(t.ret)+'" onclick="location.href=\'/\'"><div class="map-tile-name">'+t.name+'</div><div class="map-tile-change">'+fmt(t.ret)+'</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:2px">'+t.tk+'</div></div>').join("")+'</div>';
+}
   </script>
 </body>
 </html>

@@ -4,68 +4,55 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>マクロテーマ | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=2">
+  <link rel="stylesheet" href="/styles.css?v=10">
 </head>
 <body>
   <header>
-    <div class="header-top">
-      <div class="header-title">マクロテーマ</div>
-    </div>
+    <div class="header-top"><div class="header-title">マクロテーマ</div></div>
     <div class="period-bar" id="pbar"></div>
   </header>
   <main id="macroMain" style="padding:0"></main>
   <nav class="bottom-nav">
-    <a class="nav-item" href="/"><span class="nav-icon">🏠</span>ホーム</a>
-    <a class="nav-item" href="/map"><span class="nav-icon">🗺</span>マップ</a>
-    <a class="nav-item" href="/market-movers"><span class="nav-icon">📈</span>銘柄</a>
-    <a class="nav-item active" href="/infographic"><span class="nav-icon">🌐</span>マクロテーマ</a>
+    <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+    <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+    <a class="nav-item" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
+    <a class="nav-item active" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロテーマ</a>
+    <a class="nav-item" href="/favorites"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15 9 23 9 17 14 19 22 12 17 5 22 7 14 1 9 9 9"/></svg></span>お気に入り</a>
   </nav>
   <script>
-let period = "1ヶ月";
-const PL = {"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
-const fmt = v => v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-const MACRO = {
-  "市場指数": {etfs:["SPY","QQQ","IWM","RSP"], label:"主要インデックスETF"},
-  "セクター": {etfs:["XLK","XLE","XLF","XLV","XLI","XLC","XLY","XLP","XLRE","XLU","XLB"], label:"S&P500セクターETF"},
-  "債券・金利": {etfs:["TLT","TLH","IEF","IEI","SHY","SHV","HYG","MBB"], label:"米国債・社債ETF"},
-  "コモディティ": {etfs:["GLD","SLV","USO","UNG","CPER"], label:"金・銀・原油・天然ガス・銅"},
-  "暗号資産": {etfs:["IBIT"], label:"ビットコインETF"},
-  "国際": {etfs:["EWJ","MCHI","INDA","EWZ","EWY","EWT","EWU","EZU","EWC","EWA"], label:"主要国ETF"}
+let period="1ヶ月";
+const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
+const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+const MACRO={
+  "市場指数":{etfs:["SPY","QQQ","IWM","RSP"],desc:"主要インデックス"},
+  "セクター":{etfs:["XLK","XLE","XLF","XLV","XLI","XLC","XLY","XLP","XLRE","XLU","XLB"],desc:"S&P500セクター別パフォーマンス"},
+  "債券・金利":{etfs:["TLT","TLH","IEF","IEI","SHY","SHV","HYG","MBB"],desc:"金利環境と債券市場"},
+  "コモディティ":{etfs:["GLD","SLV","USO","UNG","CPER"],desc:"商品市場の動向"},
+  "暗号資産":{etfs:["IBIT"],desc:"デジタル資産"},
+  "国際":{etfs:["EWJ","MCHI","INDA","EWZ","EWY","EWT","EWU","EZU","EWC","EWA"],desc:"グローバル市場"}
 };
-let allEtfs = [];
+const NAMES={SPY:"S&P500",QQQ:"NASDAQ100",IWM:"Russell2000",RSP:"S&P500均等",XLK:"テクノロジー",XLE:"エネルギー",XLF:"金融",XLV:"ヘルスケア",XLI:"資本財",XLC:"通信",XLY:"一般消費財",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLB:"素材",TLT:"米国債20Y+",TLH:"米国債10-20Y",IEF:"米国債7-10Y",IEI:"米国債3-7Y",SHY:"米国債1-3Y",SHV:"米国債短期",HYG:"ハイイールド社債",MBB:"MBS",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",IBIT:"ビットコイン",EWJ:"日本",MCHI:"中国",INDA:"インド",EWZ:"ブラジル",EWY:"韓国",EWT:"台湾",EWU:"英国",EZU:"ユーロ圏",EWC:"カナダ",EWA:"豪州"};
+let allEtfs=[];
 fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
-  allEtfs = (data.all_themes||[]).filter(t=>t.isETF);
-  const periods = (data.all_periods||data.periods||[]).filter(p=>p!=="日中");
-  document.getElementById("pbar").innerHTML = periods.map(p=>
-    '<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>'
-  ).join("");
+  allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
+  const periods=(data.all_periods||[]).filter(p=>p!=="日中");
+  document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
   renderMacro();
 });
-function setP(btn, p) {
-  period = p;
-  document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));
-  btn.classList.add("active");
-  renderMacro();
-}
-function renderMacro() {
-  let h = "";
-  for (const [cat, info] of Object.entries(MACRO)) {
-    h += '<div class="section-label">' + cat + '</div>';
-    h += '<div style="padding:0 12px 4px;font-size:11px;color:var(--text-sub)">' + info.label + '</div>';
-    info.etfs.forEach(tk => {
-      const e = allEtfs.find(x=>x.name===tk);
-      if (!e) return;
-      const r = e[period];
-      const dir = (r||0)>=0?"up":"down";
-      h += '<div class="theme-item '+dir+'"><div class="theme-item-row">';
-      h += '<div class="rank '+dir+'">'+tk.substring(0,2)+'</div>';
-      h += '<div class="theme-name"><div class="theme-name-primary">'+tk+'</div></div>';
-      h += '<div class="return-cell"><div class="return-value '+(dir==="up"?"positive":"negative")+'">'+fmt(r)+'</div>';
-      h += '<div class="return-sub">'+fmt(e["1年"])+' /1Y</div></div>';
-      h += '<div class="chevron">›</div></div></div>';
+function setP(btn,p){period=p;document.querySelectorAll(".period-btn").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderMacro()}
+function renderMacro(){
+  let h="";
+  for(const[cat,info] of Object.entries(MACRO)){
+    h+='<div class="section-label">'+cat+'</div>';
+    h+='<div class="macro-card"><div style="font-size:11px;color:var(--text-sub);margin-bottom:8px">'+info.desc+'</div>';
+    const sorted=info.etfs.map(tk=>{const e=allEtfs.find(x=>x.name===tk);return{tk,name:NAMES[tk]||tk,ret:e?e[period]:null}}).sort((a,b)=>(b.ret||0)-(a.ret||0));
+    sorted.forEach(t=>{
+      const cls=(t.ret||0)>=0?"positive":"negative";
+      h+='<div class="macro-row"><span class="macro-row-name">'+t.name+' <span style="color:var(--text-sub);font-size:10px">'+t.tk+'</span></span><span class="macro-row-val '+cls+'">'+fmt(t.ret)+'</span></div>';
     });
+    h+='</div>';
   }
-  document.getElementById("macroMain").innerHTML = h;
+  document.getElementById("macroMain").innerHTML=h;
 }
   </script>
 </body>
