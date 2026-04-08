@@ -14,6 +14,8 @@
 .stock-tag.sector{background:rgba(0,82,204,0.08);color:#0052cc}
 .stock-tag.mc{background:rgba(0,0,0,0.05);color:var(--text-sub)}
 .stock-tag.index{background:rgba(0,200,83,0.1);color:#00c853}
+.stock-tag.ndx{background:rgba(0,82,204,0.1);color:#0052cc}
+.stock-tag.exchange{background:rgba(0,0,0,0.04);color:var(--text-sub);font-weight:500}
 .stock-price{font-size:11px;color:var(--text-sub);text-align:right}
 </style>
 </head>
@@ -76,7 +78,11 @@ function renderMovers(){
     h+='<div class="stock-info">';
     h+='<div class="stock-ticker">'+s.name;
     if(mc) h+=' <span class="stock-tag mc">'+mc+'</span>';
+    const ex=meta.exchange||"";
+    if(ex) h+=' <span class="stock-tag exchange">'+ex+'</span>';
     if(inSP) h+=' <span class="stock-tag index">S&P500</span>';
+    const indices=meta.indices||[];
+    indices.forEach(idx=>{ h+=' <span class="stock-tag ndx">'+idx+'</span>'; });
     h+='</div>';
     h+='<div class="stock-company">'+nameJa+'</div>';
     h+='<div class="stock-tags">';
