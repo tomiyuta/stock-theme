@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import pandas as pd
 from replay_engine import SnapshotStore, PriceProvider, ReplayEngine, summarize_performance
-from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay
+from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay, PrismV1WithMinHold
 
 def main():
     parser = argparse.ArgumentParser()
@@ -21,7 +21,9 @@ def main():
     engine = ReplayEngine(store, prices, initial_capital=args.initial_capital)
     outdir = Path(args.outdir); outdir.mkdir(parents=True, exist_ok=True)
     strategies = [BM2SpyShvSwitch(), BM3SectorRotation(top_n=args.bm3_top_n),
-                  BM5DirectStockMomentum(top_n=args.bm5_top_n), PrismV1Replay()]
+                  BM5DirectStockMomentum(top_n=args.bm5_top_n), PrismV1Replay(),
+                  PrismV1WithMinHold(min_days=10), PrismV1WithMinHold(min_days=20),
+                  PrismV1WithMinHold(min_days=30)]
     rows = []
     for strat in strategies:
         print(f"Running {strat.name}...")
