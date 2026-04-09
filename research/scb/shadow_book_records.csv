@@ -1,0 +1,17 @@
+rebalance_date,signal_cutoff,version,theme,theme_rank,ticker,A4_selected,A5_selected,alpha63,r2_63,shrink_factor,raw_1m,score_a5,sector,mc_bucket,weight,entry_px
+2026-03-31,2026-03-31,A5lite_shadow_v1,semi-component,1,UCTT,1,1,0.3082,0.667,1.0,-0.0165,0.3082,Technology,中型,0.1,62.18
+2026-03-31,2026-03-31,A5lite_shadow_v1,data-storage,2,SNDK,0,1,0.6653,0.641,1.0,0.0263,0.6653,Technology,大型,0.1,635.34
+2026-03-31,2026-03-31,A5lite_shadow_v1,data-storage,2,STX,1,0,-0.0862,0.702,1.0,0.034,-0.0862,Technology,大型,0.1,391.76
+2026-03-31,2026-03-31,A5lite_shadow_v1,dc-optical-device,3,AAOI,0,1,0.5543,0.32,0.64,-0.1748,0.3548,Technology,大型,0.1,84.59
+2026-03-31,2026-03-31,A5lite_shadow_v1,dc-optical-device,3,CIEN,1,0,0.1608,0.561,1.0,0.0975,0.1608,Technology,大型,0.1,388.23
+2026-03-31,2026-03-31,A5lite_shadow_v1,onsite-power,4,GEV,1,0,0.112,0.444,0.887,-0.0088,0.0994,Industrials,超大型,0.1,872.9
+2026-03-31,2026-03-31,A5lite_shadow_v1,onsite-power,4,GNRC,0,1,0.1764,0.373,0.746,-0.1521,0.1316,Industrials,大型,0.1,195.33
+2026-03-31,2026-03-31,A5lite_shadow_v1,infra-contractors,5,MTZ,1,1,0.1532,0.772,1.0,0.0565,0.1532,Industrials,大型,0.1,321.74
+2026-03-31,2026-03-31,A5lite_shadow_v1,drilling-services,6,HAL,1,1,0.1144,0.679,1.0,0.0891,0.1144,Energy,大型,0.1,38.99
+2026-03-31,2026-03-31,A5lite_shadow_v1,heat-infra,7,FLEX,1,0,-0.1495,0.433,0.867,-0.0005,-0.1296,Technology,大型,0.1,65.46
+2026-03-31,2026-03-31,A5lite_shadow_v1,heat-infra,7,MOD,0,1,0.3107,0.435,0.87,-0.0914,0.2702,Consumer Cyclical,大型,0.1,216.71
+2026-03-31,2026-03-31,A5lite_shadow_v1,silver-mining,8,AG,0,1,0.2217,0.912,1.0,-0.3203,0.2217,Basic Materials,大型,0.1,21.48
+2026-03-31,2026-03-31,A5lite_shadow_v1,silver-mining,8,PAAS,1,0,-0.04,0.887,1.0,-0.1849,-0.04,Basic Materials,大型,0.1,54.63
+2026-03-31,2026-03-31,A5lite_shadow_v1,gas-fracking,9,PTEN,1,1,0.3954,0.287,0.573,0.2279,0.2267,Energy,中型,0.1,10.83
+2026-03-31,2026-03-31,A5lite_shadow_v1,uranium,10,DNN,0,1,0.2189,0.877,1.0,-0.1922,0.2189,Energy,中型,0.1,3.53
+2026-03-31,2026-03-31,A5lite_shadow_v1,uranium,10,ISOU,1,0,0.1404,0.582,1.0,-0.1158,0.1404,Energy,小型,0.1,10.54
