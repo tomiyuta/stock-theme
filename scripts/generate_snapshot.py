@@ -256,7 +256,22 @@ def main():
                         excess += (old - weights[tk])
         if excess > 0.001:
             weights["SHV"] = weights.get("SHV", 0) + excess
+        # Collect prices for production portfolio
+        price_map = {}
+        for _, row in constituent_layer.iterrows():
+            if row.get("price") and row["price"] > 0:
+                price_map[row["ticker"]] = float(row["price"])
+        # Add SHV price from stock_meta if available
+        meta_path = Path(os.getenv("SNAPSHOT_INPUT_DIR", "data/input")).parent.parent / "public" / "api" / "stock_meta.json"
+        if meta_path.exists():
+            import json as _json
+            with open(meta_path) as _f: _meta = _json.load(_f)
+            for etf_tk in ["SHV","GLD","XLU","TLT","SPY"]:
+                if etf_tk in _meta and _meta[etf_tk].get("price"):
+                    price_map[etf_tk] = float(_meta[etf_tk]["price"])
         prod_portfolio = {"weights": {k: round(v, 4) for k, v in weights.items()},
+                         "prices": price_map,
+                         "sector_map": {tk: sec_map.get(tk, "Unknown") for tk in weights if tk != "SHV"},
                          "sector_cap": SECTOR_CAP, "max_positions": MAX_POSITIONS,
                          "strategy": "PRISM_MH20_CAP35"}
     else:

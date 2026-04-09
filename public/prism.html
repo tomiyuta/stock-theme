@@ -34,10 +34,21 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .regime-val.pos{color:var(--green)}.regime-val.neg{color:var(--red)}
 .prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(0,82,204,0.04);border:1.5px solid rgba(0,82,204,0.15)}
 .prod-title{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px}
-.prod-weights{display:flex;flex-wrap:wrap;gap:4px}
-.prod-w{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
-.prod-w.stock{background:rgba(0,200,83,0.1);color:var(--green)}
-.prod-w.cash{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.prod-input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.prod-input-label{font-size:10px;font-weight:600;color:var(--text-sub)}
+.prod-toggle{display:flex;gap:0;background:rgba(0,0,0,0.04);border-radius:4px;padding:1px}
+.prod-toggle-btn{padding:3px 10px;border-radius:3px;font-size:10px;font-weight:600;border:none;cursor:pointer;background:none;color:var(--text-sub)}
+.prod-toggle-btn.active{background:var(--blue);color:#fff}
+.prod-input{width:90px;padding:3px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:4px;font-size:11px;text-align:right;font-family:monospace}
+.prod-fx-btn{font-size:9px;padding:2px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:3px;background:none;cursor:pointer;color:var(--text-sub)}
+.prod-table{width:100%;font-size:10px;border-collapse:collapse}
+.prod-table th{text-align:left;padding:6px 4px;font-size:9px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
+.prod-table td{padding:5px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.prod-table .num{text-align:right;font-family:monospace;font-weight:600}
+.prod-table .shares{font-size:12px;font-weight:800;color:var(--blue)}
+.prod-table .dev{font-size:9px}
+.prod-table .dev.neg{color:var(--red)}.prod-table .dev.pos{color:var(--green)}
+.prod-summary{margin-top:8px;font-size:10px;display:flex;justify-content:space-between;padding:6px;background:rgba(0,0,0,0.02);border-radius:4px}
 .prod-meta{font-size:9px;color:var(--text-sub);margin-top:6px}
 </style>
 <style>
@@ -142,16 +153,25 @@ Promise.all([
     h+=`</div>`;
   }
 
-  // Production Portfolio
+  // Production Portfolio — Rebalance Calculator (opengrail同等)
   const pp=signals.production_portfolio;
   if(pp&&pp.weights){
-    const entries=Object.entries(pp.weights).sort((a,b)=>b[1]-a[1]);
-    h+=`<div class="prod-card"><div class="prod-title">📊 ${pp.strategy} — Target Portfolio</div><div class="prod-weights">`;
-    for(const [tk,w] of entries){
-      const cls=tk==="SHV"?"cash":"stock";
-      h+=`<span class="prod-w ${cls}">${tk} ${(w*100).toFixed(1)}%</span>`;
-    }
-    h+=`</div><div class="prod-meta">Sector Cap: ${(pp.sector_cap*100).toFixed(0)}% | Max Positions: ${pp.max_positions} | MinHold: 20日</div></div>`;
+    window._pp=pp;
+    h+=`<div class="prod-card"><div class="prod-title">📊 ${pp.strategy} — リバランス計算</div>`;
+    // Input row
+    h+=`<div class="prod-input-row">`;
+    h+=`<span class="prod-input-label">投資資金</span>`;
+    h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setPrismCcy('USD')">USD</button><button class="prod-toggle-btn" onclick="setPrismCcy('JPY')">JPY</button></div>`;
+    h+=`<span id="prismCcySign">$</span><input id="prismCapital" class="prod-input" type="number" value="10000" oninput="calcPrismRebal()">`;
+    h+=`<span class="prod-input-label">ドル円:</span><input id="prismFx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcPrismRebal()">`;
+    h+=`<button class="prod-fx-btn" onclick="fetchPrismFx()">🔄 現在レート</button>`;
+    h+=`</div>`;
+    // Table
+    h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>目標比率 / 投資額</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+    h+=`<tbody id="prismRebalBody"></tbody></table>`;
+    h+=`<div id="prismRebalSummary"></div>`;
+    h+=`<div class="prod-meta">Sector Cap: ${(pp.sector_cap*100).toFixed(0)}% | Max Positions: ${pp.max_positions} | MinHold: 20日 | ※購入株数は切り捨て・端数は現金保有</div>`;
+    h+=`</div>`;
   }
 
   // Buy/Sell
@@ -260,7 +280,77 @@ Promise.all([
   });
 
   document.getElementById("prismMain").innerHTML=h;
+  if(window._pp) calcPrismRebal();
 }).catch(err=>{document.getElementById("prismMain").innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
+
+window._prismCcy='USD';
+function setPrismCcy(c){
+  window._prismCcy=c;
+  document.querySelectorAll('.prod-toggle-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
+  document.getElementById('prismCcySign').textContent=c==='USD'?'$':'¥';
+  calcPrismRebal();
+}
+function fetchPrismFx(){
+  const btn=document.querySelector('.prod-fx-btn');btn.textContent='取得中...';
+  fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{
+    const rate=d.rates?.JPY||150;
+    document.getElementById('prismFx').value=rate.toFixed(2);
+    btn.textContent='🔄 '+rate.toFixed(2)+'円';
+    calcPrismRebal();
+  }).catch(()=>{btn.textContent='🔄 取得失敗';});
+}
+function calcPrismRebal(){
+  const pp=window._pp;if(!pp)return;
+  const rawCap=parseFloat(document.getElementById('prismCapital').value)||0;
+  const fx=parseFloat(document.getElementById('prismFx').value)||150;
+  const capUSD=window._prismCcy==='JPY'?rawCap/fx:rawCap;
+  const prices=pp.prices||{};
+  const weights=pp.weights;
+  const entries=Object.entries(weights).filter(([tk])=>tk!=='SHV').sort((a,b)=>b[1]-a[1]);
+  const shvW=weights['SHV']||0;
+  let totalInvested=0;let html='';
+  entries.forEach(([tk,w])=>{
+    const px=prices[tk];if(!px)return;
+    const targetAmt=capUSD*w;
+    const shares=Math.floor(targetAmt/px);
+    const actualAmt=shares*px;
+    const actualPct=capUSD>0?(actualAmt/capUSD)*100:0;
+    const dev=actualPct-(w*100);
+    totalInvested+=actualAmt;
+    const secMap=pp.sector_map||{};
+    const secJa={"Basic Materials":"素材","Technology":"テクノロジー","Energy":"エネルギー","Industrials":"資本財","Utilities":"公益","Healthcare":"ヘルスケア","Financial Services":"金融","Consumer Defensive":"生活必需品","Consumer Cyclical":"一般消費財","Communication Services":"通信","Real Estate":"不動産"};
+    const sec=secJa[secMap[tk]||'']||'';
+    html+=`<tr><td><b>${tk}</b> <span style="font-size:9px;color:var(--text-sub)">${sec}</span></td>`;
+    html+=`<td class="num">${(w*100).toFixed(1)}% / $${targetAmt.toFixed(0)}</td>`;
+    html+=`<td class="num">$${px.toLocaleString()}</td>`;
+    html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
+  });
+  // SHV row
+  if(shvW>0){
+    const shvPx=prices['SHV']||110.15;
+    const shvTarget=capUSD*shvW;
+    const shvShares=Math.floor(shvTarget/shvPx);
+    const shvActual=shvShares*shvPx;
+    const shvPct=capUSD>0?(shvActual/capUSD)*100:0;
+    const shvDev=shvPct-(shvW*100);
+    totalInvested+=shvActual;
+    html+=`<tr style="background:rgba(0,0,0,0.02)"><td><b>SHV</b> <span style="font-size:9px;color:var(--text-sub)">短期国債ETF(防御)</span></td>`;
+    html+=`<td class="num">${(shvW*100).toFixed(1)}% / $${shvTarget.toFixed(0)}</td>`;
+    html+=`<td class="num">$${shvPx.toLocaleString()}</td>`;
+    html+=`<td class="num"><span class="shares">${shvShares}株</span> <span class="dev ${shvDev>=0?'pos':'neg'}">実${shvPct.toFixed(1)}% (${shvDev>=0?'+':''}${shvDev.toFixed(1)}%)</span></td></tr>`;
+  }
+  const el=document.getElementById('prismRebalBody');if(el)el.innerHTML=html;
+  const residual=capUSD-totalInvested;
+  const residualPct=capUSD>0?(residual/capUSD)*100:0;
+  const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
+  const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
+  let sumH=`<div class="prod-summary"><span>実投資額 <b>${fmtD(totalInvested)}</b>`;
+  if(window._prismCcy==='JPY')sumH+=` (${fmtY(totalInvested)})`;
+  sumH+=`</span><span>未使用現金 <b style="color:${residualPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(residual)} (${residualPct.toFixed(1)}%)</b>`;
+  if(window._prismCcy==='JPY')sumH+=` (${fmtY(residual)})`;
+  sumH+=`</span></div>`;
+  const sumEl=document.getElementById('prismRebalSummary');if(sumEl)sumEl.innerHTML=sumH;
+}
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">テーマ</span></a>
