@@ -198,7 +198,16 @@ def build_trigger_candidates(gate, theme_df, constituents_df, prev_dir):
     }
 
 def write_json(path, payload):
-    path.write_text(json.dumps(payload, indent=2, ensure_ascii=False, default=str), encoding="utf-8")
+    import math
+    def clean_nan(obj):
+        if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+            return None
+        if isinstance(obj, dict):
+            return {k: clean_nan(v) for k, v in obj.items()}
+        if isinstance(obj, list):
+            return [clean_nan(v) for v in obj]
+        return obj
+    path.write_text(json.dumps(clean_nan(payload), indent=2, ensure_ascii=False, default=str), encoding="utf-8")
 
 def main():
     now = datetime.now(JST)
