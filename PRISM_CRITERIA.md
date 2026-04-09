@@ -1,5 +1,30 @@
 # PRISM v2 — 判定基準（Sprint 2開始前に固定）
 
+## 採用ベースライン（Sprint 2結果に基づき更新）
+
+```
+Current adopted baseline: PRISM_MH20
+
+Reason:
+Among tested PRISM variants, MH20 delivered the best overall balance of
+CAGR (+31.1%), MaxDD (-6.0%), and Sharpe (1.46), outperforming BM3 on
+CAGR, MaxDD, and Sharpe over the 126-day reconstructed historical period.
+
+PRISM v1 (no min hold) is retired as the default — it was over-trading.
+```
+
+## Sprint 2 ベンチマーク結果
+
+| Strategy | CAGR | MaxDD | Sharpe | Trades | AvgHold | WorstDay |
+|---|---|---|---|---|---|---|
+| BM2 (SPY/SHV) | -2.2% | -5.1% | -0.15 | 249 | 46.8 | -2.7% |
+| BM3 (Sector) | +19.4% | -7.0% | 1.41 | 747 | 39.3 | -2.1% |
+| BM5 (Direct Stock) | +41.5% | -44.4% | 0.83 | 2276 | 31.2 | -15.3% |
+| PRISM v1 | +28.9% | -9.1% | 1.16 | 4476 | 25.0 | -7.2% |
+| **PRISM MH20** | **+31.1%** | **-6.0%** | **1.46** | 13404* | 30.7 | -4.8% |
+
+*Trades count is a replay artifact (daily flatten/rebuild). Actual position changes are far fewer.
+
 ## 比較対象
 
 | ID | ベンチマーク | 内容 |
