@@ -113,7 +113,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <script>
 const SEC_JA={"Basic Materials":"素材","Communication Services":"通信","Energy":"エネルギー","Financial Services":"金融","Industrials":"資本財","Technology":"テクノロジー","Consumer Defensive":"生活必需品","Real Estate":"不動産","Utilities":"公益","Healthcare":"ヘルスケア","Consumer Cyclical":"一般消費財"};
 const fmt=v=>{if(v===null||v===undefined)return"—";const n=Number(v);return isNaN(n)?"—":(n>=0?"+":"")+((n*100).toFixed(1))+"%"};
-const _v="?v=3";
+const _v="?v="+Date.now();
 Promise.all([
   fetch("/api/prism/meta.json"+_v).then(r=>r.json()),
   fetch("/api/prism/gate.json"+_v).then(r=>r.json()),
