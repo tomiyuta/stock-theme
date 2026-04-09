@@ -20,6 +20,16 @@
 .gate-card.closed .gate-state{color:#ff1744}
 .gate-detail{font-size:11px;color:var(--text-sub);margin-top:4px}
 .gate-atk{font-size:16px;font-weight:700;margin-top:6px}
+.signal-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 12px}
+.signal-card{border-radius:6px;padding:10px;min-height:80px}
+.signal-card.buy{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.25)}
+.signal-card.sell{background:rgba(255,23,68,0.06);border:1px solid rgba(255,23,68,0.25)}
+.signal-card-title{font-size:11px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:4px}
+.signal-card.buy .signal-card-title{color:#00c853}
+.signal-card.sell .signal-card-title{color:#ff1744}
+.signal-item{font-size:12px;font-weight:700;color:var(--text-main);line-height:1.8}
+.signal-item-sub{font-size:9px;color:var(--text-sub);font-weight:400;margin-left:4px}
+.signal-empty{font-size:10px;color:var(--text-sub);font-style:italic}
 </style>
 </head>
 <body>
@@ -105,6 +115,45 @@ Promise.all([
   h += `<div class="gate-state">K-GATE: ${gate.gate_state}</div>`;
   h += `<div class="gate-detail">SPY 3M: ${fmt(gate.benchmark_ret_3m)} | SHV 3M: ${fmt(gate.cash_ret_3m)} | Excess: ${fmt(gate.excess_3m)}</div>`;
   h += `<div class="gate-atk">${gLabel} — 攻撃比率 ${(gate.atk_cap*100).toFixed(0)}%</div>`;
+  h += `</div>`;
+
+  // ── Buy / Sell signal pair ──
+  const buyStocks = constituents.filter(c=>c.stock_selected);
+  const prevThemes = (signals.trigger_candidates?.theme_membership_diff?.removed)||[];
+  const droppedThemes = (signals.trigger_candidates?.T2_theme_drop)||[];
+  const decelThemes = (signals.trigger_candidates?.T3_accel_flip)||[];
+  const sellThemes = [...new Set([...prevThemes, ...droppedThemes, ...decelThemes])];
+  // Find stocks that belong to sell themes from all constituents
+  const sellStocks = constituents.filter(c=>sellThemes.includes(c.theme));
+  const newEntryThemes = (signals.trigger_candidates?.T5_new_entry)||[];
+  const newBuyStocks = buyStocks.filter(c=>newEntryThemes.includes(c.theme));
+
+  h += `<div class="signal-pair">`;
+  // Buy card
+  h += `<div class="signal-card buy">`;
+  h += `<div class="signal-card-title">▲ 購入候補</div>`;
+  if(buyStocks.length===0){
+    h += `<div class="signal-empty">該当なし</div>`;
+  } else {
+    buyStocks.forEach(c=>{
+      const isNew = newEntryThemes.includes(c.theme);
+      h += `<div class="signal-item">${c.ticker}<span class="signal-item-sub">${c.theme}${isNew?" 🆕":""}</span></div>`;
+    });
+  }
+  h += `</div>`;
+  // Sell card
+  h += `<div class="signal-card sell">`;
+  h += `<div class="signal-card-title">▼ 売却候補</div>`;
+  if(sellThemes.length===0){
+    h += `<div class="signal-empty">該当なし</div>`;
+  } else {
+    sellThemes.forEach(theme=>{
+      const reason = droppedThemes.includes(theme)?"脱落":decelThemes.includes(theme)?"減速":"除外";
+      const tickers = sellStocks.filter(c=>c.theme===theme).map(c=>c.ticker).slice(0,3);
+      h += `<div class="signal-item" style="color:#ff1744">${tickers.join(", ")||theme}<span class="signal-item-sub">${reason}</span></div>`;
+    });
+  }
+  h += `</div>`;
   h += `</div>`;
 
   // Sectors
