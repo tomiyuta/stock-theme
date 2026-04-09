@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import pandas as pd
 from replay_engine import SnapshotStore, PriceProvider, ReplayEngine, summarize_performance
-from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay, PrismV1WithMinHold, PrismHysteresis
+from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay, PrismV1WithMinHold, PrismHysteresis, PrismMH20SectorCap
 
 def main():
     parser = argparse.ArgumentParser()
@@ -22,9 +22,8 @@ def main():
     outdir = Path(args.outdir); outdir.mkdir(parents=True, exist_ok=True)
     strategies = [BM3SectorRotation(top_n=args.bm3_top_n),
                   PrismV1WithMinHold(min_days=20),
-                  PrismHysteresis(entry_rank=15, hold_rank=30, min_days=20, label="HYS_A_E15H30"),
-                  PrismHysteresis(entry_rank=15, hold_rank=35, min_days=20, label="HYS_B_E15H35"),
-                  PrismHysteresis(entry_rank=10, hold_rank=30, min_days=20, label="HYS_C_E10H30")]
+                  PrismMH20SectorCap(min_days=20, sector_cap=0.35),
+                  PrismMH20SectorCap(min_days=20, sector_cap=0.25)]
     rows = []
     for strat in strategies:
         print(f"Running {strat.name}...")

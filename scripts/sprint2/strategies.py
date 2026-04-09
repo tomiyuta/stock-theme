@@ -94,6 +94,60 @@ class PrismV1WithMinHold:
         self._held = {}
         self._prev_date = None
 
+class PrismMH20SectorCap:
+    """MH20 baseline + sector concentration cap."""
+    def __init__(self, min_days=20, sector_cap=0.35):
+        self.min_days=min_days; self.cap=sector_cap
+        self.name=f"MH20_CAP{int(sector_cap*100)}"
+        self._held={}; self._prev_date=None
+
+    def build_target_portfolio(self, date_str, snap):
+        if self._prev_date and self._prev_date!=date_str:
+            for tk in self._held: self._held[tk]+=1
+        self._prev_date=date_str
+
+        new_picks=[p for p in snap["signals"].get("selected_stocks",[]) if p]
+        seen=set(); unique=[]
+        for p in new_picks:
+            if p not in seen: unique.append(p); seen.add(p)
+        kept={tk:self._held[tk] for tk in self._held if self._held[tk]<self.min_days}
+        expired={tk for tk in self._held if self._held[tk]>=self.min_days and tk not in set(unique)}
+        for tk in expired: del self._held[tk]
+        for tk in unique:
+            if tk not in self._held: self._held[tk]=0
+        final=list(self._held.keys())
+        if not final:
+            return {"weights":{"SHV":1.0},"reasons":{"SHV":"no holdings"}}
+
+        # Build sector map from constituents
+        sec_map={}
+        for c in snap.get("constituents",[]):
+            sec_map[c["ticker"]]=c.get("sector","Unknown")
+
+        # Equal weight then cap
+        w=1.0/len(final)
+        weights={tk:w for tk in final}
+        # Compute sector totals
+        sec_tot={}
+        for tk,wt in weights.items():
+            s=sec_map.get(tk,"Unknown")
+            sec_tot[s]=sec_tot.get(s,0)+wt
+        # Scale down over-cap sectors
+        excess_total=0
+        for s,tot in sec_tot.items():
+            if tot>self.cap:
+                scale=self.cap/tot
+                for tk in list(weights.keys()):
+                    if sec_map.get(tk,"Unknown")==s:
+                        old=weights[tk]; weights[tk]=old*scale
+                        excess_total+=(old-weights[tk])
+        # Redistribute excess to cash (SHV)
+        if excess_total>0.001:
+            weights["SHV"]=weights.get("SHV",0)+excess_total
+
+        reasons={tk:f"cap({sec_map.get(tk,'?')})" if sec_map.get(tk) in [s for s,t in sec_tot.items() if t>self.cap] else "selected" for tk in weights}
+        return {"weights":weights,"reasons":reasons}
+
 class PrismV1Replay:
     name = "PRISM_V1"
     def build_target_portfolio(self, date_str, snap):
