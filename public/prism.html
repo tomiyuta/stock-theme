@@ -339,7 +339,59 @@ Promise.all([
     ["Layer 3: 個別株選定",`<div class="logic-rule">各テーマから1M上位2銘柄（large優先）。重複統合。</div>`],
     ["ポートフォリオ制約（MH20_CAP35の核心）",`<div class="logic-rule"><b>MinHold 20日</b>: 保有銘柄は最低20営業日保持。過剰回転を防止しCAGRを+2.8pt改善。</div><div class="logic-rule"><b>SectorCap 35%</b>: 単一セクター配分上限。超過分はSHVへ退避。集中リスクを抑制しMaxDDを-0.8pt、WorstDayを-1.9pt改善。</div><div class="logic-rule"><b>MaxPositions 35</b>: 保有銘柄上限。運用実務負荷を制限。</div>`],
     ["トリガー（T1〜T5）",`<div class="logic-rule">T1: K-gate反転 | T2: テーマ脱落(rank&gt;30) | T3: 加速→減速 | T4: DD(-15%/-2σ) | T5: 新規参入</div><div class="logic-rule">T4は現在プレースホルダー（Phase 4で実装予定）</div>`],
-    ["検証結果サマリ",`<div class="logic-rule">テーマ層の価値: BM5(直接株)のMaxDD -44%→-5.2%に圧縮。BM3(セクター)をSharpe+0.35上回り。</div><div class="logic-rule">改善の本質: alphaはテーマ層に元からあった。v1が壊していたのは過剰回転(MH20で解決)と集中(CAP35で解決)。</div><div class="logic-rule">Robustness: パラメータ9grid全PASS / 前半後半共にプラス / CLOSED期Sharpe1.46 / 50bps込みでBM3超過</div>`]
+    ["検証結果サマリ（短期126日間）",`<div class="logic-rule">テーマ層の価値: BM5(直接株)のMaxDD -44%→-5.2%に圧縮。BM3(セクター)をSharpe+0.35上回り。</div><div class="logic-rule">改善の本質: alphaはテーマ層に元からあった。v1が壊していたのは過剰回転(MH20で解決)と集中(CAP35で解決)。</div><div class="logic-rule">Robustness: パラメータ9grid全PASS / 前半後半共にプラス / CLOSED期Sharpe1.46 / 50bps込みでBM3超過</div>`],
+    ["🔬 長期検証: 確定した事実（Norgate 24年間）",`
+<div style="font-size:10px;font-weight:700;color:var(--blue);margin:6px 0 4px">データソース</div>
+<div class="logic-rule">Norgate Data Premium — ETF 29銘柄（2000〜2026年）+ PIT S&P500構成 1,289銘柄（1990〜2026年）。survivorship biasなし。GFC(2008) / COVID(2020) / 2022ベア等の複数サイクルを包含。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--green);margin:8px 0 4px">✅ 確定1: 制約は24年間で普遍的に有効</div>
+<div class="logic-rule">MH20 + SectorCap 35% + atk_capの組み合わせは、あらゆる市場環境でMaxDDを大幅改善。</div>
+<table class="logic-table"><tr><th>比較</th><th>MaxDD改善</th><th>Sharpe変化</th></tr>
+<tr><td>BM3 → BM3+制約</td><td>-50.3%→-33.1%（+17pp）</td><td>0.45→0.57（+0.12）</td></tr>
+<tr><td>BM5 → BM5+制約</td><td>-63.8%→-21.2%（+42.6pp）</td><td>0.61→0.75（+0.14）</td></tr></table>
+<div class="logic-rule">結論: 制約は"普遍的に効く構造"であり、特定の相場環境に依存しない。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--green);margin:8px 0 4px">✅ 確定2: K-gateは正の価値を持つ</div>
+<div class="logic-rule">4モデルの24年間比較（NoGate / Current 80-50-30 / Soft 100-80-60-40 / Linear連続化）の結果、現行K-gate（Current）がSharpe・Sortino共に最高。</div>
+<table class="logic-table"><tr><th>Model</th><th>CAGR</th><th>MaxDD</th><th>Sharpe</th></tr>
+<tr><td>NoGate</td><td>+9.2%</td><td>-43.9%</td><td>0.52</td></tr>
+<tr><td>Current（現行）</td><td>+7.7%</td><td>-33.1%</td><td>0.57 ← 最高</td></tr>
+<tr><td>Soft</td><td>+8.7%</td><td>-36.2%</td><td>0.55</td></tr>
+<tr><td>Linear</td><td>+7.7%</td><td>-33.0%</td><td>0.52</td></tr></table>
+<div class="logic-rule">K-gateは1.5ppのCAGRで10.8ppのMaxDD改善を購入。「alpha削減装置」ではなくリスク効率改善装置。binary性（段階的でなく離散的）も問題なし（Linear≈Current）。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--green);margin:8px 0 4px">✅ 確定3: 個別株モメンタムは長期alphaを持つ</div>
+<div class="logic-rule">PIT S&P500（survivorship biasなし）の6Mモメンタム Top5で、CAGR +14.3%（SPY +11.6%を上回る）。ただしMaxDD -63.8%は致命的で、制約なしの運用は不可能。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--green);margin:8px 0 4px">✅ 確定4: セクター層は長期alphaを持たない</div>
+<div class="logic-rule">BM3（セクターETFローテーション）CAGR +6.1% ≈ BM2（SPY/SHY切替）+6.2%。共にSPY B&H +11.0%を大幅に下回る。Layer 1の役割は"alpha源泉"ではなく"フィルタ"。</div>
+`],
+    ["🔬 長期検証: 未確定の事項",`
+<div style="font-size:10px;font-weight:700;color:var(--gold);margin:6px 0 4px">⚠️ 未確定1: テーマ層（Layer 2）の長期効果</div>
+<div class="logic-rule">短期126日間ではテーマ層がSharpeを0.83→1.76に改善（+0.93）。これは制約の改善効果（+0.14）の6.6倍大きい。</div>
+<div class="logic-rule">しかし長期では未検証。理由: 207テーマの定義は2024-2026年の市場構造に基づくものであり、2008年時点にはこの分類が存在しなかった。現在の定義を過去に投影すると、構成銘柄バイアス（生存銘柄に偏る）とテーマ存在バイアス（当時なかったテーマに投資したことになる）が発生する。</div>
+<div class="logic-rule">仮説: テーマ層は"短中期のalpha抽出フィルター"として有効だが、長期alphaの源泉であるかは不明。</div>
+<div class="logic-rule">検証方法: ①Forward蓄積60日（2026-06-09目標）でreconstructedとの比較 ②GICS Sub-Industry代替によるテーマ層近似の長期検証（研究段階）。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--gold);margin:8px 0 4px">⚠️ 未確定2: K-gateの長期CAGRコスト</div>
+<div class="logic-rule">BM5でのK-gate適用: CAGR +14.3%→+7.6%（半減）。これはCLOSED期間が長期では長くなるため。ただしPRISMはテーマ層を持つため、テーマ層がCLOSED期間中にも30%枠内で良い銘柄を選べるなら、CAGRコストはBM5ほど深刻でない可能性がある。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--gold);margin:8px 0 4px">⚠️ 未確定3: regime-specific alpha</div>
+<div class="logic-rule">短期126日間の検証期間（2025年10月〜2026年4月）はCLOSED→MID環境が支配的。OPEN環境での長期挙動は短期検証に含まれていない。Forward蓄積でOPEN期を含むデータが集まれば検証可能。</div>
+
+<div style="font-size:10px;font-weight:700;color:var(--gold);margin:8px 0 4px">⚠️ 未確定4: テーマ再分類リスク</div>
+<div class="logic-rule">stock-themes.comがテーマ定義を変更した場合、PRISMの銘柄選定に影響が生じる。member_hashで差分検出は可能だが、発生頻度・影響度は未実測。</div>
+`],
+    ["🔬 長期検証: PRISMの構造的位置づけ",`
+<div class="logic-rule"><b>PRISMの本質（長期検証で判明）:</b></div>
+<table class="logic-table"><tr><th>役割</th><th>コンポーネント</th><th>長期検証</th></tr>
+<tr><td>Alpha源泉</td><td>個別株モメンタム（テーマ経由）</td><td>個別株: 確定 / テーマ: 未確定</td></tr>
+<tr><td>Alpha保持装置</td><td>MinHold 20日 / SectorCap 35%</td><td>✅ 24年間で普遍的有効</td></tr>
+<tr><td>リスク調整装置</td><td>K-gate（80/50/30）</td><td>✅ Sharpe最大、変更根拠なし</td></tr>
+<tr><td>フィルタ</td><td>セクターDM（Layer 1）</td><td>⚠️ 長期alpha無し、フィルタとしてのみ機能</td></tr></table>
+<div class="logic-rule" style="margin-top:8px"><b>要約:</b> 制約は確定した土台。テーマ層は有望だが未確定。K-gateは正の価値を持つリスク調整装置であり、現行設定を維持。</div>
+<div class="logic-rule"><b>次の検証:</b> Forward蓄積60日（目標2026-06-09）でテーマ層の実運用効果を測定。それまでは戦略パラメータを凍結し、Paper Tradingでオペレーション整合性を確認する。</div>
+`]
   ];
   cards.forEach(([title,body])=>{
     h+=`<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">${title}<span class="lc-icon">▶</span></div><div class="logic-card-body">${body}</div></div>`;
