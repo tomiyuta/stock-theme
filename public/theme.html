@@ -23,6 +23,9 @@
 .stock-sub{display:flex;align-items:center;gap:3px;flex-wrap:wrap;margin-top:1px}
 .stock-sector{font-size:9px;padding:1px 4px;border-radius:2px;background:rgba(0,82,204,0.08);color:#0052cc}
 .stock-industry{font-size:9px;color:var(--text-sub)}
+.theme-tags{display:flex;gap:2px;flex-wrap:wrap;margin-top:2px;max-height:32px;overflow:hidden}
+.theme-tag{font-size:7px;padding:1px 3px;border-radius:2px;background:rgba(156,39,176,0.08);color:#9c27b0;white-space:nowrap}
+.margin-tag{font-size:8px;padding:1px 4px;border-radius:2px;background:rgba(0,150,136,0.1);color:#009688;margin-left:3px;flex-shrink:0}
 @media(max-width:767px){.sector-tag{max-width:50px}.mc-tag{font-size:8px;padding:0 3px}.idx-tag{font-size:7px;padding:0 3px}}
 @media(max-width:380px){.sector-tag{display:none}.mc-tag{display:none}.idx-tag{display:none}}
 </style>
@@ -51,8 +54,9 @@ Promise.all([
   fetch("/api/theme_ranking.json").then(r=>r.json()),
   fetch("/api/stock_meta.json?v=2").then(r=>r.json()).catch(()=>({})),
   fetch("/api/alpha_beta.json?v=2").then(r=>r.json()).catch(()=>({})),
-  fetch("/api/theme-details/"+slug+".json?v=2").then(r=>r.json()).catch(()=>null)
-]).then(([ranking, stockMeta, abAll, detail])=>{
+  fetch("/api/theme-details/"+slug+".json?v=2").then(r=>r.json()).catch(()=>null),
+  fetch("/api/ticker_enrichment.json?v=2").then(r=>r.json()).catch(()=>({}))
+]).then(([ranking, stockMeta, abAll, detail, enrichment])=>{
   const all=ranking.all_themes||[];
   const theme=all.find(t=>t.slug===slug);
   if(!theme){document.getElementById("detailMain").innerHTML='<div class="loading">テーマが見つかりません</div>';return}
@@ -81,7 +85,8 @@ Promise.all([
   }
 
   // Build stock cards (本家準拠)
-  let stockHtml='<div class="column-header"><div class="ch-left">終値：'+(ranking.latest_stock_date||"—")+'</div><div class="ch-right"><span>1年間推移</span><span>1日騰落率</span></div></div>';
+  let stockHtml='<div class="column-header"><div class="ch-left">終値：'+(ranking.latest_stock_date||"—")+'</div><div class="ch-right" id="stockPeriodBar">'+periods.map(pr=>'<span class="period-btn'+(pr==="1日"?" active":"")+'" onclick="switchStockPeriod(\''+pr+'\')" style="cursor:pointer;font-size:10px;padding:2px 4px;border-radius:3px">'+(PL[pr]||pr)+'</span>').join('')+'</div></div>';
+  let currentStockPeriod="1日";
   rows.forEach((s,i)=>{
     const dir=(s.r1d??0)>=0?"up":"down";
     const rankClass=i<3?"top3 "+dir:"";
@@ -96,16 +101,22 @@ Promise.all([
     const price=s.meta.price?("$"+s.meta.price.toLocaleString()):"—";
     const r1dStr=fmt(s.r1d);
     const r1dCls=(s.r1d??0)>=0?"positive":"negative";
+    const enr=enrichment[s.tk]||{};
+    const marginTag=enr.margin!=null?'<span class="margin-tag">利益率 '+enr.margin+'%</span>':'';
+    const otherThemes=(enr.themes||[]).filter(t=>t!==theme.name);
+    const themeTags=otherThemes.length>0?'<div class="theme-tags">'+otherThemes.map(t=>'<span class="theme-tag">'+t+'</span>').join('')+'</div>':'';
 
-    stockHtml+=`<div class="stock-card ${dir}"><div class="stock-row">
+    const perfJson=JSON.stringify(s.perf).replace(/"/g,'&quot;');
+    stockHtml+=`<div class="stock-card ${dir}" data-perf="${perfJson}" data-tk="${s.tk}"><div class="stock-row">
       <div class="rank ${rankClass}">${i+1}</div>
       <div class="theme-name" style="flex:1;min-width:0">
-        <div class="theme-name-primary" style="display:flex;align-items:center;gap:0">${s.tk}${mcLabel}${exTag}${spTag}${ndxTag}</div>
+        <div class="theme-name-primary" style="display:flex;align-items:center;gap:0">${s.tk}${mcLabel}${marginTag}${exTag}${spTag}${ndxTag}</div>
         <div class="theme-name-secondary">${companyName}</div>
         <div class="stock-sub">${sectorJa?'<span class="stock-sector">'+sectorJa+'</span>':''}${s.meta.industry?'<span class="stock-industry">'+s.meta.industry+'</span>':''}</div>
+        ${themeTags}
       </div>
       <div class="sparkline-wrap"><canvas data-tk="${s.tk}" height="52"></canvas></div>
-      <div class="return-cell">
+      <div class="return-cell" data-ret-cell>
         <div class="return-value ${r1dCls}">${r1dStr}</div>
         <div class="return-sub">${price}</div>
       </div>
@@ -171,6 +182,41 @@ Promise.all([
       });
     });
   }
+  // Period switch for stock cards
+  window.switchStockPeriod=function(p){
+    currentStockPeriod=p;
+    document.querySelectorAll('#stockPeriodBar .period-btn').forEach(b=>{b.classList.toggle('active',b.textContent.trim()===(PL[p]||p))});
+    const cards=Array.from(document.querySelectorAll('.stock-card[data-perf]'));
+    cards.forEach(card=>{
+      try{
+        const perf=JSON.parse(card.dataset.perf);
+        const v=perf[p]??null;
+        const cell=card.querySelector('[data-ret-cell]');
+        if(cell){
+          const cls=(v??0)>=0?"positive":"negative";
+          cell.querySelector('.return-value').className="return-value "+cls;
+          cell.querySelector('.return-value').textContent=fmt(v);
+        }
+        card.classList.toggle('up',(v??0)>=0);
+        card.classList.toggle('down',(v??0)<0);
+      }catch(e){}
+    });
+    // Re-sort
+    const container=cards[0]?.parentNode;
+    if(container){
+      const sorted=cards.sort((a,b)=>{
+        const pa=JSON.parse(a.dataset.perf)[p]??-999;
+        const pb=JSON.parse(b.dataset.perf)[p]??-999;
+        return pb-pa;
+      });
+      sorted.forEach((c,i)=>{
+        container.appendChild(c);
+        const rank=c.querySelector('.rank');
+        if(rank)rank.textContent=i+1;
+      });
+    }
+  };
+
 });
   </script>
 </body>

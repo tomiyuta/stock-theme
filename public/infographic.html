@@ -35,6 +35,11 @@
 .cross-tk{font-weight:800;min-width:45px}.cross-cnt{font-size:10px;color:var(--text-sub);min-width:20px}
 .cross-tags{display:flex;gap:3px;flex-wrap:wrap}
 .cross-tag{font-size:8px;padding:1px 4px;border-radius:2px;background:rgba(0,82,204,0.06);color:#0052cc;white-space:nowrap}
+.dip-card{margin:4px 10px;padding:10px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);display:flex;justify-content:space-between;align-items:center}
+.dip-name{font-size:12px;font-weight:700;flex:1}.dip-val{font-size:14px;font-weight:800;color:#ff1744}
+.dip-meta{font-size:9px;color:var(--text-sub);margin-top:2px}
+.dip-wr{font-size:9px;padding:1px 4px;border-radius:2px;margin-left:6px}
+.dip-wr.high{background:rgba(0,200,83,0.1);color:#00c853}.dip-wr.low{background:rgba(255,23,68,0.1);color:#ff1744}
 </style>
 </head>
 <body>
@@ -43,12 +48,14 @@
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab('macro')">マクロ</button>
       <button class="tab-btn" onclick="switchTab('struct')">構造分析</button>
+      <button class="tab-btn" onclick="switchTab('dip')">押し目</button>
     </div>
     <div class="period-bar" id="pbar"></div>
   </header>
   <main>
     <div id="tabMacro" class="tab-content active"><div id="macroMain" style="padding:0"></div></div>
     <div id="tabStruct" class="tab-content"><div id="structMain" style="padding:0"></div></div>
+    <div id="tabDip" class="tab-content"><div id="dipMain" style="padding:0"></div></div>
   </main>
   <nav class="bottom-nav">
     <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
@@ -59,11 +66,14 @@
   </nav>
 <script>
 function switchTab(t){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===(t==='macro'?0:1)));
+  const tabs=['macro','struct','dip'];
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',tabs[i]===t));
   document.getElementById('tabMacro').classList.toggle('active',t==='macro');
   document.getElementById('tabStruct').classList.toggle('active',t==='struct');
+  document.getElementById('tabDip').classList.toggle('active',t==='dip');
   document.getElementById('pbar').style.display=t==='macro'?'':'none';
   if(t==='struct'&&!window._structLoaded){loadStruct();window._structLoaded=true;}
+  if(t==='dip'&&!window._dipLoaded){loadDip();window._dipLoaded=true;}
 }
 let period="1ヶ月";
 const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
@@ -130,6 +140,26 @@ function loadStruct(){
   }).catch(e=>{document.getElementById('structMain').innerHTML='<p style="padding:20px;color:var(--text-sub)">構造データ読込中...</p>';});
 }
 function esc(s){const d=document.createElement('span');d.textContent=s;return d.innerHTML;}
+// === Dip Alerts Tab ===
+function loadDip(){
+  fetch("/api/dip_alerts.json?v="+Date.now()).then(r=>r.json()).then(data=>{
+    const period='1M';
+    const alerts=data[period]||[];
+    let h='<div class="section-label">押し目検知（'+alerts.length+'テーマ）</div>';
+    if(alerts.length===0){h+='<div style="padding:20px;color:var(--text-sub)">現在押し目シグナルなし</div>';}
+    alerts.forEach(a=>{
+      const wrCls=a.win_rate>=60?'high':'low';
+      h+='<div class="dip-card">';
+      h+='<div><div class="dip-name">'+esc(a.theme)+'</div>';
+      h+='<div class="dip-meta">閾値: '+a.threshold+'% / 検知: '+a.detected+'</div></div>';
+      h+='<div style="text-align:right"><div class="dip-val">'+a.dip+'%</div>';
+      h+='<span class="dip-wr '+wrCls+'">回復率 '+a.win_rate+'%</span></div>';
+      h+='</div>';
+    });
+    document.getElementById('dipMain').innerHTML=h;
+  }).catch(()=>{document.getElementById('dipMain').innerHTML='<p style="padding:20px;color:var(--text-sub)">データ読込中...</p>';});
+}
+
 </script>
 </body>
 </html>
