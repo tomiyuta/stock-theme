@@ -1,0 +1,12 @@
+{
+  "driver_dc": 1.0,
+  "driver_inp": 0.9,
+  "driver_lpo": 0.6,
+  "driver_eth": 0.8,
+  "driver_ocs": 0.5,
+  "driver_copper": 0.5,
+  "driver_100t": 0.4,
+  "driver_lta": 0.7,
+  "driver_china": 0.4,
+  "driver_cycle": 0.6
+}
