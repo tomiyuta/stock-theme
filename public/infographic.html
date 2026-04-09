@@ -3,31 +3,76 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>マクロテーマ | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=15">
+  <title>マクロ＋構造 | 米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css?v=20">
+<style>
+.tab-bar{display:flex;border-bottom:2px solid rgba(0,0,0,0.06);margin:0 0 4px}
+.tab-btn{flex:1;padding:10px;border:none;background:none;font-size:13px;font-weight:600;color:var(--text-sub);cursor:pointer;position:relative;font-family:inherit}
+.tab-btn.active{color:var(--text-main)}
+.tab-btn.active::after{content:'';position:absolute;bottom:-2px;left:15%;right:15%;height:2px;background:var(--text-main);border-radius:1px}
+.tab-content{display:none}.tab-content.active{display:block}
+</style>
+<style>
+.sr-card{margin:4px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden}
+.sr-header{padding:10px 12px;font-size:12px;font-weight:700;cursor:pointer;background:var(--card,#f8f9fb);display:flex;justify-content:space-between;align-items:center}
+.sr-header:active{background:rgba(0,0,0,0.04)}
+.sr-body{display:none;padding:0 8px 8px;overflow-x:auto}
+.sr-card.open .sr-body{display:block}
+.sr-card.open .sr-arrow{transform:rotate(90deg)}
+.sr-arrow{font-size:9px;color:var(--text-sub);transition:transform 0.2s}
+.sr-meta{font-size:9px;color:var(--text-sub)}
+.dm-table{width:100%;font-size:9px;border-collapse:collapse;min-width:350px}
+.dm-table th{padding:3px 2px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.08);position:sticky;top:0;background:#fff}
+.dm-table td{padding:3px 2px;border-bottom:1px solid rgba(0,0,0,0.03);text-align:center}
+.dm-table td:first-child{text-align:left;font-weight:700;font-size:10px;white-space:nowrap}
+.dm-s{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:2px;font-size:10px;font-weight:700}
+.dm-s.s10{background:rgba(0,200,83,0.15);color:#00c853}
+.dm-s.s05{background:rgba(0,82,204,0.1);color:#0052cc}
+.dm-s.s025{background:rgba(245,158,11,0.1);color:#f59e0b}
+.dm-s.s0{color:rgba(0,0,0,0.1)}
+.cross-row{display:flex;align-items:center;gap:6px;padding:4px 10px;border-bottom:1px solid rgba(0,0,0,0.04);font-size:11px}
+.cross-tk{font-weight:800;min-width:45px}.cross-cnt{font-size:10px;color:var(--text-sub);min-width:20px}
+.cross-tags{display:flex;gap:3px;flex-wrap:wrap}
+.cross-tag{font-size:8px;padding:1px 4px;border-radius:2px;background:rgba(0,82,204,0.06);color:#0052cc;white-space:nowrap}
+</style>
 </head>
 <body>
   <header>
-    <div class="header-top"><div class="header-title">マクロテーマ</div></div>
+    <div class="header-top"><div class="header-title">マクロ＋構造分析</div></div>
+    <div class="tab-bar">
+      <button class="tab-btn active" onclick="switchTab('macro')">マクロ</button>
+      <button class="tab-btn" onclick="switchTab('struct')">構造分析</button>
+    </div>
     <div class="period-bar" id="pbar"></div>
   </header>
-  <main id="macroMain" style="padding:0"></main>
+  <main>
+    <div id="tabMacro" class="tab-content active"><div id="macroMain" style="padding:0"></div></div>
+    <div id="tabStruct" class="tab-content"><div id="structMain" style="padding:0"></div></div>
+  </main>
   <nav class="bottom-nav">
     <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
     <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
     <a class="nav-item" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
     <a class="nav-item active" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロ</a>
-      <a class="nav-item" href="/prism"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
+    <a class="nav-item" href="/prism"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
   </nav>
-  <script>
+<script>
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',i===(t==='macro'?0:1)));
+  document.getElementById('tabMacro').classList.toggle('active',t==='macro');
+  document.getElementById('tabStruct').classList.toggle('active',t==='struct');
+  document.getElementById('pbar').style.display=t==='macro'?'':'none';
+  if(t==='struct'&&!window._structLoaded){loadStruct();window._structLoaded=true;}
+}
 let period="1ヶ月";
 const PL={"1日":"1D","5日":"5D","10日":"10D","1ヶ月":"1M","2ヶ月":"2M","3ヶ月":"3M","半年":"6M","1年":"1Y"};
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+// === Macro Tab (existing) ===
 const MACRO={
   "市場指数":{etfs:["SPY","QQQ","IWM","RSP"],desc:"主要インデックス"},
-  "セクター":{etfs:["XLK","XLE","XLF","XLV","XLI","XLC","XLY","XLP","XLRE","XLU","XLB"],desc:"S&P500セクター別パフォーマンス"},
+  "セクター":{etfs:["XLK","XLE","XLF","XLV","XLI","XLC","XLY","XLP","XLRE","XLU","XLB"],desc:"S&P500セクター別"},
   "債券・金利":{etfs:["TLT","TLH","IEF","IEI","SHY","SHV","HYG","MBB"],desc:"金利環境と債券市場"},
-  "コモディティ":{etfs:["GLD","SLV","USO","UNG","CPER"],desc:"商品市場の動向"},
+  "コモディティ":{etfs:["GLD","SLV","USO","UNG","CPER"],desc:"商品市場"},
   "暗号資産":{etfs:["IBIT"],desc:"デジタル資産"},
   "国際":{etfs:["EWJ","MCHI","INDA","EWZ","EWY","EWT","EWU","EZU","EWC","EWA"],desc:"グローバル市場"}
 };
@@ -43,17 +88,47 @@ function setP(btn,p){period=p;document.querySelectorAll(".period-btn").forEach(b
 function renderMacro(){
   let h="";
   for(const[cat,info] of Object.entries(MACRO)){
-    h+='<div class="section-label">'+cat+'</div>';
-    h+='<div class="macro-card"><div style="font-size:11px;color:var(--text-sub);margin-bottom:8px">'+info.desc+'</div>';
+    h+='<div class="section-label">'+cat+'</div><div class="macro-card"><div style="font-size:11px;color:var(--text-sub);margin-bottom:8px">'+info.desc+'</div>';
     const sorted=info.etfs.map(tk=>{const e=allEtfs.find(x=>x.name===tk);return{tk,name:NAMES[tk]||tk,ret:e?e[period]:null}}).sort((a,b)=>(b.ret||0)-(a.ret||0));
-    sorted.forEach(t=>{
-      const cls=(t.ret||0)>=0?"positive":"negative";
-      h+='<div class="macro-row"><span class="macro-row-name">'+t.name+' <span style="color:var(--text-sub);font-size:10px">'+t.tk+'</span></span><span class="macro-row-val '+cls+'">'+fmt(t.ret)+'</span></div>';
-    });
+    sorted.forEach(t=>{const cls=(t.ret||0)>=0?"positive":"negative";h+='<div class="macro-row"><span class="macro-row-name">'+t.name+' <span style="color:var(--text-sub);font-size:10px">'+t.tk+'</span></span><span class="macro-row-val '+cls+'">'+fmt(t.ret)+'</span></div>';});
     h+='</div>';
   }
   document.getElementById("macroMain").innerHTML=h;
 }
-  </script>
+// === Structural Analysis Tab ===
+function loadStruct(){
+  fetch("/api/structural.json?v="+Date.now()).then(r=>r.json()).then(data=>{
+    let h='<div class="section-label">テーマ構造分析（25レポート・'+data.total_tickers+'銘柄）</div>';
+    // Reports
+    data.reports.forEach(r=>{
+      const catHeaders=r.catalysts.map(c=>'<th title="'+esc(c.title)+'" style="writing-mode:vertical-rl;font-size:7px;max-width:16px;padding:2px 0">'+c.num+'</th>').join('');
+      let rows='';
+      r.tickers.forEach(t=>{
+        let cells='';
+        t.drivers.forEach(d=>{
+          const cls=d.s===1?'s10':d.s===0.5?'s05':d.s===0.25?'s025':'s0';
+          cells+='<td><span class="dm-s '+cls+'">'+d.sym+'</span></td>';
+        });
+        rows+='<tr><td>'+t.tk+'</td>'+cells+'</tr>';
+      });
+      h+='<div class="sr-card"><div class="sr-header" onclick="this.parentElement.classList.toggle(\'open\')">';
+      h+='<span>'+esc(r.name)+' <span class="sr-meta">'+r.n_tickers+'銘柄 × '+r.n_catalysts+'ドライバー</span></span>';
+      h+='<span class="sr-arrow">▶</span></div>';
+      h+='<div class="sr-body"><div style="overflow-x:auto"><table class="dm-table"><tr><th></th>'+catHeaders+'</tr>'+rows+'</table></div></div></div>';
+    });
+    // Cross-theme tickers
+    if(data.cross_tickers&&data.cross_tickers.length>0){
+      h+='<div class="section-label">テーマ横断銘柄（2レポート以上に登場）</div>';
+      data.cross_tickers.forEach(ct=>{
+        h+='<div class="cross-row"><span class="cross-tk">'+ct.tk+'</span>';
+        h+='<span class="cross-cnt">'+ct.count+'</span>';
+        h+='<span class="cross-tags">'+ct.reports.map(r=>'<span class="cross-tag">'+esc(r)+'</span>').join('')+'</span></div>';
+      });
+    }
+    document.getElementById('structMain').innerHTML=h;
+  }).catch(e=>{document.getElementById('structMain').innerHTML='<p style="padding:20px;color:var(--text-sub)">構造データ読込中...</p>';});
+}
+function esc(s){const d=document.createElement('span');d.textContent=s;return d.innerHTML;}
+</script>
 </body>
 </html>
