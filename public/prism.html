@@ -49,6 +49,17 @@
 .signal-item{font-size:12px;font-weight:700;color:var(--text-main);line-height:1.8}
 .signal-item-sub{font-size:9px;color:var(--text-sub);font-weight:400;margin-left:4px}
 .signal-empty{font-size:10px;color:var(--text-sub);font-style:italic}
+.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(0,82,204,0.04);border:1px solid rgba(0,82,204,0.15)}
+.prod-title{font-size:11px;font-weight:700;color:#0052cc;margin-bottom:6px}
+.prod-weights{display:flex;flex-wrap:wrap;gap:4px}
+.prod-w{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
+.prod-w.stock{background:rgba(0,200,83,0.1);color:#00c853}
+.prod-w.cash{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.regime-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 12px}
+.regime-box{border-radius:4px;padding:6px;text-align:center;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
+.regime-label{font-size:8px;color:var(--text-sub);font-weight:600}
+.regime-val{font-size:11px;font-weight:700}
+.regime-val.pos{color:#00c853}.regime-val.neg{color:#ff1744}
 </style>
 </head>
 <body>
@@ -136,6 +147,34 @@ Promise.all([
   h += `<div class="gate-detail">SPY 3M: ${fmt(gate.benchmark_ret_3m)} | SHV 3M: ${fmt(gate.cash_ret_3m)} | Excess: ${fmt(gate.excess_3m)}</div>`;
   h += `<div class="gate-atk">${gLabel} — 攻撃比率 ${(gate.atk_cap*100).toFixed(0)}%</div>`;
   h += `</div>`;
+
+  // ── Production Portfolio (MH20_CAP35) ──
+  const pp = signals.production_portfolio;
+  if(pp && pp.weights){
+    h += `<div class="prod-card">`;
+    h += `<div class="prod-title">📊 ${pp.strategy||"PRISM"} — Target Portfolio</div>`;
+    h += `<div class="prod-weights">`;
+    Object.entries(pp.weights).sort((a,b)=>b[1]-a[1]).forEach(([tk,w])=>{
+      const cls = tk==="SHV"?"cash":"stock";
+      h += `<span class="prod-w ${cls}">${tk} ${(w*100).toFixed(1)}%</span>`;
+    });
+    h += `</div></div>`;
+  }
+
+  // ── 4-Axis Regime Observation ──
+  if(gate.equity_axis){
+    const ea=gate.equity_axis, ca=gate.credit_axis, ha=gate.hard_asset_axis, da=gate.duration_axis;
+    const rv=(v)=>{const n=typeof v==="number"?v:0;return{txt:fmt(n),cls:n>=0?"pos":"neg"}};
+    h += `<div class="regime-row">`;
+    const axes=[
+      {label:"Equity",val:ea.equity_excess_3m},
+      {label:"Credit",val:ca.lqd_excess_3m},
+      {label:"Gold-SHV",val:ha.gld_excess_3m},
+      {label:"Duration",val:da.tlt_ret_3m}
+    ];
+    axes.forEach(a=>{const r=rv(a.val);h+=`<div class="regime-box"><div class="regime-label">${a.label}</div><div class="regime-val ${r.cls}">${r.txt}</div></div>`;});
+    h += `</div>`;
+  }
 
   // ── Buy / Sell signal pair ──
   const buyStocks = constituents.filter(c=>c.stock_selected);
