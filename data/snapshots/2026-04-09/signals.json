@@ -20,11 +20,11 @@
   ],
   "production_portfolio": {
     "weights": {
-      "VALE": 0.0875,
-      "RIO": 0.0875,
-      "APD": 0.0875,
-      "LIN": 0.0875,
-      "SHV": 0.65
+      "VALE": 0.075,
+      "RIO": 0.075,
+      "APD": 0.075,
+      "LIN": 0.075,
+      "SHV": 0.7
     },
     "prices": {
       "FLEX": 68.21,
@@ -888,7 +888,15 @@
     },
     "sector_cap": 0.35,
     "max_positions": 35,
-    "strategy": "PRISM_MH20_CAP35"
+    "single_name_cap": 0.08,
+    "strategy": "PRISM_MH20_CAP35",
+    "summary": {
+      "gross_equity_weight": 0.3,
+      "cash_proxy_weight": 0.7,
+      "n_equity_positions": 4,
+      "gate_state": "CLOSED",
+      "atk_cap": 0.3
+    }
   },
   "trigger_candidates": {
     "T1_gate_flip": false,

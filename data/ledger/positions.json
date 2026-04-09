@@ -1,0 +1,65 @@
+{
+  "as_of_date": "2026-04-09",
+  "positions": [
+    {
+      "ticker": "VALE",
+      "status": "active",
+      "entry_date": "2026-04-09",
+      "entry_price": 16.18,
+      "holding_days": 0,
+      "target_weight": 0.075,
+      "sector": "Basic Materials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 16.18
+    },
+    {
+      "ticker": "RIO",
+      "status": "active",
+      "entry_date": "2026-04-09",
+      "entry_price": 94.66,
+      "holding_days": 0,
+      "target_weight": 0.075,
+      "sector": "Basic Materials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 94.66
+    },
+    {
+      "ticker": "APD",
+      "status": "active",
+      "entry_date": "2026-04-09",
+      "entry_price": 292.39,
+      "holding_days": 0,
+      "target_weight": 0.075,
+      "sector": "Basic Materials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 292.39
+    },
+    {
+      "ticker": "LIN",
+      "status": "active",
+      "entry_date": "2026-04-09",
+      "entry_price": 494.59,
+      "holding_days": 0,
+      "target_weight": 0.075,
+      "sector": "Basic Materials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 494.59
+    }
+  ],
+  "metadata": {
+    "strategy": "PRISM_MH20_CAP35",
+    "schema_version": "v1"
+  },
+  "cash_proxy": {
+    "ticker": "SHV",
+    "weight": 0.7
+  }
+}

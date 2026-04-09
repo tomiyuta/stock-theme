@@ -1,0 +1,5 @@
+date,action,ticker,current_weight,target_weight,delta_weight,reason,min_hold_blocked,sector,theme
+2026-04-09,BUY,VALE,0,0.075,0.075,new_entry,False,Basic Materials,
+2026-04-09,BUY,RIO,0,0.075,0.075,new_entry,False,Basic Materials,
+2026-04-09,BUY,APD,0,0.075,0.075,new_entry,False,Basic Materials,
+2026-04-09,BUY,LIN,0,0.075,0.075,new_entry,False,Basic Materials,

@@ -230,32 +230,36 @@ def main():
             "schema_version": "v1", "generator": "generate_snapshot.py"}
     selected_stocks = constituent_layer.loc[constituent_layer["stock_selected"], "ticker"].drop_duplicates().tolist()
 
-    # Production portfolio: apply sector_cap=35%
+    # Production portfolio: atk_cap → sector_cap → single_name_cap → SHV
     SECTOR_CAP = 0.35
     MAX_POSITIONS = 35
+    SINGLE_NAME_CAP = 0.08
     prod_stocks = selected_stocks[:MAX_POSITIONS]
+    sec_map = {}
+    for _, row in constituent_layer.iterrows():
+        sec_map[row["ticker"]] = row.get("sector", "Unknown")
     if prod_stocks:
-        w = 1.0 / len(prod_stocks)
-        weights = {tk: w for tk in prod_stocks}
-        # Sector map from constituents
-        sec_map = {}
-        for _, row in constituent_layer.iterrows():
-            sec_map[row["ticker"]] = row.get("sector", "Unknown")
-        # Compute sector totals and cap
+        # Step 1: atk_cap（攻撃比率上限）
+        n = len(prod_stocks)
+        weights = {tk: gate.atk_cap / n for tk in prod_stocks}
+        # Step 2: sector_cap
         sec_tot = {}
         for tk, wt in weights.items():
             s = sec_map.get(tk, "Unknown")
             sec_tot[s] = sec_tot.get(s, 0) + wt
-        excess = 0
         for s, tot in sec_tot.items():
             if tot > SECTOR_CAP:
                 scale = SECTOR_CAP / tot
                 for tk in list(weights.keys()):
                     if sec_map.get(tk, "Unknown") == s:
-                        old = weights[tk]; weights[tk] = old * scale
-                        excess += (old - weights[tk])
-        if excess > 0.001:
-            weights["SHV"] = weights.get("SHV", 0) + excess
+                        weights[tk] = weights[tk] * scale
+        # Step 3: single_name_cap
+        for tk in list(weights.keys()):
+            if weights[tk] > SINGLE_NAME_CAP:
+                weights[tk] = SINGLE_NAME_CAP
+        # Step 4: residual → SHV
+        eq_total = sum(weights.values())
+        weights["SHV"] = round(1.0 - eq_total, 4)
         # Collect prices for production portfolio
         price_map = {}
         for _, row in constituent_layer.iterrows():
@@ -273,7 +277,12 @@ def main():
                          "prices": price_map,
                          "sector_map": {tk: sec_map.get(tk, "Unknown") for tk in weights if tk != "SHV"},
                          "sector_cap": SECTOR_CAP, "max_positions": MAX_POSITIONS,
-                         "strategy": "PRISM_MH20_CAP35"}
+                         "single_name_cap": SINGLE_NAME_CAP,
+                         "strategy": "PRISM_MH20_CAP35",
+                         "summary": {"gross_equity_weight": round(eq_total, 4),
+                                    "cash_proxy_weight": round(1.0 - eq_total, 4),
+                                    "n_equity_positions": len(prod_stocks),
+                                    "gate_state": gate.gate_state, "atk_cap": gate.atk_cap}}
     else:
         prod_portfolio = {"weights": {"SHV": 1.0}, "sector_cap": SECTOR_CAP,
                          "max_positions": MAX_POSITIONS, "strategy": "PRISM_MH20_CAP35"}

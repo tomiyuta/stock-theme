@@ -44,6 +44,7 @@ jobs:
           python scripts/generate_snapshot.py
           mkdir -p public/api/prism
           cp data/snapshots/latest/*.json public/api/prism/
+          python scripts/generate_orders.py
 
       - name: Commit and push
         run: |
