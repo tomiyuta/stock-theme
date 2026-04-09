@@ -90,7 +90,7 @@ class ReplayEngine:
 
 def summarize_performance(daily, trades):
     if daily.empty:
-        return {"CAGR":None,"MaxDD":None,"Sharpe_daily":None,"Turnover_trades":0,"AvgHoldingDays_proxy":None,"WorstDay":None}
+        return {"CAGR":None,"MaxDD":None,"Sharpe_daily":None,"Turnover_trades":0,"AvgHoldingDays_proxy":None,"WorstDay":None,"Rebalance_days":None,"Avg_Jaccard":None,"Max_sector_pct":None}
     n=len(daily); years=max(n/252.0,1e-9)
     end=float(daily["equity"].iloc[-1]); first=float(daily["equity"].iloc[0])
     cagr=(end/first)**(1/years)-1 if first>0 else None
@@ -98,6 +98,20 @@ def summarize_performance(daily, trades):
     std=float(daily["ret"].std(ddof=0))
     sharpe=(float(daily["ret"].mean())/std*(252**0.5)) if std>0 else None
     worst=float(daily["ret"].min())
+    # Position set change metrics
+    rebal_days=0; jaccard_vals=[]
+    if not trades.empty:
+        buy_by_date=trades[trades["action"]=="BUY"].groupby("exec_date")["symbol"].apply(set).to_dict()
+        dates_sorted=sorted(buy_by_date.keys())
+        prev_set=set()
+        for d in dates_sorted:
+            cur_set=buy_by_date[d]
+            if prev_set and cur_set!=prev_set:
+                rebal_days+=1
+                union=prev_set|cur_set; inter=prev_set&cur_set
+                jaccard_vals.append(len(inter)/len(union) if union else 1.0)
+            prev_set=cur_set
+    avg_jaccard=sum(jaccard_vals)/len(jaccard_vals) if jaccard_vals else None
     avg_hold=None
     if not trades.empty:
         buys=trades[trades["action"]=="BUY"].copy(); sells=trades[trades["action"]=="SELL"].copy()
@@ -106,4 +120,4 @@ def summarize_performance(daily, trades):
             m=buys.merge(sells[["symbol","exec_date"]],on="symbol",suffixes=("_b","_s"))
             m=m[m["exec_date_s"]>=m["exec_date_b"]]
             if not m.empty: avg_hold=float((m["exec_date_s"]-m["exec_date_b"]).dt.days.mean())
-    return {"CAGR":cagr,"MaxDD":maxdd,"Sharpe_daily":sharpe,"Turnover_trades":int(len(trades)),"AvgHoldingDays_proxy":avg_hold,"WorstDay":worst}
+    return {"CAGR":cagr,"MaxDD":maxdd,"Sharpe_daily":sharpe,"Turnover_trades":int(len(trades)),"AvgHoldingDays_proxy":avg_hold,"WorstDay":worst,"Rebalance_days":rebal_days,"Avg_Jaccard":round(avg_jaccard,3) if avg_jaccard else None,"Max_sector_pct":None}

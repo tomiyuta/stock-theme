@@ -5,7 +5,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).parent))
 import pandas as pd
 from replay_engine import SnapshotStore, PriceProvider, ReplayEngine, summarize_performance
-from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay, PrismV1WithMinHold
+from strategies import BM2SpyShvSwitch, BM3SectorRotation, BM5DirectStockMomentum, PrismV1Replay, PrismV1WithMinHold, PrismHysteresis
 
 def main():
     parser = argparse.ArgumentParser()
@@ -20,10 +20,11 @@ def main():
     store = SnapshotStore(args.snapshots)
     engine = ReplayEngine(store, prices, initial_capital=args.initial_capital)
     outdir = Path(args.outdir); outdir.mkdir(parents=True, exist_ok=True)
-    strategies = [BM2SpyShvSwitch(), BM3SectorRotation(top_n=args.bm3_top_n),
-                  BM5DirectStockMomentum(top_n=args.bm5_top_n), PrismV1Replay(),
-                  PrismV1WithMinHold(min_days=10), PrismV1WithMinHold(min_days=20),
-                  PrismV1WithMinHold(min_days=30)]
+    strategies = [BM3SectorRotation(top_n=args.bm3_top_n),
+                  PrismV1WithMinHold(min_days=20),
+                  PrismHysteresis(entry_rank=15, hold_rank=30, min_days=20, label="HYS_A_E15H30"),
+                  PrismHysteresis(entry_rank=15, hold_rank=35, min_days=20, label="HYS_B_E15H35"),
+                  PrismHysteresis(entry_rank=10, hold_rank=30, min_days=20, label="HYS_C_E10H30")]
     rows = []
     for strat in strategies:
         print(f"Running {strat.name}...")
@@ -36,7 +37,7 @@ def main():
         rows.append(summary)
         eq = result["daily"]
         if not eq.empty: print(f"  → ${eq['equity'].iloc[0]:,.0f} → ${eq['equity'].iloc[-1]:,.0f}")
-    df = pd.DataFrame(rows)[["Strategy","CAGR","MaxDD","Sharpe_daily","Turnover_trades","AvgHoldingDays_proxy","WorstDay"]]
+    df = pd.DataFrame(rows)[["Strategy","CAGR","MaxDD","Sharpe_daily","WorstDay","Rebalance_days","Avg_Jaccard"]]
     df.to_csv(outdir/"benchmark_summary.csv", index=False)
     print("\n"+"="*90); print(df.to_string(index=False)); print("="*90)
 

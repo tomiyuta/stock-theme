@@ -105,3 +105,93 @@ class PrismV1Replay:
             if p not in seen: unique.append(p); seen.add(p)
         w = 1.0 / len(unique)
         return {"weights": {p: w for p in unique}, "reasons": {p: "PRISM selected" for p in unique}}
+
+
+class PrismHysteresis:
+    """PRISM with configurable hysteresis zones + MH20. Themes use different thresholds for entry vs hold."""
+    def __init__(self, entry_rank=15, hold_rank=30, min_days=20, label=""):
+        self.entry_rank = entry_rank
+        self.hold_rank = hold_rank
+        self.min_days = min_days
+        self.name = label or f"PRISM_HYS_E{entry_rank}_H{hold_rank}"
+        self._held_themes = set()  # currently held themes
+        self._held_stocks = {}     # ticker -> days_held
+        self._prev_date = None
+
+    def build_target_portfolio(self, date_str, snap):
+        if self._prev_date and self._prev_date != date_str:
+            for tk in self._held_stocks:
+                self._held_stocks[tk] += 1
+        self._prev_date = date_str
+
+        themes = snap.get("themes", [])
+        constituents = snap.get("constituents", [])
+
+        # Build theme rank map
+        rank_map = {}  # theme_name -> score_rank
+        theme_data = {}
+        for t in themes:
+            name = t.get("theme", "")
+            rank = t.get("score_rank", 999)
+            rank_map[name] = rank
+            theme_data[name] = t
+
+        # Decide which themes to hold
+        new_held = set()
+        for name, rank in rank_map.items():
+            t = theme_data[name]
+            in_held = name in self._held_themes
+            if in_held:
+                # HOLD zone: more lenient
+                if rank <= self.hold_rank:
+                    new_held.add(name)
+            else:
+                # ENTRY zone: stricter
+                if (rank <= self.entry_rank
+                    and t.get("consensus_flag", False)
+                    and t.get("acceleration_flag", False)
+                    and t.get("sector_pass", False)
+                    and not t.get("high_vol_excluded", False)):
+                    new_held.add(name)
+        self._held_themes = new_held
+
+        # Select stocks from held themes (top 2 per theme by ret_1m, large priority)
+        stocks = []
+        for theme_name in new_held:
+            theme_cons = [c for c in constituents if c.get("theme") == theme_name]
+            theme_cons.sort(key=lambda c: (
+                c.get("market_cap_bucket", "") in ("large", "mega"),
+                c.get("ret_1m", 0) or 0
+            ), reverse=True)
+            for c in theme_cons[:2]:
+                tk = c["ticker"]
+                if tk not in [s["ticker"] for s in stocks]:
+                    stocks.append(c)
+
+        # Apply min hold
+        new_tickers = {s["ticker"] for s in stocks}
+        # Keep stocks under min hold even if their theme dropped
+        kept = {tk for tk, days in self._held_stocks.items() if days < self.min_days and tk not in new_tickers}
+        all_tickers = new_tickers | kept
+
+        # Update held stocks
+        expired = [tk for tk in self._held_stocks if tk not in all_tickers]
+        for tk in expired:
+            del self._held_stocks[tk]
+        for tk in all_tickers:
+            if tk not in self._held_stocks:
+                self._held_stocks[tk] = 0
+
+        if not all_tickers:
+            return {"weights": {"SHV": 1.0}, "reasons": {"SHV": "no holdings"}}
+
+        w = 1.0 / len(all_tickers)
+        reasons = {}
+        for tk in all_tickers:
+            if tk in kept:
+                reasons[tk] = f"min_hold({self._held_stocks[tk]}d/{self.min_days}d)"
+            elif tk in new_tickers:
+                reasons[tk] = "hysteresis selected"
+            else:
+                reasons[tk] = "held"
+        return {"weights": {tk: w for tk in all_tickers}, "reasons": reasons}
