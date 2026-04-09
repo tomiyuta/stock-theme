@@ -22,7 +22,8 @@
 .sr-arrow{font-size:9px;color:var(--text-sub);transition:transform 0.2s}
 .sr-meta{font-size:9px;color:var(--text-sub)}
 .dm-table{width:100%;font-size:9px;border-collapse:collapse;min-width:350px}
-.dm-table th{padding:3px 2px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.08);position:sticky;top:0;background:#fff}
+.dm-table th{padding:4px 3px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.08);position:sticky;top:0;background:#fff;font-size:8px;white-space:nowrap;text-align:center}
+.dm-table th.dm-cat-th{max-width:70px;overflow:hidden;text-overflow:ellipsis;cursor:help}
 .dm-table td{padding:3px 2px;border-bottom:1px solid rgba(0,0,0,0.03);text-align:center}
 .dm-table td:first-child{text-align:left;font-weight:700;font-size:10px;white-space:nowrap}
 .dm-s{display:inline-block;width:16px;height:16px;line-height:16px;text-align:center;border-radius:2px;font-size:10px;font-weight:700}
@@ -101,7 +102,7 @@ function loadStruct(){
     let h='<div class="section-label">テーマ構造分析（25レポート・'+data.total_tickers+'銘柄）</div>';
     // Reports
     data.reports.forEach(r=>{
-      const catHeaders=r.catalysts.map(c=>'<th title="'+esc(c.title)+'" style="writing-mode:vertical-rl;font-size:7px;max-width:16px;padding:2px 0">'+c.num+'</th>').join('');
+      const catHeaders=r.catalysts.map(c=>'<th class="dm-cat-th" title="'+esc(c.title)+'">'+esc(c.short)+'</th>').join('');
       let rows='';
       r.tickers.forEach(t=>{
         let cells='';

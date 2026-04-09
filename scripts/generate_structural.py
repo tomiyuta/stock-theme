@@ -36,7 +36,21 @@ def build():
         catalysts = []
         if cf.exists():
             for c in json.load(open(cf)).get("items", []):
-                catalysts.append({"num": c["num"], "title": c.get("title", "")[:80]})
+                title = c.get("title", "")
+                # Generate short label: extract key phrase
+                short = title[:80]
+                # Remove ticker references like *AVGO*
+                import re
+                short = re.sub(r'\*[A-Z]+\*', '', short)
+                # Take first clause (before first particle/break)
+                for sep in ["が", "で", "の", "を", "に", "は", "と", "――"]:
+                    idx = short.find(sep)
+                    if 3 < idx < 20:
+                        short = short[:idx]
+                        break
+                if len(short) > 15:
+                    short = short[:13] + "…"
+                catalysts.append({"num": c["num"], "title": title[:80], "short": short.strip()})
         tickers = []
         for item in td.get("items", []):
             tk = item.get("ticker", "")
