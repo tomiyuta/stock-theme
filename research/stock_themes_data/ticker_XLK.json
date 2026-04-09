@@ -1,0 +1,22 @@
+{
+  "comment": "",
+  "enrichment": {
+    "mc_label": "",
+    "name_jp": "XLK",
+    "sector": ""
+  },
+  "performances": {
+    "10日": 0.0407,
+    "1ヶ月": 0.0151,
+    "1年": 0.5674,
+    "1日": 0.031,
+    "2ヶ月": 0.046,
+    "3ヶ月": -0.0326,
+    "5日": 0.0661,
+    "半年": -0.012
+  },
+  "sparkline_dates": [],
+  "sparkline_values": [],
+  "themes": [],
+  "ticker": "XLK"
+}

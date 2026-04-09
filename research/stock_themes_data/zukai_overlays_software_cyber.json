@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 17.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T09:29:31.915485+00:00",
+      "function": "企業のセキュリティツールを1社にまとめる統合プラットフォーム。ファイアウォール・SASE・AI SOC・AIセキュリティを一元管理し防御の隙間をなくす",
+      "id": 284,
+      "pos_left": 11.25,
+      "pos_top": 10,
+      "product": "防御司令塔",
+      "report_id": "software_cyber",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 17.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T09:29:31.950521+00:00",
+      "function": "PCやサーバーにセキュリティソフトを入れて不正侵入を検知・遮断するサービス（EDR）。AI時代にはAIDR（端末上のAI利用を可視化・制御）に進化",
+      "id": 285,
+      "pos_left": 31.25,
+      "pos_top": 10,
+      "product": "端末保護",
+      "report_id": "software_cyber",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 17.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T09:29:31.986603+00:00",
+      "function": "「誰がどのシステムにアクセスできるか」を管理するID基盤と企業全体の脆弱性を見える化する監視ツール。AIエージェントにもIDが必要になる時代",
+      "id": 286,
+      "pos_left": 50,
+      "pos_top": 10,
+      "product": "認証回廊",
+      "report_id": "software_cyber",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 17.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T09:29:32.019589+00:00",
+      "function": "「社内でも社外でも何も信用しない」前提のセキュリティ設計。通信のたびに身元確認する「関所」方式。CDN・開発基盤との一体提供も含む",
+      "id": 287,
+      "pos_left": 70,
+      "pos_top": 10,
+      "product": "ゼロトラスト",
+      "report_id": "software_cyber",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 17.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T09:29:32.053418+00:00",
+      "function": "攻撃された後にどれだけ早く安全に復旧できるかの力（サイバーレジリエンス）。ID回復やAIエージェントの行動巻き戻し（Agent Cloud）も含む",
+      "id": 288,
+      "pos_left": 88.75,
+      "pos_top": 10,
+      "product": "最後の砦",
+      "report_id": "software_cyber",
+      "sort_order": 4,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

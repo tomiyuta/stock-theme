@@ -1,0 +1,22 @@
+{
+  "comment": "",
+  "enrichment": {
+    "mc_label": "",
+    "name_jp": "QQQ",
+    "sector": ""
+  },
+  "performances": {
+    "10日": 0.0376,
+    "1ヶ月": -0.0018,
+    "1年": 0.4405,
+    "1日": 0.0294,
+    "2ヶ月": 0.0162,
+    "3ヶ月": -0.0268,
+    "5日": 0.0498,
+    "半年": -0.0004
+  },
+  "sparkline_dates": [],
+  "sparkline_values": [],
+  "themes": [],
+  "ticker": "QQQ"
+}

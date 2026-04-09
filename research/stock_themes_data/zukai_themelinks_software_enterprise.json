@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T02:25:02.116602+00:00",
+      "id": 50,
+      "name_jp": "ソフト：エンタープライズ",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 15.0,
+      "pos_top": 4.375,
+      "report_id": "software_enterprise",
+      "slug": "soft-enterprise",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T02:25:02.176821+00:00",
+      "id": 51,
+      "name_jp": "ソフト：マーケ・販売",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 38.75,
+      "pos_top": 4.375,
+      "report_id": "software_enterprise",
+      "slug": "soft-marketing",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T02:25:02.232102+00:00",
+      "id": 52,
+      "name_jp": "ソフト：バックオフィス",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 4.375,
+      "report_id": "software_enterprise",
+      "slug": "soft-back-office",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T02:25:02.286798+00:00",
+      "id": 53,
+      "name_jp": "ソフト：生産性・開発",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 86.25,
+      "pos_top": 4.375,
+      "report_id": "software_enterprise",
+      "slug": "soft-productivity",
+      "sort_order": 3
+    }
+  ]
+}

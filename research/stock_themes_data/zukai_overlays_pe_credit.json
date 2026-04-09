@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 27.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T05:37:33.985183+00:00",
+      "function": "企業を買収（PE）しつつ融資（PC）も行う総合型。出口（M&A・IPO）が止まるとキャリー（成功報酬）が消え、保険チャネルやAIインフラ投資も抱える。スプレッド縮小と出口停滞の「二重リスク」",
+      "id": 268,
+      "pos_left": 18.75,
+      "pos_top": 10.9375,
+      "product": "PE+PC",
+      "report_id": "pe_credit",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 27.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T05:37:34.03172+00:00",
+      "function": "企業への直接貸出（ダイレクトレンディング）が主力。PE的な買収事業は限定的で出口リスクは小さいが、スプレッド縮小とソフトウェア集中リスクが直撃。特に*OWL*はソフトウェア8%・非上場BDC比率が高く脆弱性が最も高い",
+      "id": 269,
+      "pos_left": 20,
+      "pos_top": 64.6875,
+      "product": "PC専業",
+      "report_id": "pe_credit",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 27.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T05:37:34.067357+00:00",
+      "function": "メガバンクは自らの融資は厳格に規制されているが、PE系にファンドファイナンス（ファンドへの融資）を大量に提供しており間接的なエクスポージャーを持つ。PE系で問題が起きれば波及する経路がある",
+      "id": 270,
+      "pos_left": 52.5,
+      "pos_top": 10.9375,
+      "product": "融資での露出",
+      "report_id": "pe_credit",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 27.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T05:37:34.104758+00:00",
+      "function": "M&Aアドバイザリー手数料が収益の柱。PE系が投資先を売れなければディール量が減り手数料も減る「連鎖」構造。専業の*EVR*・*LAZ*が最も脆弱で、*GS*・*MS*はウェルスやトレーディングで分散",
+      "id": 271,
+      "pos_left": 82.5,
+      "pos_top": 10.9375,
+      "product": "出口の行方",
+      "report_id": "pe_credit",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

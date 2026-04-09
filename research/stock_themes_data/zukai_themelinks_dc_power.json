@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 5.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-23T10:28:10.090254+00:00",
+      "id": 25,
+      "name_jp": "太陽光発電",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 37.5,
+      "pos_top": 3.4375,
+      "report_id": "dc_power",
+      "slug": "solar-energy-storage",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 5.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-23T10:28:29.265067+00:00",
+      "id": 26,
+      "name_jp": "オンサイト電源",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 12.5,
+      "pos_top": 3.4375,
+      "report_id": "dc_power",
+      "slug": "onsite-power",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 5.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-23T10:28:29.302695+00:00",
+      "id": 27,
+      "name_jp": "電力貯蔵",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 3.4375,
+      "report_id": "dc_power",
+      "slug": "battery-storage",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 5.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-23T10:28:29.353378+00:00",
+      "id": 28,
+      "name_jp": "電力：IPP",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 87.5,
+      "pos_top": 3.4375,
+      "report_id": "dc_power",
+      "slug": "power-supply-IPP",
+      "sort_order": 3
+    }
+  ]
+}

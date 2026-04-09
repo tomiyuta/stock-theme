@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-22T02:36:22.32153+00:00",
+      "id": 21,
+      "name_jp": "熱管理インフラ",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 3.125,
+      "report_id": "dc_infra",
+      "slug": "heat-infra",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-22T02:36:22.362073+00:00",
+      "id": 22,
+      "name_jp": "次世代電源",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 37.5,
+      "pos_top": 3.125,
+      "report_id": "dc_infra",
+      "slug": "next-gen-power-supply",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-22T02:36:22.401045+00:00",
+      "id": 23,
+      "name_jp": "次世代冷媒",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 87.5,
+      "pos_top": 3.125,
+      "report_id": "dc_infra",
+      "slug": "refrigerant",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-22T02:36:22.440727+00:00",
+      "id": 24,
+      "name_jp": "電源インフラ",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 12.5,
+      "pos_top": 3.125,
+      "report_id": "dc_infra",
+      "slug": "power-infra",
+      "sort_order": 3
+    }
+  ]
+}

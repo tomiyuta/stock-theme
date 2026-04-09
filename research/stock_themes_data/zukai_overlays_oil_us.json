@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T07:02:25.384884+00:00",
+      "function": "上流（探鉱・生産）と下流（精製・販売）を一貫して手掛ける世界最大級の統合石油企業",
+      "id": 237,
+      "pos_left": 18.75,
+      "pos_top": 13.75,
+      "product": "スーパーメジャー",
+      "report_id": "oil_us",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T07:02:25.420765+00:00",
+      "function": "石油・天然ガスの探鉱（Exploration）と生産（Production）に特化する企業。精製事業は持たない",
+      "id": 238,
+      "pos_left": 50,
+      "pos_top": 13.75,
+      "product": "E&P",
+      "report_id": "oil_us",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T07:02:25.464731+00:00",
+      "function": "原油をガソリン・ディーゼル・ジェット燃料等の石油製品に変換する事業。クラックスプレッド（原油と製品の価格差）が利益の源泉",
+      "id": 239,
+      "pos_left": 81.25,
+      "pos_top": 13.75,
+      "product": "精製",
+      "report_id": "oil_us",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

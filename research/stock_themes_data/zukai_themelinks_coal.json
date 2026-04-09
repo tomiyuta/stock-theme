@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 42.0,
+      "created_at": "2026-03-28T00:58:11.351492+00:00",
+      "id": 71,
+      "name_jp": "石炭：原料炭中心",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 26.25,
+      "pos_top": 4.6875,
+      "report_id": "coal",
+      "slug": "coking-coal",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 42.0,
+      "created_at": "2026-03-28T00:58:11.385905+00:00",
+      "id": 72,
+      "name_jp": "石炭：一般炭",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 75.0,
+      "pos_top": 4.6875,
+      "report_id": "coal",
+      "slug": "thermal-coal",
+      "sort_order": 1
+    }
+  ]
+}

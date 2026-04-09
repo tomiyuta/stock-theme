@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-20T01:36:36.514341+00:00",
+      "id": 4,
+      "name_jp": "AI半導体：コア銘柄",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 13.75,
+      "pos_top": 3.4375,
+      "report_id": "server",
+      "slug": "ai-semiconductor-core",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-20T01:36:36.556096+00:00",
+      "id": 5,
+      "name_jp": "CPU",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 38.75,
+      "pos_top": 3.4375,
+      "report_id": "server",
+      "slug": "cpu",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-20T01:36:36.592903+00:00",
+      "id": 6,
+      "name_jp": "データストレージ",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 3.4375,
+      "report_id": "server",
+      "slug": "data-storage",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-20T01:36:36.63391+00:00",
+      "id": 7,
+      "name_jp": "ラック内接続",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 86.25,
+      "pos_top": 3.4375,
+      "report_id": "server",
+      "slug": "dc-rack-connect",
+      "sort_order": 3
+    }
+  ]
+}

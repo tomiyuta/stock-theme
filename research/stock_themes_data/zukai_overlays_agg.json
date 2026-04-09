@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 39.0,
+      "circle_size": 36,
+      "created_at": "2026-03-27T09:17:05.583736+00:00",
+      "function": "作物の成長に必要な栄養素（窒素・カリウム）を土壌に補給する基幹資材。天然ガスや鉱石を原料に大規模工場で製造",
+      "id": 295,
+      "pos_left": 25,
+      "pos_top": 12.1875,
+      "product": "肥料",
+      "report_id": "agg",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 39.0,
+      "circle_size": 36,
+      "created_at": "2026-03-27T09:17:05.614625+00:00",
+      "function": "遺伝子技術で害虫耐性や病害耐性を持つ高性能種子を開発・ライセンス供与。リチウムやヨウ素など特殊素材も含む",
+      "id": 296,
+      "pos_left": 25,
+      "pos_top": 55.3125,
+      "product": "種子・素材",
+      "report_id": "agg",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 39.0,
+      "circle_size": 36,
+      "created_at": "2026-03-27T09:17:05.643086+00:00",
+      "function": "農家から集荷した大豆・トウモロコシなどを搾油・精製しバイオ燃料原料や食品素材に加工。世界中の食料・飼料・燃料の流通を担う",
+      "id": 297,
+      "pos_left": 73.75,
+      "pos_top": 12.1875,
+      "product": "搾油・流通",
+      "report_id": "agg",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 43.0,
+      "created_at": "2026-03-28T04:42:19.09143+00:00",
+      "id": 73,
+      "name_jp": "レアアース",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 25.0,
+      "pos_top": 3.4375,
+      "report_id": "rare_earth",
+      "slug": "rare-earth",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 43.0,
+      "created_at": "2026-03-28T04:42:19.123679+00:00",
+      "id": 74,
+      "name_jp": "リチウム",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 75.0,
+      "pos_top": 3.4375,
+      "report_id": "rare_earth",
+      "slug": "lithium",
+      "sort_order": 1
+    }
+  ]
+}

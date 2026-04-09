@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T11:23:37.598063+00:00",
+      "function": "原発燃料の原料であるウラン鉱石を採掘する事業。ISR（地下に溶液を注入してウランを溶かし出す方法）と従来型鉱山がある。価格が$17→$90に上がったのに供給がすぐ増えないのが現在の投資テーマ",
+      "id": 244,
+      "pos_left": 16.25,
+      "pos_top": 9.6875,
+      "product": "ウラン採掘",
+      "report_id": "nuclear",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T11:23:37.64625+00:00",
+      "function": "掘ったウランを原発で使える燃料に加工する工程。世界でごく少数の工場でしか行えず、ロシアが約40%のシェアを握る。西側の「ボトルネック」",
+      "id": 245,
+      "pos_left": 16.25,
+      "pos_top": 56.875,
+      "product": "転換・濃縮",
+      "report_id": "nuclear",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T11:23:37.694463+00:00",
+      "function": "稼働中の原発の延命（運転期間延長）・出力増強（アップレート）・部品交換を行うサービス。世界約440基の既存原発が顧客。新規建設より速く実現できる",
+      "id": 246,
+      "pos_left": 50,
+      "pos_top": 9.6875,
+      "product": "現行原発サービス",
+      "report_id": "nuclear",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T11:23:37.740624+00:00",
+      "function": "工場で部品を量産し現場で組み立てる「プレハブ型原発」。従来の10年・数兆円を劇的に短縮・低コスト化する狙い。ただし商用実績はまだゼロ",
+      "id": 247,
+      "pos_left": 83.75,
+      "pos_top": 9.375,
+      "product": "SMR・次世代炉",
+      "report_id": "nuclear",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

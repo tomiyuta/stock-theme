@@ -1,0 +1,22 @@
+{
+  "comment": "",
+  "enrichment": {
+    "mc_label": "",
+    "name_jp": "XLB",
+    "sector": ""
+  },
+  "performances": {
+    "10日": 0.0681,
+    "1ヶ月": 0.0398,
+    "1年": 0.3684,
+    "1日": 0.0333,
+    "2ヶ月": 0.0293,
+    "3ヶ月": 0.0943,
+    "5日": 0.0356,
+    "半年": 0.1639
+  },
+  "sparkline_dates": [],
+  "sparkline_values": [],
+  "themes": [],
+  "ticker": "XLB"
+}

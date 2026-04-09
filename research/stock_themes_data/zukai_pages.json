@@ -1,0 +1,179 @@
+{
+  "items": [
+    {
+      "catalyst_url": "/zukai/optical/catalysts",
+      "created_at": "2026-03-20T01:18:20.110878+00:00",
+      "image_url": "/static/picture/optics_all.png",
+      "report_id": "optical",
+      "title": "光接続"
+    },
+    {
+      "catalyst_url": "/zukai/server/catalysts",
+      "created_at": "2026-03-20T01:27:37.10587+00:00",
+      "image_url": "/static/picture/server.png",
+      "report_id": "server",
+      "title": "サーバー・ラック内"
+    },
+    {
+      "catalyst_url": "/zukai/semi_manufacturing/catalysts",
+      "created_at": "2026-03-21T01:15:44.846884+00:00",
+      "image_url": "/static/picture/semi_manufacturing.png",
+      "report_id": "semi_manufacturing",
+      "title": "半導体製造"
+    },
+    {
+      "catalyst_url": "/zukai/semi_equip/catalysts",
+      "created_at": "2026-03-21T08:21:35.988256+00:00",
+      "image_url": "/static/picture/semi_equip.png",
+      "report_id": "semi_equip",
+      "title": "半導体製造装置"
+    },
+    {
+      "catalyst_url": "/zukai/agentic_ai/catalysts",
+      "created_at": "2026-03-21T09:21:03.245495+00:00",
+      "image_url": "/static/picture/agentic_ai.png",
+      "report_id": "agentic_ai",
+      "title": "エージェントAI実行基盤"
+    },
+    {
+      "catalyst_url": "/zukai/compute_providors/catalysts",
+      "created_at": "2026-03-21T09:26:19.339169+00:00",
+      "image_url": "/static/picture/dc_investors.png",
+      "report_id": "compute_providors",
+      "title": "データセンター投資主体"
+    },
+    {
+      "catalyst_url": "/zukai/dc_infra/catalysts",
+      "created_at": "2026-03-21T09:32:54.120299+00:00",
+      "image_url": "/static/picture/dc_infra.png",
+      "report_id": "dc_infra",
+      "title": "DC電源・熱管理インフラ"
+    },
+    {
+      "catalyst_url": "/zukai/dc_power/catalysts",
+      "created_at": "2026-03-23T08:55:19.784438+00:00",
+      "image_url": "/static/picture/dc_power.png",
+      "report_id": "dc_power",
+      "title": "DC電力供給"
+    },
+    {
+      "catalyst_url": "/zukai/dc_server/catalysts",
+      "created_at": "2026-03-24T04:40:28.887389+00:00",
+      "image_url": "/static/picture/ai_server.png",
+      "report_id": "dc_server",
+      "title": "サーバー"
+    },
+    {
+      "catalyst_url": "/zukai/natgas/catalysts",
+      "created_at": "2026-03-25T02:05:34.811031+00:00",
+      "image_url": "/static/picture/natgas.png",
+      "report_id": "natgas",
+      "title": "天然ガス"
+    },
+    {
+      "catalyst_url": "/zukai/oil_us/catalysts",
+      "created_at": "2026-03-25T07:01:54.677067+00:00",
+      "image_url": "/static/picture/oil_us.png",
+      "report_id": "oil_us",
+      "title": "石油：国内"
+    },
+    {
+      "catalyst_url": "/zukai/oil_global/catalysts",
+      "created_at": "2026-03-25T08:28:20.385117+00:00",
+      "image_url": "/static/picture/oil_global.png",
+      "report_id": "oil_global",
+      "title": "石油：グローバル"
+    },
+    {
+      "catalyst_url": "/zukai/nuclear/catalysts",
+      "created_at": "2026-03-25T11:22:41.105686+00:00",
+      "image_url": "/static/picture/nuclear.png",
+      "report_id": "nuclear",
+      "title": "原子力発電"
+    },
+    {
+      "catalyst_url": "/zukai/pe_credit/catalysts",
+      "created_at": "2026-03-25T12:28:46.713202+00:00",
+      "image_url": "/static/picture/pe_pc.png",
+      "report_id": "pe_credit",
+      "title": "プライベートクレジット懸念"
+    },
+    {
+      "catalyst_url": "/zukai/software_enterprise/catalysts",
+      "created_at": "2026-03-26T02:24:04.605553+00:00",
+      "image_url": "/static/picture/soft_major.png",
+      "report_id": "software_enterprise",
+      "title": "ソフトウェア：主要"
+    },
+    {
+      "catalyst_url": "/zukai/software_specialized/catalysts",
+      "created_at": "2026-03-26T05:25:53.645953+00:00",
+      "image_url": "/static/picture/soft_special.png",
+      "report_id": "software_specialized",
+      "title": "ソフトウェア：業種特化"
+    },
+    {
+      "catalyst_url": "/zukai/software_cyber/catalysts",
+      "created_at": "2026-03-26T07:33:00.20364+00:00",
+      "image_url": "/static/picture/cyber.png",
+      "report_id": "software_cyber",
+      "title": "サイバーセキュリティ"
+    },
+    {
+      "catalyst_url": "/zukai/space/catalysts",
+      "created_at": "2026-03-26T10:15:33.902353+00:00",
+      "image_url": "/static/picture/space.png",
+      "report_id": "space",
+      "title": "宇宙"
+    },
+    {
+      "catalyst_url": "/zukai/humanoids/catalysts",
+      "created_at": "2026-03-27T04:28:18.123903+00:00",
+      "image_url": "/static/picture/humanoid.png",
+      "report_id": "humanoids",
+      "title": "ヒューマノイド"
+    },
+    {
+      "catalyst_url": "/zukai/agg/catalysts",
+      "created_at": "2026-03-27T07:26:46.749489+00:00",
+      "image_url": "/static/picture/agg.png",
+      "report_id": "agg",
+      "title": "農業"
+    },
+    {
+      "catalyst_url": "/zukai/coal/catalysts",
+      "created_at": "2026-03-28T00:56:31.62451+00:00",
+      "image_url": "/static/picture/coal.png",
+      "report_id": "coal",
+      "title": "石炭"
+    },
+    {
+      "catalyst_url": "/zukai/rare_earth/catalysts",
+      "created_at": "2026-03-28T04:41:06.176347+00:00",
+      "image_url": "/static/picture/rare_earth.png",
+      "report_id": "rare_earth",
+      "title": "レアアース・リチウム"
+    },
+    {
+      "catalyst_url": "/zukai/construction/catalysts",
+      "created_at": "2026-03-31T01:15:58.674319+00:00",
+      "image_url": "/static/picture/construction.png",
+      "report_id": "construction",
+      "title": "インフラ建設"
+    },
+    {
+      "catalyst_url": "/zukai/finance_consumer/catalysts",
+      "created_at": "2026-03-31T08:25:15.009837+00:00",
+      "image_url": "/static/picture/consumer_fintech.png",
+      "report_id": "finance_consumer",
+      "title": "消費者 金融テック"
+    },
+    {
+      "catalyst_url": "/zukai/travel/catalysts",
+      "created_at": "2026-04-03T04:11:55.965341+00:00",
+      "image_url": "/static/picture/cons_travel.png",
+      "report_id": "travel",
+      "title": "消費者：旅行"
+    }
+  ]
+}

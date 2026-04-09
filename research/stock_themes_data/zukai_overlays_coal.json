@@ -1,0 +1,49 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 25.0,
+      "circle_size": 36,
+      "created_at": "2026-03-28T05:20:15.013554+00:00",
+      "function": "鉄鋼の高炉で鉄鉱石を溶かすコークスの原料となる石炭。揮発分や灰分の違いで低揮発（プレミアム）と高揮発（中級）に分かれる。世界の粗鋼生産量に連動して需要が決まる",
+      "id": 306,
+      "pos_left": 26.25,
+      "pos_top": 11.875,
+      "product": "原料炭",
+      "report_id": "coal",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 25.0,
+      "circle_size": 36,
+      "created_at": "2026-03-28T05:20:15.072321+00:00",
+      "function": "原料炭と燃料炭の両方を生産する多角化型の石炭会社。鉄鋼向けと発電向けの双方に供給することで市況変動リスクを分散できる。*CNR*と*BTU*が該当",
+      "id": 307,
+      "pos_left": 26.25,
+      "pos_top": 55.3125,
+      "product": "原料炭＋燃料炭",
+      "report_id": "coal",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 25.0,
+      "circle_size": 36,
+      "created_at": "2026-03-28T05:20:15.116941+00:00",
+      "function": "石炭火力発電所で燃やして電気を作るための石炭。米国ではAI・データセンターの電力需要急増と既存火力の延命政策により需要が構造的に回復しつつある",
+      "id": 308,
+      "pos_left": 73.75,
+      "pos_top": 11.875,
+      "product": "燃料炭",
+      "report_id": "coal",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

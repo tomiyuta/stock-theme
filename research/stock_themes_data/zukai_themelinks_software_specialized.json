@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T05:26:47.645587+00:00",
+      "id": 54,
+      "name_jp": "ソフト：コミュニケション",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 13.75,
+      "pos_top": 4.0625,
+      "report_id": "software_specialized",
+      "slug": "soft-comm",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T05:26:47.681037+00:00",
+      "id": 55,
+      "name_jp": "行政DX",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 4.0625,
+      "report_id": "software_specialized",
+      "slug": "government-dx",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T05:26:47.723985+00:00",
+      "id": 56,
+      "name_jp": "ソフト：業界特化",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 38.75,
+      "pos_top": 4.0625,
+      "report_id": "software_specialized",
+      "slug": "soft-vertical",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-26T05:26:47.762442+00:00",
+      "id": 57,
+      "name_jp": "半導体設計ソフト",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 86.25,
+      "pos_top": 4.0625,
+      "report_id": "software_specialized",
+      "slug": "semiconductor-design",
+      "sort_order": 3
+    }
+  ]
+}

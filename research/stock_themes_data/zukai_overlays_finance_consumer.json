@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 2.0,
+      "btn_width": 23.0,
+      "circle_size": 36,
+      "created_at": "2026-04-01T04:04:33.33798+00:00",
+      "function": "商品購入時に代金を分割で後払いできるサービス（BNPL）。AIによる与信判断の高度化や決済インフラへの標準組み込みが進み クレジットカードのリボ払いに代わる選択肢として定着しつつある",
+      "id": 325,
+      "pos_left": 12.5,
+      "pos_top": 10.9375,
+      "product": "後払い決済",
+      "report_id": "finance_consumer",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 23.0,
+      "circle_size": 36,
+      "created_at": "2026-04-01T04:04:33.456816+00:00",
+      "function": "投資・預金・融資・決済・暗号資産取引など複数の金融サービスを一つのアプリで横断的に利用できるプラットフォーム。ステーブルコイン（ドル連動型デジタル通貨）発行やトークン化株式取引にも拡張中",
+      "id": 326,
+      "pos_left": 37.5,
+      "pos_top": 10.625,
+      "product": "スーパーアプリ",
+      "report_id": "finance_consumer",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 23.0,
+      "circle_size": 36,
+      "created_at": "2026-04-01T04:04:33.566745+00:00",
+      "function": "クレジットカード・個人ローン・自動車ローン・学生ローンなど消費者向け融資全般。プレミアムカード（年会費型）からサブプライム層向けまで幅広い信用帯域をカバーし ローン流動化（機関投資家への売却）でフィーベース収益への転換が進む",
+      "id": 327,
+      "pos_left": 62.5,
+      "pos_top": 10.9375,
+      "product": "カード・ローン",
+      "report_id": "finance_consumer",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 23.0,
+      "circle_size": 36,
+      "created_at": "2026-04-01T04:04:33.683696+00:00",
+      "function": "カード決済の承認・清算・決済を仲介するインフラ企業。取扱高に連動する手数料に加え 不正検知・データ分析等の付加価値サービス（VAS）やエージェントAI（自律型AI）向け決済で収益を多角化",
+      "id": 328,
+      "pos_left": 87.5,
+      "pos_top": 10.9375,
+      "product": "決済ネットワーク",
+      "report_id": "finance_consumer",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

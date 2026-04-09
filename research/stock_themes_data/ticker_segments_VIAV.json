@@ -1,0 +1,94 @@
+{
+  "margin": null,
+  "revenue": {
+    "quarters": [
+      {
+        "q": "2024-03-31",
+        "sort": 202403,
+        "values": [
+          151.7,
+          76.2,
+          18.1,
+          null
+        ]
+      },
+      {
+        "q": "2024-06-30",
+        "sort": 202406,
+        "values": [
+          158.5,
+          69.8,
+          23.7,
+          null
+        ]
+      },
+      {
+        "q": "2024-09-30",
+        "sort": 202409,
+        "values": [
+          141.6,
+          78.8,
+          17.8,
+          null
+        ]
+      },
+      {
+        "q": "2024-12-31",
+        "sort": 202412,
+        "values": [
+          179.0,
+          70.9,
+          20.9,
+          199.9
+        ]
+      },
+      {
+        "q": "2025-03-31",
+        "sort": 202503,
+        "values": [
+          188.0,
+          76.6,
+          20.2,
+          208.2
+        ]
+      },
+      {
+        "q": "2025-06-30",
+        "sort": 202506,
+        "values": [
+          null,
+          81.4,
+          null,
+          209.1
+        ]
+      },
+      {
+        "q": "2025-09-30",
+        "sort": 202509,
+        "values": [
+          null,
+          83.1,
+          null,
+          216.0
+        ]
+      },
+      {
+        "q": "2025-12-31",
+        "sort": 202512,
+        "values": [
+          null,
+          77.8,
+          null,
+          291.5
+        ]
+      }
+    ],
+    "segments": [
+      "Network Enablement",
+      "Optical Security and Performance Products",
+      "Service Enablement",
+      "Network and Service Enablement"
+    ],
+    "source": "reportable"
+  }
+}

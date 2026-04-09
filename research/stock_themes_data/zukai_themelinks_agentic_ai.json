@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:29:28.615916+00:00",
+      "id": 15,
+      "name_jp": "サイバー：統合",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 50.0,
+      "pos_top": 4.0625,
+      "report_id": "agentic_ai",
+      "slug": "cybersecurity-gen",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:29:28.66505+00:00",
+      "id": 16,
+      "name_jp": "サイバー：ID/監視/診断",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 82.5,
+      "pos_top": 4.0625,
+      "report_id": "agentic_ai",
+      "slug": "cybersecurity-other",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:29:28.714576+00:00",
+      "id": 17,
+      "name_jp": "ソフト：AI利用基盤",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 18.75,
+      "pos_top": 4.0625,
+      "report_id": "agentic_ai",
+      "slug": "ai-infrastructure-software",
+      "sort_order": 2
+    }
+  ]
+}

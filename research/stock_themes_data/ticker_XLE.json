@@ -1,0 +1,22 @@
+{
+  "comment": "",
+  "enrichment": {
+    "mc_label": "",
+    "name_jp": "XLE",
+    "sector": ""
+  },
+  "performances": {
+    "10日": -0.0459,
+    "1ヶ月": 0.0375,
+    "1年": 0.5471,
+    "1日": -0.0351,
+    "2ヶ月": 0.1191,
+    "3ヶ月": 0.2802,
+    "5日": -0.0524,
+    "半年": 0.319
+  },
+  "sparkline_dates": [],
+  "sparkline_values": [],
+  "themes": [],
+  "ticker": "XLE"
+}

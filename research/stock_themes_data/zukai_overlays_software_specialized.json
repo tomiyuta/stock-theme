@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 2.0,
+      "btn_width": 20.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T07:12:21.652374+00:00",
+      "function": "ビデオ会議・電話・チャット・コールセンターの統合クラウドサービス。コロナ特需が終わり成長率4-5%で成熟。AIエージェントが電話対応を代替しシート減のリスク",
+      "id": 276,
+      "pos_left": 13.75,
+      "pos_top": 9.6875,
+      "product": "コミュニケーション",
+      "report_id": "software_specialized",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 20.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T07:12:21.702952+00:00",
+      "function": "警察・消防・911・裁判所・税務など政府向けの業務ソフト。「止めると人命に関わる」ミッションクリティカル性が最大の防壁。AIは脅威ではなく追加売上の源泉",
+      "id": 277,
+      "pos_left": 62.5,
+      "pos_top": 9.6875,
+      "product": "行政DX",
+      "report_id": "software_specialized",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 20.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T07:12:21.743333+00:00",
+      "function": "建設・保険・物流・不動産・インフラ設計など特定業界向けソフト。専門性が防壁だったが汎用AIが「十分に良い」品質で参入。景気循環リスクとAI代替リスクの二重苦",
+      "id": 278,
+      "pos_left": 38.75,
+      "pos_top": 9.6875,
+      "product": "業界特化",
+      "report_id": "software_specialized",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 2.0,
+      "btn_width": 20.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T07:12:21.788124+00:00",
+      "function": "チップ設計ソフト（EDA）。AIチップの複雑化がツール需要を増やす「逆の関係」。二強寡占で価格決定力が強い。ただし中国輸出規制が最大のリスク",
+      "id": 279,
+      "pos_left": 86.25,
+      "pos_top": 9.6875,
+      "product": "半導体設計",
+      "report_id": "software_specialized",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

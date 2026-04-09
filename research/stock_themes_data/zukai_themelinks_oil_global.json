@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-25T08:33:03.634588+00:00",
+      "id": 40,
+      "name_jp": "海洋掘削サービス",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 5.0,
+      "report_id": "oil_global",
+      "slug": "offshore-drilling",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-25T08:33:03.68783+00:00",
+      "id": 41,
+      "name_jp": "掘削サービス",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 13.75,
+      "pos_top": 5.0,
+      "report_id": "oil_global",
+      "slug": "drilling-services",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-25T08:33:03.736667+00:00",
+      "id": 42,
+      "name_jp": "スーパーメジャー：米国外",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 87.5,
+      "pos_top": 5.0,
+      "report_id": "oil_global",
+      "slug": "oil-supermajors-non-us",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 21.0,
+      "created_at": "2026-03-25T08:33:03.78838+00:00",
+      "id": 43,
+      "name_jp": "掘削機器",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 37.5,
+      "pos_top": 5.3125,
+      "report_id": "oil_global",
+      "slug": "drilling-equipment",
+      "sort_order": 3
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 18.0,
+      "circle_size": 36,
+      "created_at": "2026-04-03T09:06:48.039114+00:00",
+      "function": "インターネット上でホテル・航空券・体験などを比較・予約できるプラットフォーム（OTA: オンライン旅行代理店）。AIによる検索・接客の自動化やConnected Trip（まとめ予約）で旅行計画のワンストップ化が進む。体験予約市場の急成長も取り込み中",
+      "id": 329,
+      "pos_left": 10,
+      "pos_top": 10,
+      "product": "オンライン旅行予約",
+      "report_id": "travel",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 18.0,
+      "circle_size": 36,
+      "created_at": "2026-04-03T09:06:48.094245+00:00",
+      "function": "フランチャイズ（ブランド使用許可）やマネジメント契約で手数料収入を得るアセットライト（資産を持たない）モデルが主流。ロイヤルティプログラムと提携クレジットカード報酬が本業に匹敵する安定収益源に成長",
+      "id": 330,
+      "pos_left": 30,
+      "pos_top": 9.6875,
+      "product": "ホテル・リゾート",
+      "report_id": "travel",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 18.0,
+      "circle_size": 36,
+      "created_at": "2026-04-03T09:06:48.137132+00:00",
+      "function": "運賃を極限まで抑えた格安航空（LCC: Low-Cost Carrier）。指定席制や追加レッグルーム（足元の広い座席）の導入でプレミアム化に転じる動きが加速中。構造改革の成否が業績を大きく左右",
+      "id": 331,
+      "pos_left": 50,
+      "pos_top": 9.6875,
+      "product": "旅客航空：LCC",
+      "report_id": "travel",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 18.0,
+      "circle_size": 36,
+      "created_at": "2026-04-03T09:06:48.184718+00:00",
+      "function": "ファーストクラスやビジネスクラスなどプレミアム座席の拡大で収益力を高める大手航空会社。提携カード報酬やMRO（整備・修理事業）などの多角化収入が安定成長を支える",
+      "id": 332,
+      "pos_left": 70,
+      "pos_top": 9.6875,
+      "product": "旅客航空：メガキャリア",
+      "report_id": "travel",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 18.0,
+      "circle_size": 36,
+      "created_at": "2026-04-03T09:06:48.228827+00:00",
+      "function": "大型客船で複数の寄港地を巡りながら船上で食事・宿泊・エンターテインメントを楽しむ旅行。プライベートデスティネーション（自社リゾート島）の開発やオールインクルーシブ型の価格設定で「陸上バケーションより割安」なポジションを確立。リバークルーズやラグジュアリークルーズも急成長中",
+      "id": 333,
+      "pos_left": 90,
+      "pos_top": 9.6875,
+      "product": "クルーズ船",
+      "report_id": "travel",
+      "sort_order": 4,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

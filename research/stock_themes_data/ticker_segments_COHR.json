@@ -1,0 +1,103 @@
+{
+  "margin": null,
+  "revenue": {
+    "quarters": [
+      {
+        "q": "2024-03-31",
+        "sort": 202403,
+        "values": [
+          351.003,
+          238.982,
+          618.824,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2024-06-30",
+        "sort": 202406,
+        "values": [
+          355.268,
+          279.273,
+          679.821,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2024-09-30",
+        "sort": 202409,
+        "values": [
+          347.836,
+          237.427,
+          762.872,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2024-12-31",
+        "sort": 202412,
+        "values": [
+          375.277,
+          243.475,
+          815.913,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2025-03-31",
+        "sort": 202503,
+        "values": [
+          363.89,
+          236.672,
+          897.317,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2025-06-30",
+        "sort": 202506,
+        "values": [
+          347.993,
+          236.269,
+          945.174,
+          null,
+          null
+        ]
+      },
+      {
+        "q": "2025-09-30",
+        "sort": 202509,
+        "values": [
+          null,
+          null,
+          null,
+          1090.0,
+          491.378
+        ]
+      },
+      {
+        "q": "2025-12-31",
+        "sort": 202512,
+        "values": [
+          null,
+          null,
+          null,
+          1207.95,
+          477.679
+        ]
+      }
+    ],
+    "segments": [
+      "Lasers",
+      "Materials",
+      "Networking",
+      "Datacenter Communications",
+      "Industrial"
+    ],
+    "source": "reportable"
+  }
+}

@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:53:43.100026+00:00",
+      "id": 18,
+      "name_jp": "ハイパースケーラー",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 17.5,
+      "pos_top": 3.4375,
+      "report_id": "compute_providors",
+      "slug": "hyperscalers",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:53:43.15142+00:00",
+      "id": 19,
+      "name_jp": "ネオクラウド",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 50.0,
+      "pos_top": 3.4375,
+      "report_id": "compute_providors",
+      "slug": "neo-cloud",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 29.0,
+      "created_at": "2026-03-22T01:53:43.191456+00:00",
+      "id": 20,
+      "name_jp": "CDN",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 82.5,
+      "pos_top": 3.4375,
+      "report_id": "compute_providors",
+      "slug": "cdn",
+      "sort_order": 2
+    }
+  ]
+}

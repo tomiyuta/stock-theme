@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T06:07:22.541377+00:00",
+      "function": "大企業向けの業務ソフト（CRM・ERP・ITSM等）。業務プロセスに深く組み込まれ移行コストが高い「お堀」を持つが、AIエージェントがワークフローを自律実行し始めればシートの価値が問われる",
+      "id": 272,
+      "pos_left": 15,
+      "pos_top": 11.25,
+      "product": "エンタープライズ",
+      "report_id": "software_enterprise",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T06:07:22.580129+00:00",
+      "function": "マーケティング・EC・コミュニケーション向けソフト。SMB（中小企業）依存度が高くAI生成ツールによる「無料代替」に最も脆弱。検索トラフィックのAI代替も顧客の集客力を弱める",
+      "id": 273,
+      "pos_left": 38.75,
+      "pos_top": 11.25,
+      "product": "マーケ・販売",
+      "report_id": "software_enterprise",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T06:07:22.637233+00:00",
+      "function": "人事・経理・税務・契約管理のソフト。AIエージェントがバックオフィス業務を自動化すれば「使う人が減る→シートが減る」構造的リスク。CEO交代や目標撤回が相次ぐ",
+      "id": 274,
+      "pos_left": 62.5,
+      "pos_top": 11.25,
+      "product": "バックオフィス",
+      "report_id": "software_enterprise",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-26T06:07:22.677304+00:00",
+      "function": "開発者ツール・プロジェクト管理。AIコーディングツール（Cursor・Devin等）が開発者の生産性を直接向上→同じプロジェクトに必要な開発者が減る→シート減少リスクが最も直接的。株価下落も最大",
+      "id": 275,
+      "pos_left": 86.25,
+      "pos_top": 11.25,
+      "product": "生産性・開発",
+      "report_id": "software_enterprise",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 43.0,
+      "created_at": "2026-03-27T07:31:31.123096+00:00",
+      "id": 69,
+      "name_jp": "化学：農業",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 26.25,
+      "pos_top": 4.6875,
+      "report_id": "agg",
+      "slug": "food-agriculture",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 43.0,
+      "created_at": "2026-03-27T07:31:31.158207+00:00",
+      "id": 70,
+      "name_jp": "アグリビジネス",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 75.0,
+      "pos_top": 4.6875,
+      "report_id": "agg",
+      "slug": "agribusiness",
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,0 +1,52 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 30.0,
+      "created_at": "2026-03-25T11:25:58.086469+00:00",
+      "id": 44,
+      "name_jp": "ウラン",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 16.25,
+      "pos_top": 3.4375,
+      "report_id": "nuclear",
+      "slug": "uranium",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 30.0,
+      "created_at": "2026-03-25T11:25:58.136184+00:00",
+      "id": 45,
+      "name_jp": "原発機器（次世代）",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 83.75,
+      "pos_top": 3.4375,
+      "report_id": "nuclear",
+      "slug": "nuclear-nextgen",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 30.0,
+      "created_at": "2026-03-25T11:25:58.178096+00:00",
+      "id": 46,
+      "name_jp": "原発機器（次世代）",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 50.0,
+      "pos_top": 3.4375,
+      "report_id": "nuclear",
+      "slug": "nuclear-nextgen",
+      "sort_order": 2
+    }
+  ]
+}

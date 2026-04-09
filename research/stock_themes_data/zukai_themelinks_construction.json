@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T01:21:27.451734+00:00",
+      "id": 75,
+      "name_jp": "インフラ工事：電力/通信",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 12.5,
+      "pos_top": 3.125,
+      "report_id": "construction",
+      "slug": "pub-construction-electric",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T01:21:27.503754+00:00",
+      "id": 76,
+      "name_jp": "インフラ工事：交通",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 37.5,
+      "pos_top": 3.125,
+      "report_id": "construction",
+      "slug": "pub-construction-transpo",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T01:21:27.533924+00:00",
+      "id": 77,
+      "name_jp": "電気工事・施工",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 3.125,
+      "report_id": "construction",
+      "slug": "infra-contractors",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T01:21:27.565477+00:00",
+      "id": 78,
+      "name_jp": "インフラ設計",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 87.5,
+      "pos_top": 3.125,
+      "report_id": "construction",
+      "slug": "infrastructure-consulting",
+      "sort_order": 3
+    }
+  ]
+}

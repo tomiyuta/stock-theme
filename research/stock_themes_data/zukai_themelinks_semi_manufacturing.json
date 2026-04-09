@@ -1,0 +1,36 @@
+{
+  "items": [
+    {
+      "btn_height": 4.0,
+      "btn_width": 44.0,
+      "created_at": "2026-03-21T01:49:00.117883+00:00",
+      "id": 8,
+      "name_jp": "半導体受託製造",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 26.25,
+      "pos_top": 4.0625,
+      "report_id": "semi_manufacturing",
+      "slug": "foundry",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 4.0,
+      "btn_width": 44.0,
+      "created_at": "2026-03-21T01:49:00.15656+00:00",
+      "id": 9,
+      "name_jp": "半導体：材料・消耗品",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 73.75,
+      "pos_top": 4.0625,
+      "report_id": "semi_manufacturing",
+      "slug": "semi-consumables",
+      "sort_order": 1
+    }
+  ]
+}

@@ -1,0 +1,112 @@
+{
+  "margin": null,
+  "revenue": {
+    "quarters": [
+      {
+        "q": "2024-04-30",
+        "sort": 202404,
+        "values": [
+          77.6,
+          71.8,
+          42.0,
+          816.4,
+          153.1,
+          null
+        ]
+      },
+      {
+        "q": "2024-07-31",
+        "sort": 202407,
+        "values": [
+          76.2,
+          75.9,
+          88.9,
+          880.9,
+          151.0,
+          null
+        ]
+      },
+      {
+        "q": "2024-10-31",
+        "sort": 202410,
+        "values": [
+          82.9,
+          84.7,
+          96.5,
+          1101.1,
+          150.9,
+          null
+        ]
+      },
+      {
+        "q": "2025-01-31",
+        "sort": 202501,
+        "values": [
+          85.7,
+          105.8,
+          88.7,
+          1365.8,
+          171.4,
+          null
+        ]
+      },
+      {
+        "q": "2025-04-30",
+        "sort": 202504,
+        "values": [
+          75.7,
+          138.4,
+          63.1,
+          1440.6,
+          177.5,
+          null
+        ]
+      },
+      {
+        "q": "2025-07-31",
+        "sort": 202507,
+        "values": [
+          76.0,
+          130.1,
+          115.9,
+          1490.5,
+          193.6,
+          null
+        ]
+      },
+      {
+        "q": "2025-10-31",
+        "sort": 202510,
+        "values": [
+          35.0,
+          167.8,
+          116.6,
+          1517.9,
+          237.2,
+          null
+        ]
+      },
+      {
+        "q": "2026-01-31",
+        "sort": 202601,
+        "values": [
+          null,
+          null,
+          null,
+          1651.3,
+          null,
+          567.4
+        ]
+      }
+    ],
+    "segments": [
+      "Automotive/Industrial",
+      "Carrier Infrastructure",
+      "Consumer",
+      "Data Center",
+      "Enterprise Networking",
+      "Communications and Other"
+    ],
+    "source": "market_platform"
+  }
+}

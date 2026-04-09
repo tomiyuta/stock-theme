@@ -1,0 +1,68 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T08:27:49.288425+00:00",
+      "id": 79,
+      "name_jp": "BNPL",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 12.5,
+      "pos_top": 4.375,
+      "report_id": "finance_consumer",
+      "slug": "bnpl",
+      "sort_order": 0
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T08:27:49.331532+00:00",
+      "id": 80,
+      "name_jp": "次世代銀行",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 37.5,
+      "pos_top": 4.375,
+      "report_id": "finance_consumer",
+      "slug": "nextgen-bank",
+      "sort_order": 1
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T08:27:49.373177+00:00",
+      "id": 81,
+      "name_jp": "消費者レンディング",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 62.5,
+      "pos_top": 4.375,
+      "report_id": "finance_consumer",
+      "slug": "consumer-lending",
+      "sort_order": 2
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 22.0,
+      "created_at": "2026-03-31T08:27:49.414596+00:00",
+      "id": 82,
+      "name_jp": "決済インフラ",
+      "per_btn_height": 5.0,
+      "per_btn_width": 8.0,
+      "per_pos_left": 10.0,
+      "per_pos_top": 10.0,
+      "pos_left": 87.5,
+      "pos_top": 4.375,
+      "report_id": "finance_consumer",
+      "slug": "payment-infrastructure",
+      "sort_order": 3
+    }
+  ]
+}

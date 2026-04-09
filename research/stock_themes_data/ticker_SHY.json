@@ -1,0 +1,22 @@
+{
+  "comment": "",
+  "enrichment": {
+    "mc_label": "",
+    "name_jp": "SHY",
+    "sector": ""
+  },
+  "performances": {
+    "10日": 0.0043,
+    "1ヶ月": -0.0012,
+    "1年": 0.0345,
+    "1日": 0.001,
+    "2ヶ月": 0.0004,
+    "3ヶ月": 0.0029,
+    "5日": 0.0012,
+    "半年": 0.0138
+  },
+  "sparkline_dates": [],
+  "sparkline_values": [],
+  "themes": [],
+  "ticker": "SHY"
+}

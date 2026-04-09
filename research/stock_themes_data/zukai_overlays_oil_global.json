@@ -1,0 +1,64 @@
+{
+  "items": [
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T08:28:52.279039+00:00",
+      "function": "油田の掘削・完成・生産に必要な技術・機材・人材を提供する請負サービス。デジタルAIで差別化が進む",
+      "id": 240,
+      "pos_left": 13.75,
+      "pos_top": 13.125,
+      "product": "掘削サービス",
+      "report_id": "oil_global",
+      "sort_order": 0,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T08:28:52.328693+00:00",
+      "function": "サブシー機器（海底設備）・油井管（OCTG）・リグ設備など石油開発に必要な製造品を供給する企業",
+      "id": 241,
+      "pos_left": 37.5,
+      "pos_top": 13.125,
+      "product": "掘削機器",
+      "report_id": "oil_global",
+      "sort_order": 1,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T08:28:52.372138+00:00",
+      "function": "深海掘削リグ（ドリルシップ・セミサブ）を保有し石油会社に貸し出すサービス。デイレートで収益を得る",
+      "id": 242,
+      "pos_left": 62.5,
+      "pos_top": 13.125,
+      "product": "海洋掘削",
+      "report_id": "oil_global",
+      "sort_order": 2,
+      "ticker_detail": "",
+      "tickers": ""
+    },
+    {
+      "btn_height": 3.0,
+      "btn_width": 21.0,
+      "circle_size": 36,
+      "created_at": "2026-03-25T08:28:52.416109+00:00",
+      "function": "欧州・ブラジル本社のスーパーメジャー。上流・下流・LNG・電力を統合。深海・LNGが成長ドライバー",
+      "id": 243,
+      "pos_left": 87.5,
+      "pos_top": 13.125,
+      "product": "国際メジャー",
+      "report_id": "oil_global",
+      "sort_order": 3,
+      "ticker_detail": "",
+      "tickers": ""
+    }
+  ]
+}
