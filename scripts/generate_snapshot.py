@@ -41,6 +41,11 @@ class GateState:
     excess_3m: float
     gate_state: str
     atk_cap: float
+    # E1-I1: Regime observation axes (no judgment, record only)
+    equity_axis: dict
+    credit_axis: dict
+    hard_asset_axis: dict
+    duration_axis: dict
 
 def classify_gate(excess_3m, open_threshold, mid_threshold):
     if excess_3m > open_threshold:
@@ -89,11 +94,31 @@ def build_gate(market_returns):
     lookback_days = _env_int("K_GATE_LOOKBACK_DAYS", 63)
     open_threshold = _env_float("GATE_OPEN_THRESHOLD", 0.0)
     mid_threshold = _env_float("GATE_MID_THRESHOLD", -0.02)
-    bench_ret = float(market_returns[benchmark]["ret_3m"])
-    cash_ret = float(market_returns[cash_proxy]["ret_3m"])
+
+    def _get(tk, field): return float(market_returns.get(tk, {}).get(field, 0))
+
+    bench_ret = _get(benchmark, "ret_3m")
+    cash_ret = _get(cash_proxy, "ret_3m")
     excess = bench_ret - cash_ret
     state, atk = classify_gate(excess, open_threshold, mid_threshold)
-    return GateState(benchmark, cash_proxy, lookback_days, bench_ret, cash_ret, excess, state, atk)
+
+    equity_axis = {
+        "spy_ret_3m": _get("SPY","ret_3m"), "qqq_ret_3m": _get("QQQ","ret_3m"),
+        "shv_ret_3m": _get("SHV","ret_3m"), "equity_excess_3m": round(excess, 6),
+    }
+    credit_axis = {
+        "lqd_excess_3m": round(_get("LQD","ret_3m") - cash_ret, 6),
+        "hyg_excess_3m": round(_get("HYG","ret_3m") - cash_ret, 6),
+        "hyg_minus_lqd_3m": round(_get("HYG","ret_3m") - _get("LQD","ret_3m"), 6),
+    }
+    hard_asset_axis = {
+        "gld_excess_3m": round(_get("GLD","ret_3m") - cash_ret, 6),
+        "xle_minus_spy_3m": round(_get("XLE","ret_3m") - _get("SPY","ret_3m"), 6),
+    }
+    duration_axis = {"tlt_ret_3m": _get("TLT","ret_3m")}
+
+    return GateState(benchmark, cash_proxy, lookback_days, bench_ret, cash_ret, excess, state, atk,
+                     equity_axis, credit_axis, hard_asset_axis, duration_axis)
 
 def build_sector_layer(sectors_df):
     df = sectors_df.copy()

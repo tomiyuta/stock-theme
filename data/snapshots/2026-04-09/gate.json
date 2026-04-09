@@ -6,5 +6,23 @@
   "cash_ret_3m": 0.0085,
   "excess_3m": -0.0287,
   "gate_state": "CLOSED",
-  "atk_cap": 0.3
+  "atk_cap": 0.3,
+  "equity_axis": {
+    "spy_ret_3m": -0.0202,
+    "qqq_ret_3m": -0.0266,
+    "shv_ret_3m": 0.0085,
+    "equity_excess_3m": -0.0287
+  },
+  "credit_axis": {
+    "lqd_excess_3m": -0.0085,
+    "hyg_excess_3m": -0.0026,
+    "hyg_minus_lqd_3m": 0.0059
+  },
+  "hard_asset_axis": {
+    "gld_excess_3m": 0.0432,
+    "xle_minus_spy_3m": 0.3004
+  },
+  "duration_axis": {
+    "tlt_ret_3m": 0.007
+  }
 }
