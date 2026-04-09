@@ -1,8 +1,6 @@
 name: PRISM Snapshot
 
 on:
-  schedule:
-    - cron: "5 23 * * *"
   workflow_dispatch:
 
 jobs:
