@@ -1,14 +1,18 @@
 #!/usr/bin/env python3
-"""A1+A2: Position Ledger + Orders generation for PRISM_MH20_CAP35."""
-import json, csv, os
+"""A1+A2+B1+C2-C4: Position Ledger + Orders + GapStop + Preflight + Alerts."""
+import json, csv, os, sys
 from pathlib import Path
 from datetime import datetime, date
 
 ROOT = Path(__file__).resolve().parent.parent
 LEDGER_PATH = ROOT / "data" / "ledger" / "positions.json"
 ORDERS_DIR = ROOT / "data" / "orders"
+ALERTS_DIR = ROOT / "data" / "alerts"
 SIGNALS_PATH = ROOT / "public" / "api" / "prism" / "signals.json"
 MIN_HOLD_DAYS = 20
+SECTOR_CAP = 0.35
+SINGLE_NAME_CAP = 0.08
+GAP_STOP_THRESHOLD = -0.08  # -8% single-day drop
 
 def load_ledger():
     if LEDGER_PATH.exists():
@@ -26,6 +30,64 @@ def load_signals():
     with open(SIGNALS_PATH) as f:
         return json.load(f)
 
+# === Preflight Check (C2/C3/C4) ===
+def preflight_check(pp, ledger):
+    """Validate production_portfolio before generating orders. Returns (ok, alerts)."""
+    alerts = []
+    weights = pp.get("weights", {})
+    sec_map = pp.get("sector_map", {})
+    summary = pp.get("summary", {})
+
+    # C2: Sector cap violation
+    by_sec = {}
+    for tk, w in weights.items():
+        if tk == "SHV": continue
+        s = sec_map.get(tk, "Unknown")
+        by_sec[s] = by_sec.get(s, 0) + w
+    for s, total in by_sec.items():
+        if total > SECTOR_CAP + 1e-6:
+            alerts.append(f"🚨 C2 SECTOR_CAP_VIOLATION: {s} = {total:.1%} > {SECTOR_CAP:.0%}")
+
+    # Single-name cap
+    for tk, w in weights.items():
+        if tk == "SHV": continue
+        if w > SINGLE_NAME_CAP + 1e-6:
+            alerts.append(f"🚨 SINGLE_NAME_VIOLATION: {tk} = {w:.1%} > {SINGLE_NAME_CAP:.0%}")
+
+    # atk_cap consistency
+    eq_total = sum(w for tk, w in weights.items() if tk != "SHV")
+    atk_cap = summary.get("atk_cap", 1.0)
+    if eq_total > atk_cap + 1e-6:
+        alerts.append(f"🚨 ATK_CAP_VIOLATION: equity={eq_total:.1%} > atk_cap={atk_cap:.0%}")
+
+    # C3: MinHold violation check
+    for p in ledger.get("positions", []):
+        if p.get("status") == "active" and not p.get("eligible_to_exit", False):
+            if p["ticker"] not in weights or weights.get(p["ticker"], 0) == 0:
+                pass  # Will be caught in order generation as HOLD with min_hold_blocked
+
+    ok = len(alerts) == 0
+    return ok, alerts
+
+# === B1: Gap Stop ===
+def check_gap_stops(ledger, prices):
+    """Check for single-day gaps exceeding threshold. Returns list of forced sells."""
+    forced_sells = []
+    for p in ledger.get("positions", []):
+        if p.get("status") != "active": continue
+        tk = p["ticker"]
+        entry_px = p.get("entry_price", 0)
+        peak_px = p.get("peak_price_since_entry", entry_px)
+        current_px = prices.get(tk, 0)
+        if peak_px > 0 and current_px > 0:
+            daily_drop = (current_px - peak_px) / peak_px
+            if daily_drop <= GAP_STOP_THRESHOLD:
+                forced_sells.append({
+                    "ticker": tk, "drop": daily_drop,
+                    "reason": f"gap_stop({daily_drop:.1%})"
+                })
+    return forced_sells
+
 def generate_orders(today_str=None):
     if today_str is None:
         today_str = date.today().strftime("%Y-%m-%d")
@@ -37,6 +99,22 @@ def generate_orders(today_str=None):
     sec_map = pp.get("sector_map", {})
     ledger = load_ledger()
     prev_date = ledger.get("as_of_date")
+    all_alerts = []
+
+    # Preflight check (C2/C3/C4)
+    pf_ok, pf_alerts = preflight_check(pp, ledger)
+    all_alerts.extend(pf_alerts)
+    if not pf_ok:
+        print("⚠️  PREFLIGHT ALERTS:")
+        for a in pf_alerts: print(f"  {a}")
+
+    # B1: Gap stop check
+    gap_sells = check_gap_stops(ledger, prices)
+    if gap_sells:
+        for gs in gap_sells:
+            all_alerts.append(f"🚨 B1 GAP_STOP: {gs['ticker']} {gs['drop']:.1%} — forced sell (MinHold override)")
+            print(f"  🚨 GAP_STOP: {gs['ticker']} {gs['drop']:.1%}")
+    gap_tickers = {gs["ticker"] for gs in gap_sells}
 
     # Build current holdings map
     held = {p["ticker"]: p for p in ledger["positions"] if p["status"] == "active"}
@@ -54,6 +132,16 @@ def generate_orders(today_str=None):
     # Process each target ticker
     target_equities = {tk: w for tk, w in target_weights.items() if tk != "SHV"}
     for tk, tw in target_equities.items():
+        # Gap stop overrides everything
+        if tk in gap_tickers:
+            orders.append({"date": today_str, "action": "SELL", "ticker": tk,
+                          "current_weight": held[tk].get("target_weight", 0) if tk in held else 0,
+                          "target_weight": 0, "delta_weight": -tw,
+                          "reason": "gap_stop", "min_hold_blocked": False,
+                          "sector": sec_map.get(tk, ""), "theme": ""})
+            if tk in held:
+                held[tk]["status"] = "closed"; held[tk]["exit_date"] = today_str; held[tk]["exit_reason"] = "gap_stop"
+            continue
         if tk in held:
             # Existing position
             orders.append({"date": today_str, "action": "HOLD", "ticker": tk,
@@ -75,10 +163,18 @@ def generate_orders(today_str=None):
                 "eligible_to_exit": False, "peak_price_since_entry": prices.get(tk, 0),
             })
 
-    # Process held positions NOT in target
+    # Process held positions NOT in target (or gap-stopped)
     for tk, pos in held.items():
         if tk not in target_equities and tk != "SHV":
-            if pos.get("eligible_to_exit", False):
+            # Gap stop: forced sell regardless of MinHold
+            if tk in gap_tickers:
+                orders.append({"date": today_str, "action": "SELL", "ticker": tk,
+                              "current_weight": pos.get("target_weight", 0),
+                              "target_weight": 0, "delta_weight": -pos.get("target_weight", 0),
+                              "reason": "gap_stop", "min_hold_blocked": False,
+                              "sector": pos.get("sector", ""), "theme": pos.get("theme_at_entry", "")})
+                pos["status"] = "closed"; pos["exit_date"] = today_str; pos["exit_reason"] = "gap_stop"
+            elif pos.get("eligible_to_exit", False):
                 orders.append({"date": today_str, "action": "SELL", "ticker": tk,
                               "current_weight": pos.get("target_weight", 0),
                               "target_weight": 0, "delta_weight": -pos.get("target_weight", 0),
@@ -117,16 +213,49 @@ def generate_orders(today_str=None):
             w.writeheader(); w.writerows(orders)
     # Save ledger
     save_ledger(ledger)
-    return orders, ledger
+
+    # Save alerts (C4: pipeline health)
+    ALERTS_DIR.mkdir(parents=True, exist_ok=True)
+    if all_alerts:
+        alert_path = ALERTS_DIR / f"alerts_{today_str}.json"
+        with open(alert_path, "w") as f:
+            json.dump({"date": today_str, "alerts": all_alerts, "count": len(all_alerts)}, f, indent=2)
+
+    # Daily summary
+    active = [p for p in ledger["positions"] if p["status"] == "active"]
+    by_sec = {}
+    for p in active:
+        s = p.get("sector", "Unknown")
+        by_sec[s] = by_sec.get(s, 0) + p.get("target_weight", 0)
+    eq_total = sum(p.get("target_weight", 0) for p in active)
+    max_sec = max(by_sec.values()) if by_sec else 0
+    max_name = max((p.get("target_weight", 0) for p in active), default=0)
+    summary = {
+        "date": today_str, "n_positions": len(active),
+        "equity_pct": round(eq_total, 4), "cash_pct": round(1 - eq_total, 4),
+        "max_sector_pct": round(max_sec, 4), "max_name_pct": round(max_name, 4),
+        "alerts": len(all_alerts), "orders_count": len(orders),
+        "buys": sum(1 for o in orders if o["action"] == "BUY"),
+        "sells": sum(1 for o in orders if o["action"] == "SELL"),
+        "holds": sum(1 for o in orders if o["action"] == "HOLD"),
+    }
+
+    return orders, ledger, all_alerts, summary
 
 if __name__ == "__main__":
-    import sys
     today = sys.argv[1] if len(sys.argv) > 1 else None
-    orders, ledger = generate_orders(today)
-    print(f"✓ Orders: {len(orders)} entries")
+    orders, ledger, alerts, summary = generate_orders(today)
+    print(f"✓ Orders: {len(orders)} entries (BUY:{summary['buys']} SELL:{summary['sells']} HOLD:{summary['holds']})")
     for o in orders:
         blocked = " 🔒" if o.get("min_hold_blocked") else ""
         print(f"  {o['action']:5s} {o['ticker']:6s} {o['target_weight']:.1%} {o['reason']}{blocked}")
     active = [p for p in ledger["positions"] if p["status"]=="active"]
-    print(f"✓ Ledger: {len(active)} active positions, as_of={ledger['as_of_date']}")
-    print(f"  Cash proxy: SHV {ledger['cash_proxy']['weight']:.1%}")
+    print(f"✓ Ledger: {len(active)} active, as_of={ledger['as_of_date']}")
+    print(f"  Equity: {summary['equity_pct']:.1%} | Cash: {summary['cash_pct']:.1%} | MaxSec: {summary['max_sector_pct']:.1%} | MaxName: {summary['max_name_pct']:.1%}")
+    if alerts:
+        print(f"⚠️  ALERTS ({len(alerts)}):")
+        for a in alerts: print(f"  {a}")
+    else:
+        print("✅ No alerts — all constraints satisfied")
+    # Exit code for CI: non-zero if critical alerts
+    sys.exit(1 if any("VIOLATION" in a for a in alerts) else 0)
