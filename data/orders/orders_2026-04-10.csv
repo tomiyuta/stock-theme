@@ -1,0 +1,5 @@
+date,action,ticker,current_weight,target_weight,delta_weight,reason,min_hold_blocked,sector,theme
+2026-04-10,HOLD,VALE,0.075,0.075,0,continuing,False,Basic Materials,
+2026-04-10,HOLD,RIO,0.075,0.075,0,continuing,False,Basic Materials,
+2026-04-10,HOLD,APD,0.075,0.075,0,continuing,False,Basic Materials,
+2026-04-10,HOLD,LIN,0.075,0.075,0,continuing,False,Basic Materials,
