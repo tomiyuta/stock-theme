@@ -18,6 +18,18 @@
     "APD",
     "LIN"
   ],
+  "production_portfolio": {
+    "weights": {
+      "VALE": 0.0875,
+      "RIO": 0.0875,
+      "APD": 0.0875,
+      "LIN": 0.0875,
+      "SHV": 0.65
+    },
+    "sector_cap": 0.35,
+    "max_positions": 35,
+    "strategy": "PRISM_MH20_CAP35"
+  },
   "trigger_candidates": {
     "T1_gate_flip": false,
     "T2_theme_drop": [],

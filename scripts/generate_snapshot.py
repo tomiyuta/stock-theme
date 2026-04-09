@@ -219,10 +219,46 @@ def main():
 
     meta = {"snapshot_date": now.date().isoformat(), "snapshot_time_jst": now.isoformat(),
             "schema_version": "v1", "generator": "generate_snapshot.py"}
+    selected_stocks = constituent_layer.loc[constituent_layer["stock_selected"], "ticker"].drop_duplicates().tolist()
+
+    # Production portfolio: apply sector_cap=35%
+    SECTOR_CAP = 0.35
+    MAX_POSITIONS = 35
+    prod_stocks = selected_stocks[:MAX_POSITIONS]
+    if prod_stocks:
+        w = 1.0 / len(prod_stocks)
+        weights = {tk: w for tk in prod_stocks}
+        # Sector map from constituents
+        sec_map = {}
+        for _, row in constituent_layer.iterrows():
+            sec_map[row["ticker"]] = row.get("sector", "Unknown")
+        # Compute sector totals and cap
+        sec_tot = {}
+        for tk, wt in weights.items():
+            s = sec_map.get(tk, "Unknown")
+            sec_tot[s] = sec_tot.get(s, 0) + wt
+        excess = 0
+        for s, tot in sec_tot.items():
+            if tot > SECTOR_CAP:
+                scale = SECTOR_CAP / tot
+                for tk in list(weights.keys()):
+                    if sec_map.get(tk, "Unknown") == s:
+                        old = weights[tk]; weights[tk] = old * scale
+                        excess += (old - weights[tk])
+        if excess > 0.001:
+            weights["SHV"] = weights.get("SHV", 0) + excess
+        prod_portfolio = {"weights": {k: round(v, 4) for k, v in weights.items()},
+                         "sector_cap": SECTOR_CAP, "max_positions": MAX_POSITIONS,
+                         "strategy": "PRISM_MH20_CAP35"}
+    else:
+        prod_portfolio = {"weights": {"SHV": 1.0}, "sector_cap": SECTOR_CAP,
+                         "max_positions": MAX_POSITIONS, "strategy": "PRISM_MH20_CAP35"}
+
     signals = {"gate_state": gate.gate_state, "atk_cap": gate.atk_cap,
                "selected_sectors": sector_layer.loc[sector_layer["pass_layer1"], "ticker"].tolist(),
                "selected_themes": selected,
-               "selected_stocks": constituent_layer.loc[constituent_layer["stock_selected"], "ticker"].drop_duplicates().tolist(),
+               "selected_stocks": selected_stocks,
+               "production_portfolio": prod_portfolio,
                "trigger_candidates": triggers}
 
     write_json(snapshot_dir / "meta.json", meta)
