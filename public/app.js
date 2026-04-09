@@ -35,7 +35,7 @@ async function loadData() {
   STATE.stocks = all.filter(t=>t.isIndividualTicker);
   STATE.sparklines = sp;
   sortThemes();
-  document.getElementById("headerMeta").textContent = `終値：${rk.latest_stock_date||"—"} | ${STATE.themes.length} テーマ | ${rk.data_source||"yfinance"}`;
+  document.getElementById("headerMeta").innerHTML = `<span class="header-date">終値：${rk.latest_stock_date||"—"}</span><span class="header-badge-count">${STATE.themes.length} テーマ</span>`;
 }
 
 function sortThemes() {
