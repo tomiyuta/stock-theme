@@ -116,13 +116,14 @@ const SEC_JA={"Energy":"エネルギー","Industrials":"資本財","Utilities":"
   "Basic Materials":"素材","Consumer Defensive":"生活必需品","Consumer Cyclical":"一般消費財",
   "Healthcare":"ヘルスケア","Financial Services":"金融","Real Estate":"不動産","Communication Services":"通信"};
 
+const _v="?v=2";
 Promise.all([
-  fetch("/api/prism/meta.json").then(r=>r.json()),
-  fetch("/api/prism/gate.json").then(r=>r.json()),
-  fetch("/api/prism/sectors.json").then(r=>r.json()),
-  fetch("/api/prism/themes.json").then(r=>r.json()),
-  fetch("/api/prism/constituents.json").then(r=>r.json()),
-  fetch("/api/prism/signals.json").then(r=>r.json())
+  fetch("/api/prism/meta.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/gate.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/sectors.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/themes.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/constituents.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/signals.json"+_v).then(r=>r.json())
 ]).then(([meta,gate,sectors,themes,constituents,signals])=>{
   document.getElementById("prismDate").textContent = "Snapshot: "+meta.snapshot_date;
   let h = "";
