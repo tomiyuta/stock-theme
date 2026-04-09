@@ -156,11 +156,17 @@ def build_constituents(themes: list, meta: dict) -> list:
                 "ticker": tk,
                 "market_cap_bucket": MC_MAP.get(mc_ja, "unknown"),
                 "ret_1m": round(perf.get("1ヶ月", 0) or 0, 6),
+                "ret_3m": round(perf.get("3ヶ月", 0) or 0, 6),
+                "ret_6m": round(perf.get("半年", 0) or 0, 6),
+                "ret_1y": round(perf.get("1年", 0) or 0, 6),
                 "vol_20d_annualized": vols.get(tk, 0.0),
+                "price": m.get("price", 0),
                 "exchange": m.get("exchange", ""),
                 "sector": m.get("sector", ""),
                 "industry": m.get("industry", ""),
                 "indices": m.get("indices", []),
+                "name": m.get("name", tk),
+                "name_ja": m.get("name_ja", ""),
             }
             rows.append(row)
     return rows

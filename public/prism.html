@@ -21,12 +21,31 @@
 .gate-detail{font-size:11px;color:var(--text-sub);margin-top:4px}
 .gate-atk{font-size:16px;font-weight:700;margin-top:6px}
 .signal-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 12px}
+@media(max-width:600px){.signal-pair{grid-template-columns:1fr;gap:6px}}
 .signal-card{border-radius:6px;padding:10px;min-height:80px}
 .signal-card.buy{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.25)}
 .signal-card.sell{background:rgba(255,23,68,0.06);border:1px solid rgba(255,23,68,0.25)}
 .signal-card-title{font-size:11px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:4px}
 .signal-card.buy .signal-card-title{color:#00c853}
 .signal-card.sell .signal-card-title{color:#ff1744}
+.signal-stock{background:#fff;border-radius:4px;padding:8px;margin:4px 0;border:1px solid rgba(0,0,0,0.05)}
+.ss-top{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.ss-ticker{font-size:15px;font-weight:800;color:var(--text-main)}
+.ss-price{font-size:14px;font-weight:700;color:var(--text-main)}
+.ss-company{font-size:10px;color:var(--text-sub);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-badges{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}
+.ss-badge{font-size:8px;padding:1px 4px;border-radius:2px;white-space:nowrap}
+.ss-badge.ex{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.ss-badge.mc{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.ss-badge.sec{background:rgba(0,82,204,0.08);color:#0052cc}
+.ss-badge.idx{background:rgba(0,200,83,0.1);color:#00c853}
+.ss-badge.new{background:rgba(255,167,38,0.12);color:#ffa726}
+.ss-rets{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:5px}
+.ss-ret{text-align:center;font-size:9px;background:rgba(0,0,0,0.02);border-radius:2px;padding:2px 0}
+.ss-ret-label{color:var(--text-sub)}
+.ss-ret-val{font-weight:600;font-size:10px}
+.ss-ret-val.positive{color:#00c853}.ss-ret-val.negative{color:#ff1744}
+.ss-vol{font-size:9px;color:var(--text-sub);margin-top:3px;text-align:right}
 .signal-item{font-size:12px;font-weight:700;color:var(--text-main);line-height:1.8}
 .signal-item-sub{font-size:9px;color:var(--text-sub);font-weight:400;margin-left:4px}
 .signal-empty{font-size:10px;color:var(--text-sub);font-style:italic}
@@ -131,13 +150,37 @@ Promise.all([
   h += `<div class="signal-pair">`;
   // Buy card
   h += `<div class="signal-card buy">`;
-  h += `<div class="signal-card-title">▲ 購入候補</div>`;
+  h += `<div class="signal-card-title">▲ 購入候補 (${buyStocks.length})</div>`;
   if(buyStocks.length===0){
     h += `<div class="signal-empty">該当なし</div>`;
   } else {
     buyStocks.forEach(c=>{
       const isNew = newEntryThemes.includes(c.theme);
-      h += `<div class="signal-item">${c.ticker}<span class="signal-item-sub">${c.theme}${isNew?" 🆕":""}</span></div>`;
+      const secJa = SEC_JA[c.sector]||c.sector;
+      const MC_JA={"mega":"超大型","large":"大型","mid":"中型","small":"小型"};
+      const mcJa = MC_JA[c.market_cap_bucket]||c.market_cap_bucket;
+      const cls1m = (c.ret_1m||0)>=0?"positive":"negative";
+      const cls3m = (c.ret_3m||0)>=0?"positive":"negative";
+      const cls6m = (c.ret_6m||0)>=0?"positive":"negative";
+      const cls1y = (c.ret_1y||0)>=0?"positive":"negative";
+      h += `<div class="signal-stock">`;
+      h += `<div class="ss-top"><span class="ss-ticker">${c.ticker}</span><span class="ss-price">$${(c.price||0).toLocaleString()}</span></div>`;
+      h += `<div class="ss-company">${c.name_ja||c.name||c.ticker} — ${c.theme}</div>`;
+      h += `<div class="ss-badges">`;
+      h += `<span class="ss-badge ex">${c.exchange||""}</span>`;
+      h += `<span class="ss-badge mc">${mcJa}</span>`;
+      h += `<span class="ss-badge sec">${secJa}</span>`;
+      (c.indices||[]).forEach(idx=>{ h += `<span class="ss-badge idx">${idx}</span>`; });
+      if(isNew) h += `<span class="ss-badge new">NEW</span>`;
+      h += `</div>`;
+      h += `<div class="ss-rets">`;
+      h += `<div class="ss-ret"><div class="ss-ret-label">1M</div><div class="ss-ret-val ${cls1m}">${fmt(c.ret_1m)}</div></div>`;
+      h += `<div class="ss-ret"><div class="ss-ret-label">3M</div><div class="ss-ret-val ${cls3m}">${fmt(c.ret_3m)}</div></div>`;
+      h += `<div class="ss-ret"><div class="ss-ret-label">6M</div><div class="ss-ret-val ${cls6m}">${fmt(c.ret_6m)}</div></div>`;
+      h += `<div class="ss-ret"><div class="ss-ret-label">1Y</div><div class="ss-ret-val ${cls1y}">${fmt(c.ret_1y)}</div></div>`;
+      h += `</div>`;
+      h += `<div class="ss-vol">Vol(20d): ${((c.vol_20d_annualized||0)*100).toFixed(0)}%</div>`;
+      h += `</div>`;
     });
   }
   h += `</div>`;
