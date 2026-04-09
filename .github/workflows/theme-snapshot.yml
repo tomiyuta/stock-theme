@@ -37,11 +37,16 @@ jobs:
           GATE_MID_THRESHOLD: "-0.02"
         run: python scripts/generate_snapshot.py
 
+      - name: Publish to frontend
+        run: |
+          mkdir -p public/api/prism
+          cp data/snapshots/latest/*.json public/api/prism/
+
       - name: Commit snapshot
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          git add data/
+          git add data/ public/api/prism/
           if git diff --cached --quiet; then
             echo "No changes to commit"
           else

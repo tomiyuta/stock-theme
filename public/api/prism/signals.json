@@ -1,0 +1,39 @@
+{
+  "gate_state": "CLOSED",
+  "atk_cap": 0.3,
+  "selected_sectors": [
+    "XLE",
+    "XLU",
+    "XLB",
+    "XLP",
+    "XLI"
+  ],
+  "selected_themes": [
+    "産業ガス",
+    "多角化資源"
+  ],
+  "selected_stocks": [
+    "VALE",
+    "RIO",
+    "APD",
+    "LIN"
+  ],
+  "trigger_candidates": {
+    "T1_gate_flip": false,
+    "T2_theme_drop": [],
+    "T3_accel_flip": [],
+    "T4_dd": [],
+    "T5_new_entry": [],
+    "theme_membership_diff": {
+      "added": [],
+      "removed": [],
+      "unchanged": [
+        "多角化資源",
+        "産業ガス"
+      ]
+    },
+    "prev_snapshot_available": true,
+    "selected_theme_count": 2,
+    "selected_stock_count": 4
+  }
+}

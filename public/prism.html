@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PRISM | 米国株テーマトラッカー</title>
+  <link rel="stylesheet" href="/styles.css?v=15">
+  <style>
+.prism-header{padding:16px 12px 8px;text-align:center}
+.prism-title{font-size:22px;font-weight:800;letter-spacing:2px;color:var(--text-main)}
+.prism-subtitle{font-size:10px;color:var(--text-sub);margin-top:2px}
+.prism-date{font-size:13px;font-weight:600;color:var(--text-main);margin-top:6px}
+.gate-card{margin:8px 12px;border-radius:8px;padding:16px;text-align:center}
+.gate-card.open{background:rgba(0,200,83,0.12);border:2px solid #00c853}
+.gate-card.mid{background:rgba(255,167,38,0.12);border:2px solid #ffa726}
+.gate-card.closed{background:rgba(255,23,68,0.12);border:2px solid #ff1744}
+.gate-state{font-size:28px;font-weight:800;letter-spacing:1px}
+.gate-card.open .gate-state{color:#00c853}
+.gate-card.mid .gate-state{color:#ffa726}
+.gate-card.closed .gate-state{color:#ff1744}
+.gate-detail{font-size:11px;color:var(--text-sub);margin-top:4px}
+.gate-atk{font-size:16px;font-weight:700;margin-top:6px}
+</style>
+</head>
+<body>
+  <header>
+    <div class="prism-header">
+      <div class="prism-title">PRISM</div>
+      <div class="prism-subtitle">Portfolio Regime & Investment Signal Machine</div>
+      <div class="prism-date" id="prismDate">—</div>
+    </div>
+  </header>
+  <main id="prismMain" style="padding:0 0 80px">
+    <div style="padding:40px 16px;text-align:center;color:var(--text-sub)">読み込み中...</div>
+  </main>
+  <nav class="bottom-nav">
+    <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+    <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+    <a class="nav-item" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
+    <a class="nav-item" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロ</a>
+    <a class="nav-item active" href="/prism"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
+  </nav>
+  <style>
+.section-header{padding:12px 12px 4px;font-size:13px;font-weight:700;color:var(--text-main);border-bottom:1px solid rgba(0,0,0,0.06)}
+.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:4px;padding:8px 12px}
+.sector-chip{padding:6px 8px;border-radius:4px;text-align:center;font-size:11px;font-weight:600}
+.sector-chip.pass{background:rgba(0,200,83,0.1);color:#00c853;border:1px solid rgba(0,200,83,0.3)}
+.sector-chip.fail{background:rgba(0,0,0,0.03);color:var(--text-sub);border:1px solid rgba(0,0,0,0.06)}
+.sector-ret{font-size:9px;font-weight:400;margin-top:2px}
+.theme-pick{background:var(--card-bg);margin:4px 12px;border-radius:4px;padding:8px 10px;border-left:3px solid #00c853}
+.theme-pick .tp-name{font-size:13px;font-weight:700;color:var(--text-main)}
+.theme-pick .tp-meta{font-size:10px;color:var(--text-sub);margin-top:2px}
+.theme-pick .tp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
+.tp-tag{font-size:8px;padding:1px 5px;border-radius:2px}
+.tp-tag.strong{background:rgba(0,200,83,0.1);color:#00c853}
+.tp-tag.mixed{background:rgba(255,167,38,0.1);color:#ffa726}
+.tp-tag.late{background:rgba(0,82,204,0.1);color:#0052cc}
+.tp-tag.weak{background:rgba(0,0,0,0.05);color:var(--text-sub)}
+.stock-pick{background:var(--card-bg);margin:2px 12px;border-radius:4px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between}
+.stock-pick .sp-tk{font-size:14px;font-weight:700;color:var(--text-main)}
+.stock-pick .sp-theme{font-size:9px;color:var(--text-sub)}
+.stock-pick .sp-ret{font-size:12px;font-weight:600}
+.trigger-box{margin:4px 12px;border-radius:4px;padding:8px 10px;font-size:11px}
+.trigger-box.fire{background:rgba(255,23,68,0.08);border:1px solid rgba(255,23,68,0.2);color:#ff1744}
+.trigger-box.quiet{background:rgba(0,0,0,0.02);color:var(--text-sub)}
+.funnel-row{display:flex;align-items:center;padding:3px 12px;font-size:11px;color:var(--text-sub)}
+.funnel-bar{height:6px;border-radius:3px;background:#00c853;margin-left:8px}
+.empty-msg{padding:12px;text-align:center;font-size:12px;color:var(--text-sub)}
+  </style>
+  <script>
+const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
+const SEC_JA={"Energy":"エネルギー","Industrials":"資本財","Utilities":"公益","Technology":"テクノロジー",
+  "Basic Materials":"素材","Consumer Defensive":"生活必需品","Consumer Cyclical":"一般消費財",
+  "Healthcare":"ヘルスケア","Financial Services":"金融","Real Estate":"不動産","Communication Services":"通信"};
+
+Promise.all([
+  fetch("/api/prism/meta.json").then(r=>r.json()),
+  fetch("/api/prism/gate.json").then(r=>r.json()),
+  fetch("/api/prism/sectors.json").then(r=>r.json()),
+  fetch("/api/prism/themes.json").then(r=>r.json()),
+  fetch("/api/prism/constituents.json").then(r=>r.json()),
+  fetch("/api/prism/signals.json").then(r=>r.json())
+]).then(([meta,gate,sectors,themes,constituents,signals])=>{
+  document.getElementById("prismDate").textContent = "Snapshot: "+meta.snapshot_date;
+  let h = "";
+
+  // K-gate card
+  const gc = gate.gate_state.toLowerCase();
+  const gLabel = {OPEN:"攻撃モード",MID:"警戒モード",CLOSED:"防御モード"}[gate.gate_state]||gate.gate_state;
+  h += `<div class="gate-card ${gc}">`;
+  h += `<div class="gate-state">K-GATE: ${gate.gate_state}</div>`;
+  h += `<div class="gate-detail">SPY 3M: ${fmt(gate.benchmark_ret_3m)} | SHV 3M: ${fmt(gate.cash_ret_3m)} | Excess: ${fmt(gate.excess_3m)}</div>`;
+  h += `<div class="gate-atk">${gLabel} — 攻撃比率 ${(gate.atk_cap*100).toFixed(0)}%</div>`;
+  h += `</div>`;
+
+  // Sectors
+  h += `<div class="section-header">Layer 1: セクターフィルタ</div>`;
+  h += `<div class="sector-grid">`;
+  sectors.sort((a,b)=>b.ret_3m-a.ret_3m).forEach(s=>{
+    const pass = s.pass_layer1;
+    const name = SEC_JA[s.sector]||s.sector;
+    h += `<div class="sector-chip ${pass?"pass":"fail"}">${name}<div class="sector-ret">${s.ticker} ${fmt(s.ret_3m)}</div></div>`;
+  });
+  h += `</div>`;
+
+  // Selected themes
+  const selThemes = signals.selected_themes||[];
+  h += `<div class="section-header">Layer 2: テーマ選定 (${selThemes.length})</div>`;
+  if(selThemes.length===0){
+    h += `<div class="empty-msg">条件を満たすテーマなし（全フィルタ通過 0）</div>`;
+  } else {
+    const themeMap = {};
+    themes.forEach(t=>{themeMap[t.theme]=t});
+    selThemes.forEach(name=>{
+      const t = themeMap[name]||{};
+      const tfCls = (t.tf_state||"WEAK").toLowerCase();
+      h += `<div class="theme-pick">`;
+      h += `<div class="tp-name">${name}</div>`;
+      h += `<div class="tp-meta">${SEC_JA[t.sector]||t.sector||""} | score_rank: ${t.score_rank||"?"} | 3M: ${fmt(t.ret_3m)} | 1M: ${fmt(t.ret_1m)}</div>`;
+      h += `<div class="tp-tags">`;
+      h += `<span class="tp-tag ${tfCls}">${t.tf_state||"?"}</span>`;
+      if(t.acceleration_flag) h += `<span class="tp-tag strong">加速中</span>`;
+      if(t.consensus_flag) h += `<span class="tp-tag strong">コンセンサス</span>`;
+      h += `</div></div>`;
+    });
+  }
+
+  // Selected stocks
+  const selStocks = signals.selected_stocks||[];
+  h += `<div class="section-header">Layer 3: 銘柄選定 (${selStocks.length})</div>`;
+  if(selStocks.length===0){
+    h += `<div class="empty-msg">選定銘柄なし</div>`;
+  } else {
+    const conMap = {};
+    constituents.filter(c=>c.stock_selected).forEach(c=>{
+      if(!conMap[c.ticker]) conMap[c.ticker]=c;
+    });
+    selStocks.forEach(tk=>{
+      const c = conMap[tk]||{};
+      const cls = (c.ret_1m||0)>=0?"positive":"negative";
+      h += `<div class="stock-pick">`;
+      h += `<div><div class="sp-tk">${tk}</div><div class="sp-theme">${c.theme||""} | ${c.market_cap_bucket||""} | ${c.exchange||""}</div></div>`;
+      h += `<div class="sp-ret ${cls}">${fmt(c.ret_1m)}</div>`;
+      h += `</div>`;
+    });
+  }
+
+  // Trigger candidates
+  const trig = signals.trigger_candidates||{};
+  h += `<div class="section-header">トリガー候補</div>`;
+  const triggers = [
+    ["T1 K-gate反転", trig.T1_gate_flip, trig.T1_gate_flip?"FIRED":"—"],
+    ["T2 テーマ脱落", (trig.T2_theme_drop||[]).length>0, (trig.T2_theme_drop||[]).join(", ")||"—"],
+    ["T3 加速→減速", (trig.T3_accel_flip||[]).length>0, (trig.T3_accel_flip||[]).join(", ")||"—"],
+    ["T4 ドローダウン", (trig.T4_dd||[]).length>0, (trig.T4_dd||[]).join(", ")||"—"],
+    ["T5 新規参入", (trig.T5_new_entry||[]).length>0, (trig.T5_new_entry||[]).join(", ")||"—"],
+  ];
+  triggers.forEach(([label,fire,detail])=>{
+    h += `<div class="trigger-box ${fire?"fire":"quiet"}">${label}: ${detail}</div>`;
+  });
+
+  // Filter funnel
+  const total = themes.length;
+  const entryZone = themes.filter(t=>t.zone==="ENTRY_ZONE").length;
+  const consensus = themes.filter(t=>t.consensus_flag).length;
+  const accel = themes.filter(t=>t.acceleration_flag).length;
+  const secPass = themes.filter(t=>t.sector_pass).length;
+  const lowVol = themes.filter(t=>!t.high_vol_excluded).length;
+  const final = selThemes.length;
+
+  h += `<div class="section-header">フィルタファネル</div>`;
+  const funnel = [
+    ["全テーマ", total, total],
+    ["score上位20", entryZone, total],
+    ["コンセンサス(1M/3M/6M+)", consensus, total],
+    ["加速中", accel, total],
+    ["セクター通過", secPass, total],
+    ["vol≤60%", lowVol, total],
+    ["最終選定", final, total],
+  ];
+  funnel.forEach(([label, count, max])=>{
+    const pct = max>0?(count/max*100):0;
+    h += `<div class="funnel-row"><span style="min-width:140px">${label}</span><span style="min-width:30px;font-weight:600">${count}</span><div class="funnel-bar" style="width:${pct}%"></div></div>`;
+  });
+
+  document.getElementById("prismMain").innerHTML = h;
+}).catch(e=>{
+  document.getElementById("prismMain").innerHTML = `<div class="empty-msg">データ読み込みエラー: ${e.message}</div>`;
+});
+  </script>
+</body>
+</html>
