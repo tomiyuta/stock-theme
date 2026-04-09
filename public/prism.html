@@ -4,130 +4,116 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
   <title>PRISM | 米国株テーマトラッカー</title>
-  <link rel="stylesheet" href="/styles.css?v=15">
-  <style>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="/styles.css?v=20">
+<style>
+:root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);color:var(--text-main);padding-bottom:80px}
 .prism-header{padding:16px 12px 8px;text-align:center}
-.prism-title{font-size:22px;font-weight:800;letter-spacing:2px;color:var(--text-main)}
-.prism-subtitle{font-size:10px;color:var(--text-sub);margin-top:2px}
-.prism-date{font-size:13px;font-weight:600;color:var(--text-main);margin-top:6px}
-.gate-card{margin:8px 12px;border-radius:8px;padding:16px;text-align:center}
-.gate-card.open{background:rgba(0,200,83,0.12);border:2px solid #00c853}
-.gate-card.mid{background:rgba(255,167,38,0.12);border:2px solid #ffa726}
-.gate-card.closed{background:rgba(255,23,68,0.12);border:2px solid #ff1744}
-.gate-state{font-size:28px;font-weight:800;letter-spacing:1px}
-.gate-card.open .gate-state{color:#00c853}
-.gate-card.mid .gate-state{color:#ffa726}
-.gate-card.closed .gate-state{color:#ff1744}
-.gate-detail{font-size:11px;color:var(--text-sub);margin-top:4px}
-.gate-atk{font-size:16px;font-weight:700;margin-top:6px}
+.prism-title{font-size:18px;font-weight:900;letter-spacing:1px}
+.prism-sub{font-size:10px;color:var(--text-sub);margin-top:2px}
+.prism-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:3px;background:rgba(0,82,204,0.08);color:var(--blue);font-weight:700;margin-top:4px}
+</style>
+<style>
+.gate-card{margin:8px 12px;border-radius:8px;padding:14px;text-align:center}
+.gate-card.open{background:rgba(0,200,83,0.1);border:2px solid var(--green)}
+.gate-card.mid{background:rgba(255,167,38,0.1);border:2px solid #ffa726}
+.gate-card.closed{background:rgba(255,23,68,0.1);border:2px solid var(--red)}
+.gate-state{font-size:20px;font-weight:900;letter-spacing:2px}
+.gate-card.open .gate-state{color:var(--green)}.gate-card.mid .gate-state{color:#ffa726}.gate-card.closed .gate-state{color:var(--red)}
+.gate-detail{font-size:10px;color:var(--text-sub);margin-top:4px}
+.gate-atk{font-size:12px;font-weight:700;margin-top:6px}
+.regime-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 12px}
+.regime-box{border-radius:4px;padding:5px;text-align:center;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.regime-label{font-size:8px;color:var(--text-sub);font-weight:600;text-transform:uppercase}
+.regime-val{font-size:12px;font-weight:700}
+.regime-val.pos{color:var(--green)}.regime-val.neg{color:var(--red)}
+.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(0,82,204,0.04);border:1.5px solid rgba(0,82,204,0.15)}
+.prod-title{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px}
+.prod-weights{display:flex;flex-wrap:wrap;gap:4px}
+.prod-w{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
+.prod-w.stock{background:rgba(0,200,83,0.1);color:var(--green)}
+.prod-w.cash{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.prod-meta{font-size:9px;color:var(--text-sub);margin-top:6px}
+</style>
+<style>
 .signal-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 12px}
 @media(max-width:600px){.signal-pair{grid-template-columns:1fr;gap:6px}}
-.signal-card{border-radius:6px;padding:10px;min-height:80px}
+.signal-card{border-radius:6px;padding:10px;min-height:60px}
 .signal-card.buy{background:rgba(0,200,83,0.06);border:1px solid rgba(0,200,83,0.25)}
 .signal-card.sell{background:rgba(255,23,68,0.06);border:1px solid rgba(255,23,68,0.25)}
 .signal-card-title{font-size:11px;font-weight:700;margin-bottom:6px;display:flex;align-items:center;gap:4px}
-.signal-card.buy .signal-card-title{color:#00c853}
-.signal-card.sell .signal-card-title{color:#ff1744}
-.signal-stock{background:#fff;border-radius:4px;padding:8px;margin:4px 0;border:1px solid rgba(0,0,0,0.05)}
+.signal-card.buy .signal-card-title{color:var(--green)}.signal-card.sell .signal-card-title{color:var(--red)}
+.ss{background:#fff;border-radius:4px;padding:8px;margin:4px 0;border:1px solid rgba(0,0,0,0.05)}
 .ss-top{display:flex;align-items:center;justify-content:space-between;gap:4px}
-.ss-ticker{font-size:15px;font-weight:800;color:var(--text-main)}
-.ss-price{font-size:14px;font-weight:700;color:var(--text-main)}
+.ss-ticker{font-size:15px;font-weight:800}.ss-price{font-size:14px;font-weight:700}
 .ss-company{font-size:10px;color:var(--text-sub);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .ss-badges{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}
 .ss-badge{font-size:8px;padding:1px 4px;border-radius:2px;white-space:nowrap}
 .ss-badge.ex{background:rgba(0,0,0,0.04);color:var(--text-sub)}
-.ss-badge.mc{background:rgba(0,0,0,0.04);color:var(--text-sub)}
-.ss-badge.sec{background:rgba(0,82,204,0.08);color:#0052cc}
-.ss-badge.idx{background:rgba(0,200,83,0.1);color:#00c853}
-.ss-badge.new{background:rgba(255,167,38,0.12);color:#ffa726}
+.ss-badge.sec{background:rgba(0,82,204,0.08);color:var(--blue)}
+.ss-badge.idx{background:rgba(0,200,83,0.1);color:var(--green)}
 .ss-rets{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:5px}
 .ss-ret{text-align:center;font-size:9px;background:rgba(0,0,0,0.02);border-radius:2px;padding:2px 0}
-.ss-ret-label{color:var(--text-sub)}
-.ss-ret-val{font-weight:600;font-size:10px}
-.ss-ret-val.positive{color:#00c853}.ss-ret-val.negative{color:#ff1744}
+.ss-ret-label{color:var(--text-sub)}.ss-ret-val{font-weight:600;font-size:10px}
+.ss-ret-val.pos{color:var(--green)}.ss-ret-val.neg{color:var(--red)}
 .ss-vol{font-size:9px;color:var(--text-sub);margin-top:3px;text-align:right}
-.signal-item{font-size:12px;font-weight:700;color:var(--text-main);line-height:1.8}
-.signal-item-sub{font-size:9px;color:var(--text-sub);font-weight:400;margin-left:4px}
 .signal-empty{font-size:10px;color:var(--text-sub);font-style:italic}
-.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(0,82,204,0.04);border:1px solid rgba(0,82,204,0.15)}
-.prod-title{font-size:11px;font-weight:700;color:#0052cc;margin-bottom:6px}
-.prod-weights{display:flex;flex-wrap:wrap;gap:4px}
-.prod-w{font-size:11px;padding:3px 8px;border-radius:4px;font-weight:600}
-.prod-w.stock{background:rgba(0,200,83,0.1);color:#00c853}
-.prod-w.cash{background:rgba(0,0,0,0.04);color:var(--text-sub)}
-.regime-row{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 12px}
-.regime-box{border-radius:4px;padding:6px;text-align:center;background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
-.regime-label{font-size:8px;color:var(--text-sub);font-weight:600}
-.regime-val{font-size:11px;font-weight:700}
-.regime-val.pos{color:#00c853}.regime-val.neg{color:#ff1744}
+</style>
+<style>
+.section-title{font-size:12px;font-weight:700;margin:16px 12px 6px;color:var(--text-main)}
+.sector-grid{display:flex;flex-wrap:wrap;gap:4px;margin:0 12px}
+.sector-chip{font-size:10px;padding:4px 8px;border-radius:4px;font-weight:600}
+.sector-chip.pass{background:rgba(0,200,83,0.1);color:var(--green)}
+.sector-chip.fail{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.theme-pick{margin:4px 12px;padding:8px;border-radius:4px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.theme-pick-name{font-size:12px;font-weight:700}.theme-pick-meta{font-size:9px;color:var(--text-sub)}
+.theme-pick-badges{display:flex;gap:3px;margin-top:3px}
+.theme-pick-badge{font-size:8px;padding:1px 5px;border-radius:2px}
+.tpb-strong{background:rgba(0,200,83,0.1);color:var(--green)}.tpb-accel{background:rgba(245,158,11,0.1);color:var(--gold)}
+.stock-pick{font-size:11px;padding:4px 12px;display:flex;justify-content:space-between;border-bottom:1px solid rgba(0,0,0,0.04)}
+.trigger-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:4px;margin:0 12px}
+@media(max-width:500px){.trigger-grid{grid-template-columns:repeat(3,1fr)}}
+.trigger-box{text-align:center;padding:6px;border-radius:4px;border:1px solid rgba(0,0,0,0.06);background:var(--card-bg)}
+.trigger-box.fired{background:rgba(255,23,68,0.08);border-color:rgba(255,23,68,0.3)}
+.trigger-label{font-size:8px;color:var(--text-sub);font-weight:600}.trigger-val{font-size:10px;font-weight:700}
+.funnel{margin:8px 12px}.funnel-bar{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:10px}
+.funnel-fill{height:6px;border-radius:3px;background:var(--green)}.funnel-label{color:var(--text-sub);min-width:130px;text-align:right}.funnel-count{font-weight:700;min-width:30px}
+</style>
+<style>
+.bm-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.bm-title{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px}
+.bm-table{width:100%;font-size:10px;border-collapse:collapse}
+.bm-table th{text-align:left;padding:3px 4px;color:var(--text-sub);font-weight:600;border-bottom:1px solid rgba(0,0,0,0.1)}
+.bm-table td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.bm-table tr.highlight{background:rgba(0,82,204,0.04);font-weight:700}
+.bm-table .best{color:var(--green);font-weight:700}
+.logic-card{margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden}
+.logic-card-header{padding:10px 12px;font-size:11px;font-weight:700;cursor:pointer;background:var(--card-bg);display:flex;justify-content:space-between;align-items:center}
+.logic-card-body{display:none;padding:10px 12px;font-size:10px;line-height:1.7;color:var(--text-main)}
+.logic-card.open .logic-card-body{display:block}
+.logic-card.open .lc-icon{transform:rotate(90deg)}
+.lc-icon{font-size:9px;transition:transform 0.2s}
+.logic-rule{margin:4px 0;padding:4px 8px;background:rgba(0,0,0,0.02);border-radius:3px;font-size:10px}
+.logic-table{width:100%;font-size:9px;border-collapse:collapse;margin:6px 0}
+.logic-table th,.logic-table td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.06);text-align:left}
 </style>
 </head>
 <body>
-  <header>
-    <div class="prism-header">
-      <div class="prism-title">PRISM</div>
-      <div class="prism-subtitle">Portfolio Regime & Investment Signal Machine</div>
-      <div class="prism-date" id="prismDate">—</div>
-    </div>
-  </header>
-  <main id="prismMain" style="padding:0 0 80px">
-    <div style="padding:40px 16px;text-align:center;color:var(--text-sub)">読み込み中...</div>
-  </main>
-  <nav class="bottom-nav">
-    <a class="nav-item" href="/"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
-    <a class="nav-item" href="/map"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
-    <a class="nav-item" href="/market-movers"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
-    <a class="nav-item" href="/infographic"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロ</a>
-    <a class="nav-item active" href="/prism"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
-  </nav>
-  <style>
-.section-header{padding:12px 12px 4px;font-size:13px;font-weight:700;color:var(--text-main);border-bottom:1px solid rgba(0,0,0,0.06)}
-.sector-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(90px,1fr));gap:4px;padding:8px 12px}
-.sector-chip{padding:6px 8px;border-radius:4px;text-align:center;font-size:11px;font-weight:600}
-.sector-chip.pass{background:rgba(0,200,83,0.1);color:#00c853;border:1px solid rgba(0,200,83,0.3)}
-.sector-chip.fail{background:rgba(0,0,0,0.03);color:var(--text-sub);border:1px solid rgba(0,0,0,0.06)}
-.sector-ret{font-size:9px;font-weight:400;margin-top:2px}
-.theme-pick{background:var(--card-bg);margin:4px 12px;border-radius:4px;padding:8px 10px;border-left:3px solid #00c853}
-.theme-pick .tp-name{font-size:13px;font-weight:700;color:var(--text-main)}
-.theme-pick .tp-meta{font-size:10px;color:var(--text-sub);margin-top:2px}
-.theme-pick .tp-tags{display:flex;gap:4px;flex-wrap:wrap;margin-top:3px}
-.tp-tag{font-size:8px;padding:1px 5px;border-radius:2px}
-.tp-tag.strong{background:rgba(0,200,83,0.1);color:#00c853}
-.tp-tag.mixed{background:rgba(255,167,38,0.1);color:#ffa726}
-.tp-tag.late{background:rgba(0,82,204,0.1);color:#0052cc}
-.tp-tag.weak{background:rgba(0,0,0,0.05);color:var(--text-sub)}
-.stock-pick{background:var(--card-bg);margin:2px 12px;border-radius:4px;padding:6px 10px;display:flex;align-items:center;justify-content:space-between}
-.stock-pick .sp-tk{font-size:14px;font-weight:700;color:var(--text-main)}
-.stock-pick .sp-theme{font-size:9px;color:var(--text-sub)}
-.stock-pick .sp-ret{font-size:12px;font-weight:600}
-.trigger-box{margin:4px 12px;border-radius:4px;padding:8px 10px;font-size:11px}
-.trigger-box.fire{background:rgba(255,23,68,0.08);border:1px solid rgba(255,23,68,0.2);color:#ff1744}
-.trigger-box.quiet{background:rgba(0,0,0,0.02);color:var(--text-sub)}
-.funnel-row{display:flex;align-items:center;padding:3px 12px;font-size:11px;color:var(--text-sub)}
-.funnel-bar{height:6px;border-radius:3px;background:#00c853;margin-left:8px}
-.empty-msg{padding:12px;text-align:center;font-size:12px;color:var(--text-sub)}
-.logic-section{padding:0 12px 12px}
-.logic-card{background:var(--card-bg);border-radius:6px;margin:8px 0;overflow:hidden}
-.logic-card-header{padding:10px 12px;font-size:12px;font-weight:700;color:var(--text-main);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.04)}
-.logic-card-header .lc-icon{font-size:10px;color:var(--text-sub);transition:transform 0.2s}
-.logic-card.open .lc-icon{transform:rotate(90deg)}
-.logic-card-body{padding:0 12px;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:11px;color:var(--text-sub);line-height:1.7}
-.logic-card.open .logic-card-body{max-height:2000px;padding:8px 12px 12px}
-.logic-rule{margin:4px 0;padding-left:8px;border-left:2px solid rgba(0,82,204,0.2)}
-.logic-label{font-weight:600;color:var(--text-main);font-size:11px}
-.logic-table{width:100%;border-collapse:collapse;margin:6px 0;font-size:10px}
-.logic-table th{text-align:left;padding:3px 6px;background:rgba(0,0,0,0.03);font-weight:600;color:var(--text-main)}
-.logic-table td{padding:3px 6px;border-top:1px solid rgba(0,0,0,0.04)}
-.logic-em{color:#0052cc;font-weight:600}
-.logic-warn{color:#ff1744;font-weight:600}
-  </style>
-  <script>
-const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
-const SEC_JA={"Energy":"エネルギー","Industrials":"資本財","Utilities":"公益","Technology":"テクノロジー",
-  "Basic Materials":"素材","Consumer Defensive":"生活必需品","Consumer Cyclical":"一般消費財",
-  "Healthcare":"ヘルスケア","Financial Services":"金融","Real Estate":"不動産","Communication Services":"通信"};
-
-const _v="?v=2";
+<div class="prism-header">
+  <div class="prism-title">PRISM</div>
+  <div class="prism-sub">Portfolio Regime & Investment Signal Machine</div>
+  <div id="prismDate" class="prism-badge">Loading...</div>
+</div>
+<div id="prismMain"></div>
+<script>
+const SEC_JA={"Basic Materials":"素材","Communication Services":"通信","Energy":"エネルギー","Financial Services":"金融","Industrials":"資本財","Technology":"テクノロジー","Consumer Defensive":"生活必需品","Real Estate":"不動産","Utilities":"公益","Healthcare":"ヘルスケア","Consumer Cyclical":"一般消費財"};
+const fmt=v=>{if(v===null||v===undefined)return"—";const n=Number(v);return isNaN(n)?"—":(n>=0?"+":"")+((n*100).toFixed(1))+"%"};
+const _v="?v=3";
 Promise.all([
   fetch("/api/prism/meta.json"+_v).then(r=>r.json()),
   fetch("/api/prism/gate.json"+_v).then(r=>r.json()),
@@ -136,303 +122,152 @@ Promise.all([
   fetch("/api/prism/constituents.json"+_v).then(r=>r.json()),
   fetch("/api/prism/signals.json"+_v).then(r=>r.json())
 ]).then(([meta,gate,sectors,themes,constituents,signals])=>{
-  document.getElementById("prismDate").textContent = "Snapshot: "+meta.snapshot_date;
-  let h = "";
+  document.getElementById("prismDate").textContent="Snapshot: "+meta.snapshot_date;
+  let h="";
 
-  // K-gate card
-  const gc = gate.gate_state.toLowerCase();
-  const gLabel = {OPEN:"攻撃モード",MID:"警戒モード",CLOSED:"防御モード"}[gate.gate_state]||gate.gate_state;
-  h += `<div class="gate-card ${gc}">`;
-  h += `<div class="gate-state">K-GATE: ${gate.gate_state}</div>`;
-  h += `<div class="gate-detail">SPY 3M: ${fmt(gate.benchmark_ret_3m)} | SHV 3M: ${fmt(gate.cash_ret_3m)} | Excess: ${fmt(gate.excess_3m)}</div>`;
-  h += `<div class="gate-atk">${gLabel} — 攻撃比率 ${(gate.atk_cap*100).toFixed(0)}%</div>`;
-  h += `</div>`;
+  // K-gate
+  const gc=gate.gate_state.toLowerCase();
+  const gLabel={OPEN:"攻撃モード",MID:"警戒モード",CLOSED:"防御モード"}[gate.gate_state]||gate.gate_state;
+  h+=`<div class="gate-card ${gc}"><div class="gate-state">K-GATE: ${gate.gate_state}</div>`;
+  h+=`<div class="gate-detail">SPY 3M: ${fmt(gate.benchmark_ret_3m)} | SHV 3M: ${fmt(gate.cash_ret_3m)} | Excess: ${fmt(gate.excess_3m)}</div>`;
+  h+=`<div class="gate-atk">${gLabel} — 攻撃比率 ${(gate.atk_cap*100).toFixed(0)}%</div></div>`;
 
-  // ── Production Portfolio (MH20_CAP35) ──
-  const pp = signals.production_portfolio;
-  if(pp && pp.weights){
-    h += `<div class="prod-card">`;
-    h += `<div class="prod-title">📊 ${pp.strategy||"PRISM"} — Target Portfolio</div>`;
-    h += `<div class="prod-weights">`;
-    Object.entries(pp.weights).sort((a,b)=>b[1]-a[1]).forEach(([tk,w])=>{
-      const cls = tk==="SHV"?"cash":"stock";
-      h += `<span class="prod-w ${cls}">${tk} ${(w*100).toFixed(1)}%</span>`;
-    });
-    h += `</div></div>`;
-  }
-
-  // ── 4-Axis Regime Observation ──
+  // 4-Axis Regime
   if(gate.equity_axis){
-    const ea=gate.equity_axis, ca=gate.credit_axis, ha=gate.hard_asset_axis, da=gate.duration_axis;
-    const rv=(v)=>{const n=typeof v==="number"?v:0;return{txt:fmt(n),cls:n>=0?"pos":"neg"}};
-    h += `<div class="regime-row">`;
-    const axes=[
-      {label:"Equity",val:ea.equity_excess_3m},
-      {label:"Credit",val:ca.lqd_excess_3m},
-      {label:"Gold-SHV",val:ha.gld_excess_3m},
-      {label:"Duration",val:da.tlt_ret_3m}
-    ];
-    axes.forEach(a=>{const r=rv(a.val);h+=`<div class="regime-box"><div class="regime-label">${a.label}</div><div class="regime-val ${r.cls}">${r.txt}</div></div>`;});
-    h += `</div>`;
+    const ea=gate.equity_axis,ca=gate.credit_axis,ha=gate.hard_asset_axis,da=gate.duration_axis;
+    const rv=v=>{const n=Number(v)||0;return{t:fmt(n),c:n>=0?"pos":"neg"}};
+    const axes=[{l:"Equity",v:ea.equity_excess_3m},{l:"Credit",v:ca.lqd_excess_3m},{l:"Gold-SHV",v:ha.gld_excess_3m},{l:"Duration",v:da.tlt_ret_3m}];
+    h+=`<div class="regime-row">`;
+    axes.forEach(a=>{const r=rv(a.v);h+=`<div class="regime-box"><div class="regime-label">${a.l}</div><div class="regime-val ${r.c}">${r.t}</div></div>`;});
+    h+=`</div>`;
   }
 
-  // ── Buy / Sell signal pair ──
-  const buyStocks = constituents.filter(c=>c.stock_selected);
-  const prevThemes = (signals.trigger_candidates?.theme_membership_diff?.removed)||[];
-  const droppedThemes = (signals.trigger_candidates?.T2_theme_drop)||[];
-  const decelThemes = (signals.trigger_candidates?.T3_accel_flip)||[];
-  const sellThemes = [...new Set([...prevThemes, ...droppedThemes, ...decelThemes])];
-  // Find stocks that belong to sell themes from all constituents
-  const sellStocks = constituents.filter(c=>sellThemes.includes(c.theme));
-  const newEntryThemes = (signals.trigger_candidates?.T5_new_entry)||[];
-  const newBuyStocks = buyStocks.filter(c=>newEntryThemes.includes(c.theme));
+  // Production Portfolio
+  const pp=signals.production_portfolio;
+  if(pp&&pp.weights){
+    const entries=Object.entries(pp.weights).sort((a,b)=>b[1]-a[1]);
+    h+=`<div class="prod-card"><div class="prod-title">📊 ${pp.strategy} — Target Portfolio</div><div class="prod-weights">`;
+    for(const [tk,w] of entries){
+      const cls=tk==="SHV"?"cash":"stock";
+      h+=`<span class="prod-w ${cls}">${tk} ${(w*100).toFixed(1)}%</span>`;
+    }
+    h+=`</div><div class="prod-meta">Sector Cap: ${(pp.sector_cap*100).toFixed(0)}% | Max Positions: ${pp.max_positions} | MinHold: 20日</div></div>`;
+  }
 
-  h += `<div class="signal-pair">`;
-  // Buy card
-  h += `<div class="signal-card buy">`;
-  h += `<div class="signal-card-title">▲ 購入候補 (${buyStocks.length})</div>`;
-  if(buyStocks.length===0){
-    h += `<div class="signal-empty">該当なし</div>`;
-  } else {
-    buyStocks.forEach(c=>{
-      const isNew = newEntryThemes.includes(c.theme);
-      const secJa = SEC_JA[c.sector]||c.sector;
-      const MC_JA={"mega":"超大型","large":"大型","mid":"中型","small":"小型"};
-      const mcJa = MC_JA[c.market_cap_bucket]||c.market_cap_bucket;
-      const cls1m = (c.ret_1m||0)>=0?"positive":"negative";
-      const cls3m = (c.ret_3m||0)>=0?"positive":"negative";
-      const cls6m = (c.ret_6m||0)>=0?"positive":"negative";
-      const cls1y = (c.ret_1y||0)>=0?"positive":"negative";
-      h += `<div class="signal-stock">`;
-      h += `<div class="ss-top"><span class="ss-ticker">${c.ticker}</span><span class="ss-price">$${(c.price||0).toLocaleString()}</span></div>`;
-      h += `<div class="ss-company">${c.name_ja||c.name||c.ticker} — ${c.theme}</div>`;
-      h += `<div class="ss-badges">`;
-      h += `<span class="ss-badge ex">${c.exchange||""}</span>`;
-      h += `<span class="ss-badge mc">${mcJa}</span>`;
-      h += `<span class="ss-badge sec">${secJa}</span>`;
-      (c.indices||[]).forEach(idx=>{ h += `<span class="ss-badge idx">${idx}</span>`; });
-      if(isNew) h += `<span class="ss-badge new">NEW</span>`;
-      h += `</div>`;
-      h += `<div class="ss-rets">`;
-      h += `<div class="ss-ret"><div class="ss-ret-label">1M</div><div class="ss-ret-val ${cls1m}">${fmt(c.ret_1m)}</div></div>`;
-      h += `<div class="ss-ret"><div class="ss-ret-label">3M</div><div class="ss-ret-val ${cls3m}">${fmt(c.ret_3m)}</div></div>`;
-      h += `<div class="ss-ret"><div class="ss-ret-label">6M</div><div class="ss-ret-val ${cls6m}">${fmt(c.ret_6m)}</div></div>`;
-      h += `<div class="ss-ret"><div class="ss-ret-label">1Y</div><div class="ss-ret-val ${cls1y}">${fmt(c.ret_1y)}</div></div>`;
-      h += `</div>`;
-      h += `<div class="ss-vol">Vol(20d): ${((c.vol_20d_annualized||0)*100).toFixed(0)}%</div>`;
-      h += `</div>`;
+  // Buy/Sell
+  const buyStocks=constituents.filter(c=>c.stock_selected);
+  const trig=signals.trigger_candidates||{};
+  const prevT=(trig.theme_membership_diff?.removed)||[];
+  const dropT=(trig.T2_theme_drop)||[];
+  const decelT=(trig.T3_accel_flip)||[];
+  const sellThemes=[...new Set([...prevT,...dropT,...decelT])];
+  const sellStocks=constituents.filter(c=>sellThemes.includes(c.theme));
+  const newEntryT=(trig.T5_new_entry)||[];
+
+  h+=`<div class="signal-pair"><div class="signal-card buy"><div class="signal-card-title">▲ 購入候補 (${buyStocks.length})</div>`;
+  if(!buyStocks.length){h+=`<div class="signal-empty">該当なし</div>`;}
+  else{buyStocks.forEach(c=>{
+    const secJa=SEC_JA[c.sector]||c.sector;
+    const MC_JA={"mega":"超大型","large":"大型","mid":"中型","small":"小型"};
+    const mcJa=MC_JA[c.market_cap_bucket]||c.market_cap_bucket;
+    const isNew=newEntryT.includes(c.theme);
+    h+=`<div class="ss"><div class="ss-top"><span class="ss-ticker">${c.ticker}</span><span class="ss-price">$${(c.price||0).toLocaleString()}</span></div>`;
+    h+=`<div class="ss-company">${c.name_ja||c.name||c.ticker} — ${c.theme}</div>`;
+    h+=`<div class="ss-badges"><span class="ss-badge ex">${c.exchange||""}</span><span class="ss-badge ex">${mcJa}</span><span class="ss-badge sec">${secJa}</span>`;
+    (c.indices||[]).forEach(idx=>{h+=`<span class="ss-badge idx">${idx}</span>`;});
+    if(isNew)h+=`<span class="ss-badge" style="background:rgba(245,158,11,0.12);color:#f59e0b">NEW</span>`;
+    h+=`</div><div class="ss-rets">`;
+    [{l:"1M",v:c.ret_1m},{l:"3M",v:c.ret_3m},{l:"6M",v:c.ret_6m},{l:"1Y",v:c.ret_1y}].forEach(r=>{
+      h+=`<div class="ss-ret"><div class="ss-ret-label">${r.l}</div><div class="ss-ret-val ${(r.v||0)>=0?"pos":"neg"}">${fmt(r.v)}</div></div>`;
     });
-  }
-  h += `</div>`;
+    h+=`</div><div class="ss-vol">Vol(20d): ${((c.vol_20d_annualized||0)*100).toFixed(0)}%</div></div>`;
+  });}
+  h+=`</div>`;
+
   // Sell card
-  h += `<div class="signal-card sell">`;
-  h += `<div class="signal-card-title">▼ 売却候補</div>`;
-  if(sellThemes.length===0){
-    h += `<div class="signal-empty">該当なし</div>`;
-  } else {
-    sellThemes.forEach(theme=>{
-      const reason = droppedThemes.includes(theme)?"脱落":decelThemes.includes(theme)?"減速":"除外";
-      const tickers = sellStocks.filter(c=>c.theme===theme).map(c=>c.ticker).slice(0,3);
-      h += `<div class="signal-item" style="color:#ff1744">${tickers.join(", ")||theme}<span class="signal-item-sub">${reason}</span></div>`;
-    });
-  }
-  h += `</div>`;
-  h += `</div>`;
+  h+=`<div class="signal-card sell"><div class="signal-card-title">▼ 売却候補</div>`;
+  if(!sellStocks.length){h+=`<div class="signal-empty">該当なし</div>`;}
+  else{sellStocks.forEach(c=>{h+=`<div style="font-size:12px;font-weight:700;line-height:1.8">${c.ticker}<span style="font-size:9px;color:var(--text-sub);margin-left:4px">${c.theme}</span></div>`;});}
+  h+=`</div></div>`;
 
-  // Sectors
-  h += `<div class="section-header">Layer 1: セクターフィルタ</div>`;
-  h += `<div class="sector-grid">`;
-  sectors.sort((a,b)=>b.ret_3m-a.ret_3m).forEach(s=>{
-    const pass = s.pass_layer1;
-    const name = SEC_JA[s.sector]||s.sector;
-    h += `<div class="sector-chip ${pass?"pass":"fail"}">${name}<div class="sector-ret">${s.ticker} ${fmt(s.ret_3m)}</div></div>`;
+  // Layer 1
+  const secSorted=[...sectors].sort((a,b)=>b.ret_3m-a.ret_3m);
+  h+=`<div class="section-title">Layer 1: セクターフィルタ</div><div class="sector-grid">`;
+  secSorted.forEach(s=>{
+    const p=s.pass_layer1;const ja=SEC_JA[s.sector]||s.sector;
+    h+=`<div class="sector-chip ${p?"pass":"fail"}">${ja}<br>${s.ticker} ${fmt(s.ret_3m)}</div>`;
   });
-  h += `</div>`;
+  h+=`</div>`;
 
-  // Selected themes
-  const selThemes = signals.selected_themes||[];
-  h += `<div class="section-header">Layer 2: テーマ選定 (${selThemes.length})</div>`;
-  if(selThemes.length===0){
-    h += `<div class="empty-msg">条件を満たすテーマなし（全フィルタ通過 0）</div>`;
-  } else {
-    const themeMap = {};
-    themes.forEach(t=>{themeMap[t.theme]=t});
-    selThemes.forEach(name=>{
-      const t = themeMap[name]||{};
-      const tfCls = (t.tf_state||"WEAK").toLowerCase();
-      h += `<div class="theme-pick">`;
-      h += `<div class="tp-name">${name}</div>`;
-      h += `<div class="tp-meta">${SEC_JA[t.sector]||t.sector||""} | score_rank: ${t.score_rank||"?"} | 3M: ${fmt(t.ret_3m)} | 1M: ${fmt(t.ret_1m)}</div>`;
-      h += `<div class="tp-tags">`;
-      h += `<span class="tp-tag ${tfCls}">${t.tf_state||"?"}</span>`;
-      if(t.acceleration_flag) h += `<span class="tp-tag strong">加速中</span>`;
-      if(t.consensus_flag) h += `<span class="tp-tag strong">コンセンサス</span>`;
-      h += `</div></div>`;
-    });
-  }
+  // Layer 2
+  const selThemes=themes.filter(t=>t.entry_candidate).sort((a,b)=>a.score_rank-b.score_rank);
+  h+=`<div class="section-title">Layer 2: テーマ選定 (${selThemes.length})</div>`;
+  selThemes.forEach(t=>{
+    const sja=SEC_JA[t.sector]||t.sector;
+    h+=`<div class="theme-pick"><div class="theme-pick-name">${t.theme}</div>`;
+    h+=`<div class="theme-pick-meta">${sja} | rank: ${t.score_rank} | 3M: ${fmt(t.ret_3m)} | breadth: ${(t.theme_breadth_3m*100).toFixed(0)}%</div>`;
+    h+=`<div class="theme-pick-badges">`;
+    if(t.tf_state==="STRONG")h+=`<span class="theme-pick-badge tpb-strong">STRONG</span>`;
+    if(t.acceleration_flag)h+=`<span class="theme-pick-badge tpb-accel">加速中</span>`;
+    if(t.consensus_flag)h+=`<span class="theme-pick-badge tpb-strong">コンセンサス</span>`;
+    h+=`</div></div>`;
+  });
 
-  // Selected stocks
-  const selStocks = signals.selected_stocks||[];
-  h += `<div class="section-header">Layer 3: 銘柄選定 (${selStocks.length})</div>`;
-  if(selStocks.length===0){
-    h += `<div class="empty-msg">選定銘柄なし</div>`;
-  } else {
-    const conMap = {};
-    constituents.filter(c=>c.stock_selected).forEach(c=>{
-      if(!conMap[c.ticker]) conMap[c.ticker]=c;
-    });
-    selStocks.forEach(tk=>{
-      const c = conMap[tk]||{};
-      const cls = (c.ret_1m||0)>=0?"positive":"negative";
-      h += `<div class="stock-pick">`;
-      h += `<div><div class="sp-tk">${tk}</div><div class="sp-theme">${c.theme||""} | ${c.market_cap_bucket||""} | ${c.exchange||""}</div></div>`;
-      h += `<div class="sp-ret ${cls}">${fmt(c.ret_1m)}</div>`;
-      h += `</div>`;
-    });
-  }
+  // Layer 3
+  const selStocks=constituents.filter(c=>c.stock_selected);
+  h+=`<div class="section-title">Layer 3: 銘柄選定 (${selStocks.length})</div>`;
+  selStocks.forEach(c=>{h+=`<div class="stock-pick"><span><b>${c.ticker}</b> ${c.theme} | ${c.market_cap_bucket} | ${c.exchange}</span><span style="font-weight:700;color:${(c.ret_1m||0)>=0?"var(--green)":"var(--red)"}">${fmt(c.ret_1m)}</span></div>`;});
 
-  // Trigger candidates
-  const trig = signals.trigger_candidates||{};
-  h += `<div class="section-header">トリガー候補</div>`;
-  const triggers = [
-    ["T1 K-gate反転", trig.T1_gate_flip, trig.T1_gate_flip?"FIRED":"—"],
-    ["T2 テーマ脱落", (trig.T2_theme_drop||[]).length>0, (trig.T2_theme_drop||[]).join(", ")||"—"],
-    ["T3 加速→減速", (trig.T3_accel_flip||[]).length>0, (trig.T3_accel_flip||[]).join(", ")||"—"],
-    ["T4 ドローダウン", (trig.T4_dd||[]).length>0, (trig.T4_dd||[]).join(", ")||"—"],
-    ["T5 新規参入", (trig.T5_new_entry||[]).length>0, (trig.T5_new_entry||[]).join(", ")||"—"],
+  // Triggers
+  h+=`<div class="section-title">トリガー候補</div><div class="trigger-grid">`;
+  const trigs=[["T1","K-gate反転",trig.T1_gate_flip],["T2","テーマ脱落",(trig.T2_theme_drop||[]).length>0],["T3","加速→減速",(trig.T3_accel_flip||[]).length>0],["T4","DD",(trig.T4_dd||[]).length>0],["T5","新規参入",(trig.T5_new_entry||[]).length>0]];
+  trigs.forEach(([id,label,fired])=>{h+=`<div class="trigger-box${fired?" fired":""}"><div class="trigger-label">${id} ${label}</div><div class="trigger-val">${fired?"FIRED":"—"}</div></div>`;});
+  h+=`</div>`;
+
+  // Funnel
+  const funnelData=[["全テーマ",207],["score上位20",themes.filter(t=>t.zone==="ENTRY_ZONE").length],["コンセンサス",themes.filter(t=>t.consensus_flag).length],["加速中",themes.filter(t=>t.acceleration_flag).length],["セクター通過",themes.filter(t=>t.sector_pass).length],["vol≤60%",themes.filter(t=>!t.high_vol_excluded).length],["最終選定",selThemes.length]];
+  const maxF=207;
+  h+=`<div class="section-title">フィルタファネル</div><div class="funnel">`;
+  funnelData.forEach(([label,count])=>{const pct=Math.max((count/maxF)*100,2);h+=`<div class="funnel-bar"><span class="funnel-label">${label}</span><div class="funnel-fill" style="width:${pct}%"></div><span class="funnel-count">${count}</span></div>`;});
+  h+=`</div>`;
+
+  // Benchmark Results
+  h+=`<div class="section-title">検証済みベンチマーク比較（126日間）</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">PRISM_MH20_CAP35 vs ベンチマーク群</div>`;
+  h+=`<table class="bm-table"><tr><th>Strategy</th><th>CAGR</th><th>MaxDD</th><th>Sharpe</th><th>WorstDay</th></tr>`;
+  h+=`<tr><td>BM2 (SPY/SHV)</td><td>-2.2%</td><td>-5.1%</td><td>-0.15</td><td>-2.7%</td></tr>`;
+  h+=`<tr><td>BM3 (セクターETF)</td><td>+19.4%</td><td>-7.0%</td><td>1.41</td><td class="best">-2.1%</td></tr>`;
+  h+=`<tr><td>BM5 (直接株モメンタム)</td><td>+41.5%</td><td>-44.4%</td><td>0.83</td><td>-15.3%</td></tr>`;
+  h+=`<tr class="highlight"><td>PRISM_MH20_CAP35</td><td class="best">+33.9%</td><td class="best">-5.2%</td><td class="best">1.76</td><td>-2.9%</td></tr>`;
+  h+=`</table>`;
+  h+=`<div class="prod-meta" style="margin-top:8px">パラメータ安定性: 9グリッド全PASS | サブ期間: 前半/後半共にプラス | Regime: CLOSED期もSharpe 1.46 | コスト: 50bpsでもBM3超過</div>`;
+  h+=`</div>`;
+
+  // Logic Cards
+  h+=`<div class="section-title">PRISM_MH20_CAP35 投資ロジック</div>`;
+  const cards=[
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM_MH20_CAP35は、階層状態機械＋ポートフォリオ制約で構成される検証済みモメンタム戦略です。</div><div class="logic-rule">4層フィルタ: Layer 0（K-gate）→ Layer 1（セクターDM）→ Layer 2（テーマスコア）→ Layer 3（個別株選定）</div><div class="logic-rule">制約: MinHold 20営業日（回転抑制）+ SectorCap 35%（集中抑制）+ MaxPositions 35</div><div class="logic-rule">検証: 126日間の擬似バックテストでBM3（セクターETFローテーション）をCAGR/MaxDD/Sharpeで上回り。パラメータ安定性9グリッド全PASS。</div>`],
+    ["Layer 0: K-gate",`<div class="logic-rule">excess = SPY_3M − SHV_3M → OPEN(&gt;0%, 80%) / MID(-2%〜0%, 50%) / CLOSED(≤-2%, 30%)</div><div class="logic-rule">4軸regime観測（判定には未使用、将来検証用に蓄積）: Equity / Credit / Hard Asset / Duration</div>`],
+    ["Layer 1: セクターフィルタ",`<div class="logic-rule">11セクターETFに絶対+相対デュアルモメンタム: 3M &gt; 0 AND rank ≤ 5</div>`],
+    ["Layer 2: テーマ選定",`<div class="logic-rule">5因子スコア: z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule">ENTRY: rank≤20 + consensus + acceleration + sector_pass + vol≤60%</div><div class="logic-rule">品質観測（将来score_v2用）: breadth, concentration, member_hash</div>`],
+    ["Layer 3: 個別株選定",`<div class="logic-rule">各テーマから1M上位2銘柄（large優先）。重複統合。</div>`],
+    ["ポートフォリオ制約（MH20_CAP35の核心）",`<div class="logic-rule"><b>MinHold 20日</b>: 保有銘柄は最低20営業日保持。過剰回転を防止しCAGRを+2.8pt改善。</div><div class="logic-rule"><b>SectorCap 35%</b>: 単一セクター配分上限。超過分はSHVへ退避。集中リスクを抑制しMaxDDを-0.8pt、WorstDayを-1.9pt改善。</div><div class="logic-rule"><b>MaxPositions 35</b>: 保有銘柄上限。運用実務負荷を制限。</div>`],
+    ["トリガー（T1〜T5）",`<div class="logic-rule">T1: K-gate反転 | T2: テーマ脱落(rank&gt;30) | T3: 加速→減速 | T4: DD(-15%/-2σ) | T5: 新規参入</div><div class="logic-rule">T4は現在プレースホルダー（Phase 4で実装予定）</div>`],
+    ["検証結果サマリ",`<div class="logic-rule">テーマ層の価値: BM5(直接株)のMaxDD -44%→-5.2%に圧縮。BM3(セクター)をSharpe+0.35上回り。</div><div class="logic-rule">改善の本質: alphaはテーマ層に元からあった。v1が壊していたのは過剰回転(MH20で解決)と集中(CAP35で解決)。</div><div class="logic-rule">Robustness: パラメータ9grid全PASS / 前半後半共にプラス / CLOSED期Sharpe1.46 / 50bps込みでBM3超過</div>`]
   ];
-  triggers.forEach(([label,fire,detail])=>{
-    h += `<div class="trigger-box ${fire?"fire":"quiet"}">${label}: ${detail}</div>`;
+  cards.forEach(([title,body])=>{
+    h+=`<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">${title}<span class="lc-icon">▶</span></div><div class="logic-card-body">${body}</div></div>`;
   });
 
-  // Filter funnel
-  const total = themes.length;
-  const entryZone = themes.filter(t=>t.zone==="ENTRY_ZONE").length;
-  const consensus = themes.filter(t=>t.consensus_flag).length;
-  const accel = themes.filter(t=>t.acceleration_flag).length;
-  const secPass = themes.filter(t=>t.sector_pass).length;
-  const lowVol = themes.filter(t=>!t.high_vol_excluded).length;
-  const final = selThemes.length;
-
-  h += `<div class="section-header">フィルタファネル</div>`;
-  const funnel = [
-    ["全テーマ", total, total],
-    ["score上位20", entryZone, total],
-    ["コンセンサス(1M/3M/6M+)", consensus, total],
-    ["加速中", accel, total],
-    ["セクター通過", secPass, total],
-    ["vol≤60%", lowVol, total],
-    ["最終選定", final, total],
-  ];
-  funnel.forEach(([label, count, max])=>{
-    const pct = max>0?(count/max*100):0;
-    h += `<div class="funnel-row"><span style="min-width:140px">${label}</span><span style="min-width:30px;font-weight:600">${count}</span><div class="funnel-bar" style="width:${pct}%"></div></div>`;
-  });
-
-  // ── Strategy Logic Section ──
-  h += `<div class="section-header">PRISM 投資ロジック</div>`;
-  h += `<div class="logic-section">`;
-
-  // Card 0: Architecture
-  h += `<div class="logic-card open"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">アーキテクチャ概要<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>PRISM（Portfolio Regime & Investment Signal Machine）は、階層状態機械と多段ゲート制御を基盤とする<span class="logic-em">観測駆動型モメンタム戦略</span>です。米国株207テーマ×915銘柄ユニバースに対し、レジーム判定→セクター→テーマ→個別株の4層フィルタで動的にポートフォリオを構築します。</p>`;
-  h += `<div class="logic-rule"><span class="logic-label">設計原則</span>：売買ロジックより先に「時点整合な状態記録」を固定する。毎日同一時刻・同一手順でスナップショットを凍結保存し、look-ahead汚染とテーマ再分類ドリフトを防止する。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">3+1層構造</span>：Layer 0（K-gate）→ Layer 1（セクターDM）→ Layer 2（テーマDM）→ Layer 3（個別株選定）。上位レイヤーが下位を支配する。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">リバランス方式</span>：カレンダー固定ではなく<span class="logic-em">シグナル状態変化トリガー</span>（T1〜T5）で動的に実行する。</div>`;
-  h += `</div></div>`;
-
-  // Card 1: K-gate
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 0: K-gate（門番）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>市場全体のレジーム（強気/弱気）を判定し、攻撃資金の上限比率を制御する絶対モメンタムフィルタ。</p>`;
-  h += `<div class="logic-rule"><span class="logic-label">計算式</span>：excess = SPY 3Mリターン − SHV 3Mリターン</div>`;
-  h += `<table class="logic-table"><tr><th>excess</th><th>状態</th><th>攻撃比率上限</th><th>意味</th></tr>`;
-  h += `<tr><td>> 0%</td><td class="logic-em">OPEN</td><td>80%</td><td>株式が短期国債を上回る → 攻撃優位</td></tr>`;
-  h += `<tr><td>-2%〜0%</td><td style="color:#ffa726;font-weight:600">MID</td><td>50%</td><td>拮抗 → 警戒モード</td></tr>`;
-  h += `<tr><td>≤ -2%</td><td class="logic-warn">CLOSED</td><td>30%</td><td>株式劣後 → 防御優先</td></tr>`;
-  h += `</table>`;
-  h += `<div class="logic-rule"><span class="logic-label">判定と配分の分離</span>：gate_state（OPEN/MID/CLOSED）とatk_cap（数値）を独立して記録する。これによりシグナル判定とポジション制御を別々に監査可能。</div>`;
-  h += `</div></div>`;
-
-  // Card 2: Sector
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 1: セクターフィルタ（デュアルモメンタム）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>11セクターETF（XLB〜XLY）に対し、相対モメンタムと絶対モメンタムの二重フィルタを適用。</p>`;
-  h += `<div class="logic-rule"><span class="logic-label">絶対条件</span>：3Mリターン > 0（セクター自体が上昇トレンド）</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">相対条件</span>：3Mリターン上位5セクター以内</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">通過条件</span>：絶対 AND 相対の両方を満たすセクターのみ投資対象</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">根拠</span>：セクター間の3Mスプレッドは約40pp（エネルギー+20% vs 不動産-19%）。負のセクターを排除するだけで平均リターンが構造的に改善。</div>`;
-  h += `</div></div>`;
-
-  // Card 3: Theme
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 2: テーマ選定（マルチファクタースコア）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>Layer 1を通過したセクターに属する207テーマから、5因子合成スコアで上位を選定。</p>`;
-  h += `<table class="logic-table"><tr><th>因子</th><th>重み</th><th>計算方法</th><th>意味</th></tr>`;
-  h += `<tr><td>3Mモメンタム</td><td>1.00</td><td>z(ret_3m)</td><td>中期トレンド強度</td></tr>`;
-  h += `<tr><td>加速度</td><td>0.60</td><td>z(1M年率換算 − 3M年率換算)</td><td>短期が長期を上回る＝加速中</td></tr>`;
-  h += `<tr><td>コンセンサス</td><td>0.75</td><td>1M/3M/6M全て正 → 1</td><td>マルチTFノイズ低減フィルタ</td></tr>`;
-  h += `<tr><td>セクター通過</td><td>0.50</td><td>Layer 1通過 → 1</td><td>上位レイヤー支配</td></tr>`;
-  h += `<tr><td>ボラティリティ</td><td>-0.60</td><td>z(テーマ平均vol_20d)</td><td>高volテーマを減点</td></tr>`;
-  h += `</table>`;
-  h += `<div class="logic-rule"><span class="logic-label">TF状態コード</span>：STRONG（1M/3M/6M全正）、MIXED_UP（6Mのみ負）、LATE（1Mのみ負）、WEAK（それ以外）。コンセンサスの役割はα生成ではなくシグナル安定化。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">ヒステリシス帯</span>：進入＝score上位20、維持＝上位30、退出＝31位以下。21〜30位はデッドゾーン（新規不可・既存維持）。Jaccard(1M vs 3M)=0.33の境界不安定性を吸収。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">除外ルール</span>：年率換算vol > 60%のテーマは候補から除外（例：量子コンピュータ vol=97%）。</div>`;
-  h += `</div></div>`;
-
-  // Card 4: Stock
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 3: 個別株選定<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>選定テーマから構成銘柄を抽出し、テーマ内モメンタムで最終銘柄を決定。</p>`;
-  h += `<div class="logic-rule"><span class="logic-label">選定基準</span>：各テーマから1Mリターン上位2銘柄を選定</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">流動性優先</span>：大型（large）以上を優先。S&P500/NASDAQ-100構成銘柄にボーナス。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">重複統合</span>：複数テーマに跨がる銘柄（例：NVDA）は1ポジションに統合。ユニーク銘柄数≥20を目標。</div>`;
-  h += `<div class="logic-rule"><span class="logic-label">根拠</span>：テーマ内分散はstd=43〜120%と巨大。同じテーマでも+244%と-15%の銘柄が混在するため、テーマ「平均」の購入は非効率。</div>`;
-  h += `</div></div>`;
-
-  // Card 5: Dynamic Triggers
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">動的リバランストリガー（T1〜T5）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>カレンダー固定ではなく、以下5条件のいずれかを満たした時のみリバランスを実行。毎日08:05 JSTにシグナル評価。</p>`;
-  h += `<table class="logic-table"><tr><th>ID</th><th>トリガー</th><th>条件</th><th>推定頻度</th></tr>`;
-  h += `<tr><td>T1</td><td>K-gate反転</td><td>gate_stateが前日と異なる</td><td>年2〜4回</td></tr>`;
-  h += `<tr><td>T2</td><td>テーマ脱落</td><td>保有テーマのscore_rank > 30</td><td>月2〜3回</td></tr>`;
-  h += `<tr><td>T3</td><td>加速→減速</td><td>保有テーマのacceleration_flagがfalseに</td><td>月1〜2回</td></tr>`;
-  h += `<tr><td>T4</td><td>ドローダウン</td><td>保有銘柄が高値から-15%（or -2σ_20d）</td><td>不定期</td></tr>`;
-  h += `<tr><td>T5</td><td>新規参入</td><td>非保有テーマが全フィルタ通過しENTRY_ZONE入り</td><td>月2〜3回</td></tr>`;
-  h += `</table>`;
-  h += `<div class="logic-rule"><span class="logic-label">最低保有期間</span>：T2/T5による入替は20営業日の最低保有期間を設定し、回転率を抑制。</div>`;
-  h += `</div></div>`;
-
-  // Card 6: Entry/Exit
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">売買ルール（Entry / Exit）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p class="logic-label">■ 購入（Entry）</p>`;
-  h += `<div class="logic-rule">①K-gate評価 → ②セクターフィルタ → ③テーマスコア上位20 → ④テーマ内1Mリターン上位2銘柄 → ⑤vol逆数加重でサイジング → ⑥米市場開場（22:30 JST）で成行発注</div>`;
-  h += `<p class="logic-label" style="margin-top:8px">■ 売却（Exit）— 5条件のいずれかで発動</p>`;
-  h += `<table class="logic-table"><tr><th>条件</th><th>内容</th><th>猶予</th></tr>`;
-  h += `<tr><td>E1: テーマ脱落</td><td>score_rank > 30 に低下</td><td>最低保有20日経過後</td></tr>`;
-  h += `<tr><td>E2: 短期崩壊</td><td>テーマ1Mリターンが2日連続負</td><td>1日猶予</td></tr>`;
-  h += `<tr><td>E3: 個別DD</td><td>銘柄が高値から max(-15%, -2σ) 下落</td><td>即時（猶予なし）</td></tr>`;
-  h += `<tr><td>E4: K-gate悪化</td><td>atk_cap低下 → 最低ランクテーマから縮小</td><td>翌営業日</td></tr>`;
-  h += `<tr><td>E5: セクター脱落</td><td>属するセクターの3Mが負転</td><td>翌営業日</td></tr>`;
-  h += `</table>`;
-  h += `<div class="logic-rule"><span class="logic-label">レイヤー支配原則</span>：E4（K-gate）> E5（セクター）> E1（テーマ）> E3（個別株）。上位レイヤーの判断が下位を常に上書き。</div>`;
-  h += `</div></div>`;
-
-  // Card 7: Position Sizing & Defense
-  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">ポジションサイジング & 防御ポートフォリオ<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p class="logic-label">■ 攻撃枠（K-gate atk_cap依存）</p>`;
-  h += `<div class="logic-rule">攻撃枠 = 総資金 × atk_cap。テーマ等加重 → テーマ内vol逆数加重。例：atk_cap=30%、1000万円 → 攻撃300万 ÷ 10テーマ = 30万/テーマ → 2銘柄にvol逆数配分。</div>`;
-  h += `<p class="logic-label" style="margin-top:8px">■ 防御枠（残りの資金）</p>`;
-  h += `<table class="logic-table"><tr><th>資産</th><th>配分</th><th>理由</th></tr>`;
-  h += `<tr><td>SHV（超短期国債）</td><td>40%</td><td>金利リスクほぼゼロ、キャッシュ等価</td></tr>`;
-  h += `<tr><td>GLD（金）</td><td>30%</td><td>インフレヘッジ＋株式逆相関</td></tr>`;
-  h += `<tr><td>XLU（公益）</td><td>30%</td><td>ディフェンシブ高配当セクター</td></tr>`;
-  h += `</table>`;
-  h += `<div class="logic-rule"><span class="logic-label">現在の配分例</span>（K-gate CLOSED, atk_cap=30%）：攻撃30%（VALE/RIO/APD/LIN）+ 防御70%（SHV 28% / GLD 21% / XLU 21%）</div>`;
-  h += `</div></div>`;
-
-  h += `</div>`;  // close logic-section
-
-  document.getElementById("prismMain").innerHTML = h;
-}).catch(e=>{
-  document.getElementById("prismMain").innerHTML = `<div class="empty-msg">データ読み込みエラー: ${e.message}</div>`;
-});
-  </script>
+  document.getElementById("prismMain").innerHTML=h;
+}).catch(err=>{document.getElementById("prismMain").innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
+</script>
+<nav class="bottom-nav">
+  <a href="/" class="nav-item"><span class="nav-icon">📊</span><span class="nav-label">テーマ</span></a>
+  <a href="/map" class="nav-item"><span class="nav-icon">🗺️</span><span class="nav-label">マップ</span></a>
+  <a href="/market-movers" class="nav-item"><span class="nav-icon">📈</span><span class="nav-label">銘柄</span></a>
+  <a href="/infographic" class="nav-item"><span class="nav-icon">🌐</span><span class="nav-label">マクロ</span></a>
+  <a href="/prism" class="nav-item active"><span class="nav-icon">💎</span><span class="nav-label">PRISM</span></a>
+</nav>
 </body>
 </html>
