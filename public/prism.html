@@ -66,6 +66,20 @@
 .funnel-row{display:flex;align-items:center;padding:3px 12px;font-size:11px;color:var(--text-sub)}
 .funnel-bar{height:6px;border-radius:3px;background:#00c853;margin-left:8px}
 .empty-msg{padding:12px;text-align:center;font-size:12px;color:var(--text-sub)}
+.logic-section{padding:0 12px 12px}
+.logic-card{background:var(--card-bg);border-radius:6px;margin:8px 0;overflow:hidden}
+.logic-card-header{padding:10px 12px;font-size:12px;font-weight:700;color:var(--text-main);cursor:pointer;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(0,0,0,0.04)}
+.logic-card-header .lc-icon{font-size:10px;color:var(--text-sub);transition:transform 0.2s}
+.logic-card.open .lc-icon{transform:rotate(90deg)}
+.logic-card-body{padding:0 12px;max-height:0;overflow:hidden;transition:max-height 0.3s ease,padding 0.3s ease;font-size:11px;color:var(--text-sub);line-height:1.7}
+.logic-card.open .logic-card-body{max-height:2000px;padding:8px 12px 12px}
+.logic-rule{margin:4px 0;padding-left:8px;border-left:2px solid rgba(0,82,204,0.2)}
+.logic-label{font-weight:600;color:var(--text-main);font-size:11px}
+.logic-table{width:100%;border-collapse:collapse;margin:6px 0;font-size:10px}
+.logic-table th{text-align:left;padding:3px 6px;background:rgba(0,0,0,0.03);font-weight:600;color:var(--text-main)}
+.logic-table td{padding:3px 6px;border-top:1px solid rgba(0,0,0,0.04)}
+.logic-em{color:#0052cc;font-weight:600}
+.logic-warn{color:#ff1744;font-weight:600}
   </style>
   <script>
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
@@ -182,6 +196,106 @@ Promise.all([
     const pct = max>0?(count/max*100):0;
     h += `<div class="funnel-row"><span style="min-width:140px">${label}</span><span style="min-width:30px;font-weight:600">${count}</span><div class="funnel-bar" style="width:${pct}%"></div></div>`;
   });
+
+  // ── Strategy Logic Section ──
+  h += `<div class="section-header">PRISM 投資ロジック</div>`;
+  h += `<div class="logic-section">`;
+
+  // Card 0: Architecture
+  h += `<div class="logic-card open"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">アーキテクチャ概要<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>PRISM（Portfolio Regime & Investment Signal Machine）は、BAMの階層状態機械設計を米国株207テーマ×915銘柄ユニバースに移植した<span class="logic-em">観測駆動型モメンタム戦略</span>です。</p>`;
+  h += `<div class="logic-rule"><span class="logic-label">設計原則</span>：売買ロジックより先に「時点整合な状態記録」を固定する。毎日同一時刻・同一手順でスナップショットを凍結保存し、look-ahead汚染とテーマ再分類ドリフトを防止する。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">3+1層構造</span>：Layer 0（K-gate）→ Layer 1（セクターDM）→ Layer 2（テーマDM）→ Layer 3（個別株選定）。上位レイヤーが下位を支配する。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">リバランス方式</span>：カレンダー固定ではなく<span class="logic-em">シグナル状態変化トリガー</span>（T1〜T5）で動的に実行する。</div>`;
+  h += `</div></div>`;
+
+  // Card 1: K-gate
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 0: K-gate（門番）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>市場全体のレジーム（強気/弱気）を判定し、攻撃資金の上限比率を制御する絶対モメンタムフィルタ。</p>`;
+  h += `<div class="logic-rule"><span class="logic-label">計算式</span>：excess = SPY 3Mリターン − SHV 3Mリターン</div>`;
+  h += `<table class="logic-table"><tr><th>excess</th><th>状態</th><th>攻撃比率上限</th><th>意味</th></tr>`;
+  h += `<tr><td>> 0%</td><td class="logic-em">OPEN</td><td>80%</td><td>株式が短期国債を上回る → 攻撃優位</td></tr>`;
+  h += `<tr><td>-2%〜0%</td><td style="color:#ffa726;font-weight:600">MID</td><td>50%</td><td>拮抗 → 警戒モード</td></tr>`;
+  h += `<tr><td>≤ -2%</td><td class="logic-warn">CLOSED</td><td>30%</td><td>株式劣後 → 防御優先</td></tr>`;
+  h += `</table>`;
+  h += `<div class="logic-rule"><span class="logic-label">判定と配分の分離</span>：gate_state（OPEN/MID/CLOSED）とatk_cap（数値）を独立して記録する。これによりシグナル判定とポジション制御を別々に監査可能。</div>`;
+  h += `</div></div>`;
+
+  // Card 2: Sector
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 1: セクターフィルタ（デュアルモメンタム）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>11セクターETF（XLB〜XLY）に対し、相対モメンタムと絶対モメンタムの二重フィルタを適用。</p>`;
+  h += `<div class="logic-rule"><span class="logic-label">絶対条件</span>：3Mリターン > 0（セクター自体が上昇トレンド）</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">相対条件</span>：3Mリターン上位5セクター以内</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">通過条件</span>：絶対 AND 相対の両方を満たすセクターのみ投資対象</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">根拠</span>：セクター間の3Mスプレッドは約40pp（エネルギー+20% vs 不動産-19%）。負のセクターを排除するだけで平均リターンが構造的に改善。</div>`;
+  h += `</div></div>`;
+
+  // Card 3: Theme
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 2: テーマ選定（マルチファクタースコア）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>Layer 1を通過したセクターに属する207テーマから、5因子合成スコアで上位を選定。</p>`;
+  h += `<table class="logic-table"><tr><th>因子</th><th>重み</th><th>計算方法</th><th>意味</th></tr>`;
+  h += `<tr><td>3Mモメンタム</td><td>1.00</td><td>z(ret_3m)</td><td>中期トレンド強度</td></tr>`;
+  h += `<tr><td>加速度</td><td>0.60</td><td>z(1M年率換算 − 3M年率換算)</td><td>短期が長期を上回る＝加速中</td></tr>`;
+  h += `<tr><td>コンセンサス</td><td>0.75</td><td>1M/3M/6M全て正 → 1</td><td>マルチTFノイズ低減フィルタ</td></tr>`;
+  h += `<tr><td>セクター通過</td><td>0.50</td><td>Layer 1通過 → 1</td><td>上位レイヤー支配</td></tr>`;
+  h += `<tr><td>ボラティリティ</td><td>-0.60</td><td>z(テーマ平均vol_20d)</td><td>高volテーマを減点</td></tr>`;
+  h += `</table>`;
+  h += `<div class="logic-rule"><span class="logic-label">TF状態コード</span>：STRONG（1M/3M/6M全正）、MIXED_UP（6Mのみ負）、LATE（1Mのみ負）、WEAK（それ以外）。コンセンサスの役割はα生成ではなくシグナル安定化。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">ヒステリシス帯</span>：進入＝score上位20、維持＝上位30、退出＝31位以下。21〜30位はデッドゾーン（新規不可・既存維持）。Jaccard(1M vs 3M)=0.33の境界不安定性を吸収。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">除外ルール</span>：年率換算vol > 60%のテーマは候補から除外（例：量子コンピュータ vol=97%）。</div>`;
+  h += `</div></div>`;
+
+  // Card 4: Stock
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">Layer 3: 個別株選定<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>選定テーマから構成銘柄を抽出し、テーマ内モメンタムで最終銘柄を決定。</p>`;
+  h += `<div class="logic-rule"><span class="logic-label">選定基準</span>：各テーマから1Mリターン上位2銘柄を選定</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">流動性優先</span>：大型（large）以上を優先。S&P500/NASDAQ-100構成銘柄にボーナス。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">重複統合</span>：複数テーマに跨がる銘柄（例：NVDA）は1ポジションに統合。ユニーク銘柄数≥20を目標。</div>`;
+  h += `<div class="logic-rule"><span class="logic-label">根拠</span>：テーマ内分散はstd=43〜120%と巨大。同じテーマでも+244%と-15%の銘柄が混在するため、テーマ「平均」の購入は非効率。</div>`;
+  h += `</div></div>`;
+
+  // Card 5: Dynamic Triggers
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">動的リバランストリガー（T1〜T5）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p>カレンダー固定ではなく、以下5条件のいずれかを満たした時のみリバランスを実行。毎日08:05 JSTにシグナル評価。</p>`;
+  h += `<table class="logic-table"><tr><th>ID</th><th>トリガー</th><th>条件</th><th>推定頻度</th></tr>`;
+  h += `<tr><td>T1</td><td>K-gate反転</td><td>gate_stateが前日と異なる</td><td>年2〜4回</td></tr>`;
+  h += `<tr><td>T2</td><td>テーマ脱落</td><td>保有テーマのscore_rank > 30</td><td>月2〜3回</td></tr>`;
+  h += `<tr><td>T3</td><td>加速→減速</td><td>保有テーマのacceleration_flagがfalseに</td><td>月1〜2回</td></tr>`;
+  h += `<tr><td>T4</td><td>ドローダウン</td><td>保有銘柄が高値から-15%（or -2σ_20d）</td><td>不定期</td></tr>`;
+  h += `<tr><td>T5</td><td>新規参入</td><td>非保有テーマが全フィルタ通過しENTRY_ZONE入り</td><td>月2〜3回</td></tr>`;
+  h += `</table>`;
+  h += `<div class="logic-rule"><span class="logic-label">最低保有期間</span>：T2/T5による入替は20営業日の最低保有期間を設定し、回転率を抑制。</div>`;
+  h += `</div></div>`;
+
+  // Card 6: Entry/Exit
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">売買ルール（Entry / Exit）<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p class="logic-label">■ 購入（Entry）</p>`;
+  h += `<div class="logic-rule">①K-gate評価 → ②セクターフィルタ → ③テーマスコア上位20 → ④テーマ内1Mリターン上位2銘柄 → ⑤vol逆数加重でサイジング → ⑥米市場開場（22:30 JST）で成行発注</div>`;
+  h += `<p class="logic-label" style="margin-top:8px">■ 売却（Exit）— 5条件のいずれかで発動</p>`;
+  h += `<table class="logic-table"><tr><th>条件</th><th>内容</th><th>猶予</th></tr>`;
+  h += `<tr><td>E1: テーマ脱落</td><td>score_rank > 30 に低下</td><td>最低保有20日経過後</td></tr>`;
+  h += `<tr><td>E2: 短期崩壊</td><td>テーマ1Mリターンが2日連続負</td><td>1日猶予</td></tr>`;
+  h += `<tr><td>E3: 個別DD</td><td>銘柄が高値から max(-15%, -2σ) 下落</td><td>即時（猶予なし）</td></tr>`;
+  h += `<tr><td>E4: K-gate悪化</td><td>atk_cap低下 → 最低ランクテーマから縮小</td><td>翌営業日</td></tr>`;
+  h += `<tr><td>E5: セクター脱落</td><td>属するセクターの3Mが負転</td><td>翌営業日</td></tr>`;
+  h += `</table>`;
+  h += `<div class="logic-rule"><span class="logic-label">レイヤー支配原則</span>：E4（K-gate）> E5（セクター）> E1（テーマ）> E3（個別株）。上位レイヤーの判断が下位を常に上書き。</div>`;
+  h += `</div></div>`;
+
+  // Card 7: Position Sizing & Defense
+  h += `<div class="logic-card"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">ポジションサイジング & 防御ポートフォリオ<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
+  h += `<p class="logic-label">■ 攻撃枠（K-gate atk_cap依存）</p>`;
+  h += `<div class="logic-rule">攻撃枠 = 総資金 × atk_cap。テーマ等加重 → テーマ内vol逆数加重。例：atk_cap=30%、1000万円 → 攻撃300万 ÷ 10テーマ = 30万/テーマ → 2銘柄にvol逆数配分。</div>`;
+  h += `<p class="logic-label" style="margin-top:8px">■ 防御枠（残りの資金）</p>`;
+  h += `<table class="logic-table"><tr><th>資産</th><th>配分</th><th>理由</th></tr>`;
+  h += `<tr><td>SHV（超短期国債）</td><td>40%</td><td>金利リスクほぼゼロ、キャッシュ等価</td></tr>`;
+  h += `<tr><td>GLD（金）</td><td>30%</td><td>インフレヘッジ＋株式逆相関</td></tr>`;
+  h += `<tr><td>XLU（公益）</td><td>30%</td><td>ディフェンシブ高配当セクター</td></tr>`;
+  h += `</table>`;
+  h += `<div class="logic-rule"><span class="logic-label">現在の配分例</span>（K-gate CLOSED, atk_cap=30%）：攻撃30%（VALE/RIO/APD/LIN）+ 防御70%（SHV 28% / GLD 21% / XLU 21%）</div>`;
+  h += `</div></div>`;
+
+  h += `</div>`;  // close logic-section
 
   document.getElementById("prismMain").innerHTML = h;
 }).catch(e=>{
