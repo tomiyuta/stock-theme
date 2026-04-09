@@ -1,0 +1,50 @@
+[
+  {
+    "date": "2026-04-09",
+    "action": "BUY",
+    "ticker": "VALE",
+    "current_weight": "0",
+    "target_weight": "0.075",
+    "delta_weight": "0.075",
+    "reason": "new_entry",
+    "min_hold_blocked": "False",
+    "sector": "Basic Materials",
+    "theme": ""
+  },
+  {
+    "date": "2026-04-09",
+    "action": "BUY",
+    "ticker": "RIO",
+    "current_weight": "0",
+    "target_weight": "0.075",
+    "delta_weight": "0.075",
+    "reason": "new_entry",
+    "min_hold_blocked": "False",
+    "sector": "Basic Materials",
+    "theme": ""
+  },
+  {
+    "date": "2026-04-09",
+    "action": "BUY",
+    "ticker": "APD",
+    "current_weight": "0",
+    "target_weight": "0.075",
+    "delta_weight": "0.075",
+    "reason": "new_entry",
+    "min_hold_blocked": "False",
+    "sector": "Basic Materials",
+    "theme": ""
+  },
+  {
+    "date": "2026-04-09",
+    "action": "BUY",
+    "ticker": "LIN",
+    "current_weight": "0",
+    "target_weight": "0.075",
+    "delta_weight": "0.075",
+    "reason": "new_entry",
+    "min_hold_blocked": "False",
+    "sector": "Basic Materials",
+    "theme": ""
+  }
+]

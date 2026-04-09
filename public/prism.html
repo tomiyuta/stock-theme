@@ -112,6 +112,23 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .logic-rule{margin:4px 0;padding:4px 8px;background:rgba(0,0,0,0.02);border-radius:3px;font-size:10px}
 .logic-table{width:100%;font-size:9px;border-collapse:collapse;margin:6px 0}
 .logic-table th,.logic-table td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.06);text-align:left}
+.ledger-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.ledger-title{font-size:11px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:6px}
+.ledger-row{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(0,0,0,0.04);font-size:10px}
+.ledger-tk{font-weight:800;font-size:12px;min-width:50px}
+.ledger-bar-wrap{flex:1;background:rgba(0,0,0,0.04);border-radius:3px;height:8px;overflow:hidden}
+.ledger-bar{height:100%;border-radius:3px;transition:width 0.3s}
+.ledger-bar.locked{background:var(--red)}.ledger-bar.unlocked{background:var(--green)}
+.ledger-info{font-size:9px;color:var(--text-sub);min-width:80px;text-align:right}
+.order-row{display:flex;align-items:center;gap:6px;padding:3px 0;font-size:10px}
+.order-action{font-weight:700;font-size:10px;padding:1px 6px;border-radius:3px;min-width:36px;text-align:center}
+.order-action.buy{background:rgba(0,200,83,0.1);color:var(--green)}
+.order-action.sell{background:rgba(255,23,68,0.1);color:var(--red)}
+.order-action.hold{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.health-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 12px}
+.health-box{border-radius:4px;padding:5px;text-align:center;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.health-label{font-size:8px;color:var(--text-sub);font-weight:600}.health-val{font-size:12px;font-weight:700}
+.health-val.ok{color:var(--green)}.health-val.warn{color:var(--gold)}.health-val.bad{color:var(--red)}
 </style>
 </head>
 <body>
@@ -131,8 +148,10 @@ Promise.all([
   fetch("/api/prism/sectors.json"+_v).then(r=>r.json()),
   fetch("/api/prism/themes.json"+_v).then(r=>r.json()),
   fetch("/api/prism/constituents.json"+_v).then(r=>r.json()),
-  fetch("/api/prism/signals.json"+_v).then(r=>r.json())
-]).then(([meta,gate,sectors,themes,constituents,signals])=>{
+  fetch("/api/prism/signals.json"+_v).then(r=>r.json()),
+  fetch("/api/prism/ledger.json"+_v).then(r=>r.json()).catch(()=>null),
+  fetch("/api/prism/orders.json"+_v).then(r=>r.json()).catch(()=>[])
+]).then(([meta,gate,sectors,themes,constituents,signals,ledger,orders])=>{
   document.getElementById("prismDate").textContent="Snapshot: "+meta.snapshot_date;
   let h="";
 
@@ -150,6 +169,22 @@ Promise.all([
     const axes=[{l:"Equity",v:ea.equity_excess_3m},{l:"Credit",v:ca.lqd_excess_3m},{l:"Gold-SHV",v:ha.gld_excess_3m},{l:"Duration",v:da.tlt_ret_3m}];
     h+=`<div class="regime-row">`;
     axes.forEach(a=>{const r=rv(a.v);h+=`<div class="regime-box"><div class="regime-label">${a.l}</div><div class="regime-val ${r.c}">${r.t}</div></div>`;});
+    h+=`</div>`;
+  }
+
+  // Health Summary
+  if(ledger){
+    const active=(ledger.positions||[]).filter(p=>p.status==='active');
+    const eqPct=active.reduce((s,p)=>s+(p.target_weight||0),0);
+    const byS={};active.forEach(p=>{const s=p.sector||'?';byS[s]=(byS[s]||0)+(p.target_weight||0);});
+    const maxS=Math.max(...Object.values(byS),0);
+    const maxN=Math.max(...active.map(p=>p.target_weight||0),0);
+    const minHoldCount=active.filter(p=>!p.eligible_to_exit).length;
+    h+=`<div class="health-grid">`;
+    h+=`<div class="health-box"><div class="health-label">Equity</div><div class="health-val">${(eqPct*100).toFixed(1)}%</div></div>`;
+    h+=`<div class="health-box"><div class="health-label">MaxSector</div><div class="health-val ${maxS<=0.35?'ok':'bad'}">${(maxS*100).toFixed(1)}%</div></div>`;
+    h+=`<div class="health-box"><div class="health-label">MaxName</div><div class="health-val ${maxN<=0.08?'ok':'bad'}">${(maxN*100).toFixed(1)}%</div></div>`;
+    h+=`<div class="health-box"><div class="health-label">🔒MinHold</div><div class="health-val">${minHoldCount}/${active.length}</div></div>`;
     h+=`</div>`;
   }
 
@@ -171,6 +206,37 @@ Promise.all([
     h+=`<tbody id="prismRebalBody"></tbody></table>`;
     h+=`<div id="prismRebalSummary"></div>`;
     h+=`<div class="prod-meta">Sector Cap: ${(pp.sector_cap*100).toFixed(0)}% | Max Positions: ${pp.max_positions} | MinHold: 20日 | ※購入株数は切り捨て・端数は現金保有</div>`;
+    h+=`</div>`;
+  }
+
+  // Position Ledger
+  if(ledger&&ledger.positions){
+    const active=ledger.positions.filter(p=>p.status==='active');
+    if(active.length>0){
+      h+=`<div class="ledger-card"><div class="ledger-title">📋 Position Ledger (as_of: ${ledger.as_of_date||'?'})</div>`;
+      active.forEach(p=>{
+        const pct=Math.min((p.holding_days||0)/20*100,100);
+        const cls=p.eligible_to_exit?'unlocked':'locked';
+        const icon=p.eligible_to_exit?'🔓':'🔒';
+        h+=`<div class="ledger-row"><span class="ledger-tk">${p.ticker}</span>`;
+        h+=`<div class="ledger-bar-wrap"><div class="ledger-bar ${cls}" style="width:${pct}%"></div></div>`;
+        h+=`<span class="ledger-info">${icon} ${p.holding_days||0}d/20d ${p.eligible_to_exit?'売却可':'保持中'}</span></div>`;
+      });
+      h+=`</div>`;
+    }
+  }
+
+  // Orders
+  if(orders&&orders.length>0){
+    h+=`<div class="ledger-card"><div class="ledger-title">📝 本日の注文 (${orders[0]?.date||''})</div>`;
+    orders.forEach(o=>{
+      const acls=o.action==='BUY'?'buy':o.action==='SELL'?'sell':'hold';
+      const blocked=o.min_hold_blocked==='True'?' 🔒':'';
+      h+=`<div class="order-row"><span class="order-action ${acls}">${o.action}</span>`;
+      h+=`<span style="font-weight:700;min-width:50px">${o.ticker}</span>`;
+      h+=`<span style="font-size:9px;color:var(--text-sub)">${o.reason}${blocked}</span>`;
+      h+=`<span style="margin-left:auto;font-size:10px;font-weight:600">${(Number(o.target_weight)*100).toFixed(1)}%</span></div>`;
+    });
     h+=`</div>`;
   }
 
