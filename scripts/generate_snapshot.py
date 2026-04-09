@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """
-BAM-inspired daily snapshot generator for a stock-theme universe.
+PRISM daily snapshot generator for a stock-theme universe.
 Adapted from ChatGPT scaffold with stock-theme data adapter.
 """
 from __future__ import annotations

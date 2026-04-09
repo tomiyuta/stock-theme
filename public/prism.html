@@ -203,7 +203,7 @@ Promise.all([
 
   // Card 0: Architecture
   h += `<div class="logic-card open"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">アーキテクチャ概要<span class="lc-icon">▶</span></div><div class="logic-card-body">`;
-  h += `<p>PRISM（Portfolio Regime & Investment Signal Machine）は、BAMの階層状態機械設計を米国株207テーマ×915銘柄ユニバースに移植した<span class="logic-em">観測駆動型モメンタム戦略</span>です。</p>`;
+  h += `<p>PRISM（Portfolio Regime & Investment Signal Machine）は、階層状態機械と多段ゲート制御を基盤とする<span class="logic-em">観測駆動型モメンタム戦略</span>です。米国株207テーマ×915銘柄ユニバースに対し、レジーム判定→セクター→テーマ→個別株の4層フィルタで動的にポートフォリオを構築します。</p>`;
   h += `<div class="logic-rule"><span class="logic-label">設計原則</span>：売買ロジックより先に「時点整合な状態記録」を固定する。毎日同一時刻・同一手順でスナップショットを凍結保存し、look-ahead汚染とテーマ再分類ドリフトを防止する。</div>`;
   h += `<div class="logic-rule"><span class="logic-label">3+1層構造</span>：Layer 0（K-gate）→ Layer 1（セクターDM）→ Layer 2（テーマDM）→ Layer 3（個別株選定）。上位レイヤーが下位を支配する。</div>`;
   h += `<div class="logic-rule"><span class="logic-label">リバランス方式</span>：カレンダー固定ではなく<span class="logic-em">シグナル状態変化トリガー</span>（T1〜T5）で動的に実行する。</div>`;
