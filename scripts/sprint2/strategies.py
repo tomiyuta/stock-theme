@@ -98,7 +98,7 @@ class PrismMH20SectorCap:
     """MH20 baseline + sector concentration cap."""
     def __init__(self, min_days=20, sector_cap=0.35):
         self.min_days=min_days; self.cap=sector_cap
-        self.name=f"MH20_CAP{int(sector_cap*100)}"
+        self.name=f"MH{min_days}_CAP{int(sector_cap*100)}"
         self._held={}; self._prev_date=None
 
     def build_target_portfolio(self, date_str, snap):

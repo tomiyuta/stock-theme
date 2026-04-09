@@ -3,14 +3,21 @@
 ## 採用ベースライン（Sprint 2結果に基づき更新）
 
 ```
-Current adopted baseline: PRISM_MH20
+Current adopted baseline: PRISM_MH20_CAP35
 
-Reason:
-Among tested PRISM variants, MH20 delivered the best overall balance of
-CAGR (+31.1%), MaxDD (-6.0%), and Sharpe (1.46), outperforming BM3 on
-CAGR, MaxDD, and Sharpe over the 126-day reconstructed historical period.
+Results (126-day reconstructed historical):
+  CAGR:     +33.9%
+  MaxDD:    -5.2%
+  Sharpe:   1.76
+  WorstDay: -2.9%
 
-PRISM v1 (no min hold) is retired as the default — it was over-trading.
+Dominates BM3 on CAGR (+14.5pt), MaxDD (+1.8pt), Sharpe (+0.35).
+WorstDay gap vs BM3 is -0.8pt (nearly closed).
+
+Interpretation:
+PRISM's core problem was NOT the theme layer — it was over-trading
+and sector concentration. MH20 fixed rotation; CAP35 fixed concentration.
+Alpha was always there; the "holding rules" were destroying it.
 ```
 
 ## Sprint 2 ベンチマーク結果

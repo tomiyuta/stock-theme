@@ -20,10 +20,11 @@ def main():
     store = SnapshotStore(args.snapshots)
     engine = ReplayEngine(store, prices, initial_capital=args.initial_capital)
     outdir = Path(args.outdir); outdir.mkdir(parents=True, exist_ok=True)
-    strategies = [BM3SectorRotation(top_n=args.bm3_top_n),
-                  PrismV1WithMinHold(min_days=20),
-                  PrismMH20SectorCap(min_days=20, sector_cap=0.35),
-                  PrismMH20SectorCap(min_days=20, sector_cap=0.25)]
+    strategies = [BM3SectorRotation(top_n=args.bm3_top_n)]
+    # Robustness grid: hold x cap
+    for hold in [15, 20, 25]:
+        for cap in [30, 35, 40]:
+            strategies.append(PrismMH20SectorCap(min_days=hold, sector_cap=cap/100.0))
     rows = []
     for strat in strategies:
         print(f"Running {strat.name}...")
