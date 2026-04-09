@@ -23,17 +23,14 @@
     "T2_theme_drop": [],
     "T3_accel_flip": [],
     "T4_dd": [],
-    "T5_new_entry": [
-      "多角化資源",
-      "産業ガス"
-    ],
+    "T5_new_entry": [],
     "theme_membership_diff": {
-      "added": [
+      "added": [],
+      "removed": [],
+      "unchanged": [
         "多角化資源",
         "産業ガス"
-      ],
-      "removed": [],
-      "unchanged": []
+      ]
     },
     "prev_snapshot_available": true,
     "selected_theme_count": 2,
