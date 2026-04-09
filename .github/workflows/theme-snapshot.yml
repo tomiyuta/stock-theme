@@ -1,0 +1,51 @@
+name: BAM Theme Snapshot
+
+on:
+  schedule:
+    - cron: "5 23 * * *"
+  workflow_dispatch:
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install dependencies
+        run: pip install requests pandas numpy yfinance scipy
+
+      - name: Prepare snapshot inputs
+        run: python scripts/prepare_snapshot_inputs.py
+
+      - name: Generate snapshot
+        env:
+          SNAPSHOT_INPUT_DIR: data/input
+          SNAPSHOT_ROOT: data/snapshots
+          MARKET_BENCHMARK: SPY
+          CASH_PROXY: SHV
+          K_GATE_LOOKBACK_DAYS: "63"
+          GATE_OPEN_THRESHOLD: "0.0"
+          GATE_MID_THRESHOLD: "-0.02"
+        run: python scripts/generate_snapshot.py
+
+      - name: Commit snapshot
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "snapshot: $(date -u +'%Y-%m-%dT%H:%M:%SZ')"
+            git pull --rebase origin main
+            git push
+          fi

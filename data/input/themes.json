@@ -1,0 +1,1865 @@
+[
+  {
+    "theme": "半導体製造装置：後工程",
+    "slug": "semi-equip-back",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.2665,
+    "ret_3m": 0.5908,
+    "ret_6m": 0.8476
+  },
+  {
+    "theme": "DRAM品薄",
+    "slug": "memory-shortage",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1624,
+    "ret_3m": 0.1766,
+    "ret_6m": 0.6243
+  },
+  {
+    "theme": "光接続：インフラ",
+    "slug": "dc-optical-device",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.2364,
+    "ret_3m": 0.8501,
+    "ret_6m": 1.7154
+  },
+  {
+    "theme": "アナログ半導体：パワー",
+    "slug": "analog-semi-power",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1966,
+    "ret_3m": 0.2078,
+    "ret_6m": 0.3597
+  },
+  {
+    "theme": "半導体製造装置：前工程",
+    "slug": "semi-equip-front",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1535,
+    "ret_3m": 0.1915,
+    "ret_6m": 0.4834
+  },
+  {
+    "theme": "光接続：トランシーバ",
+    "slug": "dc-optical-ems",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1675,
+    "ret_3m": 0.7796,
+    "ret_6m": 1.2389
+  },
+  {
+    "theme": "宇宙：地球観測",
+    "slug": "earth-observation",
+    "sector": "Industrials",
+    "theme1": "宇宙",
+    "ret_1m": 0.7274,
+    "ret_3m": 1.082,
+    "ret_6m": 0.7344
+  },
+  {
+    "theme": "クルーズ船",
+    "slug": "cruise-lines",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": 0.0173,
+    "ret_3m": -0.0717,
+    "ret_6m": -0.0007
+  },
+  {
+    "theme": "データストレージ",
+    "slug": "data-storage",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.2481,
+    "ret_3m": 0.617,
+    "ret_6m": 2.3342
+  },
+  {
+    "theme": "半導体製造装置：部品",
+    "slug": "semi-component",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.2338,
+    "ret_3m": 0.867,
+    "ret_6m": 1.2224
+  },
+  {
+    "theme": "次世代電源",
+    "slug": "next-gen-power-supply",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1152,
+    "ret_3m": 0.2775,
+    "ret_6m": 0.7506
+  },
+  {
+    "theme": "防衛：保守部品・MRO",
+    "slug": "defence-maintenance",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": -0.02,
+    "ret_3m": 0.0018,
+    "ret_6m": 0.0793
+  },
+  {
+    "theme": "銅鉱山",
+    "slug": "copper-mining",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": 0.0376,
+    "ret_3m": 0.0355,
+    "ret_6m": 0.5148
+  },
+  {
+    "theme": "半導体：材料・消耗品",
+    "slug": "semi-consumables",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1678,
+    "ret_3m": 0.4822,
+    "ret_6m": 2.0113
+  },
+  {
+    "theme": "建築塗料",
+    "slug": "housing-infrastructure",
+    "sector": "Basic Materials",
+    "theme1": "化学",
+    "ret_1m": 0.0136,
+    "ret_3m": 0.0205,
+    "ret_6m": 0.041
+  },
+  {
+    "theme": "ラグジュアリー",
+    "slug": "luxury",
+    "sector": "Consumer Cyclical",
+    "theme1": "アパレル",
+    "ret_1m": 0.0643,
+    "ret_3m": 0.085,
+    "ret_6m": 0.2436
+  },
+  {
+    "theme": "旅客航空：LCC",
+    "slug": "airlines-lcc",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": -0.0672,
+    "ret_3m": -0.1291,
+    "ret_6m": 0.0372
+  },
+  {
+    "theme": "半導体受託製造",
+    "slug": "foundry",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1775,
+    "ret_3m": 0.2574,
+    "ret_6m": 0.707
+  },
+  {
+    "theme": "人型ロボ：筋骨・神経",
+    "slug": "humanoid-bones",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": 0.0687,
+    "ret_3m": 0.1266,
+    "ret_6m": 0.284
+  },
+  {
+    "theme": "レアアース",
+    "slug": "rare-earth",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": -0.1338,
+    "ret_3m": -0.1267,
+    "ret_6m": -0.2195
+  },
+  {
+    "theme": "ネオクラウド",
+    "slug": "neo-cloud",
+    "sector": "Technology",
+    "theme1": "AIプロバイダ",
+    "ret_1m": 0.1749,
+    "ret_3m": 0.1382,
+    "ret_6m": 0.2929
+  },
+  {
+    "theme": "熱管理インフラ",
+    "slug": "heat-infra",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1074,
+    "ret_3m": 0.3377,
+    "ret_6m": 0.3127
+  },
+  {
+    "theme": "グラファイト",
+    "slug": "graphite",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": 0.0115,
+    "ret_3m": -0.4073,
+    "ret_6m": -0.476
+  },
+  {
+    "theme": "防衛：推進システム",
+    "slug": "defence-engine",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": 0.0474,
+    "ret_3m": 0.1143,
+    "ret_6m": 0.2607
+  },
+  {
+    "theme": "不動産テック",
+    "slug": "re-tech",
+    "sector": "Real Estate",
+    "theme1": "不動産",
+    "ret_1m": -0.13,
+    "ret_3m": -0.3217,
+    "ret_6m": -0.2631
+  },
+  {
+    "theme": "原発機器（次世代）",
+    "slug": "nuclear-nextgen",
+    "sector": "Energy",
+    "theme1": "原子力",
+    "ret_1m": -0.0225,
+    "ret_3m": -0.1045,
+    "ret_6m": -0.1584
+  },
+  {
+    "theme": "CPU",
+    "slug": "cpu",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.2343,
+    "ret_3m": 0.2809,
+    "ret_6m": 0.2341
+  },
+  {
+    "theme": "ロボ：産業/医療",
+    "slug": "robotics-industrial",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": 0.0612,
+    "ret_3m": 0.0976,
+    "ret_6m": 0.5269
+  },
+  {
+    "theme": "ライフスタイル・家具",
+    "slug": "lifestyle-furniture",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": -0.0152,
+    "ret_3m": -0.1398,
+    "ret_6m": -0.0128
+  },
+  {
+    "theme": "カスタムAI半導体",
+    "slug": "custom-ai-chips",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1499,
+    "ret_3m": 0.1888,
+    "ret_6m": 0.3915
+  },
+  {
+    "theme": "AIサーバ：受託製造",
+    "slug": "ai-server-odm",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1568,
+    "ret_3m": 0.1207,
+    "ret_6m": 0.2326
+  },
+  {
+    "theme": "オンサイト電源",
+    "slug": "onsite-power",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.0514,
+    "ret_3m": 0.3044,
+    "ret_6m": 0.4828
+  },
+  {
+    "theme": "機械：建設/農業/資源",
+    "slug": "machinery-construction-ag",
+    "sector": "Industrials",
+    "theme1": "産業機械",
+    "ret_1m": 0.0387,
+    "ret_3m": 0.1691,
+    "ret_6m": 0.3531
+  },
+  {
+    "theme": "インフラ工事：交通",
+    "slug": "pub-construction-transpo",
+    "sector": "Industrials",
+    "theme1": "建設",
+    "ret_1m": 0.0251,
+    "ret_3m": 0.065,
+    "ret_6m": 0.1051
+  },
+  {
+    "theme": "Appleインテリジェンス",
+    "slug": "apple-intelligence",
+    "sector": "Technology",
+    "theme1": "エッジAI",
+    "ret_1m": 0.1386,
+    "ret_3m": 0.1896,
+    "ret_6m": 0.2665
+  },
+  {
+    "theme": "電気工事・施工",
+    "slug": "infra-contractors",
+    "sector": "Industrials",
+    "theme1": "データセンター",
+    "ret_1m": 0.0842,
+    "ret_3m": 0.36,
+    "ret_6m": 0.4364
+  },
+  {
+    "theme": "骨材・基礎資材",
+    "slug": "aggregates-concrete",
+    "sector": "Basic Materials",
+    "theme1": "建設資材",
+    "ret_1m": 0.0449,
+    "ret_3m": -0.012,
+    "ret_6m": 0.0275
+  },
+  {
+    "theme": "アナログ半導体：汎用",
+    "slug": "analog-semi-generic",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1363,
+    "ret_3m": 0.2378,
+    "ret_6m": 0.3622
+  },
+  {
+    "theme": "産業用電池",
+    "slug": "industrial-batteries",
+    "sector": "Energy",
+    "theme1": "バッテリー",
+    "ret_1m": -0.016,
+    "ret_3m": -0.1264,
+    "ret_6m": 0.0553
+  },
+  {
+    "theme": "住宅設備：外装",
+    "slug": "home-exterior",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": -0.0096,
+    "ret_3m": -0.0326,
+    "ret_6m": -0.0608
+  },
+  {
+    "theme": "原発機器（現行）",
+    "slug": "nuclear-traditional",
+    "sector": "Energy",
+    "theme1": "原子力",
+    "ret_1m": 0.09,
+    "ret_3m": 0.207,
+    "ret_6m": 0.4289
+  },
+  {
+    "theme": "旅客航空：メガキャリア",
+    "slug": "airlines-legacy",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": 0.0467,
+    "ret_3m": -0.1691,
+    "ret_6m": 0.044
+  },
+  {
+    "theme": "電源インフラ",
+    "slug": "power-infra",
+    "sector": "Industrials",
+    "theme1": "データセンター",
+    "ret_1m": 0.0985,
+    "ret_3m": 0.1996,
+    "ret_6m": 0.2182
+  },
+  {
+    "theme": "アメカジ",
+    "slug": "american-casual",
+    "sector": "Consumer Cyclical",
+    "theme1": "アパレル",
+    "ret_1m": 0.0902,
+    "ret_3m": -0.137,
+    "ret_6m": 0.129
+  },
+  {
+    "theme": "eVTOL",
+    "slug": "eVTOL",
+    "sector": "Technology",
+    "theme1": "モビリティ",
+    "ret_1m": -0.1397,
+    "ret_3m": -0.3185,
+    "ret_6m": -0.3779
+  },
+  {
+    "theme": "人型ロボ：目",
+    "slug": "humanoid-eyes",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": -0.0425,
+    "ret_3m": -0.092,
+    "ret_6m": -0.3099
+  },
+  {
+    "theme": "住宅ローン組成",
+    "slug": "mortgage-origination",
+    "sector": "Financial Services",
+    "theme1": "消費者",
+    "ret_1m": 0.0203,
+    "ret_3m": -0.2372,
+    "ret_6m": -0.1971
+  },
+  {
+    "theme": "ロボ：物流/サービス",
+    "slug": "robotics-logistics",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": -0.0064,
+    "ret_3m": -0.214,
+    "ret_6m": -0.288
+  },
+  {
+    "theme": "住宅設備：流通",
+    "slug": "home-distribution",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": -0.0891,
+    "ret_3m": -0.122,
+    "ret_6m": -0.1811
+  },
+  {
+    "theme": "住宅設備：屋内",
+    "slug": "home-interior",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": -0.0385,
+    "ret_3m": -0.0944,
+    "ret_6m": -0.1289
+  },
+  {
+    "theme": "投資銀行",
+    "slug": "investment-banking",
+    "sector": "Financial Services",
+    "theme1": "銀行",
+    "ret_1m": 0.0819,
+    "ret_3m": -0.1331,
+    "ret_6m": -0.0335
+  },
+  {
+    "theme": "大衆車",
+    "slug": "mass-market-vehicles",
+    "sector": "Consumer Cyclical",
+    "theme1": "自動車",
+    "ret_1m": 0.0414,
+    "ret_3m": -0.1574,
+    "ret_6m": 0.0081
+  },
+  {
+    "theme": "光接続：スイッチ",
+    "slug": "dc-optical-semi",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1272,
+    "ret_3m": 0.1069,
+    "ret_6m": 0.1532
+  },
+  {
+    "theme": "中国AI",
+    "slug": "china-ai",
+    "sector": "Technology",
+    "theme1": "AIプロバイダ",
+    "ret_1m": -0.0531,
+    "ret_3m": -0.0152,
+    "ret_6m": -0.1557
+  },
+  {
+    "theme": "保険DX",
+    "slug": "insurance-dx",
+    "sector": "Financial Services",
+    "theme1": "フィンテック",
+    "ret_1m": 0.0261,
+    "ret_3m": -0.212,
+    "ret_6m": -0.1868
+  },
+  {
+    "theme": "自動車部品",
+    "slug": "auto-parts",
+    "sector": "Consumer Cyclical",
+    "theme1": "自動車",
+    "ret_1m": -0.0124,
+    "ret_3m": -0.0461,
+    "ret_6m": 0.0062
+  },
+  {
+    "theme": "金属・機能性パッケージ",
+    "slug": "metal-specialty-packaging",
+    "sector": "Basic Materials",
+    "theme1": "包装・容器",
+    "ret_1m": -0.0003,
+    "ret_3m": 0.062,
+    "ret_6m": 0.1252
+  },
+  {
+    "theme": "IOT×エッジAI",
+    "slug": "semi-iot-ai",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.0204,
+    "ret_3m": -0.1301,
+    "ret_6m": -0.0421
+  },
+  {
+    "theme": "空調",
+    "slug": "hvac",
+    "sector": "Industrials",
+    "theme1": "設備インフラ",
+    "ret_1m": -0.0095,
+    "ret_3m": 0.0663,
+    "ret_6m": -0.0295
+  },
+  {
+    "theme": "半導体工場インフラ",
+    "slug": "semi-fab-infra",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.1087,
+    "ret_3m": 0.2582,
+    "ret_6m": 0.3931
+  },
+  {
+    "theme": "アクティブウェア",
+    "slug": "activewear",
+    "sector": "Consumer Cyclical",
+    "theme1": "アパレル",
+    "ret_1m": -0.076,
+    "ret_3m": -0.1916,
+    "ret_6m": -0.1328
+  },
+  {
+    "theme": "住設専門商社",
+    "slug": "housing-equipment-trading",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": 0.0004,
+    "ret_3m": -0.0042,
+    "ret_6m": -0.0318
+  },
+  {
+    "theme": "ホームビルダー",
+    "slug": "homebuilders",
+    "sector": "Consumer Cyclical",
+    "theme1": "住宅",
+    "ret_1m": -0.0548,
+    "ret_3m": -0.0431,
+    "ret_6m": -0.141
+  },
+  {
+    "theme": "鉄",
+    "slug": "steel",
+    "sector": "Basic Materials",
+    "theme1": "メタル",
+    "ret_1m": 0.0191,
+    "ret_3m": -0.0422,
+    "ret_6m": 0.1315
+  },
+  {
+    "theme": "ホテル・リゾート",
+    "slug": "hotels-resorts",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": 0.0481,
+    "ret_3m": 0.0265,
+    "ret_6m": 0.1421
+  },
+  {
+    "theme": "産業資材流通",
+    "slug": "industrial-distribution",
+    "sector": "Industrials",
+    "theme1": "産業サービス",
+    "ret_1m": 0.053,
+    "ret_3m": 0.124,
+    "ret_6m": 0.1541
+  },
+  {
+    "theme": "AI半導体：コア銘柄",
+    "slug": "ai-semiconductor-core",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.0875,
+    "ret_3m": 0.1118,
+    "ret_6m": 0.3179
+  },
+  {
+    "theme": "防衛：素材・部材",
+    "slug": "defence-parts",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": -0.0023,
+    "ret_3m": 0.2228,
+    "ret_6m": 0.4694
+  },
+  {
+    "theme": "暗号資産・ブロックチェン",
+    "slug": "crypto",
+    "sector": "Financial Services",
+    "theme1": "フィンテック",
+    "ret_1m": -0.0186,
+    "ret_3m": -0.1479,
+    "ret_6m": -0.421
+  },
+  {
+    "theme": "機械：多角化",
+    "slug": "diversified-industrials",
+    "sector": "Industrials",
+    "theme1": "産業機械",
+    "ret_1m": 0.0139,
+    "ret_3m": 0.068,
+    "ret_6m": 0.1369
+  },
+  {
+    "theme": "ラック内接続",
+    "slug": "dc-rack-connect",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": -0.0091,
+    "ret_3m": -0.1443,
+    "ret_6m": -0.1944
+  },
+  {
+    "theme": "資本財リース",
+    "slug": "capital-equipment-leasing",
+    "sector": "Industrials",
+    "theme1": "産業サービス",
+    "ret_1m": -0.0018,
+    "ret_3m": 0.0282,
+    "ret_6m": 0.1459
+  },
+  {
+    "theme": "太陽光発電",
+    "slug": "solar-energy-storage",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": -0.1537,
+    "ret_3m": -0.193,
+    "ret_6m": 0.1112
+  },
+  {
+    "theme": "トラック輸送",
+    "slug": "trucking-intermodal",
+    "sector": "Industrials",
+    "theme1": "物流",
+    "ret_1m": 0.0582,
+    "ret_3m": 0.2441,
+    "ret_6m": 0.5458
+  },
+  {
+    "theme": "インフラ工事：電力/通信",
+    "slug": "pub-construction-electric",
+    "sector": "Industrials",
+    "theme1": "建設",
+    "ret_1m": 0.0912,
+    "ret_3m": 0.2879,
+    "ret_6m": 0.4444
+  },
+  {
+    "theme": "アナログ半導体：センサ",
+    "slug": "analog-semi-sensor",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.0535,
+    "ret_3m": 0.0848,
+    "ret_6m": 0.1993
+  },
+  {
+    "theme": "製紙・段ボール",
+    "slug": "corrugated-paper-packaging",
+    "sector": "Basic Materials",
+    "theme1": "包装・容器",
+    "ret_1m": -0.0284,
+    "ret_3m": -0.0431,
+    "ret_6m": -0.054
+  },
+  {
+    "theme": "アウトドア製品",
+    "slug": "outdoor-products",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー製品",
+    "ret_1m": 0.0069,
+    "ret_3m": -0.0685,
+    "ret_6m": 0.0614
+  },
+  {
+    "theme": "BNPL",
+    "slug": "bnpl",
+    "sector": "Financial Services",
+    "theme1": "フィンテック",
+    "ret_1m": -0.0451,
+    "ret_3m": -0.3259,
+    "ret_6m": -0.4075
+  },
+  {
+    "theme": "ウラン",
+    "slug": "uranium",
+    "sector": "Energy",
+    "theme1": "原子力",
+    "ret_1m": -0.0326,
+    "ret_3m": -0.0714,
+    "ret_6m": -0.0436
+  },
+  {
+    "theme": "オンライン旅行予約",
+    "slug": "ota",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": 0.0026,
+    "ret_3m": -0.1658,
+    "ret_6m": -0.081
+  },
+  {
+    "theme": "多角化資源",
+    "slug": "diversified-resources",
+    "sector": "Basic Materials",
+    "theme1": "資源",
+    "ret_1m": 0.0792,
+    "ret_3m": 0.1933,
+    "ret_6m": 0.4914
+  },
+  {
+    "theme": "鉄道製造・リース",
+    "slug": "rail-manufacturing",
+    "sector": "Industrials",
+    "theme1": "産業機械",
+    "ret_1m": -0.0278,
+    "ret_3m": 0.058,
+    "ret_6m": 0.134
+  },
+  {
+    "theme": "メガバンク",
+    "slug": "megabanks",
+    "sector": "Financial Services",
+    "theme1": "銀行",
+    "ret_1m": 0.0958,
+    "ret_3m": -0.0669,
+    "ret_6m": 0.095
+  },
+  {
+    "theme": "物流サービス",
+    "slug": "logistics-air-freight",
+    "sector": "Industrials",
+    "theme1": "物流",
+    "ret_1m": 0.0041,
+    "ret_3m": 0.0306,
+    "ret_6m": 0.2458
+  },
+  {
+    "theme": "高品質ファーストフード",
+    "slug": "fast-casual",
+    "sector": "Consumer Cyclical",
+    "theme1": "レストラン",
+    "ret_1m": -0.0098,
+    "ret_3m": -0.0178,
+    "ret_6m": -0.0824
+  },
+  {
+    "theme": "軍用ドローン",
+    "slug": "drones",
+    "sector": "Industrials",
+    "theme1": "防衛テック",
+    "ret_1m": -0.1313,
+    "ret_3m": -0.1596,
+    "ret_6m": -0.1855
+  },
+  {
+    "theme": "量子コンピュータ",
+    "slug": "quantum-computing",
+    "sector": "Technology",
+    "theme1": "量子",
+    "ret_1m": -0.1732,
+    "ret_3m": -0.4549,
+    "ret_6m": -0.639
+  },
+  {
+    "theme": "施設設備",
+    "slug": "facility-equipment",
+    "sector": "Industrials",
+    "theme1": "設備インフラ",
+    "ret_1m": 0.003,
+    "ret_3m": -0.0444,
+    "ret_6m": -0.0182
+  },
+  {
+    "theme": "スマートグラス",
+    "slug": "smart-glass",
+    "sector": "Technology",
+    "theme1": "エッジAI",
+    "ret_1m": -0.0412,
+    "ret_3m": -0.1779,
+    "ret_6m": -0.1535
+  },
+  {
+    "theme": "リチウム",
+    "slug": "lithium",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": 0.0294,
+    "ret_3m": -0.0848,
+    "ret_6m": 0.3308
+  },
+  {
+    "theme": "生命科学：精密分析",
+    "slug": "lifescience-diagnose",
+    "sector": "Healthcare",
+    "theme1": "生命科学",
+    "ret_1m": 0.0355,
+    "ret_3m": -0.1242,
+    "ret_6m": 0.1277
+  },
+  {
+    "theme": "カジュアルダイニング",
+    "slug": "dining",
+    "sector": "Consumer Cyclical",
+    "theme1": "レストラン",
+    "ret_1m": -0.0293,
+    "ret_3m": -0.0372,
+    "ret_6m": 0.0173
+  },
+  {
+    "theme": "宇宙：インフラ",
+    "slug": "space-infrastructure",
+    "sector": "Industrials",
+    "theme1": "宇宙",
+    "ret_1m": 0.2733,
+    "ret_3m": 0.0975,
+    "ret_6m": 0.325
+  },
+  {
+    "theme": "カフェ",
+    "slug": "cafe",
+    "sector": "Consumer Cyclical",
+    "theme1": "レストラン",
+    "ret_1m": 0.0162,
+    "ret_3m": -0.0146,
+    "ret_6m": 0.166
+  },
+  {
+    "theme": "半導体設計ソフト",
+    "slug": "semiconductor-design",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.0453,
+    "ret_3m": -0.1368,
+    "ret_6m": -0.1615
+  },
+  {
+    "theme": "消費者レンディング",
+    "slug": "consumer-lending",
+    "sector": "Financial Services",
+    "theme1": "消費者",
+    "ret_1m": 0.0251,
+    "ret_3m": -0.2326,
+    "ret_6m": -0.1417
+  },
+  {
+    "theme": "不動産サービス",
+    "slug": "re-service",
+    "sector": "Real Estate",
+    "theme1": "不動産",
+    "ret_1m": 0.0483,
+    "ret_3m": -0.1188,
+    "ret_6m": 0.0113
+  },
+  {
+    "theme": "金鉱山",
+    "slug": "gold-mining",
+    "sector": "Basic Materials",
+    "theme1": "貴金属",
+    "ret_1m": -0.0506,
+    "ret_3m": 0.0659,
+    "ret_6m": 0.2805
+  },
+  {
+    "theme": "防衛：電子・情報通信",
+    "slug": "defence-comm",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": 0.0112,
+    "ret_3m": 0.0798,
+    "ret_6m": 0.2515
+  },
+  {
+    "theme": "食品卸売",
+    "slug": "food-wholesale",
+    "sector": "Consumer Defensive",
+    "theme1": "卸売",
+    "ret_1m": -0.0327,
+    "ret_3m": 0.0776,
+    "ret_6m": 0.0073
+  },
+  {
+    "theme": "地銀",
+    "slug": "regional-bank",
+    "sector": "Financial Services",
+    "theme1": "銀行",
+    "ret_1m": 0.0617,
+    "ret_3m": 0.0057,
+    "ret_6m": 0.0871
+  },
+  {
+    "theme": "電力貯蔵",
+    "slug": "battery-storage",
+    "sector": "Energy",
+    "theme1": "バッテリー",
+    "ret_1m": -0.1788,
+    "ret_3m": -0.4956,
+    "ret_6m": -0.4538
+  },
+  {
+    "theme": "生命科学：消耗品",
+    "slug": "lifescience-consumables",
+    "sector": "Healthcare",
+    "theme1": "生命科学",
+    "ret_1m": 0.0049,
+    "ret_3m": -0.17,
+    "ret_6m": -0.1048
+  },
+  {
+    "theme": "AIサーバ：自社ブランド",
+    "slug": "server-brand",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.0498,
+    "ret_3m": 0.1084,
+    "ret_6m": -0.0897
+  },
+  {
+    "theme": "ハイパースケーラー",
+    "slug": "hyperscalers",
+    "sector": "Technology",
+    "theme1": "AIプロバイダ",
+    "ret_1m": -0.0238,
+    "ret_3m": -0.1232,
+    "ret_6m": -0.1333
+  },
+  {
+    "theme": "日用品",
+    "slug": "consumer-staples",
+    "sector": "Consumer Defensive",
+    "theme1": "日用品",
+    "ret_1m": -0.0617,
+    "ret_3m": 0.0247,
+    "ret_6m": -0.0031
+  },
+  {
+    "theme": "次世代セル",
+    "slug": "nextgen-batteries",
+    "sector": "Energy",
+    "theme1": "バッテリー",
+    "ret_1m": -0.0436,
+    "ret_3m": -0.1769,
+    "ret_6m": -0.395
+  },
+  {
+    "theme": "中国EV",
+    "slug": "chinese-ev",
+    "sector": "Consumer Cyclical",
+    "theme1": "中国",
+    "ret_1m": 0.1004,
+    "ret_3m": 0.1054,
+    "ret_6m": -0.2192
+  },
+  {
+    "theme": "次世代銀行",
+    "slug": "nextgen-bank",
+    "sector": "Financial Services",
+    "theme1": "フィンテック",
+    "ret_1m": -0.1086,
+    "ret_3m": -0.3993,
+    "ret_6m": -0.4382
+  },
+  {
+    "theme": "動画配信サービス",
+    "slug": "video-streaming",
+    "sector": "Consumer Cyclical",
+    "theme1": "エンタメ",
+    "ret_1m": 0.0074,
+    "ret_3m": -0.0092,
+    "ret_6m": 0.0029
+  },
+  {
+    "theme": "インフラ計測",
+    "slug": "infra-measure",
+    "sector": "Industrials",
+    "theme1": "産業機械",
+    "ret_1m": 0.0115,
+    "ret_3m": -0.0962,
+    "ret_6m": -0.1819
+  },
+  {
+    "theme": "決済テック",
+    "slug": "payment-tech",
+    "sector": "Financial Services",
+    "theme1": "決済",
+    "ret_1m": -0.0649,
+    "ret_3m": -0.2235,
+    "ret_6m": -0.2765
+  },
+  {
+    "theme": "おもちゃ",
+    "slug": "toys",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー製品",
+    "ret_1m": -0.0588,
+    "ret_3m": -0.1187,
+    "ret_6m": 0.0375
+  },
+  {
+    "theme": "中古車販売",
+    "slug": "used-car-sales",
+    "sector": "Consumer Cyclical",
+    "theme1": "自動車",
+    "ret_1m": 0.0205,
+    "ret_3m": -0.1032,
+    "ret_6m": -0.0996
+  },
+  {
+    "theme": "生命保険",
+    "slug": "life-insurance",
+    "sector": "Financial Services",
+    "theme1": "保険",
+    "ret_1m": 0.0442,
+    "ret_3m": -0.0277,
+    "ret_6m": 0.0162
+  },
+  {
+    "theme": "OpenAI関連",
+    "slug": "openai-related",
+    "sector": "Technology",
+    "theme1": "AIプロバイダ",
+    "ret_1m": 0.0038,
+    "ret_3m": -0.0793,
+    "ret_6m": -0.1251
+  },
+  {
+    "theme": "自動車メンテナンス",
+    "slug": "auto-maintenance",
+    "sector": "Consumer Cyclical",
+    "theme1": "自動車",
+    "ret_1m": -0.0375,
+    "ret_3m": -0.0107,
+    "ret_6m": -0.16
+  },
+  {
+    "theme": "施設衛生管理",
+    "slug": "facility-sanitation",
+    "sector": "Industrials",
+    "theme1": "産業サービス",
+    "ret_1m": -0.0378,
+    "ret_3m": -0.0195,
+    "ret_6m": 0.0311
+  },
+  {
+    "theme": "アナログ半導体：通信",
+    "slug": "analog-semi-comm",
+    "sector": "Technology",
+    "theme1": "半導体",
+    "ret_1m": 0.0212,
+    "ret_3m": -0.1168,
+    "ret_6m": -0.1932
+  },
+  {
+    "theme": "総合飲料",
+    "slug": "beverages-diversified",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": -0.0586,
+    "ret_3m": -0.0087,
+    "ret_6m": 0.0166
+  },
+  {
+    "theme": "自動運転",
+    "slug": "autonomous",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": -0.076,
+    "ret_3m": -0.2553,
+    "ret_6m": -0.3195
+  },
+  {
+    "theme": "ライブエンタメ",
+    "slug": "live-entertainment",
+    "sector": "Consumer Cyclical",
+    "theme1": "エンタメ",
+    "ret_1m": 0.0001,
+    "ret_3m": 0.0067,
+    "ret_6m": -0.045
+  },
+  {
+    "theme": "掘削サービス",
+    "slug": "drilling-services",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.0912,
+    "ret_3m": 0.2146,
+    "ret_6m": 0.4918
+  },
+  {
+    "theme": "宇宙：衛星通信",
+    "slug": "satellite-communications",
+    "sector": "Industrials",
+    "theme1": "宇宙",
+    "ret_1m": 0.2352,
+    "ret_3m": 0.2683,
+    "ret_6m": 0.6115
+  },
+  {
+    "theme": "ディスカウント衣料",
+    "slug": "discount-apparel",
+    "sector": "Consumer Cyclical",
+    "theme1": "アパレル",
+    "ret_1m": 0.0268,
+    "ret_3m": 0.042,
+    "ret_6m": 0.1644
+  },
+  {
+    "theme": "バイオテック：総合",
+    "slug": "biotech-diversified",
+    "sector": "Healthcare",
+    "theme1": "医薬品",
+    "ret_1m": -0.0446,
+    "ret_3m": 0.0355,
+    "ret_6m": 0.1793
+  },
+  {
+    "theme": "保険仲介",
+    "slug": "insurance-brokerage",
+    "sector": "Financial Services",
+    "theme1": "保険",
+    "ret_1m": -0.0258,
+    "ret_3m": -0.1676,
+    "ret_6m": -0.243
+  },
+  {
+    "theme": "ネットメディア",
+    "slug": "advertising-platforms",
+    "sector": "Communication Services",
+    "theme1": "メディア",
+    "ret_1m": -0.0203,
+    "ret_3m": -0.2321,
+    "ret_6m": -0.1798
+  },
+  {
+    "theme": "バイオテック：ゲノム",
+    "slug": "biotech-genomics",
+    "sector": "Healthcare",
+    "theme1": "医薬品",
+    "ret_1m": -0.0261,
+    "ret_3m": -0.0092,
+    "ret_6m": 0.1222
+  },
+  {
+    "theme": "AI創薬",
+    "slug": "ai-pharma",
+    "sector": "Healthcare",
+    "theme1": "医療AI",
+    "ret_1m": 0.0247,
+    "ret_3m": -0.1462,
+    "ret_6m": -0.011
+  },
+  {
+    "theme": "化粧品・パーソナルケア",
+    "slug": "cosmetics-personal-care",
+    "sector": "Consumer Defensive",
+    "theme1": "日用品",
+    "ret_1m": -0.142,
+    "ret_3m": -0.1299,
+    "ret_6m": -0.1387
+  },
+  {
+    "theme": "製薬大手",
+    "slug": "pharma",
+    "sector": "Healthcare",
+    "theme1": "医薬品",
+    "ret_1m": 0.0039,
+    "ret_3m": 0.0357,
+    "ret_6m": 0.1402
+  },
+  {
+    "theme": "インフラ設計",
+    "slug": "infrastructure-consulting",
+    "sector": "Industrials",
+    "theme1": "建設",
+    "ret_1m": -0.0665,
+    "ret_3m": -0.1008,
+    "ret_6m": -0.1934
+  },
+  {
+    "theme": "決済インフラ",
+    "slug": "payment-infrastructure",
+    "sector": "Financial Services",
+    "theme1": "決済",
+    "ret_1m": -0.0214,
+    "ret_3m": -0.1295,
+    "ret_6m": -0.1166
+  },
+  {
+    "theme": "PE・プライベトクレジト",
+    "slug": "pe-private-credit",
+    "sector": "Financial Services",
+    "theme1": "投資",
+    "ret_1m": -0.0295,
+    "ret_3m": -0.3491,
+    "ret_6m": -0.2877
+  },
+  {
+    "theme": "防衛：統合",
+    "slug": "defence-general",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": -0.0419,
+    "ret_3m": 0.0673,
+    "ret_6m": 0.1521
+  },
+  {
+    "theme": "生命科学：総合",
+    "slug": "lifescience-pf",
+    "sector": "Healthcare",
+    "theme1": "生命科学",
+    "ret_1m": -0.0137,
+    "ret_3m": -0.235,
+    "ret_6m": -0.1917
+  },
+  {
+    "theme": "コンテンツ・スタジオ",
+    "slug": "content-studios",
+    "sector": "Consumer Cyclical",
+    "theme1": "メディア",
+    "ret_1m": -0.0144,
+    "ret_3m": -0.0846,
+    "ret_6m": -0.0602
+  },
+  {
+    "theme": "ファーストフード",
+    "slug": "fast-food",
+    "sector": "Consumer Cyclical",
+    "theme1": "レストラン",
+    "ret_1m": -0.0616,
+    "ret_3m": -0.0583,
+    "ret_6m": -0.057
+  },
+  {
+    "theme": "電力：IPP",
+    "slug": "power-supply-IPP",
+    "sector": "Utilities",
+    "theme1": "電力",
+    "ret_1m": 0.0088,
+    "ret_3m": 0.024,
+    "ret_6m": 0.0105
+  },
+  {
+    "theme": "次世代冷媒",
+    "slug": "refrigerant",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": 0.1792,
+    "ret_3m": 0.6498,
+    "ret_6m": 0.3731
+  },
+  {
+    "theme": "鉄道貨物",
+    "slug": "railways",
+    "sector": "Industrials",
+    "theme1": "物流",
+    "ret_1m": -0.0057,
+    "ret_3m": 0.0899,
+    "ret_6m": 0.0802
+  },
+  {
+    "theme": "タバコ",
+    "slug": "tobacco",
+    "sector": "Consumer Defensive",
+    "theme1": "日用品",
+    "ret_1m": -0.0023,
+    "ret_3m": 0.1343,
+    "ret_6m": 0.1098
+  },
+  {
+    "theme": "病院運営",
+    "slug": "hospital-operators",
+    "sector": "Healthcare",
+    "theme1": "医療保険・診療",
+    "ret_1m": -0.0624,
+    "ret_3m": 0.0154,
+    "ret_6m": 0.0797
+  },
+  {
+    "theme": "銀鉱山",
+    "slug": "silver-mining",
+    "sector": "Basic Materials",
+    "theme1": "貴金属",
+    "ret_1m": -0.1017,
+    "ret_3m": 0.0308,
+    "ret_6m": 0.3863
+  },
+  {
+    "theme": "医薬品卸",
+    "slug": "pharma-distribution",
+    "sector": "Healthcare",
+    "theme1": "医薬品",
+    "ret_1m": -0.06,
+    "ret_3m": -0.0022,
+    "ret_6m": 0.1955
+  },
+  {
+    "theme": "生命科学：創薬受託",
+    "slug": "lifescience-service",
+    "sector": "Healthcare",
+    "theme1": "生命科学",
+    "ret_1m": 0.003,
+    "ret_3m": -0.2722,
+    "ret_6m": -0.1541
+  },
+  {
+    "theme": "食品小売・量販店",
+    "slug": "grocery-retail",
+    "sector": "Consumer Defensive",
+    "theme1": "小売",
+    "ret_1m": 0.0106,
+    "ret_3m": 0.1558,
+    "ret_6m": 0.2251
+  },
+  {
+    "theme": "損害保険",
+    "slug": "property-casualty-insurance",
+    "sector": "Financial Services",
+    "theme1": "保険",
+    "ret_1m": 0.0028,
+    "ret_3m": 0.0192,
+    "ret_6m": 0.0236
+  },
+  {
+    "theme": "水道",
+    "slug": "water-utilities",
+    "sector": "Utilities",
+    "theme1": "水道",
+    "ret_1m": 0.0346,
+    "ret_3m": 0.1456,
+    "ret_6m": 0.1149
+  },
+  {
+    "theme": "行政DX",
+    "slug": "government-dx",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1423,
+    "ret_3m": -0.1527,
+    "ret_6m": -0.2705
+  },
+  {
+    "theme": "REIT",
+    "slug": "reit",
+    "sector": "Real Estate",
+    "theme1": "不動産",
+    "ret_1m": 0.0008,
+    "ret_3m": 0.0981,
+    "ret_6m": 0.1115
+  },
+  {
+    "theme": "菓子",
+    "slug": "confectionery",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": -0.0278,
+    "ret_3m": 0.1409,
+    "ret_6m": 0.0614
+  },
+  {
+    "theme": "防衛：サービス",
+    "slug": "defence-service",
+    "sector": "Industrials",
+    "theme1": "防衛",
+    "ret_1m": -0.0614,
+    "ret_3m": -0.0661,
+    "ret_6m": -0.0601
+  },
+  {
+    "theme": "アルコール飲料",
+    "slug": "alcoholic-beverages",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": -0.0109,
+    "ret_3m": 0.0556,
+    "ret_6m": 0.1206
+  },
+  {
+    "theme": "人型ロボ：脳",
+    "slug": "humanoid-brain",
+    "sector": "Technology",
+    "theme1": "ロボティクス",
+    "ret_1m": -0.073,
+    "ret_3m": -0.1771,
+    "ret_6m": -0.1654
+  },
+  {
+    "theme": "産業ガス",
+    "slug": "industrial-gases",
+    "sector": "Basic Materials",
+    "theme1": "化学",
+    "ret_1m": 0.063,
+    "ret_3m": 0.152,
+    "ret_6m": 0.0927
+  },
+  {
+    "theme": "ストレージ ソリュション",
+    "slug": "storage-solutions",
+    "sector": "Technology",
+    "theme1": "データセンター",
+    "ret_1m": -0.0081,
+    "ret_3m": -0.0802,
+    "ret_6m": -0.2383
+  },
+  {
+    "theme": "バイオテック：特化",
+    "slug": "biotech-specialized",
+    "sector": "Healthcare",
+    "theme1": "医薬品",
+    "ret_1m": 0.0475,
+    "ret_3m": -0.0535,
+    "ret_6m": 0.0367
+  },
+  {
+    "theme": "電力：規制事業者",
+    "slug": "power-supply-regulated",
+    "sector": "Utilities",
+    "theme1": "電力",
+    "ret_1m": 0.0195,
+    "ret_3m": 0.1239,
+    "ret_6m": 0.0793
+  },
+  {
+    "theme": "ガス小売",
+    "slug": "gas-utilities",
+    "sector": "Utilities",
+    "theme1": "電気・ガス小売",
+    "ret_1m": 0.0259,
+    "ret_3m": 0.132,
+    "ret_6m": 0.1411
+  },
+  {
+    "theme": "医療保険＋診療",
+    "slug": "health-insurance-services",
+    "sector": "Healthcare",
+    "theme1": "医療保険・診療",
+    "ret_1m": 0.0378,
+    "ret_3m": -0.127,
+    "ret_6m": -0.0964
+  },
+  {
+    "theme": "CDN",
+    "slug": "cdn",
+    "sector": "Technology",
+    "theme1": "ITサービス",
+    "ret_1m": 0.2282,
+    "ret_3m": 0.8754,
+    "ret_6m": 1.0721
+  },
+  {
+    "theme": "高PER",
+    "slug": "high-pe",
+    "sector": "Other",
+    "theme1": "ファンダメンタルズ",
+    "ret_1m": -0.0734,
+    "ret_3m": -0.0771,
+    "ret_6m": -0.087
+  },
+  {
+    "theme": "サイバー：端末保護",
+    "slug": "cybersecurity-end",
+    "sector": "Technology",
+    "theme1": "サイバーセキュリティ",
+    "ret_1m": -0.0384,
+    "ret_3m": -0.09,
+    "ret_6m": -0.1931
+  },
+  {
+    "theme": "食肉",
+    "slug": "meat-products",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": -0.0206,
+    "ret_3m": 0.0608,
+    "ret_6m": 0.0736
+  },
+  {
+    "theme": "電気・ガス小売",
+    "slug": "multi-utilities",
+    "sector": "Utilities",
+    "theme1": "電気・ガス小売",
+    "ret_1m": 0.0073,
+    "ret_3m": 0.1161,
+    "ret_6m": 0.0812
+  },
+  {
+    "theme": "高配当",
+    "slug": "dividend",
+    "sector": "Other",
+    "theme1": "ファンダメンタルズ",
+    "ret_1m": -0.0049,
+    "ret_3m": 0.1466,
+    "ret_6m": 0.235
+  },
+  {
+    "theme": "ドルストア",
+    "slug": "dollar-store",
+    "sector": "Consumer Defensive",
+    "theme1": "小売",
+    "ret_1m": -0.1214,
+    "ret_3m": -0.18,
+    "ret_6m": 0.2358
+  },
+  {
+    "theme": "サイバー：統合",
+    "slug": "cybersecurity-gen",
+    "sector": "Technology",
+    "theme1": "サイバーセキュリティ",
+    "ret_1m": -0.0147,
+    "ret_3m": -0.0721,
+    "ret_6m": -0.1633
+  },
+  {
+    "theme": "宅配デリバリー",
+    "slug": "delivery",
+    "sector": "Consumer Cyclical",
+    "theme1": "レストラン",
+    "ret_1m": -0.0302,
+    "ret_3m": -0.1873,
+    "ret_6m": -0.2201
+  },
+  {
+    "theme": "不動産検索PF",
+    "slug": "re-pf",
+    "sector": "Real Estate",
+    "theme1": "不動産",
+    "ret_1m": -0.1414,
+    "ret_3m": -0.4,
+    "ret_6m": -0.4808
+  },
+  {
+    "theme": "海洋掘削サービス",
+    "slug": "offshore-drilling",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.0979,
+    "ret_3m": 0.712,
+    "ret_6m": 0.8602
+  },
+  {
+    "theme": "廃棄物・リサイクル",
+    "slug": "environmental-waste",
+    "sector": "Industrials",
+    "theme1": "産業サービス",
+    "ret_1m": -0.0265,
+    "ret_3m": 0.0344,
+    "ret_6m": 0.0175
+  },
+  {
+    "theme": "ケーブルTV",
+    "slug": "cable-tv",
+    "sector": "Communication Services",
+    "theme1": "メディア",
+    "ret_1m": -0.047,
+    "ret_3m": 0.048,
+    "ret_6m": -0.117
+  },
+  {
+    "theme": "アグリビジネス",
+    "slug": "agribusiness",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": 0.0632,
+    "ret_3m": 0.2749,
+    "ret_6m": 0.349
+  },
+  {
+    "theme": "ソフト：業界特化",
+    "slug": "soft-vertical",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1145,
+    "ret_3m": -0.2369,
+    "ret_6m": -0.3173
+  },
+  {
+    "theme": "天然ガス：輸送・需要接続",
+    "slug": "natgas-infra",
+    "sector": "Energy",
+    "theme1": "データセンター",
+    "ret_1m": 0.0045,
+    "ret_3m": 0.2237,
+    "ret_6m": 0.1852
+  },
+  {
+    "theme": "加工食品",
+    "slug": "processed-foods",
+    "sector": "Consumer Defensive",
+    "theme1": "食品",
+    "ret_1m": -0.1526,
+    "ret_3m": -0.133,
+    "ret_6m": -0.2028
+  },
+  {
+    "theme": "ライドシェア",
+    "slug": "rideshare",
+    "sector": "Consumer Cyclical",
+    "theme1": "レジャー・移動",
+    "ret_1m": -0.0208,
+    "ret_3m": -0.238,
+    "ret_6m": -0.3289
+  },
+  {
+    "theme": "広告テック",
+    "slug": "ad-tech",
+    "sector": "Communication Services",
+    "theme1": "メディア",
+    "ret_1m": -0.1385,
+    "ret_3m": -0.3445,
+    "ret_6m": -0.3417
+  },
+  {
+    "theme": "石炭：一般炭",
+    "slug": "thermal-coal",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": -0.0868,
+    "ret_3m": -0.0044,
+    "ret_6m": -0.0371
+  },
+  {
+    "theme": "アルミ",
+    "slug": "alminium",
+    "sector": "Basic Materials",
+    "theme1": "メタル",
+    "ret_1m": 0.1897,
+    "ret_3m": 0.3418,
+    "ret_6m": 1.1915
+  },
+  {
+    "theme": "サイバー：データ保護",
+    "slug": "cybersecurity-data",
+    "sector": "Technology",
+    "theme1": "サイバーセキュリティ",
+    "ret_1m": -0.088,
+    "ret_3m": -0.3418,
+    "ret_6m": -0.4642
+  },
+  {
+    "theme": "化学：農業",
+    "slug": "food-agriculture",
+    "sector": "Basic Materials",
+    "theme1": "化学",
+    "ret_1m": 0.0758,
+    "ret_3m": 0.2902,
+    "ret_6m": 0.4645
+  },
+  {
+    "theme": "掘削機器",
+    "slug": "drilling-equipment",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.083,
+    "ret_3m": 0.3593,
+    "ret_6m": 0.6454
+  },
+  {
+    "theme": "ソフト：エンタープライズ",
+    "slug": "soft-enterprise",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1128,
+    "ret_3m": -0.2866,
+    "ret_6m": -0.3853
+  },
+  {
+    "theme": "ソフト：AI利用基盤",
+    "slug": "ai-infrastructure-software",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1211,
+    "ret_3m": -0.3343,
+    "ret_6m": -0.287
+  },
+  {
+    "theme": "ソフト：コミュニケション",
+    "slug": "soft-comm",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.0718,
+    "ret_3m": 0.0044,
+    "ret_6m": -0.0058
+  },
+  {
+    "theme": "サイバー：ID/監視/診断",
+    "slug": "cybersecurity-other",
+    "sector": "Technology",
+    "theme1": "サイバーセキュリティ",
+    "ret_1m": -0.0851,
+    "ret_3m": -0.1694,
+    "ret_6m": -0.2736
+  },
+  {
+    "theme": "モバイル通信",
+    "slug": "mobile-telecom",
+    "sector": "Communication Services",
+    "theme1": "通信",
+    "ret_1m": -0.0486,
+    "ret_3m": 0.1165,
+    "ret_6m": 0.056
+  },
+  {
+    "theme": "コンサル",
+    "slug": "consulting",
+    "sector": "Technology",
+    "theme1": "ITサービス",
+    "ret_1m": -0.0436,
+    "ret_3m": -0.214,
+    "ret_6m": -0.1668
+  },
+  {
+    "theme": "ソフト：マーケ・販売",
+    "slug": "soft-marketing",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1545,
+    "ret_3m": -0.3224,
+    "ret_6m": -0.3149
+  },
+  {
+    "theme": "天然ガス：収集・加工",
+    "slug": "natgas-upstream",
+    "sector": "Energy",
+    "theme1": "天然ガス",
+    "ret_1m": 0.0251,
+    "ret_3m": 0.2719,
+    "ret_6m": 0.3122
+  },
+  {
+    "theme": "天然ガス：生産",
+    "slug": "natural-gas-production",
+    "sector": "Energy",
+    "theme1": "天然ガス",
+    "ret_1m": 0.0045,
+    "ret_3m": 0.1829,
+    "ret_6m": 0.1403
+  },
+  {
+    "theme": "サイバー：クラウド",
+    "slug": "cybersecurity-cloud",
+    "sector": "Technology",
+    "theme1": "サイバーセキュリティ",
+    "ret_1m": -0.0519,
+    "ret_3m": -0.1561,
+    "ret_6m": -0.2963
+  },
+  {
+    "theme": "スーパーメジャー：米国外",
+    "slug": "oil-supermajors-non-us",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.1076,
+    "ret_3m": 0.4449,
+    "ret_6m": 0.4361
+  },
+  {
+    "theme": "天然ガス掘削：米",
+    "slug": "gas-fracking",
+    "sector": "Energy",
+    "theme1": "天然ガス",
+    "ret_1m": 0.0853,
+    "ret_3m": 0.428,
+    "ret_6m": 0.8971
+  },
+  {
+    "theme": "石炭：原料炭中心",
+    "slug": "coking-coal",
+    "sector": "Basic Materials",
+    "theme1": "戦略資源",
+    "ret_1m": 0.0548,
+    "ret_3m": -0.0921,
+    "ret_6m": -0.0368
+  },
+  {
+    "theme": "ソフト：生産性・開発",
+    "slug": "soft-productivity",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1101,
+    "ret_3m": -0.4456,
+    "ret_6m": -0.4532
+  },
+  {
+    "theme": "天然ガス：輸出",
+    "slug": "natgas-exprot",
+    "sector": "Energy",
+    "theme1": "天然ガス",
+    "ret_1m": 0.1395,
+    "ret_3m": 0.5436,
+    "ret_6m": 0.1034
+  },
+  {
+    "theme": "スーパーメジャー：米国",
+    "slug": "oil-supermajors-us",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.0283,
+    "ret_3m": 0.2717,
+    "ret_6m": 0.3339
+  },
+  {
+    "theme": "石油探鉱・生産",
+    "slug": "oil-exploration-production",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.0808,
+    "ret_3m": 0.3692,
+    "ret_6m": 0.3363
+  },
+  {
+    "theme": "ソフト：バックオフィス",
+    "slug": "soft-back-office",
+    "sector": "Technology",
+    "theme1": "ソフトウェア",
+    "ret_1m": -0.1448,
+    "ret_3m": -0.3764,
+    "ret_6m": -0.4277
+  },
+  {
+    "theme": "石油精製",
+    "slug": "refinary",
+    "sector": "Energy",
+    "theme1": "石油",
+    "ret_1m": 0.1149,
+    "ret_3m": 0.4198,
+    "ret_6m": 0.3717
+  },
+  {
+    "theme": "化学：汎用",
+    "slug": "commodity-chemicals",
+    "sector": "Basic Materials",
+    "theme1": "化学",
+    "ret_1m": 0.1278,
+    "ret_3m": 0.5917,
+    "ret_6m": 0.655
+  }
+]

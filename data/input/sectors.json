@@ -1,0 +1,79 @@
+[
+  {
+    "sector": "Basic Materials",
+    "ticker": "XLB",
+    "ret_1m": 0.0398,
+    "ret_3m": 0.0943,
+    "ret_6m": 0.1639
+  },
+  {
+    "sector": "Communication Services",
+    "ticker": "XLC",
+    "ret_1m": -0.0288,
+    "ret_3m": -0.0269,
+    "ret_6m": -0.0169
+  },
+  {
+    "sector": "Energy",
+    "ticker": "XLE",
+    "ret_1m": 0.0375,
+    "ret_3m": 0.2802,
+    "ret_6m": 0.319
+  },
+  {
+    "sector": "Financial Services",
+    "ticker": "XLF",
+    "ret_1m": 0.0225,
+    "ret_3m": -0.0875,
+    "ret_6m": -0.0383
+  },
+  {
+    "sector": "Industrials",
+    "ticker": "XLI",
+    "ret_1m": -0.0001,
+    "ret_3m": 0.0549,
+    "ret_6m": 0.1056
+  },
+  {
+    "sector": "Technology",
+    "ticker": "XLK",
+    "ret_1m": 0.0151,
+    "ret_3m": -0.0326,
+    "ret_6m": -0.012
+  },
+  {
+    "sector": "Consumer Defensive",
+    "ticker": "XLP",
+    "ret_1m": -0.0317,
+    "ret_3m": 0.0746,
+    "ret_6m": 0.0833
+  },
+  {
+    "sector": "Real Estate",
+    "ticker": "XLRE",
+    "ret_1m": -0.0059,
+    "ret_3m": 0.0498,
+    "ret_6m": 0.0368
+  },
+  {
+    "sector": "Utilities",
+    "ticker": "XLU",
+    "ret_1m": 0.0055,
+    "ret_3m": 0.0978,
+    "ret_6m": 0.0574
+  },
+  {
+    "sector": "Healthcare",
+    "ticker": "XLV",
+    "ret_1m": -0.0258,
+    "ret_3m": -0.0494,
+    "ret_6m": 0.0472
+  },
+  {
+    "sector": "Consumer Cyclical",
+    "ticker": "XLY",
+    "ret_1m": -0.031,
+    "ret_3m": -0.0828,
+    "ret_6m": -0.0724
+  }
+]

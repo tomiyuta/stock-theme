@@ -1,0 +1,10 @@
+{
+  "benchmark": "SPY",
+  "cash_proxy": "SHV",
+  "lookback_days": 63,
+  "benchmark_ret_3m": -0.0202,
+  "cash_ret_3m": 0.0085,
+  "excess_3m": -0.0287,
+  "gate_state": "CLOSED",
+  "atk_cap": 0.3
+}
