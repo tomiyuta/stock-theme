@@ -12,7 +12,10 @@ SIGNALS_PATH = ROOT / "public" / "api" / "prism" / "signals.json"
 MIN_HOLD_DAYS = 20
 SECTOR_CAP = 0.35
 SINGLE_NAME_CAP = 0.08
-GAP_STOP_THRESHOLD = -0.08  # -8% single-day drop
+GAP_STOP_THRESHOLD = -0.08  # -8% trailing drawdown from peak
+# EXIT_CONSTITUTION_v2: TRAIL8_ALERT is monitoring-only.
+# Auto-sell is DISABLED. Do not re-enable without forward validation.
+TRAIL8_AUTO_SELL_ENABLED = False
 
 def load_ledger():
     if LEDGER_PATH.exists():
@@ -108,13 +111,14 @@ def generate_orders(today_str=None):
         print("⚠️  PREFLIGHT ALERTS:")
         for a in pf_alerts: print(f"  {a}")
 
-    # B1: Gap stop check
+    # B1: TRAIL8 alert check (monitoring only per EXIT_CONSTITUTION_v2)
     gap_sells = check_gap_stops(ledger, prices)
     if gap_sells:
         for gs in gap_sells:
-            all_alerts.append(f"🚨 B1 GAP_STOP: {gs['ticker']} {gs['drop']:.1%} — forced sell (MinHold override)")
-            print(f"  🚨 GAP_STOP: {gs['ticker']} {gs['drop']:.1%}")
-    gap_tickers = {gs["ticker"] for gs in gap_sells}
+            all_alerts.append(f"⚠️ TRAIL8_ALERT: {gs['ticker']} {gs['drop']:.1%} (trailing DD from peak — monitoring only)")
+            print(f"  ⚠️ TRAIL8_ALERT: {gs['ticker']} {gs['drop']:.1%} (alert-only, no auto-sell)")
+    # Auto-sell disabled per EXIT_CONSTITUTION_v2 §B-2
+    gap_tickers = {gs["ticker"] for gs in gap_sells} if TRAIL8_AUTO_SELL_ENABLED else set()
 
     # Build current holdings map
     held = {p["ticker"]: p for p in ledger["positions"] if p["status"] == "active"}
@@ -220,6 +224,14 @@ def generate_orders(today_str=None):
         alert_path = ALERTS_DIR / f"alerts_{today_str}.json"
         with open(alert_path, "w") as f:
             json.dump({"date": today_str, "alerts": all_alerts, "count": len(all_alerts)}, f, indent=2)
+
+    # TRAIL8 monitoring log (EXIT_CONSTITUTION_v2 §5: separate from order pipeline)
+    if gap_sells:
+        monitor_path = ALERTS_DIR / f"trail8_monitor_{today_str}.json"
+        with open(monitor_path, "w") as f:
+            json.dump({"date": today_str, "trail8_alerts": gap_sells,
+                       "auto_sell_enabled": TRAIL8_AUTO_SELL_ENABLED,
+                       "note": "EXIT_CONSTITUTION_v2: monitoring only"}, f, indent=2)
 
     # Daily summary
     active = [p for p in ledger["positions"] if p["status"] == "active"]
