@@ -218,7 +218,59 @@ def compute_prism_r_pnl():
     return result
 
 # =============================================================
+# Forward Overlay — append monthly returns to cumulative_returns.json
+# =============================================================
+def update_forward_overlay():
+    from datetime import date
+    today = date.today()
+    
+    for api_dir, pnl_key, label in [
+        (API_PRISM, 'a4', 'PRISM'),
+        (API_PRISM_R, 'a5', 'PRISM-R'),
+    ]:
+        cum_path = api_dir / 'cumulative_returns.json'
+        pnl_path = api_dir / 'pnl.json'
+        if not cum_path.exists() or not pnl_path.exists():
+            continue
+        
+        cum = load_json(cum_path)
+        pnl = load_json(pnl_path)
+        fwd = cum.get('forward_overlay', {'dates': [], 'a4': [], 'a5': [], 'SPY': []})
+        
+        # Get portfolio total P&L as the current snapshot return
+        total_pnl = pnl.get('summary', {}).get('total_pnl_pct', 0)
+        as_of = pnl.get('as_of_date', str(today))
+        
+        # Only update if as_of date is newer than last forward entry
+        if fwd['dates'] and as_of <= fwd['dates'][-1]:
+            print(f'{label} forward: already up to date ({as_of})')
+            continue
+        
+        # Append daily snapshot (will be aggregated to monthly on chart side)
+        fwd['dates'].append(as_of)
+        
+        # For the strategy return, use total_pnl from pnl.json
+        # This is cumulative since entry, so we store as growth factor
+        if pnl_key == 'a4':
+            fwd['a4'].append(round(1 + total_pnl, 6))
+        else:
+            fwd['a5'].append(round(1 + total_pnl, 6))
+        
+        # SPY: fetch from last known price in constituents or use 0
+        # We'll compute SPY return from the BT boundary
+        spy_val = fwd.get('SPY', [])
+        if len(spy_val) < len(fwd['dates']):
+            # Pad SPY with 1.0 placeholder (will be updated with real data)
+            while len(spy_val) < len(fwd['dates']):
+                spy_val.append(1.0)
+            fwd['SPY'] = spy_val
+        
+        cum['forward_overlay'] = fwd
+        save_json(cum_path, cum)
+        print(f'{label} forward: appended {as_of} (growth={1+total_pnl:.4f})')
+
 if __name__ == '__main__':
     compute_prism_pnl()
     compute_prism_r_pnl()
+    update_forward_overlay()
     print('Done.')

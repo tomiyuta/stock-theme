@@ -364,10 +364,22 @@ function initPrismRChart(){
 fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
   const ctx=document.getElementById('cumChartR');
   if(!ctx)return;
-  new Chart(ctx,{type:'line',data:{labels:cr.dates,datasets:[
-    {label:'A5-R (PRISM-R)',data:cr.a5,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,0.05)',borderWidth:2,pointRadius:0,fill:true},
-    {label:'SPY',data:cr.SPY,borderColor:'#9ca3af',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]}
-  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+  const fwd = cr.forward_overlay || {dates:[],a5:[],SPY:[]};
+  const lastBT_a5 = cr.a5[cr.a5.length-1] || 1;
+  const lastBT_spy = cr.SPY[cr.SPY.length-1] || 1;
+  const fwdA5 = (fwd.a5||[]).map(g => Math.round(lastBT_a5 * g * 1e6) / 1e6);
+  const fwdSPY = (fwd.SPY||[]).map(g => Math.round(lastBT_spy * g * 1e6) / 1e6);
+  const allDates = [...cr.dates, ...fwd.dates.filter(d => !cr.dates.includes(d))];
+  const btA5 = [...cr.a5, ...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const btSPY = [...cr.SPY, ...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const fwdA5Full = [...new Array(cr.dates.length - 1).fill(null), lastBT_a5, ...fwdA5];
+  const fwdSPYFull = [...new Array(cr.dates.length - 1).fill(null), lastBT_spy, ...fwdSPY];
+  new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
+    {label:'A5-R BT(参考)',data:btA5,borderColor:'rgba(124,58,237,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'A5-R 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
     plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},
       tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
     scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},
