@@ -653,3 +653,42 @@ Historical結果 vs Base(Current-L1 + A5-SNRb):
   BFM-v2 = risk-managed Layer 1 alternative（research-shadow）
   BFMv2_research_clock = independent（A5-SNRb/A5-liteを汚染しない）
 ```
+
+
+---
+
+## Session Close — Final Status (2026-04-10)
+
+### Official Labels (confirmed by 12 ChatGPT reviews)
+
+```
+A4:          live core
+A5-lite:     return-seeking residual-alpha selector（frozen shadow）
+A5-SNRb:     risk-normalized residual-alpha alternative（primary research-shadow, forward clock active）
+BFM-v2:      risk-managed Layer 1 alternative（research-shadow候補, Sharpe+0.13/Calmar+0.27/MaxDD+13pt）
+A5-Quality:  path-smoothness-biased（secondary, parked）
+A5-SNRa:     rejected（over-penalization）
+BFM-v1:      rejected（over-defensive）
+```
+
+### Next Actions (priority order, confirmed)
+
+```
+1. BFM-v2 forward clock開始（別clock）
+2. Theme Correlation Budget 診断実装（制約ではなくログ）
+3. CRA-v1（stock-themes confirmation overlay）
+4. Dip Sleeve
+5. Continuity Filter
+6. Vol overlay
+```
+
+### Not To Do
+
+```
+- A5-lite の再定義
+- BFM-v2 の production 昇格
+- A5-SNRb の追加tuning
+- stock-themes α/β の ranking利用
+- 3本以上の新枝を同時に走らせること
+- HybridBench / Kalman
+```
