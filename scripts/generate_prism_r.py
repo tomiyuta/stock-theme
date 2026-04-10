@@ -133,9 +133,72 @@ for th in ts.index:
     sel.append(th); sc_cnt[s] = sc_cnt.get(s, 0) + 1
     if len(sel) >= TOP_T: break
 
+# === BFM-v2: Quality Filter on top-25 candidates ===
+CAND_N = 25
+candidates = list(ts.index[:CAND_N])
+cand_feat = {}
+for th in candidates:
+    ths = sub[sub['theme']==th]
+    tks = ths['ticker'].unique()
+    if len(tks) < MIN_M: continue
+    tk_r63 = {}
+    for tk in tks:
+        tkd = ths[ths['ticker']==tk].sort_values('date')
+        if len(tkd) >= 20: tk_r63[tk] = cumret(tkd['ret'].values[-63:])
+    if len(tk_r63) < MIN_M: continue
+    breadth63 = sum(1 for v in tk_r63.values() if np.isfinite(v) and v > 0) / len(tk_r63)
+    abs_c = np.array([abs(v) for v in tk_r63.values() if np.isfinite(v)])
+    tot_abs = abs_c.sum()
+    conc63 = float(np.sum((abs_c/tot_abs)**2)) if tot_abs > 1e-10 else 1.0
+    td_vals = ths.groupby('date')['theme_ret'].first().sort_index().values
+    tvol = float(np.std(td_vals[-63:], ddof=1)*np.sqrt(252)) if len(td_vals)>=63 else np.nan
+    if np.isfinite(breadth63) and np.isfinite(conc63) and np.isfinite(tvol):
+        cand_feat[th] = {'breadth63': breadth63, 'concentration63': conc63, 'theme_vol63': tvol}
+
+sel_bfm2 = sel  # fallback
+bfm2_vetoed = set()
+if len(cand_feat) >= 5:
+    cf = pd.DataFrame(cand_feat).T
+    b_thresh = cf['breadth63'].quantile(0.30)
+    c_thresh = cf['concentration63'].quantile(0.80)
+    v_thresh = cf['theme_vol63'].quantile(0.80)
+    for th in cf.index:
+        if cf.loc[th,'breadth63'] < b_thresh: bfm2_vetoed.add(th)
+        if cf.loc[th,'concentration63'] > c_thresh: bfm2_vetoed.add(th)
+        if cf.loc[th,'theme_vol63'] > v_thresh: bfm2_vetoed.add(th)
+    survivors = [th for th in ts.index if th in candidates and th not in bfm2_vetoed]
+    sel_bfm2 = []; sc_cnt3 = {}
+    for th in survivors:
+        s2 = theme_sector.get(th, 'Unk')
+        if sc_cnt3.get(s2, 0) >= SEC_MAX: continue
+        sel_bfm2.append(th); sc_cnt3[s2] = sc_cnt3.get(s2, 0) + 1
+        if len(sel_bfm2) >= TOP_T: break
+
+# === Theme Correlation Budget Diagnostics ===
+theme_daily_rets = {}
+for th in sel:
+    td = sub[sub['theme']==th].groupby('date')['theme_ret'].first().sort_index()
+    if len(td) >= 20: theme_daily_rets[th] = td
+corr_diag = {}
+if len(theme_daily_rets) >= 2:
+    tdr = pd.DataFrame(theme_daily_rets).dropna()
+    if len(tdr) >= 20:
+        corr_mat = tdr.corr()
+        n_th = len(corr_mat)
+        upper = corr_mat.where(np.triu(np.ones((n_th,n_th), dtype=bool), k=1))
+        all_corrs = upper.stack().values
+        corr_diag = {
+            'n_themes': n_th,
+            'avg_pairwise_corr': round(float(np.mean(all_corrs)), 3),
+            'max_pairwise_corr': round(float(np.max(all_corrs)), 3),
+            'min_pairwise_corr': round(float(np.min(all_corrs)), 3),
+            'n_high_corr_pairs': int(np.sum(all_corrs > 0.7)),
+            'effective_n_themes': round(float(1.0 / np.mean((1.0/n_th + (1-1.0/n_th)*np.mean(all_corrs)))), 1) if np.mean(all_corrs) < 1.0 else 1.0,
+        }
+
 # Stock scoring + comparison
 comparisons = []
-used4 = set(); used5 = set(); used_snrb = set()
+used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set()
 for rank_i, th in enumerate(sel):
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
     tks = ths['ticker'].unique()
@@ -186,6 +249,12 @@ for rank_i, th in enumerate(sel):
     for s in s_snrb:
         if s['ticker'] not in used_snrb and s['score_snrb'] is not None:
             snrb_tk = s['ticker']; used_snrb.add(snrb_tk); break
+    # BFM-v2 pick (only if theme is in sel_bfm2)
+    bfm2_tk = None
+    if th in sel_bfm2:
+        for s in s_snrb:  # same Layer 2 scorer as SNRb
+            if s['ticker'] not in used_bfm2 and s['score_snrb'] is not None:
+                bfm2_tk = s['ticker']; used_bfm2.add(bfm2_tk); break
     # Theme state per EXIT CONSTITUTION v2
     full_rank = int(ts['score'].rank(ascending=False).loc[th])
     theme_state = 'ENTRY' if full_rank <= 20 else 'WATCH' if full_rank <= 35 else 'EXIT'
@@ -198,8 +267,9 @@ for rank_i, th in enumerate(sel):
         'decel': round(float(ts.loc[th, 'decel']), 4),
         'theme_score': round(float(ts.loc[th, 'score']), 3),
         'n_members': len(tks),
-        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk,
+        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk, 'bfm2_pick': bfm2_tk,
         'same': a4_tk == a5_tk, 'a5_snrb_same': a5_tk == snrb_tk,
+        'in_bfm2': th in sel_bfm2,
         'stocks': all_stocks
     })
 
@@ -228,6 +298,8 @@ for tk, th in curr_picks.items():
 # === Output ===
 overlap = sum(1 for c in comparisons if c['same'])
 snrb_overlap_a5 = sum(1 for c in comparisons if c['a5_snrb_same'])
+bfm2_themes = [c for c in comparisons if c['in_bfm2']]
+bfm2_overlap_base = sum(1 for c in comparisons if c['in_bfm2'])
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
@@ -238,18 +310,23 @@ output = {
         'theme_score': '0.70×rank(mom63)+0.30×rank(decel)',
         'stock_score': 'α63×shrink(r²_63)',
         'stock_score_snrb': '(α63/resid_vol63)×shrink(r²_63)',
+        'bfm2_filter': 'veto: breadth<30pct, conc>80pct, vol>80pct from top25',
         'top_themes': 10, 'picks_per_theme': 1,
         'min_members': 4, 'sector_cap': 3, 'rebalance_days': 20
     },
     'summary': {
         'themes_selected': len(comparisons),
         'a4_names': len(used4), 'a5_names': len(used5), 'snrb_names': len(used_snrb),
+        'bfm2_themes': bfm2_overlap_base,
+        'bfm2_vetoed': len(bfm2_vetoed),
         'overlap': overlap,
         'overlap_pct': round(overlap / max(len(comparisons), 1), 2),
         'a5_snrb_overlap': snrb_overlap_a5,
         'a5_snrb_overlap_pct': round(snrb_overlap_a5 / max(len(comparisons), 1), 2),
         'diff_names': len(comparisons) - overlap
     },
+    'correlation_diagnostics': corr_diag,
+    'bfm2_quality_features': {th: cand_feat.get(th) for th in sel if th in cand_feat},
     'comparisons': comparisons,
     'virtual_exits': virtual_exits,
     'virtual_entries': virtual_entries
@@ -286,4 +363,6 @@ with open(OUT / 'meta.json', 'w') as f:
 comp_size = (OUT / 'shadow_comparison.json').stat().st_size / 1024
 print(f'PRISM-R: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
       f'snrb_overlap={snrb_overlap_a5}/{len(comparisons)}, '
+      f'bfm2={bfm2_overlap_base}/10 (vetoed={len(bfm2_vetoed)}), '
+      f'corr={corr_diag.get("avg_pairwise_corr","N/A")}, '
       f'snapshot={dt.date()}, size={comp_size:.0f}KB')

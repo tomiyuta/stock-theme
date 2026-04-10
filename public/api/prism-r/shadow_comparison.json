@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-09",
-  "generated_at": "2026-04-11T01:14:49.360372",
+  "generated_at": "2026-04-11T04:09:56.691882",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -8,6 +8,7 @@
     "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
     "stock_score": "α63×shrink(r²_63)",
     "stock_score_snrb": "(α63/resid_vol63)×shrink(r²_63)",
+    "bfm2_filter": "veto: breadth<30pct, conc>80pct, vol>80pct from top25",
     "top_themes": 10,
     "picks_per_theme": 1,
     "min_members": 4,
@@ -19,11 +20,73 @@
     "a4_names": 10,
     "a5_names": 10,
     "snrb_names": 10,
+    "bfm2_themes": 7,
+    "bfm2_vetoed": 11,
     "overlap": 7,
     "overlap_pct": 0.7,
     "a5_snrb_overlap": 10,
     "a5_snrb_overlap_pct": 1.0,
     "diff_names": 3
+  },
+  "correlation_diagnostics": {
+    "n_themes": 10,
+    "avg_pairwise_corr": 0.277,
+    "max_pairwise_corr": 0.928,
+    "min_pairwise_corr": -0.167,
+    "n_high_corr_pairs": 7,
+    "effective_n_themes": 2.9
+  },
+  "bfm2_quality_features": {
+    "dc-optical-ems": {
+      "breadth63": 1.0,
+      "concentration63": 0.40113689623358173,
+      "theme_vol63": 0.7310618526215383
+    },
+    "gas-fracking": {
+      "breadth63": 1.0,
+      "concentration63": 0.2200917605082515,
+      "theme_vol63": 0.3975768986420264
+    },
+    "dc-optical-device": {
+      "breadth63": 0.8888888888888888,
+      "concentration63": 0.17265982590361187,
+      "theme_vol63": 0.7079213244337225
+    },
+    "onsite-power": {
+      "breadth63": 1.0,
+      "concentration63": 0.22467615462394103,
+      "theme_vol63": 0.46848321637019164
+    },
+    "semi-component": {
+      "breadth63": 1.0,
+      "concentration63": 0.29063910332209325,
+      "theme_vol63": 0.6999705209280692
+    },
+    "refinary": {
+      "breadth63": 1.0,
+      "concentration63": 0.17076681618566877,
+      "theme_vol63": 0.4269948369326816
+    },
+    "defence-parts": {
+      "breadth63": 1.0,
+      "concentration63": 0.3141622466350068,
+      "theme_vol63": 0.31541724165730867
+    },
+    "oil-supermajors-non-us": {
+      "breadth63": 1.0,
+      "concentration63": 0.29029094649238674,
+      "theme_vol63": 0.24453521009733675
+    },
+    "infra-contractors": {
+      "breadth63": 1.0,
+      "concentration63": 0.21547536855949906,
+      "theme_vol63": 0.4592346938588311
+    },
+    "grocery-retail": {
+      "breadth63": 1.0,
+      "concentration63": 0.2540254537302809,
+      "theme_vol63": 0.1840435562633809
+    }
   },
   "comparisons": [
     {
@@ -40,8 +103,10 @@
       "a4_pick": "MRVL",
       "a5_pick": "AAOI",
       "snrb_pick": "AAOI",
+      "bfm2_pick": null,
       "same": false,
       "a5_snrb_same": true,
+      "in_bfm2": false,
       "stocks": [
         {
           "ticker": "AAOI",
@@ -139,8 +204,10 @@
       "a4_pick": "PUMP",
       "a5_pick": "PTEN",
       "snrb_pick": "PTEN",
+      "bfm2_pick": "PTEN",
       "same": false,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "ACDC",
@@ -238,8 +305,10 @@
       "a4_pick": "CIEN",
       "a5_pick": "VIAV",
       "snrb_pick": "VIAV",
+      "bfm2_pick": null,
       "same": false,
       "a5_snrb_same": true,
+      "in_bfm2": false,
       "stocks": [
         {
           "ticker": "AAOI",
@@ -401,8 +470,10 @@
       "a4_pick": "GEV",
       "a5_pick": "GEV",
       "snrb_pick": "GEV",
+      "bfm2_pick": "GEV",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "BE",
@@ -500,8 +571,10 @@
       "a4_pick": "UCTT",
       "a5_pick": "UCTT",
       "snrb_pick": "UCTT",
+      "bfm2_pick": null,
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": false,
       "stocks": [
         {
           "ticker": "AEIS",
@@ -583,8 +656,10 @@
       "a4_pick": "PARR",
       "a5_pick": "PARR",
       "snrb_pick": "PARR",
+      "bfm2_pick": "PARR",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "DINO",
@@ -714,8 +789,10 @@
       "a4_pick": "DCO",
       "a5_pick": "DCO",
       "snrb_pick": "DCO",
+      "bfm2_pick": "DCO",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "ATI",
@@ -797,8 +874,10 @@
       "a4_pick": "PBR",
       "a5_pick": "PBR",
       "snrb_pick": "PBR",
+      "bfm2_pick": "PBR",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "BP",
@@ -880,8 +959,10 @@
       "a4_pick": "MTZ",
       "a5_pick": "MTZ",
       "snrb_pick": "MTZ",
+      "bfm2_pick": "MTZ",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "EME",
@@ -979,8 +1060,10 @@
       "a4_pick": "COST",
       "a5_pick": "COST",
       "snrb_pick": "COST",
+      "bfm2_pick": "COST",
       "same": true,
       "a5_snrb_same": true,
+      "in_bfm2": true,
       "stocks": [
         {
           "ticker": "COST",

@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-09",
-  "generated_at": "2026-04-11T01:14:49.361603",
+  "generated_at": "2026-04-11T04:09:56.692947",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "pit_safe": false,
@@ -12,6 +12,7 @@
     "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
     "stock_score": "α63×shrink(r²_63)",
     "stock_score_snrb": "(α63/resid_vol63)×shrink(r²_63)",
+    "bfm2_filter": "veto: breadth<30pct, conc>80pct, vol>80pct from top25",
     "top_themes": 10,
     "picks_per_theme": 1,
     "min_members": 4,
