@@ -345,3 +345,94 @@ Additional items for each rebalance (appended to existing checklist):
 16. blocked_tech_weight
 17. sector_cap_suppression_count
 ```
+
+
+---
+
+## Research Priority: A5-SNR and Beyond (confirmed 2026-04-10)
+
+### Decision Context
+
+stock-themes.com の α/β 逆推定により、以下が確定:
+- stock-themes は自己除外なしの OLS（β/R² が 10-15% 過大推定）
+- PRISM-R の自前 OLS は自己除外ありで推定汚染が少ない
+- 現行 A5-lite の弱点は raw α の大きさに引っ張られること
+- r² は α の信頼性ではなく回帰全体の説明力
+- 次に磨くべきは「大きい α」ではなく「信頼できる α」
+
+詳細: `research/stock_themes_alpha_beta_analysis.md`
+
+### Confirmed Research Phases
+
+```
+Phase 1a: A5-SNRa
+  alpha_cum63 = α̂_daily × 63
+  resid_vol63 = std(ε_daily) × √63
+  score = alpha_cum63 / resid_vol63
+  （shrink(r²) なし — 二重ペナルティ回避）
+
+Phase 1b: A5-SNRb
+  score = (alpha_cum63 / resid_vol63) × shrink(r²)
+  （shrink の追加効果を分離検証）
+
+Phase 2: A5-Quality
+  noise_path = √(Σ ε_t²)
+  quality = |alpha_cum63| / (|alpha_cum63| + noise_path)
+  score = alpha_cum63 × quality
+  （signed residual sum ではなく path noise で測定）
+
+Phase 3: A5-T（診断用のみ、独立候補ではない）
+  score = alpha_cum63 × clip(|tα|/3, 0, 1)
+  plain OLS SE → HAC/NW は diagnostic 比較に留める
+  （63日窓では α/resid_vol と α/SE(α) はほぼ同順序）
+
+v3+: HybridBench / Dynamic β / Kalman
+```
+
+### Branch Governance
+
+```
+A4:          live production
+A5-lite:     shadow（凍結維持、independent forward clock）
+A5-SNRa/b:  research-shadow（別 clock、spec freeze 後に n カウント開始）
+A5-Quality:  research-shadow（別 clock）
+
+原則:
+  - A5-lite の証拠で A5-SNR を昇格させない
+  - A5-SNR の証拠で A5-Quality を正当化しない
+  - 各枝は spec freeze 後に別の n カウントを開始
+  - production 判断は PIT-safe forward shadow のみ
+```
+
+### Historical BT Protocol (direction check only)
+
+```
+必須確認項目（方向性のみ）:
+  - A5-SNRa vs A5-lite: median 月次 diff の符号
+  - A5-SNRa vs A5-lite: Tech share of net active return の変化方向
+  - A5-SNRa vs A5-lite: Top5 集中度の変化方向
+  - A5-SNRa vs A5-lite: non-Tech active diff の変化方向
+  - A5-SNRa vs A5-lite: MaxDD の悪化/改善
+
+確認しないもの（PIT 汚染のため）:
+  - 絶対 CAGR / Sharpe
+  - 統計的有意性（p 値）
+  - パラメータ最適化
+```
+
+### stock-themes.com Data Usage Rules
+
+```
+使ってよい（auditor / confirmer として）:
+  ✅ sign agreement（自前 α と stock-themes α の符号一致）
+  ✅ 3M/6M/12M の α 符号安定性
+  ✅ alpha_tval による外部確認
+  ✅ theme_factor / individual_factor の帰属分析
+
+使ってはいけない（selector として）:
+  ❌ stock-themes α をそのまま ranking に使用
+  ❌ self-inclusive β/R² を confidence として主利用
+  ❌ individual_factor を ex-ante alpha と解釈
+
+stock-themes = selector ではなく auditor / confirmer
+```
