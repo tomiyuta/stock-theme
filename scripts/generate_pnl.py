@@ -1,0 +1,224 @@
+#!/usr/bin/env python3
+"""
+generate_pnl.py — P&L tracking for PRISM and PRISM-R
+Outputs:
+  public/api/prism/pnl.json      (PRISM real P&L from ledger)
+  public/api/prism-r/pnl.json    (PRISM-R virtual P&L from virtual_ledger)
+"""
+import json, os
+from pathlib import Path
+from datetime import datetime
+
+ROOT = Path(__file__).resolve().parent.parent
+API_PRISM = ROOT / 'public' / 'api' / 'prism'
+API_PRISM_R = ROOT / 'public' / 'api' / 'prism-r'
+DATA_R = ROOT / 'data' / 'prism-r'
+
+def load_json(path):
+    with open(path, encoding='utf-8') as f:
+        return json.load(f)
+
+def save_json(path, data):
+    with open(path, 'w', encoding='utf-8') as f:
+        json.dump(data, f, ensure_ascii=False, indent=2)
+
+# =============================================================
+# PRISM P&L
+# =============================================================
+def compute_prism_pnl():
+    ledger = load_json(API_PRISM / 'ledger.json')
+    constituents = load_json(API_PRISM / 'constituents.json')
+    price_map = {c['ticker']: c.get('price', 0) for c in constituents if c.get('price')}
+    as_of = ledger.get('as_of_date', '')
+    
+    positions = []
+    total_invested = 0.0
+    total_current = 0.0
+    
+    for p in ledger.get('positions', []):
+        if p['status'] != 'active':
+            continue
+        tk = p['ticker']
+        entry_px = p.get('entry_price', 0)
+        current_px = price_map.get(tk, entry_px)
+        weight = p.get('target_weight', 0)
+        
+        pnl_pct = (current_px - entry_px) / entry_px if entry_px > 0 else 0
+        pnl_weighted = pnl_pct * weight
+        peak_px = p.get('peak_price_since_entry', entry_px)
+        dd_from_peak = (current_px - peak_px) / peak_px if peak_px > 0 else 0
+        
+        positions.append({
+            'ticker': tk,
+            'sector': p.get('sector', ''),
+            'theme': p.get('theme_at_entry', ''),
+            'entry_date': p.get('entry_date', ''),
+            'entry_price': round(entry_px, 2),
+            'current_price': round(current_px, 2),
+            'peak_price': round(peak_px, 2),
+            'weight': round(weight, 4),
+            'holding_days': p.get('holding_days', 0),
+            'pnl_pct': round(pnl_pct, 4),
+            'pnl_weighted': round(pnl_weighted, 6),
+            'dd_from_peak': round(dd_from_peak, 4),
+            'trail8_alert': dd_from_peak <= -0.08,
+            'minhold_blocked': not p.get('eligible_to_exit', True),
+        })
+        total_invested += entry_px * weight
+        total_current += current_px * weight
+    
+    total_pnl = (total_current - total_invested) / total_invested if total_invested > 0 else 0
+    
+    # Sort by P&L descending
+    positions.sort(key=lambda x: x['pnl_pct'], reverse=True)
+    
+    winners = [p for p in positions if p['pnl_pct'] > 0]
+    losers = [p for p in positions if p['pnl_pct'] < 0]
+    
+    result = {
+        'as_of_date': as_of,
+        'generated_at': datetime.now().isoformat(),
+        'strategy': 'PRISM',
+        'status': 'LIVE_PAPER',
+        'summary': {
+            'total_positions': len(positions),
+            'total_pnl_pct': round(total_pnl, 4),
+            'winners': len(winners),
+            'losers': len(losers),
+            'best': positions[0]['ticker'] if positions else None,
+            'best_pnl': positions[0]['pnl_pct'] if positions else 0,
+            'worst': positions[-1]['ticker'] if positions else None,
+            'worst_pnl': positions[-1]['pnl_pct'] if positions else 0,
+            'trail8_alerts': sum(1 for p in positions if p['trail8_alert']),
+            'blocked_count': sum(1 for p in positions if p['minhold_blocked']),
+        },
+        'positions': positions,
+    }
+    save_json(API_PRISM / 'pnl.json', result)
+    print(f'PRISM P&L: {len(positions)} positions, total={total_pnl:+.2%}')
+    return result
+
+# =============================================================
+# PRISM-R Virtual P&L
+# =============================================================
+def compute_prism_r_pnl():
+    comp = load_json(API_PRISM_R / 'shadow_comparison.json')
+    snapshot_date = comp.get('snapshot_date', '')
+    
+    # Load or create virtual ledger
+    vledger_path = DATA_R / 'virtual_ledger.json'
+    if vledger_path.exists():
+        vledger = load_json(vledger_path)
+    else:
+        vledger = {'positions': {}, 'history': [], 'created_at': datetime.now().isoformat()}
+    
+    # Current A5-R picks with prices
+    current_picks = {}
+    for c in comp.get('comparisons', []):
+        s = next((x for x in c['stocks'] if x['ticker'] == c['a5_pick']), {})
+        current_picks[c['a5_pick']] = {
+            'theme': c.get('theme_name', ''),
+            'price': s.get('price', 0),
+            'alpha63': s.get('alpha63', 0),
+            'score': s.get('score_a5', 0),
+            'theme_state': c.get('theme_state', ''),
+            'full_rank': c.get('full_rank', 0),
+        }
+    
+    # Update virtual ledger: add new picks, keep existing entry prices
+    for tk, info in current_picks.items():
+        if tk not in vledger['positions']:
+            vledger['positions'][tk] = {
+                'entry_date': snapshot_date,
+                'entry_price': info['price'],
+                'theme': info['theme'],
+                'status': 'active',
+            }
+    
+    # Mark exited positions
+    for tk in list(vledger['positions'].keys()):
+        pos = vledger['positions'][tk]
+        if tk not in current_picks and pos['status'] == 'active':
+            pos['status'] = 'closed'
+            pos['exit_date'] = snapshot_date
+            pos['exit_price'] = 0  # will be updated if price available
+    
+    # Save updated virtual ledger
+    save_json(vledger_path, vledger)
+    
+    # Compute P&L for active positions
+    positions = []
+    total_invested = 0.0
+    total_current = 0.0
+    weight = 1.0 / max(len(current_picks), 1)  # equal weight
+    
+    for tk, info in current_picks.items():
+        vpos = vledger['positions'].get(tk, {})
+        entry_px = vpos.get('entry_price', info['price'])
+        current_px = info['price']
+        entry_date = vpos.get('entry_date', snapshot_date)
+        
+        pnl_pct = (current_px - entry_px) / entry_px if entry_px > 0 else 0
+        pnl_weighted = pnl_pct * weight
+        
+        positions.append({
+            'ticker': tk,
+            'theme': info['theme'],
+            'theme_state': info['theme_state'],
+            'entry_date': entry_date,
+            'entry_price': round(entry_px, 2),
+            'current_price': round(current_px, 2),
+            'weight': round(weight, 4),
+            'alpha63': round(info.get('alpha63', 0), 3),
+            'pnl_pct': round(pnl_pct, 4),
+            'pnl_weighted': round(pnl_weighted, 6),
+        })
+        total_invested += entry_px * weight
+        total_current += current_px * weight
+    
+    total_pnl = (total_current - total_invested) / total_invested if total_invested > 0 else 0
+    positions.sort(key=lambda x: x['pnl_pct'], reverse=True)
+    
+    winners = [p for p in positions if p['pnl_pct'] > 0]
+    losers = [p for p in positions if p['pnl_pct'] < 0]
+    
+    # Closed positions from ledger
+    closed = []
+    for tk, pos in vledger['positions'].items():
+        if pos['status'] == 'closed':
+            closed.append({
+                'ticker': tk,
+                'theme': pos.get('theme', ''),
+                'entry_date': pos.get('entry_date', ''),
+                'exit_date': pos.get('exit_date', ''),
+                'entry_price': pos.get('entry_price', 0),
+            })
+    
+    result = {
+        'as_of_date': snapshot_date,
+        'generated_at': datetime.now().isoformat(),
+        'strategy': 'PRISM-R',
+        'status': 'SHADOW_VIRTUAL',
+        'summary': {
+            'total_positions': len(positions),
+            'total_pnl_pct': round(total_pnl, 4),
+            'winners': len(winners),
+            'losers': len(losers),
+            'best': positions[0]['ticker'] if positions else None,
+            'best_pnl': positions[0]['pnl_pct'] if positions else 0,
+            'worst': positions[-1]['ticker'] if positions else None,
+            'worst_pnl': positions[-1]['pnl_pct'] if positions else 0,
+            'closed_count': len(closed),
+        },
+        'positions': positions,
+        'closed_positions': closed,
+    }
+    save_json(API_PRISM_R / 'pnl.json', result)
+    print(f'PRISM-R P&L: {len(positions)} positions, total={total_pnl:+.2%}, closed={len(closed)}')
+    return result
+
+# =============================================================
+if __name__ == '__main__':
+    compute_prism_pnl()
+    compute_prism_r_pnl()
+    print('Done.')

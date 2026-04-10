@@ -1,0 +1,66 @@
+{
+  "positions": {
+    "AAOI": {
+      "entry_date": "2026-04-09",
+      "entry_price": 133.3,
+      "theme": "光接続：トランシーバ",
+      "status": "active"
+    },
+    "PTEN": {
+      "entry_date": "2026-04-09",
+      "entry_price": 10.14,
+      "theme": "天然ガス掘削：米",
+      "status": "active"
+    },
+    "VIAV": {
+      "entry_date": "2026-04-09",
+      "entry_price": 42.74,
+      "theme": "光接続：インフラ",
+      "status": "active"
+    },
+    "GEV": {
+      "entry_date": "2026-04-09",
+      "entry_price": 968.02,
+      "theme": "オンサイト電源",
+      "status": "active"
+    },
+    "PARR": {
+      "entry_date": "2026-04-09",
+      "entry_price": 59.46,
+      "theme": "石油精製",
+      "status": "active"
+    },
+    "UCTT": {
+      "entry_date": "2026-04-09",
+      "entry_price": 72.78,
+      "theme": "半導体製造装置：部品",
+      "status": "active"
+    },
+    "DCO": {
+      "entry_date": "2026-04-09",
+      "entry_price": 140.59,
+      "theme": "防衛：素材・部材",
+      "status": "active"
+    },
+    "PBR": {
+      "entry_date": "2026-04-09",
+      "entry_price": 20.69,
+      "theme": "スーパーメジャー：米国外",
+      "status": "active"
+    },
+    "MTZ": {
+      "entry_date": "2026-04-09",
+      "entry_price": 357.37,
+      "theme": "電気工事・施工",
+      "status": "active"
+    },
+    "CF": {
+      "entry_date": "2026-04-09",
+      "entry_price": 119.38,
+      "theme": "化学：農業",
+      "status": "active"
+    }
+  },
+  "history": [],
+  "created_at": "2026-04-10T16:45:16.282562"
+}

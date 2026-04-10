@@ -53,6 +53,8 @@ jobs:
         run: |
           mkdir -p public/api/prism-r
           python scripts/generate_prism_r.py
+          mkdir -p data/prism-r
+          python scripts/generate_pnl.py
 
       - name: Commit and push
         run: |
