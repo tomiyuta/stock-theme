@@ -280,9 +280,6 @@ Promise.all([
   const blockedTickers = new Set(orders.filter(o=>o.min_hold_blocked==='True').map(o=>o.ticker));
   const confirmedSells = sellStocks.filter(c=>!blockedTickers.has(c.ticker));
   const blockedSells = sellStocks.filter(c=>blockedTickers.has(c.ticker));
-  // Also check ledger for blocked positions not in target
-  const heldBlocked = (ledger?.positions||[]).filter(p=>p.status==='active'&&!p.eligible_to_exit&&!(p.ticker in target_eq));
-  const target_eq = Object.fromEntries(Object.entries(pp?.weights||{}).filter(([k])=>k!=='SHV'));
 
   h+=`<div class="signal-card sell"><div class="signal-card-title">▼ 売却確定</div>`;
   if(!confirmedSells.length){h+=`<div class="signal-empty">該当なし</div>`;}
@@ -292,7 +289,7 @@ Promise.all([
 
   // Blocked sells — full width separate card
   h+=`<div style="margin:4px 12px"><div class="signal-card blocked"><div class="signal-card-title">⏳ 売却待ち（MinHold）</div>`;
-  if(!blockedSells.length && !heldBlocked.length){h+=`<div class="signal-empty">該当なし</div>`;}
+  if(!blockedSells.length){h+=`<div class="signal-empty">該当なし</div>`;}
   else{
     blockedSells.forEach(c=>{
       const pos=(ledger?.positions||[]).find(p=>p.ticker===c.ticker&&p.status==='active');
