@@ -378,8 +378,8 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
     mkB('A5-R CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(124,58,237,0.06)')+
     mkB('A5-R Sharpe',st.a5.sharpe.toFixed(2),'rgba(124,58,237,0.06)')+
     mkB('A5-R MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
-    mkB('SPY CAGR',(st.spy.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
-    mkB('SPY MaxDD',(st.spy.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+    mkB('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkB('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
   const ann=cr.annual;const years=Object.keys(ann.a5).sort();
   let tb='';
   years.forEach(y=>{

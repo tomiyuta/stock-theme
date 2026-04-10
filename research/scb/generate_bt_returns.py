@@ -135,26 +135,26 @@ else:
     spy_close = spy['Close'].squeeze()
 spy_ret = spy_close.pct_change().dropna()
 spy_ret.index = spy_ret.index.tz_localize(None)
-df['spy'] = spy_ret.reindex(df.index).fillna(0)
+df['SPY'] = spy_ret.reindex(df.index).fillna(0)
 
 # Monthly returns
 df['ym'] = df.index.to_period('M')
 monthly = df.groupby('ym').apply(lambda g: pd.Series({
     'a4': float((1+g['a4']).prod()-1),
     'a5': float((1+g['a5']).prod()-1),
-    'spy': float((1+g['spy']).prod()-1),
+    'SPY': float((1+g['SPY']).prod()-1),
 })).reset_index()
 monthly['date'] = monthly['ym'].dt.to_timestamp('M')
 monthly = monthly.sort_values('date').reset_index(drop=True)
 
 # Cumulative growth of $1
-for col in ['a4','a5','spy']:
+for col in ['a4','a5','SPY']:
     monthly[f'cum_{col}'] = (1+monthly[col]).cumprod()
 
 # Annual returns
 monthly['year'] = monthly['date'].dt.year
 annual = {}
-for col in ['a4','a5','spy']:
+for col in ['a4','a5','SPY']:
     yr = monthly.groupby('year')[col].apply(lambda g: float((1+g).prod()-1))
     annual[col] = {str(y): round(v,4) for y,v in yr.items()}
 
@@ -174,7 +174,7 @@ def calc_stats(monthly_rets):
     return {'cagr':round(cagr,4),'sharpe':round(sharpe,4),'sortino':round(sortino,4),
             'maxdd':round(mdd,4),'n_months':n}
 
-stats = {col: calc_stats(monthly[col].values) for col in ['a4','a5','spy']}
+stats = {col: calc_stats(monthly[col].values) for col in ['a4','a5','SPY']}
 
 # Output JSON (opengrail format)
 output = {
@@ -183,8 +183,8 @@ output = {
     'ret_a4': [round(v,6) for v in monthly['a4']],
     'a5': [round(v,6) for v in monthly['cum_a5']],
     'ret_a5': [round(v,6) for v in monthly['a5']],
-    'SPY': [round(v,6) for v in monthly['cum_spy']],
-    'ret_SPY': [round(v,6) for v in monthly['spy']],
+    'SPY': [round(v,6) for v in monthly['cum_SPY']],
+    'ret_SPY': [round(v,6) for v in monthly['SPY']],
     'annual': annual,
     'stats': stats,
     'meta': {
@@ -211,6 +211,6 @@ with open(out_prismr / 'cumulative_returns.json', 'w') as f:
 print(f'\nOutput: {len(monthly)} months ({monthly["date"].iloc[0].date()} ~ {monthly["date"].iloc[-1].date()})')
 print(f'Stats A4: CAGR={stats["a4"]["cagr"]:.1%} Sharpe={stats["a4"]["sharpe"]:.2f} MaxDD={stats["a4"]["maxdd"]:.1%}')
 print(f'Stats A5: CAGR={stats["a5"]["cagr"]:.1%} Sharpe={stats["a5"]["sharpe"]:.2f} MaxDD={stats["a5"]["maxdd"]:.1%}')
-print(f'Stats SPY: CAGR={stats["spy"]["cagr"]:.1%} Sharpe={stats["spy"]["sharpe"]:.2f} MaxDD={stats["spy"]["maxdd"]:.1%}')
+print(f'Stats SPY: CAGR={stats["SPY"]["cagr"]:.1%} Sharpe={stats["SPY"]["sharpe"]:.2f} MaxDD={stats["SPY"]["maxdd"]:.1%}')
 print(f'Saved to {out_prism}/cumulative_returns.json + {out_prismr}/')
 print(f'Total time: {time.time()-t0:.1f}s')

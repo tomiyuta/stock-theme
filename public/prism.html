@@ -525,8 +525,8 @@ fetch('/api/prism/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then
     mkBadge('A4 CAGR',(st.a4.cagr*100).toFixed(1)+'%','rgba(0,82,204,0.06)')+
     mkBadge('A4 Sharpe',st.a4.sharpe.toFixed(2),'rgba(0,82,204,0.06)')+
     mkBadge('A4 MaxDD',(st.a4.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
-    mkBadge('SPY CAGR',(st.spy.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
-    mkBadge('SPY MaxDD',(st.spy.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+    mkBadge('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkBadge('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
   // Annual table
   const ann=cr.annual; const years=Object.keys(ann.a4).sort();
   let tb='';
