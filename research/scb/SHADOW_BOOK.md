@@ -692,3 +692,25 @@ BFM-v1:      rejected（over-defensive）
 - 3本以上の新枝を同時に走らせること
 - HybridBench / Kalman
 ```
+
+
+### Theme Correlation Budget — Alert Thresholds (provisional, 2026-04-10)
+
+```
+暫定アラート閾値（実務用、文献閾値ではない）:
+  effective_n_themes < 4.0     → concentration alert
+  max_pairwise_corr > 0.85     → severe overlap alert
+  high_corr_pairs / all_pairs > 10%  → cluster review
+  cluster_weight_top1 > 40%    → diversification warning
+
+初回診断値（2026-04-09スナップショット）:
+  effective_n_themes = 2.9     ⚠ ALERT（<4.0）
+  max_pairwise_corr = 0.928   ⚠ SEVERE（>0.85）
+  n_high_corr_pairs = 7/45    ⚠ 15.6%（>10%）
+  avg_pairwise_corr = 0.277
+
+解釈:
+  10テーマ保有でも実質2.9独立ベット。
+  max corr 0.928は同一潜在因子の重複保有を示唆。
+  診断継続し、3-6リバランス蓄積後にsoft cluster budgetを検討。
+```
