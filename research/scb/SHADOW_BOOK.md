@@ -436,3 +436,93 @@ A5-Quality:  research-shadow（別 clock）
 
 stock-themes = selector ではなく auditor / confirmer
 ```
+
+
+---
+
+## Audit Addendum — Research Branch Selection (2026-04-10)
+
+Status: governance-relevant addendum
+Effect on frozen A5-lite spec: none
+
+### Decision
+
+```
+A5-SNRb:    primary research-shadow（採用）
+A5-Quality: secondary / parked（2021年赤旗未解消）
+A5-SNRa:    rejected（過剰ペナルティ）
+```
+
+### Key Findings from Historical Diagnostics
+
+#### 1. MaxDD窓は別エピソード
+
+```
+A5-lite:   -42.0%  Peak 2021-11-08 → Trough 2022-09-26（2022年ベアマーケット）
+A5-SNRb:   -37.1%  Peak 2025-02-14 → Trough 2025-03-10（2025年2月急落）
+A5-Quality:-37.1%  Peak 2025-02-14 → Trough 2025-04-08（同上、回復遅延）
+```
+
+解釈: SNRb/Qualityは2022年DDを軽減した結果、2025年の小DDが新MaxDDになった。
+「同じクラッシュを浅く避けた」のではなく「別のクラッシュが新たなMaxDD」。
+
+#### 2. Tech share未改善
+
+```
+A5-lite:  Tech share of return = 39.3%
+A5-SNRb:  Tech share of return = 39.9%（ほぼ同等）
+```
+
+SNRbの改善はTech依存低下ではなく、volatility/concentration/DD profileの改善。
+
+#### 3. Top5集中度はSNRbで改善
+
+```
+A5-lite:   Top5 = 38.3%
+A5-SNRb:   Top5 = 34.1%（-4.2pt改善）
+A5-Quality:Top5 = 41.3%（+3.0pt悪化）
+```
+
+#### 4. Quality 2021年はAPLD 1銘柄依存（赤旗）
+
+```
+Quality 2021 (+165%):
+  Top-1: APLD = 58.7%
+  Top-3: 70.3%
+  Top-5: 79.2%
+```
+
+Qualityをprimaryに昇格させる根拠は現時点でない。
+
+### Branch Labels（公式）
+
+```
+A5-lite:    return-seeking residual-alpha selector
+A5-SNRb:    risk-normalized residual-alpha alternative（primary research-shadow）
+A5-Quality: path-smoothness-biased, regime-sensitive candidate（parked secondary）
+A5-SNRa:    rejected（over-penalization）
+```
+
+### Governance Implications
+
+1. A5-SNRb を次の primary research-shadow として承認
+2. A5-Quality は secondary のまま保留（forward clock 開始しない）
+3. A5-SNRa は棄却
+4. A5-lite の凍結仕様・昇格時計・ゲートは変更しない
+5. Historical evidence は方向確認のみ（PIT汚染のため）
+
+### 重要な位置づけ
+
+全候補がA5-liteに対してmedian月次diffで非優位。
+したがってこれらはA5-liteの上位互換ではなく、
+payoff distributionを変える枝（リスク調整版）として扱う。
+
+```
+A5-lite  = typical month champion
+A5-SNRb  = risk-shaped sibling
+A5-Quality = regime-sensitive convex branch（parked）
+```
+
+Any research branch introduced after A5-lite must run on an independent
+forward clock and must not reset, contaminate, or reinterpret the frozen
+A5-lite shadow record.
