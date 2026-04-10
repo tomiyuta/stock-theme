@@ -353,7 +353,7 @@ Promise.all([
   h+=`<div style="margin:0 12px;padding:8px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);background:var(--card-bg)">`;
 
   // Current SNRb picks from data
-  const snrbPicks = data.comparisons ? data.comparisons.filter(c=>c.snrb_pick).map(c=>({
+  const snrbPicks = comp.comparisons ? comp.comparisons.filter(c=>c.snrb_pick).map(c=>({
     theme: c.theme_name, ticker: c.snrb_pick, same: c.a5_snrb_same
   })) : [];
   const snrbOverlap = snrbPicks.filter(p=>p.same).length;
@@ -369,10 +369,10 @@ Promise.all([
   h+=`<div class="logic-card" onclick="this.classList.toggle('open')" style="margin:4px 0">`;
   h+=`<div class="logic-card-header" style="font-size:9px"><span>▶ SNRb銘柄選定（現スナップショット）</span><span class="lc-icon">›</span></div>`;
   h+=`<div class="logic-card-body" style="padding:6px 8px">`;
-  if(data.comparisons) {
+  if(comp.comparisons) {
     h+=`<table style="width:100%;font-size:8px;border-collapse:collapse">`;
     h+=`<tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left;padding:2px">テーマ</th><th>A5</th><th>SNRb</th><th>一致</th></tr>`;
-    data.comparisons.forEach(c=>{
+    comp.comparisons.forEach(c=>{
       const match = c.a5_snrb_same;
       const matchIcon = match ? '✅' : '🔀';
       const snrbTk = c.snrb_pick || '—';
