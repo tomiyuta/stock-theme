@@ -192,7 +192,7 @@ output = {
     'frozen_params': {
         'alpha_window': 63,
         'theme_score': '0.70×rank(mom63)+0.30×rank(decel)',
-        'stock_score': 'rank(α63)×shrink(r²_63)',
+        'stock_score': 'α63×shrink(r²_63)',
         'top_themes': 10, 'picks_per_theme': 1,
         'min_members': 4, 'sector_cap': 3, 'rebalance_days': 20
     },

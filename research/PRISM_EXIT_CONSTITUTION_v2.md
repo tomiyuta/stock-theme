@@ -3,6 +3,8 @@
 > Effective from: 2026-04-10
 > Code status: Phase 0 (document only, minimal code change)
 > Order evaluation cadence: rebalance day only (every 20 trading days)
+> Off-cycle sell evaluation: none (current implementation)
+> MinHold 20 is binding only for exits evaluated before 20 days elapsed
 
 ## 0. 目的
 
@@ -131,6 +133,23 @@ hard constraint。blocked holdingsを含むactual gross exposureがatk_capを超
 3. new buysは残余余力の範囲でのみ実行
 4. 不足時はnew buysを比例縮小
 5. 必要ならrank下位のnew buysをスキップ
+
+### C-5b. cap repair — 違反種別による分離（2026-04-10追加）
+```
+atk_cap / gross exposure / cash violation（hard）:
+  blocked縮小を許可（最終手段として）
+  順序: new buys → blocked → target continue
+
+sector_cap violation:
+  blocked縮小は原則禁止
+  同セクターの新規買付を停止することで対処
+  legacy blocked overage は一時的に許容
+
+原則文:
+  Blocked positions may be proportionally reduced only to repair
+  hard gross/atk/cash violations, not to repair sector-cap excess
+  created by legacy holdings.
+```
 
 ### C-6. forced liquidationの例外
 MinHoldより上位に来るfull liquidationは以下に限定:

@@ -14,7 +14,7 @@
 alpha_window:     63 trading days
 shrinkage:        r2<0.10 → r2×2 | 0.10≤r2≤0.50 → 0.20+(r2-0.10)×2 | r2>0.50 → 1.0
 theme_score:      0.70×rank(mom63) + 0.30×rank(decel)
-stock_score:      rank(α63) × shrink(r²_63)
+stock_score:      α63 × shrink(r²_63)
 top_themes:       10
 picks_per_theme:  1
 min_members:      4
@@ -275,4 +275,73 @@ theme_membership_frozen.json      Frozen membership definition
 feasibility_report.csv            1yr feasibility log
 shadow_book_records.csv           Shadow book initial record (2026-03-31)
 NORGATE_INSTRUCTIONS.md           Windows extraction instructions
+```
+
+---
+
+## ERRATA — Score Definition (2026-04-10)
+
+```
+Historical note:
+The implementation has consistently used:
+  stock_score = α63 × shrink(r²_63)
+
+This is confirmed in:
+  - backtest_extended.py line 103: s5[tk] = a63*shrk
+  - generate_prism_r.py line 148: score5 = a63*shrk
+
+The wording "rank(α63) × shrink(r²_63)" appearing in earlier versions of
+meta.json, SHADOW_BOOK.md, and related text was a documentation error only.
+No backtest or shadow-book result was generated from a rank(α)-based model.
+
+Effective correction (2026-04-10):
+All documentation and metadata now use: α63 × shrink(r²_63)
+```
+
+---
+
+## Order Evaluation Cadence (added 2026-04-10)
+
+```
+Routine rebalance evaluation: every 20 business days
+Off-cycle sell evaluation: none (current implementation)
+Manual override: only for data integrity / delisting / execution impossibility
+
+Interpretation:
+MinHold 20 is binding only for exits evaluated before 20 business days have elapsed.
+Under the current cadence, MinHold may be non-binding for routine rebalance exits
+and binding mainly for exceptional same-cycle removals (e.g. VALE/RIO day-0 case).
+```
+
+---
+
+## Tech Concentration Interpretation (corrected 2026-04-10)
+
+```
+Current figure: Tech share of net active return = 76%
+
+This measures RETURN CONCENTRATION, not ALLOCATION CONCENTRATION.
+76% of A5's net active return was attributable to Technology.
+This must NOT be interpreted as a 76% portfolio weight allocation to Technology.
+
+Sector tension must be evaluated separately using:
+  - active_tech_weight (portfolio allocation)
+  - tech_name_count (how many Tech names held)
+  - blocked_tech_weight (blocked positions in Tech)
+  - sector_cap_suppression_count (how often Tech new buys were blocked)
+```
+
+---
+
+## Forward Monitoring Additions (2026-04-10)
+
+Additional items for each rebalance (appended to existing checklist):
+```
+11. minhold_block_count
+12. minhold_blocked_weight
+13. fraction_of_rebalances_where_minhold_is_binding
+14. active_tech_weight (allocation, not return)
+15. tech_name_count
+16. blocked_tech_weight
+17. sector_cap_suppression_count
 ```
