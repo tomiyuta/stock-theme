@@ -184,6 +184,29 @@ Promise.all([
     h+=`<td>${tag}</td></tr>`;
   });
   h+=`</table></div>`;
+  // 3b-2. Virtual Sell Confirmed card (EXIT CONSTITUTION v2)
+  const vExits = comp.virtual_exits || [];
+  const vEntries = comp.virtual_entries || [];
+  if(vExits.length > 0) {
+    h+=`<div class="signal-card sell-r" style="margin:8px 12px"><div class="signal-card-title">🔴 売却確定（仮想） — ${vExits.length}銘柄がtarget除外</div>`;
+    vExits.forEach(e => {
+      h+=`<div style="padding:4px 8px;margin:2px 0;background:rgba(255,23,68,0.04);border-radius:3px;font-size:10px">`;
+      h+=`<b style="color:var(--red)">${e.ticker}</b> <span style="color:var(--text-sub)">${e.prev_theme}</span>`;
+      h+=`<span style="float:right;font-size:9px;color:var(--text-sub)">前回#${e.prev_rank} → 除外</span></div>`;
+    });
+    h+=`<div style="font-size:9px;color:var(--text-sub);margin-top:4px">EXIT CONSTITUTION v2: target_weightsから除外された銘柄。shadowモードのため仮想表示。</div></div>`;
+  }
+  if(vEntries.length > 0) {
+    h+=`<div class="signal-card hold-r" style="margin:8px 12px"><div class="signal-card-title">🟢 新規参入（仮想） — ${vEntries.length}銘柄</div>`;
+    vEntries.forEach(e => {
+      h+=`<div style="padding:4px 8px;margin:2px 0;background:rgba(0,200,83,0.04);border-radius:3px;font-size:10px">`;
+      h+=`<b style="color:var(--green)">${e.ticker}</b> <span style="color:var(--text-sub)">${e.theme}</span></div>`;
+    });
+    h+=`</div>`;
+  }
+  if(vExits.length === 0 && vEntries.length === 0) {
+    h+=`<div style="margin:6px 12px;padding:6px 10px;border-radius:4px;font-size:9px;background:rgba(0,200,83,0.06);color:var(--green);border:1px solid rgba(0,200,83,0.15)">✅ 前回から銘柄変更なし — 全ポジション継続</div>`;
+  }
   // 3c. Rebalance Calculator
   window._prismR_picks = comp.comparisons.map(c => {
     const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};

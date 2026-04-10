@@ -187,6 +187,28 @@ for rank_i, th in enumerate(sel):
         'stocks': all_stocks
     })
 
+# === Load previous snapshot for exit detection ===
+prev_picks = {}
+prev_file = OUT / 'shadow_comparison.json'
+if prev_file.exists():
+    try:
+        prev = json.load(open(prev_file))
+        for c in prev.get('comparisons', []):
+            prev_picks[c['a5_pick']] = {'theme': c.get('theme_name',''), 'rank': c.get('rank',0), 'full_rank': c.get('full_rank',0)}
+    except: pass
+
+curr_picks = {c['a5_pick']: c['theme_name'] for c in comparisons}
+# Virtual exits: in previous but not in current
+virtual_exits = []
+for tk, info in prev_picks.items():
+    if tk not in curr_picks:
+        virtual_exits.append({'ticker': tk, 'prev_theme': info['theme'], 'prev_rank': info['rank'], 'reason': 'removed_from_target'})
+# Virtual entries: in current but not in previous
+virtual_entries = []
+for tk, th in curr_picks.items():
+    if tk not in prev_picks:
+        virtual_entries.append({'ticker': tk, 'theme': th})
+
 # === Output ===
 overlap = sum(1 for c in comparisons if c['same'])
 output = {
@@ -208,7 +230,9 @@ output = {
         'overlap_pct': round(overlap / max(len(comparisons), 1), 2),
         'diff_names': len(comparisons) - overlap
     },
-    'comparisons': comparisons
+    'comparisons': comparisons,
+    'virtual_exits': virtual_exits,
+    'virtual_entries': virtual_entries
 }
 with open(OUT / 'shadow_comparison.json', 'w') as f:
     json.dump(output, f, ensure_ascii=False, indent=2)
