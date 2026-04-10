@@ -83,6 +83,22 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .all-stocks td{padding:3px;border-bottom:1px solid rgba(0,0,0,0.03)}
 .all-stocks td:not(:first-child){text-align:right;font-family:monospace}
 .all-stocks tr.pick-a5{background:rgba(124,58,237,0.06)}.all-stocks tr.pick-a4{background:rgba(0,0,0,0.03)}
+.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(124,58,237,0.03);border:1.5px solid rgba(124,58,237,0.15)}
+.prod-title{font-size:11px;font-weight:700;color:var(--purple);margin-bottom:8px}
+.prod-input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.prod-input-label{font-size:10px;font-weight:600;color:var(--text-sub)}
+.prod-toggle{display:flex;gap:0;background:rgba(0,0,0,0.04);border-radius:4px;padding:1px}
+.prod-toggle-btn{padding:3px 10px;border-radius:3px;font-size:10px;font-weight:600;border:none;cursor:pointer;background:none;color:var(--text-sub)}
+.prod-toggle-btn.active{background:var(--purple);color:#fff}
+.prod-input{width:90px;padding:3px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:4px;font-size:11px;text-align:right;font-family:monospace}
+.prod-fx-btn{font-size:9px;padding:2px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:3px;background:none;cursor:pointer;color:var(--text-sub)}
+.prod-table{width:100%;font-size:10px;border-collapse:collapse}
+.prod-table th{text-align:left;padding:6px 4px;font-size:9px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
+.prod-table td{padding:5px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.prod-table .num{text-align:right;font-family:monospace;font-weight:600}
+.prod-table .shares{font-size:12px;font-weight:800;color:var(--purple)}
+.prod-table .dev{font-size:9px}.prod-table .dev.neg{color:var(--red)}.prod-table .dev.pos{color:var(--green)}
+.prod-summary{margin-top:8px;font-size:10px;display:flex;justify-content:space-between;padding:6px;background:rgba(0,0,0,0.02);border-radius:4px}
 </style>
 </head>
 <body>
@@ -134,6 +150,25 @@ Promise.all([
     h+=`<td>${tag}</td></tr>`;
   });
   h+=`</table></div>`;
+  // 3c. Rebalance Calculator
+  window._prismR_picks = comp.comparisons.map(c => {
+    const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};
+    return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
+  });
+  h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
+  h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × 10%等ウェイト</div>`;
+  h+=`<div class="prod-input-row">`;
+  h+=`<span class="prod-input-label">投資資金</span>`;
+  h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setRCcy('USD')">USD</button><button class="prod-toggle-btn" onclick="setRCcy('JPY')">JPY</button></div>`;
+  h+=`<span id="rCcySign">$</span><input id="rCapital" class="prod-input" type="number" value="10000" oninput="calcR()">`;
+  h+=`<span class="prod-input-label">ドル円:</span><input id="rFx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcR()">`;
+  h+=`<button class="prod-fx-btn" onclick="fetchRFx()">🔄 現在レート</button>`;
+  h+=`</div>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+  h+=`<tbody id="rRebalBody"></tbody></table>`;
+  h+=`<div id="rRebalSummary"></div>`;
+  h+=`<div class="prod-meta">等ウェイト 10% × 10銘柄 | SHADOWモード（実際の売買は行いません）</div>`;
+  h+=`</div>`;
   // 4. Promotion Progress
   const fwd=meta.forward_rebalances||0,tgt=meta.target_rebalances||18,pct=Math.min(100,Math.round(fwd/tgt*100));
   h+=`<div class="section-title">🎯 昇格進捗</div>`;
@@ -206,6 +241,38 @@ function renderStock(s,cls,label){
     const val=r.f(r.v);const nv=Number(r.v)||0;const c=r.l==='R²'||r.l==='Shrink'?'':nv>=0?'pos':'neg';
     h+=`<div class="ss-ret"><div class="ss-ret-label">${r.l}</div><div class="ss-ret-val ${c}">${val}</div></div>`;});
   h+=`</div></div></div>`;return h;}
+
+window._rCcy='USD';
+function setRCcy(c){window._rCcy=c;document.querySelectorAll('.prod-toggle-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));document.getElementById('rCcySign').textContent=c==='USD'?'$':'¥';calcR();}
+function fetchRFx(){const btn=document.querySelector('.prod-fx-btn');btn.textContent='取得中...';fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{const rate=d.rates?.JPY||150;document.getElementById('rFx').value=rate.toFixed(2);btn.textContent='🔄 '+rate.toFixed(2)+'円';calcR();}).catch(()=>{btn.textContent='🔄 取得失敗';});}
+function calcR(){
+  const picks=window._prismR_picks;if(!picks)return;
+  const rawCap=parseFloat(document.getElementById('rCapital').value)||0;
+  const fx=parseFloat(document.getElementById('rFx').value)||150;
+  const capUSD=window._rCcy==='JPY'?rawCap/fx:rawCap;
+  const w=0.10;let totalInvested=0;let html='';
+  picks.forEach(p=>{
+    if(!p.price)return;
+    const target=capUSD*w;const shares=Math.floor(target/p.price);
+    const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
+    const dev=actualPct-10;totalInvested+=actual;
+    html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
+    html+=`<td style="font-size:9px">${p.theme}</td>`;
+    html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
+    html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
+  });
+  document.getElementById('rRebalBody').innerHTML=html;
+  const residual=capUSD-totalInvested;const residualPct=capUSD>0?(residual/capUSD)*100:0;
+  const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
+  const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
+  let sh=`<div class="prod-summary"><span>実投資額 <b>${fmtD(totalInvested)}</b>`;
+  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvested)})`;
+  sh+=`</span><span>未使用現金 <b style="color:${residualPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(residual)} (${residualPct.toFixed(1)}%)</b>`;
+  if(window._rCcy==='JPY')sh+=` (${fmtY(residual)})`;
+  sh+=`</span></div>`;
+  document.getElementById('rRebalSummary').innerHTML=sh;
+}
+setTimeout(()=>{if(window._prismR_picks)calcR();},500);
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
