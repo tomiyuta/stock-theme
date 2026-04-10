@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/styles.css?v=21">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;--purple:#7c3aed}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -226,6 +227,16 @@ Promise.all([
   h+=`<div id="rRebalSummary"></div>`;
   h+=`<div class="prod-meta">等ウェイト 10% × 10銘柄 | SHADOWモード（実際の売買は行いません）</div>`;
   h+=`</div>`;
+  // Cumulative Returns Chart (案C: BT破線 + forward実線)
+  h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">A5-R (PRISM-R) vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
+  h+=`<div style="position:relative;height:220px"><canvas id="cumChartR"></canvas></div>`;
+  h+=`<div id="cumStatsR" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`</div>`;
+  h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
+  h+=`<div class="bm-card"><table class="bm-table" id="annualTableR"><tr><th>年</th><th>A5-R</th><th>SPY</th><th>差分</th></tr></table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（A4より重い）。production判断はforward PIT-safeデータのみ。</div></div>`;
+
   // 4. Promotion Progress
   const fwd=meta.forward_rebalances||0,tgt=meta.target_rebalances||18,pct=Math.min(100,Math.round(fwd/tgt*100));
   h+=`<div class="section-title">🎯 昇格進捗</div>`;
@@ -347,6 +358,36 @@ function calcR(){
   document.getElementById('rRebalSummary').innerHTML=sh;
 }
 setTimeout(()=>{if(window._prismR_picks)calcR();},500);
+// === Cumulative Returns Chart (PRISM-R) ===
+fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
+  const ctx=document.getElementById('cumChartR');
+  if(!ctx)return;
+  new Chart(ctx,{type:'line',data:{labels:cr.dates,datasets:[
+    {label:'A5-R (PRISM-R)',data:cr.a5,borderColor:'#7c3aed',backgroundColor:'rgba(124,58,237,0.05)',borderWidth:2,pointRadius:0,fill:true},
+    {label:'SPY',data:cr.SPY,borderColor:'#9ca3af',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},
+      y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  const st=cr.stats;
+  const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  document.getElementById('cumStatsR').innerHTML=
+    mkB('A5-R CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(124,58,237,0.06)')+
+    mkB('A5-R Sharpe',st.a5.sharpe.toFixed(2),'rgba(124,58,237,0.06)')+
+    mkB('A5-R MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
+    mkB('SPY CAGR',(st.spy.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkB('SPY MaxDD',(st.spy.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+  const ann=cr.annual;const years=Object.keys(ann.a5).sort();
+  let tb='';
+  years.forEach(y=>{
+    const a5v=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=a5v-sv;
+    const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+    const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a5v)};font-weight:700">${f(a5v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+  });
+  document.getElementById('annualTableR').innerHTML+=tb;
+}).catch(e=>console.warn('cumulative chart error:',e));
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>

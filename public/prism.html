@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/styles.css?v=21">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -299,6 +300,16 @@ Promise.all([
   }
   h+=`</div></div>`;
 
+  // Cumulative Returns Chart (案C: BT破線 + forward実線)
+  h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM) vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
+  h+=`<div style="position:relative;height:220px"><canvas id="cumChart"></canvas></div>`;
+  h+=`<div id="cumStats" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`</div>`;
+  h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
+  h+=`<div class="bm-card"><table class="bm-table" id="annualTable"><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり。production判断はforward PIT-safeデータのみ。</div></div>`;
+
   // Layer 1
   const secSorted=[...sectors].sort((a,b)=>b.ret_3m-a.ret_3m);
   h+=`<div class="section-title">Layer 1: セクターフィルタ</div><div class="sector-grid">`;
@@ -493,6 +504,38 @@ function calcPrismRebal(){
   sumH+=`</span></div>`;
   const sumEl=document.getElementById('prismRebalSummary');if(sumEl)sumEl.innerHTML=sumH;
 }
+// === Cumulative Returns Chart ===
+fetch('/api/prism/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
+  const ctx=document.getElementById('cumChart');
+  if(!ctx)return;
+  new Chart(ctx,{type:'line',data:{labels:cr.dates,datasets:[
+    {label:'A4 (PRISM)',data:cr.a4,borderColor:'#0052cc',backgroundColor:'rgba(0,82,204,0.05)',borderWidth:2,pointRadius:0,fill:true,borderDash:[]},
+    {label:'SPY',data:cr.SPY,borderColor:'#9ca3af',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},
+    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},
+      tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},
+      y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  // Stats badges
+  const st=cr.stats;
+  const mkBadge=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  document.getElementById('cumStats').innerHTML=
+    mkBadge('A4 CAGR',(st.a4.cagr*100).toFixed(1)+'%','rgba(0,82,204,0.06)')+
+    mkBadge('A4 Sharpe',st.a4.sharpe.toFixed(2),'rgba(0,82,204,0.06)')+
+    mkBadge('A4 MaxDD',(st.a4.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
+    mkBadge('SPY CAGR',(st.spy.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkBadge('SPY MaxDD',(st.spy.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+  // Annual table
+  const ann=cr.annual; const years=Object.keys(ann.a4).sort();
+  let tb='';
+  years.forEach(y=>{
+    const a4v=ann.a4[y]||0,sv=ann.SPY[y]||0,diff=a4v-sv;
+    const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+    const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a4v)};font-weight:700">${f(a4v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+  });
+  document.getElementById('annualTable').innerHTML+=tb;
+}).catch(e=>console.warn('cumulative chart error:',e));
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
