@@ -526,3 +526,130 @@ A5-Quality = regime-sensitive convex branch（parked）
 Any research branch introduced after A5-lite must run on an independent
 forward clock and must not reset, contaminate, or reinterpret the frozen
 A5-lite shadow record.
+
+
+---
+
+## Appendix R3 — BFM-v1 Research Branch Governance (2026-04-10)
+
+Status: spec-frozen research branch
+Effect on A5-lite / A5-SNRb: none
+
+### Purpose
+
+Layer 1（テーマ選定）の quality 改善。
+「強いテーマ」ではなく「良い強さのテーマ」を選ぶ。
+Layer 2 は A5-SNRb を固定し、Layer 1 単独差分を検証する。
+
+### Score Definition (frozen)
+
+```
+入力特徴量（theme-details/日次価格から計算）:
+  R63:               63営業日テーマ累積リターン
+  R126:              126営業日テーマ累積リターン
+  decel:             直近過熱剥落（現行PRISM互換）
+  breadth63:         63日リターン正の構成銘柄比率
+  breadth_persist63: 63日間の日次平均参加率
+  concentration63:   テーマ内上位寄与のHerfindahl指数
+  theme_vol63:       テーマ日次ボラ × √252
+
+スコア:
+  TrendBlock    = mean(rank(R63), rank(R126), rank(decel))
+  BreadthBlock  = mean(rank(breadth63), rank(breadth_persist63))
+  FragilityBlock = mean(rank(concentration63), rank(theme_vol63))
+
+  BFM_score = TrendBlock + BreadthBlock - FragilityBlock
+
+選定: BFM_score上位10テーマ / sector_cap=3 / greedy
+```
+
+### Backtest Design
+
+```
+比較対象（Layer 1差分のみ）:
+  Base: current Layer 1 + A5-SNRb
+  BFM:  BFM-v1 Layer 1  + A5-SNRb
+
+Layer 2, Layer 3, EXIT CONSTITUTION は完全固定。
+```
+
+### Historical で見るもの / 見ないもの
+
+```
+見る（方向確認のみ）:
+  - median月次active diffの符号
+  - Top5 active contributor shareの変化方向
+  - Tech share of active returnの変化方向
+  - Non-Tech active diff
+  - MaxDD episodeの変化方向
+  - selected theme breadth/concentration統計
+
+見ない:
+  - 絶対CAGR / 絶対Sharpe
+  - p値による採否
+  - パラメータ最適化
+```
+
+### Branch Management
+
+```
+A4:          live
+A5-lite:     frozen shadow（independent clock）
+A5-SNRb:     primary research-shadow（independent clock）
+BFM-v1:      Layer 1 research branch（independent clock、spec frozen）
+```
+
+
+### BFM-v1 Failure Memo (2026-04-10)
+
+```
+BFM-v1 は Layer 1 full replacement として棄却。
+CAGR -32pt / theme overlap 28% → 「別戦略化」。
+breadth/fragility を主役にすると高成長テーマを体系的に排除。
+重み調整では救済しない。設計思想を変更し BFM-v2 へ。
+```
+
+### BFM-v2: Quality Filter 型（spec frozen）
+
+```
+役割: Layer 1 の品質フィルタ（主スコア置換ではない）
+設計: 強いテーマを残したまま「悪い強さ」だけ除外
+
+Stage 1: 現行テーマスコアで上位25テーマを仮採用
+Stage 2: 以下を除外（veto型）
+  - breadth63 が候補群内 下位30%
+  - concentration63 が候補群内 上位20%
+  - theme_vol63 が候補群内 上位20%
+Stage 3: 残った中からscore_base上位10テーマを採用
+
+Layer 2: A5-SNRb固定
+```
+
+
+### BFM-v2 Decision Memo (2026-04-10)
+
+```
+Status: risk-adjusted pass（Layer 1 replacement としては未確定）
+Role:   risk-managed Layer 1 alternative
+
+Historical結果 vs Base(Current-L1 + A5-SNRb):
+  CAGR:    -14.0pt ❌  (57.8% → 43.8%)
+  Vol:     -12.0pt ✅  (39.3% → 27.4%)
+  Sharpe:  +0.130  ✅✅ (1.471 → 1.601) ← 初のSharpe改善候補
+  Sortino: +0.007  ≒
+  Calmar:  +0.269  ✅✅ (1.561 → 1.829)
+  MaxDD:   +13.1pt ✅✅ (-37.1% → -23.9%)
+  Theme overlap: 47%（BFM-v1の28%から回復）
+  Avg vetoed: 11.9/25テーマ
+  Median月次diff: -0.0049 ↓（典型月ではBaseが優位）
+
+解釈:
+  - Sharpe/Calmar/MaxDD改善を達成した最初の候補
+  - ただし典型月では負け、upside captureも削っている
+  - Base+SNRbの上位互換ではなく、低リスク分岐
+  - BFM-v1→v2で設計変更（主スコア→品質フィルタ）が正しかった証拠
+
+ラベル:
+  BFM-v2 = risk-managed Layer 1 alternative（research-shadow）
+  BFMv2_research_clock = independent（A5-SNRb/A5-liteを汚染しない）
+```

@@ -1,0 +1,754 @@
+{
+  "metrics": {
+    "base": {
+      "name": "Base",
+      "cagr": 0.5746291262645673,
+      "vol": 0.3931876673825978,
+      "sharpe": 1.4614627414176113,
+      "sortino": 1.5631554752599166,
+      "calmar": 1.5506264720269882,
+      "maxdd": -0.370578689730099
+    },
+    "bfm": {
+      "name": "BFM-v1",
+      "cagr": 0.2541096185794416,
+      "vol": 0.20834558708812234,
+      "sharpe": 1.2196544315189302,
+      "sortino": 1.1938949685927105,
+      "calmar": 1.2523786571438933,
+      "maxdd": -0.2029015882137038
+    }
+  },
+  "detail_log": [
+    {
+      "date": "2020-07-02",
+      "n_elig": 109,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.201
+    },
+    {
+      "date": "2020-07-31",
+      "n_elig": 109,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.25
+    },
+    {
+      "date": "2020-08-28",
+      "n_elig": 109,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.986,
+      "avg_conc": 0.22
+    },
+    {
+      "date": "2020-09-28",
+      "n_elig": 109,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.969,
+      "avg_conc": 0.237
+    },
+    {
+      "date": "2020-10-26",
+      "n_elig": 109,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.236
+    },
+    {
+      "date": "2020-11-23",
+      "n_elig": 110,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.961,
+      "avg_conc": 0.217
+    },
+    {
+      "date": "2020-12-22",
+      "n_elig": 113,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.209
+    },
+    {
+      "date": "2021-01-22",
+      "n_elig": 113,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.204
+    },
+    {
+      "date": "2021-02-22",
+      "n_elig": 113,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.191
+    },
+    {
+      "date": "2021-03-22",
+      "n_elig": 114,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.188
+    },
+    {
+      "date": "2021-04-20",
+      "n_elig": 115,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.199
+    },
+    {
+      "date": "2021-05-18",
+      "n_elig": 120,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.169
+    },
+    {
+      "date": "2021-06-16",
+      "n_elig": 120,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.986,
+      "avg_conc": 0.167
+    },
+    {
+      "date": "2021-07-15",
+      "n_elig": 120,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.894,
+      "avg_conc": 0.172
+    },
+    {
+      "date": "2021-08-12",
+      "n_elig": 120,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.991,
+      "avg_conc": 0.203
+    },
+    {
+      "date": "2021-09-10",
+      "n_elig": 120,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.927,
+      "avg_conc": 0.223
+    },
+    {
+      "date": "2021-10-08",
+      "n_elig": 122,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.885,
+      "avg_conc": 0.233
+    },
+    {
+      "date": "2021-11-05",
+      "n_elig": 124,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.226
+    },
+    {
+      "date": "2021-12-06",
+      "n_elig": 124,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.929,
+      "avg_conc": 0.228
+    },
+    {
+      "date": "2022-01-04",
+      "n_elig": 124,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.99,
+      "avg_conc": 0.191
+    },
+    {
+      "date": "2022-02-02",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 4,
+      "avg_breadth": 0.842,
+      "avg_conc": 0.164
+    },
+    {
+      "date": "2022-03-03",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.954,
+      "avg_conc": 0.171
+    },
+    {
+      "date": "2022-03-31",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.877,
+      "avg_conc": 0.158
+    },
+    {
+      "date": "2022-04-29",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.9,
+      "avg_conc": 0.164
+    },
+    {
+      "date": "2022-05-27",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.887,
+      "avg_conc": 0.169
+    },
+    {
+      "date": "2022-06-28",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 6,
+      "stock_overlap": 6,
+      "avg_breadth": 0.458,
+      "avg_conc": 0.187
+    },
+    {
+      "date": "2022-07-27",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.635,
+      "avg_conc": 0.253
+    },
+    {
+      "date": "2022-08-24",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.938,
+      "avg_conc": 0.278
+    },
+    {
+      "date": "2022-09-22",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.888,
+      "avg_conc": 0.196
+    },
+    {
+      "date": "2022-10-20",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.691,
+      "avg_conc": 0.213
+    },
+    {
+      "date": "2022-11-17",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 6,
+      "stock_overlap": 6,
+      "avg_breadth": 0.897,
+      "avg_conc": 0.185
+    },
+    {
+      "date": "2022-12-16",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.938,
+      "avg_conc": 0.202
+    },
+    {
+      "date": "2023-01-18",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.199
+    },
+    {
+      "date": "2023-02-15",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.211
+    },
+    {
+      "date": "2023-03-16",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 2,
+      "avg_breadth": 0.778,
+      "avg_conc": 0.279
+    },
+    {
+      "date": "2023-04-14",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.843,
+      "avg_conc": 0.276
+    },
+    {
+      "date": "2023-05-12",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.886,
+      "avg_conc": 0.188
+    },
+    {
+      "date": "2023-06-12",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.982,
+      "avg_conc": 0.203
+    },
+    {
+      "date": "2023-07-12",
+      "n_elig": 125,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 6,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.21
+    },
+    {
+      "date": "2023-08-09",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 0,
+      "stock_overlap": 0,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.2
+    },
+    {
+      "date": "2023-09-07",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.958,
+      "avg_conc": 0.224
+    },
+    {
+      "date": "2023-10-05",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.803,
+      "avg_conc": 0.199
+    },
+    {
+      "date": "2023-11-02",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 6,
+      "stock_overlap": 6,
+      "avg_breadth": 0.6,
+      "avg_conc": 0.215
+    },
+    {
+      "date": "2023-12-01",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 6,
+      "stock_overlap": 6,
+      "avg_breadth": 0.87,
+      "avg_conc": 0.209
+    },
+    {
+      "date": "2024-01-02",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.184
+    },
+    {
+      "date": "2024-01-31",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 0,
+      "stock_overlap": 0,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.18
+    },
+    {
+      "date": "2024-02-29",
+      "n_elig": 126,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.988,
+      "avg_conc": 0.175
+    },
+    {
+      "date": "2024-03-28",
+      "n_elig": 128,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.986,
+      "avg_conc": 0.206
+    },
+    {
+      "date": "2024-04-26",
+      "n_elig": 128,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.957,
+      "avg_conc": 0.222
+    },
+    {
+      "date": "2024-05-24",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.971,
+      "avg_conc": 0.187
+    },
+    {
+      "date": "2024-06-25",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.897,
+      "avg_conc": 0.172
+    },
+    {
+      "date": "2024-07-24",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.944,
+      "avg_conc": 0.181
+    },
+    {
+      "date": "2024-08-21",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.944,
+      "avg_conc": 0.172
+    },
+    {
+      "date": "2024-09-19",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.966,
+      "avg_conc": 0.145
+    },
+    {
+      "date": "2024-10-17",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.991,
+      "avg_conc": 0.17
+    },
+    {
+      "date": "2024-11-14",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.991,
+      "avg_conc": 0.227
+    },
+    {
+      "date": "2024-12-13",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.98,
+      "avg_conc": 0.236
+    },
+    {
+      "date": "2025-01-15",
+      "n_elig": 129,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.941,
+      "avg_conc": 0.232
+    },
+    {
+      "date": "2025-02-13",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.79,
+      "avg_conc": 0.209
+    },
+    {
+      "date": "2025-03-14",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.861,
+      "avg_conc": 0.18
+    },
+    {
+      "date": "2025-04-11",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 6,
+      "avg_breadth": 0.742,
+      "avg_conc": 0.146
+    },
+    {
+      "date": "2025-05-12",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 5,
+      "stock_overlap": 5,
+      "avg_breadth": 0.766,
+      "avg_conc": 0.17
+    },
+    {
+      "date": "2025-06-10",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.943,
+      "avg_conc": 0.213
+    },
+    {
+      "date": "2025-07-10",
+      "n_elig": 130,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.213
+    },
+    {
+      "date": "2025-08-07",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.986,
+      "avg_conc": 0.231
+    },
+    {
+      "date": "2025-09-05",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 0,
+      "stock_overlap": 0,
+      "avg_breadth": 0.975,
+      "avg_conc": 0.215
+    },
+    {
+      "date": "2025-10-03",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 1,
+      "stock_overlap": 1,
+      "avg_breadth": 0.968,
+      "avg_conc": 0.156
+    },
+    {
+      "date": "2025-10-31",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 0.96,
+      "avg_conc": 0.169
+    },
+    {
+      "date": "2025-12-01",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.93,
+      "avg_conc": 0.17
+    },
+    {
+      "date": "2025-12-30",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 5,
+      "avg_breadth": 0.879,
+      "avg_conc": 0.196
+    },
+    {
+      "date": "2026-01-29",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 4,
+      "stock_overlap": 4,
+      "avg_breadth": 0.943,
+      "avg_conc": 0.162
+    },
+    {
+      "date": "2026-02-27",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 3,
+      "stock_overlap": 3,
+      "avg_breadth": 1.0,
+      "avg_conc": 0.159
+    },
+    {
+      "date": "2026-03-27",
+      "n_elig": 131,
+      "base_themes": 10,
+      "bfm_themes": 10,
+      "theme_overlap": 2,
+      "stock_overlap": 2,
+      "avg_breadth": 0.915,
+      "avg_conc": 0.167
+    }
+  ]
+}
