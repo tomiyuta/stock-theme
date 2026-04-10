@@ -1,0 +1,31 @@
+{
+  "snapshot_date": "2026-03-31",
+  "generated_at": "2026-04-10T12:28:04.420293",
+  "version": "A5-lite_shadow_v1",
+  "status": "SHADOW",
+  "pit_safe": false,
+  "forward_rebalances": 0,
+  "target_rebalances": 18,
+  "next_rebalance_est": "2026-05-08",
+  "frozen_params": {
+    "alpha_window": 63,
+    "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
+    "stock_score": "rank(α63)×shrink(r²_63)",
+    "top_themes": 10,
+    "picks_per_theme": 1,
+    "min_members": 4,
+    "sector_cap": 3,
+    "rebalance_days": 20
+  },
+  "backtest_5yr": {
+    "a4_sharpe": 1.29,
+    "a5_sharpe": 1.41,
+    "sharpe_diff": 0.12,
+    "monthly_diff": "+1.13%",
+    "monthly_win_rate": "53%",
+    "sign_test_p": 0.36,
+    "tech_share_net": "76%",
+    "a5_maxdd": "-42.0%",
+    "a4_maxdd": "-39.7%"
+  }
+}

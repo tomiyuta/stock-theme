@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>PRISM-R | 米国株テーマトラッカー</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="/styles.css?v=20">
+<style>
+:root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;
+  --green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;
+  --purple:#7c3aed;--border:rgba(0,0,0,0.07)}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:-apple-system,'Noto Sans JP',sans-serif;background:var(--bg);
+  color:var(--text-main);font-size:12px;padding-bottom:80px;-webkit-font-smoothing:antialiased}
+@media(min-width:1024px){html{background:#eee}body{max-width:700px;margin:0 auto;
+  background:var(--bg);min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+</style>
+<style>
+.pr-header{padding:16px 12px 10px;text-align:center;border-bottom:1px solid var(--border)}
+.pr-title{font-size:20px;font-weight:900;letter-spacing:1px}
+.pr-title .r{color:var(--purple)}
+.pr-sub{font-size:10px;color:var(--text-sub);margin-top:3px}
+.pr-badge{display:inline-block;font-size:9px;padding:3px 8px;border-radius:3px;font-weight:700;margin-top:5px}
+.pr-badge.shadow{background:rgba(124,58,237,0.1);color:var(--purple)}
+.pr-badge.pilot{background:rgba(245,158,11,0.1);color:var(--gold)}
+.pr-badge.prod{background:rgba(0,200,83,0.1);color:var(--green)}
+
+.pr-params{margin:8px 12px;padding:10px;border-radius:6px;background:rgba(124,58,237,0.03);
+  border:1px solid rgba(124,58,237,0.1);font-size:10px;color:var(--text-sub)}
+.pr-params code{font-family:'SF Mono',monospace;font-size:9px;color:var(--purple)}
+
+.pr-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 12px}
+.pr-stat{background:var(--card-bg);border-radius:4px;padding:8px 4px;text-align:center}
+.pr-stat-val{font-size:16px;font-weight:800}
+.pr-stat-label{font-size:8px;color:var(--text-sub);font-weight:600;margin-top:2px}
+
+.pr-section{font-size:11px;font-weight:700;margin:16px 12px 6px;color:var(--text-sub);
+  letter-spacing:0.3px;text-transform:uppercase}
+
+.pr-comp{margin:4px 12px;border-radius:6px;background:var(--card-bg);
+  border:1px solid var(--border);overflow:hidden}
+.pr-comp.same{border-left:3px solid var(--green)}
+.pr-comp.diff{border-left:3px solid var(--purple)}
+.pr-comp-header{display:flex;justify-content:space-between;align-items:center;
+  padding:8px 10px;cursor:pointer}
+.pr-comp-theme{font-size:12px;font-weight:700}
+.pr-comp-rank{font-size:9px;color:var(--text-sub);font-weight:600}
+.pr-comp-meta{font-size:9px;color:var(--text-sub);padding:0 10px 2px}
+</style>
+<style>
+.pr-comp-body{display:none;padding:0 10px 10px}
+.pr-comp.open .pr-comp-body{display:block}
+.pr-picks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
+.pr-pick{border-radius:4px;padding:8px;min-height:60px}
+.pr-pick.a4{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
+.pr-pick.a5{background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.15)}
+.pr-pick-label{font-size:8px;font-weight:700;color:var(--text-sub);margin-bottom:4px}
+.pr-pick.a5 .pr-pick-label{color:var(--purple)}
+.pr-pick-ticker{font-size:16px;font-weight:900}
+.pr-pick-name{font-size:9px;color:var(--text-sub);margin-top:1px;overflow:hidden;
+  text-overflow:ellipsis;white-space:nowrap}
+.pr-pick-metrics{margin-top:6px}
+.pr-pick-row{display:flex;justify-content:space-between;font-size:9px;padding:1px 0}
+.pr-pick-row .lbl{color:var(--text-sub)}.pr-pick-row .val{font-weight:600;font-family:monospace}
+.pr-pick-row .val.pos{color:var(--green)}.pr-pick-row .val.neg{color:var(--red)}
+.pr-badge-sm{display:inline-block;font-size:7px;padding:1px 4px;border-radius:2px;margin-top:3px}
+.pr-badge-sm.sec{background:rgba(0,82,204,0.08);color:var(--blue)}
+.pr-badge-sm.mc{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+
+.pr-match-tag{font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px}
+.pr-match-tag.same{background:rgba(0,200,83,0.1);color:var(--green)}
+.pr-match-tag.diff{background:rgba(124,58,237,0.1);color:var(--purple)}
+
+.pr-progress{margin:8px 12px;border-radius:6px;padding:12px;
+  background:rgba(124,58,237,0.03);border:1px solid rgba(124,58,237,0.1)}
+.pr-progress-bar{height:6px;background:rgba(0,0,0,0.06);border-radius:3px;margin:8px 0 4px;overflow:hidden}
+.pr-progress-fill{height:100%;background:var(--purple);border-radius:3px;transition:width 0.3s}
+.pr-progress-text{font-size:10px;color:var(--text-sub);display:flex;justify-content:space-between}
+
+.pr-bt{margin:8px 12px;border-radius:6px;padding:10px;background:var(--card-bg);
+  border:1px solid var(--border)}
+.pr-bt-title{font-size:10px;font-weight:700;color:var(--text-sub);margin-bottom:6px}
+.pr-bt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
+.pr-bt-item{font-size:9px;padding:4px 6px;background:rgba(0,0,0,0.02);border-radius:3px;
+  display:flex;justify-content:space-between}
+.pr-bt-item .lbl{color:var(--text-sub)}.pr-bt-item .val{font-weight:700;font-family:monospace}
+
+.pr-warn{margin:8px 12px;padding:8px 10px;border-radius:4px;font-size:9px;
+  background:rgba(245,158,11,0.08);color:#b45309;border:1px solid rgba(245,158,11,0.2)}
+</style>
+</head>
+<body>
+
+<div class="pr-header">
+  <div class="pr-title">PRISM-<span class="r">R</span></div>
+  <div class="pr-sub">Residual Alpha Shadow Book</div>
+  <span class="pr-badge shadow" id="prStatusBadge">SHADOW</span>
+</div>
+
+<div class="pr-warn" id="prWarn">
+  ⚠ 研究用: テーマ構成のPIT問題あり。絶対CAGRは採用根拠にしない。相対差分のみ有効。
+</div>
+
+<div class="pr-params" id="prParams"></div>
+
+<div class="pr-summary" id="prSummary"></div>
+
+<div class="pr-section">🎯 昇格進捗</div>
+<div class="pr-progress" id="prProgress"></div>
+
+<div class="pr-section">📊 5年拡張バックテスト（参考）</div>
+<div class="pr-bt" id="prBacktest"></div>
+
+<div class="pr-section" id="prCompTitle">🔀 Shadow比較</div>
+<div id="prComparisons"></div>
+
+<script>
+const API_BASE = '/api/prism-r';
+const fmt = (v, d=1) => v != null ? (v*100).toFixed(d)+'%' : '—';
+const fmtN = (v, d=3) => v != null ? v.toFixed(d) : '—';
+
+async function init() {
+  const [compRes, metaRes] = await Promise.all([
+    fetch(`${API_BASE}/shadow_comparison.json`),
+    fetch(`${API_BASE}/meta.json`)
+  ]);
+  const comp = await compRes.json();
+  const meta = await metaRes.json();
+  renderParams(comp);
+  renderSummary(comp);
+  renderProgress(meta);
+  renderBacktest(meta);
+  renderComparisons(comp);
+}
+
+function renderParams(d) {
+  const p = d.frozen_params;
+  document.getElementById('prParams').innerHTML = `
+    <div style="font-weight:700;margin-bottom:4px">凍結パラメータ v1</div>
+    <div>Score: <code>${p.stock_score}</code></div>
+    <div>Theme: <code>${p.theme_score}</code></div>
+    <div>α窓=<code>${p.alpha_window}日</code> | テーマ数=<code>${p.top_themes}</code> |
+         銘柄/テーマ=<code>${p.picks_per_theme}</code> | 最小構成=<code>${p.min_members}</code> |
+         セクター上限=<code>${p.sector_cap}</code> | リバランス=<code>${p.rebalance_days}営業日</code></div>
+    <div style="margin-top:4px;font-size:9px">Snapshot: ${d.snapshot_date}</div>
+  `;
+}
+</script>
+<script>
+function renderSummary(d) {
+  const s = d.summary;
+  document.getElementById('prSummary').innerHTML = `
+    <div class="pr-stat"><div class="pr-stat-val">${s.themes_selected}</div><div class="pr-stat-label">テーマ</div></div>
+    <div class="pr-stat"><div class="pr-stat-val">${s.a5_names}</div><div class="pr-stat-label">A5銘柄</div></div>
+    <div class="pr-stat"><div class="pr-stat-val" style="color:var(--purple)">${s.diff_names}</div><div class="pr-stat-label">差分銘柄</div></div>
+    <div class="pr-stat"><div class="pr-stat-val">${Math.round(s.overlap_pct*100)}%</div><div class="pr-stat-label">重複率</div></div>
+  `;
+}
+
+function renderProgress(m) {
+  const current = m.forward_rebalances || 0;
+  const target = m.target_rebalances || 18;
+  const pct = Math.min(100, Math.round(current/target*100));
+  document.getElementById('prProgress').innerHTML = `
+    <div style="font-size:11px;font-weight:700">Forward PIT-safe 観測</div>
+    <div class="pr-progress-bar"><div class="pr-progress-fill" style="width:${pct}%"></div></div>
+    <div class="pr-progress-text">
+      <span>${current} / ${target} リバランス</span>
+      <span>次回: ${m.next_rebalance_est || '—'}</span>
+    </div>
+    <div style="font-size:9px;color:var(--text-sub);margin-top:4px">
+      12回=pilot候補 | 18回=production審査 | 24回=強い確認
+    </div>
+  `;
+}
+
+function renderBacktest(m) {
+  const b = m.backtest_5yr || {};
+  document.getElementById('prBacktest').innerHTML = `
+    <div class="pr-bt-title">73リバランス / 2020-01 ~ 2026-04 / Norgate Platinum</div>
+    <div class="pr-bt-grid">
+      <div class="pr-bt-item"><span class="lbl">Sharpe差</span><span class="val">${b.sharpe_diff ? '+'+b.sharpe_diff : '—'}</span></div>
+      <div class="pr-bt-item"><span class="lbl">月次diff</span><span class="val">${b.monthly_diff||'—'}</span></div>
+      <div class="pr-bt-item"><span class="lbl">月次勝率</span><span class="val">${b.monthly_win_rate||'—'}</span></div>
+      <div class="pr-bt-item"><span class="lbl">Sign test</span><span class="val">p=${b.sign_test_p||'—'}</span></div>
+      <div class="pr-bt-item"><span class="lbl">Tech比率</span><span class="val">${b.tech_share_net||'—'}</span></div>
+      <div class="pr-bt-item"><span class="lbl">A5 MaxDD</span><span class="val">${b.a5_maxdd||'—'}</span></div>
+    </div>
+    <div style="font-size:8px;color:var(--text-sub);margin-top:6px">
+      ⚠ PIT汚染含む研究値。Silver層: 相対差分のみ参考。production判断はforward PIT-safeのみ。
+    </div>
+  `;
+}
+</script>
+<script>
+function renderComparisons(d) {
+  const container = document.getElementById('prComparisons');
+  document.getElementById('prCompTitle').textContent =
+    `🔀 Shadow比較 — ${d.snapshot_date}`;
+  let html = '';
+  for (const c of d.comparisons) {
+    const cls = c.same ? 'same' : 'diff';
+    const a4s = c.stocks.find(s => s.ticker === c.a4_pick) || {};
+    const a5s = c.stocks.find(s => s.ticker === c.a5_pick) || {};
+    html += `<div class="pr-comp ${cls}" onclick="this.classList.toggle('open')">`;
+    html += `<div class="pr-comp-header">
+      <div>
+        <span class="pr-comp-theme">${c.theme_name}</span>
+        <span class="pr-match-tag ${cls}">${c.same ? '一致' : '差分'}</span>
+      </div>
+      <span class="pr-comp-rank">#${c.rank} | ${c.n_members}銘柄</span>
+    </div>`;
+    html += `<div class="pr-comp-meta">
+      mom63=${fmt(c.mom63)} | decel=${fmtN(c.decel,4)} |
+      score=${fmtN(c.theme_score)} | ${c.sector}
+    </div>`;
+    html += `<div class="pr-comp-body"><div class="pr-picks">`;
+    // A4 pick
+    html += renderPick(a4s, 'a4', 'A4: raw 1M');
+    // A5 pick
+    html += renderPick(a5s, 'a5', 'A5-R: α×shrink');
+    html += `</div>`;
+    // All members table (collapsed)
+    if (c.stocks.length > 0) {
+      html += `<div style="margin-top:8px;font-size:9px;color:var(--text-sub);font-weight:600">全構成銘柄</div>`;
+      html += `<table style="width:100%;font-size:9px;border-collapse:collapse;margin-top:4px">`;
+      html += `<tr style="border-bottom:1px solid var(--border)">
+        <th style="text-align:left;padding:3px">Ticker</th>
+        <th style="text-align:right;padding:3px">1M</th>
+        <th style="text-align:right;padding:3px">α63</th>
+        <th style="text-align:right;padding:3px">R²</th>
+        <th style="text-align:right;padding:3px">Score</th>
+      </tr>`;
+      const sorted = [...c.stocks].sort((a,b) => (b.score_a5||0)-(a.score_a5||0));
+      for (const s of sorted) {
+        const isA4 = s.ticker === c.a4_pick;
+        const isA5 = s.ticker === c.a5_pick;
+        const bg = isA5 ? 'rgba(124,58,237,0.06)' : isA4 ? 'rgba(0,0,0,0.03)' : '';
+        const mark = isA5 ? ' ◆R' : isA4 ? ' ◇A4' : '';
+        html += `<tr style="border-bottom:1px solid rgba(0,0,0,0.03);background:${bg}">
+          <td style="padding:3px;font-weight:${(isA4||isA5)?700:400}">${s.ticker}${mark}</td>
+          <td style="text-align:right;padding:3px;color:${(s.raw_1m||0)>=0?'var(--green)':'var(--red)'}">${fmt(s.raw_1m)}</td>
+          <td style="text-align:right;padding:3px;color:${(s.alpha63||0)>=0?'var(--green)':'var(--red)'}">${fmtN(s.alpha63,3)}</td>
+          <td style="text-align:right;padding:3px">${fmtN(s.r2_63)}</td>
+          <td style="text-align:right;padding:3px;font-weight:600">${fmtN(s.score_a5,3)}</td>
+        </tr>`;
+      }
+      html += `</table>`;
+    }
+    html += `</div></div>`;
+  }
+  container.innerHTML = html;
+}
+
+function renderPick(s, cls, label) {
+  if (!s || !s.ticker) return `<div class="pr-pick ${cls}"><div class="pr-pick-label">${label}</div><div style="color:var(--text-sub);font-size:9px">候補なし</div></div>`;
+  const aCol = (s.alpha63||0) >= 0 ? 'pos' : 'neg';
+  const mCol = (s.raw_1m||0) >= 0 ? 'pos' : 'neg';
+  return `<div class="pr-pick ${cls}">
+    <div class="pr-pick-label">${label}</div>
+    <div class="pr-pick-ticker">${s.ticker}</div>
+    <div class="pr-pick-name">${s.name_ja || s.name || ''}</div>
+    <div class="pr-pick-metrics">
+      <div class="pr-pick-row"><span class="lbl">α63</span><span class="val ${aCol}">${fmtN(s.alpha63,3)}</span></div>
+      <div class="pr-pick-row"><span class="lbl">R²</span><span class="val">${fmtN(s.r2_63)}</span></div>
+      <div class="pr-pick-row"><span class="lbl">Shrink</span><span class="val">${fmtN(s.shrink)}</span></div>
+      <div class="pr-pick-row"><span class="lbl">1M raw</span><span class="val ${mCol}">${fmt(s.raw_1m)}</span></div>
+      <div class="pr-pick-row"><span class="lbl">価格</span><span class="val">$${s.price||'—'}</span></div>
+    </div>
+    <div><span class="pr-badge-sm sec">${s.sector}</span> <span class="pr-badge-sm mc">${s.mc}</span></div>
+  </div>`;
+}
+
+init().catch(e => console.error('PRISM-R init error:', e));
+</script>
+
+<nav class="bottom-nav">
+  <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+  <a href="/map" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+  <a href="/market-movers" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
+  <a href="/prism" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
+  <a href="/prism-r" class="nav-item active"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3"/></svg></span><span style="color:var(--purple)">R</span></a>
+</nav>
+</body>
+</html>
