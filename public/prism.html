@@ -307,7 +307,7 @@ Promise.all([
   h+=`<div id="cumStats" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="bm-card"><table class="bm-table" id="annualTable"><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></table>`;
+  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBody"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり。production判断はforward PIT-safeデータのみ。</div></div>`;
 
   // Layer 1
@@ -535,7 +535,7 @@ fetch('/api/prism/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
     tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a4v)};font-weight:700">${f(a4v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
   });
-  document.getElementById('annualTable').innerHTML+=tb;
+  document.getElementById('annualBody').innerHTML=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));
 },3000);
 </script>

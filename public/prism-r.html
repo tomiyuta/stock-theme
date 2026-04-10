@@ -234,7 +234,7 @@ Promise.all([
   h+=`<div id="cumStatsR" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="bm-card"><table class="bm-table" id="annualTableR"><tr><th>年</th><th>A5-R</th><th>SPY</th><th>差分</th></tr></table>`;
+  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A5-R</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（A4より重い）。production判断はforward PIT-safeデータのみ。</div></div>`;
 
   // 4. Promotion Progress
@@ -387,7 +387,7 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
     tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a5v)};font-weight:700">${f(a5v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
   });
-  document.getElementById('annualTableR').innerHTML+=tb;
+  document.getElementById('annualBodyR').innerHTML=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));
 },3000);
 </script>
