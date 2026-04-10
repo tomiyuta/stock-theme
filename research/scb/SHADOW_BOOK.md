@@ -197,6 +197,56 @@ Required each rebalance:
 9. **NEW: Non-Tech active diff ≥ 0**
 10. **NEW: Top-5 active contributor share < 50%**
 
+### Gate 11 (candidate, not mandatory)
+```
+Cost-stressed active diff remains ≥ 0 at 100bps
+Rationale: theme/small-cap stocks have higher real-world slippage than 50bps.
+Status: supplementary gate, not blocking.
+```
+
+---
+
+## Turnover & Cost Definitions (fixed per Doc 11/13 audit)
+
+```
+one_way_turnover_t = 0.5 × Σ_i |w_target,i,t − w_pretrade,i,t|
+  (fraction of portfolio traded, 0=no change, 1=full replacement)
+
+avg_turnover = mean(one_way_turnover_t across all rebalances)
+cum_turnover = Σ_t one_way_turnover_t
+
+cost_drag_t = 2 × tc_one_side × one_way_turnover_t
+  (round-trip cost per rebalance)
+
+Measured values (5yr, 72 rebalances):
+  A4 avg time-series turnover: 93%/rebal
+  A5 avg time-series turnover: 83%/rebal
+  Cross-sectional overlap A4∩A5: 43% (NOT used for cost — different metric)
+
+Total cost drag (cumulative, 72 rebalances):
+  @10bps round-trip: A4=13.4%  A5=11.9%
+  @25bps round-trip: A4=33.4%  A5=29.8%
+  @50bps round-trip: A4=66.8%  A5=59.5%
+  These are cumulative cost deductions from gross return, NOT CAGR.
+```
+
+---
+
+## Forward Shadow Monitoring Checklist (each rebalance)
+
+```
+1. realized_active_diff (A5_net - A4_net)
+2. A4_turnover / A5_turnover (time-series, NOT cross-sectional)
+3. 25bps and 50bps net active diff
+4. cumulative Tech share of net active return
+5. rolling 6-rebalance active Tech weight
+6. non_tech_only_diff
+7. top5_active_contributor_share
+8. single_name_max_contribution (% of cumulative diff)
+9. A5_MaxDD vs A4_MaxDD
+10. snapshot_id + pit_safe flag
+```
+
 ---
 
 ## Q4: Dispersion Re-introduction (unchanged, reinforced)
