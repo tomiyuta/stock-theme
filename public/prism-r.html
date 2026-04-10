@@ -10,290 +10,194 @@
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/styles.css?v=20">
 <style>
-:root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;
-  --green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;
-  --purple:#7c3aed;--border:rgba(0,0,0,0.07)}
+:root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;--purple:#7c3aed}
 *{margin:0;padding:0;box-sizing:border-box}
-body{font-family:-apple-system,'Noto Sans JP',sans-serif;background:var(--bg);
-  color:var(--text-main);font-size:12px;padding-bottom:80px;-webkit-font-smoothing:antialiased}
-@media(min-width:1024px){html{background:#eee}body{max-width:700px;margin:0 auto;
-  background:var(--bg);min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,0.06)}}
-</style>
-<style>
-.pr-header{padding:16px 12px 10px;text-align:center;border-bottom:1px solid var(--border)}
-.pr-title{font-size:20px;font-weight:900;letter-spacing:1px}
-.pr-title .r{color:var(--purple)}
-.pr-sub{font-size:10px;color:var(--text-sub);margin-top:3px}
-.pr-badge{display:inline-block;font-size:9px;padding:3px 8px;border-radius:3px;font-weight:700;margin-top:5px}
-.pr-badge.shadow{background:rgba(124,58,237,0.1);color:var(--purple)}
-.pr-badge.pilot{background:rgba(245,158,11,0.1);color:var(--gold)}
-.pr-badge.prod{background:rgba(0,200,83,0.1);color:var(--green)}
-
-.pr-params{margin:8px 12px;padding:10px;border-radius:6px;background:rgba(124,58,237,0.03);
-  border:1px solid rgba(124,58,237,0.1);font-size:10px;color:var(--text-sub)}
-.pr-params code{font-family:'SF Mono',monospace;font-size:9px;color:var(--purple)}
-
-.pr-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:8px 12px}
-.pr-stat{background:var(--card-bg);border-radius:4px;padding:8px 4px;text-align:center}
-.pr-stat-val{font-size:16px;font-weight:800}
-.pr-stat-label{font-size:8px;color:var(--text-sub);font-weight:600;margin-top:2px}
-
-.pr-section{font-size:11px;font-weight:700;margin:16px 12px 6px;color:var(--text-sub);
-  letter-spacing:0.3px;text-transform:uppercase}
-
-.pr-comp{margin:4px 12px;border-radius:6px;background:var(--card-bg);
-  border:1px solid var(--border);overflow:hidden}
-.pr-comp.same{border-left:3px solid var(--green)}
-.pr-comp.diff{border-left:3px solid var(--purple)}
-.pr-comp-header{display:flex;justify-content:space-between;align-items:center;
-  padding:8px 10px;cursor:pointer}
-.pr-comp-theme{font-size:12px;font-weight:700}
-.pr-comp-rank{font-size:9px;color:var(--text-sub);font-weight:600}
-.pr-comp-meta{font-size:9px;color:var(--text-sub);padding:0 10px 2px}
-</style>
-<style>
-.pr-comp-body{display:none;padding:0 10px 10px}
-.pr-comp.open .pr-comp-body{display:block}
-.pr-picks{display:grid;grid-template-columns:1fr 1fr;gap:6px}
-.pr-pick{border-radius:4px;padding:8px;min-height:60px}
-.pr-pick.a4{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.06)}
-.pr-pick.a5{background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.15)}
-.pr-pick-label{font-size:8px;font-weight:700;color:var(--text-sub);margin-bottom:4px}
-.pr-pick.a5 .pr-pick-label{color:var(--purple)}
-.pr-pick-ticker{font-size:16px;font-weight:900}
-.pr-pick-name{font-size:9px;color:var(--text-sub);margin-top:1px;overflow:hidden;
-  text-overflow:ellipsis;white-space:nowrap}
-.pr-pick-metrics{margin-top:6px}
-.pr-pick-row{display:flex;justify-content:space-between;font-size:9px;padding:1px 0}
-.pr-pick-row .lbl{color:var(--text-sub)}.pr-pick-row .val{font-weight:600;font-family:monospace}
-.pr-pick-row .val.pos{color:var(--green)}.pr-pick-row .val.neg{color:var(--red)}
-.pr-badge-sm{display:inline-block;font-size:7px;padding:1px 4px;border-radius:2px;margin-top:3px}
-.pr-badge-sm.sec{background:rgba(0,82,204,0.08);color:var(--blue)}
-.pr-badge-sm.mc{background:rgba(0,0,0,0.04);color:var(--text-sub)}
-
-.pr-match-tag{font-size:8px;font-weight:700;padding:2px 6px;border-radius:3px}
-.pr-match-tag.same{background:rgba(0,200,83,0.1);color:var(--green)}
-.pr-match-tag.diff{background:rgba(124,58,237,0.1);color:var(--purple)}
-
-.pr-progress{margin:8px 12px;border-radius:6px;padding:12px;
-  background:rgba(124,58,237,0.03);border:1px solid rgba(124,58,237,0.1)}
-.pr-progress-bar{height:6px;background:rgba(0,0,0,0.06);border-radius:3px;margin:8px 0 4px;overflow:hidden}
-.pr-progress-fill{height:100%;background:var(--purple);border-radius:3px;transition:width 0.3s}
-.pr-progress-text{font-size:10px;color:var(--text-sub);display:flex;justify-content:space-between}
-
-.pr-bt{margin:8px 12px;border-radius:6px;padding:10px;background:var(--card-bg);
-  border:1px solid var(--border)}
-.pr-bt-title{font-size:10px;font-weight:700;color:var(--text-sub);margin-bottom:6px}
-.pr-bt-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:4px}
-.pr-bt-item{font-size:9px;padding:4px 6px;background:rgba(0,0,0,0.02);border-radius:3px;
-  display:flex;justify-content:space-between}
-.pr-bt-item .lbl{color:var(--text-sub)}.pr-bt-item .val{font-weight:700;font-family:monospace}
-
-.pr-warn{margin:8px 12px;padding:8px 10px;border-radius:4px;font-size:9px;
-  background:rgba(245,158,11,0.08);color:#b45309;border:1px solid rgba(245,158,11,0.2)}
+body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);color:var(--text-main);padding-bottom:80px}
+@media(min-width:1024px){html{background:#eee}body{max-width:700px;margin:0 auto;background:var(--bg);min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+.prism-header{padding:16px 12px 8px;text-align:center}
+.prism-title{font-size:18px;font-weight:900;letter-spacing:1px}
+.prism-sub{font-size:10px;color:var(--text-sub);margin-top:2px}
+.prism-badge{display:inline-block;font-size:9px;padding:2px 6px;border-radius:3px;font-weight:700;margin-top:4px}
+.gate-card{margin:8px 12px;border-radius:8px;padding:14px;text-align:center}
+.gate-card.shadow{background:rgba(124,58,237,0.06);border:2px solid var(--purple)}
+.gate-state{font-size:20px;font-weight:900;letter-spacing:2px;color:var(--purple)}
+.gate-detail{font-size:10px;color:var(--text-sub);margin-top:4px}
+.gate-atk{font-size:12px;font-weight:700;margin-top:6px}
+.health-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 12px}
+.health-box{border-radius:4px;padding:5px;text-align:center;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.health-label{font-size:8px;color:var(--text-sub);font-weight:600}
+.health-val{font-size:12px;font-weight:700}
+.section-title{font-size:12px;font-weight:700;margin:16px 12px 6px;color:var(--text-main)}
+.signal-pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 12px}
+@media(max-width:600px){.signal-pair{grid-template-columns:1fr;gap:6px}}
+.signal-card{border-radius:6px;padding:10px;min-height:60px}
+.signal-card.a4{background:rgba(0,0,0,0.02);border:1px solid rgba(0,0,0,0.1)}
+.signal-card.a5{background:rgba(124,58,237,0.04);border:1px solid rgba(124,58,237,0.25)}
+.signal-card-title{font-size:11px;font-weight:700;margin-bottom:6px}
+.signal-card.a4 .signal-card-title{color:var(--text-main)}
+.signal-card.a5 .signal-card-title{color:var(--purple)}
+.ss{background:#fff;border-radius:4px;padding:8px;margin:4px 0;border:1px solid rgba(0,0,0,0.05)}
+.ss-top{display:flex;align-items:center;justify-content:space-between;gap:4px}
+.ss-ticker{font-size:15px;font-weight:800}.ss-price{font-size:14px;font-weight:700}
+.ss-company{font-size:10px;color:var(--text-sub);margin-top:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ss-badges{display:flex;gap:3px;flex-wrap:wrap;margin-top:3px}
+.ss-badge{font-size:8px;padding:1px 4px;border-radius:2px;white-space:nowrap}
+.ss-badge.ex{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.ss-badge.sec{background:rgba(0,82,204,0.08);color:var(--blue)}
+.ss-rets{display:grid;grid-template-columns:repeat(4,1fr);gap:2px;margin-top:5px}
+.ss-ret{text-align:center;font-size:9px;background:rgba(0,0,0,0.02);border-radius:2px;padding:2px 0}
+.ss-ret-label{color:var(--text-sub)}.ss-ret-val{font-weight:600;font-size:10px}
+.ss-ret-val.pos{color:var(--green)}.ss-ret-val.neg{color:var(--red)}
+.theme-pick{margin:4px 12px;padding:8px;border-radius:4px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06);cursor:pointer}
+.theme-pick.same{border-left:3px solid var(--green)}.theme-pick.diff{border-left:3px solid var(--purple)}
+.theme-pick-top{display:flex;justify-content:space-between;align-items:center}
+.theme-pick-name{font-size:12px;font-weight:700}.theme-pick-meta{font-size:9px;color:var(--text-sub)}
+.theme-pick-badge{font-size:8px;padding:1px 5px;border-radius:2px}
+.tpb-same{background:rgba(0,200,83,0.1);color:var(--green)}.tpb-diff{background:rgba(124,58,237,0.1);color:var(--purple)}
+.theme-pick-body{display:none;margin-top:8px}.theme-pick.open .theme-pick-body{display:block}
+.bm-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.bm-title{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px}
+.bm-table{width:100%;font-size:10px;border-collapse:collapse}
+.bm-table th{text-align:left;padding:3px 4px;color:var(--text-sub);font-weight:600;border-bottom:1px solid rgba(0,0,0,0.1)}
+.bm-table td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.bm-table .best{color:var(--green);font-weight:700}.bm-table .worst{color:var(--red);font-weight:700}
+.logic-card{margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden}
+.logic-card-header{padding:10px 12px;font-size:11px;font-weight:700;cursor:pointer;background:var(--card-bg);display:flex;justify-content:space-between;align-items:center}
+.logic-card-body{display:none;padding:10px 12px;font-size:10px;line-height:1.7}
+.logic-card.open .logic-card-body{display:block}.logic-card.open .lc-icon{transform:rotate(90deg)}
+.lc-icon{font-size:9px;transition:transform 0.2s}
+.logic-rule{margin:4px 0;padding:4px 8px;background:rgba(0,0,0,0.02);border-radius:3px;font-size:10px}
+.ledger-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.ledger-title{font-size:11px;font-weight:700;margin-bottom:8px}
+.prog-bar-wrap{background:rgba(0,0,0,0.04);border-radius:4px;height:10px;overflow:hidden;margin:6px 0}
+.prog-bar-fill{height:100%;border-radius:4px;background:var(--purple);transition:width 0.5s}
+.prog-steps{display:flex;justify-content:space-between;font-size:8px;color:var(--text-sub);font-weight:600;margin-top:2px}
+.gate-grid{display:grid;grid-template-columns:1fr 1fr;gap:4px;margin:4px 12px}
+@media(max-width:400px){.gate-grid{grid-template-columns:1fr}}
+.gate-item{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-radius:4px;font-size:9px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.gate-item .g-label{color:var(--text-sub);font-weight:600}.gate-item .g-icon{font-size:11px}
+.prod-meta{font-size:9px;color:var(--text-sub);margin-top:6px}
+.all-stocks{width:100%;font-size:9px;border-collapse:collapse;margin-top:4px}
+.all-stocks th{text-align:left;padding:3px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
+.all-stocks th:not(:first-child){text-align:right}
+.all-stocks td{padding:3px;border-bottom:1px solid rgba(0,0,0,0.03)}
+.all-stocks td:not(:first-child){text-align:right;font-family:monospace}
+.all-stocks tr.pick-a5{background:rgba(124,58,237,0.06)}.all-stocks tr.pick-a4{background:rgba(0,0,0,0.03)}
 </style>
 </head>
 <body>
-
-<div class="pr-header">
-  <div class="pr-title">PRISM-<span class="r">R</span></div>
-  <div class="pr-sub">Residual Alpha Shadow Book</div>
-  <span class="pr-badge shadow" id="prStatusBadge">SHADOW</span>
+<div class="prism-header">
+  <div class="prism-title">PRISM-<span style="color:var(--purple)">R</span></div>
+  <div class="prism-sub">Residual Alpha Shadow Book</div>
+  <div id="prismDate" class="prism-badge" style="background:rgba(124,58,237,0.08);color:var(--purple)">Loading...</div>
+  <div id="headerMeta"></div>
 </div>
-
-<div class="pr-warn" id="prWarn">
-  ⚠ 研究用: テーマ構成のPIT問題あり。絶対CAGRは採用根拠にしない。相対差分のみ有効。
-</div>
-
-<div id="headerMeta"></div>
-
-<div class="pr-params" id="prParams"></div>
-
-<div class="pr-summary" id="prSummary"></div>
-
-<div class="pr-section">🎯 昇格進捗</div>
-<div class="pr-progress" id="prProgress"></div>
-
-<div class="pr-section">📊 5年拡張バックテスト（参考）</div>
-<div class="pr-bt" id="prBacktest"></div>
-
-<div class="pr-section" id="prCompTitle">🔀 Shadow比較</div>
-<div id="prComparisons"></div>
+<div id="prismMain"><div style="padding:40px;text-align:center;color:var(--text-sub)">読み込み中...</div></div>
 
 <script>
-const API_BASE = '/api/prism-r';
-const fmt = (v, d=1) => v != null ? (v*100).toFixed(d)+'%' : '—';
-const fmtN = (v, d=3) => v != null ? v.toFixed(d) : '—';
-
-async function init() {
-  const [compRes, metaRes] = await Promise.all([
-    fetch(`${API_BASE}/shadow_comparison.json`),
-    fetch(`${API_BASE}/meta.json`)
-  ]);
-  const comp = await compRes.json();
-  const meta = await metaRes.json();
-  renderParams(comp);
-  renderSummary(comp);
-  renderProgress(meta);
-  renderBacktest(meta);
-  renderComparisons(comp);
-}
-
-function renderParams(d) {
-  const p = d.frozen_params;
-  document.getElementById('prParams').innerHTML = `
-    <div style="font-weight:700;margin-bottom:4px">凍結パラメータ v1</div>
-    <div>Score: <code>${p.stock_score}</code></div>
-    <div>Theme: <code>${p.theme_score}</code></div>
-    <div>α窓=<code>${p.alpha_window}日</code> | テーマ数=<code>${p.top_themes}</code> |
-         銘柄/テーマ=<code>${p.picks_per_theme}</code> | 最小構成=<code>${p.min_members}</code> |
-         セクター上限=<code>${p.sector_cap}</code> | リバランス=<code>${p.rebalance_days}営業日</code></div>
-    <div style="margin-top:4px;font-size:9px">Snapshot: ${d.snapshot_date}</div>
-  `;
-}
+const fmt=v=>{if(v===null||v===undefined)return'—';const n=Number(v);return isNaN(n)?'—':(n>=0?'+':'')+((n*100).toFixed(1))+'%'};
+const fmtN=(v,d=3)=>v!=null?v.toFixed(d):'—';
+const _v='?v='+Date.now();
+Promise.all([
+  fetch('/api/prism-r/shadow_comparison.json'+_v).then(r=>r.json()),
+  fetch('/api/prism-r/meta.json'+_v).then(r=>r.json())
+]).then(([comp,meta])=>{
+  document.getElementById('prismDate').textContent='Snapshot: '+comp.snapshot_date;
+  let h='';
+  // 1. Shadow Status Card
+  h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-R: ${meta.status||'SHADOW'}</div>`;
+  h+=`<div class="gate-detail">α63×shrink(r²) | 20営業日リバランス | sector_cap=3</div>`;
+  h+=`<div class="gate-atk">観測モード — A4 live維持</div></div>`;
+  // 2. PIT Warning
+  h+=`<div style="margin:6px 12px;padding:6px 10px;border-radius:4px;font-size:9px;background:rgba(245,158,11,0.08);color:#b45309;border:1px solid rgba(245,158,11,0.2)">⚠ 研究用: テーマ構成のPIT問題あり。絶対CAGRは採用根拠にしない。相対差分のみ有効。</div>`;
+  // 3. Summary Grid
+  const s=comp.summary;
+  h+=`<div class="health-grid">`;
+  h+=`<div class="health-box"><div class="health-label">テーマ</div><div class="health-val">${s.themes_selected}</div></div>`;
+  h+=`<div class="health-box"><div class="health-label">A5銘柄</div><div class="health-val">${s.a5_names}</div></div>`;
+  h+=`<div class="health-box"><div class="health-label">差分銘柄</div><div class="health-val" style="color:var(--purple)">${s.diff_names}</div></div>`;
+  h+=`<div class="health-box"><div class="health-label">重複率</div><div class="health-val">${Math.round(s.overlap_pct*100)}%</div></div></div>`;
+  // 4. Promotion Progress
+  const fwd=meta.forward_rebalances||0,tgt=meta.target_rebalances||18,pct=Math.min(100,Math.round(fwd/tgt*100));
+  h+=`<div class="section-title">🎯 昇格進捗</div>`;
+  h+=`<div class="ledger-card"><div class="ledger-title">Forward PIT-safe 観測: ${fwd} / ${tgt} リバランス</div>`;
+  h+=`<div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${pct}%"></div></div>`;
+  h+=`<div class="prog-steps"><span>0</span><span>12 pilot</span><span>18 review</span><span>24 strong</span></div>`;
+  h+=`<div class="prod-meta" style="margin-top:6px">次回: ${meta.next_rebalance_est||'—'}</div></div>`;
+  // 5. Backtest Reference
+  const b=meta.backtest_5yr||{};
+  h+=`<div class="section-title">📊 5年拡張バックテスト（参考値）</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">73リバランス / 2020-01 ~ 2026-04 / Norgate Platinum</div>`;
+  h+=`<table class="bm-table"><tr><th>指標</th><th>A4 (raw 1M)</th><th>A5-R (α×shrink)</th><th>差分</th></tr>`;
+  h+=`<tr><td>Sharpe</td><td>${b.a4_sharpe||'—'}</td><td class="best">${b.a5_sharpe||'—'}</td><td>+${b.sharpe_diff||'—'}</td></tr>`;
+  h+=`<tr><td>MaxDD</td><td>${b.a4_maxdd||'—'}</td><td class="worst">${b.a5_maxdd||'—'}</td><td>-2.3pt</td></tr>`;
+  h+=`<tr><td>月次diff</td><td colspan="2" style="text-align:center">${b.monthly_diff||'—'}/月</td><td>勝率 ${b.monthly_win_rate||'—'}</td></tr>`;
+  h+=`<tr><td>Sign test</td><td colspan="2" style="text-align:center">p=${b.sign_test_p||'—'}</td><td class="worst">有意でない</td></tr>`;
+  h+=`<tr><td>Tech比率</td><td colspan="2" style="text-align:center">${b.tech_share_net||'—'}</td><td class="worst">純超過収益の76%</td></tr></table>`;
+  h+=`<div class="prod-meta" style="margin-top:6px">⚠ PIT汚染含む研究値。production判断はforward PIT-safeのみ。</div></div>`;
+  // 6. Shadow Comparison
+  h+=`<div class="section-title">🔀 Shadow比較 — ${comp.snapshot_date}</div>`;
+  comp.comparisons.forEach(c=>{
+    const cls=c.same?'same':'diff';
+    const a4s=c.stocks.find(x=>x.ticker===c.a4_pick)||{};
+    const a5s=c.stocks.find(x=>x.ticker===c.a5_pick)||{};
+    h+=`<div class="theme-pick ${cls}" onclick="this.classList.toggle('open')">`;
+    h+=`<div class="theme-pick-top"><div><span class="theme-pick-name">${c.theme_name}</span> <span class="theme-pick-badge ${c.same?'tpb-same':'tpb-diff'}">${c.same?'一致':'差分'}</span></div>`;
+    h+=`<span style="font-size:9px;color:var(--text-sub);font-weight:600">#${c.rank} | ${c.n_members}銘柄</span></div>`;
+    h+=`<div class="theme-pick-meta">mom63=${fmt(c.mom63)} | decel=${fmtN(c.decel,4)} | score=${fmtN(c.theme_score)} | ${c.sector}</div>`;
+    h+=`<div class="theme-pick-body"><div class="signal-pair">`;
+    h+=renderStock(a4s,'a4','A4: raw 1M');
+    h+=renderStock(a5s,'a5','A5-R: α×shrink');
+    h+=`</div>`;
+    if(c.stocks.length>0){const sorted=[...c.stocks].sort((a,b)=>(b.score_a5||0)-(a.score_a5||0));
+    h+=`<table class="all-stocks"><tr><th>Ticker</th><th>1M</th><th>α63</th><th>R²</th><th>Score</th></tr>`;
+    sorted.forEach(x=>{const isA5=x.ticker===c.a5_pick,isA4=x.ticker===c.a4_pick;
+    const cls=isA5?'pick-a5':isA4?'pick-a4':'';const mark=isA5?' ◆R':isA4?' ◇A4':'';
+    h+=`<tr class="${cls}"><td style="font-weight:${(isA4||isA5)?700:400}">${x.ticker}${mark}</td>`;
+    h+=`<td style="color:${(x.raw_1m||0)>=0?'var(--green)':'var(--red)'}">${fmt(x.raw_1m)}</td>`;
+    h+=`<td style="color:${(x.alpha63||0)>=0?'var(--green)':'var(--red)'}">${fmtN(x.alpha63)}</td>`;
+    h+=`<td>${fmtN(x.r2_63)}</td><td style="font-weight:600">${fmtN(x.score_a5)}</td></tr>`;});
+    h+=`</table>`;}
+    h+=`</div></div>`;
+  });
+  // 7. Frozen Parameters
+  const p=comp.frozen_params;
+  h+=`<div class="section-title">🔒 凍結パラメータ</div>`;
+  h+=`<div class="logic-card open"><div class="logic-card-header" onclick="this.parentElement.classList.toggle('open')">A5-lite v1 — 全パラメータ凍結中<span class="lc-icon">▶</span></div>`;
+  h+=`<div class="logic-card-body">`;
+  h+=`<div class="logic-rule"><b>Stock Score:</b> <code>${p.stock_score}</code></div>`;
+  h+=`<div class="logic-rule"><b>Theme Score:</b> <code>${p.theme_score}</code></div>`;
+  h+=`<div class="logic-rule">α窓=${p.alpha_window}日 | テーマ数=${p.top_themes} | 銘柄/テーマ=${p.picks_per_theme} | 最小構成=${p.min_members} | sector_cap=${p.sector_cap} | リバランス=${p.rebalance_days}営業日</div>`;
+  h+=`</div></div>`;
+  // 8. Production Gates
+  h+=`<div class="section-title">🚦 昇格ゲート</div><div class="gate-grid">`;
+  ['G1: median diff > +0.5%','G2: cumulative > +8%','G3: MaxDD ≤ 5pt悪化','G4: 単月 < 35%寄与',
+   'G5: 前後半とも正','G6: PIT-safe only','G7: 25bps net > 0','G8: Tech share < 60%',
+   'G9: Non-Tech diff ≥ 0','G10: Top5 share < 50%'].forEach(g=>{
+    h+=`<div class="gate-item"><span class="g-label">${g}</span><span class="g-icon">⏳</span></div>`;});
+  h+=`</div><div class="prod-meta" style="margin:2px 12px">全ゲートはforward PIT-safeデータで評価。バックテスト値は参考のみ。</div>`;
+  document.getElementById('prismMain').innerHTML=h;
+}).catch(err=>{document.getElementById('prismMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
+function renderStock(s,cls,label){
+  if(!s||!s.ticker)return`<div class="signal-card ${cls}"><div class="signal-card-title">${label}</div><div style="color:var(--text-sub);font-size:9px">候補なし</div></div>`;
+  let h=`<div class="signal-card ${cls}"><div class="signal-card-title">${label}</div>`;
+  h+=`<div class="ss"><div class="ss-top"><span class="ss-ticker">${s.ticker}</span><span class="ss-price">$${s.price||'—'}</span></div>`;
+  h+=`<div class="ss-company">${s.name_ja||s.name||''}</div>`;
+  h+=`<div class="ss-badges"><span class="ss-badge ex">${s.mc}</span><span class="ss-badge sec">${s.sector}</span></div>`;
+  h+=`<div class="ss-rets">`;
+  [{l:'α63',v:s.alpha63,f:fmtN},{l:'R²',v:s.r2_63,f:fmtN},{l:'Shrink',v:s.shrink,f:fmtN},{l:'1M',v:s.raw_1m,f:fmt}].forEach(r=>{
+    const val=r.f(r.v);const nv=Number(r.v)||0;const c=r.l==='R²'||r.l==='Shrink'?'':nv>=0?'pos':'neg';
+    h+=`<div class="ss-ret"><div class="ss-ret-label">${r.l}</div><div class="ss-ret-val ${c}">${val}</div></div>`;});
+  h+=`</div></div></div>`;return h;}
 </script>
-<script>
-function renderSummary(d) {
-  const s = d.summary;
-  document.getElementById('prSummary').innerHTML = `
-    <div class="pr-stat"><div class="pr-stat-val">${s.themes_selected}</div><div class="pr-stat-label">テーマ</div></div>
-    <div class="pr-stat"><div class="pr-stat-val">${s.a5_names}</div><div class="pr-stat-label">A5銘柄</div></div>
-    <div class="pr-stat"><div class="pr-stat-val" style="color:var(--purple)">${s.diff_names}</div><div class="pr-stat-label">差分銘柄</div></div>
-    <div class="pr-stat"><div class="pr-stat-val">${Math.round(s.overlap_pct*100)}%</div><div class="pr-stat-label">重複率</div></div>
-  `;
-}
-
-function renderProgress(m) {
-  const current = m.forward_rebalances || 0;
-  const target = m.target_rebalances || 18;
-  const pct = Math.min(100, Math.round(current/target*100));
-  document.getElementById('prProgress').innerHTML = `
-    <div style="font-size:11px;font-weight:700">Forward PIT-safe 観測</div>
-    <div class="pr-progress-bar"><div class="pr-progress-fill" style="width:${pct}%"></div></div>
-    <div class="pr-progress-text">
-      <span>${current} / ${target} リバランス</span>
-      <span>次回: ${m.next_rebalance_est || '—'}</span>
-    </div>
-    <div style="font-size:9px;color:var(--text-sub);margin-top:4px">
-      12回=pilot候補 | 18回=production審査 | 24回=強い確認
-    </div>
-  `;
-}
-
-function renderBacktest(m) {
-  const b = m.backtest_5yr || {};
-  document.getElementById('prBacktest').innerHTML = `
-    <div class="pr-bt-title">73リバランス / 2020-01 ~ 2026-04 / Norgate Platinum</div>
-    <div class="pr-bt-grid">
-      <div class="pr-bt-item"><span class="lbl">Sharpe差</span><span class="val">${b.sharpe_diff ? '+'+b.sharpe_diff : '—'}</span></div>
-      <div class="pr-bt-item"><span class="lbl">月次diff</span><span class="val">${b.monthly_diff||'—'}</span></div>
-      <div class="pr-bt-item"><span class="lbl">月次勝率</span><span class="val">${b.monthly_win_rate||'—'}</span></div>
-      <div class="pr-bt-item"><span class="lbl">Sign test</span><span class="val">p=${b.sign_test_p||'—'}</span></div>
-      <div class="pr-bt-item"><span class="lbl">Tech比率</span><span class="val">${b.tech_share_net||'—'}</span></div>
-      <div class="pr-bt-item"><span class="lbl">A5 MaxDD</span><span class="val">${b.a5_maxdd||'—'}</span></div>
-    </div>
-    <div style="font-size:8px;color:var(--text-sub);margin-top:6px">
-      ⚠ PIT汚染含む研究値。Silver層: 相対差分のみ参考。production判断はforward PIT-safeのみ。
-    </div>
-  `;
-}
-</script>
-<script>
-function renderComparisons(d) {
-  const container = document.getElementById('prComparisons');
-  document.getElementById('prCompTitle').textContent =
-    `🔀 Shadow比較 — ${d.snapshot_date}`;
-  let html = '';
-  for (const c of d.comparisons) {
-    const cls = c.same ? 'same' : 'diff';
-    const a4s = c.stocks.find(s => s.ticker === c.a4_pick) || {};
-    const a5s = c.stocks.find(s => s.ticker === c.a5_pick) || {};
-    html += `<div class="pr-comp ${cls}" onclick="this.classList.toggle('open')">`;
-    html += `<div class="pr-comp-header">
-      <div>
-        <span class="pr-comp-theme">${c.theme_name}</span>
-        <span class="pr-match-tag ${cls}">${c.same ? '一致' : '差分'}</span>
-      </div>
-      <span class="pr-comp-rank">#${c.rank} | ${c.n_members}銘柄</span>
-    </div>`;
-    html += `<div class="pr-comp-meta">
-      mom63=${fmt(c.mom63)} | decel=${fmtN(c.decel,4)} |
-      score=${fmtN(c.theme_score)} | ${c.sector}
-    </div>`;
-    html += `<div class="pr-comp-body"><div class="pr-picks">`;
-    // A4 pick
-    html += renderPick(a4s, 'a4', 'A4: raw 1M');
-    // A5 pick
-    html += renderPick(a5s, 'a5', 'A5-R: α×shrink');
-    html += `</div>`;
-    // All members table (collapsed)
-    if (c.stocks.length > 0) {
-      html += `<div style="margin-top:8px;font-size:9px;color:var(--text-sub);font-weight:600">全構成銘柄</div>`;
-      html += `<table style="width:100%;font-size:9px;border-collapse:collapse;margin-top:4px">`;
-      html += `<tr style="border-bottom:1px solid var(--border)">
-        <th style="text-align:left;padding:3px">Ticker</th>
-        <th style="text-align:right;padding:3px">1M</th>
-        <th style="text-align:right;padding:3px">α63</th>
-        <th style="text-align:right;padding:3px">R²</th>
-        <th style="text-align:right;padding:3px">Score</th>
-      </tr>`;
-      const sorted = [...c.stocks].sort((a,b) => (b.score_a5||0)-(a.score_a5||0));
-      for (const s of sorted) {
-        const isA4 = s.ticker === c.a4_pick;
-        const isA5 = s.ticker === c.a5_pick;
-        const bg = isA5 ? 'rgba(124,58,237,0.06)' : isA4 ? 'rgba(0,0,0,0.03)' : '';
-        const mark = isA5 ? ' ◆R' : isA4 ? ' ◇A4' : '';
-        html += `<tr style="border-bottom:1px solid rgba(0,0,0,0.03);background:${bg}">
-          <td style="padding:3px;font-weight:${(isA4||isA5)?700:400}">${s.ticker}${mark}</td>
-          <td style="text-align:right;padding:3px;color:${(s.raw_1m||0)>=0?'var(--green)':'var(--red)'}">${fmt(s.raw_1m)}</td>
-          <td style="text-align:right;padding:3px;color:${(s.alpha63||0)>=0?'var(--green)':'var(--red)'}">${fmtN(s.alpha63,3)}</td>
-          <td style="text-align:right;padding:3px">${fmtN(s.r2_63)}</td>
-          <td style="text-align:right;padding:3px;font-weight:600">${fmtN(s.score_a5,3)}</td>
-        </tr>`;
-      }
-      html += `</table>`;
-    }
-    html += `</div></div>`;
-  }
-  container.innerHTML = html;
-}
-
-function renderPick(s, cls, label) {
-  if (!s || !s.ticker) return `<div class="pr-pick ${cls}"><div class="pr-pick-label">${label}</div><div style="color:var(--text-sub);font-size:9px">候補なし</div></div>`;
-  const aCol = (s.alpha63||0) >= 0 ? 'pos' : 'neg';
-  const mCol = (s.raw_1m||0) >= 0 ? 'pos' : 'neg';
-  return `<div class="pr-pick ${cls}">
-    <div class="pr-pick-label">${label}</div>
-    <div class="pr-pick-ticker">${s.ticker}</div>
-    <div class="pr-pick-name">${s.name_ja || s.name || ''}</div>
-    <div class="pr-pick-metrics">
-      <div class="pr-pick-row"><span class="lbl">α63</span><span class="val ${aCol}">${fmtN(s.alpha63,3)}</span></div>
-      <div class="pr-pick-row"><span class="lbl">R²</span><span class="val">${fmtN(s.r2_63)}</span></div>
-      <div class="pr-pick-row"><span class="lbl">Shrink</span><span class="val">${fmtN(s.shrink)}</span></div>
-      <div class="pr-pick-row"><span class="lbl">1M raw</span><span class="val ${mCol}">${fmt(s.raw_1m)}</span></div>
-      <div class="pr-pick-row"><span class="lbl">価格</span><span class="val">$${s.price||'—'}</span></div>
-    </div>
-    <div><span class="pr-badge-sm sec">${s.sector}</span> <span class="pr-badge-sm mc">${s.mc}</span></div>
-  </div>`;
-}
-
-init().catch(e => console.error('PRISM-R init error:', e));
-</script>
-
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
   <a href="/map" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
   <a href="/market-movers" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>銘柄</a>
   <a href="/infographic" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15 15 0 014 10 15 15 0 01-4 10 15 15 0 01-4-10 15 15 0 014-10z"/></svg></span>マクロ</a>
   <a href="/prism" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
-  <a class="nav-item active" href="/prism-r"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3"/></svg></span><span style="color:#7c3aed">R</span></a>
+  <a class="nav-item active" href="/prism-r"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3"/></svg></span><span style="color:var(--purple)">R</span></a>
 </nav>
-<script>
-(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
-const el=document.getElementById('headerMeta');if(el&&d.last_update){
-el.innerHTML=(el.innerHTML||'')+
-'<div class="last-updated">データ更新: '+d.last_update+'</div>';}
-}catch(e){}})();
-</script>
+<script>(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();const el=document.getElementById('headerMeta');if(el&&d.last_update){el.innerHTML=(el.innerHTML||'')+'<div class="last-updated">データ更新: '+d.last_update+'</div>';}}catch(e){}})();</script>
 </body>
 </html>
