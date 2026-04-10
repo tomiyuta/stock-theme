@@ -171,9 +171,14 @@ for rank_i, th in enumerate(sel):
     for s in s5:
         if s['ticker'] not in used5 and s['score_a5'] is not None:
             a5_tk = s['ticker']; used5.add(a5_tk); break
+    # Theme state per EXIT CONSTITUTION v2
+    full_rank = int(ts['score'].rank(ascending=False).loc[th])
+    theme_state = 'ENTRY' if full_rank <= 20 else 'WATCH' if full_rank <= 35 else 'EXIT'
     comparisons.append({
         'theme': th, 'theme_name': slug_to_name.get(th, th),
-        'rank': rank_i + 1, 'sector': theme_sector.get(th, ''),
+        'rank': rank_i + 1, 'full_rank': full_rank,
+        'theme_state': theme_state,
+        'sector': theme_sector.get(th, ''),
         'mom63': round(float(ts.loc[th, 'mom63']), 4),
         'decel': round(float(ts.loc[th, 'decel']), 4),
         'theme_score': round(float(ts.loc[th, 'score']), 3),

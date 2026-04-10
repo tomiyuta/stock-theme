@@ -65,7 +65,7 @@ def acceleration_flag(r1, r3):
 
 def zone_from_rank(rank_3m):
     if rank_3m <= 20: return "ENTRY_ZONE"
-    if rank_3m <= 30: return "HOLD_ZONE"
+    if rank_3m <= 35: return "HOLD_ZONE"
     return "OUT_ZONE"
 
 
@@ -184,8 +184,8 @@ def build_trigger_candidates(gate, theme_df, constituents_df, prev_dir):
     t1 = bool(prev_gate) and prev_gate.get("gate_state") != gate.gate_state
     rank_map = theme_df.set_index("theme")["score_rank"].to_dict()
     accel_map = theme_df.set_index("theme")["acceleration_flag"].to_dict()
-    t2 = sorted([t for t in prev_themes if rank_map.get(t, 999) > 30])
-    t3 = sorted([t for t in prev_themes if t in accel_map and not bool(accel_map[t])])
+    t2 = sorted([t for t in prev_themes if rank_map.get(t, 999) > 35])
+    t3 = sorted([t for t in prev_themes if t in accel_map and not bool(accel_map[t])])  # diagnostic only per EXIT_CONSTITUTION_v2
     t5 = sorted([t for t in curr_themes if t not in set(prev_themes)])
 
     return {

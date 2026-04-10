@@ -156,7 +156,7 @@ Promise.all([
   fetch("/api/prism/ledger.json"+_v).then(r=>r.json()).catch(()=>null),
   fetch("/api/prism/orders.json"+_v).then(r=>r.json()).catch(()=>[])
 ]).then(([meta,gate,sectors,themes,constituents,signals,ledger,orders])=>{
-  document.getElementById("prismDate").textContent="Snapshot: "+meta.snapshot_date;
+  document.getElementById("prismDate").textContent="Snapshot: "+meta.snapshot_date+" | EXIT v2 | T2>35 | TRAIL8=alert";
   let h="";
 
   // K-gate
@@ -250,8 +250,8 @@ Promise.all([
   const trig=signals.trigger_candidates||{};
   const prevT=(trig.theme_membership_diff?.removed)||[];
   const dropT=(trig.T2_theme_drop)||[];
-  const decelT=(trig.T3_accel_flip)||[];
-  const sellThemes=[...new Set([...prevT,...dropT,...decelT])];
+  const decelT=(trig.T3_accel_flip)||[];  // diagnostic only per EXIT_CONSTITUTION_v2
+  const sellThemes=[...new Set([...prevT,...dropT])];  // T3 excluded from sell triggers
   const sellStocks=constituents.filter(c=>sellThemes.includes(c.theme));
   const newEntryT=(trig.T5_new_entry)||[];
 
@@ -329,7 +329,7 @@ Promise.all([
 
   // Triggers
   h+=`<div class="section-title">トリガー候補</div><div class="trigger-grid">`;
-  const trigs=[["T1","K-gate反転",trig.T1_gate_flip],["T2","テーマ脱落",(trig.T2_theme_drop||[]).length>0],["T3","加速→減速",(trig.T3_accel_flip||[]).length>0],["T4","DD",(trig.T4_dd||[]).length>0],["T5","新規参入",(trig.T5_new_entry||[]).length>0]];
+  const trigs=[["T1","K-gate反転",trig.T1_gate_flip],["T2","テーマ脱落(>35)",(trig.T2_theme_drop||[]).length>0],["T3","加速→減速 ⓘ",(trig.T3_accel_flip||[]).length>0],["T4","DD",(trig.T4_dd||[]).length>0],["T5","新規参入",(trig.T5_new_entry||[]).length>0]];
   trigs.forEach(([id,label,fired])=>{h+=`<div class="trigger-box${fired?" fired":""}"><div class="trigger-label">${id} ${label}</div><div class="trigger-val">${fired?"FIRED":"—"}</div></div>`;});
   h+=`</div>`;
 

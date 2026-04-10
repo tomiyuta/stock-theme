@@ -136,7 +136,7 @@ Promise.all([
   // 3b. Virtual Portfolio — A4 vs A5-R side by side
   h+=`<div class="section-title">📋 バーチャルポートフォリオ</div>`;
   h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM現行) vs A5-R (Shadow) — 各10%等ウェイト</div>`;
-  h+=`<table class="bm-table"><tr><th>#</th><th>テーマ</th><th>A4 pick</th><th>A5-R pick</th><th></th></tr>`;
+  h+=`<table class="bm-table"><tr><th>#</th><th>テーマ</th><th>状態</th><th>A4 pick</th><th>A5-R pick</th><th></th></tr>`;
   comp.comparisons.forEach((c,i)=>{
     const a4s=c.stocks.find(x=>x.ticker===c.a4_pick)||{};
     const a5s=c.stocks.find(x=>x.ticker===c.a5_pick)||{};
@@ -145,6 +145,8 @@ Promise.all([
     h+=`<tr ${cls}>`;
     h+=`<td style="font-size:9px;color:var(--text-sub)">${i+1}</td>`;
     h+=`<td style="font-size:9px">${c.theme_name}</td>`;
+    const stColor=c.theme_state==='ENTRY'?'var(--green)':c.theme_state==='WATCH'?'#b45309':'var(--red)';
+    h+=`<td style="font-size:8px;font-weight:700;color:${stColor}">${c.theme_state||'?'}</td>`;
     h+=`<td style="font-weight:700">${c.a4_pick} <span style="font-size:8px;color:${(a4s.raw_1m||0)>=0?'var(--green)':'var(--red)'}">${fmt(a4s.raw_1m)}</span></td>`;
     h+=`<td style="font-weight:700;color:var(--purple)">${c.a5_pick} <span style="font-size:8px;color:${(a5s.alpha63||0)>=0?'var(--green)':'var(--red)'}">α${fmtN(a5s.alpha63)}</span></td>`;
     h+=`<td>${tag}</td></tr>`;
@@ -194,8 +196,10 @@ Promise.all([
     const a4s=c.stocks.find(x=>x.ticker===c.a4_pick)||{};
     const a5s=c.stocks.find(x=>x.ticker===c.a5_pick)||{};
     h+=`<div class="theme-pick ${cls}" onclick="this.classList.toggle('open')">`;
-    h+=`<div class="theme-pick-top"><div><span class="theme-pick-name">${c.theme_name}</span> <span class="theme-pick-badge ${c.same?'tpb-same':'tpb-diff'}">${c.same?'一致':'差分'}</span></div>`;
-    h+=`<span style="font-size:9px;color:var(--text-sub);font-weight:600">#${c.rank} | ${c.n_members}銘柄</span></div>`;
+    const stCls = c.theme_state==='ENTRY'?'tpb-same':c.theme_state==='WATCH'?'style="background:rgba(245,158,11,0.1);color:#b45309"':'style="background:rgba(255,23,68,0.1);color:var(--red)"';
+    const stTag = c.theme_state==='ENTRY'?`<span class="theme-pick-badge tpb-same">${c.theme_state}</span>`:c.theme_state==='WATCH'?`<span class="theme-pick-badge" style="background:rgba(245,158,11,0.1);color:#b45309">${c.theme_state}</span>`:`<span class="theme-pick-badge" style="background:rgba(255,23,68,0.1);color:var(--red)">${c.theme_state}</span>`;
+    h+=`<div class="theme-pick-top"><div><span class="theme-pick-name">${c.theme_name}</span> <span class="theme-pick-badge ${c.same?'tpb-same':'tpb-diff'}">${c.same?'一致':'差分'}</span> ${stTag}</div>`;
+    h+=`<span style="font-size:9px;color:var(--text-sub);font-weight:600">#${c.rank} (rank${c.full_rank||'?'}) | ${c.n_members}銘柄</span></div>`;
     h+=`<div class="theme-pick-meta">mom63=${fmt(c.mom63)} | decel=${fmtN(c.decel,4)} | score=${fmtN(c.theme_score)} | ${c.sector}</div>`;
     h+=`<div class="theme-pick-body"><div class="signal-pair">`;
     h+=renderStock(a4s,'a4','A4: raw 1M');
