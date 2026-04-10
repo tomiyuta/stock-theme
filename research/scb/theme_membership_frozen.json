@@ -1,0 +1,1389 @@
+{
+  "activewear": [
+    "AS",
+    "BIRK",
+    "DECK",
+    "LULU",
+    "NKE",
+    "ONON"
+  ],
+  "ad-tech": [
+    "APP",
+    "DV",
+    "MGNI",
+    "TTD",
+    "U",
+    "ZETA"
+  ],
+  "advertising-platforms": [
+    "GOOGL",
+    "META",
+    "PINS",
+    "RDDT",
+    "ROKU",
+    "SNAP"
+  ],
+  "aggregates-concrete": [
+    "ACA",
+    "CRH",
+    "EXP",
+    "KNF",
+    "MLM",
+    "USLM",
+    "VMC"
+  ],
+  "agribusiness": [
+    "ADM",
+    "BG"
+  ],
+  "ai-infrastructure-software": [
+    "DDOG",
+    "MDB",
+    "PATH",
+    "SNOW"
+  ],
+  "ai-pharma": [
+    "ABSI",
+    "CERT",
+    "GH",
+    "RLAY",
+    "RXRX",
+    "SDGR",
+    "TEM"
+  ],
+  "ai-semiconductor-core": [
+    "AMD",
+    "AVGO",
+    "MRVL",
+    "MU",
+    "NVDA"
+  ],
+  "ai-server-odm": [
+    "FLEX",
+    "JBL",
+    "SANM"
+  ],
+  "airlines-lcc": [
+    "ALK",
+    "LUV"
+  ],
+  "airlines-legacy": [
+    "AAL",
+    "DAL",
+    "UAL"
+  ],
+  "alcoholic-beverages": [
+    "ABEV",
+    "BUD",
+    "DEO",
+    "STZ",
+    "TAP"
+  ],
+  "alminium": [
+    "AA",
+    "CENX"
+  ],
+  "american-casual": [
+    "AEO",
+    "ANF",
+    "GAP",
+    "LEVI",
+    "URBN",
+    "VFC"
+  ],
+  "analog-semi-comm": [
+    "QRVO",
+    "SWKS"
+  ],
+  "analog-semi-generic": [
+    "ADI",
+    "DIOD",
+    "TXN"
+  ],
+  "analog-semi-power": [
+    "MPWR",
+    "ON"
+  ],
+  "analog-semi-sensor": [
+    "ALGM",
+    "MCHP",
+    "NXPI",
+    "SLAB"
+  ],
+  "apple-intelligence": [
+    "AAPL",
+    "AMKR",
+    "ARM",
+    "GLW",
+    "SWKS",
+    "TSM"
+  ],
+  "auto-maintenance": [
+    "AZO",
+    "GPC",
+    "ORLY"
+  ],
+  "auto-parts": [
+    "ALV",
+    "APTV",
+    "BWA",
+    "GNTX",
+    "LEA",
+    "MGA"
+  ],
+  "autonomous": [
+    "AMBA",
+    "AUR",
+    "MBLY",
+    "QCOM",
+    "TSLA"
+  ],
+  "battery-storage": [
+    "EOSE",
+    "FLNC",
+    "GWH",
+    "STEM"
+  ],
+  "beverages-diversified": [
+    "CELH",
+    "KDP",
+    "KO",
+    "MNST",
+    "PEP"
+  ],
+  "biotech-diversified": [
+    "ABBV",
+    "AMGN",
+    "BIIB",
+    "GILD",
+    "REGN"
+  ],
+  "biotech-genomics": [
+    "ALNY",
+    "CRSP",
+    "INCY",
+    "MRNA",
+    "NTRA",
+    "VKTX"
+  ],
+  "biotech-specialized": [
+    "ARGX",
+    "INSM",
+    "VRTX"
+  ],
+  "bnpl": [
+    "AFRM",
+    "KLAR",
+    "SEZL"
+  ],
+  "cable-tv": [
+    "CHTR",
+    "CMCSA"
+  ],
+  "cafe": [
+    "BROS",
+    "SBUX"
+  ],
+  "capital-equipment-leasing": [
+    "AER",
+    "FTAI",
+    "GATX",
+    "TRN",
+    "URI"
+  ],
+  "cdn": [
+    "AKAM",
+    "FSLY",
+    "NET"
+  ],
+  "china-ai": [
+    "BABA",
+    "BIDU",
+    "GDS",
+    "KC",
+    "VNET"
+  ],
+  "chinese-ev": [
+    "LI",
+    "NIO",
+    "XPEV"
+  ],
+  "coking-coal": [
+    "AMR",
+    "BTU",
+    "CNR",
+    "HCC",
+    "METC",
+    "SXC"
+  ],
+  "commodity-chemicals": [
+    "DOW",
+    "LYB"
+  ],
+  "confectionery": [
+    "HSY",
+    "MDLZ",
+    "PEP"
+  ],
+  "consulting": [
+    "ACN",
+    "BAH",
+    "CTSH",
+    "IBM"
+  ],
+  "consumer-lending": [
+    "AFRM",
+    "ALLY",
+    "AXP",
+    "COF",
+    "FCFS",
+    "KLAR",
+    "OMF",
+    "SLM",
+    "SYF",
+    "UPST"
+  ],
+  "consumer-staples": [
+    "CHD",
+    "CL",
+    "CLX",
+    "HLN",
+    "KMB",
+    "KVUE",
+    "PG",
+    "REYN",
+    "UL"
+  ],
+  "content-studios": [
+    "CMCSA",
+    "DIS",
+    "FOXA",
+    "NWS"
+  ],
+  "copper-mining": [
+    "ERO",
+    "FCX",
+    "HBM",
+    "IE",
+    "SCCO",
+    "TECK",
+    "TGB",
+    "TMQ"
+  ],
+  "corrugated-paper-packaging": [
+    "GPK",
+    "IP",
+    "PKG",
+    "SON",
+    "SW"
+  ],
+  "cosmetics-personal-care": [
+    "EL",
+    "ELF",
+    "KVUE",
+    "PG",
+    "ULTA"
+  ],
+  "cpu": [
+    "AMD",
+    "ARM",
+    "INTC"
+  ],
+  "cruise-lines": [
+    "CCL",
+    "NCLH",
+    "RCL",
+    "VIK"
+  ],
+  "crypto": [
+    "BLSH",
+    "CLSK",
+    "COIN",
+    "CRCL",
+    "FIGR",
+    "MARA",
+    "MSTR",
+    "XYZ"
+  ],
+  "custom-ai-chips": [
+    "AMKR",
+    "ARM",
+    "ASX",
+    "AVGO",
+    "MRVL",
+    "TSM"
+  ],
+  "cybersecurity-cloud": [
+    "NET",
+    "ZS"
+  ],
+  "cybersecurity-data": [
+    "CVLT",
+    "RBRK"
+  ],
+  "cybersecurity-end": [
+    "CRWD",
+    "S"
+  ],
+  "cybersecurity-gen": [
+    "CHKP",
+    "FTNT",
+    "PANW"
+  ],
+  "cybersecurity-other": [
+    "DDOG",
+    "DT",
+    "OKTA",
+    "TENB"
+  ],
+  "data-storage": [
+    "MU",
+    "SNDK",
+    "STX",
+    "WDC"
+  ],
+  "dc-optical-device": [
+    "AAOI",
+    "CIEN",
+    "COHR",
+    "GLW",
+    "KEYS",
+    "LITE",
+    "POET",
+    "SITM",
+    "VIAV"
+  ],
+  "dc-optical-ems": [
+    "AAOI",
+    "COHR",
+    "FN",
+    "MRVL",
+    "MTSI"
+  ],
+  "dc-optical-semi": [
+    "ANET",
+    "AVGO",
+    "CLS",
+    "CSCO",
+    "HPE",
+    "MRVL"
+  ],
+  "dc-rack-connect": [
+    "ALAB",
+    "APH",
+    "CRDO"
+  ],
+  "defence-comm": [
+    "ATRO",
+    "CTS",
+    "CW",
+    "KE",
+    "LHX",
+    "MRCY",
+    "SKYT"
+  ],
+  "defence-engine": [
+    "BWXT",
+    "GE",
+    "WWD"
+  ],
+  "defence-general": [
+    "BA",
+    "GD",
+    "HII",
+    "LMT",
+    "NOC",
+    "RTX",
+    "TXT"
+  ],
+  "defence-maintenance": [
+    "AIR",
+    "HEI",
+    "LOAR",
+    "TDG",
+    "VSEC"
+  ],
+  "defence-parts": [
+    "ATI",
+    "DCO",
+    "HWM",
+    "HXL"
+  ],
+  "defence-service": [
+    "AMTM",
+    "BAH",
+    "CACI",
+    "KBR",
+    "LDOS",
+    "PLTR",
+    "PSN",
+    "VSEC",
+    "VVX"
+  ],
+  "delivery": [
+    "CART",
+    "DASH",
+    "UBER"
+  ],
+  "dining": [
+    "DRI",
+    "TXRH"
+  ],
+  "discount-apparel": [
+    "BURL",
+    "OLLI",
+    "ROST",
+    "TJX"
+  ],
+  "diversified-industrials": [
+    "DOV",
+    "EMR",
+    "ETN",
+    "HON",
+    "ITW",
+    "PH",
+    "TXT"
+  ],
+  "diversified-resources": [
+    "BHP",
+    "RIO",
+    "VALE"
+  ],
+  "dividend": [
+    "ABBV",
+    "AMGN",
+    "BMY",
+    "COP",
+    "CVX",
+    "LMT",
+    "MRK",
+    "TXN",
+    "VZ"
+  ],
+  "dollar-store": [
+    "DG",
+    "DLTR"
+  ],
+  "drilling-equipment": [
+    "FTI",
+    "NOV",
+    "TS"
+  ],
+  "drilling-services": [
+    "BKR",
+    "HAL",
+    "SLB",
+    "WFRD"
+  ],
+  "drones": [
+    "AVAV",
+    "DPRO",
+    "KRMN",
+    "KTOS",
+    "MRCY",
+    "ONDS",
+    "RCAT"
+  ],
+  "eVTOL": [
+    "ACHR",
+    "EVEX",
+    "EVTL",
+    "JOBY",
+    "VTOL"
+  ],
+  "earth-observation": [
+    "BKSY",
+    "PL",
+    "SATL",
+    "SPIR"
+  ],
+  "environmental-waste": [
+    "CLH",
+    "GFL",
+    "RSG",
+    "VLTO",
+    "WCN",
+    "WM"
+  ],
+  "facility-equipment": [
+    "ALLE",
+    "APG",
+    "AYI",
+    "JCI",
+    "OTIS",
+    "XYL"
+  ],
+  "facility-sanitation": [
+    "CTAS",
+    "ROL",
+    "RTO"
+  ],
+  "fast-casual": [
+    "CMG",
+    "SHAK"
+  ],
+  "fast-food": [
+    "DPZ",
+    "MCD",
+    "QSR",
+    "WEN",
+    "WING",
+    "YUM"
+  ],
+  "food-agriculture": [
+    "CF",
+    "CTVA",
+    "NTR",
+    "SQM"
+  ],
+  "food-wholesale": [
+    "PFGC",
+    "SYY",
+    "USFD"
+  ],
+  "foundry": [
+    "AMKR",
+    "ASX",
+    "GFS",
+    "INTC",
+    "SKYT",
+    "TSEM",
+    "TSM",
+    "UMC"
+  ],
+  "gas-fracking": [
+    "ACDC",
+    "HP",
+    "LBRT",
+    "PTEN",
+    "PUMP"
+  ],
+  "gas-utilities": [
+    "ATO",
+    "BIPC",
+    "MDU",
+    "NFG",
+    "NI",
+    "NJR",
+    "OGS",
+    "SR",
+    "SRE",
+    "SWX",
+    "UGI"
+  ],
+  "gold-mining": [
+    "AEM",
+    "AGI",
+    "AU",
+    "B",
+    "CDE",
+    "FNV",
+    "GFI",
+    "HL",
+    "HMY",
+    "IAG",
+    "KGC",
+    "NEM",
+    "RGLD",
+    "WPM"
+  ],
+  "government-dx": [
+    "AXON",
+    "MSI",
+    "TYL"
+  ],
+  "graphite": [
+    "EAF",
+    "NMG",
+    "NVX",
+    "WWR"
+  ],
+  "grocery-retail": [
+    "COST",
+    "KR",
+    "TGT",
+    "WMT"
+  ],
+  "health-insurance-services": [
+    "CI",
+    "CNC",
+    "CVS",
+    "ELV",
+    "HUM",
+    "UNH"
+  ],
+  "heat-infra": [
+    "CARR",
+    "FLEX",
+    "MOD",
+    "NVT",
+    "TT",
+    "VRT"
+  ],
+  "high-pe": [
+    "AXON",
+    "COST",
+    "CRWD",
+    "PLTR",
+    "WMT"
+  ],
+  "home-distribution": [
+    "BLDR",
+    "FND",
+    "HD",
+    "LOW",
+    "TSCO"
+  ],
+  "home-exterior": [
+    "CSL",
+    "JHX",
+    "OC",
+    "POOL",
+    "SHW",
+    "WMS"
+  ],
+  "home-interior": [
+    "ALLE",
+    "FBIN",
+    "MAS",
+    "REZI",
+    "SWK"
+  ],
+  "homebuilders": [
+    "DHI",
+    "KBH",
+    "LEN",
+    "MTH",
+    "NVR",
+    "PHM",
+    "TMHC",
+    "TOL"
+  ],
+  "hospital-operators": [
+    "CAH",
+    "COR",
+    "DVA",
+    "EHC",
+    "HCA",
+    "THC",
+    "UHS"
+  ],
+  "hotels-resorts": [
+    "H",
+    "HLT",
+    "IHG",
+    "MAR",
+    "WH"
+  ],
+  "housing-equipment-trading": [
+    "FERG",
+    "POOL",
+    "QXO",
+    "SITE",
+    "WSO"
+  ],
+  "housing-infrastructure": [
+    "PPG",
+    "SHW"
+  ],
+  "humanoid-bones": [
+    "ADI",
+    "ALGM",
+    "HXL",
+    "ON",
+    "RRX",
+    "TEL"
+  ],
+  "humanoid-brain": [
+    "NVDA",
+    "QCOM",
+    "TSLA"
+  ],
+  "humanoid-eyes": [
+    "ARBE",
+    "CGNX",
+    "OUST"
+  ],
+  "hvac": [
+    "CARR",
+    "LII",
+    "TT"
+  ],
+  "hyperscalers": [
+    "AMZN",
+    "GOOGL",
+    "META",
+    "MSFT",
+    "ORCL"
+  ],
+  "industrial-batteries": [
+    "ELVA",
+    "ENS",
+    "MVST"
+  ],
+  "industrial-distribution": [
+    "FAST",
+    "GWW",
+    "MSM",
+    "WCC"
+  ],
+  "industrial-gases": [
+    "APD",
+    "LIN"
+  ],
+  "infra-contractors": [
+    "EME",
+    "FIX",
+    "MTZ",
+    "PWR",
+    "STRL"
+  ],
+  "infra-measure": [
+    "BMI",
+    "ITRI",
+    "XYL"
+  ],
+  "infrastructure-consulting": [
+    "ACM",
+    "J",
+    "STN",
+    "TTEK"
+  ],
+  "insurance-brokerage": [
+    "AJG",
+    "AON",
+    "BRO",
+    "RYAN",
+    "WTW"
+  ],
+  "insurance-dx": [
+    "CLOV",
+    "LMND",
+    "OSCR"
+  ],
+  "investment-banking": [
+    "EVR",
+    "GS",
+    "JEF",
+    "LAZ",
+    "MS",
+    "RJF"
+  ],
+  "life-insurance": [
+    "AFL",
+    "GL",
+    "MET",
+    "MFC",
+    "PRI",
+    "PRU"
+  ],
+  "lifescience-consumables": [
+    "RGEN",
+    "TECH",
+    "WST"
+  ],
+  "lifescience-diagnose": [
+    "A",
+    "BRKR",
+    "ILMN",
+    "MTD",
+    "RVTY",
+    "TXG",
+    "WAT"
+  ],
+  "lifescience-pf": [
+    "AVTR",
+    "DHR",
+    "TMO"
+  ],
+  "lifescience-service": [
+    "CRL",
+    "ICLR",
+    "IQV",
+    "MEDP"
+  ],
+  "lifestyle-furniture": [
+    "SGI",
+    "SN",
+    "W",
+    "WSM"
+  ],
+  "lithium": [
+    "ALB",
+    "ATLX",
+    "CRML",
+    "ELVR",
+    "IONR",
+    "LAC",
+    "RIO",
+    "SGML",
+    "SLI",
+    "SQM"
+  ],
+  "live-entertainment": [
+    "FWONK",
+    "LYV",
+    "TKO"
+  ],
+  "logistics-air-freight": [
+    "CHRW",
+    "EXPD",
+    "FDX",
+    "GXO",
+    "UPS"
+  ],
+  "luxury": [
+    "RL",
+    "TPR"
+  ],
+  "machinery-construction-ag": [
+    "CAT",
+    "CMI",
+    "DE",
+    "OSK",
+    "TTC"
+  ],
+  "mass-market-vehicles": [
+    "F",
+    "GM",
+    "STLA"
+  ],
+  "meat-products": [
+    "PPC",
+    "TSN"
+  ],
+  "megabanks": [
+    "BAC",
+    "C",
+    "JPM",
+    "WFC"
+  ],
+  "memory-shortage": [
+    "AMAT",
+    "AMKR",
+    "KLAC",
+    "LRCX",
+    "MU",
+    "ONTO",
+    "RMBS"
+  ],
+  "metal-specialty-packaging": [
+    "ATR",
+    "AVY",
+    "BALL",
+    "CCK"
+  ],
+  "mobile-telecom": [
+    "T",
+    "TMUS",
+    "VZ"
+  ],
+  "mortgage-origination": [
+    "PFSI",
+    "RKT",
+    "UWMC"
+  ],
+  "multi-utilities": [
+    "AEE",
+    "CMS",
+    "CNP",
+    "D",
+    "DTE",
+    "ED",
+    "ES",
+    "NGG",
+    "PEG",
+    "SRE",
+    "WEC",
+    "XEL"
+  ],
+  "natgas-exprot": [
+    "LNG",
+    "SRE",
+    "VG"
+  ],
+  "natgas-infra": [
+    "KMI",
+    "TRP",
+    "WMB"
+  ],
+  "natgas-upstream": [
+    "ET",
+    "OKE",
+    "TRGP"
+  ],
+  "natural-gas-production": [
+    "AR",
+    "CTRA",
+    "EQT",
+    "EXE",
+    "RRC"
+  ],
+  "neo-cloud": [
+    "APLD",
+    "CIFR",
+    "CORZ",
+    "CRWV",
+    "DOCN",
+    "HUT",
+    "IREN",
+    "NBIS",
+    "NUAI",
+    "WULF"
+  ],
+  "next-gen-power-supply": [
+    "ADI",
+    "ETN",
+    "MPWR",
+    "ON",
+    "VICR",
+    "VRT"
+  ],
+  "nextgen-bank": [
+    "HOOD",
+    "SOFI"
+  ],
+  "nextgen-batteries": [
+    "AMPX",
+    "ENVX",
+    "QS",
+    "SES",
+    "SLDP"
+  ],
+  "nuclear-nextgen": [
+    "BWXT",
+    "GEV",
+    "OKLO",
+    "SMR"
+  ],
+  "nuclear-traditional": [
+    "BWXT",
+    "CCJ",
+    "FLS",
+    "GEV"
+  ],
+  "offshore-drilling": [
+    "NE",
+    "RIG",
+    "VAL"
+  ],
+  "oil-exploration-production": [
+    "COP",
+    "OXY"
+  ],
+  "oil-supermajors-non-us": [
+    "BP",
+    "PBR",
+    "SHEL",
+    "TTE"
+  ],
+  "oil-supermajors-us": [
+    "CVX",
+    "XOM"
+  ],
+  "onsite-power": [
+    "BE",
+    "CAT",
+    "CMI",
+    "GEV",
+    "GNRC"
+  ],
+  "openai-related": [
+    "AMD",
+    "AVGO",
+    "MSFT",
+    "NVDA",
+    "ORCL"
+  ],
+  "ota": [
+    "ABNB",
+    "BKNG",
+    "EXPE",
+    "TRIP"
+  ],
+  "outdoor-products": [
+    "BC",
+    "GOLF",
+    "THO"
+  ],
+  "payment-infrastructure": [
+    "MA",
+    "V"
+  ],
+  "payment-tech": [
+    "PYPL",
+    "SHOP",
+    "TOST",
+    "XYZ"
+  ],
+  "pe-private-credit": [
+    "APO",
+    "ARES",
+    "BX",
+    "CG",
+    "KKR",
+    "OWL",
+    "TPG"
+  ],
+  "pharma": [
+    "ABBV",
+    "AZN",
+    "BMY",
+    "GSK",
+    "JNJ",
+    "LLY",
+    "MRK",
+    "NVO",
+    "NVS",
+    "PFE",
+    "SNY"
+  ],
+  "pharma-distribution": [
+    "CAH",
+    "COR",
+    "HSIC",
+    "MCK"
+  ],
+  "power-infra": [
+    "AME",
+    "AMSC",
+    "APH",
+    "ETN",
+    "HUBB",
+    "POWL"
+  ],
+  "power-supply-IPP": [
+    "AES",
+    "BEP",
+    "CEG",
+    "CWEN",
+    "NEE",
+    "TLN",
+    "VST"
+  ],
+  "power-supply-regulated": [
+    "AEP",
+    "D",
+    "DUK",
+    "ETR",
+    "EXC",
+    "NRG",
+    "SO",
+    "XEL"
+  ],
+  "processed-foods": [
+    "CAG",
+    "CPB",
+    "GIS",
+    "KHC",
+    "MKC"
+  ],
+  "property-casualty-insurance": [
+    "AIG",
+    "ALL",
+    "CB",
+    "HIG",
+    "PGR",
+    "TRV"
+  ],
+  "pub-construction-electric": [
+    "DY",
+    "MTZ",
+    "MYRG",
+    "PWR"
+  ],
+  "pub-construction-transpo": [
+    "ROAD",
+    "TPC"
+  ],
+  "quantum-computing": [
+    "IONQ",
+    "QBTS",
+    "QUBT",
+    "RGTI"
+  ],
+  "rail-manufacturing": [
+    "FSTR",
+    "GATX",
+    "GBX",
+    "OSK",
+    "RAIL",
+    "TRN",
+    "WAB"
+  ],
+  "railways": [
+    "CNI",
+    "CP",
+    "CSX",
+    "NSC",
+    "UNP"
+  ],
+  "rare-earth": [
+    "AREC",
+    "CRML",
+    "IDR",
+    "IPX",
+    "MP",
+    "NB",
+    "PPTA",
+    "TMC",
+    "TMRC",
+    "UAMY",
+    "USAR",
+    "UUUU"
+  ],
+  "re-pf": [
+    "CSGP",
+    "Z"
+  ],
+  "re-service": [
+    "CBRE",
+    "JLL"
+  ],
+  "re-tech": [
+    "COMP",
+    "OPEN"
+  ],
+  "refinary": [
+    "DINO",
+    "DK",
+    "MPC",
+    "PARR",
+    "PBF",
+    "PSX",
+    "VLO"
+  ],
+  "refrigerant": [
+    "CC",
+    "SOLS"
+  ],
+  "regional-bank": [
+    "BPOP",
+    "CFG",
+    "CFR",
+    "FHN",
+    "HWC",
+    "KEY",
+    "MTB",
+    "PB",
+    "RF",
+    "SSB",
+    "WAL",
+    "ZION"
+  ],
+  "reit": [
+    "AMT",
+    "CCI",
+    "DLR",
+    "EQIX",
+    "O",
+    "PLD",
+    "SPG",
+    "STAG",
+    "VTR",
+    "WELL"
+  ],
+  "rideshare": [
+    "LYFT",
+    "UBER"
+  ],
+  "robotics-industrial": [
+    "ISRG",
+    "ROK",
+    "TER"
+  ],
+  "robotics-logistics": [
+    "AMRC",
+    "MIDD",
+    "RR",
+    "SERV",
+    "SYM",
+    "TNC"
+  ],
+  "satellite-communications": [
+    "ASTS",
+    "GSAT",
+    "IRDM",
+    "SATS",
+    "VSAT"
+  ],
+  "semi-component": [
+    "AEIS",
+    "ICHR",
+    "MKSI",
+    "UCTT"
+  ],
+  "semi-consumables": [
+    "APD",
+    "AXTI",
+    "ENTG",
+    "LIN",
+    "PLAB",
+    "Q"
+  ],
+  "semi-equip-back": [
+    "AEHR",
+    "CAMT",
+    "COHU",
+    "ONTO",
+    "TER"
+  ],
+  "semi-equip-front": [
+    "ACLS",
+    "AMAT",
+    "ASML",
+    "KLAC",
+    "LRCX"
+  ],
+  "semi-fab-infra": [
+    "AWI",
+    "ETN",
+    "POWL",
+    "THR",
+    "WTS"
+  ],
+  "semi-iot-ai": [
+    "AMBA",
+    "AMBQ",
+    "LSCC",
+    "NXPI",
+    "QCOM",
+    "SYNA"
+  ],
+  "semiconductor-design": [
+    "CDNS",
+    "SNPS"
+  ],
+  "server-brand": [
+    "DELL",
+    "HPE",
+    "SMCI"
+  ],
+  "silver-mining": [
+    "AG",
+    "CDE",
+    "HL",
+    "PAAS",
+    "WPM"
+  ],
+  "smart-glass": [
+    "LSCC",
+    "META",
+    "QCOM",
+    "SNAP",
+    "VUZI",
+    "WRBY"
+  ],
+  "soft-back-office": [
+    "DOCU",
+    "INTU",
+    "WDAY"
+  ],
+  "soft-comm": [
+    "FIVN",
+    "RNG",
+    "ZM"
+  ],
+  "soft-enterprise": [
+    "CRM",
+    "MSFT",
+    "NOW",
+    "ORCL"
+  ],
+  "soft-marketing": [
+    "ADBE",
+    "FIG",
+    "HUBS",
+    "KVYO",
+    "SHOP",
+    "TWLO"
+  ],
+  "soft-productivity": [
+    "FROG",
+    "GTLB",
+    "MNDY",
+    "TEAM"
+  ],
+  "soft-vertical": [
+    "ADSK",
+    "APPF",
+    "BSY",
+    "GWRE",
+    "MANH",
+    "PCOR",
+    "ROP",
+    "TRMB",
+    "TTAN"
+  ],
+  "solar-energy-storage": [
+    "CSIQ",
+    "ENPH",
+    "FSLR",
+    "NXT",
+    "TE"
+  ],
+  "space-infrastructure": [
+    "FLY",
+    "LUNR",
+    "RDW",
+    "RKLB"
+  ],
+  "steel": [
+    "CLF",
+    "CMC",
+    "NUE",
+    "RS",
+    "STLD"
+  ],
+  "storage-solutions": [
+    "NTAP",
+    "PSTG"
+  ],
+  "thermal-coal": [
+    "ARLP",
+    "HNRG"
+  ],
+  "tobacco": [
+    "BTI",
+    "MO",
+    "PM"
+  ],
+  "toys": [
+    "HAS",
+    "MAT"
+  ],
+  "trucking-intermodal": [
+    "JBHT",
+    "ODFL",
+    "XPO"
+  ],
+  "uranium": [
+    "AEC",
+    "CCJ",
+    "DNN",
+    "EU",
+    "ISOU",
+    "LEU",
+    "NXE",
+    "UEC",
+    "URG",
+    "UROY",
+    "UUUU"
+  ],
+  "used-car-sales": [
+    "AN",
+    "CVNA",
+    "KMX",
+    "LAD"
+  ],
+  "video-streaming": [
+    "DIS",
+    "GOOGL",
+    "NFLX"
+  ],
+  "water-utilities": [
+    "AWK",
+    "SBS",
+    "WTRG"
+  ]
+}
