@@ -359,6 +359,7 @@ function calcR(){
 }
 setTimeout(()=>{if(window._prismR_picks)calcR();},500);
 // === Cumulative Returns Chart (PRISM-R) ===
+setTimeout(()=>{
 fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
   const ctx=document.getElementById('cumChartR');
   if(!ctx)return;
@@ -388,6 +389,7 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
   });
   document.getElementById('annualTableR').innerHTML+=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));
+},3000);
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
