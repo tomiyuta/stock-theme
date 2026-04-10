@@ -166,8 +166,8 @@ function loadDip(){
 <script>
 (async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
 const el=document.getElementById('headerMeta');if(el&&d.last_update){
-const lu=d.last_update;el.innerHTML=(el.innerHTML||'')+
-'<span style="font-size:10px;color:#6b7280;margin-left:4px">更新: '+lu+'</span>';}
+el.innerHTML=(el.innerHTML||'')+
+'<div class="last-updated">データ更新: '+d.last_update+'</div>';}
 }catch(e){}})();
 </script>
 </body>

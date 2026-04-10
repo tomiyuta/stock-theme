@@ -35,7 +35,7 @@ async function loadData() {
   STATE.stocks = all.filter(t=>t.isIndividualTicker);
   STATE.sparklines = sp;
   sortThemes();
-  document.getElementById("headerMeta").innerHTML = `<span class="header-date">終値：${rk.latest_stock_date||"—"}</span><span class="header-badge-count">${STATE.themes.length} テーマ</span><span style="font-size:10px;color:#6b7280;margin-left:4px">更新: ${rk.last_update||""}</span>`;
+  document.getElementById("headerMeta").innerHTML = `<span class="header-date">終値：${rk.latest_stock_date||"—"}</span><span class="header-badge-count">${STATE.themes.length} テーマ</span><div class="last-updated">データ更新: ${rk.last_update||""}</div>`;
 }
 
 function sortThemes() {
