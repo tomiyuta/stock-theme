@@ -117,6 +117,23 @@ Promise.all([
   h+=`<div class="health-box"><div class="health-label">A5銘柄</div><div class="health-val">${s.a5_names}</div></div>`;
   h+=`<div class="health-box"><div class="health-label">差分銘柄</div><div class="health-val" style="color:var(--purple)">${s.diff_names}</div></div>`;
   h+=`<div class="health-box"><div class="health-label">重複率</div><div class="health-val">${Math.round(s.overlap_pct*100)}%</div></div></div>`;
+  // 3b. Virtual Portfolio — A4 vs A5-R side by side
+  h+=`<div class="section-title">📋 バーチャルポートフォリオ</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM現行) vs A5-R (Shadow) — 各10%等ウェイト</div>`;
+  h+=`<table class="bm-table"><tr><th>#</th><th>テーマ</th><th>A4 pick</th><th>A5-R pick</th><th></th></tr>`;
+  comp.comparisons.forEach((c,i)=>{
+    const a4s=c.stocks.find(x=>x.ticker===c.a4_pick)||{};
+    const a5s=c.stocks.find(x=>x.ticker===c.a5_pick)||{};
+    const cls=c.same?'':'style="background:rgba(124,58,237,0.04)"';
+    const tag=c.same?'<span style="color:var(--green);font-size:9px">一致</span>':'<span style="color:var(--purple);font-size:9px;font-weight:700">差分</span>';
+    h+=`<tr ${cls}>`;
+    h+=`<td style="font-size:9px;color:var(--text-sub)">${i+1}</td>`;
+    h+=`<td style="font-size:9px">${c.theme_name}</td>`;
+    h+=`<td style="font-weight:700">${c.a4_pick} <span style="font-size:8px;color:${(a4s.raw_1m||0)>=0?'var(--green)':'var(--red)'}">${fmt(a4s.raw_1m)}</span></td>`;
+    h+=`<td style="font-weight:700;color:var(--purple)">${c.a5_pick} <span style="font-size:8px;color:${(a5s.alpha63||0)>=0?'var(--green)':'var(--red)'}">α${fmtN(a5s.alpha63)}</span></td>`;
+    h+=`<td>${tag}</td></tr>`;
+  });
+  h+=`</table></div>`;
   // 4. Promotion Progress
   const fwd=meta.forward_rebalances||0,tgt=meta.target_rebalances||18,pct=Math.min(100,Math.round(fwd/tgt*100));
   h+=`<div class="section-title">🎯 昇格進捗</div>`;
