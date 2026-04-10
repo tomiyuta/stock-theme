@@ -125,6 +125,9 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .order-action.buy{background:rgba(0,200,83,0.1);color:var(--green)}
 .order-action.sell{background:rgba(255,23,68,0.1);color:var(--red)}
 .order-action.hold{background:rgba(0,0,0,0.04);color:var(--text-sub)}
+.order-action.blocked{background:rgba(245,158,11,0.15);color:#b45309}
+.signal-card.blocked{background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.3)}
+.signal-card.blocked .signal-card-title{color:#b45309}
 .health-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:4px;margin:6px 12px}
 .health-box{border-radius:4px;padding:5px;text-align:center;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
 .health-label{font-size:8px;color:var(--text-sub);font-weight:600}.health-val{font-size:12px;font-weight:700}
@@ -231,11 +234,12 @@ Promise.all([
   if(orders&&orders.length>0){
     h+=`<div class="ledger-card"><div class="ledger-title">📝 本日の注文 (${orders[0]?.date||''})</div>`;
     orders.forEach(o=>{
-      const acls=o.action==='BUY'?'buy':o.action==='SELL'?'sell':'hold';
-      const blocked=o.min_hold_blocked==='True'?' 🔒':'';
-      h+=`<div class="order-row"><span class="order-action ${acls}">${o.action}</span>`;
+      const isBlocked=o.min_hold_blocked==='True';
+      const acls=o.action==='BUY'?'buy':o.action==='SELL'?'sell':isBlocked?'blocked':'hold';
+      const actionLabel=isBlocked?'🔒WAIT':o.action;
+      h+=`<div class="order-row"><span class="order-action ${acls}">${actionLabel}</span>`;
       h+=`<span style="font-weight:700;min-width:50px">${o.ticker}</span>`;
-      h+=`<span style="font-size:9px;color:var(--text-sub)">${o.reason}${blocked}</span>`;
+      h+=`<span style="font-size:9px;color:${isBlocked?'#b45309':'var(--text-sub)'}">${o.reason}</span>`;
       h+=`<span style="margin-left:auto;font-size:10px;font-weight:600">${(Number(o.target_weight)*100).toFixed(1)}%</span></div>`;
     });
     h+=`</div>`;
@@ -272,9 +276,30 @@ Promise.all([
   h+=`</div>`;
 
   // Sell card
-  h+=`<div class="signal-card sell"><div class="signal-card-title">▼ 売却候補</div>`;
-  if(!sellStocks.length){h+=`<div class="signal-empty">該当なし</div>`;}
-  else{sellStocks.forEach(c=>{h+=`<div style="font-size:12px;font-weight:700;line-height:1.8">${c.ticker}<span style="font-size:9px;color:var(--text-sub);margin-left:4px">${c.theme}</span></div>`;});}
+  // Separate sell candidates into confirmed sells vs MinHold blocked
+  const blockedTickers = new Set(orders.filter(o=>o.min_hold_blocked==='True').map(o=>o.ticker));
+  const confirmedSells = sellStocks.filter(c=>!blockedTickers.has(c.ticker));
+  const blockedSells = sellStocks.filter(c=>blockedTickers.has(c.ticker));
+  // Also check ledger for blocked positions not in target
+  const heldBlocked = (ledger?.positions||[]).filter(p=>p.status==='active'&&!p.eligible_to_exit&&!(p.ticker in target_eq));
+  const target_eq = Object.fromEntries(Object.entries(pp?.weights||{}).filter(([k])=>k!=='SHV'));
+
+  h+=`<div class="signal-card sell"><div class="signal-card-title">▼ 売却確定</div>`;
+  if(!confirmedSells.length){h+=`<div class="signal-empty">該当なし</div>`;}
+  else{confirmedSells.forEach(c=>{h+=`<div style="font-size:12px;font-weight:700;line-height:1.8;color:var(--red)">${c.ticker}<span style="font-size:9px;color:var(--text-sub);margin-left:4px">${c.theme} — MinHold満了・売却可</span></div>`;});}
+  h+=`</div>`;
+  h+=`</div>`;
+
+  // Blocked sells — full width separate card
+  h+=`<div style="margin:4px 12px"><div class="signal-card blocked"><div class="signal-card-title">⏳ 売却待ち（MinHold）</div>`;
+  if(!blockedSells.length && !heldBlocked.length){h+=`<div class="signal-empty">該当なし</div>`;}
+  else{
+    blockedSells.forEach(c=>{
+      const pos=(ledger?.positions||[]).find(p=>p.ticker===c.ticker&&p.status==='active');
+      const days=pos?pos.holding_days||0:'?';
+      h+=`<div style="font-size:12px;font-weight:700;line-height:1.8;color:#b45309">🔒 ${c.ticker}<span style="font-size:9px;color:var(--text-sub);margin-left:4px">${c.theme} — ${days}d/20d 保持中</span></div>`;
+    });
+  }
   h+=`</div></div>`;
 
   // Layer 1
