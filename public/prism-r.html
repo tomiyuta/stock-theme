@@ -77,6 +77,15 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .gate-item{display:flex;justify-content:space-between;align-items:center;padding:5px 8px;border-radius:4px;font-size:9px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
 .gate-item .g-label{color:var(--text-sub);font-weight:600}.gate-item .g-icon{font-size:11px}
 .prod-meta{font-size:9px;color:var(--text-sub);margin-top:6px}
+.signal-card.sell-r{background:rgba(255,23,68,0.04);border:1.5px solid rgba(255,23,68,0.25)}
+.signal-card.sell-r .signal-card-title{color:var(--red)}
+.signal-card.blocked-r{background:rgba(245,158,11,0.04);border:1.5px solid rgba(245,158,11,0.25)}
+.signal-card.blocked-r .signal-card-title{color:#b45309}
+.signal-card.hold-r{background:rgba(0,200,83,0.04);border:1.5px solid rgba(0,200,83,0.25)}
+.signal-card.hold-r .signal-card-title{color:var(--green)}
+.logic-table{width:100%;font-size:9px;border-collapse:collapse;margin:4px 0}
+.logic-table th,.logic-table td{padding:3px 6px;border-bottom:1px solid rgba(0,0,0,0.06);text-align:left}
+.logic-table th{color:var(--text-sub);font-weight:600}
 .all-stocks{width:100%;font-size:9px;border-collapse:collapse;margin-top:4px}
 .all-stocks th{text-align:left;padding:3px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
 .all-stocks th:not(:first-child){text-align:right}
@@ -133,6 +142,29 @@ Promise.all([
   h+=`<div class="health-box"><div class="health-label">A5銘柄</div><div class="health-val">${s.a5_names}</div></div>`;
   h+=`<div class="health-box"><div class="health-label">差分銘柄</div><div class="health-val" style="color:var(--purple)">${s.diff_names}</div></div>`;
   h+=`<div class="health-box"><div class="health-label">重複率</div><div class="health-val">${Math.round(s.overlap_pct*100)}%</div></div></div>`;
+  // 3a. Virtual sell/hold signals (EXIT CONSTITUTION v2)
+  const exitThemes=comp.comparisons.filter(c=>c.theme_state==='EXIT');
+  const watchThemes=comp.comparisons.filter(c=>c.theme_state==='WATCH');
+  const entryThemes=comp.comparisons.filter(c=>c.theme_state==='ENTRY');
+  if(exitThemes.length>0){
+    h+=`<div class="section-title" style="color:var(--red)">▼ 売却確定（仮想）</div>`;
+    exitThemes.forEach(c=>{
+      const s5=c.stocks.find(x=>x.ticker===c.a5_pick)||{};
+      h+=`<div class="signal-card sell-r" style="margin:4px 12px"><div class="signal-card-title">🔴 ${c.a5_pick} ${c.theme_name} — rank${c.full_rank} EXIT</div>`;
+      h+=`<div style="font-size:9px;color:var(--text-sub)">テーマrank>${35}でtarget除外。MinHold満了後に売却対象。</div></div>`;
+    });
+  }
+  if(watchThemes.length>0){
+    h+=`<div class="section-title" style="color:#b45309">⏳ WATCH ZONE（仮想）</div>`;
+    watchThemes.forEach(c=>{
+      h+=`<div class="signal-card blocked-r" style="margin:4px 12px"><div class="signal-card-title">🟡 ${c.a5_pick} ${c.theme_name} — rank${c.full_rank} WATCH</div>`;
+      h+=`<div style="font-size:9px;color:var(--text-sub)">rank 21-35: 退出しないが監視強化。rank>35で売却候補に移行。</div></div>`;
+    });
+  }
+  if(exitThemes.length===0&&watchThemes.length===0){
+    h+=`<div class="signal-card hold-r" style="margin:8px 12px"><div class="signal-card-title">✅ 全${entryThemes.length}テーマ ENTRY（rank≤20）</div>`;
+    h+=`<div style="font-size:9px;color:var(--text-sub)">EXIT CONSTITUTION v2: 売却候補なし。全テーマがENTRY zone内。</div></div>`;
+  }
   // 3b. Virtual Portfolio — A4 vs A5-R side by side
   h+=`<div class="section-title">📋 バーチャルポートフォリオ</div>`;
   h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM現行) vs A5-R (Shadow) — 各10%等ウェイト</div>`;
@@ -232,6 +264,21 @@ Promise.all([
    'G9: Non-Tech diff ≥ 0','G10: Top5 share < 50%'].forEach(g=>{
     h+=`<div class="gate-item"><span class="g-label">${g}</span><span class="g-icon">⏳</span></div>`;});
   h+=`</div><div class="prod-meta" style="margin:2px 12px">全ゲートはforward PIT-safeデータで評価。バックテスト値は参考のみ。</div>`;
+  // 9. Investment Logic Cards (MECE)
+  h+=`<div class="section-title">📐 PRISM-R 投資ロジック</div>`;
+  const lcards=[
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）のみを差し替えたshadow overlay戦略。</div><div class="logic-rule">Layer 1（テーマ選定）とLayer 3（ポートフォリオ制約）はPRISMと完全同一。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M return最大 → Layer 3</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²_63)</code> 最大 → Layer 3</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 35% + MaxPositions 35</div>`],
+    ["Layer 1: テーマ選定（PRISM共通）",`<div class="logic-rule"><b>5因子スコア:</b> z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule"><b>選定:</b> 上位10テーマ / 適格=4銘柄以上 / セクター制約=同一セクター最大3</div><div class="logic-rule"><b>ヒステリシス:</b> ENTRY≤20 / WATCH 21-35 / EXIT&gt;35</div>`],
+    ["Layer 2: 銘柄選定（PRISM-R固有）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:4px 0">OLS回帰モデル（63日ローリング）</div><div class="logic-rule"><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code></div><div class="logic-rule"><b>自己除外:</b> テーマ平均から銘柄i自身を除外（平均4.7銘柄/テーマで歪み防止）</div><div class="logic-rule"><b>出力:</b> α63（残差α）/ β63（傾き）/ r²_63（決定係数）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">Shrinkage関数（hard filterの代替）</div><div class="logic-rule"><code>shrink(r²): r²&lt;0.10→r²×2 | 0.10-0.50→線形補間 | r²&gt;0.50→1.0</code></div><div class="logic-rule">設計意図: 小ユニバースで候補枯渇を防ぎつつ、低信頼度αを縮小</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">スコア</div><div class="logic-rule"><code>score = α63 × shrink(r²_63)</code></div><div class="logic-rule">各テーマからscore最大の1銘柄を選定。重複禁止。</div>`],
+    ["Layer 3: ポートフォリオ制約（PRISM共通）",`<div class="logic-rule"><b>ウェイト:</b> 等ウェイト 10銘柄×10%</div><div class="logic-rule"><b>リバランス:</b> 20営業日ごと</div><div class="logic-rule"><b>MinHold:</b> 20営業日（実証済みコア）</div><div class="logic-rule"><b>SectorCap:</b> 35%</div>`],
+    ["A4 vs A5-R 構造差",`<table class="logic-table"><tr><th></th><th>A4 (PRISM)</th><th>A5-R (PRISM-R)</th></tr><tr><td>Layer 2</td><td>raw 1M return最大</td><td>α63×shrink(r²)</td></tr><tr><td>選定の性質</td><td>先月最も上がった銘柄</td><td>構造的α最大の銘柄</td></tr><tr><td>Turnover</td><td>93%/リバランス</td><td>83%（持続性高い）</td></tr><tr><td>PIT感応度</td><td>テーマ構成に依存</td><td>テーマ構成+OLS推定値（より高い）</td></tr><tr><td>Tech比率</td><td>標準</td><td>純超過収益の76%</td></tr><tr><td>Top5集中度</td><td>26%</td><td>38%（やや集中）</td></tr></table><div class="logic-rule">⚠ A5-Rは「A4の上位互換」ではなく「Tech優位局面で効きやすい、正の歪みを持つ、やや集中型のresidual-alpha overlay」</div>`],
+    ["トリガー（T1〜T5）— EXIT CONSTITUTION v2",`<div class="logic-rule"><b>T1: K-gate反転</b> — 退出理由ではなく容量変更シグナル。</div><div class="logic-rule"><b>T2: テーマ脱落 (rank &gt; 35)</b> — 正式な退出ドライバ。ヒステリシス: entry≤20 / watch 21-35 / exit &gt;35。</div><div class="logic-rule"><b>T3: 加速→減速 ⓘ diagnostic only</b> — 単独では退出しない。theme score内のacceleration情報と二重計上の恐れ。</div><div class="logic-rule"><b>T4: TRAIL8_ALERT</b> — peak比-8% trailing DD alert。<b>auto-sell無効</b>。未検証のためalert-only。</div><div class="logic-rule"><b>T5: 新規参入</b> — 押し出し圧力。単独退出理由ではない。</div>`],
+    ["売却ロジック（EXIT CONSTITUTION v2）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:6px 0 4px">3層分離アーキテクチャ</div><div class="logic-rule"><b>Layer A: Signal Exit</b> — ターゲット除外判定。T2(rank&gt;35)が正式退出ドライバ。T3はdiagnostic only。</div><div class="logic-rule"><b>Layer B: Execution Permission</b> — 実行制約。MinHold 20営業日が唯一の実証済みコア。TRAIL8=alert-only。</div><div class="logic-rule"><b>Layer C: Portfolio Reconciliation</b> — blocked銘柄のcap整合。最優先governance論点。</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">売却判定フロー</div><div class="logic-rule">① target_weightsに含まれる → <b>HOLD_TARGET</b></div><div class="logic-rule">② target外 + holding_days &lt; 20 → <b>🔒 HOLD_BLOCKED</b>（MinHold）</div><div class="logic-rule">③ target外 + holding_days ≥ 20 → <b>SELL_EXPIRED</b></div><div class="logic-rule">④ TRAIL8発火 → <b>⚠️ ALERT のみ</b>（auto-sell無効）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">cap violation時の優先順位</div><div class="logic-rule">1. Data integrity / delisting → 即時売却（MinHold無視）</div><div class="logic-rule">2. atk_cap（hard） → blocked銘柄の比例縮小を許可</div><div class="logic-rule">3. MinHold → 裁量売却禁止だが、cap対応の縮小は許可</div><div class="logic-rule">4. sector_cap → legacy blocked=soft / new buys=hard</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">blocked weight処理</div><div class="logic-rule">blocked銘柄は atk_cap違反時のみ縮小許可。sector_capでは不可。</div><div style="font-size:10px;font-weight:700;color:var(--text-sub);margin:8px 0 4px">パイプライン分離</div><div class="logic-rule"><b>Order pipeline:</b> テーマ選定→target→MinHold→cap repair→注文</div><div class="logic-rule"><b>Monitoring pipeline:</b> TRAIL8 / T3 / peak DD（注文権限なし）</div>`],
+    ["PIT・検証状況",`<div style="font-size:10px;font-weight:700;color:var(--green);margin:4px 0">✅ 検証済み</div><div class="logic-rule">MinHold 20日 / SectorCap 35% / K-gate / A5方向性（5年73リバランス）</div><div style="font-size:10px;font-weight:700;color:#b45309;margin:8px 0 4px">⚠ 部分検証</div><div class="logic-rule">テーマスコア5因子（126日のみ）/ ヒステリシス20/35（未テスト）</div><div style="font-size:10px;font-weight:700;color:var(--red);margin:8px 0 4px">❌ 未検証</div><div class="logic-rule">TRAIL8 -8%閾値 / T3単独効果 / Layer C cap repair / A5固有exit / shrinkage関数の理論的最適性</div><div style="font-size:10px;font-weight:700;color:var(--text-sub);margin:8px 0 4px">PIT留保</div><div class="logic-rule">A4/A5は同一frozen membershipを使うためPIT汚染は<b>部分相殺</b>される。ただしA5はOLS推定値にmembershipが直接入るため、Layer 2のPIT感応度はA4より高い。</div><div class="logic-rule">76%のTech比率は<b>return concentration</b>（パフォーマンス集中）であり、allocation concentration（配分集中）ではない。</div>`]
+  ];
+  lcards.forEach(([title,body])=>{
+    h+=`<div class="logic-card" onclick="this.classList.toggle('open')"><div class="logic-card-header"><span>▶ ${title}</span><span class="lc-icon">›</span></div><div class="logic-card-body">${body}</div></div>`;
+  });
   document.getElementById('prismMain').innerHTML=h;
 }).catch(err=>{document.getElementById('prismMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
 function renderStock(s,cls,label){
