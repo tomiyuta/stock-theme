@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-09",
-  "generated_at": "2026-04-11T04:09:56.692947",
+  "generated_at": "2026-04-11T05:37:03.619678",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "pit_safe": false,
@@ -13,6 +13,7 @@
     "stock_score": "α63×shrink(r²_63)",
     "stock_score_snrb": "(α63/resid_vol63)×shrink(r²_63)",
     "bfm2_filter": "veto: breadth<30pct, conc>80pct, vol>80pct from top25",
+    "cra_v1": "SNRb × (0.70 + 0.30 × AuditScore), AuditScore from st sign/tval",
     "top_themes": 10,
     "picks_per_theme": 1,
     "min_members": 4,

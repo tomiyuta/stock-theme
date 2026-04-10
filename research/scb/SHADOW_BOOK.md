@@ -714,3 +714,22 @@ BFM-v1:      rejected（over-defensive）
   max corr 0.928は同一潜在因子の重複保有を示唆。
   診断継続し、3-6リバランス蓄積後にsoft cluster budgetを検討。
 ```
+
+
+### CRA-v1 Decision Memo (2026-04-10)
+
+```
+Status: marginal / parked（SNRbとの差異が微小）
+
+Historical結果 vs SNRb:
+  全指標で差 < 0.02。Stock overlap 92%。
+  confirmationの影響が微小な理由:
+    - stock-themes α/tvalは静的スナップショット（rolling更新なし）
+    - 大半の銘柄で既にsign agreementが成立
+    - 0.70 + 0.30×audit の重みではランキング逆転が稀
+
+判定:
+  CRA-v1は理論的には妥当だが、現行データでは実質的な改善がない。
+  premium APIの定期再取得が可能になった場合に再評価。
+  現時点ではparked。forward clockは開始しない。
+```

@@ -14,6 +14,13 @@ SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
 API = ROOT / 'public' / 'api'
 OUT = API / 'prism-r'
+
+# Load stock-themes beta_alpha for CRA-v1 confirmation
+BA_PATH = ROOT / 'data' / 'stock-themes-api' / 'beta_alpha_all.json'
+st_beta_alpha = {}
+if BA_PATH.exists():
+    try: st_beta_alpha = json.load(open(BA_PATH))
+    except: pass
 OUT.mkdir(exist_ok=True)
 
 # === Load theme-details → long panel ===
@@ -92,6 +99,27 @@ def shrink_r2(r2v):
     if r2v<0.10: return r2v*2
     if r2v<=0.50: return 0.20+(r2v-0.10)*2.0
     return 1.0
+
+def cra_audit(theme_slug, ticker, self_alpha):
+    """CRA-v1: Consensus Residual Alpha confirmation from stock-themes."""
+    ba_theme = st_beta_alpha.get(theme_slug, {}).get('data', {})
+    ba_tk = ba_theme.get(ticker, {})
+    if not ba_tk: return 0.0, {}
+    a3m = ba_tk.get('3M', {}); a6m = ba_tk.get('6M', {})
+    st_a3 = a3m.get('alpha', 0); st_a6 = a6m.get('alpha', 0)
+    st_t3 = a3m.get('alpha_tval', 0); st_t6 = a6m.get('alpha_tval', 0)
+    st_p3 = a3m.get('alpha_pval', 1); st_p6 = a6m.get('alpha_pval', 1)
+    sa = 1 if self_alpha > 0 else (-1 if self_alpha < 0 else 0)
+    c1 = 1.0 if sa != 0 and (1 if st_a3 > 0 else -1) == sa else 0.0
+    c2 = 1.0 if sa != 0 and (1 if st_a6 > 0 else -1) == sa else 0.0
+    c3 = 1.0 if (st_a3 > 0) == (st_a6 > 0) else 0.0
+    c4 = 1.0 if abs(st_t3) > 1 or st_p3 < 0.10 else 0.0
+    c5 = 1.0 if abs(st_t6) > 1 or st_p6 < 0.10 else 0.0
+    audit = 0.30*c1 + 0.30*c2 + 0.15*c3 + 0.125*c4 + 0.125*c5
+    detail = {'c1_sign3m':c1,'c2_sign6m':c2,'c3_st_stable':c3,'c4_tval3m':c4,'c5_tval6m':c5,
+              'audit_score':round(audit,3),'st_alpha_3m':round(st_a3,6),'st_alpha_6m':round(st_a6,6),
+              'st_tval_3m':round(st_t3,3),'st_tval_6m':round(st_t6,3)}
+    return audit, detail
 
 # === Main logic ===
 WARMUP = 126; MIN_M = 4; TOP_T = 10; SEC_MAX = 3
@@ -198,7 +226,7 @@ if len(theme_daily_rets) >= 2:
 
 # Stock scoring + comparison
 comparisons = []
-used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set()
+used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set(); used_cra = set()
 for rank_i, th in enumerate(sel):
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
     tks = ths['ticker'].unique()
@@ -216,6 +244,9 @@ for rank_i, th in enumerate(sel):
             score_snrb = (a63 / rvol63) * shrk
         else:
             score_snrb = -999
+        # CRA-v1: confirmation overlay on SNRb
+        cra_audit_score, cra_detail = cra_audit(th, tk, a63)
+        score_cra = score_snrb * (0.70 + 0.30 * cra_audit_score) if score_snrb > -999 else -999
         latest = panel[(panel['theme']==th)&(panel['ticker']==tk)&(panel['date']==dt)]
         price = float(latest['close'].iloc[0]) if len(latest)>0 else None
         mi = meta_d.get(tk, {})
@@ -229,6 +260,8 @@ for rank_i, th in enumerate(sel):
             'shrink': round(shrk, 3),
             'score_a5': round(score5, 4) if score5 > -999 else None,
             'score_snrb': round(score_snrb, 4) if score_snrb > -999 else None,
+            'score_cra': round(score_cra, 4) if score_cra > -999 else None,
+            'cra_audit': cra_detail if cra_detail else None,
             'price': round(price, 2) if price else None,
             'sector': mi.get('sector', ''), 'mc': mi.get('mc', ''),
             'name': mi.get('name', ''), 'name_ja': mi.get('name_ja', '')
@@ -255,6 +288,12 @@ for rank_i, th in enumerate(sel):
         for s in s_snrb:  # same Layer 2 scorer as SNRb
             if s['ticker'] not in used_bfm2 and s['score_snrb'] is not None:
                 bfm2_tk = s['ticker']; used_bfm2.add(bfm2_tk); break
+    # CRA-v1 pick
+    s_cra = sorted(all_stocks, key=lambda x: -(x['score_cra'] or -999))
+    cra_tk = None
+    for s in s_cra:
+        if s['ticker'] not in used_cra and s['score_cra'] is not None:
+            cra_tk = s['ticker']; used_cra.add(cra_tk); break
     # Theme state per EXIT CONSTITUTION v2
     full_rank = int(ts['score'].rank(ascending=False).loc[th])
     theme_state = 'ENTRY' if full_rank <= 20 else 'WATCH' if full_rank <= 35 else 'EXIT'
@@ -267,8 +306,8 @@ for rank_i, th in enumerate(sel):
         'decel': round(float(ts.loc[th, 'decel']), 4),
         'theme_score': round(float(ts.loc[th, 'score']), 3),
         'n_members': len(tks),
-        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk, 'bfm2_pick': bfm2_tk,
-        'same': a4_tk == a5_tk, 'a5_snrb_same': a5_tk == snrb_tk,
+        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk, 'bfm2_pick': bfm2_tk, 'cra_pick': cra_tk,
+        'same': a4_tk == a5_tk, 'a5_snrb_same': a5_tk == snrb_tk, 'snrb_cra_same': snrb_tk == cra_tk,
         'in_bfm2': th in sel_bfm2,
         'stocks': all_stocks
     })
@@ -300,6 +339,7 @@ overlap = sum(1 for c in comparisons if c['same'])
 snrb_overlap_a5 = sum(1 for c in comparisons if c['a5_snrb_same'])
 bfm2_themes = [c for c in comparisons if c['in_bfm2']]
 bfm2_overlap_base = sum(1 for c in comparisons if c['in_bfm2'])
+cra_overlap_snrb = sum(1 for c in comparisons if c['snrb_cra_same'])
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
@@ -311,12 +351,14 @@ output = {
         'stock_score': 'α63×shrink(r²_63)',
         'stock_score_snrb': '(α63/resid_vol63)×shrink(r²_63)',
         'bfm2_filter': 'veto: breadth<30pct, conc>80pct, vol>80pct from top25',
+        'cra_v1': 'SNRb × (0.70 + 0.30 × AuditScore), AuditScore from st sign/tval',
         'top_themes': 10, 'picks_per_theme': 1,
         'min_members': 4, 'sector_cap': 3, 'rebalance_days': 20
     },
     'summary': {
         'themes_selected': len(comparisons),
         'a4_names': len(used4), 'a5_names': len(used5), 'snrb_names': len(used_snrb),
+        'cra_names': len(used_cra), 'snrb_cra_overlap': cra_overlap_snrb,
         'bfm2_themes': bfm2_overlap_base,
         'bfm2_vetoed': len(bfm2_vetoed),
         'overlap': overlap,
@@ -363,6 +405,7 @@ with open(OUT / 'meta.json', 'w') as f:
 comp_size = (OUT / 'shadow_comparison.json').stat().st_size / 1024
 print(f'PRISM-R: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
       f'snrb_overlap={snrb_overlap_a5}/{len(comparisons)}, '
+      f'cra_overlap_snrb={cra_overlap_snrb}/{len(comparisons)}, '
       f'bfm2={bfm2_overlap_base}/10 (vetoed={len(bfm2_vetoed)}), '
       f'corr={corr_diag.get("avg_pairwise_corr","N/A")}, '
       f'snapshot={dt.date()}, size={comp_size:.0f}KB')
