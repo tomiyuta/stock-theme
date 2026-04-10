@@ -49,6 +49,11 @@ jobs:
           LATEST_ORDER=$(ls -t data/orders/orders_*.csv 2>/dev/null | head -1)
           if [ -n "$LATEST_ORDER" ]; then python3 -c "import csv,json,sys; r=list(csv.DictReader(open('$LATEST_ORDER'))); open('public/api/prism/orders.json','w').write(json.dumps(r,indent=2))"; fi
 
+      - name: Generate PRISM-R shadow
+        run: |
+          mkdir -p public/api/prism-r
+          python scripts/generate_prism_r.py
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"

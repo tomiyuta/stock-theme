@@ -1,12 +1,12 @@
 {
-  "snapshot_date": "2026-03-31",
-  "generated_at": "2026-04-10T12:28:04.420293",
+  "snapshot_date": "2026-04-09",
+  "generated_at": "2026-04-10T12:51:00.717296",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "pit_safe": false,
   "forward_rebalances": 0,
   "target_rebalances": 18,
-  "next_rebalance_est": "2026-05-08",
+  "next_rebalance_est": "",
   "frozen_params": {
     "alpha_window": 63,
     "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
