@@ -45,6 +45,7 @@
 <body>
   <header>
     <div class="header-top"><div class="header-title">マクロ＋構造分析</div></div>
+    <div class="header-meta" id="headerMeta"></div>
     <div class="tab-bar">
       <button class="tab-btn active" onclick="switchTab('macro')">マクロ</button>
       <button class="tab-btn" onclick="switchTab('struct')">構造分析</button>
@@ -161,6 +162,13 @@ function loadDip(){
   }).catch(()=>{document.getElementById('dipMain').innerHTML='<p style="padding:20px;color:var(--text-sub)">データ読込中...</p>';});
 }
 
+</script>
+<script>
+(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+const el=document.getElementById('headerMeta');if(el&&d.last_update){
+const lu=d.last_update;el.innerHTML=(el.innerHTML||'')+
+'<span style="font-size:10px;color:#6b7280;margin-left:4px">更新: '+lu+'</span>';}
+}catch(e){}})();
 </script>
 </body>
 </html>

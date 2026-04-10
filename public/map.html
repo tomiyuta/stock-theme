@@ -9,6 +9,7 @@
 <body>
   <header>
     <div class="header-top"><div class="header-title">マップ</div></div>
+    <div class="header-meta" id="headerMeta"></div>
     <div class="period-bar" id="pbar"></div>
     <div class="radio-filters" id="catFilter"></div>
   </header>
@@ -51,5 +52,12 @@ function renderMap(){
   document.getElementById("mapMain").innerHTML='<div class="map-viewport">'+tiles.map(t=>'<div class="map-tile" style="background:'+tileColor(t.ret)+'" onclick="window.open(\'https://finance.yahoo.com/quote/'+t.tk+'\',\'_blank\')"><div class="map-tile-name">'+t.name+'</div><div class="map-tile-change">'+fmt(t.ret)+'</div><div style="font-size:9px;color:rgba(255,255,255,0.7);margin-top:2px">'+t.tk+'</div></div>').join("")+'</div>';
 }
   </script>
+<script>
+(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+const el=document.getElementById('headerMeta');if(el&&d.last_update){
+const lu=d.last_update;el.innerHTML=(el.innerHTML||'')+
+'<span style="font-size:10px;color:#6b7280;margin-left:4px">更新: '+lu+'</span>';}
+}catch(e){}})();
+</script>
 </body>
 </html>

@@ -35,6 +35,7 @@
     <div class="header-top">
       <a href="/" style="text-decoration:none;color:var(--text-sub);font-size:14px">← テーマ一覧</a>
     </div>
+    <div class="header-meta" id="headerMeta"></div>
   </header>
   <main id="detailMain" style="padding:0;overflow-x:hidden;width:100%"><div class="loading" style="padding:60px 16px">読み込み中...</div></main>
   <nav class="bottom-nav">
@@ -220,5 +221,12 @@ Promise.all([
 
 });
   </script>
+<script>
+(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+const el=document.getElementById('headerMeta');if(el&&d.last_update){
+const lu=d.last_update;el.innerHTML=(el.innerHTML||'')+
+'<span style="font-size:10px;color:#6b7280;margin-left:4px">更新: '+lu+'</span>';}
+}catch(e){}})();
+</script>
 </body>
 </html>

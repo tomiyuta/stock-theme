@@ -22,6 +22,7 @@
 <body>
   <header>
     <div class="header-top"><div class="header-title">銘柄ランキング</div></div>
+    <div class="header-meta" id="headerMeta"></div>
     <div class="period-bar" id="pbar"></div>
     <div class="movers-toggle" id="moversToggle">
       <button class="active" onclick="setDir(this,'up')">上昇</button>
@@ -101,5 +102,12 @@ function renderMovers(){
   document.getElementById("mvMain").innerHTML=h;
 }
   </script>
+<script>
+(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+const el=document.getElementById('headerMeta');if(el&&d.last_update){
+const lu=d.last_update;el.innerHTML=(el.innerHTML||'')+
+'<span style="font-size:10px;color:#6b7280;margin-left:4px">更新: '+lu+'</span>';}
+}catch(e){}})();
+</script>
 </body>
 </html>
