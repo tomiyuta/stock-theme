@@ -1,29 +1,125 @@
 {
-  "as_of_date": "2026-04-09",
-  "generated_at": "2026-04-10T18:22:08.756328",
+  "as_of_date": "2026-04-10",
+  "generated_at": "2026-04-10T23:44:28.836142",
   "strategy": "PRISM-R",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0,
-    "winners": 0,
-    "losers": 0,
+    "total_pnl_pct": 0.0205,
+    "winners": 6,
+    "losers": 1,
     "best": "AAOI",
-    "best_pnl": 0.0,
-    "worst": "CF",
-    "worst_pnl": 0.0,
-    "closed_count": 0
+    "best_pnl": 0.1298,
+    "worst": "PTEN",
+    "worst_pnl": -0.0089,
+    "closed_count": 3
   },
   "positions": [
     {
       "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
+      "theme": "光接続：インフラ",
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 133.3,
-      "current_price": 133.3,
+      "current_price": 150.6,
       "weight": 0.1,
-      "alpha63": 0.94,
+      "alpha63": 0.882,
+      "pnl_pct": 0.1298,
+      "pnl_weighted": 0.012978
+    },
+    {
+      "ticker": "PARR",
+      "theme": "石油精製",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 59.46,
+      "current_price": 62.77,
+      "weight": 0.1,
+      "alpha63": 0.291,
+      "pnl_pct": 0.0557,
+      "pnl_weighted": 0.005567
+    },
+    {
+      "ticker": "UCTT",
+      "theme": "半導体製造装置：部品",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 72.78,
+      "current_price": 75.81,
+      "weight": 0.1,
+      "alpha63": 0.171,
+      "pnl_pct": 0.0416,
+      "pnl_weighted": 0.004163
+    },
+    {
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 20.69,
+      "current_price": 21.51,
+      "weight": 0.1,
+      "alpha63": 0.272,
+      "pnl_pct": 0.0396,
+      "pnl_weighted": 0.003963
+    },
+    {
+      "ticker": "GEV",
+      "theme": "オンサイト電源",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 968.02,
+      "current_price": 991.32,
+      "weight": 0.1,
+      "alpha63": 0.273,
+      "pnl_pct": 0.0241,
+      "pnl_weighted": 0.002407
+    },
+    {
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 357.37,
+      "current_price": 361.22,
+      "weight": 0.1,
+      "alpha63": 0.224,
+      "pnl_pct": 0.0108,
+      "pnl_weighted": 0.001077
+    },
+    {
+      "ticker": "MTSI",
+      "theme": "光接続：トランシーバ",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-10",
+      "entry_price": 258.11,
+      "current_price": 258.11,
+      "weight": 0.1,
+      "alpha63": 0.09,
+      "pnl_pct": 0.0,
+      "pnl_weighted": 0.0
+    },
+    {
+      "ticker": "PWR",
+      "theme": "インフラ工事：電力/通信",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-10",
+      "entry_price": 585.36,
+      "current_price": 585.36,
+      "weight": 0.1,
+      "alpha63": 0.092,
+      "pnl_pct": 0.0,
+      "pnl_weighted": 0.0
+    },
+    {
+      "ticker": "VZ",
+      "theme": "高配当",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-10",
+      "entry_price": 46.04,
+      "current_price": 46.04,
+      "weight": 0.1,
+      "alpha63": 0.081,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
@@ -33,108 +129,34 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 10.14,
-      "current_price": 10.14,
+      "current_price": 10.05,
       "weight": 0.1,
-      "alpha63": 0.256,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
+      "alpha63": 0.186,
+      "pnl_pct": -0.0089,
+      "pnl_weighted": -0.000888
+    }
+  ],
+  "closed_positions": [
     {
       "ticker": "VIAV",
       "theme": "光接続：インフラ",
-      "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
-      "entry_price": 42.74,
-      "current_price": 42.74,
-      "weight": 0.1,
-      "alpha63": 0.379,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "GEV",
-      "theme": "オンサイト電源",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 968.02,
-      "current_price": 968.02,
-      "weight": 0.1,
-      "alpha63": 0.196,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "PARR",
-      "theme": "石油精製",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 59.46,
-      "current_price": 59.46,
-      "weight": 0.1,
-      "alpha63": 0.237,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "UCTT",
-      "theme": "半導体製造装置：部品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 72.78,
-      "current_price": 72.78,
-      "weight": 0.1,
-      "alpha63": 0.182,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "exit_date": "2026-04-10",
+      "entry_price": 42.74
     },
     {
       "ticker": "DCO",
       "theme": "防衛：素材・部材",
-      "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
-      "entry_price": 140.59,
-      "current_price": 140.59,
-      "weight": 0.1,
-      "alpha63": 0.241,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 20.69,
-      "current_price": 20.69,
-      "weight": 0.1,
-      "alpha63": 0.283,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 357.37,
-      "current_price": 357.37,
-      "weight": 0.1,
-      "alpha63": 0.173,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "exit_date": "2026-04-10",
+      "entry_price": 140.59
     },
     {
       "ticker": "CF",
       "theme": "化学：農業",
-      "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
-      "entry_price": 119.38,
-      "current_price": 119.38,
-      "weight": 0.1,
-      "alpha63": 0.355,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "exit_date": "2026-04-10",
+      "entry_price": 119.38
     }
-  ],
-  "closed_positions": []
+  ]
 }

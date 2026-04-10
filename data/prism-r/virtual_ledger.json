@@ -16,7 +16,9 @@
       "entry_date": "2026-04-09",
       "entry_price": 42.74,
       "theme": "光接続：インフラ",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-10",
+      "exit_price": 0
     },
     "GEV": {
       "entry_date": "2026-04-09",
@@ -40,7 +42,9 @@
       "entry_date": "2026-04-09",
       "entry_price": 140.59,
       "theme": "防衛：素材・部材",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-10",
+      "exit_price": 0
     },
     "PBR": {
       "entry_date": "2026-04-09",
@@ -58,6 +62,26 @@
       "entry_date": "2026-04-09",
       "entry_price": 119.38,
       "theme": "化学：農業",
+      "status": "closed",
+      "exit_date": "2026-04-10",
+      "exit_price": 0
+    },
+    "MTSI": {
+      "entry_date": "2026-04-10",
+      "entry_price": 258.11,
+      "theme": "光接続：トランシーバ",
+      "status": "active"
+    },
+    "PWR": {
+      "entry_date": "2026-04-10",
+      "entry_price": 585.36,
+      "theme": "インフラ工事：電力/通信",
+      "status": "active"
+    },
+    "VZ": {
+      "entry_date": "2026-04-10",
+      "entry_price": 46.04,
+      "theme": "高配当",
       "status": "active"
     }
   },

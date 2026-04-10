@@ -1,12 +1,12 @@
 {
-  "as_of_date": "2026-04-09",
+  "as_of_date": "2026-04-10",
   "positions": [
     {
       "ticker": "VALE",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 16.18,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.075,
       "sector": "Basic Materials",
       "theme_at_entry": "",
@@ -19,7 +19,7 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 94.66,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.075,
       "sector": "Basic Materials",
       "theme_at_entry": "",
@@ -32,33 +32,33 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 292.39,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Basic Materials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 296.61
+      "peak_price_since_entry": 297.74
     },
     {
       "ticker": "LIN",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 494.59,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Basic Materials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 500.48
+      "peak_price_since_entry": 503.3
     },
     {
       "ticker": "MTZ",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 348.11,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.05,
       "sector": "Industrials",
       "theme_at_entry": "",
@@ -71,7 +71,7 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 381.0,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.05,
       "sector": "Industrials",
       "theme_at_entry": "",
@@ -84,20 +84,20 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 31.71,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Utilities",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 31.71
+      "peak_price_since_entry": 32.99
     },
     {
       "ticker": "AWK",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 136.36,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.05,
       "sector": "Utilities",
       "theme_at_entry": "",
@@ -110,20 +110,20 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 292.52,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 292.52
+      "peak_price_since_entry": 299.52
     },
     {
       "ticker": "FAST",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 48.18,
-      "holding_days": 0,
+      "holding_days": 1,
       "target_weight": 0.05,
       "sector": "Industrials",
       "theme_at_entry": "",
@@ -136,26 +136,78 @@
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 527.21,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 527.21
+      "peak_price_since_entry": 534.67
     },
     {
       "ticker": "ETN",
       "status": "active",
       "entry_date": "2026-04-09",
       "entry_price": 385.58,
-      "holding_days": 0,
-      "target_weight": 0.05,
+      "holding_days": 1,
+      "target_weight": 0.03,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 385.58
+      "peak_price_since_entry": 400.44
+    },
+    {
+      "ticker": "ODFL",
+      "status": "active",
+      "entry_date": "2026-04-10",
+      "entry_price": 209.5,
+      "holding_days": 0,
+      "target_weight": 0.03,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 209.5
+    },
+    {
+      "ticker": "XPO",
+      "status": "active",
+      "entry_date": "2026-04-10",
+      "entry_price": 211.73,
+      "holding_days": 0,
+      "target_weight": 0.03,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 211.73
+    },
+    {
+      "ticker": "WTRG",
+      "status": "active",
+      "entry_date": "2026-04-10",
+      "entry_price": 41.06,
+      "holding_days": 0,
+      "target_weight": 0.03,
+      "sector": "Utilities",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 41.06
+    },
+    {
+      "ticker": "GWW",
+      "status": "active",
+      "entry_date": "2026-04-10",
+      "entry_price": 1172.21,
+      "holding_days": 0,
+      "target_weight": 0.03,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 1172.21
     }
   ],
   "metadata": {
@@ -164,6 +216,6 @@
   },
   "cash_proxy": {
     "ticker": "SHV",
-    "weight": 0.5
+    "weight": 0.7
   }
 }
