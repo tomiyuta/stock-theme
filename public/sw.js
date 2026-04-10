@@ -1,4 +1,4 @@
-const CACHE = "st-v3";
+const CACHE = "st-v4";
 const STATIC = ["/styles.css", "/app.js"];
 
 self.addEventListener("install", e => {
