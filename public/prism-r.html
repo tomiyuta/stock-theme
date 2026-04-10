@@ -314,6 +314,7 @@ Promise.all([
     h+=`<div class="logic-card" onclick="this.classList.toggle('open')"><div class="logic-card-header"><span>▶ ${title}</span><span class="lc-icon">›</span></div><div class="logic-card-body">${body}</div></div>`;
   });
   document.getElementById('prismMain').innerHTML=h;
+  initPrismRChart();
 }).catch(err=>{document.getElementById('prismMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
 function renderStock(s,cls,label){
   if(!s||!s.ticker)return`<div class="signal-card ${cls}"><div class="signal-card-title">${label}</div><div style="color:var(--text-sub);font-size:9px">候補なし</div></div>`;
@@ -359,7 +360,7 @@ function calcR(){
 }
 setTimeout(()=>{if(window._prismR_picks)calcR();},500);
 // === Cumulative Returns Chart (PRISM-R) ===
-setTimeout(()=>{
+function initPrismRChart(){
 fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
   const ctx=document.getElementById('cumChartR');
   if(!ctx)return;
@@ -389,7 +390,7 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
   });
   document.getElementById('annualBodyR').innerHTML=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));
-},3000);
+}
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
