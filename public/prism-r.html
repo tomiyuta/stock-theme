@@ -8,7 +8,7 @@
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#ffffff">
-  <link rel="stylesheet" href="/styles.css?v=20">
+  <link rel="stylesheet" href="/styles.css?v=21">
 <style>
 :root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;--purple:#7c3aed}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -54,8 +54,8 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .theme-pick-name{font-size:12px;font-weight:700}.theme-pick-meta{font-size:9px;color:var(--text-sub)}
 .theme-pick-badge{font-size:8px;padding:1px 5px;border-radius:2px}
 .tpb-same{background:rgba(0,200,83,0.1);color:var(--green)}.tpb-diff{background:rgba(124,58,237,0.1);color:var(--purple)}
-.theme-pick-body{display:none;margin-top:8px}.theme-pick.open .theme-pick-body{display:block}
-.bm-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.theme-pick-body{display:none;margin-top:8px;overflow-x:auto;-webkit-overflow-scrolling:touch}.theme-pick.open .theme-pick-body{display:block}
+.bm-card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06);overflow-x:auto;-webkit-overflow-scrolling:touch}
 .bm-title{font-size:11px;font-weight:700;color:var(--blue);margin-bottom:8px}
 .bm-table{width:100%;font-size:10px;border-collapse:collapse}
 .bm-table th{text-align:left;padding:3px 4px;color:var(--text-sub);font-weight:600;border-bottom:1px solid rgba(0,0,0,0.1)}
@@ -83,7 +83,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .all-stocks td{padding:3px;border-bottom:1px solid rgba(0,0,0,0.03)}
 .all-stocks td:not(:first-child){text-align:right;font-family:monospace}
 .all-stocks tr.pick-a5{background:rgba(124,58,237,0.06)}.all-stocks tr.pick-a4{background:rgba(0,0,0,0.03)}
-.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(124,58,237,0.03);border:1.5px solid rgba(124,58,237,0.15)}
+.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(124,58,237,0.03);border:1.5px solid rgba(124,58,237,0.15);overflow-x:auto;-webkit-overflow-scrolling:touch}
 .prod-title{font-size:11px;font-weight:700;color:var(--purple);margin-bottom:8px}
 .prod-input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
 .prod-input-label{font-size:10px;font-weight:600;color:var(--text-sub)}

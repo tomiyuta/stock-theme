@@ -165,3 +165,25 @@ body{font-size:13px}
 
 .last-updated{display:inline-flex;align-items:center;gap:4px;font-size:11px;font-weight:600;color:#0052cc;background:rgba(0,82,204,0.07);padding:3px 8px;border-radius:4px;margin:4px 12px}
 .last-updated::before{content:'🕐';font-size:10px}
+
+/* === iPhone / Mobile hardening === */
+@media(max-width:430px){
+  .bm-table,.prod-table,.all-stocks{font-size:9px}
+  .bm-table th,.bm-table td,.prod-table th,.prod-table td{padding:2px 3px}
+  .signal-pair{grid-template-columns:1fr!important;gap:6px}
+  .health-grid{grid-template-columns:repeat(2,1fr)}
+  .gate-grid{grid-template-columns:1fr!important}
+  .prod-input-row{gap:4px}
+  .prod-input{width:70px;font-size:16px}
+  .prod-toggle-btn{padding:3px 8px;font-size:9px}
+  .prod-fx-btn{font-size:8px;padding:2px 4px}
+  .prod-input-label{font-size:9px}
+  .regime-row{grid-template-columns:repeat(2,1fr)}
+  .trigger-grid{grid-template-columns:repeat(3,1fr)}
+  .funnel-label{min-width:90px;font-size:9px}
+  .ss-ticker{font-size:13px}.ss-price{font-size:12px}
+}
+/* Prevent iOS zoom on input focus */
+input[type="number"],input[type="text"],select,textarea{font-size:16px!important;-webkit-appearance:none}
+/* Scrollable table wrapper */
+.table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;padding:0 2px}
