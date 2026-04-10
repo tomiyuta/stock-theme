@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-09",
-  "generated_at": "2026-04-11T01:09:31.150533",
+  "generated_at": "2026-04-11T01:14:49.360372",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -1049,18 +1049,6 @@
       ]
     }
   ],
-  "virtual_exits": [
-    {
-      "ticker": "CF",
-      "prev_theme": "化学：農業",
-      "prev_rank": 10,
-      "reason": "removed_from_target"
-    }
-  ],
-  "virtual_entries": [
-    {
-      "ticker": "COST",
-      "theme": "食品小売・量販店"
-    }
-  ]
+  "virtual_exits": [],
+  "virtual_entries": []
 }
