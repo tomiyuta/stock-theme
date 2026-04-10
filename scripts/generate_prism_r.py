@@ -73,13 +73,15 @@ theme_sector = psec.groupby('theme')['sector'].agg(
 # === Helpers ===
 def ols_ab(y, x):
     mask = np.isfinite(y) & np.isfinite(x); y, x = y[mask], x[mask]; n = len(y)
-    if n < 10: return np.nan, np.nan, np.nan
+    if n < 10: return np.nan, np.nan, np.nan, np.nan
     xm, ym = x.mean(), y.mean(); xd = x - xm; vx = np.dot(xd, xd)/(n-1)
-    if vx < 1e-12: return np.nan, np.nan, np.nan
+    if vx < 1e-12: return np.nan, np.nan, np.nan, np.nan
     b = np.dot(xd, y-ym)/(n-1) / vx; a = ym - b*xm
-    ss = float(np.sum((y-a-b*x)**2)); st = float(np.sum((y-ym)**2))
+    resid = y - a - b*x
+    ss = float(np.sum(resid**2)); st = float(np.sum((y-ym)**2))
     r2 = 1-ss/st if st>1e-12 else np.nan
-    return a*n, b, r2
+    resid_vol = float(np.std(resid, ddof=1)*np.sqrt(n)) if n>2 else np.nan
+    return a*n, b, r2, resid_vol
 
 def cumret(arr):
     a = np.asarray(arr, dtype=float); a = a[np.isfinite(a)]
@@ -133,7 +135,7 @@ for th in ts.index:
 
 # Stock scoring + comparison
 comparisons = []
-used4 = set(); used5 = set()
+used4 = set(); used5 = set(); used_snrb = set()
 for rank_i, th in enumerate(sel):
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
     tks = ths['ticker'].unique()
@@ -143,9 +145,14 @@ for rank_i, th in enumerate(sel):
         tkd = ths[ths['ticker']==tk].sort_values('date')
         r21d = tkd[tkd['date'].isin(dt21)]
         raw_1m = cumret(r21d['ret'].values) if len(r21d)>=10 else np.nan
-        a63, b63, r2_63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
+        a63, b63, r2_63, rvol63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
         shrk = shrink_r2(r2_63) if np.isfinite(r2_63) else 0
         score5 = a63*shrk if np.isfinite(a63) else -999
+        # A5-SNRb score: (alpha_cum / resid_vol) × shrink(r²)
+        if np.isfinite(a63) and np.isfinite(rvol63) and rvol63 > 1e-8:
+            score_snrb = (a63 / rvol63) * shrk
+        else:
+            score_snrb = -999
         latest = panel[(panel['theme']==th)&(panel['ticker']==tk)&(panel['date']==dt)]
         price = float(latest['close'].iloc[0]) if len(latest)>0 else None
         mi = meta_d.get(tk, {})
@@ -155,8 +162,10 @@ for rank_i, th in enumerate(sel):
             'alpha63': round(a63, 4) if np.isfinite(a63) else None,
             'beta63': round(b63, 3) if np.isfinite(b63) else None,
             'r2_63': round(r2_63, 3) if np.isfinite(r2_63) else None,
+            'resid_vol63': round(rvol63, 4) if np.isfinite(rvol63) else None,
             'shrink': round(shrk, 3),
             'score_a5': round(score5, 4) if score5 > -999 else None,
+            'score_snrb': round(score_snrb, 4) if score_snrb > -999 else None,
             'price': round(price, 2) if price else None,
             'sector': mi.get('sector', ''), 'mc': mi.get('mc', ''),
             'name': mi.get('name', ''), 'name_ja': mi.get('name_ja', '')
@@ -171,6 +180,12 @@ for rank_i, th in enumerate(sel):
     for s in s5:
         if s['ticker'] not in used5 and s['score_a5'] is not None:
             a5_tk = s['ticker']; used5.add(a5_tk); break
+    # SNRb pick
+    s_snrb = sorted(all_stocks, key=lambda x: -(x['score_snrb'] or -999))
+    snrb_tk = None
+    for s in s_snrb:
+        if s['ticker'] not in used_snrb and s['score_snrb'] is not None:
+            snrb_tk = s['ticker']; used_snrb.add(snrb_tk); break
     # Theme state per EXIT CONSTITUTION v2
     full_rank = int(ts['score'].rank(ascending=False).loc[th])
     theme_state = 'ENTRY' if full_rank <= 20 else 'WATCH' if full_rank <= 35 else 'EXIT'
@@ -183,7 +198,8 @@ for rank_i, th in enumerate(sel):
         'decel': round(float(ts.loc[th, 'decel']), 4),
         'theme_score': round(float(ts.loc[th, 'score']), 3),
         'n_members': len(tks),
-        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'same': a4_tk == a5_tk,
+        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk,
+        'same': a4_tk == a5_tk, 'a5_snrb_same': a5_tk == snrb_tk,
         'stocks': all_stocks
     })
 
@@ -211,6 +227,7 @@ for tk, th in curr_picks.items():
 
 # === Output ===
 overlap = sum(1 for c in comparisons if c['same'])
+snrb_overlap_a5 = sum(1 for c in comparisons if c['a5_snrb_same'])
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
@@ -220,14 +237,17 @@ output = {
         'alpha_window': 63,
         'theme_score': '0.70×rank(mom63)+0.30×rank(decel)',
         'stock_score': 'α63×shrink(r²_63)',
+        'stock_score_snrb': '(α63/resid_vol63)×shrink(r²_63)',
         'top_themes': 10, 'picks_per_theme': 1,
         'min_members': 4, 'sector_cap': 3, 'rebalance_days': 20
     },
     'summary': {
         'themes_selected': len(comparisons),
-        'a4_names': len(used4), 'a5_names': len(used5),
+        'a4_names': len(used4), 'a5_names': len(used5), 'snrb_names': len(used_snrb),
         'overlap': overlap,
         'overlap_pct': round(overlap / max(len(comparisons), 1), 2),
+        'a5_snrb_overlap': snrb_overlap_a5,
+        'a5_snrb_overlap_pct': round(snrb_overlap_a5 / max(len(comparisons), 1), 2),
         'diff_names': len(comparisons) - overlap
     },
     'comparisons': comparisons,
@@ -252,6 +272,12 @@ meta_out = {
         'monthly_diff': '+1.13%', 'monthly_win_rate': '53%',
         'sign_test_p': 0.360, 'tech_share_net': '76%',
         'a5_maxdd': '-42.0%', 'a4_maxdd': '-39.7%'
+    },
+    'snrb_backtest_5yr': {
+        'snrb_sharpe': 1.46, 'snrb_cagr': '57.5%', 'snrb_vol': '39.3%',
+        'snrb_maxdd': '-37.1%', 'snrb_calmar': 1.55,
+        'snrb_top5_share': '34.1%',
+        'status': 'research-shadow (independent forward clock)'
     }
 }
 with open(OUT / 'meta.json', 'w') as f:
@@ -259,4 +285,5 @@ with open(OUT / 'meta.json', 'w') as f:
 
 comp_size = (OUT / 'shadow_comparison.json').stat().st_size / 1024
 print(f'PRISM-R: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
+      f'snrb_overlap={snrb_overlap_a5}/{len(comparisons)}, '
       f'snapshot={dt.date()}, size={comp_size:.0f}KB')

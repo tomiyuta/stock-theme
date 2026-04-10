@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-09",
-  "generated_at": "2026-04-10T16:38:07.327871",
+  "generated_at": "2026-04-11T01:09:31.151636",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "pit_safe": false,
@@ -11,6 +11,7 @@
     "alpha_window": 63,
     "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
     "stock_score": "α63×shrink(r²_63)",
+    "stock_score_snrb": "(α63/resid_vol63)×shrink(r²_63)",
     "top_themes": 10,
     "picks_per_theme": 1,
     "min_members": 4,
@@ -27,5 +28,14 @@
     "tech_share_net": "76%",
     "a5_maxdd": "-42.0%",
     "a4_maxdd": "-39.7%"
+  },
+  "snrb_backtest_5yr": {
+    "snrb_sharpe": 1.46,
+    "snrb_cagr": "57.5%",
+    "snrb_vol": "39.3%",
+    "snrb_maxdd": "-37.1%",
+    "snrb_calmar": 1.55,
+    "snrb_top5_share": "34.1%",
+    "status": "research-shadow (independent forward clock)"
   }
 }
