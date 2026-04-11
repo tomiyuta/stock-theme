@@ -117,7 +117,7 @@ Promise.all([
   const nPicks = comp.comparisons?.length || 5;
   const wPct = (100/nPicks).toFixed(0);
   h+=`<div class="section-title">📊 G2-MAX リバランス計算</div>`;
-  h+=`<div class="prod-card"><div class="prod-title">G2-MAX Shadow Portfolio — ${nPicks}銘柄 × W5b一貫性加重</div>`;
+  h+=`<div class="prod-card"><div class="prod-title">G2-MAX Shadow Portfolio — ${nPicks}銘柄</div>`;
   h+=`<div class="prod-input-row">`;
   h+=`<span class="prod-input-label">投資資金</span>`;
   h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setG2Ccy('USD')">USD</button><button class="prod-toggle-btn" onclick="setG2Ccy('JPY')">JPY</button></div>`;
@@ -125,27 +125,10 @@ Promise.all([
   h+=`<span class="prod-input-label">ドル円:</span><input id="g2Fx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcG2()">`;
   h+=`<button class="prod-fx-btn" onclick="fetchG2Fx()">🔄 現在レート</button>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">W5b%</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">G2%</th><th style="text-align:right;color:#D85A30">🔥BEAST%</th><th style="text-align:right">株価($)</th><th style="text-align:right">G2 株数/実配分</th></tr></thead>`;
   h+=`<tbody id="g2RebalBody"></tbody></table>`;
   h+=`<div id="g2RebalSummary"></div>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">W5b一貫性加重（R63/R126/R252ex1m, 30%キャップ）× ${nPicks}銘柄 | SHADOWモード</div>`;
-  h+=`</div>`;
-
-  // === BEAST Mode Rebalance ===
-  h+=`<div class="section-title" style="color:#D85A30">🔥 BEAST Mode — W5bキャップなし</div>`;
-  h+=`<div class="prod-card" style="border-color:rgba(216,90,48,0.3);background:rgba(216,90,48,0.03)">`;
-  h+=`<div class="prod-title" style="color:#D85A30">BEAST Portfolio — ${nPicks}銘柄 × W5b NO CAP</div>`;
-  h+=`<div style="font-size:9px;color:#D85A30;margin-bottom:8px">⚠ 単一テーマ最大61.9% — 投機的。BT: CAGR=278% Sharpe=2.70 MaxDD=-46.7%</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">BEAST%</th><th style="text-align:right">vs G2</th></tr></thead><tbody>`;
-  window._g2_picks.forEach(p=>{
-    const bw=p.beast_weight||1.0/window._g2_picks.length;const gw=p.w5b_weight||1.0/window._g2_picks.length;
-    const diff=((bw-gw)*100);
-    h+=`<tr><td><b style="color:#D85A30">${p.ticker}</b></td><td style="font-size:9px">${p.theme}</td>`;
-    h+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
-    h+=`<td class="num" style="font-size:9px;color:${diff>=0?'#00c853':'#ff1744'}">${diff>=0?'+':''}${diff.toFixed(1)}%</td></tr>`;
-  });
-  h+=`</tbody></table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">W5b一貫性加重（キャップなし）— G2-MAXとの差分はウェイトのみ。銘柄は同一。</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">G2 = W5b一貫性加重（30%キャップ）| 🔥BEAST = W5bキャップなし（参考値）| 株数はG2基準で計算</div>`;
   h+=`</div>`;
 
   // === 6. Cumulative Returns Chart ===
@@ -243,12 +226,14 @@ function calcG2(){
   picks.forEach(p=>{
     if(!p.price)return;
     const w=p.w5b_weight||1.0/picks.length;
+    const bw=p.beast_weight||1.0/picks.length;
     const target=capUSD*w;const shares=Math.floor(target/p.price);
     const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
     const targetPct=w*100;const dev=actualPct-targetPct;totalInvested+=actual;
     html+=`<tr><td><b style="color:var(--g2)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
     html+=`<td class="num" style="font-weight:700;color:var(--g2)">${(w*100).toFixed(1)}%</td>`;
+    html+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
     html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
   });
