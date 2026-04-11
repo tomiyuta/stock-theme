@@ -151,15 +151,16 @@ Promise.all([
     ['G0 A5-lite','67.2%','1.565','-42.0%','19.1x'],
     ['G1 5テーマ集中','145.3%','2.179','-48.7%','172.8x'],
     ['G2 6テーマ W5b ★','230.7%','2.935','-45.0%','—'],
+    ['🔥 BEAST (W5b nocap)','278.0%','2.704','-46.7%','—'],
     ['G3a α/σ²','64.6%','1.576','-39.3%','17.5x'],
     ['G4 Kelly sizing','36.6%','0.838','-51.9%','6.0x'],
   ];
   abl.forEach(([s,c,sh,md,t])=>{
-    const best=s.includes('★');
-    h+=`<tr style="${best?'background:rgba(225,29,72,0.06);font-weight:700':''}"><td>${s}</td><td>${c}</td><td>${sh}</td><td>${md}</td><td>${t}</td></tr>`;
+    const best=s.includes('★');const beast=s.includes('BEAST');
+    h+=`<tr style="${best?'background:rgba(225,29,72,0.06);font-weight:700':beast?'background:rgba(216,90,48,0.06);color:#D85A30':''}"><td>${s}</td><td>${c}</td><td>${sh}</td><td>${md}</td><td>${t}</td></tr>`;
   });
   h+=`</table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">6テーマ採用: Sharpe最大(2.80) + MaxDD最良(-44%)。Kelly正規化は全て逆効果。</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">G2(★)=Sharpe基準の採用戦略。BEAST=キャップなし参考値（CAGR↑ Sharpe↓）。Kelly正規化は全て逆効果。</div>`;
   h+=`</div>`;
 
   // === 9. Architecture ===
