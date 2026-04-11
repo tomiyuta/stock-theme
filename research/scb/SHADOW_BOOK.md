@@ -980,3 +980,44 @@ weight = normalize(raw_weight), single theme cap = 30%
   - R252の追加
   - Kelly系との再統合
 ```
+
+
+---
+
+## BEAST Mode Decision Memo (2026-04-12)
+
+### 定義
+
+```
+BEAST mode = W5b一貫性加重 WITHOUT 30% cap
+  = G2-MAX の全パラメータを維持しつつ、単一テーマウェイト上限を撤廃
+```
+
+### BT結果
+
+```
+                     CAGR      Vol   Sharpe   Calmar    MaxDD     Terminal  平均最大W
+G2-MAX (W5b cap30)  235.1%   78.7%   2.986   4.906   -47.9%    1,037x     24.4%
+BEAST (W5b nocap)   283.1%  102.9%   2.750   5.690   -49.8%    2,236x     29.1%
+
+差分:
+  ΔCAGR=+48pt  ΔSharpe=-0.24  ΔMaxDD=-1.8pt  ΔCalmar=+0.78  ΔTerminal=+1,199x
+
+単一テーマ最大ウェイト:
+  cap30: max=30.0%, >50%発生=0%
+  BEAST: max=61.9%, >50%発生=11%（73リバランス中8回）
+```
+
+### 判定: 非採用（記録のみ）
+
+```
+理由:
+  ① Sharpe -0.24 = リスク効率の悪化
+  ② Vol 103% = 年間±100%の振幅
+  ③ 最大61.9%を1テーマに配分 = 事実上の単銘柄賭け
+  ④ G2-MAXは既に攻撃型。BEASTは投機に近い
+
+用途:
+  「G2-MAXでもまだ物足りない」場合の参考値。
+  実装はしない。
+```
