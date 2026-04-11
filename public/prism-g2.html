@@ -44,7 +44,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <div style="padding:16px 12px 4px;text-align:center">
   <div style="font-size:20px;font-weight:900;letter-spacing:1px">G2-<span style="color:var(--g2)">MAX</span></div>
   <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Concentrated Cluster-Aware Raw Residual Momentum</div>
-  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -55%覚悟の攻撃型戦略</div>
+  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -44%覚悟の攻撃型戦略</div>
   <div id="headerMeta"></div>
 </div>
 <div id="g2Main"><div style="padding:40px;text-align:center;color:var(--text-sub)">Loading...</div></div>
@@ -65,7 +65,7 @@ Promise.all([
 
   // === 2. Key Metrics Banner ===
   h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 12px">`;
-  [['BT CAGR','179.1%','rgba(225,29,72,0.08)'],['BT Sharpe','2.568','rgba(225,29,72,0.08)'],['BT MaxDD','-54.7%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
+  [['BT CAGR','175.3%','rgba(225,29,72,0.08)'],['BT Sharpe','2.795','rgba(225,29,72,0.08)'],['BT MaxDD','-44.1%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
     h+=`<div style="padding:8px;border-radius:6px;background:${c};text-align:center"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:14px;font-weight:900;color:var(--g2)">${v}</div></div>`;
   });
   h+=`</div>`;
@@ -73,7 +73,7 @@ Promise.all([
 
   // === 3. Portfolio ===
   h+=`<div class="section-title">📊 G2-MAX ポートフォリオ</div>`;
-  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">5テーマ集中 × raw α63 — ${comp.comparisons?.length||0}銘柄</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">6テーマ集中 × raw α63 — ${comp.comparisons?.length||0}銘柄</div>`;
   h+=`<table class="tbl"><tr><th>#</th><th>テーマ</th><th>銘柄</th><th>価格</th><th>α63</th></tr>`;
   (comp.comparisons||[]).forEach((c,i)=>{
     const s = c.stocks?.[0] || {};
@@ -146,7 +146,7 @@ Promise.all([
   const abl=[
     ['G0 A5-lite','67.2%','1.565','-42.0%','19.1x'],
     ['G1 5テーマ集中','145.3%','2.179','-48.7%','172.8x'],
-    ['G2 raw α ★','179.1%','2.568','-54.7%','362.5x'],
+    ['G2 6テーマ ★','175.3%','2.795','-44.1%','335.5x'],
     ['G3a α/σ²','64.6%','1.576','-39.3%','17.5x'],
     ['G4 Kelly sizing','36.6%','0.838','-51.9%','6.0x'],
   ];
@@ -155,17 +155,17 @@ Promise.all([
     h+=`<tr style="${best?'background:rgba(225,29,72,0.06);font-weight:700':''}"><td>${s}</td><td>${c}</td><td>${sh}</td><td>${md}</td><td>${t}</td></tr>`;
   });
   h+=`</table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">CAGR改善源: 集中(+78pt) + raw α(+34pt)。Kelly正規化は全て逆効果。</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">6テーマ採用: Sharpe最大(2.80) + MaxDD最良(-44%)。Kelly正規化は全て逆効果。</div>`;
   h+=`</div>`;
 
   // === 9. Architecture ===
   h+=`<div class="section-title">📐 G2-MAX アーキテクチャ</div>`;
   const arch=[
     ["設計思想",`<div style="font-size:10px;line-height:1.6;padding:6px;background:rgba(225,29,72,0.04);border-radius:4px"><b>G2-MAX</b> = CAGR最大化専用の集中型raw α戦略<br>PRISM-RQ（Sharpe/Calmar重視）とは<b>目的関数が異なる</b><br>Ablation BTで「集中+raw α」がCAGR最大の本体と確認</div>`],
-    ["Layer 1: 5テーマ集中 + Corr Budget",`<div style="font-size:10px;line-height:1.6"><code>ThemeScore = 0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)</code><br><br><b>選定:</b> 上位からgreedy採用、相関制約 max_corr &lt; 0.80<br><b>テーマ数:</b> 5（10→5で+78pt CAGR）<br><b>sector cap:</b> なし<br><b>BFM-v2 veto:</b> なし</div>`],
+    ["Layer 1: 6テーマ集中 + Corr Budget",`<div style="font-size:10px;line-height:1.6"><code>ThemeScore = 0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)</code><br><br><b>選定:</b> 上位からgreedy採用、相関制約 max_corr &lt; 0.80<br><b>テーマ数:</b> 6（Sharpe最大2.80 / MaxDD最良-44%の最適点）<br><b>sector cap:</b> なし<br><b>BFM-v2 veto:</b> なし</div>`],
     ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定<br><br><b>なぜraw α:</b> SNRb（α/σ）は右裾を削りCAGRを-9.5pt。shrink(r²)もさらに削る。raw αはhigh-conviction winnerを保存する。</div>`],
     ["防御装置",`<div style="font-size:10px;line-height:1.6"><b>残すもの:</b><br>• Correlation budget（同一因子の重複ベット回避）<br>• Data integrity / delisting 系 hard exit<br><br><b>外すもの:</b><br>• BFM-v2 veto（CAGR -14pt）<br>• SNRb（CAGR -9.5pt）<br>• shrink(r²)<br>• sector cap<br>• Vol overlay<br>• panic de-gearing（今回のBTでは無効）</div>`],
-    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に最も敏感。</b><br>5テーマ集中 + raw αは「今のテーマ構成で過去を計算」の影響を最大化する構成。<br>CAGR 179%のうちPIT上方バイアスの割合は不明。<br>forward実績で大幅に下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
+    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に敏感。</b><br>6テーマ集中 + raw αは「今のテーマ構成で過去を計算」の影響を受けやすい構成。<br>CAGR 175%のうちPIT上方バイアスの割合は不明。<br>forward実績で下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
   ];
   arch.forEach(([title,body])=>{
     h+=`<div style="margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;cursor:pointer" onclick="this.querySelector('.abody').style.display=this.querySelector('.abody').style.display==='block'?'none':'block'">`;
@@ -184,7 +184,7 @@ Promise.all([
   h+=`<div style="margin:4px 12px;padding:8px;border-radius:6px;background:var(--card-bg);font-size:8px;line-height:1.8;color:var(--text-sub)">`;
   h+=`<b style="color:var(--blue)">PRISM-R</b> CAGR=65.6% Sharpe=1.34 MaxDD=-35.6% — baseline (A5-lite)<br>`;
   h+=`<b style="color:var(--purple)">PRISM-RQ</b> CAGR=43.8% Sharpe=1.60 MaxDD=-23.9% — risk-adjusted (BFM-v2+SNRb)<br>`;
-  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=179.1% Sharpe=2.57 MaxDD=-54.7% — CAGR-max (concentrated raw α)`;
+  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=175.3% Sharpe=2.80 MaxDD=-44.1% — CAGR-max (concentrated raw α)`;
   h+=`</div>`;
 
   document.getElementById('g2Main').innerHTML=h;

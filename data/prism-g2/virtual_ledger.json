@@ -29,6 +29,12 @@
       "entry_price": 298.71,
       "theme": "半導体：材料・消耗品",
       "status": "active"
+    },
+    "ETN": {
+      "entry_date": "2026-04-10",
+      "entry_price": 403.0,
+      "theme": "DC変圧器・スイッチギア",
+      "status": "active"
     }
   },
   "history": [],

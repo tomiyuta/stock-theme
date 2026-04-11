@@ -1,4 +1,4 @@
-"""Generate G2-MAX snapshot: 5 themes (corr budget) × raw self-excluded α63.
+"""Generate G2-MAX snapshot: 6 themes (corr budget) × raw self-excluded α63.
 Output: public/api/prism-g2/shadow_comparison.json + meta.json
 """
 import json, os, sys, numpy as np, pandas as pd
@@ -67,7 +67,7 @@ def ols_alpha(y, x):
     return a*n, b, r2  # alpha_cum63, beta, r2
 
 # === Main Logic ===
-WARMUP = 126; MIN_M = 4; TOP_T = 5; MAX_CORR = 0.80
+WARMUP = 126; MIN_M = 4; TOP_T = 6; MAX_CORR = 0.80
 j = len(dates_all) - 1; dt = dates_all[j]
 dt63 = set(dates_all[max(0,j-62):j+1])
 dt126 = set(dates_all[max(0,j-125):j+1])
@@ -162,7 +162,7 @@ output = {
     'generated_at': datetime.now().isoformat(),
     'version': 'G2-MAX_v1',
     'status': 'SHADOW',
-    'strategy': 'G2-MAX: 5-theme concentrated raw residual momentum',
+    'strategy': 'G2-MAX: 6-theme concentrated raw residual momentum',
     'frozen_params': {
         'theme_score': '0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)',
         'stock_score': 'raw self-excluded α63 (no shrink, no SNR)',

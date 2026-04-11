@@ -28,7 +28,7 @@ def ols_alpha(y, x):
     if vx<1e-15: return np.nan
     b=np.dot(x-xm,y-ym)/(n-1)/vx; a=ym-b*xm; return a*n
 
-WARMUP=126; REBAL=20; MIN_M=4; TOP_T=5; MAX_CORR=0.80
+WARMUP=126; REBAL=20; MIN_M=4; TOP_T=6; MAX_CORR=0.80
 rebal_idx=list(range(WARMUP,len(dates_all),REBAL))
 if rebal_idx[-1]!=len(dates_all)-1: rebal_idx.append(len(dates_all)-1)
 daily_ret_g2=[]; daily_dates=[]
@@ -121,7 +121,7 @@ output={
         'a5':{'cagr':round(cagr,4),'sharpe':round(sharpe,4),'maxdd':round(maxdd,4),'n_months':len(dates_str)},
         'SPY':{'cagr':round(cagr_s,4),'sharpe':round(sh_s,4),'maxdd':round(maxdd_s,4),'n_months':len(dates_str)},
     },
-    'meta':{'strategy':'G2-MAX (5-theme concentrated raw α)','source':'Norgate BT','pit_warning':True},
+    'meta':{'strategy':'G2-MAX (6-theme concentrated raw α)','source':'Norgate BT','pit_warning':True},
     'forward_overlay':{'dates':[],'a5':[],'SPY':[]}
 }
 import os; os.makedirs('/Users/yutatomi/Downloads/stock-theme/public/api/prism-g2', exist_ok=True)

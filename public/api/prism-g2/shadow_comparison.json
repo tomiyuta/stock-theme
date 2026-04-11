@@ -1,9 +1,9 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-11T18:21:10.022226",
+  "generated_at": "2026-04-11T20:03:29.166331",
   "version": "G2-MAX_v1",
   "status": "SHADOW",
-  "strategy": "G2-MAX: 5-theme concentrated raw residual momentum",
+  "strategy": "G2-MAX: 6-theme concentrated raw residual momentum",
   "frozen_params": {
     "theme_score": "0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)",
     "stock_score": "raw self-excluded α63 (no shrink, no SNR)",
@@ -13,11 +13,11 @@
     "min_members": 4
   },
   "summary": {
-    "themes_selected": 5,
-    "picks": 5,
+    "themes_selected": 6,
+    "picks": 6,
     "correlation": {
-      "n_themes": 5,
-      "avg_corr": 0.455,
+      "n_themes": 6,
+      "avg_corr": 0.49,
       "max_corr": 0.715
     }
   },
@@ -345,6 +345,64 @@
           "mc": "大型",
           "name": "Qnity Electronics, Inc.",
           "name_ja": "Qnity Electronics"
+        }
+      ]
+    },
+    {
+      "theme": "dc-transformer",
+      "theme_name": "DC変圧器・スイッチギア",
+      "theme_score": 0.913,
+      "mom63": 0.4682,
+      "mom126": 0.5148,
+      "pick": "POWL",
+      "stocks": [
+        {
+          "ticker": "ETN",
+          "alpha63": -0.0833,
+          "beta63": 0.73,
+          "r2_63": 0.667,
+          "raw_1m": 0.1327,
+          "price": 403.0,
+          "sector": "Industrials",
+          "mc": "大型",
+          "name": "Eaton Corporation plc",
+          "name_ja": "イートン"
+        },
+        {
+          "ticker": "GEV",
+          "alpha63": 0.1881,
+          "beta63": 0.782,
+          "r2_63": 0.467,
+          "raw_1m": 0.1702,
+          "price": 991.32,
+          "sector": "Industrials",
+          "mc": "超大型",
+          "name": "GE Vernova Inc.",
+          "name_ja": "GE Vernova"
+        },
+        {
+          "ticker": "HUBB",
+          "alpha63": -0.0913,
+          "beta63": 0.539,
+          "r2_63": 0.454,
+          "raw_1m": 0.1214,
+          "price": 536.01,
+          "sector": "Industrials",
+          "mc": "大型",
+          "name": "Hubbell Incorporated",
+          "name_ja": "Hubbell"
+        },
+        {
+          "ticker": "POWL",
+          "alpha63": 0.3749,
+          "beta63": 1.127,
+          "r2_63": 0.325,
+          "raw_1m": 0.3448,
+          "price": 230.94,
+          "sector": "Industrials",
+          "mc": "中型",
+          "name": "Powell Industries, Inc.",
+          "name_ja": "Powell Industries"
         }
       ]
     }

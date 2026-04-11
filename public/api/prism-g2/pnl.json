@@ -3,7 +3,7 @@
   "strategy": "G2-MAX",
   "status": "SHADOW_VIRTUAL",
   "summary": {
-    "total_positions": 5,
+    "total_positions": 6,
     "total_pnl_pct": 0.0
   },
   "positions": [
@@ -12,7 +12,7 @@
       "theme": "光接続：トランシーバ",
       "entry_price": 150.6,
       "current_price": 150.6,
-      "weight": 0.2,
+      "weight": 0.1667,
       "pnl_pct": 0.0
     },
     {
@@ -20,7 +20,7 @@
       "theme": "半導体製造装置：部品",
       "entry_price": 379.64,
       "current_price": 379.64,
-      "weight": 0.2,
+      "weight": 0.1667,
       "pnl_pct": 0.0
     },
     {
@@ -28,7 +28,7 @@
       "theme": "データストレージ",
       "entry_price": 420.59,
       "current_price": 420.59,
-      "weight": 0.2,
+      "weight": 0.1667,
       "pnl_pct": 0.0
     },
     {
@@ -36,7 +36,7 @@
       "theme": "宇宙：地球観測",
       "entry_price": 34.14,
       "current_price": 34.14,
-      "weight": 0.2,
+      "weight": 0.1667,
       "pnl_pct": 0.0
     },
     {
@@ -44,7 +44,15 @@
       "theme": "半導体：材料・消耗品",
       "entry_price": 298.71,
       "current_price": 298.71,
-      "weight": 0.2,
+      "weight": 0.1667,
+      "pnl_pct": 0.0
+    },
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "entry_price": 403.0,
+      "current_price": 403.0,
+      "weight": 0.1667,
       "pnl_pct": 0.0
     }
   ]
