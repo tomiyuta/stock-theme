@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>テーマ詳細 | 米国株テーマトラッカー</title>
+  <title>テーマ詳細 | PRISMATIC</title>
   <link rel="stylesheet" href="/styles.css?v=21">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <style>
@@ -64,7 +64,7 @@ Promise.all([
   const all=ranking.all_themes||[];
   const theme=all.find(t=>t.slug===slug);
   if(!theme){document.getElementById("detailMain").innerHTML='<div class="loading">テーマが見つかりません</div>';return}
-  document.title=theme.name+" | 米国株テーマトラッカー";
+  document.title=theme.name+" | PRISMATIC";
   const periods=(ranking.all_periods||[]).filter(p=>p!=="日中");
   const ab=(abAll["3ヶ月"]||{})[slug]||{};
   const tickers=theme.related?theme.related.split(",").filter(t=>t.trim()).map(t=>t.trim()):[];
