@@ -148,7 +148,11 @@ function esc(s){const d=document.createElement('span');d.textContent=s;return d.
 function loadDip(){
   fetch("/api/dip_alerts.json?v="+Date.now()).then(r=>r.json()).then(data=>{
     const period='1M';
-    const alerts=data[period]||[];
+    const raw=data[period]||[];
+    // Deduplicate: keep deepest dip per theme
+    const seen={};
+    raw.forEach(a=>{const k=a.theme;if(!seen[k]||Math.abs(a.dip)>Math.abs(seen[k].dip))seen[k]=a;});
+    const alerts=Object.values(seen).sort((a,b)=>a.dip-b.dip);
     let h='<div class="section-label">押し目検知（'+alerts.length+'テーマ）</div>';
     if(alerts.length===0){h+='<div style="padding:20px;color:var(--text-sub)">現在押し目シグナルなし</div>';}
     alerts.forEach(a=>{
