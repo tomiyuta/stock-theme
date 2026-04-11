@@ -153,7 +153,61 @@ function loadDip(){
     const seen={};
     raw.forEach(a=>{const k=a.theme;if(!seen[k]||Math.abs(a.dip)>Math.abs(seen[k].dip))seen[k]=a;});
     const alerts=Object.values(seen).sort((a,b)=>a.dip-b.dip);
-    let h='<div class="section-label">押し目検知（'+alerts.length+'テーマ）</div>';
+    let h='';
+    // === Methodology Card ===
+    h+='<div style="margin:8px 10px;border-radius:8px;padding:12px 14px;background:rgba(0,82,204,0.04);border:1px solid rgba(0,82,204,0.12);cursor:pointer" onclick="this.querySelector(\'.dip-guide-body\').style.display=this.querySelector(\'.dip-guide-body\').style.display===\'block\'?\'none\':\'block\'">';
+    h+='<div style="display:flex;justify-content:space-between;align-items:center"><span style="font-size:12px;font-weight:700;color:#0052cc">📖 押し目検知の読み方</span><span style="font-size:9px;color:var(--text-sub)">▶ タップで展開</span></div>';
+    h+='<div class="dip-guide-body" style="display:none;margin-top:10px;font-size:10px;line-height:1.7;color:var(--text-main)">';
+
+    h+='<div style="font-weight:700;margin-bottom:4px;color:#0052cc">■ 計算手法</div>';
+    h+='<div style="padding:6px 8px;background:rgba(0,0,0,0.02);border-radius:4px;margin-bottom:8px">';
+    h+='① テーマリターンのピーク（1M/3M/6M/12Mルックバック）を特定<br>';
+    h+='② 現在価格とピークの差 = <b>下落幅（dip）</b><br>';
+    h+='③ 過去の同パターン（下落幅×経過期間）から<b>回復率（win_rate）</b>を算出<br>';
+    h+='④ 回復率 = 「同じ深さ・同じ速さの下落後、テーマが反発した歴史的確率」';
+    h+='</div>';
+
+    h+='<div style="font-weight:700;margin-bottom:4px;color:#0052cc">■ 3つの軸（MECE）</div>';
+    h+='<table style="width:100%;font-size:9px;border-collapse:collapse;margin-bottom:8px">';
+    h+='<tr style="background:rgba(0,82,204,0.06)"><th style="padding:3px 6px;text-align:left;font-weight:700">軸</th><th style="padding:3px 6px;text-align:left">区分</th><th style="padding:3px 6px;text-align:left">意味</th></tr>';
+    h+='<tr><td rowspan="3" style="padding:3px 6px;font-weight:700;border-right:1px solid rgba(0,0,0,0.06)">下落幅</td><td style="padding:3px 6px">10-20%</td><td style="padding:3px 6px">調整</td></tr>';
+    h+='<tr><td style="padding:3px 6px">20-30%</td><td style="padding:3px 6px">大幅下落</td></tr>';
+    h+='<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:3px 6px">30%+</td><td style="padding:3px 6px">暴落</td></tr>';
+    h+='<tr><td rowspan="3" style="padding:3px 6px;font-weight:700;border-right:1px solid rgba(0,0,0,0.06)">経過期間</td><td style="padding:3px 6px">0-1M</td><td style="padding:3px 6px">短期（急落）</td></tr>';
+    h+='<tr><td style="padding:3px 6px">1-2M</td><td style="padding:3px 6px">じわじわ</td></tr>';
+    h+='<tr style="border-bottom:1px solid rgba(0,0,0,0.06)"><td style="padding:3px 6px">2-3M</td><td style="padding:3px 6px">だらだら</td></tr>';
+    h+='<tr><td rowspan="4" style="padding:3px 6px;font-weight:700;border-right:1px solid rgba(0,0,0,0.06)">LB期間</td><td style="padding:3px 6px">1M</td><td style="padding:3px 6px">直近ピーク基準</td></tr>';
+    h+='<tr><td style="padding:3px 6px">3M</td><td style="padding:3px 6px">四半期ピーク基準</td></tr>';
+    h+='<tr><td style="padding:3px 6px">6M</td><td style="padding:3px 6px">半年ピーク基準</td></tr>';
+    h+='<tr><td style="padding:3px 6px">12M</td><td style="padding:3px 6px">年間ピーク基準</td></tr>';
+    h+='</table>';
+
+    h+='<div style="font-weight:700;margin-bottom:4px;color:#0052cc">■ 判断フロー</div>';
+    h+='<div style="padding:6px 8px;background:rgba(0,200,83,0.04);border-radius:4px;border-left:3px solid #00c853;margin-bottom:6px">';
+    h+='<b style="color:#00c853">✅ 使える場面</b><br>';
+    h+='• <b>売却の「待て」</b> — 保有テーマに押し目alert → トレンド崩壊ではなく一時的下落と判断し保持継続<br>';
+    h+='• <b>エントリの前倒し</b> — ENTRY圏のテーマが安くなった → 次のリバランスを待たず買い<br>';
+    h+='• <b>候補テーマの予約</b> — WATCH圏で深い押し目 → 回復すればENTRY圏入りを監視';
+    h+='</div>';
+    h+='<div style="padding:6px 8px;background:rgba(255,23,68,0.04);border-radius:4px;border-left:3px solid #ff1744;margin-bottom:6px">';
+    h+='<b style="color:#ff1744">❌ 使わない場面</b><br>';
+    h+='• EXIT圏（rank &gt; 35）のテーマ → トレンド崩壊の可能性大<br>';
+    h+='• 回復率 &lt; 60% → コイン投げ以下の確率<br>';
+    h+='• サンプル &lt; 20件 → 統計的に無意味';
+    h+='</div>';
+
+    h+='<div style="font-weight:700;margin-bottom:4px;color:#0052cc">■ カードの読み方</div>';
+    h+='<div style="padding:6px 8px;background:rgba(0,0,0,0.02);border-radius:4px">';
+    h+='<b>テーマ名</b> — 押し目が検出されたテーマ<br>';
+    h+='<b style="color:#ff1744">-XX.X%</b> — ピークからの下落幅（深いほど赤）<br>';
+    h+='<b>閾値</b> — dip_bandの下限<br>';
+    h+='<b>回復率</b> — 過去同パターンで反発した割合（<span style="color:#00c853">60%以上=緑</span> / <span style="color:#ff1744">60%未満=赤</span>）<br>';
+    h+='<b>検知日</b> — いつ押し目が発生したか';
+    h+='</div>';
+
+    h+='</div></div>';
+
+    h+='<div class="section-label">押し目検知（'+alerts.length+'テーマ）</div>';
     if(alerts.length===0){h+='<div style="padding:20px;color:var(--text-sub)">現在押し目シグナルなし</div>';}
     alerts.forEach(a=>{
       const wrCls=a.win_rate>=60?'high':'low';
