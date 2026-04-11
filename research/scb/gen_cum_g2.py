@@ -31,7 +31,7 @@ def ols_alpha(y, x):
 WARMUP=126; REBAL=20; MIN_M=4; TOP_T=6; MAX_CORR=0.80
 rebal_idx=list(range(WARMUP,len(dates_all),REBAL))
 if rebal_idx[-1]!=len(dates_all)-1: rebal_idx.append(len(dates_all)-1)
-daily_ret_g2=[]; daily_dates=[]
+daily_ret_g2=[]; daily_ret_beast=[]; daily_dates=[]
 
 for pos in range(len(rebal_idx)-1):
     j=rebal_idx[pos]; j_next=rebal_idx[pos+1]; dt=dates_all[j]
@@ -110,26 +110,37 @@ for pos in range(len(rebal_idx)-1):
             ws=ws/ws.sum()
             for i,tk in enumerate(port): port[tk]=float(ws[i])
     if not port:
-        daily_ret_g2.extend([0.0]*len(hold_dates)); daily_dates.extend(hold_dates); continue
+        daily_ret_g2.extend([0.0]*len(hold_dates)); daily_ret_beast.extend([0.0]*len(hold_dates)); daily_dates.extend(hold_dates); continue
+    # BEAST = nocap (normalize only)
+    port_beast = {tk: w5b_raw.get(tk, 1.0) for tk in port} if 'w5b_raw' in dir() else dict(port)
+    bt = sum(port_beast.values())
+    if bt > 0:
+        for tk in port_beast: port_beast[tk] /= bt
     ws=pd.Series(port)
     dr=tk_wide.loc[hold_dates].reindex(columns=ws.index).fillna(0).mul(ws,axis=1).sum(axis=1)
-    daily_ret_g2.extend(dr.values.tolist()); daily_dates.extend(hold_dates)
+    daily_ret_g2.extend(dr.values.tolist())
+    ws_b=pd.Series(port_beast)
+    dr_b=tk_wide.loc[hold_dates].reindex(columns=ws_b.index).fillna(0).mul(ws_b,axis=1).sum(axis=1)
+    daily_ret_beast.extend(dr_b.values.tolist())
+    daily_dates.extend(hold_dates)
 
 # Monthly cumulative
-df=pd.DataFrame({'date':daily_dates,'g2':daily_ret_g2}); df['date']=pd.to_datetime(df['date']); df=df.set_index('date').sort_index()
+df=pd.DataFrame({'date':daily_dates,'g2':daily_ret_g2,'beast':daily_ret_beast}); df['date']=pd.to_datetime(df['date']); df=df.set_index('date').sort_index()
 monthly_g2=df['g2'].resample('M').apply(lambda x:float(np.expm1(np.log1p(x).sum())))
+monthly_beast=df['beast'].resample('M').apply(lambda x:float(np.expm1(np.log1p(x).sum())))
 spy_m=spy_ret.reindex(df.index).fillna(0).resample('M').apply(lambda x:float(np.expm1(np.log1p(x).sum())))
 common=sorted(set(monthly_g2.index)&set(spy_m.index))
 # Cut at 2026-03-31 (same as other pages)
 common=[d for d in common if d<=pd.Timestamp('2026-03-31')]
-mg2=monthly_g2.loc[common]; ms=spy_m.loc[common]
-cum_g2=np.cumprod(1+mg2.values); cum_spy=np.cumprod(1+ms.values)
+mg2=monthly_g2.loc[common]; mb=monthly_beast.loc[common]; ms=spy_m.loc[common]
+cum_g2=np.cumprod(1+mg2.values); cum_beast=np.cumprod(1+mb.values); cum_spy=np.cumprod(1+ms.values)
 dates_str=[d.strftime('%Y-%m-%d') for d in common]
-ann_g2,ann_spy={},{}
-for d,rg,rs in zip(common,mg2.values,ms.values):
-    y=str(d.year); ann_g2[y]=ann_g2.get(y,1.0)*(1+rg); ann_spy[y]=ann_spy.get(y,1.0)*(1+rs)
+ann_g2,ann_spy,ann_beast={},{},{}
+for d,rg,rs,rb in zip(common,mg2.values,ms.values,mb.values):
+    y=str(d.year); ann_g2[y]=ann_g2.get(y,1.0)*(1+rg); ann_spy[y]=ann_spy.get(y,1.0)*(1+rs); ann_beast[y]=ann_beast.get(y,1.0)*(1+rb)
 for y in ann_g2: ann_g2[y]=round(float(ann_g2[y])-1,4)
 for y in ann_spy: ann_spy[y]=round(float(ann_spy[y])-1,4)
+for y in ann_beast: ann_beast[y]=round(float(ann_beast[y])-1,4)
 # Stats
 arr=np.array(daily_ret_g2); arr=arr[np.isfinite(arr)]; n=len(arr); yrs=n/252
 cagr=(1+float(np.expm1(np.log1p(arr).sum())))**(1/yrs)-1
@@ -139,16 +150,24 @@ sa=spy_ret.reindex(df.index).fillna(0).values; sa=sa[np.isfinite(sa)]
 ns=len(sa); ys=ns/252; cagr_s=(1+float(np.expm1(np.log1p(sa).sum())))**(1/ys)-1
 vol_s=float(np.std(sa,ddof=1)*np.sqrt(252)); sh_s=cagr_s/vol_s if vol_s>1e-8 else 0
 eq_s=np.cumprod(1+sa); pk_s=np.maximum.accumulate(eq_s); maxdd_s=float(((eq_s-pk_s)/pk_s).min())
+# BEAST stats
+ab=np.array(daily_ret_beast); ab=ab[np.isfinite(ab)]; nb=len(ab); yb=nb/252
+cagr_b=(1+float(np.expm1(np.log1p(ab).sum())))**(1/yb)-1
+vol_b=float(np.std(ab,ddof=1)*np.sqrt(252)); sh_b=cagr_b/vol_b if vol_b>1e-8 else 0
+eq_b=np.cumprod(1+ab); pk_b=np.maximum.accumulate(eq_b); maxdd_b=float(((eq_b-pk_b)/pk_b).min())
 
 output={
     'dates':dates_str,
     'a5':[round(float(v),4) for v in cum_g2],
     'ret_a5':[round(float(v),4) for v in mg2.values],
+    'beast':[round(float(v),4) for v in cum_beast],
+    'ret_beast':[round(float(v),4) for v in mb.values],
     'SPY':[round(float(v),4) for v in cum_spy],
     'ret_SPY':[round(float(v),4) for v in ms.values],
-    'annual':{'a5':ann_g2,'SPY':ann_spy},
+    'annual':{'a5':ann_g2,'beast':ann_beast,'SPY':ann_spy},
     'stats':{
         'a5':{'cagr':round(cagr,4),'sharpe':round(sharpe,4),'maxdd':round(maxdd,4),'n_months':len(dates_str)},
+        'beast':{'cagr':round(cagr_b,4),'sharpe':round(sh_b,4),'maxdd':round(maxdd_b,4),'n_months':len(dates_str)},
         'SPY':{'cagr':round(cagr_s,4),'sharpe':round(sh_s,4),'maxdd':round(maxdd_s,4),'n_months':len(dates_str)},
     },
     'meta':{'strategy':'G2-MAX (6-theme W5b consistency-weighted raw α)','source':'Norgate BT','pit_warning':True},

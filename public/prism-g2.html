@@ -112,7 +112,7 @@ Promise.all([
   // === 6. Rebalance Calculator ===
   window._g2_picks = (comp.comparisons||[]).map(c => {
     const s = c.stocks?.[0] || {};
-    return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63, w5b_weight:c.w5b_weight||0};
+    return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63, w5b_weight:c.w5b_weight||0, beast_weight:c.beast_weight||0};
   });
   const nPicks = comp.comparisons?.length || 5;
   const wPct = (100/nPicks).toFixed(0);
@@ -131,6 +131,23 @@ Promise.all([
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">W5b一貫性加重（R63/R126/R252ex1m, 30%キャップ）× ${nPicks}銘柄 | SHADOWモード</div>`;
   h+=`</div>`;
 
+  // === BEAST Mode Rebalance ===
+  h+=`<div class="section-title" style="color:#D85A30">🔥 BEAST Mode — W5bキャップなし</div>`;
+  h+=`<div class="prod-card" style="border-color:rgba(216,90,48,0.3);background:rgba(216,90,48,0.03)">`;
+  h+=`<div class="prod-title" style="color:#D85A30">BEAST Portfolio — ${nPicks}銘柄 × W5b NO CAP</div>`;
+  h+=`<div style="font-size:9px;color:#D85A30;margin-bottom:8px">⚠ 単一テーマ最大61.9% — 投機的。BT: CAGR=278% Sharpe=2.70 MaxDD=-46.7%</div>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">BEAST%</th><th style="text-align:right">vs G2</th></tr></thead><tbody>`;
+  picks.forEach(p=>{
+    const bw=p.beast_weight||1.0/picks.length;const gw=p.w5b_weight||1.0/picks.length;
+    const diff=((bw-gw)*100);
+    h+=`<tr><td><b style="color:#D85A30">${p.ticker}</b></td><td style="font-size:9px">${p.theme}</td>`;
+    h+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
+    h+=`<td class="num" style="font-size:9px;color:${diff>=0?'#00c853':'#ff1744'}">${diff>=0?'+':''}${diff.toFixed(1)}%</td></tr>`;
+  });
+  h+=`</tbody></table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">W5b一貫性加重（キャップなし）— G2-MAXとの差分はウェイトのみ。銘柄は同一。</div>`;
+  h+=`</div>`;
+
   // === 6. Cumulative Returns Chart ===
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
@@ -140,7 +157,7 @@ Promise.all([
 
   // === 7. Annual Performance ===
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
+  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th style="color:#D85A30">BEAST</th><th>SPY</th><th>G2-SPY</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（集中型のため特に重い）。forward実績でのみ判断。</div></div>`;
 
   // === 8. Ablation BT Comparison ===
@@ -253,15 +270,18 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
   const ctx=document.getElementById('cumChartG2');if(!ctx)return;
   const fwd=cr.forward_overlay||{dates:[],a5:[],SPY:[]};
   const lastBT=cr.a5[cr.a5.length-1]||1;const lastSPY=cr.SPY[cr.SPY.length-1]||1;
+  const btBeast=cr.beast||[];
   const fwdA5=(fwd.a5||[]).map(g=>Math.round(lastBT*g*1e6)/1e6);
   const fwdSPY=(fwd.SPY||[]).map(g=>Math.round(lastSPY*g*1e6)/1e6);
   const allDates=[...cr.dates,...fwd.dates.filter(d=>!cr.dates.includes(d))];
   const btA5=[...cr.a5,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const btBeastPad=[...btBeast,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const btSPY=[...cr.SPY,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const fA5=[...new Array(cr.dates.length-1).fill(null),lastBT,...fwdA5];
   const fSPY=[...new Array(cr.dates.length-1).fill(null),lastSPY,...fwdSPY];
   window._cumChartG2=new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
     {label:'G2 BT(参考)',data:btA5,borderColor:'rgba(225,29,72,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'BEAST BT',data:btBeastPad,borderColor:'rgba(216,90,48,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[6,3]},
     {label:'G2 実績',data:fA5,borderColor:'#e11d48',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fSPY,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
@@ -274,14 +294,17 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
     mkB('G2 CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(225,29,72,0.06)')+
     mkB('G2 Sharpe',st.a5.sharpe.toFixed(2),'rgba(225,29,72,0.06)')+
     mkB('G2 MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
+    (st.beast?mkB('BEAST CAGR',(st.beast.cagr*100).toFixed(1)+'%','rgba(216,90,48,0.08)')+
+    mkB('BEAST Sharpe',st.beast.sharpe.toFixed(2),'rgba(216,90,48,0.08)')+
+    mkB('BEAST MaxDD',(st.beast.maxdd*100).toFixed(1)+'%','rgba(216,90,48,0.08)'):'')+
     mkB('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
     mkB('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
   const ann=cr.annual;const years=Object.keys(ann.a5).sort();let tb='';
   years.forEach(y=>{
-    const gv=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=gv-sv;
+    const gv=ann.a5[y]||0,bv=(ann.beast||{})[y]||0,sv=ann.SPY[y]||0,diff=gv-sv;
     const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
-    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(gv)};font-weight:700">${f(gv)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(gv)};font-weight:700">${f(gv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
   });
   document.getElementById('annualBodyG2').innerHTML=tb;
 }).catch(e=>console.warn('G2 chart error:',e));}

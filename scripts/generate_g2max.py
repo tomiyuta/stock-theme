@@ -189,10 +189,13 @@ for _ in range(5):
     for i, th in enumerate(w5b_data): w5b_data[th]['weight'] = round(float(ws[i]), 4)
 
 # Add W5b weights to comparisons
+# BEAST = nocap normalized weights
+beast_total = sum(d['raw_weight'] for d in w5b_data.values())
 for c in comparisons:
     th = c['theme']
     wd = w5b_data.get(th, {})
     c['w5b_weight'] = round(wd.get('weight', 1.0/len(comparisons)), 4)
+    c['beast_weight'] = round(wd.get('raw_weight', 1.0) / beast_total, 4) if beast_total > 0 else round(1.0/len(comparisons), 4)
     c['w5b_pos_count'] = wd.get('pos_count', 0)
     c['w5b_r252ex1m'] = round(wd.get('r252ex1m', 0), 4) if np.isfinite(wd.get('r252ex1m', np.nan)) else None
 

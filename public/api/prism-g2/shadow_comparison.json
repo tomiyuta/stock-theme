@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-12T04:58:56.529476",
+  "generated_at": "2026-04-12T05:34:15.428202",
   "version": "G2-MAX_v1",
   "status": "SHADOW",
   "strategy": "G2-MAX: 6-theme W5b consistency-weighted raw residual momentum",
@@ -100,6 +100,7 @@
         }
       ],
       "w5b_weight": 0.1727,
+      "beast_weight": 0.1727,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 2.5269
     },
@@ -162,6 +163,7 @@
         }
       ],
       "w5b_weight": 0.1609,
+      "beast_weight": 0.1609,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 1.9488
     },
@@ -224,6 +226,7 @@
         }
       ],
       "w5b_weight": 0.2861,
+      "beast_weight": 0.2861,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 7.3258
     },
@@ -286,6 +289,7 @@
         }
       ],
       "w5b_weight": 0.1354,
+      "beast_weight": 0.1354,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 1.5561
     },
@@ -372,6 +376,7 @@
         }
       ],
       "w5b_weight": 0.139,
+      "beast_weight": 0.139,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 1.7681
     },
@@ -434,6 +439,7 @@
         }
       ],
       "w5b_weight": 0.1058,
+      "beast_weight": 0.1058,
       "w5b_pos_count": 3,
       "w5b_r252ex1m": 0.9579
     }
