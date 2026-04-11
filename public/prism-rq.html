@@ -354,7 +354,8 @@ function toggleLogScale(chartVar, toggleId, isLog) {
 </script>
 
 <script>
-(async()=>{
+(async function loadSellCard(){
+  await new Promise(r=>setTimeout(r,3000));
   try {
     const pnl = await fetch('/api/prism-rq/pnl.json?t='+Date.now()).then(r=>r.json());
     const closed = pnl.closed_positions || [];
