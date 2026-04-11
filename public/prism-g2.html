@@ -125,10 +125,10 @@ Promise.all([
   h+=`<span class="prod-input-label">ドル円:</span><input id="g2Fx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcG2()">`;
   h+=`<button class="prod-fx-btn" onclick="fetchG2Fx()">🔄 現在レート</button>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">G2%</th><th style="text-align:right;color:#D85A30">🔥BEAST%</th><th style="text-align:right">株価($)</th><th style="text-align:right">G2 株数/実配分</th></tr></thead>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">G2%</th><th style="text-align:right;color:#D85A30">🔥%</th><th style="text-align:right">株価</th><th style="text-align:right">G2 株数</th><th style="text-align:right;color:#D85A30">🔥株数</th></tr></thead>`;
   h+=`<tbody id="g2RebalBody"></tbody></table>`;
   h+=`<div id="g2RebalSummary"></div>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">G2 = W5b一貫性加重（30%キャップ）| 🔥BEAST = W5bキャップなし（参考値）| 株数はG2基準で計算</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">G2 = W5b 30%キャップ | 🔥 = W5bキャップなし | 同一銘柄・ウェイトのみ異なる</div>`;
   h+=`</div>`;
 
   // === 6. Cumulative Returns Chart ===
@@ -222,30 +222,35 @@ function calcG2(){
   const rawCap=parseFloat(document.getElementById('g2Capital').value)||0;
   const fx=parseFloat(document.getElementById('g2Fx').value)||150;
   const capUSD=g2ccy==='JPY'?rawCap/fx:rawCap;
-  let totalInvested=0;let html='';
+  let totalInvG2=0;let totalInvB=0;let html='';
   picks.forEach(p=>{
     if(!p.price)return;
     const w=p.w5b_weight||1.0/picks.length;
     const bw=p.beast_weight||1.0/picks.length;
-    const target=capUSD*w;const shares=Math.floor(target/p.price);
-    const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
-    const targetPct=w*100;const dev=actualPct-targetPct;totalInvested+=actual;
+    const g2target=capUSD*w;const g2shares=Math.floor(g2target/p.price);
+    const g2actual=g2shares*p.price;const g2pct=capUSD>0?(g2actual/capUSD)*100:0;
+    const btarget=capUSD*bw;const bshares=Math.floor(btarget/p.price);
+    const bactual=bshares*p.price;const bpct=capUSD>0?(bactual/capUSD)*100:0;
+    totalInvG2+=g2actual;totalInvB+=bactual;
     html+=`<tr><td><b style="color:var(--g2)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
     html+=`<td class="num" style="font-weight:700;color:var(--g2)">${(w*100).toFixed(1)}%</td>`;
     html+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
-    html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
+    html+=`<td class="num"><span class="shares">${g2shares}株</span> <span class="dev ${g2pct-w*100>=0?'pos':'neg'}">実${g2pct.toFixed(1)}%</span></td>`;
+    html+=`<td class="num" style="color:#D85A30"><span class="shares">${bshares}株</span> <span style="font-size:8px">実${bpct.toFixed(1)}%</span></td></tr>`;
   });
   document.getElementById('g2RebalBody').innerHTML=html;
-  const residual=capUSD-totalInvested;const residualPct=capUSD>0?(residual/capUSD)*100:0;
+  const resG2=capUSD-totalInvG2;const resB=capUSD-totalInvB;
+  const resPctG2=capUSD>0?(resG2/capUSD)*100:0;const resPctB=capUSD>0?(resB/capUSD)*100:0;
   const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
   const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
-  let sh=`<div class="prod-summary"><span>実投資額 <b>${fmtD(totalInvested)}</b>`;
-  if(g2ccy==='JPY')sh+=` (${fmtY(totalInvested)})`;
-  sh+=`</span><span>未使用現金 <b style="color:${residualPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(residual)} (${residualPct.toFixed(1)}%)</b>`;
-  if(g2ccy==='JPY')sh+=` (${fmtY(residual)})`;
-  sh+=`</span></div>`;
+  let sh=`<div class="prod-summary"><span style="color:var(--g2)">G2 投資額 <b>${fmtD(totalInvG2)}</b>`;
+  if(g2ccy==='JPY')sh+=` (${fmtY(totalInvG2)})`;
+  sh+=`</span><span style="color:var(--g2)">余り <b style="color:${resPctG2>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resG2)} (${resPctG2.toFixed(1)}%)</b></span></div>`;
+  sh+=`<div class="prod-summary" style="margin-top:4px"><span style="color:#D85A30">🔥 投資額 <b>${fmtD(totalInvB)}</b>`;
+  if(g2ccy==='JPY')sh+=` (${fmtY(totalInvB)})`;
+  sh+=`</span><span style="color:#D85A30">余り <b style="color:${resPctB>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resB)} (${resPctB.toFixed(1)}%)</b></span></div>`;
   document.getElementById('g2RebalSummary').innerHTML=sh;
 }
 
