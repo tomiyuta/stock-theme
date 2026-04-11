@@ -137,8 +137,8 @@ Promise.all([
   h+=`<div class="prod-title" style="color:#D85A30">BEAST Portfolio — ${nPicks}銘柄 × W5b NO CAP</div>`;
   h+=`<div style="font-size:9px;color:#D85A30;margin-bottom:8px">⚠ 単一テーマ最大61.9% — 投機的。BT: CAGR=278% Sharpe=2.70 MaxDD=-46.7%</div>`;
   h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">BEAST%</th><th style="text-align:right">vs G2</th></tr></thead><tbody>`;
-  picks.forEach(p=>{
-    const bw=p.beast_weight||1.0/picks.length;const gw=p.w5b_weight||1.0/picks.length;
+  window._g2_picks.forEach(p=>{
+    const bw=p.beast_weight||1.0/window._g2_picks.length;const gw=p.w5b_weight||1.0/window._g2_picks.length;
     const diff=((bw-gw)*100);
     h+=`<tr><td><b style="color:#D85A30">${p.ticker}</b></td><td style="font-size:9px">${p.theme}</td>`;
     h+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
