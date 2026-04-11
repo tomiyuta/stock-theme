@@ -1,0 +1,352 @@
+{
+  "snapshot_date": "2026-04-10",
+  "generated_at": "2026-04-11T18:21:10.022226",
+  "version": "G2-MAX_v1",
+  "status": "SHADOW",
+  "strategy": "G2-MAX: 5-theme concentrated raw residual momentum",
+  "frozen_params": {
+    "theme_score": "0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)",
+    "stock_score": "raw self-excluded α63 (no shrink, no SNR)",
+    "top_themes": 5,
+    "max_corr": 0.8,
+    "picks_per_theme": 1,
+    "min_members": 4
+  },
+  "summary": {
+    "themes_selected": 5,
+    "picks": 5,
+    "correlation": {
+      "n_themes": 5,
+      "avg_corr": 0.455,
+      "max_corr": 0.715
+    }
+  },
+  "comparisons": [
+    {
+      "theme": "dc-optical-ems",
+      "theme_name": "光接続：トランシーバ",
+      "theme_score": 0.9901,
+      "mom63": 1.077,
+      "mom126": 1.4614,
+      "pick": "AAOI",
+      "stocks": [
+        {
+          "ticker": "AAOI",
+          "alpha63": 1.0373,
+          "beta63": 1.613,
+          "r2_63": 0.282,
+          "raw_1m": 0.1857,
+          "price": 150.6,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Applied Optoelectronics, Inc.",
+          "name_ja": "Applied Optoelectronics"
+        },
+        {
+          "ticker": "COHR",
+          "alpha63": -0.1155,
+          "beta63": 0.932,
+          "r2_63": 0.668,
+          "raw_1m": 0.2231,
+          "price": 307.5,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Coherent Corp.",
+          "name_ja": "Coherent"
+        },
+        {
+          "ticker": "FN",
+          "alpha63": -0.1926,
+          "beta63": 0.777,
+          "r2_63": 0.489,
+          "raw_1m": 0.2628,
+          "price": 662.13,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Fabrinet",
+          "name_ja": "Fabrinet"
+        },
+        {
+          "ticker": "MRVL",
+          "alpha63": 0.2605,
+          "beta63": 0.253,
+          "r2_63": 0.108,
+          "raw_1m": 0.4207,
+          "price": 128.49,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Marvell Technology, Inc.",
+          "name_ja": "マーベル"
+        },
+        {
+          "ticker": "MTSI",
+          "alpha63": 0.0896,
+          "beta63": 0.439,
+          "r2_63": 0.361,
+          "raw_1m": 0.1598,
+          "price": 258.11,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "MACOM Technology Solutions Holdings, Inc.",
+          "name_ja": "MACOM  Solutions"
+        }
+      ]
+    },
+    {
+      "theme": "semi-component",
+      "theme_name": "半導体製造装置：部品",
+      "theme_score": 0.9832,
+      "mom63": 1.0431,
+      "mom126": 1.5218,
+      "pick": "UCTT",
+      "stocks": [
+        {
+          "ticker": "AEIS",
+          "alpha63": 0.166,
+          "beta63": 0.567,
+          "r2_63": 0.53,
+          "raw_1m": 0.2058,
+          "price": 379.64,
+          "sector": "Industrials",
+          "mc": "大型",
+          "name": "Advanced Energy Industries, Inc.",
+          "name_ja": "Advanced Energy Industries"
+        },
+        {
+          "ticker": "ICHR",
+          "alpha63": 0.1625,
+          "beta63": 1.356,
+          "r2_63": 0.593,
+          "raw_1m": 0.2826,
+          "price": 57.5,
+          "sector": "Technology",
+          "mc": "小型",
+          "name": "Ichor Holdings, Ltd.",
+          "name_ja": "Ichor"
+        },
+        {
+          "ticker": "MKSI",
+          "alpha63": -0.0786,
+          "beta63": 0.597,
+          "r2_63": 0.607,
+          "raw_1m": 0.1984,
+          "price": 268.77,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "MKS Inc.",
+          "name_ja": "MKS"
+        },
+        {
+          "ticker": "UCTT",
+          "alpha63": 0.171,
+          "beta63": 1.072,
+          "r2_63": 0.67,
+          "raw_1m": 0.3203,
+          "price": 75.81,
+          "sector": "Technology",
+          "mc": "中型",
+          "name": "Ultra Clean Holdings, Inc.",
+          "name_ja": "Ultra Clean"
+        }
+      ]
+    },
+    {
+      "theme": "data-storage",
+      "theme_name": "データストレージ",
+      "theme_score": 0.974,
+      "mom63": 0.8375,
+      "mom126": 2.1972,
+      "pick": "SNDK",
+      "stocks": [
+        {
+          "ticker": "MU",
+          "alpha63": -0.2662,
+          "beta63": 0.726,
+          "r2_63": 0.648,
+          "raw_1m": 0.005,
+          "price": 420.59,
+          "sector": "Technology",
+          "mc": "超大型",
+          "name": "Micron Technology, Inc.",
+          "name_ja": "マイクロン"
+        },
+        {
+          "ticker": "SNDK",
+          "alpha63": 0.4716,
+          "beta63": 1.077,
+          "r2_63": 0.582,
+          "raw_1m": 0.2996,
+          "price": 851.77,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Sandisk Corporation",
+          "name_ja": "Sandisk"
+        },
+        {
+          "ticker": "STX",
+          "alpha63": 0.0662,
+          "beta63": 0.844,
+          "r2_63": 0.68,
+          "raw_1m": 0.3058,
+          "price": 503.13,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Seagate Technology Holdings plc",
+          "name_ja": "Seagate"
+        },
+        {
+          "ticker": "WDC",
+          "alpha63": 0.0537,
+          "beta63": 0.939,
+          "r2_63": 0.747,
+          "raw_1m": 0.2776,
+          "price": 343.43,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Western Digital Corporation",
+          "name_ja": "Western Digital"
+        }
+      ]
+    },
+    {
+      "theme": "earth-observation",
+      "theme_name": "宇宙：地球観測",
+      "theme_score": 0.9725,
+      "mom63": 0.9461,
+      "mom126": 0.8216,
+      "pick": "SATL",
+      "stocks": [
+        {
+          "ticker": "BKSY",
+          "alpha63": -0.1611,
+          "beta63": 0.689,
+          "r2_63": 0.449,
+          "raw_1m": 0.4448,
+          "price": 34.14,
+          "sector": "Industrials",
+          "mc": "小型",
+          "name": "BlackSky Technology Inc.",
+          "name_ja": "BlackSky"
+        },
+        {
+          "ticker": "PL",
+          "alpha63": -0.008,
+          "beta63": 0.675,
+          "r2_63": 0.436,
+          "raw_1m": 0.3628,
+          "price": 34.67,
+          "sector": "Industrials",
+          "mc": "大型",
+          "name": "Planet Labs PBC",
+          "name_ja": "Planet Labs PBC"
+        },
+        {
+          "ticker": "SATL",
+          "alpha63": 0.5537,
+          "beta63": 1.055,
+          "r2_63": 0.36,
+          "raw_1m": 1.3569,
+          "price": 7.33,
+          "sector": "Industrials",
+          "mc": "小型",
+          "name": "Satellogic Inc.",
+          "name_ja": "Satellogic"
+        },
+        {
+          "ticker": "SPIR",
+          "alpha63": 0.4223,
+          "beta63": 0.622,
+          "r2_63": 0.311,
+          "raw_1m": 0.9547,
+          "price": 21.56,
+          "sector": "Industrials",
+          "mc": "小型",
+          "name": "Spire Global, Inc.",
+          "name_ja": "Spire Global"
+        }
+      ]
+    },
+    {
+      "theme": "semi-consumables",
+      "theme_name": "半導体：材料・消耗品",
+      "theme_score": 0.9542,
+      "mom63": 0.5401,
+      "mom126": 1.1816,
+      "pick": "AXTI",
+      "stocks": [
+        {
+          "ticker": "APD",
+          "alpha63": 0.1375,
+          "beta63": 0.021,
+          "r2_63": 0.002,
+          "raw_1m": 0.0824,
+          "price": 298.71,
+          "sector": "Basic Materials",
+          "mc": "大型",
+          "name": "Air Products and Chemicals, Inc.",
+          "name_ja": "エアープロダクツ"
+        },
+        {
+          "ticker": "AXTI",
+          "alpha63": 0.6337,
+          "beta63": 2.27,
+          "r2_63": 0.196,
+          "raw_1m": 0.3552,
+          "price": 64.18,
+          "sector": "Technology",
+          "mc": "中型",
+          "name": "AXT, Inc.",
+          "name_ja": "AXT"
+        },
+        {
+          "ticker": "ENTG",
+          "alpha63": 0.0122,
+          "beta63": 0.699,
+          "r2_63": 0.347,
+          "raw_1m": 0.1647,
+          "price": 135.32,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Entegris, Inc.",
+          "name_ja": "Entegris"
+        },
+        {
+          "ticker": "LIN",
+          "alpha63": 0.1383,
+          "beta63": 0.008,
+          "r2_63": 0.001,
+          "raw_1m": 0.0449,
+          "price": 503.15,
+          "sector": "Basic Materials",
+          "mc": "超大型",
+          "name": "Linde plc",
+          "name_ja": "リンデ"
+        },
+        {
+          "ticker": "PLAB",
+          "alpha63": -0.0618,
+          "beta63": 1.0,
+          "r2_63": 0.451,
+          "raw_1m": 0.3056,
+          "price": 44.9,
+          "sector": "Technology",
+          "mc": "中型",
+          "name": "Photronics, Inc.",
+          "name_ja": "Photronics"
+        },
+        {
+          "ticker": "Q",
+          "alpha63": 0.1345,
+          "beta63": 0.612,
+          "r2_63": 0.296,
+          "raw_1m": 0.1237,
+          "price": 130.65,
+          "sector": "Technology",
+          "mc": "大型",
+          "name": "Qnity Electronics, Inc.",
+          "name_ja": "Qnity Electronics"
+        }
+      ]
+    }
+  ]
+}
