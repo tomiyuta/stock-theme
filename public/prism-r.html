@@ -213,6 +213,7 @@ Promise.all([
     const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};
     return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
   });
+  h+=`<div id="sellCardR"></div>`;
   h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
   h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × 10%等ウェイト</div>`;
   h+=`<div class="prod-input-row">`;
@@ -405,10 +406,9 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
 }).catch(e=>console.warn('cumulative chart error:',e));
 }
 </script>
-<div id="sellCardR"></div>
-
 <script>
-(async()=>{
+(async function(){
+  await new Promise(r=>setTimeout(r,3000));
   try {
     const pnl = await fetch('/api/prism-r/pnl.json?t='+Date.now()).then(r=>r.json());
     const closed = pnl.closed_positions || [];
