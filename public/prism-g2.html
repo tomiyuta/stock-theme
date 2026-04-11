@@ -22,6 +22,22 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .tbl th{text-align:left;padding:3px 4px;color:var(--text-sub);font-weight:600;border-bottom:1px solid rgba(0,0,0,0.1)}
 .tbl td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
 .pos{color:var(--green);font-weight:700}.neg{color:var(--red);font-weight:700}
+.prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(225,29,72,0.03);border:1.5px solid rgba(225,29,72,0.15);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.prod-title{font-size:11px;font-weight:700;color:var(--g2);margin-bottom:10px}
+.prod-input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.prod-input-label{font-size:10px;font-weight:600;color:var(--text-sub)}
+.prod-toggle{display:flex;gap:0;background:rgba(0,0,0,0.04);border-radius:4px;padding:1px}
+.prod-toggle-btn{padding:3px 10px;border-radius:3px;font-size:10px;font-weight:600;border:none;cursor:pointer;background:none;color:var(--text-sub)}
+.prod-toggle-btn.active{background:var(--g2);color:#fff}
+.prod-input{width:90px;padding:3px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:4px;font-size:11px;text-align:right;font-family:monospace}
+.prod-fx-btn{font-size:9px;padding:2px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:3px;background:none;cursor:pointer;color:var(--text-sub)}
+.prod-table{width:100%;font-size:10px;border-collapse:collapse}
+.prod-table th{text-align:left;padding:6px 4px;font-size:9px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
+.prod-table td{padding:5px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.prod-table .num{text-align:right;font-family:monospace;font-weight:600}
+.prod-table .shares{font-size:12px;font-weight:800;color:var(--g2)}
+.prod-table .dev{font-size:9px}.prod-table .dev.neg{color:var(--red)}.prod-table .dev.pos{color:var(--green)}
+.prod-summary{display:flex;gap:16px;flex-wrap:wrap;margin-top:10px;padding-top:8px;border-top:1px solid rgba(0,0,0,0.06);font-size:10px;color:var(--text-sub)}
 </style>
 </head>
 <body>
@@ -93,18 +109,21 @@ Promise.all([
     const s = c.stocks?.[0] || {};
     return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
   });
+  const nPicks = comp.comparisons?.length || 5;
+  const wPct = (100/nPicks).toFixed(0);
   h+=`<div class="section-title">📊 G2-MAX リバランス計算</div>`;
-  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX — ${comp.comparisons?.length||5}銘柄 × ${(100/(comp.comparisons?.length||5)).toFixed(0)}%等ウェイト</div>`;
-  h+=`<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px;font-size:10px">`;
-  h+=`<span>投資資金</span>`;
-  h+=`<span id="g2CcySign">$</span><input id="g2Capital" type="number" value="10000" oninput="calcG2()" style="width:80px;padding:4px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;font-size:11px">`;
-  h+=`<span>ドル円:</span><input id="g2Fx" type="number" value="150" step="0.1" style="width:55px;padding:4px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;font-size:11px" oninput="calcG2()">`;
-  h+=`<button onclick="setG2Ccy('USD')" style="padding:3px 8px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;cursor:pointer;font-size:9px">USD</button>`;
-  h+=`<button onclick="setG2Ccy('JPY')" style="padding:3px 8px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;cursor:pointer;font-size:9px">JPY</button>`;
+  h+=`<div class="prod-card"><div class="prod-title">G2-MAX Shadow Portfolio — ${nPicks}銘柄 × ${wPct}%等ウェイト</div>`;
+  h+=`<div class="prod-input-row">`;
+  h+=`<span class="prod-input-label">投資資金</span>`;
+  h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setG2Ccy('USD')">USD</button><button class="prod-toggle-btn" onclick="setG2Ccy('JPY')">JPY</button></div>`;
+  h+=`<span id="g2CcySign">$</span><input id="g2Capital" class="prod-input" type="number" value="10000" oninput="calcG2()">`;
+  h+=`<span class="prod-input-label">ドル円:</span><input id="g2Fx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcG2()">`;
+  h+=`<button class="prod-fx-btn" onclick="fetchG2Fx()">🔄 現在レート</button>`;
   h+=`</div>`;
-  h+=`<table class="tbl"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead><tbody id="g2RebalBody"></tbody></table>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+  h+=`<tbody id="g2RebalBody"></tbody></table>`;
   h+=`<div id="g2RebalSummary"></div>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">等ウェイト × ${comp.comparisons?.length||5}銘柄 | SHADOWモード</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">等ウェイト ${wPct}% × ${nPicks}銘柄 | SHADOWモード（実際の売買は行いません）</div>`;
   h+=`</div>`;
 
   // === 6. Cumulative Returns Chart ===
@@ -174,23 +193,48 @@ Promise.all([
 
 // Rebalance calculator
 let g2ccy='USD';
-function setG2Ccy(c){g2ccy=c;document.getElementById('g2CcySign').textContent=c==='JPY'?'¥':'$';calcG2();}
+function setG2Ccy(c){
+  g2ccy=c;
+  document.querySelectorAll('.prod-toggle-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));
+  document.getElementById('g2CcySign').textContent=c==='USD'?'$':'¥';
+  calcG2();
+}
+function fetchG2Fx(){
+  const btn=document.querySelector('.prod-fx-btn');
+  btn.textContent='取得中...';
+  fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{
+    const rate=d.rates?.JPY||150;
+    document.getElementById('g2Fx').value=rate.toFixed(2);
+    btn.textContent='🔄 '+rate.toFixed(2)+'円';
+    calcG2();
+  }).catch(()=>{btn.textContent='🔄 取得失敗';});
+}
 function calcG2(){
-  const picks=window._g2_picks;if(!picks)return;
-  const cap=parseFloat(document.getElementById('g2Capital').value)||10000;
+  const picks=window._g2_picks;if(!picks||!picks.length)return;
+  const rawCap=parseFloat(document.getElementById('g2Capital').value)||0;
   const fx=parseFloat(document.getElementById('g2Fx').value)||150;
-  const usd=g2ccy==='JPY'?cap/fx:cap;
-  const w=1/picks.length; let rows='',totalAlloc=0;
+  const capUSD=g2ccy==='JPY'?rawCap/fx:rawCap;
+  const w=1.0/picks.length;let totalInvested=0;let html='';
   picks.forEach(p=>{
-    if(!p.price||!p.ticker)return;
-    const target=usd*w; const shares=Math.floor(target/p.price);
-    const actual=shares*p.price; const pctA=actual/usd;
-    totalAlloc+=actual;
-    rows+=`<tr><td style="font-weight:700">${p.ticker}</td><td style="font-size:9px">${p.theme||''}</td><td style="text-align:right">$${p.price.toFixed(2)}</td><td style="text-align:right">${shares}株 / ${(pctA*100).toFixed(1)}%</td></tr>`;
+    if(!p.price)return;
+    const target=capUSD*w;const shares=Math.floor(target/p.price);
+    const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
+    const targetPct=w*100;const dev=actualPct-targetPct;totalInvested+=actual;
+    html+=`<tr><td><b style="color:var(--g2)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
+    html+=`<td style="font-size:9px">${p.theme}</td>`;
+    html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
+    html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
   });
-  document.getElementById('g2RebalBody').innerHTML=rows;
-  const cash=usd-totalAlloc;
-  document.getElementById('g2RebalSummary').innerHTML=`<div style="font-size:9px;margin-top:6px;color:var(--text-sub)">投資: $${totalAlloc.toFixed(0)} | 余剰: $${cash.toFixed(0)} (${(cash/usd*100).toFixed(1)}%)</div>`;
+  document.getElementById('g2RebalBody').innerHTML=html;
+  const residual=capUSD-totalInvested;const residualPct=capUSD>0?(residual/capUSD)*100:0;
+  const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
+  const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
+  let sh=`<div class="prod-summary"><span>実投資額 <b>${fmtD(totalInvested)}</b>`;
+  if(g2ccy==='JPY')sh+=` (${fmtY(totalInvested)})`;
+  sh+=`</span><span>未使用現金 <b style="color:${residualPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(residual)} (${residualPct.toFixed(1)}%)</b>`;
+  if(g2ccy==='JPY')sh+=` (${fmtY(residual)})`;
+  sh+=`</span></div>`;
+  document.getElementById('g2RebalSummary').innerHTML=sh;
 }
 
 // Cumulative returns chart
