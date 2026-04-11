@@ -860,3 +860,48 @@ PRISM → PRISM-R → PRISM-RQ
   - CRA-v1 (parked)
   - Dip Sleeve (diagnostic)
 ```
+
+
+---
+
+## GMAX-K3 Ablation BT Results (2026-04-11)
+
+```
+===============================================================================================
+Strategy             CAGR      Vol   Sharpe    MaxDD    LogGr    Term$   WorstM
+===============================================================================================
+  G0_A5lite        67.2%   42.9%   1.565  -42.0%   0.514    19.1x  -16.9%
+  G1_conc5        145.3%   66.7%   2.179  -48.7%   0.897   172.8x  -18.5%
+  G2_rawA         179.1%   69.7%   2.568  -54.7%   1.026   362.5x  -27.7%
+  G3a_kelly        64.6%   41.0%   1.576  -39.3%   0.498    17.5x  -17.3%
+  G3b_3theme       66.0%   52.9%   1.248  -49.7%   0.507    18.4x  -24.8%
+  G4_klsize        36.6%   43.7%   0.838  -51.9%   0.312     6.0x  -22.3%
+  G5_panic         36.7%   43.7%   0.840  -51.9%   0.313     6.0x  -22.3%
+===============================================================================================
+
+Ablation効果:
+  G0→G1: 10→5テーマ+corr budget  = +78.1pt CAGR ← 最大改善源
+  G1→G2: shrink除去→raw α        = +33.8pt CAGR ← 二番目
+  G2→G3a: raw α→α/σ²             = -114.5pt     ← 壊滅
+  G3a→G3b: 5→3テーマ              = +1.4pt       ← 無効
+  G3b→G4: Kelly-lite sizing       = -29.4pt      ← 大幅悪化
+  G4→G5: panic de-gearing         = +0.1pt       ← 無効
+
+結論:
+  CAGR最大化の本体 = 「集中」+「raw α右裾の保存」
+  Kelly的正規化(α/σ², variance sizing) = このuniverseでは全て逆効果
+  理由: noisy短期α推定をσ²で割ると高conviction winnerを二重に罰する
+
+公式ラベル:
+  G2_CAGR_MAX = concentrated cluster-aware raw residual momentum
+  位置づけ: pure growth branch（A5-SNRbのrisk-adjusted branchとは別管理）
+```
+
+### 次の検証候補（未実施）
+
+```
+Z2: Layer 1をR252/R126/R63 trend stackに置換
+Z3: テーマ数 4/5/6 sweep
+Z4: 銘柄数/テーマ 1/2/3 sweep
+Z5: holding period 10/20/40日
+```
