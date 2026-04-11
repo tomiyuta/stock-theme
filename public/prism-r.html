@@ -439,6 +439,32 @@ Promise.all([
   }
   h+=`</div>`;
 
+  // === Dip Sleeve Diagnostics ===
+  const dipSum = comp.dip_sleeve_summary || {};
+  const dipAlerts = comp.dip_sleeve_diagnostics || [];
+  if(dipAlerts.length > 0) {
+    const nQ = dipSum.qualified || 0;
+    h+=`<div style="margin:8px 12px;padding:8px 10px;border-radius:6px;border:1px solid ${nQ>0?'#d97706':'rgba(0,0,0,0.06)'};background:${nQ>0?'rgba(217,119,6,0.06)':'var(--card-bg)'}">`;
+    h+=`<div style="font-size:10px;font-weight:700;color:${nQ>0?'#d97706':'var(--text-main)'};margin-bottom:4px">`;
+    h+=`📉 Dip Sleeve — ${nQ}/${dipSum.total_alerts} qualified</div>`;
+    const qualified = dipAlerts.filter(a=>a.qualified);
+    if(qualified.length>0) {
+      h+=`<table style="width:100%;font-size:8px;border-collapse:collapse">`;
+      h+=`<tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left">テーマ</th><th>Dip</th><th>WR</th><th>n</th><th>Window</th><th>State</th></tr>`;
+      const seen = new Set();
+      qualified.forEach(a=>{
+        const key = a.theme+a.window;
+        if(seen.has(key)) return; seen.add(key);
+        h+=`<tr><td>${a.theme}</td><td style="color:var(--red)">${(a.dip*100).toFixed(1)}%</td>`;
+        h+=`<td>${(a.win_rate*100).toFixed(0)}%</td><td>${a.sample_n}</td>`;
+        h+=`<td>${a.window}</td><td style="color:#d97706">${a.trend_state}</td></tr>`;
+      });
+      h+=`</table>`;
+    }
+    h+=`<div style="font-size:7px;color:var(--text-sub);margin-top:3px">条件: ENTRY/WATCH + win_rate≥60% + n≥20 + window∈{1M,1-2M,2-3M} + days≤60</div>`;
+    h+=`</div>`;
+  }
+
   document.getElementById('prismMain').innerHTML=h;
   initPrismRChart();
 }).catch(err=>{document.getElementById('prismMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});

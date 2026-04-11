@@ -340,6 +340,46 @@ snrb_overlap_a5 = sum(1 for c in comparisons if c['a5_snrb_same'])
 bfm2_themes = [c for c in comparisons if c['in_bfm2']]
 bfm2_overlap_base = sum(1 for c in comparisons if c['in_bfm2'])
 cra_overlap_snrb = sum(1 for c in comparisons if c['snrb_cra_same'])
+# === Dip Sleeve Diagnostics ===
+DIP_PATH = ROOT / 'data' / 'stock-themes-api' / 'dip_alerts.json'
+dip_sleeve = []
+if DIP_PATH.exists():
+    try:
+        dip_data = json.load(open(DIP_PATH))
+        # Build slug lookup for theme names
+        name_to_slug = {}
+        for th_slug in ts.index:
+            name_to_slug[slug_to_name.get(th_slug, th_slug)] = th_slug
+        for alert in dip_data.get('alerts', []):
+            th_name = alert.get('theme_name', '')
+            th_slug = name_to_slug.get(th_name)
+            # Check trend qualification
+            in_trend = False; trend_rank = None; trend_state = None
+            if th_slug and th_slug in ts.index:
+                trend_rank = int(ts['score'].rank(ascending=False).get(th_slug, 999))
+                trend_state = 'ENTRY' if trend_rank <= 20 else 'WATCH' if trend_rank <= 35 else 'EXIT'
+                in_trend = trend_state in ('ENTRY', 'WATCH')
+            # Apply qualification filters
+            win_rate = alert.get('win_rate', 0)
+            sample_n = alert.get('sample_n', 0)
+            window = alert.get('window', '')
+            days_since = alert.get('days_since', 999)
+            qualified = (in_trend and win_rate >= 0.60 and sample_n >= 20
+                        and window in ('1M', '1-2M', '2-3M') and days_since <= 60)
+            dip_sleeve.append({
+                'theme': th_name, 'theme_slug': th_slug,
+                'dip': round(alert.get('dip_actual', 0), 3),
+                'band': alert.get('dip_band', ''),
+                'win_rate': round(win_rate, 3), 'sample_n': sample_n,
+                'window': window, 'days_since': days_since,
+                'pattern': alert.get('pattern_label', ''),
+                'trend_rank': trend_rank, 'trend_state': trend_state,
+                'qualified': qualified
+            })
+    except Exception as e:
+        print(f'WARN: dip_alerts load failed: {e}')
+n_qualified = sum(1 for d in dip_sleeve if d['qualified'])
+
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
@@ -369,6 +409,8 @@ output = {
     },
     'correlation_diagnostics': corr_diag,
     'bfm2_quality_features': {th: cand_feat.get(th) for th in sel if th in cand_feat},
+    'dip_sleeve_diagnostics': dip_sleeve,
+    'dip_sleeve_summary': {'total_alerts': len(dip_sleeve), 'qualified': n_qualified},
     'comparisons': comparisons,
     'virtual_exits': virtual_exits,
     'virtual_entries': virtual_entries
@@ -408,4 +450,5 @@ print(f'PRISM-R: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}
       f'cra_overlap_snrb={cra_overlap_snrb}/{len(comparisons)}, '
       f'bfm2={bfm2_overlap_base}/10 (vetoed={len(bfm2_vetoed)}), '
       f'corr={corr_diag.get("avg_pairwise_corr","N/A")}, '
+      f'dip={n_qualified}/{len(dip_sleeve)} qualified, '
       f'snapshot={dt.date()}, size={comp_size:.0f}KB')

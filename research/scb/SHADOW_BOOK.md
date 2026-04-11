@@ -733,3 +733,28 @@ Historical結果 vs SNRb:
   premium APIの定期再取得が可能になった場合に再評価。
   現時点ではparked。forward clockは開始しない。
 ```
+
+
+### Dip Sleeve Status (2026-04-10)
+
+```
+Status: diagnostic only（forward観測中、取引なし）
+実装: generate_prism_r.pyに組込み済み、CI/CD自動更新
+
+フィルタ条件:
+  - テーマがENTRY or WATCH（trend_rank ≤ 35）
+  - win_rate ≥ 60%
+  - sample_n ≥ 20
+  - window ∈ {1M, 1-2M, 2-3M}
+  - days_since ≤ 60
+
+初回結果（2026-04-09）:
+  Total: 18 alerts / Qualified: 4
+  銀鉱山 (rank=24, WATCH): 3件
+  金鉱山 (rank=26, WATCH): 1件
+  → 貴金属テーマに集中
+
+制約: dip_alertsは静的スナップショット。
+       historical BTは不可。forward診断のみ。
+       premium APIの定期再取得が必要。
+```
