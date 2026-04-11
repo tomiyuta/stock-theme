@@ -2,7 +2,7 @@ name: Daily Data Update
 
 on:
   schedule:
-    - cron: '0 23 * * 1-5'
+    - cron: '0 22 * * 1-5'   # UTC 22:00 = EDT 18:00(夏) / EST 17:00(冬) = 米国市場閉場後1-2時間
   workflow_dispatch:
 
 jobs:
