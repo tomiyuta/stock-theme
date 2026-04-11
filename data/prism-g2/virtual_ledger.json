@@ -1,0 +1,36 @@
+{
+  "positions": {
+    "AAOI": {
+      "entry_date": "2026-04-10",
+      "entry_price": 150.6,
+      "theme": "光接続：トランシーバ",
+      "status": "active"
+    },
+    "AEIS": {
+      "entry_date": "2026-04-10",
+      "entry_price": 379.64,
+      "theme": "半導体製造装置：部品",
+      "status": "active"
+    },
+    "MU": {
+      "entry_date": "2026-04-10",
+      "entry_price": 420.59,
+      "theme": "データストレージ",
+      "status": "active"
+    },
+    "BKSY": {
+      "entry_date": "2026-04-10",
+      "entry_price": 34.14,
+      "theme": "宇宙：地球観測",
+      "status": "active"
+    },
+    "APD": {
+      "entry_date": "2026-04-10",
+      "entry_price": 298.71,
+      "theme": "半導体：材料・消耗品",
+      "status": "active"
+    }
+  },
+  "history": [],
+  "created_at": "2026-04-11T18:23:44.094978"
+}

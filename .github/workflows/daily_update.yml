@@ -53,9 +53,12 @@ jobs:
         run: |
           mkdir -p public/api/prism-r
           mkdir -p public/api/prism-rq
+          mkdir -p public/api/prism-g2
           python scripts/generate_prism_r.py
+          python scripts/generate_g2max.py
           mkdir -p data/prism-r
           mkdir -p data/prism-rq
+          mkdir -p data/prism-g2
           python scripts/generate_pnl.py
 
       - name: Commit and push

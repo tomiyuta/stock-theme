@@ -13,8 +13,10 @@ ROOT = Path(__file__).resolve().parent.parent
 API_PRISM = ROOT / 'public' / 'api' / 'prism'
 API_PRISM_R = ROOT / 'public' / 'api' / 'prism-r'
 API_PRISM_RQ = ROOT / 'public' / 'api' / 'prism-rq'
+API_PRISM_G2 = ROOT / 'public' / 'api' / 'prism-g2'
 DATA_R = ROOT / 'data' / 'prism-r'
 DATA_RQ = ROOT / 'data' / 'prism-rq'
+DATA_G2 = ROOT / 'data' / 'prism-g2'
 
 def load_json(path):
     with open(path, encoding='utf-8') as f:
@@ -266,6 +268,47 @@ def compute_prism_rq_pnl():
     return result
 
 # =============================================================
+# G2-MAX Virtual P&L (concentrated raw α, 5 themes)
+# =============================================================
+def compute_prism_g2_pnl():
+    comp_path = API_PRISM_G2 / 'shadow_comparison.json'
+    if not comp_path.exists():
+        print('G2-MAX P&L: no shadow_comparison.json'); return None
+    comp = load_json(comp_path)
+    snapshot_date = comp.get('snapshot_date', '')
+    DATA_G2.mkdir(parents=True, exist_ok=True)
+    vledger_path = DATA_G2 / 'virtual_ledger.json'
+    vledger = load_json(vledger_path) if vledger_path.exists() else {'positions': {}, 'history': [], 'created_at': datetime.now().isoformat()}
+    current_picks = {}
+    for c in comp.get('comparisons', []):
+        if c.get('stocks'):
+            s = c['stocks'][0]
+            tk = s['ticker']
+            current_picks[tk] = {'theme': c.get('theme_name', ''), 'price': s.get('price', 0)}
+    weight = 1.0 / max(len(current_picks), 1)
+    for tk, info in current_picks.items():
+        if tk not in vledger['positions']:
+            vledger['positions'][tk] = {'entry_date': snapshot_date, 'entry_price': info['price'], 'theme': info['theme'], 'status': 'active'}
+    for tk in list(vledger['positions'].keys()):
+        if tk not in current_picks and vledger['positions'][tk]['status'] == 'active':
+            vledger['positions'][tk]['status'] = 'closed'
+            vledger['positions'][tk]['exit_date'] = snapshot_date
+    save_json(vledger_path, vledger)
+    positions = []; total_inv = 0.0; total_cur = 0.0
+    for tk, info in current_picks.items():
+        vp = vledger['positions'].get(tk, {})
+        ep = vp.get('entry_price', info['price']); cp = info['price']
+        pnl = (cp - ep) / ep if ep > 0 else 0
+        positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(weight,4), 'pnl_pct': round(pnl,4)})
+        total_inv += ep * weight; total_cur += cp * weight
+    total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
+    result = {'as_of_date': snapshot_date, 'strategy': 'G2-MAX', 'status': 'SHADOW_VIRTUAL',
+              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4)}, 'positions': positions}
+    save_json(API_PRISM_G2 / 'pnl.json', result)
+    print(f'G2-MAX P&L: {len(positions)} positions, total={total_pnl:+.2%}')
+    return result
+
+# =============================================================
 # Forward Overlay — append monthly returns to cumulative_returns.json
 # =============================================================
 def update_forward_overlay():
@@ -276,6 +319,7 @@ def update_forward_overlay():
         (API_PRISM, 'a4', 'PRISM'),
         (API_PRISM_R, 'a5', 'PRISM-R'),
         (API_PRISM_RQ, 'a5', 'PRISM-RQ'),
+        (API_PRISM_G2, 'a5', 'G2-MAX'),
     ]:
         cum_path = api_dir / 'cumulative_returns.json'
         pnl_path = api_dir / 'pnl.json'
@@ -322,5 +366,6 @@ if __name__ == '__main__':
     compute_prism_pnl()
     compute_prism_r_pnl()
     compute_prism_rq_pnl()
+    compute_prism_g2_pnl()
     update_forward_overlay()
     print('Done.')

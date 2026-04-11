@@ -389,13 +389,19 @@
     }
   },
   "meta": {
-    "strategy": "G2-MAX (5-theme concentrated raw \u03b1)",
+    "strategy": "G2-MAX (5-theme concentrated raw α)",
     "source": "Norgate BT",
     "pit_warning": true
   },
   "forward_overlay": {
-    "dates": [],
-    "a5": [],
-    "SPY": []
+    "dates": [
+      "2026-04-10"
+    ],
+    "a5": [
+      1.0
+    ],
+    "SPY": [
+      1.0
+    ]
   }
 }
