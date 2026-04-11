@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-11T11:20:57.544577",
+  "generated_at": "2026-04-11T11:38:59.662010",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -441,6 +441,7 @@
       "alpha_sign_total": 7
     }
   ],
+  "continuity_active": false,
   "vol_overlay_diagnostics": {
     "realized_vol_20d": 0.378,
     "realized_vol_63d": 0.369,
@@ -449,6 +450,7 @@
     "gross_scale_63d": 0.678,
     "would_reduce": true
   },
+  "vol_overlay_active": false,
   "comparisons": [
     {
       "theme": "gas-fracking",

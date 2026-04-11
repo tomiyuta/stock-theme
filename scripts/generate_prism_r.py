@@ -380,7 +380,8 @@ if DIP_PATH.exists():
         print(f'WARN: dip_alerts load failed: {e}')
 n_qualified = sum(1 for d in dip_sleeve if d['qualified'])
 
-# === Continuity Filter Diagnostics ===
+# === Continuity Filter Diagnostics (DIAGNOSTIC ONLY — does not affect selection) ===
+ENABLE_CONTINUITY_ACTIVE = False  # True = affects selection; False = log only
 SPARK_PATH = ROOT / 'data' / 'stock-themes-api' / 'sparklines_all.json'
 BA_PATH2 = ROOT / 'data' / 'stock-themes-api' / 'beta_alpha_all.json'
 continuity_diag = []
@@ -412,7 +413,8 @@ try:
 except Exception as e:
     print(f'WARN: continuity filter failed: {e}')
 
-# === Vol Overlay Diagnostics ===
+# === Vol Overlay Diagnostics (DIAGNOSTIC ONLY — does not affect gross) ===
+ENABLE_VOL_ACTIVE = False  # True = adjusts gross; False = log only
 vol_diag = {}
 try:
     # Portfolio realized vol (20-day and 63-day)
@@ -476,7 +478,9 @@ output = {
     'dip_sleeve_diagnostics': dip_sleeve,
     'dip_sleeve_summary': {'total_alerts': len(dip_sleeve), 'qualified': n_qualified},
     'continuity_diagnostics': continuity_diag,
+    'continuity_active': ENABLE_CONTINUITY_ACTIVE,
     'vol_overlay_diagnostics': vol_diag,
+    'vol_overlay_active': ENABLE_VOL_ACTIVE,
     'comparisons': comparisons,
     'virtual_exits': virtual_exits,
     'virtual_entries': virtual_entries

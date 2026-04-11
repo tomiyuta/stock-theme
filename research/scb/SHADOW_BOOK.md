@@ -801,3 +801,35 @@ Status: diagnostic only（shadow overlay、gross調整は未適用）
   Vol overlay を適用した場合、gross を ~66% に縮小する必要がある。
   ただし現時点では診断のみ。実gross調整はforwardデータ蓄積後に検討。
 ```
+
+
+### Appendix R5 — Continuity Filter Governance (2026-04-11)
+
+```
+Role:   quality filter / tie-breaker（独立alpha branchではない）
+Status: diagnostic only, ENABLE_CONTINUITY_ACTIVE = False
+Clock:  独立。選定に影響する場合は新clock開始。
+理論根拠: Frog-in-the-Pan — gradual informationはdiscrete informationより
+          強く持続的なcontinuationを生みやすい。
+
+指標:
+  sign_consistency:     スパークライン方向転換の少なさ
+  monotonic_ratio:      上昇週の比率
+  jumpiness:            週次変化のCV（低い方が滑らか）
+  alpha_sign_positive:  stock-themes 7期間α中の正符号数
+```
+
+### Appendix R6 — Vol Overlay Governance (2026-04-11)
+
+```
+Role:   risk-management overlay（独立alpha branchではない）
+Status: diagnostic only, ENABLE_VOL_ACTIVE = False
+Clock:  独立。grossを変更する場合は新clock開始。
+理論根拠: Moreira-Muir — realized volatilityが高い時に
+          エクスポージャーを落とすとSharpeが改善しうる。
+
+数式:
+  gross_t = min(gross_base, target_vol / realized_vol_t)
+  target_vol = 25%
+  realized_vol = 20日 or 63日
+```
