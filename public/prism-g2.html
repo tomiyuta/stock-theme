@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>G2-MAX | 米国株テーマトラッカー</title>
+  <link rel="manifest" href="/manifest.json">
+  <link rel="apple-touch-icon" href="/icon-192.png">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="theme-color" content="#ffffff">
+  <link rel="stylesheet" href="/styles.css?v=21">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+<style>
+:root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;--purple:#7c3aed;--g2:#e11d48}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);color:var(--text-main);padding-bottom:80px}
+@media(min-width:1024px){html{background:#eee}body{max-width:700px;margin:0 auto;background:var(--bg);min-height:100vh;box-shadow:0 0 40px rgba(0,0,0,0.06)}}
+.section-title{font-size:12px;font-weight:700;margin:16px 12px 6px;color:var(--text-main)}
+.card{margin:8px 12px;border-radius:8px;padding:12px;background:var(--card-bg);border:1px solid rgba(0,0,0,0.06)}
+.card-title{font-size:11px;font-weight:700;margin-bottom:8px}
+.tbl{width:100%;font-size:10px;border-collapse:collapse}
+.tbl th{text-align:left;padding:3px 4px;color:var(--text-sub);font-weight:600;border-bottom:1px solid rgba(0,0,0,0.1)}
+.tbl td{padding:3px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
+.pos{color:var(--green);font-weight:700}.neg{color:var(--red);font-weight:700}
+</style>
+</head>
+<body>
+<div style="padding:16px 12px 4px;text-align:center">
+  <div style="font-size:20px;font-weight:900;letter-spacing:1px">G2-<span style="color:var(--g2)">MAX</span></div>
+  <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Concentrated Cluster-Aware Raw Residual Momentum</div>
+  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -55%覚悟の攻撃型戦略</div>
+</div>
+<div id="g2Main"><div style="padding:40px;text-align:center;color:var(--text-sub)">Loading...</div></div>
+<script>
+const _v='?t='+Date.now();
+Promise.all([
+  fetch('/api/prism-g2/shadow_comparison.json'+_v).then(r=>r.json()),
+  fetch('/api/prism-g2/meta.json'+_v).then(r=>r.json())
+]).then(([comp,meta])=>{
+  let h='';
+  const pct=v=>(v*100).toFixed(1)+'%';
+
+  // === 1. Status Card ===
+  h+=`<div style="margin:8px 12px;border-radius:8px;padding:14px;text-align:center;background:rgba(225,29,72,0.06);border:2px solid var(--g2)">`;
+  h+=`<div style="font-size:20px;font-weight:900;letter-spacing:2px;color:var(--g2)">G2-MAX: ${meta.status||'SHADOW'}</div>`;
+  h+=`<div style="font-size:10px;color:var(--text-sub);margin-top:4px">${comp.snapshot_date} | ${comp.version||'G2-MAX_v1'}</div>`;
+  h+=`</div>`;
+
+  // === 2. Key Metrics Banner ===
+  h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 12px">`;
+  [['BT CAGR','179.1%','rgba(225,29,72,0.08)'],['BT Sharpe','2.568','rgba(225,29,72,0.08)'],['BT MaxDD','-54.7%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
+    h+=`<div style="padding:8px;border-radius:6px;background:${c};text-align:center"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:14px;font-weight:900;color:var(--g2)">${v}</div></div>`;
+  });
+  h+=`</div>`;
+  h+=`<div style="margin:0 12px;font-size:8px;color:var(--g2);text-align:center">⚠ PIT汚染あり。BT値は参考のみ。production判断はforward実績限定。</div>`;
+
+  // === 3. Portfolio ===
+  h+=`<div class="section-title">📊 G2-MAX ポートフォリオ</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">5テーマ集中 × raw α63 — ${comp.comparisons?.length||0}銘柄</div>`;
+  h+=`<table class="tbl"><tr><th>#</th><th>テーマ</th><th>銘柄</th><th>価格</th><th>α63</th></tr>`;
+  (comp.comparisons||[]).forEach((c,i)=>{
+    const s = c.stocks?.[0] || {};
+    const a = s.alpha63;
+    h+=`<tr><td>${i+1}</td><td style="font-size:9px">${c.theme_name||c.theme}</td>`;
+    h+=`<td style="font-weight:700">${s.ticker||'—'}</td>`;
+    h+=`<td>$${s.price||'—'}</td>`;
+    h+=`<td class="${a>0?'pos':'neg'}">${a!==undefined?a.toFixed(3):'—'}</td></tr>`;
+  });
+  h+=`</table></div>`;
+
+  // === 4. Theme Details (expandable) ===
+  (comp.comparisons||[]).forEach((c,i)=>{
+    const s = c.stocks?.[0] || {};
+    h+=`<div style="margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;cursor:pointer" onclick="this.querySelector('.g2body').style.display=this.querySelector('.g2body').style.display==='block'?'none':'block'">`;
+    h+=`<div style="padding:8px 10px;font-size:11px;font-weight:700;background:var(--card-bg);display:flex;justify-content:space-between"><span>${c.theme_name||c.theme} → ${s.ticker||'?'}</span><span style="font-size:9px">▶</span></div>`;
+    h+=`<div class="g2body" style="display:none;padding:8px 10px;font-size:9px">`;
+    if(s.price) h+=`<div style="font-size:14px;font-weight:700">$${s.price} <span style="font-size:10px;color:var(--text-sub)">${s.name||''}</span></div>`;
+    h+=`<div style="display:flex;gap:4px;margin:4px 0">`;
+    if(s.sector) h+=`<span style="font-size:8px;padding:1px 4px;border-radius:2px;background:rgba(0,82,204,0.08);color:var(--blue)">${s.sector}</span>`;
+    if(s.mc) h+=`<span style="font-size:8px;padding:1px 4px;border-radius:2px;background:rgba(0,0,0,0.04)">${s.mc}</span>`;
+    h+=`</div>`;
+    h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:4px;margin:6px 0">`;
+    [['α63',s.alpha63],['β63',s.beta63],['R²',s.r2_63]].forEach(([l,v])=>{
+      h+=`<div style="padding:3px 5px;border-radius:3px;background:rgba(225,29,72,0.05)"><div style="font-size:7px;color:var(--text-sub)">${l}</div><div style="font-weight:700">${v!==null&&v!==undefined?v:'—'}</div></div>`;
+    });
+    h+=`</div>`;
+    h+=`<div style="font-size:8px;color:var(--text-sub)">Theme score: ${c.theme_score?.toFixed(3)||'—'} | mom63: ${pct(c.mom63||0)} | mom126: ${pct(c.mom126||0)}</div>`;
+    h+=`</div></div>`;
+  });
+
+  // === 5. Rebalance Calculator ===
+  window._g2_picks = (comp.comparisons||[]).map(c => {
+    const s = c.stocks?.[0] || {};
+    return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
+  });
+  h+=`<div class="section-title">📊 G2-MAX リバランス計算</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX — ${comp.comparisons?.length||5}銘柄 × ${(100/(comp.comparisons?.length||5)).toFixed(0)}%等ウェイト</div>`;
+  h+=`<div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px;font-size:10px">`;
+  h+=`<span>投資資金</span>`;
+  h+=`<span id="g2CcySign">$</span><input id="g2Capital" type="number" value="10000" oninput="calcG2()" style="width:80px;padding:4px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;font-size:11px">`;
+  h+=`<span>ドル円:</span><input id="g2Fx" type="number" value="150" step="0.1" style="width:55px;padding:4px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;font-size:11px" oninput="calcG2()">`;
+  h+=`<button onclick="setG2Ccy('USD')" style="padding:3px 8px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;cursor:pointer;font-size:9px">USD</button>`;
+  h+=`<button onclick="setG2Ccy('JPY')" style="padding:3px 8px;border:1px solid rgba(0,0,0,0.15);border-radius:4px;cursor:pointer;font-size:9px">JPY</button>`;
+  h+=`</div>`;
+  h+=`<table class="tbl"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead><tbody id="g2RebalBody"></tbody></table>`;
+  h+=`<div id="g2RebalSummary"></div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">等ウェイト × ${comp.comparisons?.length||5}銘柄 | SHADOWモード</div>`;
+  h+=`</div>`;
+
+  // === 6. Cumulative Returns Chart ===
+  h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
+  h+=`<div style="position:relative;height:220px"><canvas id="cumChartG2"></canvas></div>`;
+  h+=`<div id="cumStatsG2" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`</div>`;
+
+  // === 7. Annual Performance ===
+  h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
+  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（集中型のため特に重い）。forward実績でのみ判断。</div></div>`;
+
+  // === 8. Ablation BT Comparison ===
+  h+=`<div class="section-title">🔬 Ablation BT（戦略間比較）</div>`;
+  h+=`<div class="card"><div class="card-title">CAGR最大化 ablation ladder</div>`;
+  h+=`<table class="tbl"><tr><th>Strategy</th><th>CAGR</th><th>Sharpe</th><th>MaxDD</th><th>Terminal</th></tr>`;
+  const abl=[
+    ['G0 A5-lite','67.2%','1.565','-42.0%','19.1x'],
+    ['G1 5テーマ集中','145.3%','2.179','-48.7%','172.8x'],
+    ['G2 raw α ★','179.1%','2.568','-54.7%','362.5x'],
+    ['G3a α/σ²','64.6%','1.576','-39.3%','17.5x'],
+    ['G4 Kelly sizing','36.6%','0.838','-51.9%','6.0x'],
+  ];
+  abl.forEach(([s,c,sh,md,t])=>{
+    const best=s.includes('★');
+    h+=`<tr style="${best?'background:rgba(225,29,72,0.06);font-weight:700':''}"><td>${s}</td><td>${c}</td><td>${sh}</td><td>${md}</td><td>${t}</td></tr>`;
+  });
+  h+=`</table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">CAGR改善源: 集中(+78pt) + raw α(+34pt)。Kelly正規化は全て逆効果。</div>`;
+  h+=`</div>`;
+
+  // === 9. Architecture ===
+  h+=`<div class="section-title">📐 G2-MAX アーキテクチャ</div>`;
+  const arch=[
+    ["設計思想",`<div style="font-size:10px;line-height:1.6;padding:6px;background:rgba(225,29,72,0.04);border-radius:4px"><b>G2-MAX</b> = CAGR最大化専用の集中型raw α戦略<br>PRISM-RQ（Sharpe/Calmar重視）とは<b>目的関数が異なる</b><br>Ablation BTで「集中+raw α」がCAGR最大の本体と確認</div>`],
+    ["Layer 1: 5テーマ集中 + Corr Budget",`<div style="font-size:10px;line-height:1.6"><code>ThemeScore = 0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)</code><br><br><b>選定:</b> 上位からgreedy採用、相関制約 max_corr &lt; 0.80<br><b>テーマ数:</b> 5（10→5で+78pt CAGR）<br><b>sector cap:</b> なし<br><b>BFM-v2 veto:</b> なし</div>`],
+    ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定<br><br><b>なぜraw α:</b> SNRb（α/σ）は右裾を削りCAGRを-9.5pt。shrink(r²)もさらに削る。raw αはhigh-conviction winnerを保存する。</div>`],
+    ["防御装置",`<div style="font-size:10px;line-height:1.6"><b>残すもの:</b><br>• Correlation budget（同一因子の重複ベット回避）<br>• Data integrity / delisting 系 hard exit<br><br><b>外すもの:</b><br>• BFM-v2 veto（CAGR -14pt）<br>• SNRb（CAGR -9.5pt）<br>• shrink(r²)<br>• sector cap<br>• Vol overlay<br>• panic de-gearing（今回のBTでは無効）</div>`],
+    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に最も敏感。</b><br>5テーマ集中 + raw αは「今のテーマ構成で過去を計算」の影響を最大化する構成。<br>CAGR 179%のうちPIT上方バイアスの割合は不明。<br>forward実績で大幅に下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
+  ];
+  arch.forEach(([title,body])=>{
+    h+=`<div style="margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;cursor:pointer" onclick="this.querySelector('.abody').style.display=this.querySelector('.abody').style.display==='block'?'none':'block'">`;
+    h+=`<div style="padding:8px 10px;font-size:11px;font-weight:700;background:var(--card-bg);display:flex;justify-content:space-between"><span>${title}</span><span style="font-size:9px">▶</span></div>`;
+    h+=`<div class="abody" style="display:none;padding:8px 10px">${body}</div></div>`;
+  });
+
+  // === 10. Forward Clock ===
+  h+=`<div style="margin:16px 12px 4px;font-size:10px;font-weight:700">Forward Clock</div>`;
+  h+=`<div class="card"><div style="font-size:9px;color:var(--text-sub)">G2-MAX: 2026-04-10開始 | 独立clock</div>`;
+  h+=`<div style="background:rgba(0,0,0,0.04);border-radius:4px;height:10px;overflow:hidden;margin:6px 0"><div style="height:100%;width:0%;border-radius:4px;background:var(--g2)"></div></div>`;
+  h+=`<div style="display:flex;justify-content:space-between;font-size:8px;color:var(--text-sub)"><span>0/18 rebalances</span><span>Pilot: 12 | Review: 18</span></div></div>`;
+
+  // === 11. Strategy Comparison ===
+  h+=`<div class="section-title" style="color:var(--text-sub)">🏷️ 戦略系譜</div>`;
+  h+=`<div style="margin:4px 12px;padding:8px;border-radius:6px;background:var(--card-bg);font-size:8px;line-height:1.8;color:var(--text-sub)">`;
+  h+=`<b style="color:var(--blue)">PRISM-R</b> CAGR=65.6% Sharpe=1.34 MaxDD=-35.6% — baseline (A5-lite)<br>`;
+  h+=`<b style="color:var(--purple)">PRISM-RQ</b> CAGR=43.8% Sharpe=1.60 MaxDD=-23.9% — risk-adjusted (BFM-v2+SNRb)<br>`;
+  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=179.1% Sharpe=2.57 MaxDD=-54.7% — CAGR-max (concentrated raw α)`;
+  h+=`</div>`;
+
+  document.getElementById('g2Main').innerHTML=h;
+  setTimeout(initG2,300);
+  setTimeout(calcG2,500);
+}).catch(err=>{document.getElementById('g2Main').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
+
+// Rebalance calculator
+let g2ccy='USD';
+function setG2Ccy(c){g2ccy=c;document.getElementById('g2CcySign').textContent=c==='JPY'?'¥':'$';calcG2();}
+function calcG2(){
+  const picks=window._g2_picks;if(!picks)return;
+  const cap=parseFloat(document.getElementById('g2Capital').value)||10000;
+  const fx=parseFloat(document.getElementById('g2Fx').value)||150;
+  const usd=g2ccy==='JPY'?cap/fx:cap;
+  const w=1/picks.length; let rows='',totalAlloc=0;
+  picks.forEach(p=>{
+    if(!p.price||!p.ticker)return;
+    const target=usd*w; const shares=Math.floor(target/p.price);
+    const actual=shares*p.price; const pctA=actual/usd;
+    totalAlloc+=actual;
+    rows+=`<tr><td style="font-weight:700">${p.ticker}</td><td style="font-size:9px">${p.theme||''}</td><td style="text-align:right">$${p.price.toFixed(2)}</td><td style="text-align:right">${shares}株 / ${(pctA*100).toFixed(1)}%</td></tr>`;
+  });
+  document.getElementById('g2RebalBody').innerHTML=rows;
+  const cash=usd-totalAlloc;
+  document.getElementById('g2RebalSummary').innerHTML=`<div style="font-size:9px;margin-top:6px;color:var(--text-sub)">投資: $${totalAlloc.toFixed(0)} | 余剰: $${cash.toFixed(0)} (${(cash/usd*100).toFixed(1)}%)</div>`;
+}
+
+// Cumulative returns chart
+function initG2(){
+fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
+  const ctx=document.getElementById('cumChartG2');if(!ctx)return;
+  const fwd=cr.forward_overlay||{dates:[],a5:[],SPY:[]};
+  const lastBT=cr.a5[cr.a5.length-1]||1;const lastSPY=cr.SPY[cr.SPY.length-1]||1;
+  const fwdA5=(fwd.a5||[]).map(g=>Math.round(lastBT*g*1e6)/1e6);
+  const fwdSPY=(fwd.SPY||[]).map(g=>Math.round(lastSPY*g*1e6)/1e6);
+  const allDates=[...cr.dates,...fwd.dates.filter(d=>!cr.dates.includes(d))];
+  const btA5=[...cr.a5,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const btSPY=[...cr.SPY,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const fA5=[...new Array(cr.dates.length-1).fill(null),lastBT,...fwdA5];
+  const fSPY=[...new Array(cr.dates.length-1).fill(null),lastSPY,...fwdSPY];
+  new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
+    {label:'G2 BT(参考)',data:btA5,borderColor:'rgba(225,29,72,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'G2 実績',data:fA5,borderColor:'#e11d48',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'SPY 実績',data:fSPY,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
+    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  const st=cr.stats;
+  const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  document.getElementById('cumStatsG2').innerHTML=
+    mkB('G2 CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(225,29,72,0.06)')+
+    mkB('G2 Sharpe',st.a5.sharpe.toFixed(2),'rgba(225,29,72,0.06)')+
+    mkB('G2 MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
+    mkB('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkB('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+  const ann=cr.annual;const years=Object.keys(ann.a5).sort();let tb='';
+  years.forEach(y=>{
+    const gv=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=gv-sv;
+    const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+    const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(gv)};font-weight:700">${f(gv)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+  });
+  document.getElementById('annualBodyG2').innerHTML=tb;
+}).catch(e=>console.warn('G2 chart error:',e));}
+</script>
+<nav class="bottom-nav">
+  <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
+  <a href="/map" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 6v16l7-4 8 4 7-4V2l-7 4-8-4-7 4z"/></svg></span>マップ</a>
+  <a href="/prism" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><line x1="12" y1="22" x2="12" y2="8.5"/><line x1="22" y1="8.5" x2="2" y2="8.5"/></svg></span>PRISM</a>
+  <a class="nav-item" href="/prism-r"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3"/></svg></span><span style="color:var(--purple)">R</span></a>
+  <a class="nav-item" href="/prism-rq"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span style="color:var(--purple)">RQ</span></a>
+  <a class="nav-item active" href="/prism-g2"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><path d="M7 14l5-8 5 8" fill="currentColor"/></svg></span><span style="color:#e11d48">G2</span></a>
+</nav>
+</body>
+</html>

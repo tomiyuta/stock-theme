@@ -9,7 +9,8 @@
     { "source": "/infographic", "destination": "/infographic.html" },
     { "source": "/prism", "destination": "/prism.html" },
     { "source": "/prism-r", "destination": "/prism-r.html" },
-    { "source": "/prism-rq", "destination": "/prism-rq.html" }
+    { "source": "/prism-rq", "destination": "/prism-rq.html" },
+    { "source": "/prism-g2", "destination": "/prism-g2.html" }
   ],
   "headers": [
     {

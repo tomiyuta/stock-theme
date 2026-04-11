@@ -1,4 +1,4 @@
-const CACHE = "st-v6";
+const CACHE = "st-v7";
 const STATIC = ["/styles.css", "/app.js"];
 
 self.addEventListener("install", e => {
@@ -19,7 +19,7 @@ self.addEventListener("fetch", e => {
   // HTML pages and API: always network-first
   if (url.pathname.endsWith('.html') || url.pathname.endsWith('/') ||
       url.pathname.startsWith('/api/') ||
-      url.pathname === '/prism' || url.pathname === '/prism-r' || url.pathname === '/prism-rq' ||
+      url.pathname === '/prism' || url.pathname === '/prism-r' || url.pathname === '/prism-rq' || url.pathname === '/prism-g2' ||
       url.pathname === '/map' || url.pathname === '/market-movers' ||
       url.pathname === '/infographic') {
     e.respondWith(
