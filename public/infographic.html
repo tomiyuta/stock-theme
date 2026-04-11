@@ -95,6 +95,7 @@ const NAMES={SPY:"S&P500",QQQ:"NASDAQ100",IWM:"Russell2000",RSP:"S&P500均等",X
 let allEtfs=[];
 fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
   allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
+  window._allThemes=data.all_themes||[];
   const periods=(data.all_periods||[]).filter(p=>p!=="日中");
   document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
   renderMacro();
@@ -153,6 +154,7 @@ function loadDip(){
     const seen={};
     raw.forEach(a=>{const k=a.theme;if(!seen[k]||Math.abs(a.dip)>Math.abs(seen[k].dip))seen[k]=a;});
     const alerts=Object.values(seen).sort((a,b)=>a.dip-b.dip);
+    window._dipAlerts=alerts;
     let h='';
     // === Methodology Card ===
     h+='<div style="margin:8px 10px;border-radius:8px;padding:12px 14px;background:rgba(0,82,204,0.04);border:1px solid rgba(0,82,204,0.12);cursor:pointer" onclick="this.querySelector(\'.dip-guide-body\').style.display=this.querySelector(\'.dip-guide-body\').style.display===\'block\'?\'none\':\'block\'">';
@@ -209,17 +211,55 @@ function loadDip(){
 
     h+='<div class="section-label">押し目検知（'+alerts.length+'テーマ）</div>';
     if(alerts.length===0){h+='<div style="padding:20px;color:var(--text-sub)">現在押し目シグナルなし</div>';}
-    alerts.forEach(a=>{
+    alerts.forEach((a,idx)=>{
       const wrCls=a.win_rate>=60?'high':'low';
-      h+='<div class="dip-card">';
-      h+='<div><div class="dip-name">'+esc(a.theme)+'</div>';
+      h+='<div style="margin:4px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden">';
+      h+='<div class="dip-card" style="cursor:pointer" onclick="toggleDipStocks(\'dipStocks'+idx+'\','+idx+')">';
+      h+='<div><div class="dip-name">'+esc(a.theme)+' <span style="font-size:9px;color:var(--text-sub)">▶</span></div>';
       h+='<div class="dip-meta">閾値: '+a.threshold+'% / 検知: '+a.detected+'</div></div>';
       h+='<div style="text-align:right"><div class="dip-val">'+a.dip+'%</div>';
       h+='<span class="dip-wr '+wrCls+'">回復率 '+a.win_rate+'%</span></div>';
       h+='</div>';
+      h+='<div id="dipStocks'+idx+'" style="display:none;padding:0 10px 10px"></div>';
+      h+='</div>';
     });
     document.getElementById('dipMain').innerHTML=h;
   }).catch(()=>{document.getElementById('dipMain').innerHTML='<p style="padding:20px;color:var(--text-sub)">データ読込中...</p>';});
+}
+function toggleDipStocks(elId, alertIdx){
+  const el=document.getElementById(elId);
+  if(!el)return;
+  if(el.style.display==='block'){el.style.display='none';return;}
+  el.style.display='block';
+  if(el.innerHTML){return;}
+  // Find theme data
+  const alerts=window._dipAlerts||[];
+  const a=alerts[alertIdx];
+  if(!a){el.innerHTML='<div style="font-size:9px;color:var(--text-sub)">データなし</div>';return;}
+  const themeName=a.theme;
+  const themes=window._allThemes||[];
+  const th=themes.find(t=>t.name===themeName||t.slug===themeName);
+  if(!th||!th.tickerPerformances){el.innerHTML='<div style="font-size:9px;color:var(--text-sub)">銘柄データなし</div>';return;}
+  const tp=th.tickerPerformances;
+  const tickers=Object.keys(tp);
+  // Sort by 1M return (descending)
+  const sorted=tickers.map(tk=>{const p=tp[tk];return{tk,r1m:p['1ヶ月']||0,r3m:p['3ヶ月']||0,r6m:p['半年']||0,r1y:p['1年']||0};}).sort((a,b)=>b.r1m-a.r1m);
+  const f=v=>{if(v==null)return'—';const pct=(v*100).toFixed(1);return(v>=0?'+':'')+pct+'%';};
+  const c=v=>v>=0?'color:#00c853':'color:#ff1744';
+  let t='<table style="width:100%;font-size:9px;border-collapse:collapse">';
+  t+='<tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left;padding:3px 4px;font-weight:600;color:var(--text-sub)">銘柄</th><th style="text-align:right;padding:3px 4px;font-weight:600;color:var(--text-sub)">1M</th><th style="text-align:right;padding:3px 4px;font-weight:600;color:var(--text-sub)">3M</th><th style="text-align:right;padding:3px 4px;font-weight:600;color:var(--text-sub)">6M</th><th style="text-align:right;padding:3px 4px;font-weight:600;color:var(--text-sub)">1Y</th></tr>';
+  sorted.forEach(s=>{
+    t+='<tr style="border-bottom:1px solid rgba(0,0,0,0.04)">';
+    t+='<td style="padding:3px 4px;font-weight:700">'+s.tk+'</td>';
+    t+='<td style="padding:3px 4px;text-align:right;font-weight:600;'+c(s.r1m)+'">'+f(s.r1m)+'</td>';
+    t+='<td style="padding:3px 4px;text-align:right;'+c(s.r3m)+'">'+f(s.r3m)+'</td>';
+    t+='<td style="padding:3px 4px;text-align:right;'+c(s.r6m)+'">'+f(s.r6m)+'</td>';
+    t+='<td style="padding:3px 4px;text-align:right;'+c(s.r1y)+'">'+f(s.r1y)+'</td>';
+    t+='</tr>';
+  });
+  t+='</table>';
+  t+='<div style="font-size:8px;color:var(--text-sub);margin-top:4px">'+tickers.length+'銘柄 | 1Mリターン順</div>';
+  el.innerHTML=t;
 }
 
 </script>
