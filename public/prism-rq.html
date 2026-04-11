@@ -275,7 +275,7 @@ Promise.all([
 }).catch(err=>{document.getElementById('rqMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
 
 function initRQChart(){
-fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
+fetch('/api/prism-rq/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
   const ctx=document.getElementById('cumChartRQ');
   if(!ctx)return;
   const fwd=cr.forward_overlay||{dates:[],a5:[],SPY:[]};
