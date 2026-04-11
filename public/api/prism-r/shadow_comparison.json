@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-10T23:44:28.710214",
+  "generated_at": "2026-04-11T11:18:07.705090",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -33,11 +33,11 @@
   },
   "correlation_diagnostics": {
     "n_themes": 10,
-    "avg_pairwise_corr": NaN,
-    "max_pairwise_corr": NaN,
-    "min_pairwise_corr": NaN,
+    "avg_pairwise_corr": 0.336,
+    "max_pairwise_corr": 0.963,
+    "min_pairwise_corr": -0.123,
     "n_high_corr_pairs": 12,
-    "effective_n_themes": 1.0
+    "effective_n_themes": 2.5
   },
   "bfm2_quality_features": {
     "gas-fracking": {
@@ -47,17 +47,17 @@
     },
     "dc-optical-device": {
       "breadth63": 0.8888888888888888,
-      "concentration63": 0.19031781781649662,
+      "concentration63": 0.19031781781649665,
       "theme_vol63": 0.6904387068478482
     },
     "semi-component": {
       "breadth63": 1.0,
-      "concentration63": 0.2894083317822359,
+      "concentration63": 0.28940833178223585,
       "theme_vol63": 0.6934591553709475
     },
     "infra-contractors": {
       "breadth63": 1.0,
-      "concentration63": 0.21589637179204552,
+      "concentration63": 0.21589637179204557,
       "theme_vol63": 0.4431327364983514
     },
     "dc-optical-ems": {
@@ -72,7 +72,7 @@
     },
     "refinary": {
       "breadth63": 1.0,
-      "concentration63": 0.18813782900649476,
+      "concentration63": 0.18813782900649473,
       "theme_vol63": 0.41450304213282346
     },
     "onsite-power": {
@@ -87,9 +87,267 @@
     },
     "dividend": {
       "breadth63": 0.8888888888888888,
-      "concentration63": 0.135032484601258,
+      "concentration63": 0.13503248460125794,
       "theme_vol63": 0.13382319279409421
     }
+  },
+  "dip_sleeve_diagnostics": [
+    {
+      "theme": "不動産テック",
+      "theme_slug": null,
+      "dip": -0.295,
+      "band": "20-30%",
+      "win_rate": 0.714,
+      "sample_n": 70,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・大幅下落",
+      "trend_rank": null,
+      "trend_state": null,
+      "qualified": false
+    },
+    {
+      "theme": "軍用ドローン",
+      "theme_slug": "drones",
+      "dip": -0.202,
+      "band": "20-30%",
+      "win_rate": 0.714,
+      "sample_n": 70,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・大幅下落",
+      "trend_rank": 96,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "銀鉱山",
+      "theme_slug": "silver-mining",
+      "dip": -0.234,
+      "band": "20-30%",
+      "win_rate": 0.683,
+      "sample_n": 82,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・大幅下落",
+      "trend_rank": 18,
+      "trend_state": "ENTRY",
+      "qualified": true
+    },
+    {
+      "theme": "銀鉱山",
+      "theme_slug": "silver-mining",
+      "dip": -0.234,
+      "band": "20-30%",
+      "win_rate": 0.682,
+      "sample_n": 66,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・大幅下落",
+      "trend_rank": 18,
+      "trend_state": "ENTRY",
+      "qualified": true
+    },
+    {
+      "theme": "レアアース",
+      "theme_slug": "rare-earth",
+      "dip": -0.17,
+      "band": "10-20%",
+      "win_rate": 0.669,
+      "sample_n": 124,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・調整",
+      "trend_rank": 69,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "金鉱山",
+      "theme_slug": "gold-mining",
+      "dip": -0.156,
+      "band": "10-20%",
+      "win_rate": 0.669,
+      "sample_n": 124,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・調整",
+      "trend_rank": 21,
+      "trend_state": "WATCH",
+      "qualified": true
+    },
+    {
+      "theme": "銅鉱山",
+      "theme_slug": "copper-mining",
+      "dip": -0.128,
+      "band": "10-20%",
+      "win_rate": 0.669,
+      "sample_n": 124,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・調整",
+      "trend_rank": 52,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "軍用ドローン",
+      "theme_slug": "drones",
+      "dip": -0.119,
+      "band": "10-20%",
+      "win_rate": 0.669,
+      "sample_n": 124,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・調整",
+      "trend_rank": 96,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "銀鉱山",
+      "theme_slug": "silver-mining",
+      "dip": -0.234,
+      "band": "20-30%",
+      "win_rate": 0.656,
+      "sample_n": 61,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・大幅下落",
+      "trend_rank": 18,
+      "trend_state": "ENTRY",
+      "qualified": true
+    },
+    {
+      "theme": "石炭：原料炭中心",
+      "theme_slug": "coking-coal",
+      "dip": -0.108,
+      "band": "10-20%",
+      "win_rate": 0.646,
+      "sample_n": 147,
+      "window": "0-1M",
+      "days_since": 6,
+      "pattern": "短期・調整",
+      "trend_rank": 99,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "太陽光発電",
+      "theme_slug": "solar-energy-storage",
+      "dip": -0.215,
+      "band": "20-30%",
+      "win_rate": 0.629,
+      "sample_n": 62,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・大幅下落",
+      "trend_rank": 64,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "不動産テック",
+      "theme_slug": null,
+      "dip": -0.295,
+      "band": "20-30%",
+      "win_rate": 0.629,
+      "sample_n": 62,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・大幅下落",
+      "trend_rank": null,
+      "trend_state": null,
+      "qualified": false
+    },
+    {
+      "theme": "レアアース",
+      "theme_slug": "rare-earth",
+      "dip": -0.162,
+      "band": "10-20%",
+      "win_rate": 0.622,
+      "sample_n": 111,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・調整",
+      "trend_rank": 69,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "銅鉱山",
+      "theme_slug": "copper-mining",
+      "dip": -0.128,
+      "band": "10-20%",
+      "win_rate": 0.621,
+      "sample_n": 140,
+      "window": "1-2M",
+      "days_since": 28,
+      "pattern": "じわじわ・調整",
+      "trend_rank": 52,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "レアアース",
+      "theme_slug": "rare-earth",
+      "dip": -0.162,
+      "band": "10-20%",
+      "win_rate": 0.619,
+      "sample_n": 105,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・調整",
+      "trend_rank": 69,
+      "trend_state": "EXIT",
+      "qualified": false
+    },
+    {
+      "theme": "産業用電池",
+      "theme_slug": null,
+      "dip": -0.186,
+      "band": "10-20%",
+      "win_rate": 0.619,
+      "sample_n": 105,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・調整",
+      "trend_rank": null,
+      "trend_state": null,
+      "qualified": false
+    },
+    {
+      "theme": "旅客航空：LCC",
+      "theme_slug": null,
+      "dip": -0.181,
+      "band": "10-20%",
+      "win_rate": 0.602,
+      "sample_n": 113,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・調整",
+      "trend_rank": null,
+      "trend_state": null,
+      "qualified": false
+    },
+    {
+      "theme": "電力貯蔵",
+      "theme_slug": "battery-storage",
+      "dip": -0.448,
+      "band": "30%+",
+      "win_rate": 0.6,
+      "sample_n": 40,
+      "window": "2-3M",
+      "days_since": 47,
+      "pattern": "だらだら・暴落",
+      "trend_rank": 126,
+      "trend_state": "EXIT",
+      "qualified": false
+    }
+  ],
+  "dip_sleeve_summary": {
+    "total_alerts": 18,
+    "qualified": 4
   },
   "comparisons": [
     {
@@ -1976,38 +2234,6 @@
       ]
     }
   ],
-  "virtual_exits": [
-    {
-      "ticker": "VIAV",
-      "prev_theme": "光接続：インフラ",
-      "prev_rank": 3,
-      "reason": "removed_from_target"
-    },
-    {
-      "ticker": "DCO",
-      "prev_theme": "防衛：素材・部材",
-      "prev_rank": 7,
-      "reason": "removed_from_target"
-    },
-    {
-      "ticker": "COST",
-      "prev_theme": "食品小売・量販店",
-      "prev_rank": 10,
-      "reason": "removed_from_target"
-    }
-  ],
-  "virtual_entries": [
-    {
-      "ticker": "MTSI",
-      "theme": "光接続：トランシーバ"
-    },
-    {
-      "ticker": "PWR",
-      "theme": "インフラ工事：電力/通信"
-    },
-    {
-      "ticker": "VZ",
-      "theme": "高配当"
-    }
-  ]
+  "virtual_exits": [],
+  "virtual_entries": []
 }
