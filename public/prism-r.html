@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>PRISM-RQ | 米国株テーマトラッカー</title>
+  <title>PRISM-R | 米国株テーマトラッカー</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -131,7 +131,7 @@ Promise.all([
   document.getElementById('prismDate').textContent='Snapshot: '+comp.snapshot_date;
   let h='';
   // 1. Shadow Status Card
-  h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-RQ: ${meta.status||'SHADOW'}</div>`;
+  h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-R: ${meta.status||'SHADOW'}</div>`;
   h+=`<div class="gate-detail">α63×shrink(r²) | 20営業日リバランス | sector_cap=3</div>`;
   h+=`<div class="gate-atk">観測モード — A4 live維持</div></div>`;
   // 2. PIT Warning
@@ -213,7 +213,7 @@ Promise.all([
     const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};
     return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
   });
-  h+=`<div class="section-title">📊 PRISM-RQ リバランス計算</div>`;
+  h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
   h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × 10%等ウェイト</div>`;
   h+=`<div class="prod-input-row">`;
   h+=`<span class="prod-input-label">投資資金</span>`;
@@ -299,9 +299,9 @@ Promise.all([
     h+=`<div class="gate-item"><span class="g-label">${g}</span><span class="g-icon">⏳</span></div>`;});
   h+=`</div><div class="prod-meta" style="margin:2px 12px">全ゲートはforward PIT-safeデータで評価。バックテスト値は参考のみ。</div>`;
   // 9. Investment Logic Cards (MECE)
-  h+=`<div class="section-title">📐 PRISM-RQ 投資ロジック</div>`;
+  h+=`<div class="section-title">📐 PRISM-R 投資ロジック</div>`;
   const lcards=[
-    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-RQは、PRISMのLayer 1に品質フィルタ（BFM-v2）、Layer 2にresidual-SNR（A5-SNRb）を組み合わせた2層構造。</div><div class="logic-rule"><b>Layer 1:</b> テーマ選定 → BFM-v2品質フィルタ（breadth/concentration/vol veto）</div><div class="logic-rule"><b>Layer 2:</b> A5-SNRb = (α63/resid_vol63) × shrink(r²) で銘柄選定</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 3テーマ + 10銘柄等ウェイト</div>`],
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）のみを差し替えたshadow overlay戦略。</div><div class="logic-rule">Layer 1（テーマ選定）とLayer 3（ポートフォリオ制約）はPRISMと完全同一。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M return最大 → Layer 3</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²_63)</code> 最大 → Layer 3</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 35% + MaxPositions 35</div>`],
     ["Layer 1: テーマ選定（PRISM共通）",`<div class="logic-rule"><b>5因子スコア:</b> z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule"><b>選定:</b> 上位10テーマ / 適格=4銘柄以上 / セクター制約=同一セクター最大3</div><div class="logic-rule"><b>ヒステリシス:</b> ENTRY≤20 / WATCH 21-35 / EXIT&gt;35</div>`],
     ["Layer 2: 銘柄選定（PRISM-R固有）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:4px 0">OLS回帰モデル（63日ローリング）</div><div class="logic-rule"><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code></div><div class="logic-rule"><b>自己除外:</b> テーマ平均から銘柄i自身を除外（平均4.7銘柄/テーマで歪み防止）</div><div class="logic-rule"><b>出力:</b> α63（残差α）/ β63（傾き）/ r²_63（決定係数）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">Shrinkage関数（hard filterの代替）</div><div class="logic-rule"><code>shrink(r²): r²&lt;0.10→r²×2 | 0.10-0.50→線形補間 | r²&gt;0.50→1.0</code></div><div class="logic-rule">設計意図: 小ユニバースで候補枯渇を防ぎつつ、低信頼度αを縮小</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">スコア</div><div class="logic-rule"><code>score = α63 × shrink(r²_63)</code></div><div class="logic-rule">各テーマからscore最大の1銘柄を選定。重複禁止。</div>`],
     ["Layer 3: ポートフォリオ制約（PRISM共通）",`<div class="logic-rule"><b>ウェイト:</b> 等ウェイト 10銘柄×10%</div><div class="logic-rule"><b>リバランス:</b> 20営業日ごと</div><div class="logic-rule"><b>MinHold:</b> 20営業日（実証済みコア）</div><div class="logic-rule"><b>SectorCap:</b> 35%</div>`],
@@ -313,198 +313,6 @@ Promise.all([
   lcards.forEach(([title,body])=>{
     h+=`<div class="logic-card" onclick="this.classList.toggle('open')"><div class="logic-card-header"><span>▶ ${title}</span><span class="lc-icon">›</span></div><div class="logic-card-body">${body}</div></div>`;
   });
-
-  // === A5-SNRb Research Shadow Section ===
-  h+=`<div class="section-title" style="margin-top:16px">🔬 A5-SNRb Research Shadow</div>`;
-
-  // Status card
-  h+=`<div style="margin:4px 12px;padding:10px 12px;border-radius:6px;border:1px solid var(--purple);background:rgba(126,87,194,0.06)">`;
-  h+=`<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">`;
-  h+=`<span style="font-size:11px;font-weight:700;color:var(--purple)">A5-SNRb — risk-normalized residual-alpha alternative</span>`;
-  h+=`<span style="font-size:8px;padding:2px 6px;border-radius:3px;background:var(--purple);color:white">RESEARCH-SHADOW</span></div>`;
-  h+=`<div style="font-size:9px;color:var(--text-sub);line-height:1.6">`;
-  h+=`Layer 2スコアのみ差し替え。Layer 1（テーマ選定）・Layer 3（制約）はA5-liteと完全同一。<br>`;
-  h+=`<code style="font-size:9px;background:var(--card-bg);padding:1px 4px;border-radius:3px">score = (α63 / resid_vol63) × shrink(r²)</code><br>`;
-  h+=`分子 = 63日累積α / 分母 = 63日残差ボラティリティ → 「信頼できるα」を選定</div></div>`;
-
-  // A5-lite vs SNRb comparison table
-  h+=`<div style="margin:8px 12px;font-size:10px;font-weight:700;color:var(--text-main)">Historical BT 比較（5年73リバランス・方向確認のみ）</div>`;
-  h+=`<div style="margin:0 12px;overflow-x:auto"><table class="logic-table" style="font-size:9px;width:100%">`;
-  h+=`<tr><th>指標</th><th>A5-lite</th><th>A5-SNRb</th><th>差</th><th>判定</th></tr>`;
-  const btRows=[
-    ['CAGR','66.9%','57.5%','-9.5pt','❌'],
-    ['Vol','42.9%','39.3%','-3.6pt','✅'],
-    ['Sharpe','1.559','1.461','-0.098','❌'],
-    ['Sortino','1.665','1.563','-0.102','❌'],
-    ['Calmar','1.594','1.551','-0.043','≒'],
-    ['MaxDD','-42.0%','-37.1%','+4.9pt','✅'],
-    ['Top5集中','38.3%','34.1%','-4.2pt','✅'],
-    ['Tech Share','39.3%','39.9%','+0.6pt','≒']
-  ];
-  btRows.forEach(r=>{
-    const jc=r[4]==='✅'?'color:var(--green)':r[4]==='❌'?'color:var(--red)':'color:var(--text-sub)';
-    h+=`<tr><td>${r[0]}</td><td style="text-align:right">${r[1]}</td><td style="text-align:right">${r[2]}</td><td style="text-align:right">${r[3]}</td><td style="text-align:center;${jc}">${r[4]}</td></tr>`;
-  });
-  h+=`</table></div>`;
-  h+=`<div style="margin:2px 12px;font-size:8px;color:var(--text-sub)">⚠ PIT汚染あり（frozen membership）。production判断には使用不可。方向確認のみ。</div>`;
-
-  // Forward Clock
-  h+=`<div style="margin:8px 12px;font-size:10px;font-weight:700;color:var(--text-main)">Forward Clock</div>`;
-  h+=`<div style="margin:0 12px;padding:8px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);background:var(--card-bg)">`;
-
-  // Current SNRb picks from data
-  const snrbPicks = comp.comparisons ? comp.comparisons.filter(c=>c.snrb_pick).map(c=>({
-    theme: c.theme_name, ticker: c.snrb_pick, same: c.a5_snrb_same
-  })) : [];
-  const snrbOverlap = snrbPicks.filter(p=>p.same).length;
-  const snrbTotal = snrbPicks.length;
-
-  h+=`<div style="display:flex;gap:12px;flex-wrap:wrap;margin-bottom:6px">`;
-  h+=`<div style="font-size:9px"><span style="color:var(--text-sub)">開始日</span> <b>2026-04-09</b></div>`;
-  h+=`<div style="font-size:9px"><span style="color:var(--text-sub)">経過</span> <b>0 / 18 リバランス</b></div>`;
-  h+=`<div style="font-size:9px"><span style="color:var(--text-sub)">A5 vs SNRb一致</span> <b>${snrbOverlap}/${snrbTotal} (${snrbTotal>0?Math.round(snrbOverlap/snrbTotal*100):0}%)</b></div>`;
-  h+=`</div>`;
-
-  // SNRb picks detail (collapsible)
-  h+=`<div class="logic-card" onclick="this.classList.toggle('open')" style="margin:4px 0">`;
-  h+=`<div class="logic-card-header" style="font-size:9px"><span>▶ SNRb銘柄選定（現スナップショット）</span><span class="lc-icon">›</span></div>`;
-  h+=`<div class="logic-card-body" style="padding:6px 8px">`;
-  if(comp.comparisons) {
-    h+=`<table style="width:100%;font-size:8px;border-collapse:collapse">`;
-    h+=`<tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left;padding:2px">テーマ</th><th>A5</th><th>SNRb</th><th>一致</th></tr>`;
-    comp.comparisons.forEach(c=>{
-      const match = c.a5_snrb_same;
-      const matchIcon = match ? '✅' : '🔀';
-      const snrbTk = c.snrb_pick || '—';
-      // Find SNRb score
-      const snrbStock = c.stocks ? c.stocks.find(s=>s.ticker===snrbTk) : null;
-      const snrbScore = snrbStock && snrbStock.score_snrb != null ? snrbStock.score_snrb.toFixed(3) : '—';
-      h+=`<tr style="border-bottom:1px solid rgba(0,0,0,0.04)">`;
-      h+=`<td style="padding:2px;font-size:8px">${c.theme_name||c.theme}</td>`;
-      h+=`<td style="text-align:center;font-weight:600">${c.a5_pick||'—'}</td>`;
-      h+=`<td style="text-align:center;font-weight:600;color:var(--purple)">${snrbTk}</td>`;
-      h+=`<td style="text-align:center">${matchIcon}</td></tr>`;
-    });
-    h+=`</table>`;
-  }
-  h+=`</div></div>`;
-
-  // Key interpretation
-  h+=`<div style="font-size:8px;color:var(--text-sub);line-height:1.5;margin-top:4px">`;
-  h+=`<b>位置づけ:</b> A5-liteの上位互換ではなく、リスク調整版。典型月ではA5-liteが優位。<br>`;
-  h+=`<b>改善:</b> MaxDD +4.9pt / Vol -3.6pt / Top5集中 -4.2pt<br>`;
-  h+=`<b>代償:</b> CAGR -9.5pt / Sharpe -0.10<br>`;
-  h+=`<b>枝管理:</b> A5-liteの凍結は維持。SNRbは独立clockで観測。production判断はPIT-safe forward限定。`;
-  h+=`</div></div>`;
-
-  // === Theme Correlation Budget Section ===
-  const cd = comp.correlation_diagnostics || {};
-  if (cd.n_themes) {
-    h+=`<div class="section-title" style="margin-top:16px">🔗 Theme Correlation Budget</div>`;
-    h+=`<div style="margin:4px 12px;padding:10px 12px;border-radius:6px;border:1px solid ${cd.effective_n_themes<4?'var(--red)':'rgba(0,0,0,0.06)'};background:${cd.effective_n_themes<4?'rgba(239,68,68,0.06)':'var(--card-bg)'}">`;
-    h+=`<div style="font-size:10px;font-weight:700;color:${cd.effective_n_themes<4?'var(--red)':'var(--text-main)'};margin-bottom:6px">`;
-    h+=`テーマ相関診断 — effective_n_themes = ${cd.effective_n_themes}`;
-    if(cd.effective_n_themes<4) h+=` ⚠️ ALERT`;
-    h+=`</div>`;
-    h+=`<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;font-size:9px">`;
-    const corrItems = [
-      ['Avg Corr', cd.avg_pairwise_corr, cd.avg_pairwise_corr>0.5],
-      ['Max Corr', cd.max_pairwise_corr, cd.max_pairwise_corr>0.85],
-      ['High Pairs (>0.7)', cd.n_high_corr_pairs+'/45', cd.n_high_corr_pairs/45>0.10],
-      ['Effective N', cd.effective_n_themes, cd.effective_n_themes<4],
-    ];
-    corrItems.forEach(([label, val, alert]) => {
-      h+=`<div style="padding:4px 6px;border-radius:4px;background:${alert?'rgba(239,68,68,0.08)':'rgba(0,0,0,0.03)'}">`;
-      h+=`<div style="color:var(--text-sub);font-size:8px">${label}</div>`;
-      h+=`<div style="font-weight:700;color:${alert?'var(--red)':'var(--text-main)'}">${val} ${alert?'⚠':'✅'}</div></div>`;
-    });
-    h+=`</div>`;
-    h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px;line-height:1.4">`;
-    h+=`10テーマ保有でも相関構造込みで実質${cd.effective_n_themes}独立ベット。`;
-    if(cd.max_pairwise_corr>0.85) h+=`<br>max corr ${cd.max_pairwise_corr}は同一潜在因子の重複保有を示唆。`;
-    h+=`<br>暫定閾値: effective_n<4 / max_corr>0.85 / high_pairs>10%`;
-    h+=`</div></div>`;
-  }
-
-  // === BFM-v2 Status ===
-  const bfm2Count = comp.summary?.bfm2_themes || 0;
-  const bfm2Vetoed = comp.summary?.bfm2_vetoed || 0;
-  h+=`<div style="margin:8px 12px;padding:8px 10px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);background:var(--card-bg);font-size:9px">`;
-  h+=`<div style="font-weight:700;margin-bottom:4px">BFM-v2 品質フィルタ</div>`;
-  h+=`<div style="color:var(--text-sub)">テーマ生存: ${bfm2Count}/10 | vetoed: ${bfm2Vetoed}/25候補</div>`;
-  // Show which themes were vetoed
-  const vetoedThemes = comp.comparisons ? comp.comparisons.filter(c=>!c.in_bfm2).map(c=>c.theme_name||c.theme) : [];
-  if(vetoedThemes.length>0) {
-    h+=`<div style="color:var(--red);font-size:8px;margin-top:2px">除外: ${vetoedThemes.join(', ')}</div>`;
-  }
-  h+=`</div>`;
-
-  // === Dip Sleeve Diagnostics ===
-  const dipSum = comp.dip_sleeve_summary || {};
-  const dipAlerts = comp.dip_sleeve_diagnostics || [];
-  if(dipAlerts.length > 0) {
-    const nQ = dipSum.qualified || 0;
-    h+=`<div style="margin:8px 12px;padding:8px 10px;border-radius:6px;border:1px solid ${nQ>0?'#d97706':'rgba(0,0,0,0.06)'};background:${nQ>0?'rgba(217,119,6,0.06)':'var(--card-bg)'}">`;
-    h+=`<div style="font-size:10px;font-weight:700;color:${nQ>0?'#d97706':'var(--text-main)'};margin-bottom:4px">`;
-    h+=`📉 Dip Sleeve — ${nQ}/${dipSum.total_alerts} qualified</div>`;
-    const qualified = dipAlerts.filter(a=>a.qualified);
-    if(qualified.length>0) {
-      h+=`<table style="width:100%;font-size:8px;border-collapse:collapse">`;
-      h+=`<tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left">テーマ</th><th>Dip</th><th>WR</th><th>n</th><th>Window</th><th>State</th></tr>`;
-      const seen = new Set();
-      qualified.forEach(a=>{
-        const key = a.theme+a.window;
-        if(seen.has(key)) return; seen.add(key);
-        h+=`<tr><td>${a.theme}</td><td style="color:var(--red)">${(a.dip*100).toFixed(1)}%</td>`;
-        h+=`<td>${(a.win_rate*100).toFixed(0)}%</td><td>${a.sample_n}</td>`;
-        h+=`<td>${a.window}</td><td style="color:#d97706">${a.trend_state}</td></tr>`;
-      });
-      h+=`</table>`;
-    }
-    h+=`<div style="font-size:7px;color:var(--text-sub);margin-top:3px">条件: ENTRY/WATCH + win_rate≥60% + n≥20 + window∈{1M,1-2M,2-3M} + days≤60</div>`;
-    h+=`</div>`;
-  }
-
-  // === Experimental: Continuity Filter + Vol Overlay ===
-  const contDiag = comp.continuity_diagnostics || [];
-  const volDiag = comp.vol_overlay_diagnostics || {};
-  if (contDiag.length > 0 || volDiag.realized_vol_20d) {
-    h+=`<div class="section-title" style="margin-top:16px;color:var(--text-sub)">🧪 Experimental Diagnostics</div>`;
-    h+=`<div style="margin:4px 12px;padding:8px 10px;border-radius:6px;border:1px dashed rgba(0,0,0,0.15);background:var(--card-bg);font-size:8px;color:var(--text-sub)">`;
-    h+=`<div style="font-size:7px;margin-bottom:4px">⚠ 診断のみ（選定・grossに影響なし）</div>`;
-    // Continuity
-    if (contDiag.length > 0) {
-      h+=`<div style="font-weight:700;margin-bottom:3px;color:var(--text-main);font-size:9px">Continuity Filter</div>`;
-      h+=`<table style="width:100%;border-collapse:collapse;font-size:8px"><tr style="border-bottom:1px solid rgba(0,0,0,0.1)"><th style="text-align:left">Theme</th><th>Tick</th><th>Sign</th><th>Mono</th><th>Jump</th><th>α+</th></tr>`;
-      contDiag.forEach(c => {
-        const sc = c.sign_consistency; const ap = c.alpha_sign_positive;
-        const warn = (sc && sc < 0.4) || (ap !== undefined && ap < 4);
-        h+=`<tr style="color:${warn?'var(--red)':'inherit'}">`;
-        h+=`<td>${c.theme||''}</td><td>${c.ticker||''}</td>`;
-        h+=`<td>${sc !== undefined ? sc.toFixed(2) : '—'}</td>`;
-        h+=`<td>${c.monotonic_ratio !== undefined ? c.monotonic_ratio.toFixed(2) : '—'}</td>`;
-        h+=`<td>${c.jumpiness !== undefined ? c.jumpiness.toFixed(1) : '—'}</td>`;
-        h+=`<td>${ap !== undefined ? ap+'/7' : '—'}</td></tr>`;
-      });
-      h+=`</table>`;
-    }
-    // Vol overlay
-    if (volDiag.realized_vol_20d) {
-      h+=`<div style="font-weight:700;margin:6px 0 3px;color:var(--text-main);font-size:9px">Vol Overlay</div>`;
-      const wr = volDiag.would_reduce;
-      h+=`<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:4px">`;
-      [['Vol 20d', (volDiag.realized_vol_20d*100).toFixed(1)+'%', volDiag.realized_vol_20d>0.30],
-       ['Vol 63d', (volDiag.realized_vol_63d*100).toFixed(1)+'%', volDiag.realized_vol_63d>0.30],
-       ['Gross Scale', volDiag.gross_scale_20d.toFixed(2), wr]
-      ].forEach(([l,v,a]) => {
-        h+=`<div style="padding:3px 5px;border-radius:3px;background:${a?'rgba(239,68,68,0.08)':'rgba(0,0,0,0.03)'}">`;
-        h+=`<div style="font-size:7px">${l}</div><div style="font-weight:700;color:${a?'var(--red)':'var(--text-main)'}">${v} ${a?'⚠':'✅'}</div></div>`;
-      });
-      h+=`</div>`;
-      if(wr) h+=`<div style="font-size:7px;color:var(--red);margin-top:2px">target 25%超過 → gross ${(volDiag.gross_scale_20d*100).toFixed(0)}%に縮小示唆</div>`;
-    }
-    h+=`</div>`;
-  }
 
   document.getElementById('prismMain').innerHTML=h;
   initPrismRChart();
