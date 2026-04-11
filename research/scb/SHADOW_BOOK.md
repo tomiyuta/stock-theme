@@ -905,3 +905,78 @@ Z3: テーマ数 4/5/6 sweep
 Z4: 銘柄数/テーマ 1/2/3 sweep
 Z5: holding period 10/20/40日
 ```
+
+
+---
+
+## W5 Consistency Weighting Decision Memo (2026-04-12)
+
+### 判定: B — shadow並走（即採用しない）
+
+```
+ChatGPT #1: "economically plausible, statistically unproven" → B (shadow)
+ChatGPT #2: "本物の可能性が高いが production に上げるには早い" → B (shadow)
+```
+
+### BT結果
+
+```
+W0 等ウェイト:   CAGR=179.1%  Sharpe=2.847  MaxDD=-47.7%  ← 現行
+W5 一貫性加重:   CAGR=234.0%  Sharpe=3.058  MaxDD=-48.5%  ← 最有望
+W8 幾何平均:     CAGR=228.7%  Sharpe=3.034  MaxDD=-49.1%  ← W5と類似
+```
+
+### W5の式（固定、改変禁止）
+
+```
+pos_count = Σ 1(R21>0, R63>0, R126>0)    # 0-3
+avg_ret = mean(max(R21,0), max(R63,0), max(R126,0))
+raw_weight = pos_count × (1 + avg_ret)
+weight = normalize(raw_weight), single theme cap = 30%
+```
+
+### 理論的位置づけ
+
+- Kelly **ではない**
+- momentum quality / trend consistency weighting と解釈すべき
+- Frog-in-the-Pan: 連続的・滑らかな情報流入がモメンタムを強くする
+- W5/W7/W8の3つが同方向 → 共通因子（multi-horizon consistency）
+
+### 即採用しない理由
+
+1. CAGR +55ptは改善幅が大きすぎる（過学習リスク）
+2. 5年・73リバランス・PIT汚染・複数ルール比較
+3. 2021/2024の強気相場依存の可能性
+
+### 昇格基準（6-12リバランス後）
+
+```
+必須:
+  ① net diff > 0 が過半
+  ② median diff >= 0
+  ③ single-theme contribution share が W0 より悪化しない
+  ④ worst month が W0 より著しく悪化しない
+  ⑤ weight turnover が許容範囲
+  ⑥ cost-adjusted diff > 0
+
+強い昇格条件:
+  ⑦ 前半・後半とも正
+  ⑧ 複数レジームで効いている
+  ⑨ theme_weight_top1 が cap に張り付き続けない
+```
+
+### 実装方針
+
+```
+今やること:
+  - W5を独立shadowとしてgenerate_g2max.pyに追加（W0と同一selector）
+  - R126欠損時: valid horizon のみで計算（bottom送りしない）
+  - 30% cap維持
+  - turnover・concentration指標を記録
+
+今やらないこと:
+  - W5-v2/v3/v4の派生
+  - capの最適化
+  - R252の追加
+  - Kelly系との再統合
+```
