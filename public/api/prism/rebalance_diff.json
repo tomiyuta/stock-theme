@@ -1,0 +1,75 @@
+{
+  "as_of": "",
+  "prev_date": "",
+  "added": [],
+  "removed": [],
+  "unchanged": [
+    {
+      "ticker": "APD",
+      "theme": "",
+      "price": 297.74,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 400.44,
+      "date": ""
+    },
+    {
+      "ticker": "GWW",
+      "theme": "",
+      "price": 1172.21,
+      "date": ""
+    },
+    {
+      "ticker": "HUBB",
+      "theme": "",
+      "price": 534.67,
+      "date": ""
+    },
+    {
+      "ticker": "LIN",
+      "theme": "",
+      "price": 503.3,
+      "date": ""
+    },
+    {
+      "ticker": "ODFL",
+      "theme": "",
+      "price": 209.5,
+      "date": ""
+    },
+    {
+      "ticker": "SBS",
+      "theme": "",
+      "price": 32.99,
+      "date": ""
+    },
+    {
+      "ticker": "WCC",
+      "theme": "",
+      "price": 299.52,
+      "date": ""
+    },
+    {
+      "ticker": "WTRG",
+      "theme": "",
+      "price": 41.06,
+      "date": ""
+    },
+    {
+      "ticker": "XPO",
+      "theme": "",
+      "price": 211.73,
+      "date": ""
+    }
+  ],
+  "summary": {
+    "total_now": 10,
+    "total_prev": 10,
+    "added": 0,
+    "removed": 0,
+    "unchanged": 10
+  }
+}

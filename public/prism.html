@@ -197,6 +197,7 @@ Promise.all([
   const pp=signals.production_portfolio;
   if(pp&&pp.weights){
     window._pp=pp;
+    h+=`<div id="rebalDiffP"></div>`;
     h+=`<div class="prod-card"><div class="prod-title">📊 ${pp.strategy} — リバランス計算</div>`;
     // Input row
     h+=`<div class="prod-input-row">`;
@@ -592,6 +593,39 @@ function toggleLogScale(chartVar, toggleId, isLog) {
     b.classList.toggle('active', isLog ? i===1 : i===0);
   });
 }
+</script>
+
+<script>
+(async function(){
+  await new Promise(r=>setTimeout(r,3500));
+  try {
+    const diff = await fetch('/api/prism/rebalance_diff.json?t='+Date.now()).then(r=>r.json());
+    const el = document.getElementById('rebalDiffP');
+    if(!el) return;
+    const s = diff.summary||{};
+    if(s.added===0 && s.removed===0){
+      el.innerHTML = '<div style="margin:8px 12px;padding:10px;border-radius:8px;background:rgba(0,82,204,0.04);border:1px solid rgba(0,82,204,0.12);font-size:10px;color:#0052cc">🔄 リバランス差分なし — 前回と同じポートフォリオ</div>';
+      return;
+    }
+    let h = '<div style="margin:8px 12px;border-radius:8px;padding:12px;background:rgba(0,82,204,0.04);border:1.5px solid rgba(0,82,204,0.15)">';
+    h += '<div style="font-size:11px;font-weight:700;color:#0052cc;margin-bottom:8px">🔄 リバランス差分</div>';
+    if(diff.added&&diff.added.length>0){
+      h += '<div style="font-size:9px;font-weight:700;color:#00c853;margin:6px 0 3px">▲ 新規購入 ('+diff.added.length+'件)</div>';
+      diff.added.forEach(a=>{h += '<div style="padding:2px 0;font-size:10px"><b style="color:#00c853">'+a.ticker+'</b> <span style="color:var(--text-sub)">'+( a.theme||'')+'</span> <span style="font-family:monospace">$'+(a.price||0).toFixed(2)+'</span></div>';});
+    }
+    if(diff.removed&&diff.removed.length>0){
+      h += '<div style="font-size:9px;font-weight:700;color:#ff1744;margin:6px 0 3px">▼ 売却 ('+diff.removed.length+'件)</div>';
+      diff.removed.forEach(a=>{h += '<div style="padding:2px 0;font-size:10px"><b style="color:#ff1744">'+a.ticker+'</b> <span style="color:var(--text-sub)">'+(a.theme||'')+'</span></div>';});
+    }
+    if(diff.unchanged&&diff.unchanged.length>0){
+      h += '<div style="font-size:9px;font-weight:700;color:var(--text-sub);margin:6px 0 3px">= 継続保有 ('+diff.unchanged.length+'件)</div>';
+      diff.unchanged.forEach(a=>{h += '<div style="padding:2px 0;font-size:10px;color:var(--text-sub)">'+a.ticker+' <span style="font-size:9px">'+(a.theme||'')+'</span></div>';});
+    }
+    h += '<div style="font-size:8px;color:var(--text-sub);margin-top:6px">前回: '+(diff.prev_date||'初回')+'</div>';
+    h += '</div>';
+    el.innerHTML = h;
+  } catch(e) { console.warn('rebal diff error:', e); }
+})();
 </script>
 </body>
 </html>

@@ -1,0 +1,77 @@
+{
+  "tickers": [
+    "APD",
+    "ETN",
+    "GWW",
+    "HUBB",
+    "LIN",
+    "ODFL",
+    "SBS",
+    "WCC",
+    "WTRG",
+    "XPO"
+  ],
+  "picks": [
+    {
+      "ticker": "ODFL",
+      "theme": "",
+      "price": 209.5,
+      "date": ""
+    },
+    {
+      "ticker": "XPO",
+      "theme": "",
+      "price": 211.73,
+      "date": ""
+    },
+    {
+      "ticker": "SBS",
+      "theme": "",
+      "price": 32.99,
+      "date": ""
+    },
+    {
+      "ticker": "WTRG",
+      "theme": "",
+      "price": 41.06,
+      "date": ""
+    },
+    {
+      "ticker": "APD",
+      "theme": "",
+      "price": 297.74,
+      "date": ""
+    },
+    {
+      "ticker": "LIN",
+      "theme": "",
+      "price": 503.3,
+      "date": ""
+    },
+    {
+      "ticker": "WCC",
+      "theme": "",
+      "price": 299.52,
+      "date": ""
+    },
+    {
+      "ticker": "GWW",
+      "theme": "",
+      "price": 1172.21,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 400.44,
+      "date": ""
+    },
+    {
+      "ticker": "HUBB",
+      "theme": "",
+      "price": 534.67,
+      "date": ""
+    }
+  ],
+  "date": ""
+}

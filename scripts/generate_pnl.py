@@ -364,10 +364,102 @@ def update_forward_overlay():
         save_json(cum_path, cum)
         print(f'{label} forward: appended {as_of} (growth={1+total_pnl:.4f})')
 
+# =============================================================
+# Rebalance Diff — track monthly portfolio changes
+# =============================================================
+def update_rebalance_diffs():
+    """Compare current picks with previous snapshot, save diff for each strategy."""
+    strategies = [
+        {'api': API_PRISM, 'data': ROOT / 'data', 'label': 'PRISM',
+         'picks_fn': lambda: _get_prism_picks()},
+        {'api': API_PRISM_R, 'data': DATA_R, 'label': 'PRISM-R',
+         'picks_fn': lambda: _get_shadow_picks(API_PRISM_R, 'a5_pick')},
+        {'api': API_PRISM_RQ, 'data': DATA_RQ, 'label': 'PRISM-RQ',
+         'picks_fn': lambda: _get_shadow_picks(API_PRISM_R, 'snrb_pick')},
+        {'api': API_PRISM_G2, 'data': DATA_G2, 'label': 'G2-MAX',
+         'picks_fn': lambda: _get_g2_picks()},
+    ]
+    for s in strategies:
+        s['data'].mkdir(parents=True, exist_ok=True)
+        prev_path = s['data'] / 'prev_picks.json'
+        curr = s['picks_fn']()
+        if not curr:
+            print(f'{s["label"]} diff: no current picks')
+            continue
+        curr_tickers = {p['ticker'] for p in curr}
+        curr_map = {p['ticker']: p for p in curr}
+        # Load previous
+        if prev_path.exists():
+            prev = load_json(prev_path)
+        else:
+            prev = {'tickers': [], 'picks': [], 'date': ''}
+        prev_tickers = set(prev.get('tickers', []))
+        prev_map = {p['ticker']: p for p in prev.get('picks', [])}
+        # Compute diff
+        added = sorted(curr_tickers - prev_tickers)
+        removed = sorted(prev_tickers - curr_tickers)
+        unchanged = sorted(curr_tickers & prev_tickers)
+        diff = {
+            'as_of': curr[0].get('date', '') if curr else '',
+            'prev_date': prev.get('date', ''),
+            'added': [curr_map[tk] for tk in added],
+            'removed': [prev_map.get(tk, {'ticker': tk}) for tk in removed],
+            'unchanged': [curr_map[tk] for tk in unchanged],
+            'summary': {
+                'total_now': len(curr_tickers),
+                'total_prev': len(prev_tickers),
+                'added': len(added), 'removed': len(removed), 'unchanged': len(unchanged),
+            }
+        }
+        save_json(s['api'] / 'rebalance_diff.json', diff)
+        # Save current as prev for next run
+        save_json(prev_path, {'tickers': sorted(curr_tickers), 'picks': curr,
+                               'date': curr[0].get('date', '')})
+        chg = f'+{len(added)}/-{len(removed)}/={len(unchanged)}'
+        print(f'{s["label"]} diff: {chg}')
+
+def _get_prism_picks():
+    sig_path = ROOT / 'data' / 'snapshots' / 'latest' / 'signals.json'
+    if not sig_path.exists(): return []
+    sig = load_json(sig_path)
+    date = sig.get('snapshot_date', '')
+    picks = []
+    for tk, w in sig.get('production_portfolio', {}).get('weights', {}).items():
+        if tk == 'SHV' or w <= 0: continue
+        price = sig.get('production_portfolio', {}).get('prices', {}).get(tk, 0)
+        picks.append({'ticker': tk, 'theme': '', 'price': price, 'date': date})
+    return picks
+
+def _get_shadow_picks(api_dir, pick_key):
+    comp_path = api_dir / 'shadow_comparison.json'
+    if not comp_path.exists(): return []
+    comp = load_json(comp_path)
+    date = comp.get('snapshot_date', '')
+    picks = []
+    for c in comp.get('comparisons', []):
+        tk = c.get(pick_key)
+        if not tk: continue
+        s = next((x for x in c.get('stocks', []) if x['ticker'] == tk), {})
+        picks.append({'ticker': tk, 'theme': c.get('theme_name', ''), 'price': s.get('price', 0), 'date': date})
+    return picks
+
+def _get_g2_picks():
+    comp_path = API_PRISM_G2 / 'shadow_comparison.json'
+    if not comp_path.exists(): return []
+    comp = load_json(comp_path)
+    date = comp.get('snapshot_date', '')
+    picks = []
+    for c in comp.get('comparisons', []):
+        if c.get('stocks'):
+            s = c['stocks'][0]
+            picks.append({'ticker': s['ticker'], 'theme': c.get('theme_name', ''), 'price': s.get('price', 0), 'date': date})
+    return picks
+
 if __name__ == '__main__':
     compute_prism_pnl()
     compute_prism_r_pnl()
     compute_prism_rq_pnl()
     compute_prism_g2_pnl()
     update_forward_overlay()
+    update_rebalance_diffs()
     print('Done.')

@@ -1,0 +1,49 @@
+{
+  "tickers": [
+    "AAOI",
+    "AEIS",
+    "APD",
+    "BKSY",
+    "ETN",
+    "MU"
+  ],
+  "picks": [
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：トランシーバ",
+      "price": 150.6,
+      "date": "2026-04-10"
+    },
+    {
+      "ticker": "AEIS",
+      "theme": "半導体製造装置：部品",
+      "price": 379.64,
+      "date": "2026-04-10"
+    },
+    {
+      "ticker": "MU",
+      "theme": "データストレージ",
+      "price": 420.59,
+      "date": "2026-04-10"
+    },
+    {
+      "ticker": "BKSY",
+      "theme": "宇宙：地球観測",
+      "price": 34.14,
+      "date": "2026-04-10"
+    },
+    {
+      "ticker": "APD",
+      "theme": "半導体：材料・消耗品",
+      "price": 298.71,
+      "date": "2026-04-10"
+    },
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "price": 403.0,
+      "date": "2026-04-10"
+    }
+  ],
+  "date": "2026-04-10"
+}
