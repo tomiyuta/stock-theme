@@ -9,6 +9,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="theme-color" content="#ffffff">
   <link rel="stylesheet" href="/styles.css?v=21">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
 <style>
 :root{--text-main:#1a1a2e;--text-sub:#6b7280;--bg:#fff;--card-bg:#f8f9fb;--green:#00c853;--red:#ff1744;--blue:#0052cc;--gold:#f59e0b;--purple:#7c3aed}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -201,6 +202,18 @@ Promise.all([
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">BFM-v2 = Sharpe/Calmar/MaxDD改善を達成した初の候補。risk-managed alternative（replacementではない）。</div>`;
   h+=`</div>`;
 
+  // === 8b. Cumulative Returns Chart ===
+  h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--purple)">PRISM-RQ vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
+  h+=`<div style="position:relative;height:220px"><canvas id="cumChartRQ"></canvas></div>`;
+  h+=`<div id="cumStatsRQ" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`</div>`;
+
+  // === 8c. Annual Performance Table ===
+  h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
+  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>PRISM-RQ</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyRQ"></tbody></table>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり。production判断はforward PIT-safeデータのみ。</div></div>`;
+
   // === 9. Forward Clock ===
   h+=`<div style="margin:8px 12px;font-size:10px;font-weight:700;color:var(--text-main)">Forward Clock</div>`;
   h+=`<div class="card">`;
@@ -257,7 +270,53 @@ Promise.all([
   h+=`</div>`;
 
   document.getElementById('rqMain').innerHTML=h;
+  // Init cumulative chart after DOM render
+  setTimeout(initRQChart, 300);
 }).catch(err=>{document.getElementById('rqMain').innerHTML=`<p style="color:red;padding:20px">Error: ${err.message}</p>`;});
+
+function initRQChart(){
+fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
+  const ctx=document.getElementById('cumChartRQ');
+  if(!ctx)return;
+  const fwd=cr.forward_overlay||{dates:[],a5:[],SPY:[]};
+  const lastBT_a5=cr.a5[cr.a5.length-1]||1;
+  const lastBT_spy=cr.SPY[cr.SPY.length-1]||1;
+  const fwdA5=(fwd.a5||[]).map(g=>Math.round(lastBT_a5*g*1e6)/1e6);
+  const fwdSPY=(fwd.SPY||[]).map(g=>Math.round(lastBT_spy*g*1e6)/1e6);
+  const allDates=[...cr.dates,...fwd.dates.filter(d=>!cr.dates.includes(d))];
+  const btA5=[...cr.a5,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const btSPY=[...cr.SPY,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const fwdA5Full=[...new Array(cr.dates.length-1).fill(null),lastBT_a5,...fwdA5];
+  const fwdSPYFull=[...new Array(cr.dates.length-1).fill(null),lastBT_spy,...fwdSPY];
+  new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
+    {label:'RQ BT(参考)',data:btA5,borderColor:'rgba(124,58,237,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'RQ 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
+  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
+    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+  // Stats badges
+  const st=cr.stats;
+  const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  document.getElementById('cumStatsRQ').innerHTML=
+    mkB('RQ CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(124,58,237,0.06)')+
+    mkB('RQ Sharpe',st.a5.sharpe.toFixed(2),'rgba(124,58,237,0.06)')+
+    mkB('RQ MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
+    mkB('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
+    mkB('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+  // Annual table
+  const ann=cr.annual;const years=Object.keys(ann.a5).sort();
+  let tb='';
+  years.forEach(y=>{
+    const a5v=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=a5v-sv;
+    const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
+    const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a5v)};font-weight:700">${f(a5v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+  });
+  document.getElementById('annualBodyRQ').innerHTML=tb;
+}).catch(e=>console.warn('RQ chart error:',e));
+}
 </script>
 <nav class="bottom-nav">
   <a href="/" class="nav-item"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg></span>テーマ</a>
