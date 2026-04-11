@@ -260,8 +260,9 @@ def compute_prism_rq_pnl():
         positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(weight,4), 'pnl_pct': round(pnl,4), 'pnl_weighted': round(pnl*weight,6)})
         total_inv += ep * weight; total_cur += cp * weight
     total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
+    closed = [{'ticker':tk,'theme':v.get('theme',''),'entry_date':v.get('entry_date',''),'exit_date':v.get('exit_date',''),'entry_price':v.get('entry_price',0)} for tk,v in vledger['positions'].items() if v.get('status')=='closed']
     result = {'as_of_date': snapshot_date, 'strategy': 'PRISM-RQ', 'status': 'SHADOW_VIRTUAL',
-              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4)}, 'positions': positions}
+              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4), 'closed_count': len(closed)}, 'positions': positions, 'closed_positions': closed}
     API_PRISM_RQ.mkdir(parents=True, exist_ok=True)
     save_json(API_PRISM_RQ / 'pnl.json', result)
     print(f'PRISM-RQ P&L: {len(positions)} positions, total={total_pnl:+.2%}')
@@ -302,8 +303,9 @@ def compute_prism_g2_pnl():
         positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(weight,4), 'pnl_pct': round(pnl,4)})
         total_inv += ep * weight; total_cur += cp * weight
     total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
+    closed = [{'ticker':tk,'theme':v.get('theme',''),'entry_date':v.get('entry_date',''),'exit_date':v.get('exit_date',''),'entry_price':v.get('entry_price',0)} for tk,v in vledger['positions'].items() if v.get('status')=='closed']
     result = {'as_of_date': snapshot_date, 'strategy': 'G2-MAX', 'status': 'SHADOW_VIRTUAL',
-              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4)}, 'positions': positions}
+              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4), 'closed_count': len(closed)}, 'positions': positions, 'closed_positions': closed}
     save_json(API_PRISM_G2 / 'pnl.json', result)
     print(f'G2-MAX P&L: {len(positions)} positions, total={total_pnl:+.2%}')
     return result

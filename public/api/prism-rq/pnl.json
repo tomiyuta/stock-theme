@@ -4,7 +4,8 @@
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0
+    "total_pnl_pct": 0.0,
+    "closed_count": 0
   },
   "positions": [
     {
@@ -97,5 +98,6 @@
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     }
-  ]
+  ],
+  "closed_positions": []
 }
