@@ -833,3 +833,30 @@ Clock:  独立。grossを変更する場合は新clock開始。
   target_vol = 25%
   realized_vol = 20日 or 63日
 ```
+
+
+---
+
+## PRISM-RQ Naming (2026-04-11)
+
+```
+PRISM → PRISM-R → PRISM-RQ
+
+  PRISM:    Layer 1 (theme momentum) + Layer 2 (raw 1M return)
+  PRISM-R:  Layer 1 (同上) + Layer 2 (α63 × shrink(r²))
+  PRISM-RQ: Layer 1 (BFM-v2品質フィルタ) + Layer 2 (A5-SNRb residual-SNR)
+            R = Residual（SNRb継承）
+            Q = Quality（BFM-v2品質フィルタ）
+
+構造:
+  Layer 1: score = 0.70×rank(mom63) + 0.30×rank(decel) → top25 → BFM-v2 veto → top10
+  Layer 2: score = (alpha_cum63 / resid_vol63) × shrink(r²)
+  Layer 3: 10銘柄 × 等ウェイト × 20営業日リバランス
+
+統治レイヤー（診断中）:
+  - Theme Correlation Budget
+  - Continuity Filter (ENABLE=False)
+  - Vol Overlay (ENABLE=False)
+  - CRA-v1 (parked)
+  - Dip Sleeve (diagnostic)
+```

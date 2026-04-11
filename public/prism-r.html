@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>PRISM-R | 米国株テーマトラッカー</title>
+  <title>PRISM-RQ | 米国株テーマトラッカー</title>
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/icon-192.png">
   <meta name="apple-mobile-web-app-capable" content="yes">
@@ -131,7 +131,7 @@ Promise.all([
   document.getElementById('prismDate').textContent='Snapshot: '+comp.snapshot_date;
   let h='';
   // 1. Shadow Status Card
-  h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-R: ${meta.status||'SHADOW'}</div>`;
+  h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-RQ: ${meta.status||'SHADOW'}</div>`;
   h+=`<div class="gate-detail">α63×shrink(r²) | 20営業日リバランス | sector_cap=3</div>`;
   h+=`<div class="gate-atk">観測モード — A4 live維持</div></div>`;
   // 2. PIT Warning
@@ -213,7 +213,7 @@ Promise.all([
     const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};
     return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
   });
-  h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
+  h+=`<div class="section-title">📊 PRISM-RQ リバランス計算</div>`;
   h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × 10%等ウェイト</div>`;
   h+=`<div class="prod-input-row">`;
   h+=`<span class="prod-input-label">投資資金</span>`;
@@ -299,9 +299,9 @@ Promise.all([
     h+=`<div class="gate-item"><span class="g-label">${g}</span><span class="g-icon">⏳</span></div>`;});
   h+=`</div><div class="prod-meta" style="margin:2px 12px">全ゲートはforward PIT-safeデータで評価。バックテスト値は参考のみ。</div>`;
   // 9. Investment Logic Cards (MECE)
-  h+=`<div class="section-title">📐 PRISM-R 投資ロジック</div>`;
+  h+=`<div class="section-title">📐 PRISM-RQ 投資ロジック</div>`;
   const lcards=[
-    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）のみを差し替えたshadow overlay戦略。</div><div class="logic-rule">Layer 1（テーマ選定）とLayer 3（ポートフォリオ制約）はPRISMと完全同一。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M return最大 → Layer 3</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²_63)</code> 最大 → Layer 3</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 35% + MaxPositions 35</div>`],
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-RQは、PRISMのLayer 1に品質フィルタ（BFM-v2）、Layer 2にresidual-SNR（A5-SNRb）を組み合わせた2層構造。</div><div class="logic-rule"><b>Layer 1:</b> テーマ選定 → BFM-v2品質フィルタ（breadth/concentration/vol veto）</div><div class="logic-rule"><b>Layer 2:</b> A5-SNRb = (α63/resid_vol63) × shrink(r²) で銘柄選定</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 3テーマ + 10銘柄等ウェイト</div>`],
     ["Layer 1: テーマ選定（PRISM共通）",`<div class="logic-rule"><b>5因子スコア:</b> z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule"><b>選定:</b> 上位10テーマ / 適格=4銘柄以上 / セクター制約=同一セクター最大3</div><div class="logic-rule"><b>ヒステリシス:</b> ENTRY≤20 / WATCH 21-35 / EXIT&gt;35</div>`],
     ["Layer 2: 銘柄選定（PRISM-R固有）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:4px 0">OLS回帰モデル（63日ローリング）</div><div class="logic-rule"><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code></div><div class="logic-rule"><b>自己除外:</b> テーマ平均から銘柄i自身を除外（平均4.7銘柄/テーマで歪み防止）</div><div class="logic-rule"><b>出力:</b> α63（残差α）/ β63（傾き）/ r²_63（決定係数）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">Shrinkage関数（hard filterの代替）</div><div class="logic-rule"><code>shrink(r²): r²&lt;0.10→r²×2 | 0.10-0.50→線形補間 | r²&gt;0.50→1.0</code></div><div class="logic-rule">設計意図: 小ユニバースで候補枯渇を防ぎつつ、低信頼度αを縮小</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">スコア</div><div class="logic-rule"><code>score = α63 × shrink(r²_63)</code></div><div class="logic-rule">各テーマからscore最大の1銘柄を選定。重複禁止。</div>`],
     ["Layer 3: ポートフォリオ制約（PRISM共通）",`<div class="logic-rule"><b>ウェイト:</b> 等ウェイト 10銘柄×10%</div><div class="logic-rule"><b>リバランス:</b> 20営業日ごと</div><div class="logic-rule"><b>MinHold:</b> 20営業日（実証済みコア）</div><div class="logic-rule"><b>SectorCap:</b> 35%</div>`],

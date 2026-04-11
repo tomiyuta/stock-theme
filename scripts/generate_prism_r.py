@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Generate PRISM-R shadow comparison JSON from theme-details data.
+"""Generate PRISM-RQ shadow comparison JSON from theme-details data.
+PRISM-RQ = Residual-SNR (Layer 2: A5-SNRb) + Quality filter (Layer 1: BFM-v2)
 Runs as part of daily_update.yml after build_for_vercel.py.
 Input:  public/api/theme-details/*.json + public/api/stock_meta.json + public/api/theme_ranking.json
 Output: public/api/prism-r/shadow_comparison.json + public/api/prism-r/meta.json
@@ -449,7 +450,7 @@ except Exception as e:
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
-    'version': 'A5-lite_shadow_v1',
+    'version': 'PRISM-RQ_v1',
     'status': 'SHADOW',
     'frozen_params': {
         'alpha_window': 63,
@@ -491,7 +492,7 @@ with open(OUT / 'shadow_comparison.json', 'w') as f:
 meta_out = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
-    'version': 'A5-lite_shadow_v1',
+    'version': 'PRISM-RQ_v1',
     'status': 'SHADOW',
     'pit_safe': False,
     'forward_rebalances': 0,
@@ -515,7 +516,7 @@ with open(OUT / 'meta.json', 'w') as f:
     json.dump(meta_out, f, ensure_ascii=False, indent=2)
 
 comp_size = (OUT / 'shadow_comparison.json').stat().st_size / 1024
-print(f'PRISM-R: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
+print(f'PRISM-RQ: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
       f'snrb_overlap={snrb_overlap_a5}/{len(comparisons)}, '
       f'cra_overlap_snrb={cra_overlap_snrb}/{len(comparisons)}, '
       f'bfm2={bfm2_overlap_base}/10 (vetoed={len(bfm2_vetoed)}), '

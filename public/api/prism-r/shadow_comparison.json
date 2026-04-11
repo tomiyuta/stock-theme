@@ -1,7 +1,7 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-11T11:38:59.662010",
-  "version": "A5-lite_shadow_v1",
+  "generated_at": "2026-04-11T11:45:57.799583",
+  "version": "PRISM-RQ_v1",
   "status": "SHADOW",
   "frozen_params": {
     "alpha_window": 63,
