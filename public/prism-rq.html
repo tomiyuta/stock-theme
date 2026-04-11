@@ -208,8 +208,8 @@ Promise.all([
   // === 8b. Cumulative Returns Chart ===
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="card"><div class="card-title" style="color:var(--purple)">PRISM-RQ vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
-  h+=`<div style="position:relative;height:220px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartRQToggle"><button class="active" onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',true)">対数</button></div></div><canvas id="cumChartRQ"></canvas></div>`;
-  h+=`<div id="cumStatsRQ" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartRQToggle"><button class="active" onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',true)">対数</button></div></div><canvas id="cumChartRQ"></canvas></div>`;
+  h+=`<div id="cumStatsRQ" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
 
   // === 8c. Annual Performance Table ===
@@ -298,9 +298,9 @@ fetch('/api/prism-rq/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
     {label:'RQ 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
+  ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,
     plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
-    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   // Stats badges
   const st=cr.stats;
   const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;

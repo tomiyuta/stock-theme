@@ -232,8 +232,8 @@ Promise.all([
   // Cumulative Returns Chart (案C: BT破線 + forward実線)
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="bm-card"><div class="bm-title">A5-R (PRISM-R) vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
-  h+=`<div style="position:relative;height:220px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartRToggle"><button class="active" onclick="toggleLogScale('_cumChartR','cumChartRToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartR','cumChartRToggle',true)">対数</button></div></div><canvas id="cumChartR"></canvas></div>`;
-  h+=`<div id="cumStatsR" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartRToggle"><button class="active" onclick="toggleLogScale('_cumChartR','cumChartRToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartR','cumChartRToggle',true)">対数</button></div></div><canvas id="cumChartR"></canvas></div>`;
+  h+=`<div id="cumStatsR" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A5-R</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
@@ -382,10 +382,10 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
     {label:'A5-R 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
+  ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,
     plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},
       tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
-    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},
       y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   const st=cr.stats;
   const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;

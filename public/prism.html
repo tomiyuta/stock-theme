@@ -304,8 +304,8 @@ Promise.all([
   // Cumulative Returns Chart (案C: BT破線 + forward実線)
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM) vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
-  h+=`<div style="position:relative;height:220px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartToggle"><button class="active" onclick="toggleLogScale('_cumChartP','cumChartToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartP','cumChartToggle',true)">対数</button></div></div><canvas id="cumChart"></canvas></div>`;
-  h+=`<div id="cumStats" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
+  h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartToggle"><button class="active" onclick="toggleLogScale('_cumChartP','cumChartToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartP','cumChartToggle',true)">対数</button></div></div><canvas id="cumChart"></canvas></div>`;
+  h+=`<div id="cumStats" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBody"></tbody></table>`;
@@ -530,10 +530,10 @@ fetch('/api/prism/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then
     {label:'A4 実績',data:fwdA4Full,borderColor:'#0052cc',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
-  ]},options:{responsive:true,maintainAspectRatio:false,interaction:{mode:'index',intersect:false},spanGaps:false,
+  ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,
     plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},
       tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
-    scales:{x:{type:'category',ticks:{maxTicksLimit:8,font:{size:9}},grid:{display:false}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},
       y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   // Stats badges
   const st=cr.stats;
