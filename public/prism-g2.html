@@ -105,7 +105,10 @@ Promise.all([
     h+=`</div></div>`;
   });
 
-  // === 5. Rebalance Calculator ===
+  // === 5. Sell Card ===
+  h+=`<div id="sellCardG2"></div>`;
+
+  // === 6. Rebalance Calculator ===
   window._g2_picks = (comp.comparisons||[]).map(c => {
     const s = c.stocks?.[0] || {};
     return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
@@ -279,10 +282,9 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
   document.getElementById('annualBodyG2').innerHTML=tb;
 }).catch(e=>console.warn('G2 chart error:',e));}
 </script>
-<div id="sellCardG2"></div>
-
 <script>
-(async()=>{
+(async function(){
+  await new Promise(r=>setTimeout(r,3000));
   try {
     const pnl = await fetch('/api/prism-g2/pnl.json?t='+Date.now()).then(r=>r.json());
     const closed = pnl.closed_positions || [];
