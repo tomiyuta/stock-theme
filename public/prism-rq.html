@@ -206,7 +206,7 @@ Promise.all([
   // === 8b. Cumulative Returns Chart ===
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="card"><div class="card-title" style="color:var(--purple)">PRISM-RQ vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
-  h+=`<div style="position:relative;height:220px"><canvas id="cumChartRQ"></canvas></div>`;
+  h+=`<div style="position:relative;height:220px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartRQToggle"><button class="active" onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartRQ','cumChartRQToggle',true)">対数</button></div></div><canvas id="cumChartRQ"></canvas></div>`;
   h+=`<div id="cumStatsRQ" style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap"></div>`;
   h+=`</div>`;
 
@@ -289,7 +289,7 @@ fetch('/api/prism-rq/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
   const btSPY=[...cr.SPY,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const fwdA5Full=[...new Array(cr.dates.length-1).fill(null),lastBT_a5,...fwdA5];
   const fwdSPYFull=[...new Array(cr.dates.length-1).fill(null),lastBT_spy,...fwdSPY];
-  new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
+  window._cumChartRQ=new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
     {label:'RQ BT(参考)',data:btA5,borderColor:'rgba(124,58,237,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'RQ 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
@@ -329,5 +329,25 @@ fetch('/api/prism-rq/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
       <a class="nav-item" href="/prism-g2"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><path d="M7 14l5-8 5 8" fill="currentColor"/></svg></span><span style="color:#e11d48">G2</span></a>
 </nav>
 <script>(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();const el=document.getElementById('headerMeta');if(el&&d.last_update){el.innerHTML='<div class="last-updated">データ更新: '+d.last_update+'</div>';}}catch(e){}})();</script>
+
+<script>
+function toggleLogScale(chartVar, toggleId, isLog) {
+  const chart = window[chartVar];
+  if (!chart) return;
+  chart.options.scales.y.type = isLog ? 'logarithmic' : 'linear';
+  if (isLog) {
+    chart.options.scales.y.ticks.callback = function(v) {
+      if ([0.5,1,2,5,10,20,50,100,200,500].includes(v)) return v.toFixed(v<10?1:0)+'x';
+      return null;
+    };
+  } else {
+    chart.options.scales.y.ticks.callback = function(v) { return v.toFixed(1)+'x'; };
+  }
+  chart.update();
+  document.querySelectorAll('#'+toggleId+' button').forEach(function(b,i) {
+    b.classList.toggle('active', isLog ? i===1 : i===0);
+  });
+}
+</script>
 </body>
 </html>
