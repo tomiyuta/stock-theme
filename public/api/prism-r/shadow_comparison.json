@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-11T11:18:07.705090",
+  "generated_at": "2026-04-11T11:20:57.544577",
   "version": "A5-lite_shadow_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -348,6 +348,106 @@
   "dip_sleeve_summary": {
     "total_alerts": 18,
     "qualified": 4
+  },
+  "continuity_diagnostics": [
+    {
+      "theme": "gas-fracking",
+      "ticker": "PTEN",
+      "sign_consistency": 0.442,
+      "monotonic_ratio": 0.604,
+      "jumpiness": 4.67,
+      "alpha_sign_positive": 6,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "dc-optical-device",
+      "ticker": "AAOI",
+      "sign_consistency": 0.558,
+      "monotonic_ratio": 0.717,
+      "jumpiness": 2.1,
+      "alpha_sign_positive": 5,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "semi-component",
+      "ticker": "UCTT",
+      "sign_consistency": 0.519,
+      "monotonic_ratio": 0.585,
+      "jumpiness": 3.01,
+      "alpha_sign_positive": 5,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "infra-contractors",
+      "ticker": "MTZ",
+      "sign_consistency": 0.577,
+      "monotonic_ratio": 0.679,
+      "jumpiness": 2.29,
+      "alpha_sign_positive": 7,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "dc-optical-ems",
+      "ticker": "MTSI",
+      "sign_consistency": 0.365,
+      "monotonic_ratio": 0.585,
+      "jumpiness": 2.46,
+      "alpha_sign_positive": 4,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "oil-supermajors-non-us",
+      "ticker": "PBR",
+      "sign_consistency": 0.423,
+      "monotonic_ratio": 0.642,
+      "jumpiness": 2.81,
+      "alpha_sign_positive": 5,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "refinary",
+      "ticker": "PARR",
+      "sign_consistency": 0.596,
+      "monotonic_ratio": 0.604,
+      "jumpiness": 3.75,
+      "alpha_sign_positive": 7,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "onsite-power",
+      "ticker": "GEV",
+      "sign_consistency": 0.538,
+      "monotonic_ratio": 0.679,
+      "jumpiness": 2.55,
+      "alpha_sign_positive": 6,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "pub-construction-electric",
+      "ticker": "PWR",
+      "sign_consistency": 0.462,
+      "monotonic_ratio": 0.698,
+      "jumpiness": 2.31,
+      "alpha_sign_positive": 2,
+      "alpha_sign_total": 7
+    },
+    {
+      "theme": "dividend",
+      "ticker": "VZ",
+      "sign_consistency": 0.442,
+      "monotonic_ratio": 0.604,
+      "jumpiness": 3.19,
+      "alpha_sign_positive": 4,
+      "alpha_sign_total": 7
+    }
+  ],
+  "vol_overlay_diagnostics": {
+    "realized_vol_20d": 0.378,
+    "realized_vol_63d": 0.369,
+    "target_vol": 0.25,
+    "gross_scale_20d": 0.662,
+    "gross_scale_63d": 0.678,
+    "would_reduce": true
   },
   "comparisons": [
     {

@@ -758,3 +758,46 @@ Status: diagnostic only（forward観測中、取引なし）
        historical BTは不可。forward診断のみ。
        premium APIの定期再取得が必要。
 ```
+
+
+### Continuity Filter Status (2026-04-10)
+
+```
+Status: diagnostic only（tie-breaker候補、単独戦略化しない）
+実装: generate_prism_r.pyに組込み済み、CI/CD自動更新
+
+指標:
+  sign_consistency: スパークライン方向転換の少なさ（1.0=完全単調）
+  monotonic_ratio:  上昇週の比率
+  jumpiness:        週次変化の標準偏差/平均（低い方が滑らか）
+  alpha_sign_positive: stock-themes 7期間α中の正符号数
+
+初回結果（2026-04-10）:
+  MTZ:  sign=0.58 mono=0.68 jump=2.3 α+=7/7 ← 最高品質
+  PARR: sign=0.60 mono=0.60 jump=3.8 α+=7/7
+  GEV:  sign=0.54 mono=0.68 jump=2.5 α+=6/7
+  PWR:  sign=0.46 mono=0.70 jump=2.3 α+=2/7 ← 要注意
+  VZ:   sign=0.44 mono=0.60 jump=3.2 α+=4/7 ← 要注意
+
+用途: selector ではなく veto/tie-breaker に留める
+```
+
+### Vol Overlay Status (2026-04-10)
+
+```
+Status: diagnostic only（shadow overlay、gross調整は未適用）
+実装: generate_prism_r.pyに組込み済み、CI/CD自動更新
+
+初回結果（2026-04-10）:
+  realized_vol_20d = 0.378（37.8%）
+  realized_vol_63d = 0.369（36.9%）
+  target_vol = 0.25（25%）
+  gross_scale_20d = 0.662 ← 33.8%縮小が示唆
+  gross_scale_63d = 0.678 ← 32.2%縮小が示唆
+  would_reduce = true
+
+解釈:
+  現在のポートフォリオは target_vol 25% を大幅に上回っている。
+  Vol overlay を適用した場合、gross を ~66% に縮小する必要がある。
+  ただし現時点では診断のみ。実gross調整はforwardデータ蓄積後に検討。
+```

@@ -380,6 +380,70 @@ if DIP_PATH.exists():
         print(f'WARN: dip_alerts load failed: {e}')
 n_qualified = sum(1 for d in dip_sleeve if d['qualified'])
 
+# === Continuity Filter Diagnostics ===
+SPARK_PATH = ROOT / 'data' / 'stock-themes-api' / 'sparklines_all.json'
+BA_PATH2 = ROOT / 'data' / 'stock-themes-api' / 'beta_alpha_all.json'
+continuity_diag = []
+try:
+    spark_data = json.load(open(SPARK_PATH)) if SPARK_PATH.exists() else {}
+    ba_data = json.load(open(BA_PATH2)) if BA_PATH2.exists() else {}
+    sparklines = spark_data.get('sparklines', {})
+    for c in comparisons:
+        th_slug = c['theme']; tk = c['a5_pick']
+        th_name = slug_to_name.get(th_slug, th_slug)
+        cd_entry = {'theme': th_slug, 'ticker': tk}
+        # Sparkline smoothness
+        vals = sparklines.get(th_name, [])
+        if vals and len(vals) >= 10:
+            arr = np.array(vals, dtype=float)
+            diffs = np.diff(arr)
+            sign_ch = np.sum(np.abs(np.diff(np.sign(diffs))) > 0)
+            cd_entry['sign_consistency'] = round(1.0 - sign_ch / max(len(diffs)-1, 1), 3)
+            cd_entry['monotonic_ratio'] = round(float(np.sum(diffs > 0) / max(len(diffs), 1)), 3)
+            cd_entry['jumpiness'] = round(float(np.std(diffs) / (np.abs(np.mean(diffs)) + 1e-8)), 2)
+        # Multi-horizon alpha sign consistency
+        ba_tk = ba_data.get(th_slug, {}).get('data', {}).get(tk, {})
+        if ba_tk:
+            n_pos = sum(1 for p in ['5D','10D','1M','2M','3M','6M','12M']
+                       if ba_tk.get(p, {}).get('alpha', 0) > 0)
+            cd_entry['alpha_sign_positive'] = n_pos
+            cd_entry['alpha_sign_total'] = 7
+        continuity_diag.append(cd_entry)
+except Exception as e:
+    print(f'WARN: continuity filter failed: {e}')
+
+# === Vol Overlay Diagnostics ===
+vol_diag = {}
+try:
+    # Portfolio realized vol (20-day and 63-day)
+    port_daily = []
+    for c in comparisons:
+        tk = c['a5_pick']
+        if tk:
+            tk_data = panel[(panel['ticker']==tk)&(panel['date']<=dt)].drop_duplicates('date').sort_values('date').tail(63)
+            if len(tk_data) >= 20:
+                s = tk_data.set_index('date')['ret']
+                s = s[~s.index.duplicated(keep='first')]
+                port_daily.append(s)
+    if port_daily:
+        port_df = pd.DataFrame({i: s for i, s in enumerate(port_daily)}).dropna()
+        eq_wt = port_df.mean(axis=1)  # equal weight
+        vol20 = float(eq_wt.tail(20).std() * np.sqrt(252))
+        vol63 = float(eq_wt.tail(63).std() * np.sqrt(252))
+        target_vol = 0.25  # 25% target
+        gross_scale_20 = min(1.0, target_vol / vol20) if vol20 > 0 else 1.0
+        gross_scale_63 = min(1.0, target_vol / vol63) if vol63 > 0 else 1.0
+        vol_diag = {
+            'realized_vol_20d': round(vol20, 3),
+            'realized_vol_63d': round(vol63, 3),
+            'target_vol': target_vol,
+            'gross_scale_20d': round(gross_scale_20, 3),
+            'gross_scale_63d': round(gross_scale_63, 3),
+            'would_reduce': gross_scale_20 < 1.0 or gross_scale_63 < 1.0,
+        }
+except Exception as e:
+    print(f'WARN: vol overlay failed: {e}')
+
 output = {
     'snapshot_date': str(dt.date()),
     'generated_at': datetime.now().isoformat(),
@@ -411,6 +475,8 @@ output = {
     'bfm2_quality_features': {th: cand_feat.get(th) for th in sel if th in cand_feat},
     'dip_sleeve_diagnostics': dip_sleeve,
     'dip_sleeve_summary': {'total_alerts': len(dip_sleeve), 'qualified': n_qualified},
+    'continuity_diagnostics': continuity_diag,
+    'vol_overlay_diagnostics': vol_diag,
     'comparisons': comparisons,
     'virtual_exits': virtual_exits,
     'virtual_entries': virtual_entries
