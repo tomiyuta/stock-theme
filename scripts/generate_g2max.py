@@ -1,4 +1,4 @@
-"""Generate G2-MAX snapshot: 6 themes (corr budget) × raw self-excluded α63.
+"""Generate G2-MAX snapshot: 6 themes (corr budget) × raw self-excluded α63 × W5b consistency weighting.
 Output: public/api/prism-g2/shadow_comparison.json + meta.json
 """
 import json, os, sys, numpy as np, pandas as pd
@@ -71,19 +71,23 @@ WARMUP = 126; MIN_M = 4; TOP_T = 6; MAX_CORR = 0.80
 j = len(dates_all) - 1; dt = dates_all[j]
 dt63 = set(dates_all[max(0,j-62):j+1])
 dt126 = set(dates_all[max(0,j-125):j+1])
+dt252 = set(dates_all[max(0,j-251):j+1])
 sub = panel[panel['date'].isin(dt63)]
 sub126 = panel[panel['date'].isin(dt126)]
+sub252 = panel[panel['date'].isin(dt252)]
 
 # Theme momentum
 tm = sub.groupby('theme')['ticker'].nunique()
 elig = tm[tm >= MIN_M].index.tolist()
-tm_mom63, tm_mom126, tm_mom21 = {}, {}, {}
+tm_mom63, tm_mom126, tm_mom21, tm_mom252 = {}, {}, {}, {}
 for th in elig:
     td = sub[sub['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
     if len(td) >= 21: tm_mom21[th] = cumret(td[-21:])
     if len(td) >= 63: tm_mom63[th] = cumret(td)
     td126v = sub126[sub126['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
     if len(td126v) >= 63: tm_mom126[th] = cumret(td126v)
+    td252v = sub252[sub252['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
+    if len(td252v) >= 126: tm_mom252[th] = cumret(td252v)
 
 tdf = pd.DataFrame({'mom63': pd.Series(tm_mom63), 'mom126': pd.Series(tm_mom126),
                      'mom21': pd.Series(tm_mom21)}).dropna(subset=['mom63'])
@@ -144,8 +148,53 @@ for th in sel:
         'theme_score': round(float(tdf.loc[th, 'score']), 4),
         'mom63': round(float(tdf.loc[th, 'mom63']), 4),
         'mom126': round(float(tdf.loc[th, 'mom126']), 4) if th in tdf.index and 'mom126' in tdf.columns else None,
+        'mom252': round(float(tm_mom252.get(th, np.nan)), 4) if np.isfinite(tm_mom252.get(th, np.nan)) else None,
         'pick': pick, 'stocks': all_stocks,
     })
+
+# === W5b Consistency Weighting (R63/R126/R252_ex1m) ===
+w5b_data = {}
+for c in comparisons:
+    th = c['theme']
+    r63 = tdf.loc[th, 'mom63'] if th in tdf.index else np.nan
+    r126 = tdf.loc[th, 'mom126'] if th in tdf.index and np.isfinite(tdf.loc[th, 'mom126']) else np.nan
+    r21 = tdf.loc[th, 'mom21'] if th in tdf.index and np.isfinite(tdf.loc[th, 'mom21']) else np.nan
+    r252 = tm_mom252.get(th, np.nan)
+    # R252_ex1m = (1+R252)/(1+R21) - 1
+    r252ex1m = ((1+r252)/(1+r21) - 1) if np.isfinite(r252) and np.isfinite(r21) and abs(1+r21) > 1e-8 else np.nan
+    horizons = [r63, r126, r252ex1m]
+    valid = [v for v in horizons if np.isfinite(v)]
+    if len(valid) >= 2:
+        pos_count = sum(1 for v in valid if v > 0)
+        avg_ret = float(np.mean([max(v, 0) for v in valid]))
+        raw_w = pos_count * (1 + avg_ret)
+    else:
+        pos_count = 0; avg_ret = 0; raw_w = 1.0  # fallback
+    w5b_data[th] = {'r63': r63, 'r126': r126, 'r252ex1m': r252ex1m,
+                     'pos_count': pos_count, 'avg_ret': round(avg_ret, 4), 'raw_weight': round(raw_w, 4)}
+
+# Normalize + 30% cap
+total_raw = sum(d['raw_weight'] for d in w5b_data.values())
+if total_raw > 0:
+    for th in w5b_data: w5b_data[th]['weight'] = w5b_data[th]['raw_weight'] / total_raw
+else:
+    for th in w5b_data: w5b_data[th]['weight'] = 1.0 / len(w5b_data)
+for _ in range(5):
+    ws = np.array([w5b_data[th]['weight'] for th in w5b_data])
+    excess = np.maximum(ws - 0.30, 0)
+    if excess.sum() < 1e-6: break
+    under = ws < 0.30; ws = np.minimum(ws, 0.30)
+    if under.any(): ws[under] += excess.sum() * (ws[under] / ws[under].sum())
+    ws = ws / ws.sum()
+    for i, th in enumerate(w5b_data): w5b_data[th]['weight'] = round(float(ws[i]), 4)
+
+# Add W5b weights to comparisons
+for c in comparisons:
+    th = c['theme']
+    wd = w5b_data.get(th, {})
+    c['w5b_weight'] = round(wd.get('weight', 1.0/len(comparisons)), 4)
+    c['w5b_pos_count'] = wd.get('pos_count', 0)
+    c['w5b_r252ex1m'] = round(wd.get('r252ex1m', 0), 4) if np.isfinite(wd.get('r252ex1m', np.nan)) else None
 
 # Correlation diagnostics for selected themes
 sel_corr = {}
@@ -162,17 +211,24 @@ output = {
     'generated_at': datetime.now().isoformat(),
     'version': 'G2-MAX_v1',
     'status': 'SHADOW',
-    'strategy': 'G2-MAX: 6-theme concentrated raw residual momentum',
+    'strategy': 'G2-MAX: 6-theme W5b consistency-weighted raw residual momentum',
     'frozen_params': {
         'theme_score': '0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)',
         'stock_score': 'raw self-excluded α63 (no shrink, no SNR)',
-        'top_themes': 5, 'max_corr': MAX_CORR,
+        'weighting': 'W5b consistency: pos_count(R63,R126,R252ex1m) × (1+avg_positive_ret), 30% cap',
+        'top_themes': TOP_T, 'max_corr': MAX_CORR,
         'picks_per_theme': 1, 'min_members': MIN_M,
     },
     'summary': {
         'themes_selected': len(comparisons),
         'picks': len(used),
         'correlation': sel_corr,
+        'w5b': {
+            'avg_pos_count': round(np.mean([w5b_data[th]['pos_count'] for th in w5b_data]), 2),
+            'frac_3of3': round(np.mean([1 for th in w5b_data if w5b_data[th]['pos_count']==3]) / max(len(w5b_data),1), 2),
+            'weight_top1': round(max(w5b_data[th]['weight'] for th in w5b_data), 4),
+            'weight_min': round(min(w5b_data[th]['weight'] for th in w5b_data), 4),
+        },
     },
     'comparisons': comparisons,
 }

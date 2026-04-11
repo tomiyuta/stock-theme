@@ -285,8 +285,8 @@ def compute_prism_g2_pnl():
         if c.get('stocks'):
             s = c['stocks'][0]
             tk = s['ticker']
-            current_picks[tk] = {'theme': c.get('theme_name', ''), 'price': s.get('price', 0)}
-    weight = 1.0 / max(len(current_picks), 1)
+            w5b_w = c.get('w5b_weight', 1.0/max(len(comp.get('comparisons',[])),1))
+            current_picks[tk] = {'theme': c.get('theme_name', ''), 'price': s.get('price', 0), 'weight': w5b_w}
     for tk, info in current_picks.items():
         if tk not in vledger['positions']:
             vledger['positions'][tk] = {'entry_date': snapshot_date, 'entry_price': info['price'], 'theme': info['theme'], 'status': 'active'}
@@ -299,9 +299,10 @@ def compute_prism_g2_pnl():
     for tk, info in current_picks.items():
         vp = vledger['positions'].get(tk, {})
         ep = vp.get('entry_price', info['price']); cp = info['price']
+        w = info.get('weight', 1.0/max(len(current_picks),1))
         pnl = (cp - ep) / ep if ep > 0 else 0
-        positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(weight,4), 'pnl_pct': round(pnl,4)})
-        total_inv += ep * weight; total_cur += cp * weight
+        positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(w,4), 'pnl_pct': round(pnl,4)})
+        total_inv += ep * w; total_cur += cp * w
     total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
     closed = [{'ticker':tk,'theme':v.get('theme',''),'entry_date':v.get('entry_date',''),'exit_date':v.get('exit_date',''),'entry_price':v.get('entry_price',0)} for tk,v in vledger['positions'].items() if v.get('status')=='closed']
     result = {'as_of_date': snapshot_date, 'strategy': 'G2-MAX', 'status': 'SHADOW_VIRTUAL',

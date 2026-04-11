@@ -44,7 +44,7 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <div style="padding:16px 12px 4px;text-align:center">
   <div style="font-size:20px;font-weight:900;letter-spacing:1px">G2-<span style="color:var(--g2)">MAX</span></div>
   <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Concentrated Cluster-Aware Raw Residual Momentum</div>
-  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -44%覚悟の攻撃型戦略</div>
+  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -45%覚悟の攻撃型戦略</div>
   <div id="headerMeta"></div>
 </div>
 <div id="g2Main"><div style="padding:40px;text-align:center;color:var(--text-sub)">Loading...</div></div>
@@ -65,7 +65,7 @@ Promise.all([
 
   // === 2. Key Metrics Banner ===
   h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 12px">`;
-  [['BT CAGR','175.3%','rgba(225,29,72,0.08)'],['BT Sharpe','2.795','rgba(225,29,72,0.08)'],['BT MaxDD','-44.1%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
+  [['BT CAGR','230.7%','rgba(225,29,72,0.08)'],['BT Sharpe','2.935','rgba(225,29,72,0.08)'],['BT MaxDD','-45.0%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
     h+=`<div style="padding:8px;border-radius:6px;background:${c};text-align:center"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:14px;font-weight:900;color:var(--g2)">${v}</div></div>`;
   });
   h+=`</div>`;
@@ -112,12 +112,12 @@ Promise.all([
   // === 6. Rebalance Calculator ===
   window._g2_picks = (comp.comparisons||[]).map(c => {
     const s = c.stocks?.[0] || {};
-    return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
+    return {ticker:s.ticker, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63, w5b_weight:c.w5b_weight||0};
   });
   const nPicks = comp.comparisons?.length || 5;
   const wPct = (100/nPicks).toFixed(0);
   h+=`<div class="section-title">📊 G2-MAX リバランス計算</div>`;
-  h+=`<div class="prod-card"><div class="prod-title">G2-MAX Shadow Portfolio — ${nPicks}銘柄 × ${wPct}%等ウェイト</div>`;
+  h+=`<div class="prod-card"><div class="prod-title">G2-MAX Shadow Portfolio — ${nPicks}銘柄 × W5b一貫性加重</div>`;
   h+=`<div class="prod-input-row">`;
   h+=`<span class="prod-input-label">投資資金</span>`;
   h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setG2Ccy('USD')">USD</button><button class="prod-toggle-btn" onclick="setG2Ccy('JPY')">JPY</button></div>`;
@@ -125,10 +125,10 @@ Promise.all([
   h+=`<span class="prod-input-label">ドル円:</span><input id="g2Fx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcG2()">`;
   h+=`<button class="prod-fx-btn" onclick="fetchG2Fx()">🔄 現在レート</button>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">W5b%</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
   h+=`<tbody id="g2RebalBody"></tbody></table>`;
   h+=`<div id="g2RebalSummary"></div>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">等ウェイト ${wPct}% × ${nPicks}銘柄 | SHADOWモード（実際の売買は行いません）</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:6px">W5b一貫性加重（R63/R126/R252ex1m, 30%キャップ）× ${nPicks}銘柄 | SHADOWモード</div>`;
   h+=`</div>`;
 
   // === 6. Cumulative Returns Chart ===
@@ -150,7 +150,7 @@ Promise.all([
   const abl=[
     ['G0 A5-lite','67.2%','1.565','-42.0%','19.1x'],
     ['G1 5テーマ集中','145.3%','2.179','-48.7%','172.8x'],
-    ['G2 6テーマ ★','175.3%','2.795','-44.1%','335.5x'],
+    ['G2 6テーマ W5b ★','230.7%','2.935','-45.0%','—'],
     ['G3a α/σ²','64.6%','1.576','-39.3%','17.5x'],
     ['G4 Kelly sizing','36.6%','0.838','-51.9%','6.0x'],
   ];
@@ -165,11 +165,12 @@ Promise.all([
   // === 9. Architecture ===
   h+=`<div class="section-title">📐 G2-MAX アーキテクチャ</div>`;
   const arch=[
-    ["設計思想",`<div style="font-size:10px;line-height:1.6;padding:6px;background:rgba(225,29,72,0.04);border-radius:4px"><b>G2-MAX</b> = CAGR最大化専用の集中型raw α戦略<br>PRISM-RQ（Sharpe/Calmar重視）とは<b>目的関数が異なる</b><br>Ablation BTで「集中+raw α」がCAGR最大の本体と確認</div>`],
+    ["設計思想",`<div style="font-size:10px;line-height:1.6;padding:6px;background:rgba(225,29,72,0.04);border-radius:4px"><b>G2-MAX</b> = CAGR最大化専用のW5b一貫性加重raw α戦略<br>PRISM-RQ（Sharpe/Calmar重視）とは<b>目的関数が異なる</b><br>Ablation BTで「集中+raw α+W5b加重」がCAGR最大の構成と確認</div>`],
     ["Layer 1: 6テーマ集中 + Corr Budget",`<div style="font-size:10px;line-height:1.6"><code>ThemeScore = 0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)</code><br><br><b>選定:</b> 上位からgreedy採用、相関制約 max_corr &lt; 0.80<br><b>テーマ数:</b> 6（Sharpe最大2.80 / MaxDD最良-44%の最適点）<br><b>sector cap:</b> なし<br><b>BFM-v2 veto:</b> なし</div>`],
-    ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定<br><br><b>なぜraw α:</b> SNRb（α/σ）は右裾を削りCAGRを-9.5pt。shrink(r²)もさらに削る。raw αはhigh-conviction winnerを保存する。</div>`],
+    ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定</div>`],
+    ["Layer 3: W5b一貫性加重",`<div style="font-size:10px;line-height:1.6"><b>3期間モメンタムの一貫性でウェイトを決定:</b><br><code>R252_ex1m = (1+R252)/(1+R21) - 1</code> (12-1 momentum)<br><code>pos_count = Σ𝟙(R63>0, R126>0, R252_ex1m>0)</code><br><code>avg_ret = mean(max(R63,0), max(R126,0), max(R252_ex1m,0))</code><br><code>raw_weight = pos_count × (1 + avg_ret)</code><br><code>weight = normalize + 30%キャップ</code><br><br><b>直感:</b> 3期間全てで上昇しているテーマ（真のトレンド）に多く配分。1期間だけ正のテーマ（ノイズ）は減量。<br><br><b>vs 等ウェイト:</b> CAGR +52pt, Sharpe +0.14, 2022年DD -28%→-14%改善</div>`],
     ["防御装置",`<div style="font-size:10px;line-height:1.6"><b>残すもの:</b><br>• Correlation budget（同一因子の重複ベット回避）<br>• Data integrity / delisting 系 hard exit<br><br><b>外すもの:</b><br>• BFM-v2 veto（CAGR -14pt）<br>• SNRb（CAGR -9.5pt）<br>• shrink(r²)<br>• sector cap<br>• Vol overlay<br>• panic de-gearing（今回のBTでは無効）</div>`],
-    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に敏感。</b><br>6テーマ集中 + raw αは「今のテーマ構成で過去を計算」の影響を受けやすい構成。<br>CAGR 175%のうちPIT上方バイアスの割合は不明。<br>forward実績で下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
+    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に敏感。</b><br>6テーマ集中 + raw α + W5b加重は「今のテーマ構成で過去を計算」の影響を受けやすい構成。<br>CAGR 231%のうちPIT上方バイアスの割合は不明。<br>forward実績で下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
   ];
   arch.forEach(([title,body])=>{
     h+=`<div style="margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;cursor:pointer" onclick="this.querySelector('.abody').style.display=this.querySelector('.abody').style.display==='block'?'none':'block'">`;
@@ -188,7 +189,7 @@ Promise.all([
   h+=`<div style="margin:4px 12px;padding:8px;border-radius:6px;background:var(--card-bg);font-size:8px;line-height:1.8;color:var(--text-sub)">`;
   h+=`<b style="color:var(--blue)">PRISM-R</b> CAGR=65.6% Sharpe=1.34 MaxDD=-35.6% — baseline (A5-lite)<br>`;
   h+=`<b style="color:var(--purple)">PRISM-RQ</b> CAGR=43.8% Sharpe=1.60 MaxDD=-23.9% — risk-adjusted (BFM-v2+SNRb)<br>`;
-  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=175.3% Sharpe=2.80 MaxDD=-44.1% — CAGR-max (concentrated raw α)`;
+  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=230.7% Sharpe=2.94 MaxDD=-45.0% — CAGR-max (W5b consistency-weighted raw α)`;
   h+=`</div>`;
 
   document.getElementById('g2Main').innerHTML=h;
@@ -221,14 +222,16 @@ function calcG2(){
   const rawCap=parseFloat(document.getElementById('g2Capital').value)||0;
   const fx=parseFloat(document.getElementById('g2Fx').value)||150;
   const capUSD=g2ccy==='JPY'?rawCap/fx:rawCap;
-  const w=1.0/picks.length;let totalInvested=0;let html='';
+  let totalInvested=0;let html='';
   picks.forEach(p=>{
     if(!p.price)return;
+    const w=p.w5b_weight||1.0/picks.length;
     const target=capUSD*w;const shares=Math.floor(target/p.price);
     const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
     const targetPct=w*100;const dev=actualPct-targetPct;totalInvested+=actual;
     html+=`<tr><td><b style="color:var(--g2)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
+    html+=`<td class="num" style="font-weight:700;color:var(--g2)">${(w*100).toFixed(1)}%</td>`;
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
     html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
   });

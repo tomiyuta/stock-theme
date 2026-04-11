@@ -36,17 +36,21 @@ daily_ret_g2=[]; daily_dates=[]
 for pos in range(len(rebal_idx)-1):
     j=rebal_idx[pos]; j_next=rebal_idx[pos+1]; dt=dates_all[j]
     dt63=set(dates_all[max(0,j-62):j+1]); dt126=set(dates_all[max(0,j-125):j+1])
+    dt252=set(dates_all[max(0,j-251):j+1])
     sub=panel[panel['date'].isin(dt63)]; sub126=panel[panel['date'].isin(dt126)]
+    sub252=panel[panel['date'].isin(dt252)]
     tm=sub.groupby('theme')['ticker'].nunique(); elig=tm[tm>=MIN_M].index.tolist()
     hold_dates=tk_wide.index[j+1:j_next+1]
-    tm_mom63,tm_mom126,tm_mom21={},{},{}
+    tm_mom63,tm_mom126,tm_mom21,tm_mom252={},{},{},{}
     for th in elig:
         td=sub[sub['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
         if len(td)>=21: tm_mom21[th]=cumret(td[-21:])
         if len(td)>=63: tm_mom63[th]=cumret(td)
         td126v=sub126[sub126['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
         if len(td126v)>=63: tm_mom126[th]=cumret(td126v)
-    tdf=pd.DataFrame({'m63':pd.Series(tm_mom63),'m126':pd.Series(tm_mom126),'m21':pd.Series(tm_mom21)}).dropna(subset=['m63'])
+        td252v=sub252[sub252['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
+        if len(td252v)>=126: tm_mom252[th]=cumret(td252v)
+    tdf=pd.DataFrame({'m63':pd.Series(tm_mom63),'m126':pd.Series(tm_mom126),'m21':pd.Series(tm_mom21),'m252':pd.Series(tm_mom252)}).dropna(subset=['m63'])
     if tdf.empty: daily_ret_g2.extend([0.0]*len(hold_dates)); daily_dates.extend(hold_dates); continue
     tdf['score']=0.50*tdf['m63'].rank(pct=True)+0.30*tdf['m126'].rank(pct=True,na_option='bottom')+0.20*tdf['m21'].rank(pct=True,na_option='bottom')
     tdf=tdf.sort_values('score',ascending=False)
@@ -65,7 +69,7 @@ for pos in range(len(rebal_idx)-1):
         if ok: sel.append(th)
         if len(sel)>=TOP_T: break
     # Stock selection: raw α63
-    port={}; used=set()
+    port={}; used=set(); theme_of={}
     for th in sel:
         ths=sub[(sub['theme']==th)&sub['ret'].notna()]; tks=ths['ticker'].unique()
         if len(tks)<MIN_M: continue
@@ -75,10 +79,36 @@ for pos in range(len(rebal_idx)-1):
             a63=ols_alpha(tkd['ret'].values, tkd['theme_ex_self'].values)
             scores[tk]=a63 if np.isfinite(a63) else -999
         for tk,sc in sorted(scores.items(),key=lambda x:-x[1]):
-            if tk not in used and sc>-999: port[tk]=1.0; used.add(tk); break
-    total=sum(port.values())
-    if total>0:
-        for k in port: port[k]/=total
+            if tk not in used and sc>-999: port[tk]=1.0; used.add(tk); theme_of[tk]=th; break
+    # W5b consistency weighting
+    if port:
+        w5b_raw={}
+        for tk,th in theme_of.items():
+            r63=tdf.loc[th,'m63'] if th in tdf.index else np.nan
+            r126=tdf.loc[th,'m126'] if th in tdf.index and np.isfinite(tdf.loc[th,'m126']) else np.nan
+            r21=tdf.loc[th,'m21'] if th in tdf.index and np.isfinite(tdf.loc[th,'m21']) else np.nan
+            r252=tm_mom252.get(th, np.nan)
+            r252ex1m=((1+r252)/(1+r21)-1) if np.isfinite(r252) and np.isfinite(r21) and abs(1+r21)>1e-8 else np.nan
+            horizons=[r63,r126,r252ex1m]
+            valid=[v for v in horizons if np.isfinite(v)]
+            if len(valid)>=2:
+                pc=sum(1 for v in valid if v>0)
+                ar=float(np.mean([max(v,0) for v in valid]))
+                w5b_raw[tk]=pc*(1+ar)
+            else:
+                w5b_raw[tk]=1.0
+        total_raw=sum(w5b_raw.values())
+        if total_raw>0:
+            for tk in port: port[tk]=w5b_raw[tk]/total_raw
+        # 30% cap
+        for _ in range(5):
+            ws=np.array([port[tk] for tk in port])
+            exc=np.maximum(ws-0.30,0)
+            if exc.sum()<1e-6: break
+            under=ws<0.30; ws=np.minimum(ws,0.30)
+            if under.any(): ws[under]+=exc.sum()*(ws[under]/ws[under].sum())
+            ws=ws/ws.sum()
+            for i,tk in enumerate(port): port[tk]=float(ws[i])
     if not port:
         daily_ret_g2.extend([0.0]*len(hold_dates)); daily_dates.extend(hold_dates); continue
     ws=pd.Series(port)
@@ -121,7 +151,7 @@ output={
         'a5':{'cagr':round(cagr,4),'sharpe':round(sharpe,4),'maxdd':round(maxdd,4),'n_months':len(dates_str)},
         'SPY':{'cagr':round(cagr_s,4),'sharpe':round(sh_s,4),'maxdd':round(maxdd_s,4),'n_months':len(dates_str)},
     },
-    'meta':{'strategy':'G2-MAX (6-theme concentrated raw α)','source':'Norgate BT','pit_warning':True},
+    'meta':{'strategy':'G2-MAX (6-theme W5b consistency-weighted raw α)','source':'Norgate BT','pit_warning':True},
     'forward_overlay':{'dates':[],'a5':[],'SPY':[]}
 }
 import os; os.makedirs('/Users/yutatomi/Downloads/stock-theme/public/api/prism-g2', exist_ok=True)
