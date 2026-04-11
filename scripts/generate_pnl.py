@@ -12,7 +12,9 @@ from datetime import datetime
 ROOT = Path(__file__).resolve().parent.parent
 API_PRISM = ROOT / 'public' / 'api' / 'prism'
 API_PRISM_R = ROOT / 'public' / 'api' / 'prism-r'
+API_PRISM_RQ = ROOT / 'public' / 'api' / 'prism-rq'
 DATA_R = ROOT / 'data' / 'prism-r'
+DATA_RQ = ROOT / 'data' / 'prism-rq'
 
 def load_json(path):
     with open(path, encoding='utf-8') as f:
@@ -218,6 +220,52 @@ def compute_prism_r_pnl():
     return result
 
 # =============================================================
+# PRISM-RQ Virtual P&L (SNRb picks from BFM-v2 filtered themes)
+# =============================================================
+def compute_prism_rq_pnl():
+    comp_path = API_PRISM_R / 'shadow_comparison.json'  # RQ data is in prism-r shadow
+    if not comp_path.exists():
+        print('PRISM-RQ P&L: no shadow_comparison.json'); return None
+    comp = load_json(comp_path)
+    snapshot_date = comp.get('snapshot_date', '')
+    DATA_RQ.mkdir(parents=True, exist_ok=True)
+    vledger_path = DATA_RQ / 'virtual_ledger.json'
+    vledger = load_json(vledger_path) if vledger_path.exists() else {'positions': {}, 'history': [], 'created_at': datetime.now().isoformat()}
+    # Use snrb_pick (not a5_pick) for PRISM-RQ
+    current_picks = {}
+    for c in comp.get('comparisons', []):
+        tk = c.get('snrb_pick')
+        if not tk: continue
+        s = next((x for x in c['stocks'] if x['ticker'] == tk), {})
+        current_picks[tk] = {
+            'theme': c.get('theme_name', ''), 'price': s.get('price', 0),
+            'score': s.get('score_snrb', 0), 'theme_state': c.get('theme_state', ''),
+        }
+    weight = 1.0 / max(len(current_picks), 1)
+    for tk, info in current_picks.items():
+        if tk not in vledger['positions']:
+            vledger['positions'][tk] = {'entry_date': snapshot_date, 'entry_price': info['price'], 'theme': info['theme'], 'status': 'active'}
+    for tk in list(vledger['positions'].keys()):
+        if tk not in current_picks and vledger['positions'][tk]['status'] == 'active':
+            vledger['positions'][tk]['status'] = 'closed'
+            vledger['positions'][tk]['exit_date'] = snapshot_date
+    save_json(vledger_path, vledger)
+    positions = []; total_inv = 0.0; total_cur = 0.0
+    for tk, info in current_picks.items():
+        vp = vledger['positions'].get(tk, {})
+        ep = vp.get('entry_price', info['price']); cp = info['price']
+        pnl = (cp - ep) / ep if ep > 0 else 0
+        positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(weight,4), 'pnl_pct': round(pnl,4), 'pnl_weighted': round(pnl*weight,6)})
+        total_inv += ep * weight; total_cur += cp * weight
+    total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
+    result = {'as_of_date': snapshot_date, 'strategy': 'PRISM-RQ', 'status': 'SHADOW_VIRTUAL',
+              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4)}, 'positions': positions}
+    API_PRISM_RQ.mkdir(parents=True, exist_ok=True)
+    save_json(API_PRISM_RQ / 'pnl.json', result)
+    print(f'PRISM-RQ P&L: {len(positions)} positions, total={total_pnl:+.2%}')
+    return result
+
+# =============================================================
 # Forward Overlay — append monthly returns to cumulative_returns.json
 # =============================================================
 def update_forward_overlay():
@@ -227,6 +275,7 @@ def update_forward_overlay():
     for api_dir, pnl_key, label in [
         (API_PRISM, 'a4', 'PRISM'),
         (API_PRISM_R, 'a5', 'PRISM-R'),
+        (API_PRISM_RQ, 'a5', 'PRISM-RQ'),
     ]:
         cum_path = api_dir / 'cumulative_returns.json'
         pnl_path = api_dir / 'pnl.json'
@@ -272,5 +321,6 @@ def update_forward_overlay():
 if __name__ == '__main__':
     compute_prism_pnl()
     compute_prism_r_pnl()
+    compute_prism_rq_pnl()
     update_forward_overlay()
     print('Done.')
