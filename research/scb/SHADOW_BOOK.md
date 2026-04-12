@@ -1693,3 +1693,67 @@ cap binding差: 73回中2回のみ差異
 ║    ⏳ 銘柄選定再設計（residual/12-7/earnings/formation-vol）   ║
 ╚══════════════════════════════════════════════════════════════╝
 ```
+
+
+---
+
+## Next Research: Ranking/Selection Redesign (ChatGPT, 2026-04-12)
+
+### 核心問題の再定義
+
+```
+Bear問題の真因（4層分解）:
+
+1. 「強い銘柄」の定義がprice-only total return → recent-heavy
+   → Novy-Marx: 12-7ヶ月の中間ホライズンの方が予測力が高い
+
+2. 共通因子の追い風を銘柄固有のαと区別していない
+   → Blitz-Huij-Martens: residual momentumはconventional比で2倍のrisk-adjusted利益
+   → Ehsani-Linnainmaa: stock momentumはfactor momentumを間接タイミング
+
+3. price continuation背後のfundamental underreactionを使っていない
+   → Novy-Marx: earnings/fundamental momentumがprice momentumをかなり説明
+
+4. junk/high-beta/high-vol winnerを選んでいる
+   → Asness-Frazzini-Pedersen QMJ: quality銘柄が有意なrisk-adjusted return
+   → Fan et al: 高vol銘柄はmomentum効果を失う
+```
+
+### 最有力候補: RIQM（Residual Intermediate Quality Momentum）
+
+```
+Score_price = z(resid_ret_12_7_vs_MKT+Industry)
+Score_fund  = z(gross_profitability or ROE)
+Penalty     = z(formation_semivol_63)
+Final       = 0.55 × Score_price + 0.25 × Score_fund - 0.20 × Penalty
+
+狙い:
+  ① 共通因子を抜く（residual化）
+  ② recent-heavyをやめる（12-7 intermediate horizon）
+  ③ junk/high-vol winnerを落とす（quality + vol penalty）
+```
+
+### 実装Phase順
+
+```
+Phase 1: Raw → Intermediate-horizon
+  12-7, 12-2, 6-2 の比較
+
+Phase 2: Intermediate → Residualized
+  MKT+Industry と MKT+SMB+HML+Industry を比較
+
+Phase 3: Residualized → Quality/Fundamental Overlay
+  profitability / quality + earnings/fundamental
+
+Phase 4: Soft regime reweighting
+  binary switchではなく、weightsを少しずらす
+```
+
+### 捨てるべきもの
+
+```
+❌ binary kill switchの再設計
+❌ pure recent winnersの深掘り
+❌ signal 10本以上の巨大composite
+❌ total-vol overlayにBear改善を期待すること
+```
