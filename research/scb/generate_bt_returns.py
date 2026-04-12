@@ -47,7 +47,7 @@ rebal_idx = list(range(WARMUP, len(dates_all), REBAL))
 if rebal_idx[-1] != len(dates_all)-1: rebal_idx.append(len(dates_all)-1)
 print(f'Rebalance periods: {len(rebal_idx)-1}, prep {time.time()-t0:.1f}s')
 
-a4_daily = []; a5_daily = []; a5w5b_daily = []; a5beast_daily = []; hold_dates_all = []
+a4_daily = []; a5_daily = []; a5w5b_daily = []; a5beast_daily = []; a5def_daily = []; hold_dates_all = []
 
 for pos in range(len(rebal_idx)-1):
     j = rebal_idx[pos]; j_next = rebal_idx[pos+1]
@@ -56,9 +56,11 @@ for pos in range(len(rebal_idx)-1):
     dt21 = set(dates_all[max(0,j-20):j+1])
     dt126 = set(dates_all[max(0,j-125):j+1])
     dt252 = set(dates_all[max(0,j-251):j+1])
+    dt_7_12 = set(dates_all[max(0,j-251):max(0,j-146)])  # months 7-12 ago
     sub = panel[panel['date'].isin(dt63)]
     sub126 = panel[panel['date'].isin(dt126)]
     sub252 = panel[panel['date'].isin(dt252)]
+    sub_7_12 = panel[panel['date'].isin(dt_7_12)]
     tm = sub.groupby('theme')['ticker'].nunique()
     elig = tm[tm>=MIN_M].index.tolist()
     tm_mom = {}
@@ -88,12 +90,12 @@ for pos in range(len(rebal_idx)-1):
         if sc_cnt.get(s,0)>=SEC_MAX: continue
         sel.append(th); sc_cnt[s]=sc_cnt.get(s,0)+1
         if len(sel)>=TOP_T: break
-    a4p={}; a5p={}; used4=set(); used5=set()
+    a4p={}; a5p={}; a5def={}; used4=set(); used5=set(); used_def=set()
     for th in sel:
         ths = sub[(sub['theme']==th)&sub['ret'].notna()]
         tks = ths['ticker'].unique()
         if len(tks)<MIN_M: continue
-        s4={}; s5={}
+        s4={}; s5={}; sdef={}
         for tk in tks:
             tkd = ths[ths['ticker']==tk].sort_values('date')
             r21d = tkd[tkd['date'].isin(dt21)]
@@ -102,11 +104,21 @@ for pos in range(len(rebal_idx)-1):
             a63,b63,r2_63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
             shrk = shrink_r2(r2_63) if np.isfinite(r2_63) else 0
             s5[tk] = a63*shrk if np.isfinite(a63) else -999
+            # DEF: 12-7 month alpha
+            tkd_7_12 = sub_7_12[(sub_7_12['theme']==th)&(sub_7_12['ticker']==tk)].sort_values('date')
+            if len(tkd_7_12) >= 10:
+                a_def,_,r2_def = ols_ab(tkd_7_12['ret'].values, tkd_7_12['theme_ex_self'].values)
+                shrk_def = shrink_r2(r2_def) if np.isfinite(r2_def) else 0
+                sdef[tk] = a_def*shrk_def if np.isfinite(a_def) else -999
+            else:
+                sdef[tk] = -999
         for tk,sc in sorted(s4.items(), key=lambda x:-x[1]):
             if tk not in used4 and sc>-999: a4p[tk]=1.0; used4.add(tk); break
         for tk,sc in sorted(s5.items(), key=lambda x:-x[1]):
             if tk not in used5 and sc>-999: a5p[tk]=1.0; used5.add(tk); break
-    for d in [a4p, a5p]:
+        for tk,sc in sorted(sdef.items(), key=lambda x:-x[1]):
+            if tk not in used_def and sc>-999: a5def[tk]=1.0; used_def.add(tk); break
+    for d in [a4p, a5p, a5def]:
         total=sum(d.values())
         if total>0:
             for k in d: d[k]/=total
@@ -157,7 +169,7 @@ for pos in range(len(rebal_idx)-1):
             if under.any(): ws[under] += exc.sum() * (ws[under] / ws[under].sum())
             ws = ws / ws.sum()
             for i, tk in enumerate(a5w5b): a5w5b[tk] = float(ws[i])
-    for w_dict, ret_list in [(a4p, a4_daily), (a5p, a5_daily), (a5w5b, a5w5b_daily), (a5beast, a5beast_daily)]:
+    for w_dict, ret_list in [(a4p, a4_daily), (a5p, a5_daily), (a5w5b, a5w5b_daily), (a5beast, a5beast_daily), (a5def, a5def_daily)]:
         if not w_dict:
             ret_list.extend([0.0]*len(hold_dates)); continue
         ws = pd.Series(w_dict)
@@ -172,7 +184,7 @@ print(f'BT done in {time.time()-t0:.1f}s | {len(a4_daily)} daily returns')
 import yfinance as yf
 
 dates_ser = pd.Series(hold_dates_all)
-df = pd.DataFrame({'date': dates_ser, 'a4': a4_daily, 'a5': a5_daily, 'a5w5b': a5w5b_daily, 'a5beast': a5beast_daily})
+df = pd.DataFrame({'date': dates_ser, 'a4': a4_daily, 'a5': a5_daily, 'a5w5b': a5w5b_daily, 'a5beast': a5beast_daily, 'a5def': a5def_daily})
 df['date'] = pd.to_datetime(df['date'])
 df = df.set_index('date').sort_index()
 
@@ -195,19 +207,20 @@ monthly = df.groupby('ym').apply(lambda g: pd.Series({
     'a5': float((1+g['a5']).prod()-1),
     'a5w5b': float((1+g['a5w5b']).prod()-1),
     'a5beast': float((1+g['a5beast']).prod()-1),
+    'a5def': float((1+g['a5def']).prod()-1),
     'SPY': float((1+g['SPY']).prod()-1),
 })).reset_index()
 monthly['date'] = monthly['ym'].dt.to_timestamp('M')
 monthly = monthly.sort_values('date').reset_index(drop=True)
 
 # Cumulative growth of $1
-for col in ['a4','a5','a5w5b','a5beast','SPY']:
+for col in ['a4','a5','a5w5b','a5beast','a5def','SPY']:
     monthly[f'cum_{col}'] = (1+monthly[col]).cumprod()
 
 # Annual returns
 monthly['year'] = monthly['date'].dt.year
 annual = {}
-for col in ['a4','a5','a5w5b','a5beast','SPY']:
+for col in ['a4','a5','a5w5b','a5beast','a5def','SPY']:
     yr = monthly.groupby('year')[col].apply(lambda g: float((1+g).prod()-1))
     annual[col] = {str(y): round(v,4) for y,v in yr.items()}
 
@@ -227,7 +240,7 @@ def calc_stats(monthly_rets):
     return {'cagr':round(cagr,4),'sharpe':round(sharpe,4),'sortino':round(sortino,4),
             'maxdd':round(mdd,4),'n_months':n}
 
-stats = {col: calc_stats(monthly[col].values) for col in ['a4','a5','a5w5b','a5beast','SPY']}
+stats = {col: calc_stats(monthly[col].values) for col in ['a4','a5','a5w5b','a5beast','a5def','SPY']}
 
 # Output JSON (opengrail format)
 output = {
@@ -240,6 +253,8 @@ output = {
     'ret_a5w5b': [round(v,6) for v in monthly['a5w5b']],
     'beast': [round(v,6) for v in monthly['cum_a5beast']],
     'ret_beast': [round(v,6) for v in monthly['a5beast']],
+    'def': [round(v,6) for v in monthly['cum_a5def']],
+    'ret_def': [round(v,6) for v in monthly['a5def']],
     'SPY': [round(v,6) for v in monthly['cum_SPY']],
     'ret_SPY': [round(v,6) for v in monthly['SPY']],
     'annual': annual,
@@ -251,7 +266,7 @@ output = {
         'note': 'PIT汚染あり。BTは参考値。forward実績はforward_overlay配列で追加予定。',
         'bt_boundary': monthly['date'].iloc[-1].strftime('%Y-%m-%d'),
     },
-    'forward_overlay': {'dates': [], 'a4': [], 'a5': [], 'a5w5b': [], 'beast': [], 'SPY': []},
+    'forward_overlay': {'dates': [], 'a4': [], 'a5': [], 'a5w5b': [], 'beast': [], 'def': [], 'SPY': []},
 }
 
 from pathlib import Path
@@ -270,6 +285,7 @@ print(f'Stats A4: CAGR={stats["a4"]["cagr"]:.1%} Sharpe={stats["a4"]["sharpe"]:.
 print(f'Stats A5: CAGR={stats["a5"]["cagr"]:.1%} Sharpe={stats["a5"]["sharpe"]:.2f} MaxDD={stats["a5"]["maxdd"]:.1%}')
 print(f'Stats W5b: CAGR={stats["a5w5b"]["cagr"]:.1%} Sharpe={stats["a5w5b"]["sharpe"]:.2f} MaxDD={stats["a5w5b"]["maxdd"]:.1%}')
 print(f'Stats BEAST: CAGR={stats["a5beast"]["cagr"]:.1%} Sharpe={stats["a5beast"]["sharpe"]:.2f} MaxDD={stats["a5beast"]["maxdd"]:.1%}')
+print(f'Stats DEF: CAGR={stats["a5def"]["cagr"]:.1%} Sharpe={stats["a5def"]["sharpe"]:.2f} MaxDD={stats["a5def"]["maxdd"]:.1%}')
 print(f'Stats SPY: CAGR={stats["SPY"]["cagr"]:.1%} Sharpe={stats["SPY"]["sharpe"]:.2f} MaxDD={stats["SPY"]["maxdd"]:.1%}')
 print(f'Saved to {out_prism}/cumulative_returns.json + {out_prismr}/')
 print(f'Total time: {time.time()-t0:.1f}s')

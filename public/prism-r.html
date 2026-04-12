@@ -236,7 +236,7 @@ Promise.all([
   h+=`<div id="cumStatsR" style="margin-top:12px"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>W5b</th><th style="color:#D85A30">BEAST</th><th>等W</th><th>SPY</th><th>W5b-SPY</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
+  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>W5b</th><th style="color:#D85A30">BEAST</th><th style="color:#228B22">DEF</th><th>等W</th><th>SPY</th><th>W5b-SPY</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（A4より重い）。production判断はforward PIT-safeデータのみ。</div></div>`;
 
   // 4. Promotion Progress
@@ -381,6 +381,8 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
   const btBeast = cr.beast || [];
   const lastBT_w5b = btW5b[btW5b.length-1] || 1;
   const lastBT_beast = btBeast[btBeast.length-1] || 1;
+  const btDef = cr.def || cr.a5def || [];
+  const lastBT_def = btDef[btDef.length-1] || 1;
   const fwdA5 = (fwd.a5||[]).map(g => Math.round(lastBT_a5 * g * 1e6) / 1e6);
   const fwdW5b = (fwd.a5w5b||[]).map(g => Math.round(lastBT_w5b * g * 1e6) / 1e6);
   const fwdBeast = (fwd.beast||[]).map(g => Math.round(lastBT_beast * g * 1e6) / 1e6);
@@ -390,6 +392,7 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
   const btA5 = [...cr.a5, ...new Array(padN).fill(null)];
   const btW5bPad = [...btW5b, ...new Array(padN).fill(null)];
   const btBeastPad = [...btBeast, ...new Array(padN).fill(null)];
+  const btDefPad = [...btDef, ...new Array(padN).fill(null)];
   const btSPY = [...cr.SPY, ...new Array(padN).fill(null)];
   const fwdA5Full = [...new Array(cr.dates.length - 1).fill(null), lastBT_a5, ...fwdA5];
   const fwdW5bFull = [...new Array(cr.dates.length - 1).fill(null), lastBT_w5b, ...fwdW5b];
@@ -399,6 +402,7 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
     {label:'A5-R BT(等W)',data:btA5,borderColor:'rgba(124,58,237,0.3)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'W5b BT',data:btW5bPad,borderColor:'rgba(124,58,237,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'BEAST BT',data:btBeastPad,borderColor:'rgba(216,90,48,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[6,3]},
+    {label:'🛡DEF BT',data:btDefPad,borderColor:'rgba(34,139,34,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[6,3]},
     {label:'W5b 実績',data:fwdW5bFull,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'BEAST 実績',data:fwdBeastFull,borderColor:'#D85A30',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
@@ -414,15 +418,16 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
   document.getElementById('cumStatsR').innerHTML=
     mkRow('W5b','rgba(124,58,237,0.06)',((st.a5w5b||st.a5).cagr*100).toFixed(1)+'%',((st.a5w5b||st.a5).maxdd*100).toFixed(1)+'%',(st.a5w5b||st.a5).sharpe.toFixed(2),((st.a5w5b||st.a5).sortino||0).toFixed(2),cal(st.a5w5b||st.a5))+
     (st.a5beast?mkRow('🔥BEAST','rgba(216,90,48,0.06)',(st.a5beast.cagr*100).toFixed(1)+'%',(st.a5beast.maxdd*100).toFixed(1)+'%',st.a5beast.sharpe.toFixed(2),(st.a5beast.sortino||0).toFixed(2),cal(st.a5beast)):'')+
+    (st.a5def?mkRow('🛡DEF','rgba(34,139,34,0.06)',(st.a5def.cagr*100).toFixed(1)+'%',(st.a5def.maxdd*100).toFixed(1)+'%',st.a5def.sharpe.toFixed(2),(st.a5def.sortino||0).toFixed(2),cal(st.a5def)):'')+
     mkRow('等W(参考)','rgba(0,0,0,0.02)',(st.a5.cagr*100).toFixed(1)+'%',(st.a5.maxdd*100).toFixed(1)+'%',st.a5.sharpe.toFixed(2),(st.a5.sortino||0).toFixed(2),cal(st.a5))+
     mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',(st.SPY.maxdd*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.sortino||0).toFixed(2),cal(st.SPY));
   const ann=cr.annual;const years=Object.keys(ann.a5w5b||ann.a5).sort();
   let tb='';
   years.forEach(y=>{
-    const wv=(ann.a5w5b||ann.a5)[y]||0,bv=(ann.a5beast||{})[y]||0,ev=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=wv-sv;
+    const wv=(ann.a5w5b||ann.a5)[y]||0,bv=(ann.a5beast||{})[y]||0,dv=(ann.a5def||{})[y]||0,ev=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=wv-sv;
     const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
-    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(wv)};font-weight:700">${f(wv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(ev)};font-size:9px">${f(ev)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(wv)};font-weight:700">${f(wv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(dv)};color:#228B22">${f(dv)}</td><td style="${c(ev)};font-size:9px">${f(ev)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
   });
   document.getElementById('annualBodyR').innerHTML=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));
