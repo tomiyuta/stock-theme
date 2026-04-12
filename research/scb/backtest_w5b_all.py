@@ -18,6 +18,16 @@ panel['theme_ex_self'] = np.where(panel['n_day']>1, (panel['sum_ret']-panel['ret
 dates_all = sorted(panel['date'].unique())
 tk_wide = panel.pivot_table(index='date', columns='ticker', values='ret', aggfunc='first')
 
+# Sector mapping for PRISM sector cap
+meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/ticker_meta.parquet')
+tk_sector = dict(zip(meta['ticker'], meta['sector']))
+# Theme → majority sector
+theme_tickers = panel.groupby('theme')['ticker'].apply(set).to_dict()
+theme_sector = {}
+for th, tks in theme_tickers.items():
+    secs = [tk_sector.get(tk,'Unk') for tk in tks if tk in tk_sector]
+    theme_sector[th] = max(set(secs), key=secs.count) if secs else 'Unk'
+
 def cumret(arr):
     a=np.asarray(arr,dtype=float); a=a[np.isfinite(a)]
     return float(np.expm1(np.log1p(a).sum())) if len(a) else np.nan
@@ -30,17 +40,22 @@ def ols_alpha(y, x):
     resid=y-a-b*x; sigma=float(np.std(resid,ddof=2))
     alpha=a*len(y)
     return alpha, sigma
-def corr_select(ranked, sub, max_n, max_corr=0.80):
+def corr_select(ranked, sub, max_n, max_corr=0.80, sector_cap=None):
     tdr={}
     for th in ranked:
         td=sub[sub['theme']==th].groupby('date')['theme_ret'].first().sort_index()
         if len(td)>=20: tdr[th]=td
     if len(tdr)<2: return ranked[:max_n]
-    cdf=pd.DataFrame(tdr).dropna().corr(); sel=[]
+    cdf=pd.DataFrame(tdr).dropna().corr(); sel=[]; sec_count={}
     for th in ranked:
         if th not in cdf.index: continue
         ok=all(abs(cdf.loc[th,s])<max_corr for s in sel if s in cdf.columns)
-        if ok: sel.append(th)
+        if not ok: continue
+        if sector_cap is not None:
+            s=theme_sector.get(th,'Unk')
+            if sec_count.get(s,0)>=sector_cap: continue
+            sec_count[s]=sec_count.get(s,0)+1
+        sel.append(th)
         if len(sel)>=max_n: break
     return sel
 
@@ -75,8 +90,9 @@ print(f'Rebalance: {len(rebal_idx)-1} periods')
 
 # Strategy definitions
 STRATEGIES = {
-    'PRISM-R':  {'n_themes': 10, 'stock_score': 'raw_alpha'},   # A5-lite
-    'PRISM-RQ': {'n_themes': 10, 'stock_score': 'snrb'},        # BFM-v2 + SNRb
+    'PRISM':    {'n_themes': 10, 'stock_score': 'raw_alpha', 'sector_cap': 3},
+    'PRISM-R':  {'n_themes': 10, 'stock_score': 'raw_alpha', 'sector_cap': None},
+    'PRISM-RQ': {'n_themes': 10, 'stock_score': 'snrb',      'sector_cap': None},
 }
 WEIGHT_MODES = ['W0_equal', 'W5b_cap30', 'BEAST_nocap']
 
@@ -116,7 +132,8 @@ for pos in range(len(rebal_idx)-1):
     ranked=list(tdf.sort_values('score',ascending=False).index)
     for strat_name, strat_cfg in STRATEGIES.items():
         n_th = strat_cfg['n_themes']
-        sel = corr_select(ranked, sub, n_th)
+        sec_cap = strat_cfg.get('sector_cap', None)
+        sel = corr_select(ranked, sub, n_th, sector_cap=sec_cap)
         # Stock selection per theme
         port = []; used = set()
         for th in sel:
