@@ -1757,3 +1757,44 @@ Phase 4: Soft regime reweighting
 ❌ signal 10本以上の巨大composite
 ❌ total-vol overlayにBear改善を期待すること
 ```
+
+
+---
+
+## Bear Resolution Phase 1-2 Analysis (ChatGPT, 2026-04-12)
+
+### 確定した事後分布の更新
+
+```
+1. 主レバー = intermediate horizon（residualではない）
+   → 12-7ヶ月が文献通り最有望
+   → recent-heavyが Bear問題の主因の一つ
+
+2. Theme層には情報がある（殺してはいけない）
+   → residual momentumの失敗 = theme/industry/factorがalpha carrier
+   → Moskowitz-Grinblatt: industry momentum = stock momentumの大部分を説明
+
+3. 正しい方向 = Theme momentum残す → Stock側をredesign
+   → full residualization → 棄却
+   → partial de-factoring（theme-relative stock strength）→ 検討候補
+```
+
+### Phase 3: 3ブランチ × cap grid
+
+```
+Branch 1: Bear specialist = G_both_12_7 × cap{20,25,30}
+Branch 2: DD specialist = E_stock_12_7 + current_theme × cap{20,25,30}
+Branch 3: Balanced = F_stock_6_2 + current_theme × cap{20,25,30}
+```
+
+### Phase 4-5（後工程）
+
+```
+Phase 4: partial residual
+  E_stock_12_7 + theme-relative(λ=0.2,0.4,0.6)
+  F_stock_6_2 + theme-relative(λ=0.2,0.4,0.6)
+
+Phase 5: quality overlay
+  Final = 0.7 × Score_price + 0.3 × Score_quality
+  quality = gross profitability / ROE / leverage penalty
+```
