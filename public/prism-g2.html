@@ -135,7 +135,7 @@ Promise.all([
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
   h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartG2Toggle"><button class="active" onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',false)">線形</button><button onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',true)">対数</button></div></div><canvas id="cumChartG2"></canvas></div>`;
-  h+=`<div id="cumStatsG2" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"></div>`;
+  h+=`<div id="cumStatsG2" style="margin-top:12px"></div>`;
   h+=`</div>`;
 
   // === 7. Annual Performance ===
@@ -284,16 +284,11 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
     plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
     scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   const st=cr.stats;
-  const mkB=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  const mkRow=(name,color,cagr,sharpe,maxdd)=>`<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:6px;background:${color};margin-bottom:4px"><div style="font-size:10px;font-weight:700;min-width:50px;color:var(--text-main)">${name}</div><div style="display:flex;gap:6px;flex:1"><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">CAGR</div><div style="font-size:11px;font-weight:700">${cagr}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sharpe</div><div style="font-size:11px;font-weight:700">${sharpe}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">MaxDD</div><div style="font-size:11px;font-weight:700">${maxdd}</div></div></div></div>`;
   document.getElementById('cumStatsG2').innerHTML=
-    mkB('G2 CAGR',(st.a5.cagr*100).toFixed(1)+'%','rgba(225,29,72,0.06)')+
-    mkB('G2 Sharpe',st.a5.sharpe.toFixed(2),'rgba(225,29,72,0.06)')+
-    mkB('G2 MaxDD',(st.a5.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
-    (st.beast?mkB('BEAST CAGR',(st.beast.cagr*100).toFixed(1)+'%','rgba(216,90,48,0.08)')+
-    mkB('BEAST Sharpe',st.beast.sharpe.toFixed(2),'rgba(216,90,48,0.08)')+
-    mkB('BEAST MaxDD',(st.beast.maxdd*100).toFixed(1)+'%','rgba(216,90,48,0.08)'):'')+
-    mkB('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
-    mkB('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+    mkRow('G2-MAX','rgba(225,29,72,0.06)',(st.a5.cagr*100).toFixed(1)+'%',st.a5.sharpe.toFixed(2),(st.a5.maxdd*100).toFixed(1)+'%')+
+    (st.beast?mkRow('🔥BEAST','rgba(216,90,48,0.06)',(st.beast.cagr*100).toFixed(1)+'%',st.beast.sharpe.toFixed(2),(st.beast.maxdd*100).toFixed(1)+'%'):'')+
+    mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.maxdd*100).toFixed(1)+'%');
   const ann=cr.annual;const years=Object.keys(ann.a5).sort();let tb='';
   years.forEach(y=>{
     const gv=ann.a5[y]||0,bv=(ann.beast||{})[y]||0,sv=ann.SPY[y]||0,diff=gv-sv;

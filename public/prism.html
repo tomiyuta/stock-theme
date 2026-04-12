@@ -305,7 +305,7 @@ Promise.all([
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
   h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM) vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
   h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartToggle"><button class="active" onclick="toggleLogScale('_cumChartP','cumChartToggle',false)">線形</button><button onclick="toggleLogScale('_cumChartP','cumChartToggle',true)">対数</button></div></div><canvas id="cumChart"></canvas></div>`;
-  h+=`<div id="cumStats" style="display:flex;gap:8px;margin-top:16px;flex-wrap:wrap"></div>`;
+  h+=`<div id="cumStats" style="margin-top:12px"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBody"></tbody></table>`;
@@ -537,13 +537,10 @@ fetch('/api/prism/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then
       y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   // Stats badges
   const st=cr.stats;
-  const mkBadge=(l,s,c)=>`<div style="flex:1;min-width:80px;text-align:center;padding:6px;border-radius:4px;background:${c}"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:11px;font-weight:700">${s}</div></div>`;
+  const mkRow=(name,color,cagr,sharpe,maxdd)=>`<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:6px;background:${color};margin-bottom:4px"><div style="font-size:10px;font-weight:700;min-width:50px;color:var(--text-main)">${name}</div><div style="display:flex;gap:6px;flex:1"><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">CAGR</div><div style="font-size:11px;font-weight:700">${cagr}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sharpe</div><div style="font-size:11px;font-weight:700">${sharpe}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">MaxDD</div><div style="font-size:11px;font-weight:700">${maxdd}</div></div></div></div>`;
   document.getElementById('cumStats').innerHTML=
-    mkBadge('A4 CAGR',(st.a4.cagr*100).toFixed(1)+'%','rgba(0,82,204,0.06)')+
-    mkBadge('A4 Sharpe',st.a4.sharpe.toFixed(2),'rgba(0,82,204,0.06)')+
-    mkBadge('A4 MaxDD',(st.a4.maxdd*100).toFixed(1)+'%','rgba(255,23,68,0.06)')+
-    mkBadge('SPY CAGR',(st.SPY.cagr*100).toFixed(1)+'%','rgba(0,0,0,0.03)')+
-    mkBadge('SPY MaxDD',(st.SPY.maxdd*100).toFixed(1)+'%','rgba(0,0,0,0.03)');
+    mkRow('PRISM','rgba(0,82,204,0.06)',(st.a4.cagr*100).toFixed(1)+'%',st.a4.sharpe.toFixed(2),(st.a4.maxdd*100).toFixed(1)+'%')+
+    mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.maxdd*100).toFixed(1)+'%');
   // Annual table
   const ann=cr.annual; const years=Object.keys(ann.a4).sort();
   let tb='';
