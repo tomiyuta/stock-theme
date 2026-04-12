@@ -95,13 +95,24 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .all-stocks tr.pick-a5{background:rgba(124,58,237,0.06)}.all-stocks tr.pick-a4{background:rgba(0,0,0,0.03)}
 .prod-card{margin:8px 12px;border-radius:8px;padding:12px;background:rgba(124,58,237,0.03);border:1.5px solid rgba(124,58,237,0.15);overflow-x:auto;-webkit-overflow-scrolling:touch}
 .prod-title{font-size:11px;font-weight:700;color:var(--purple);margin-bottom:8px}
-.prod-input-row{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.prod-input-row{display:flex;flex-direction:column;gap:10px;margin-bottom:12px;padding-bottom:10px;border-bottom:1px solid rgba(0,0,0,0.06)}
+.prod-input-top{display:flex;align-items:center;justify-content:space-between}
+.prod-seg{display:flex;border:0.5px solid rgba(0,0,0,0.15);border-radius:20px;overflow:hidden;background:rgba(0,0,0,0.03)}
+.prod-seg-btn{padding:7px 20px;font-size:12px;font-weight:500;border:none;cursor:pointer;background:none;color:var(--text-sub);border-radius:20px;transition:all 0.15s}
+.prod-seg-btn.active{background:var(--text-main);color:#fff}
+.prod-fx-area{display:flex;align-items:center;gap:6px;cursor:pointer;padding:4px 10px;border-radius:16px;transition:background 0.15s}
+.prod-fx-area:hover{background:rgba(0,0,0,0.04)}
+.prod-fx-rate{font-size:12px;font-weight:500;color:var(--text-main)}
+.prod-fx-dot{width:5px;height:5px;border-radius:50%;background:#1D9E75;flex-shrink:0}
+.prod-fx-time{font-size:10px;color:var(--text-sub)}
+.prod-fx-icon{width:14px;height:14px;color:var(--text-sub);transition:transform 0.5s}
+.prod-big-wrap{position:relative}
+.prod-big-sign{position:absolute;left:14px;top:50%;transform:translateY(-50%);font-size:20px;font-weight:500;color:var(--text-sub)}
+.prod-big-input{width:100%;padding:14px 14px 14px 34px;border:0.5px solid rgba(0,0,0,0.15);border-radius:8px;font-size:22px;font-weight:500;font-family:monospace;text-align:left;box-sizing:border-box;background:none;color:var(--text-main);outline:none;transition:border-color 0.15s}
+.prod-big-input:focus{border-color:var(--purple)}
+.prod-conv-row{display:flex;align-items:center;justify-content:space-between;padding:2px 4px;font-size:13px;color:var(--text-sub)}
 .prod-input-label{font-size:10px;font-weight:600;color:var(--text-sub)}
-.prod-toggle{display:flex;gap:0;background:rgba(0,0,0,0.04);border-radius:4px;padding:1px}
-.prod-toggle-btn{padding:3px 10px;border-radius:3px;font-size:10px;font-weight:600;border:none;cursor:pointer;background:none;color:var(--text-sub)}
-.prod-toggle-btn.active{background:var(--purple);color:#fff}
 .prod-input{width:90px;padding:10px 8px;border:1px solid rgba(0,0,0,0.12);border-radius:4px;font-size:11px;text-align:right;font-family:monospace}
-.prod-fx-btn{font-size:9px;padding:2px 6px;border:1px solid rgba(0,0,0,0.12);border-radius:3px;background:none;cursor:pointer;color:var(--text-sub)}
 .prod-table{width:100%;font-size:10px;border-collapse:collapse}
 .prod-table th{text-align:left;padding:6px 4px;font-size:9px;font-weight:600;color:var(--text-sub);border-bottom:1px solid rgba(0,0,0,0.1)}
 .prod-table td{padding:5px 4px;border-bottom:1px solid rgba(0,0,0,0.04)}
@@ -218,11 +229,12 @@ Promise.all([
   h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
   h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × W5b一貫性加重</div>`;
   h+=`<div class="prod-input-row">`;
-  h+=`<span class="prod-input-label">投資資金</span>`;
-  h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setRCcy('USD')">USD</button><button class="prod-toggle-btn" onclick="setRCcy('JPY')">JPY</button></div>`;
-  h+=`<span id="rCcySign">$</span><input id="rCapital" class="prod-input" type="number" value="10000" oninput="calcR()">`;
-  h+=`<span class="prod-input-label">ドル円:</span><input id="rFx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcR()">`;
-  h+=`<button class="prod-fx-btn" onclick="fetchRFx()">🔄 現在レート</button>`;
+  h+=`<div class="prod-input-top">`;
+  h+=`<div class="prod-seg"><button class="prod-seg-btn active" id="rSegUSD" onclick="setRCcy('USD')">USD</button><button class="prod-seg-btn" id="rSegJPY" onclick="setRCcy('JPY')">JPY</button></div>`;
+  h+=`<div class="prod-fx-area" onclick="fetchRFx()"><span class="prod-fx-rate" id="rFxRate">¥---</span><div class="prod-fx-dot" id="rFxDot"></div><span class="prod-fx-time" id="rFxTime">取得中...</span><svg class="prod-fx-icon" id="rFxIcon" viewBox="0 0 16 16"><path d="M13.65 2.35A8 8 0 1 0 16 8h-2a6 6 0 1 1-1.76-4.24L10 6h6V0l-2.35 2.35z" fill="currentColor"/></svg></div>`;
+  h+=`</div>`;
+  h+=`<div class="prod-big-wrap"><span class="prod-big-sign" id="rCcySign">$</span><input id="rCapital" class="prod-big-input" type="text" value="10,000" oninput="calcR()"></div>`;
+  h+=`<div class="prod-conv-row"><span id="rConvDisplay">≈ ¥---</span><span style="font-size:10px;color:var(--text-sub)">exchangerate-api.com</span></div>`;
   h+=`</div>`;
   h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">W5b%</th><th style="text-align:right;color:#D85A30">🔥%</th><th style="text-align:right">株価</th><th style="text-align:right">W5b株数</th><th style="text-align:right;color:#D85A30">🔥株数</th></tr></thead>`;
   h+=`<tbody id="rRebalBody"></tbody></table>`;
@@ -332,13 +344,32 @@ function renderStock(s,cls,label){
     h+=`<div class="ss-ret"><div class="ss-ret-label">${r.l}</div><div class="ss-ret-val ${c}">${val}</div></div>`;});
   h+=`</div></div></div>`;return h;}
 
-window._rCcy='USD';
-function setRCcy(c){window._rCcy=c;document.querySelectorAll('.prod-toggle-btn').forEach(b=>b.classList.toggle('active',b.textContent===c));document.getElementById('rCcySign').textContent=c==='USD'?'$':'¥';calcR();}
-function fetchRFx(){const btn=document.querySelector('.prod-fx-btn');btn.textContent='取得中...';fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{const rate=d.rates?.JPY||150;document.getElementById('rFx').value=rate.toFixed(2);btn.textContent='🔄 '+rate.toFixed(2)+'円';calcR();}).catch(()=>{btn.textContent='🔄 取得失敗';});}
+window._rCcy='USD';window._rFx=150;
+function setRCcy(c){
+  window._rCcy=c;
+  document.getElementById('rSegUSD').classList.toggle('active',c==='USD');
+  document.getElementById('rSegJPY').classList.toggle('active',c==='JPY');
+  document.getElementById('rCcySign').textContent=c==='USD'?'$':'¥';
+  const cap=document.getElementById('rCapital');
+  if(c==='JPY'){cap.value=Math.round(parseFloat(cap.value.replace(/,/g,''))*window._rFx).toLocaleString();}
+  else{cap.value=Math.round(parseFloat(cap.value.replace(/,/g,''))/window._rFx).toLocaleString();}
+  calcR();
+}
+function fetchRFx(){
+  const dot=document.getElementById('rFxDot');const time=document.getElementById('rFxTime');
+  const icon=document.getElementById('rFxIcon');const rate=document.getElementById('rFxRate');
+  dot.style.background='#BA7517';time.textContent='取得中...';icon.style.transform='rotate(360deg)';
+  fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{
+    window._rFx=d.rates?.JPY||150;rate.textContent='¥'+window._rFx.toFixed(2);
+    dot.style.background='#1D9E75';const now=new Date();
+    time.textContent=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')+'取得';
+    icon.style.transform='rotate(0deg)';calcR();
+  }).catch(()=>{dot.style.background='#E24B4A';time.textContent='取得失敗';icon.style.transform='rotate(0deg)';});
+}
 function calcR(){
   const picks=window._prismR_picks;if(!picks)return;
-  const rawCap=parseFloat(document.getElementById('rCapital').value)||0;
-  const fx=parseFloat(document.getElementById('rFx').value)||150;
+  const rawCap=parseFloat(document.getElementById('rCapital').value.replace(/,/g,''))||0;
+  const fx=window._rFx||150;
   const capUSD=window._rCcy==='JPY'?rawCap/fx:rawCap;
   let totalInvW5b=0;let totalInvB=0;let html='';
   picks.forEach(p=>{
@@ -367,8 +398,10 @@ function calcR(){
   if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvB)})`;
   sh+=`</span><span style="color:#D85A30">余り <b style="color:${resPctB>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resB)} (${resPctB.toFixed(1)}%)</b></span></div>`;
   document.getElementById('rRebalSummary').innerHTML=sh;
+  const convEl=document.getElementById('rConvDisplay');
+  if(convEl){if(window._rCcy==='USD')convEl.textContent='≈ ¥'+Math.round(rawCap*fx).toLocaleString();else convEl.textContent='≈ $'+Math.round(rawCap/fx).toLocaleString();}
 }
-setTimeout(()=>{if(window._prismR_picks)calcR();},500);
+setTimeout(()=>{fetchRFx();if(window._prismR_picks)setTimeout(calcR,1500);},300);
 // === Cumulative Returns Chart (PRISM-R) ===
 function initPrismRChart(){
 fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
