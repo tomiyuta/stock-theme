@@ -1246,3 +1246,102 @@ W5b(cap30): BEASTより運用体として完成度が高い
   ② DSR RED = Sharpe無価値ではなく「額面通り信じるな」
   ③ W5b優位 = 偶然ではなく設計差で説明可能
 ```
+
+
+---
+
+## B+C Audit Results (2026-04-12, cap_tail_audit.py)
+
+### B1: Static Cap Ladder — 完全結果
+
+```
+    Cap    CAGR   Sharpe  MaxDD   DSR    BearS   top1   HHI   effN
+  nocap  108.1%  1.683  -43.2%  58.0%  -0.404  20.5%  0.129  7.7
+  cap50  108.2%  1.685  -43.2%  58.1%  -0.404  20.4%  0.129  7.8
+  cap40  108.2%  1.696  -43.2%  58.0%  -0.401  20.1%  0.127  7.9
+  cap35  108.0%  1.705  -43.0%  58.0%  -0.406  19.6%  0.124  8.1
+  cap30  105.3%  1.761  -42.4%  59.9%  -0.405  18.8%  0.119  8.4  ← 現行採用
+  cap25  101.8%  1.819  -41.9%  62.8%  -0.401  17.7%  0.116  8.6
+  cap20   95.3%  1.835  -41.4%  66.5%  -0.401  16.5%  0.112  8.9  ← Composite winner
+  cap15   84.4%  1.770  -41.5%  70.6%  -0.422  14.2%  0.107  9.3
+```
+
+### B1 分析
+
+```
+1. Sharpe: nocap(1.68)→cap20(1.84)まで単調増加、cap15で反転(1.77)
+   → alpha dilution開始点 = cap15付近
+
+2. DSR: nocap(58%)→cap15(71%)まで単調改善
+   → capを締めるほどDSRは改善（集中依存が減る）
+
+3. MaxDD: -43.2%→-41.4% 全体で1.8pt改善のみ
+   → capではMaxDDを本質的に改善できない。regime問題。
+
+4. Bear Sharpe: 全cap水準で -0.40前後、ほぼ不変
+   → capはbear脆弱性に無効。bear kill switchが別途必要。
+
+5. cap30 vs cap25:
+   cap25が Sharpe(+0.06), DSR(+3pt), MaxDD(+0.5pt), Bear(+0.004) で全勝
+   cap30が CAGR(+3pt), Calmar(+0.05) で勝つが差は小さい
+```
+
+### C1: Best/Worst Day Removal (cap30)
+
+```
+  top5d  CAGR retention=59% Sharpe retention=71%  ← YELLOW（70%基準を下回る）
+  top10d CAGR retention=39% Sharpe retention=50%  ← RED
+  bot5d  CAGR=130%(+24%) Sharpe=2.22(+26%)       ← 下位5日除去で大幅改善
+  bot3m  CAGR=137%(+30%) MaxDD=-37.5%(+5pt改善)
+
+  判定: right-tail dependence = YELLOW
+  → 上位5日で41%のCAGRが消える。「少数の大勝に依存」
+  → ただし50%は超えているのでREDまでは行かない
+```
+
+### C4: ES/CED Block
+
+```
+         ES95    CED95   CED/ES
+  nocap  109.6%  39.4%   0.36
+  cap30  104.7%  38.7%   0.37
+  cap25  101.2%  38.1%   0.38
+  cap20   97.0%  37.7%   0.39
+
+  CED/ES比 ≒ 0.37 → serial-loss fragility は moderate（extreme ではない）
+  capでES95が改善: 110%→97%（cap20で-12pt）
+```
+
+### C5: ES Contribution
+
+```
+  Top3 ES contribution: -0.5%
+  Top5 ES contribution: -0.7%
+
+  判定: GREEN
+  → ES tailが特定銘柄に集中していない。よく分散されている。
+```
+
+### C7: Regime-Conditioned Tail Map (cap30)
+
+```
+  Bull+HighVol:  CAGR=366% Sharpe=5.61  ← 最高性能局面
+  Bull+LowVol:   CAGR=102% Sharpe=1.59  ← 安定した収益
+  Bear+HighVol:  CAGR=  2% Sharpe=0.05  ← ほぼ死に体
+  Bear+LowVol:   CAGR=-81% Sharpe=-1.95 ← 構造的崩壊
+
+  Worst 10%月: 57%がbear regime → bear kill switchで半分以上のtailを削れる可能性
+```
+
+### 統合判定
+
+```
+Composite Winner: cap20（Sharpe最高+DSR最高）
+ChatGPT事前予想: cap25-30が本命 → cap20-25が実測の最適レンジ
+
+cap30（現行）は conservative choice としてなお有効だが、
+cap25への移行は Sharpe/DSR/MaxDD全てで改善する。
+
+全cap水準でBear Sharpe≒-0.40のため、
+capだけではbear問題を解決できない → bear kill switchが次の最優先。
+```
