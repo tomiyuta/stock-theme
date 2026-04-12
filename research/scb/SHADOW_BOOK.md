@@ -1996,3 +1996,93 @@ C. multi-period consistency → stock-level W5b
 → FMP API（freemium）: analyst estimates + earnings surprise
 → yfinance info（無料/制限あり）: trailingPE, returnOnEquity等
 ```
+
+
+---
+
+## stock-themes.com Data Investigation for Quality Proxy (2026-04-12)
+
+### 調査結果: beta_alpha_all.json が最有力データソース
+
+```
+データ構造:
+  849銘柄 × 208テーマ × 7期間（5D/10D/1M/2M/3M/6M/12M）
+  各セル:
+    alpha        — OLS残差α
+    alpha_ann    — 年率化α
+    alpha_pval   — p値
+    alpha_tval   — t値
+    beta         — テーマβ
+    r2           — 決定係数
+    individual_factor — テーマ外の固有リターン
+    theme_factor — テーマ寄与リターン
+    theme_return — テーマ全体リターン
+```
+
+### SEC/Sharadar不要で構築可能な代理指標（4つ）
+
+```
+1. Alpha Stability Score（QMJ quality代理）
+   = Σ𝟙(alpha_tval > 1 across 3M, 6M, 12M) / 3
+   意味: 複数期間で統計的に有意なα = 「質の高いwinner」
+   文献: QMJ(Asness)のprofitability/safetyの代理
+   データ: beta_alpha_all.json → 即利用可能
+
+2. Individual Factor（Residual Momentum軽量代理）
+   = individual_factor (6M or 12M)
+   意味: テーマ要因を除いた固有リターン
+   文献: Blitz-Huij-Martensのresidual momentum
+   注意: Phase1-2でfull residualは失敗したが、
+         stock-themes APIが事前計算済みの値なので軽量に試せる
+
+3. Beta Penalty（Bear脆弱性フィルタ）
+   = beta (6M or 12M)
+   意味: テーマに対する感応度。高beta = bear時に深く掘る
+   文献: Daniel-Moskowitzのmomentum crash
+   用途: high-beta winnerを罰する → bear耐性改善
+
+4. R2 Filter（テーマ乗り銘柄除外）
+   = r2 (3M)
+   意味: テーマとの連動度。r2≒1 = テーマに乗っただけ（固有αなし）
+   用途: r2が極端に高い銘柄を除外 → stock-specific continuationを抽出
+```
+
+### stock-themes.com API全エンドポイント
+
+```
+/api/theme-ranking        — 1126テーマ × 8期間パフォーマンス + tickerPerformances
+/api/theme-movers-batch   — テーマ別ムーバー
+/api/dip-alerts           — 急落アラート
+/api/last-updated         — 最終更新日時
+/api/report-catalysts/{id}  — zukai: カタリスト分析（テキスト）
+/api/report-ticker-details/{id} — zukai: 銘柄詳細（c1-c10 ◎/△/- 評価）
+/api/report-overlays/{id} — zukai: バリューチェーン図
+/api/themes/custom/*      — カスタムテーマ
+/api/watchlist/themes     — ウォッチリスト
+```
+
+### zukai report-ticker-details（限定的）
+
+```
+一部テーマのみ（光接続, サーバー, 半導体製造等）
+各銘柄: c1-c10のカタリスト評価（◎=強い, △=普通, -=該当なし）
++ description（財務情報含むテキスト）
+
+Quality proxy構築:
+  △ ◎の数でスコア化は可能だが全テーマには存在しない
+  △ descriptionからのNLP抽出は複雑すぎ → 見送り
+```
+
+### 次セッションへの推奨
+
+```
+F_stk6_2 + beta_alpha_all.jsonの4指標を組み合わせたBT:
+  1. F_stk6_2をベースに
+  2. alpha_stability_score でwinnerの品質を確認
+  3. beta で high-beta winnerを罰する
+  4. individual_factor でテーマ外の固有モメンタムを加算
+
+期待:
+  alpha_stability + beta_penalty が Bear Sharpe をさらに改善する可能性
+  individual_factorがresidual momentumの「テーマ宇宙に適合した」版として機能する可能性
+```
