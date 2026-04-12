@@ -1345,3 +1345,69 @@ cap25への移行は Sharpe/DSR/MaxDD全てで改善する。
 全cap水準でBear Sharpe≒-0.40のため、
 capだけではbear問題を解決できない → bear kill switchが次の最優先。
 ```
+
+
+---
+
+## BEAST Kill Switch Design (ChatGPT, 2026-04-12)
+
+### 核心
+
+```
+Kill switchの本体は「bearを避ける装置」ではなく、
+「panic stateでのhigh-vol reboundに巻き込まれない装置」
+
+4層構造:
+  Outer shell:  長期トレンド（200DMA）で大きな熊相場を回避
+  Core shell:   panic/high-vol/rebound を直接検知 ← 本丸
+  Inner shell:  戦略自身のvol/DDで自己防衛
+  Re-entry:     戻るときだけ慎重に（intermediate horizon + earnings-aware）
+```
+
+### 状態遷移: NORMAL → CAUTION → KILL
+
+```
+NORMAL:
+  条件: Trend200=1 AND M63≥0 AND RV21_pct<75 AND Breadth63≥40%
+  action: cap=25%, gross=通常, 通常ranking
+
+CAUTION（2/4条件で発火）:
+  条件: Trend200=0 / M63<0 / RV21_pct≥75 / Breadth63<35%
+  action: gross=50%, cap=20%, 直近反発銘柄除外, 12-7horizon寄り
+
+KILL:
+  主条件: M63<0 AND RV21_pct≥75 AND Rebound20≥8%（同時）
+  副条件: StratDD20≤-10% / Breadth63<25% / Trend200=0 のうち2/3
+  action: gross=0-25%, 新規買い停止, ポジション解消, SHV/BIL退避
+
+Re-entry: KILL→CAUTION→NORMAL（各2回連続リバランスで確認、hysteresis）
+```
+
+### 実装Phase順
+
+```
+Phase 1: cap25をベースラインに（B1監査で確認済み）
+Phase 2: always-on vol targeting（平時から効かせる）
+Phase 3: panic-rebound KILL（本丸）
+Phase 4: 2段階再エントリー + hysteresis
+Phase 5: re-entry rankingをintermediate horizon + earnings-awareに寄せる
+```
+
+### 成否判定基準
+
+```
+Bear Sharpe: -0.40から明確改善するか
+MaxDD: -41%台から-35%未満へ近づくか
+CAGR retention: static cap25比で80%以上残るか
+whipsaw率: KILL→復帰→再KILLが過剰でないか
+off率: 退避時間が長すぎてalphaを殺していないか
+```
+
+### 採るべきでない案
+
+```
+❌ cap微調整を主戦場にする（Bear Sharpeが治らないことが判明済み）
+❌ 個別stop-lossを主役にする（ES contributionが分散＝犯人は個別銘柄ではなく状態）
+❌ crowding指標を一次トリガーにする（監視のみ）
+❌ beta hedgeを主役にする（vol scaling + cash retreatが筋）
+```
