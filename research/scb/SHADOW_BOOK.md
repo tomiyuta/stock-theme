@@ -1798,3 +1798,50 @@ Phase 5: quality overlay
   Final = 0.7 × Score_price + 0.3 × Score_quality
   quality = gross profitability / ROE / leverage penalty
 ```
+
+
+---
+
+## Bear Resolution Phase 4 Results + ChatGPT Analysis (2026-04-12)
+
+### Phase 4 結果
+
+```
+                CAGR    Sharpe  MaxDD    Bear     2022
+A_current      111.7%   1.911  -40.9%  +0.156    +4.8%  ← baseline
+F_stk6_2       105.3%   1.820  -44.6%  +0.438    +0.6%  ← 実務本命
+Fmix_25         77.9%   1.649  -40.7%  +0.587    +1.7%  ← Bear+DD最良
+G_both12_7      97.8%   1.786  -46.7%  +0.538   +31.0%  ← Bear専門
+
+失敗:
+  Partial de-theming (lambda=0.2/0.4): 効果ゼロ（Fmix_50と同一結果）
+  Quality overlay (Fmix50_Q): CAGR=74% Sharpe=1.33（quality proxyが粗すぎ）
+  Fmix blends: 6-2と12-7のシグナルが部分的に相殺
+```
+
+### ChatGPT確定事項
+
+```
+1. 主レバーはresidualではなくintermediate horizon（確定）
+2. Theme層は情報を持つ — 消してはいけない（確定）
+3. Full residualizationはこの宇宙では不適合（確定）
+4. Cap は二次レバー（scoring method > cap）（確定）
+5. Vol penaltyは主役ではない → veto/tie-breakerに降格（確定）
+
+ChatGPT推奨の設計方針:
+  「Theme layerは残す。Stock layerを6-2を基準に12-7を混ぜる。
+   Residualはfullではなくlight de-themingに留め、
+   最後にqualityでwinnerを確認する。」
+```
+
+### Bear研究の全体マップ（Phase 1-4完了）
+
+```
+Phase 1-2: 12バリアント → intermediate horizon が主レバーと判明
+Phase 3:   12バリアント → F_stk6_2_c30が実務本命と確定
+Phase 4:    9バリアント → Fmix/de-theming/qualityは追加効果なし
+
+合計33バリアント tested。
+最終結論: F_stk6_2（現行theme + 銘柄選定6-2ヶ月horizon）が最適解。
+  CAGR -6pt（許容範囲）でBear Sharpe 3倍改善。
+```
