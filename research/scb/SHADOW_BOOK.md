@@ -1439,3 +1439,80 @@ ChatGPTの処方箋の何が正しく何が間違っていたか:
   vol scaling単独の最適化（target vol 20-60%のグリッド）を行い、
   cap25 + vol scalingの組み合わせが最終候補となるか検証。
 ```
+
+
+---
+
+## Kill Switch Research — Final Conclusion (2026-04-12)
+
+### 確定した判断
+
+```
+棄却:
+  ❌ Binary kill switch (SMA200, state machine) — whipsawで逆効果
+  ❌ cap30維持 — cap25が全指標で支配
+  ❌ vol scalingをBear問題の解決策とする — Bear Sharpe不変
+
+採用:
+  ✅ cap25を新ベースライン
+  ✅ downside_vol_30をリスク整形装置として候補（alpha基準とは別管理）
+  ✅ Bear問題の主戦場を「selection logic」に移行
+
+2本のベースライン:
+  Alpha baseline:        cap25 raw (CAGR=101% Sharpe=1.81 MaxDD=-42%)
+  Risk-managed baseline: cap25 + downside_vol_30 (CAGR=81% Sharpe=2.00 MaxDD=-36%)
+```
+
+### Kill switchの正しい理解
+
+```
+できること（risk budget control）:
+  ✅ 総エクスポージャー調整
+  ✅ realized riskの平滑化
+  ✅ MaxDDと回復特性のトレードオフ調整
+
+できないこと（signal repair）:
+  ❌ bearで負けない銘柄を作る
+  ❌ 同時下落するロングブックをプラス期待値に変える
+  ❌ panic/reboundで崩れる選定ロジックの修正
+
+位置づけ: 主役→降格。
+  → 常時ONのリスク整形器（downside vol scaling）
+  → 研究用の診断変数（regime flag）
+```
+
+### 次の研究テーマ（銘柄選定ロジック再設計）
+
+```
+Phase 1: ランキング窓の再設計
+  → recent momentum vs 12-2 vs 12-7 vs blended horizon
+  → raw vs residual momentum (Blitz-Huij-Martens)
+  根拠: Novy-Marx「直近<12-7ヶ月の中間ホライズン」
+
+Phase 2: 選定オーバーレイ
+  → earnings surprise / revision / quality filter
+  → formation-period volatility penalty
+  根拠: Fan et al「高vol銘柄はmomentum効果を失う」
+         Novy-Marx「earnings momentumでcrashが減る」
+
+Phase 3: downside_vol_30オーバーレイ（最後）
+  → 何を買うかが決まってから、どれだけ持つかを調整
+
+評価基準（優先順）:
+  1. Bear Sharpe  2. MaxDD/Recovery  3. Sharpe/Calmar
+  4. Crash month hit rate  5. Down-market capture
+```
+
+### ChatGPT文献リファレンス
+
+```
+Barroso-Santa-Clara (2015): vol scalingでmomentum crash耐性改善
+Moreira-Muir (2017): 高vol時のリスク縮小が広い因子群で有効
+Daniel-Moskowitz (2016): panic state損失はvolだけでは説明不能
+Cederburg et al (2020): vol-managed portfolioのOOS実装価値は過大評価されやすい
+Wang-Yan (2021): downside vol > total vol、fixed-weight blendが有効
+Novy-Marx (2012): 12-7ヶ月horizonがmomentumの予測力最高
+Blitz-Huij-Martens (2011): residual momentumがtotal momentumより良い
+Fan et al (2022): formation-period高vol銘柄はmomentum効果を失う
+Faber (2007): トレンドフィルタはDD改善に有効だがwhipsaw注意
+```
