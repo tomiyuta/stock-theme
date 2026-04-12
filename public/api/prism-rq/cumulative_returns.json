@@ -379,13 +379,17 @@
       "cagr": 0.438,
       "sharpe": 1.6009,
       "maxdd": -0.2394,
-      "n_months": 70
+      "n_months": 70,
+      "calmar": 1.8296,
+      "sortino": 2.3838
     },
     "SPY": {
       "cagr": 0.1581,
       "sharpe": 0.9328,
       "maxdd": -0.245,
-      "n_months": 70
+      "n_months": 70,
+      "calmar": 0.6453,
+      "sortino": 1.0227
     }
   },
   "meta": {

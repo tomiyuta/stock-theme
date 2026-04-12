@@ -531,21 +531,24 @@
       "sharpe": 1.2419,
       "sortino": 3.2479,
       "maxdd": -0.3672,
-      "n_months": 70
+      "n_months": 70,
+      "calmar": 1.3407
     },
     "a5": {
       "cagr": 0.6561,
       "sharpe": 1.3401,
       "sortino": 3.2565,
       "maxdd": -0.3565,
-      "n_months": 70
+      "n_months": 70,
+      "calmar": 1.8404
     },
     "SPY": {
       "cagr": 0.1554,
       "sharpe": 1.0228,
       "sortino": 1.7834,
       "maxdd": -0.2393,
-      "n_months": 70
+      "n_months": 70,
+      "calmar": 0.6494
     }
   },
   "meta": {

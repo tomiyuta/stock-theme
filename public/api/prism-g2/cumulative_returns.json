@@ -530,23 +530,29 @@
       "cagr": 2.3066,
       "sharpe": 2.9349,
       "maxdd": -0.4497,
-      "n_months": 69
+      "n_months": 69,
+      "calmar": 5.1292,
+      "sortino": 5.5748
     },
     "beast": {
       "cagr": 2.7802,
       "sharpe": 2.704,
       "maxdd": -0.4667,
-      "n_months": 69
+      "n_months": 69,
+      "calmar": 5.9571,
+      "sortino": 6.3429
     },
     "SPY": {
       "cagr": 0.1581,
       "sharpe": 0.9328,
       "maxdd": -0.245,
-      "n_months": 69
+      "n_months": 69,
+      "calmar": 0.6453,
+      "sortino": 1.0227
     }
   },
   "meta": {
-    "strategy": "G2-MAX (6-theme W5b consistency-weighted raw α)",
+    "strategy": "G2-MAX (6-theme W5b consistency-weighted raw \u03b1)",
     "source": "Norgate BT",
     "pit_warning": true
   },
