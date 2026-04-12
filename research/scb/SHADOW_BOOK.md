@@ -2305,3 +2305,101 @@ Step 2: α形成 (63d)
 Step 3: スコア
   score = alpha_cum × shrink(R²_126)
 ```
+
+
+---
+
+## 本セッション戦略変更 最終記録 (2026-04-12)
+
+### 変更マトリクス
+
+```
+戦略       スコアリング変更         表示/UI変更              データ再生成
+─────────────────────────────────────────────────────────────────────
+PRISM-R    split-window導入         W5b実装/DEF線/UI改修     BT+shadow ✅
+           β=126d, α=63d           split-window記述         cumulative ✅
+           BT: CAGR +6.2pt         リバランスUI(案2+5)
+           採用 ✅
+
+PRISM-RQ   split-window導入         split-window記述         (PRISM-R共有)
+           (PRISM-R共通backend)
+           採用 ✅
+
+G2-MAX     split-window 棄却        リバランスUI(案2+5)      shadow ✅
+           OLS=63d維持(REVERT)      旧OLS記述維持
+           BT: CAGR -11.3pt
+           棄却→REVERT ❌
+
+PRISM      変更なし                 リバランスUI(案2+5)      なし
+           (OLS不使用)
+```
+
+### split-window BT結果（全バリアント）
+
+```
+戦略×ウェイト          ΔCAGR     ΔSharpe   ΔMaxDD    判定
+────────────────────────────────────────────────────────
+PRISM-R W5b           +6.2pt    +0.001    -1.3pt    採用 ✅
+PRISM-R BEAST         +3.4pt    -0.024    -0.5pt    採用 ✅
+PRISM-R 等W           +4.8pt    +0.075    -1.7pt    採用 ✅
+PRISM-R DEF           ±0.0      ±0.0      ±0.0      対象外
+G2-MAX W5b (WARMUP252)+3.3pt    +0.034    -1.6pt    条件依存
+G2-MAX W5b (dashboard)-11.3pt   -0.135    -0.9pt    棄却 ❌
+G2-MAX BEAST(dashboard)-18.7pt  -0.167    -8.9pt    棄却 ❌
+```
+
+### G2-MAX乖離問題の記録
+
+```
+g2max_split_bt.py (WARMUP=252, W5b=銘柄レベル): CAGR +3.3pt → 改善に見えた
+ダッシュボード条件 (WARMUP=126, W5b=テーマレベル): CAGR -11.3pt → 実際は有害
+
+乖離原因:
+  ① WARMUP差 (126 vs 252) → 2020年の爆発期を含むかで20倍の累積差
+  ② W5b加重基準 (テーマ vs 銘柄) → 完全に異なるウェイト配分
+  ③ OLS minimum (20 vs 10) → 選定候補の違い
+
+教訓: BTの条件がダッシュボードと一致していなければ結論は信頼できない
+```
+
+### 確定した法則（研究82+バリアント）
+
+```
+✅ ranking horizon >> cap >> overlay >> residual
+✅ theme層はfactor/industry carrier → 消してはいけない
+✅ split-windowはshrink(R²)ありの戦略で有効、raw αの戦略で有害
+✅ 6-2moとsplit-windowは反相乗的（交互作用=-0.484）→ 併用不可
+✅ BT条件（WARMUP, W5b基準）が結論を逆転させうる → 条件一致が必須
+```
+
+### ファイル変更一覧
+
+```
+スコアリング:
+  scripts/generate_prism_r.py → split_alpha()導入 (f89c914)
+  scripts/generate_g2max.py → split_alpha()導入→REVERT (0354908→68b2d57)
+
+BT再生成:
+  research/scb/generate_bt_returns.py → split_alpha() + DEF系列 (f89c914)
+  public/api/prism-r/cumulative_returns.json → 再生成済み
+  public/api/prism-r/shadow_comparison.json → 再生成済み
+  public/api/prism-g2/shadow_comparison.json → 旧版で再生成済み
+
+フロントエンド:
+  public/prism-r.html → W5b/DEF/split-window記述/UI改修
+  public/prism-rq.html → split-window記述/キャッシュ修正
+  public/prism-g2.html → UI改修のみ（split-window記述なし）
+  public/prism.html → UI改修のみ
+
+インフラ:
+  vercel.json → HTMLページ no-cache ヘッダー
+  public/sw.js → st-v7→st-v8
+  全8ページ → theme_ranking.json cache bust
+
+研究BT:
+  research/scb/split_window_bt.py → 2×2 factorial (b817011)
+  research/scb/g2max_split_bt.py → G2-MAX A/B (af1483c)
+  research/scb/bear_resolution_bt.py → Phase 1-2 (e7dbd65)
+  research/scb/bear_phase3.py → Phase 3 (e3d89fe)
+  research/scb/bear_phase4.py → Phase 4 (c3794b6)
+```
