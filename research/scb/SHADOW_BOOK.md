@@ -2130,3 +2130,134 @@ E_stk12_7 + quality overlay が最も筋の良い拡張
   → + quality/profitabilityで「良いwinner」確認
   → beta_alpha_all.jsonのAlpha Stability Scoreで代理可能
 ```
+
+
+---
+
+## Split-Window 2×2 Factorial BT Spec (2026-04-12)
+
+### ChatGPT合意点（3名）
+
+```
+✅ 63日は下限として妥当だが、主窓の本命ではない（126日がより強い）
+✅ 21日は文献的に最弱（短期反転汚染）
+✅ OLS窓とα形成期間は分離すべき
+✅ shrink(R²)は主補正として弱い（t値ベースの方が筋が良い）
+✅ theme層は残す（factor/industry carrier）
+```
+
+### ChatGPT分岐点と統合判定
+
+```
+#1: stock rankingを6-2mo horizonに変更（効果量既知）
+#2: split-window（β=126d, α=63d）を先に測る（効果量未知）
+#3: 2×2 factorial で因果分解する（#1と#2の交互作用を同時測定）
+
+採用: #3（2×2 factorial）
+理由: formation horizonとOLS推定窓の効果を因果分解できる
+
+252/63はfirst-passではなくsecond-pass challengerに回す
+shrink(R²)は今は変えない（因果帰属を壊さないため）
+```
+
+### 2×2 Factorial Design
+
+```
+        OLS=63d (O0)     OLS=126d (O1)
+      ┌──────────────┬──────────────┐
+H0    │ A: H0/O0     │ B: H0/O1    │  ← current formation
+(63d) │ = A_current   │ = split126  │
+      ├──────────────┼──────────────┤
+H1    │ C: H1/O0     │ D: H1/O1    │  ← 6-2mo formation
+(6-2) │ = F_stk6_2   │ = combo     │
+      └──────────────┴──────────────┘
+
+B-A = split-windowの純粋効果
+C-A = formation horizonの純粋効果（既知: Bear +0.28）
+D-C = formation変更後のsplit-window追加効果
+D-B = split-window後のformation追加効果
+D-A = 両方変更の合計効果
+(D-A) - (B-A) - (C-A) = 交互作用
+```
+
+### 判定ロジック
+
+```
+優先順:
+  1. Bear Sharpe
+  2. CAGR retention vs A_current
+  3. MaxDD
+  4. Sharpe
+  5. 2022年挙動
+```
+
+### split-window実装仕様
+
+```
+Step 1: β/R²推定（OLS=126d or 252d）
+  r_i(s) = a_i + b_i * r_theme_ex_self(s) + u_i(s)
+  over s = t-125...t (126d) or t-251...t (252d)
+
+Step 2: α形成（直近63d）
+  alpha_daily = mean(r_i(s) - b_i * r_theme_ex_self(s))
+  over s = t-62...t
+  alpha_cum = 63 * alpha_daily
+
+Step 3: スコア
+  score = alpha_cum × shrink(R²_from_step1)
+```
+
+
+### Split-Window 2×2 Factorial BT結果 (2026-04-12)
+
+```
+                   CAGR    Sharpe  MaxDD    Bear
+H0_O0 (baseline)  82.4%   1.898  -43.1%  -2.826
+H0_O1 (split126)  87.0%   2.013  -43.4%  -2.767
+H1_O0 (6-2mo)     75.1%   1.803  -40.4%  -2.728
+H1_O1 (combo)     59.7%   1.433  -39.3%  -2.775
+
+Δ vs baseline:
+  split-window:  ΔCAGR=+4.6%  ΔSharpe=+0.114  ΔMaxDD=-0.3%  ΔBear=+0.060
+  6-2mo形成:     ΔCAGR=-7.3%  ΔSharpe=-0.095  ΔMaxDD=+2.7%  ΔBear=+0.099
+  combo:         ΔCAGR=-22.7% ΔSharpe=-0.465  ΔMaxDD=+3.7%  ΔBear=+0.051
+
+Interaction effects:
+  Sharpe: -0.484 (STRONGLY anti-synergistic)
+  Bear:   -0.107 (anti-synergistic)
+```
+
+### 因果分解の結論
+
+```
+★ 最重要発見: split-windowと6-2mo formationは反相乗的（交互作用=-0.484）
+  → 両方同時に適用すると互いの効果を相殺する
+  → どちらか一方を選ぶべき
+
+split-window単独 (H0_O1):
+  ✅ CAGR +4.6pt（改善）
+  ✅ Sharpe +0.11（最良）
+  ✅ Bear +0.06（微改善）
+  ❌ MaxDD -0.3pt（ほぼ同等）
+  → 「推定品質の改善」だけでCAGR/Sharpeが上がる
+
+6-2mo formation単独 (H1_O0):
+  ✅ MaxDD +2.7pt（改善）
+  ✅ Bear +0.10（改善）
+  ❌ CAGR -7.3pt（悪化）
+  ❌ Sharpe -0.095（悪化）
+  → Bear/MaxDDは改善するが、alpha効率は下がる
+
+判定:
+  split-window (β=126d, α=63d) が圧倒的に効率が良い
+  = CostゼロでSharpe/CAGRが改善する「free lunch」
+  6-2mo formationはBear/MaxDD改善のために対価を払う設計
+```
+
+### 注意事項
+
+```
+  ① このBTは等ウェイト（W5bなし）で実行
+  ② Bear Sharpe計算方法がPhase 1-4 BTと異なる（絶対値は非比較可能、Δのみ有効）
+  ③ 次ステップ: split-window (H0_O1) をPRISM-Rの本番コードに実装
+```
