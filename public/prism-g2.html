@@ -63,13 +63,6 @@ Promise.all([
   h+=`<div style="font-size:10px;color:var(--text-sub);margin-top:4px">${comp.snapshot_date} | ${comp.version||'G2-MAX_v1'}</div>`;
   h+=`</div>`;
 
-  // === 2. Key Metrics Banner ===
-  h+=`<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:8px 12px">`;
-  [['BT CAGR','230.7%','rgba(225,29,72,0.08)'],['BT Sharpe','2.935','rgba(225,29,72,0.08)'],['BT MaxDD','-45.0%','rgba(255,23,68,0.08)']].forEach(([l,v,c])=>{
-    h+=`<div style="padding:8px;border-radius:6px;background:${c};text-align:center"><div style="font-size:8px;color:var(--text-sub)">${l}</div><div style="font-size:14px;font-weight:900;color:var(--g2)">${v}</div></div>`;
-  });
-  h+=`</div>`;
-  h+=`<div style="margin:0 12px;font-size:8px;color:var(--g2);text-align:center">⚠ PIT汚染あり。BT値は参考のみ。production判断はforward実績限定。</div>`;
 
   // === 3. Portfolio ===
   h+=`<div class="section-title">📊 G2-MAX ポートフォリオ</div>`;
