@@ -66,25 +66,6 @@ def ols_alpha(y, x):
     r2 = 1 - ss_res/ss_tot if ss_tot > 1e-12 else np.nan
     return a*n, b, r2  # alpha_cum63, beta, r2
 
-def split_alpha(y_long, x_long, y_short, x_short):
-    """Split-window: β from long window (126d), α from short window (63d)."""
-    mask = np.isfinite(y_long) & np.isfinite(x_long)
-    yl, xl = y_long[mask], x_long[mask]; nl = len(yl)
-    if nl < 20: return np.nan, np.nan, np.nan
-    xm, ym = xl.mean(), yl.mean(); vx = np.var(xl, ddof=1)
-    if vx < 1e-15: return np.nan, np.nan, np.nan
-    b_long = np.dot(xl-xm, yl-ym)/(nl-1)/vx
-    a_long = ym - b_long*xm
-    resid_long = yl - a_long - b_long*xl
-    ss = float(np.sum(resid_long**2)); st = float(np.sum((yl-ym)**2))
-    r2_long = 1-ss/st if st > 1e-12 else np.nan
-    mask_s = np.isfinite(y_short) & np.isfinite(x_short)
-    ys, xs = y_short[mask_s], x_short[mask_s]; ns = len(ys)
-    if ns < 10: return np.nan, b_long, r2_long
-    alpha_daily = np.mean(ys - b_long*xs)
-    alpha_cum = alpha_daily * ns
-    return alpha_cum, b_long, r2_long
-
 # === Main Logic ===
 WARMUP = 126; MIN_M = 4; TOP_T = 6; MAX_CORR = 0.80
 j = len(dates_all) - 1; dt = dates_all[j]
@@ -133,24 +114,16 @@ for th in tdf.index:
         sel.append(th)
         if len(sel) >= TOP_T: break
 
-# Stock selection: split-window raw α (β=126d, α=63d, no shrink, no SNR)
+# Stock selection: raw self-excluded α63 (no shrink, no SNR)
 comparisons = []; used = set()
 for th in sel:
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
-    ths126 = sub126[(sub126['theme']==th) & sub126['ret'].notna()]
     tks = ths['ticker'].unique()
     if len(tks) < MIN_M: continue
     all_stocks = []
     for tk in tks:
         tkd = ths[ths['ticker']==tk].sort_values('date')
-        tkd126 = ths126[ths126['ticker']==tk].sort_values('date')
-        # Split-window: β/R² from 126d, α from 63d
-        if len(tkd126) >= 20:
-            a63, b63, r2_63 = split_alpha(
-                tkd126['ret'].values, tkd126['theme_ex_self'].values,
-                tkd['ret'].values, tkd['theme_ex_self'].values)
-        else:
-            a63, b63, r2_63 = ols_alpha(tkd['ret'].values, tkd['theme_ex_self'].values)
+        a63, b63, r2_63 = ols_alpha(tkd['ret'].values, tkd['theme_ex_self'].values)
         raw_1m = cumret(tkd['ret'].values[-21:])
         latest = panel[(panel['theme']==th)&(panel['ticker']==tk)&(panel['date']==dt)]
         price = float(latest['close'].iloc[0]) if len(latest)>0 else None
@@ -244,7 +217,7 @@ output = {
     'strategy': 'G2-MAX: 6-theme W5b consistency-weighted raw residual momentum',
     'frozen_params': {
         'theme_score': '0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)',
-        'stock_score': 'split-window raw α (β=126d, α=63d, no shrink, no SNR)',
+        'stock_score': 'raw self-excluded α63 (no shrink, no SNR)',
         'weighting': 'W5b consistency: pos_count(R63,R126,R252ex1m) × (1+avg_positive_ret), 30% cap',
         'top_themes': TOP_T, 'max_corr': MAX_CORR,
         'picks_per_theme': 1, 'min_members': MIN_M,
