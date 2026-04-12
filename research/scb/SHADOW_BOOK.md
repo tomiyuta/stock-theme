@@ -1133,3 +1133,51 @@ BEAST = Research Alpha Candidate のまま変更なし
 W5b(cap30)が運用戦略として正しい選択であることが監査で再確認された。
 BEAST nocapは参考値としてダッシュボード表示を継続。
 ```
+
+
+---
+
+## BEAST Audit — ChatGPT Final Analysis (2026-04-12)
+
+### 最終判定
+
+```
+BEAST:      CONDITIONAL / ATTACK-SLEEVE ONLY
+W5b(cap30): CURRENT WINNER / DEFAULT CANDIDATE
+```
+
+### ChatGPT分析の要点
+
+```
+1. 主犯特定: 「過学習」ではなく「bear regime脆弱性」が主犯
+   → 問題は「原因不明の不安定性」ではなく、regime dependency
+
+2. DSR RED解釈: 「Sharpe無価値」ではなく「額面通り信じるな」
+   → 尖度79 = "普段は普通、たまに爆発"の世界
+   → 少数日の大勝で全体が持ち上がり、見た目のSharpeが美化
+
+3. W5b優位の根拠: 偶然ではなく設計差で説明可能
+   → BEASTの弱点（集中/tail/bear crash）をcapが設計的に潰した結果
+   → 「監査結果で採用理由を説明できるようになった」
+
+4. 予想より良かった点:
+   → OOS retention 70.2%（本物の信号成分あり）
+   → net Sharpe retention 88%（コスト耐性が意外に高い）
+   → Cost 2x Calmar 2.23（弱点は「コスト」ではなく「regime/集中/tail」）
+```
+
+### ChatGPT推奨 次ステップ（優先順）
+
+```
+A. Bear kill switch設計（最優先・ROI最大）
+   SPY 63d<0で負けると判明 → 打ち手の検証:
+   ① cash化 ② hold数縮小 ③ cap追加引下げ ④ defensive ETF混合 ⑤ re-entry遅延
+
+B. 集中度制御の系統比較（次点）
+   cap 20/25/30/35/equal/vol-adjusted
+   最適化軸 = CAGR最大化ではなく Sharpe/Calmar/MaxDD/DSR総合最適
+
+C. Tail dependence分解（3番手）
+   top 1%/top 5日/top 10日を除いたCAGR/Sharpe/Calmar
+   → 崩れればDSR REDの意味がさらに重くなる
+```
