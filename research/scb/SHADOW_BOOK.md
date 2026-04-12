@@ -2086,3 +2086,47 @@ F_stk6_2 + beta_alpha_all.jsonの4指標を組み合わせたBT:
   alpha_stability + beta_penalty が Bear Sharpe をさらに改善する可能性
   individual_factorがresidual momentumの「テーマ宇宙に適合した」版として機能する可能性
 ```
+
+
+---
+
+## E_stk12_7 + downside_vol_30 利用方法（ChatGPT, 2026-04-12）
+
+### 核心: 2つは直交する役割
+
+```
+E_stk12_7      = 「何を持つか」を変える守備エンジン（selection改変）
+downside_vol_30 = 「どれだけ持つか」を変えるリスク整形装置（overlay）
+
+→ 代替案ではなく、別レイヤーで組み合わせるもの
+```
+
+### ChatGPT推奨の最終構造
+
+```
+案1（実務標準）: F_stk6_2 75% + E_stk12_7 25%（overlay なし）
+案2（バランス本命）: F_stk6_2 70%(dvol30付き) + E_stk12_7 30%
+案3（守備重視）: F_stk6_2 50% + E_stk12_7 50%
+
+三役分担:
+  selection alpha    = F_stk6_2
+  defensive selection = E_stk12_7
+  risk shaping       = downside_vol_30（F側のみ）
+```
+
+### 避けるべきこと
+
+```
+❌ E_stk12_7を「相場が悪い時だけ入れる」→ binary switchの再発
+❌ downside_vol_30をBear解決策として売る → BTとズレる
+❌ E + downside overlayを両方フルにかける → 期待リターンを二重に削る
+```
+
+### 将来拡張
+
+```
+E_stk12_7 + quality overlay が最も筋の良い拡張
+  → 12-7 intermediate horizonのunderreaction
+  → + quality/profitabilityで「良いwinner」確認
+  → beta_alpha_all.jsonのAlpha Stability Scoreで代理可能
+```
