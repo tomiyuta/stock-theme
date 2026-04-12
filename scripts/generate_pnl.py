@@ -120,6 +120,8 @@ def compute_prism_r_pnl():
     current_picks = {}
     for c in comp.get('comparisons', []):
         s = next((x for x in c['stocks'] if x['ticker'] == c['a5_pick']), {})
+        w5b_w = c.get('w5b_weight', 1.0/max(len(comp.get('comparisons',[])),1))
+        beast_w = c.get('beast_weight', w5b_w)
         current_picks[c['a5_pick']] = {
             'theme': c.get('theme_name', ''),
             'price': s.get('price', 0),
@@ -127,6 +129,8 @@ def compute_prism_r_pnl():
             'score': s.get('score_a5', 0),
             'theme_state': c.get('theme_state', ''),
             'full_rank': c.get('full_rank', 0),
+            'weight': w5b_w,
+            'beast_weight': beast_w,
         }
     
     # Update virtual ledger: add new picks, keep existing entry prices
@@ -154,13 +158,16 @@ def compute_prism_r_pnl():
     positions = []
     total_invested = 0.0
     total_current = 0.0
-    weight = 1.0 / max(len(current_picks), 1)  # equal weight
+    beast_inv = 0.0
+    beast_cur = 0.0
     
     for tk, info in current_picks.items():
         vpos = vledger['positions'].get(tk, {})
         entry_px = vpos.get('entry_price', info['price'])
         current_px = info['price']
         entry_date = vpos.get('entry_date', snapshot_date)
+        weight = info.get('weight', 1.0/max(len(current_picks),1))
+        bw = info.get('beast_weight', weight)
         
         pnl_pct = (current_px - entry_px) / entry_px if entry_px > 0 else 0
         pnl_weighted = pnl_pct * weight
@@ -179,8 +186,11 @@ def compute_prism_r_pnl():
         })
         total_invested += entry_px * weight
         total_current += current_px * weight
+        beast_inv += entry_px * bw
+        beast_cur += current_px * bw
     
     total_pnl = (total_current - total_invested) / total_invested if total_invested > 0 else 0
+    beast_pnl = (beast_cur - beast_inv) / beast_inv if beast_inv > 0 else 0
     positions.sort(key=lambda x: x['pnl_pct'], reverse=True)
     
     winners = [p for p in positions if p['pnl_pct'] > 0]
@@ -206,6 +216,7 @@ def compute_prism_r_pnl():
         'summary': {
             'total_positions': len(positions),
             'total_pnl_pct': round(total_pnl, 4),
+            'beast_pnl_pct': round(beast_pnl, 4),
             'winners': len(winners),
             'losers': len(losers),
             'best': positions[0]['ticker'] if positions else None,
@@ -343,15 +354,18 @@ def update_forward_overlay():
         
         # Only update if as_of date is newer than last forward entry
         if fwd['dates'] and as_of <= fwd['dates'][-1]:
-            # Backfill beast if missing (G2-MAX only)
-            if label == 'G2-MAX' and ('beast' not in fwd or len(fwd.get('beast',[])) < len(fwd['dates'])):
+            # Backfill beast/w5b if missing (G2-MAX and PRISM-R)
+            if label in ('G2-MAX','PRISM-R') and ('beast' not in fwd or len(fwd.get('beast',[])) < len(fwd['dates'])):
                 beast_pnl = pnl.get('summary', {}).get('beast_pnl_pct', total_pnl)
                 if 'beast' not in fwd: fwd['beast'] = []
                 while len(fwd['beast']) < len(fwd['dates']):
                     fwd['beast'].append(round(1 + beast_pnl, 6))
+                if 'a5w5b' not in fwd: fwd['a5w5b'] = []
+                while len(fwd['a5w5b']) < len(fwd['dates']):
+                    fwd['a5w5b'].append(round(1 + total_pnl, 6))
                 cum['forward_overlay'] = fwd
                 save_json(cum_path, cum)
-                print(f'{label} forward: backfilled beast ({len(fwd["beast"])} entries)')
+                print(f'{label} forward: backfilled beast+w5b ({len(fwd["beast"])} entries)')
             else:
                 print(f'{label} forward: already up to date ({as_of})')
             continue
@@ -366,12 +380,15 @@ def update_forward_overlay():
         else:
             fwd['a5'].append(round(1 + total_pnl, 6))
         
-        # BEAST forward overlay (G2-MAX only)
-        if label == 'G2-MAX':
+        # BEAST/W5b forward overlay (G2-MAX and PRISM-R)
+        if label in ('G2-MAX', 'PRISM-R'):
             beast_pnl = pnl.get('summary', {}).get('beast_pnl_pct', total_pnl)
             if 'beast' not in fwd:
                 fwd['beast'] = []
             fwd['beast'].append(round(1 + beast_pnl, 6))
+            if 'a5w5b' not in fwd:
+                fwd['a5w5b'] = []
+            fwd['a5w5b'].append(round(1 + total_pnl, 6))
         
         # SPY: fetch from last known price in constituents or use 0
         # We'll compute SPY return from the BT boundary

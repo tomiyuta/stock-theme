@@ -168,7 +168,7 @@ Promise.all([
   }
   // 3b. Virtual Portfolio — A4 vs A5-R side by side
   h+=`<div class="section-title">📋 バーチャルポートフォリオ</div>`;
-  h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM現行) vs A5-R (Shadow) — 各10%等ウェイト</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">A4 (PRISM現行) vs A5-R (W5b Shadow)</div>`;
   h+=`<table class="bm-table"><tr><th>#</th><th>テーマ</th><th>状態</th><th>A4 pick</th><th>A5-R pick</th><th></th></tr>`;
   comp.comparisons.forEach((c,i)=>{
     const a4s=c.stocks.find(x=>x.ticker===c.a4_pick)||{};
@@ -211,12 +211,12 @@ Promise.all([
   // 3c. Rebalance Calculator
   window._prismR_picks = comp.comparisons.map(c => {
     const s = c.stocks.find(x=>x.ticker===c.a5_pick)||{};
-    return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63};
+    return {ticker:c.a5_pick, price:s.price, sector:s.sector, theme:c.theme_name, alpha63:s.alpha63, w5b_weight:c.w5b_weight||0, beast_weight:c.beast_weight||0};
   });
   h+=`<div id="sellCardR"></div>`;
   h+=`<div id="rebalDiffR"></div>`;
   h+=`<div class="section-title">📊 PRISM-R リバランス計算</div>`;
-  h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × 10%等ウェイト</div>`;
+  h+=`<div class="prod-card"><div class="prod-title">A5-R Shadow Portfolio — 10銘柄 × W5b一貫性加重</div>`;
   h+=`<div class="prod-input-row">`;
   h+=`<span class="prod-input-label">投資資金</span>`;
   h+=`<div class="prod-toggle"><button class="prod-toggle-btn active" onclick="setRCcy('USD')">USD</button><button class="prod-toggle-btn" onclick="setRCcy('JPY')">JPY</button></div>`;
@@ -224,10 +224,10 @@ Promise.all([
   h+=`<span class="prod-input-label">ドル円:</span><input id="rFx" class="prod-input" type="number" value="150" step="0.1" style="width:60px" oninput="calcR()">`;
   h+=`<button class="prod-fx-btn" onclick="fetchRFx()">🔄 現在レート</button>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">株価($)</th><th style="text-align:right">購入株数 / 実配分</th></tr></thead>`;
+  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">W5b%</th><th style="text-align:right;color:#D85A30">🔥%</th><th style="text-align:right">株価</th><th style="text-align:right">W5b株数</th><th style="text-align:right;color:#D85A30">🔥株数</th></tr></thead>`;
   h+=`<tbody id="rRebalBody"></tbody></table>`;
   h+=`<div id="rRebalSummary"></div>`;
-  h+=`<div class="prod-meta">等ウェイト 10% × 10銘柄 | SHADOWモード（実際の売買は行いません）</div>`;
+  h+=`<div class="prod-meta">W5b = 30%キャップ | 🔥 = キャップなし | 同一銘柄・ウェイトのみ異なる</div>`;
   h+=`</div>`;
   // Cumulative Returns Chart (案C: BT破線 + forward実線)
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
@@ -236,7 +236,7 @@ Promise.all([
   h+=`<div id="cumStatsR" style="margin-top:12px"></div>`;
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A5-R</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
+  h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>W5b</th><th style="color:#D85A30">BEAST</th><th>等W</th><th>SPY</th><th>W5b-SPY</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（A4より重い）。production判断はforward PIT-safeデータのみ。</div></div>`;
 
   // 4. Promotion Progress
@@ -303,10 +303,11 @@ Promise.all([
   // 9. Investment Logic Cards (MECE)
   h+=`<div class="section-title">📐 PRISM-R 投資ロジック</div>`;
   const lcards=[
-    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）のみを差し替えたshadow overlay戦略。</div><div class="logic-rule">Layer 1（テーマ選定）とLayer 3（ポートフォリオ制約）はPRISMと完全同一。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M return最大 → Layer 3</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²_63)</code> 最大 → Layer 3</div><div class="logic-rule">制約: MinHold 20営業日 + SectorCap 35% + MaxPositions 35</div>`],
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）を差し替え＋Layer 3（W5b加重）を追加したshadow overlay戦略。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M → 等ウェイト</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²)</code> → Layer 3: W5b一貫性加重（30%cap）</div>`],
     ["Layer 1: テーマ選定（PRISM共通）",`<div class="logic-rule"><b>5因子スコア:</b> z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule"><b>選定:</b> 上位10テーマ / 適格=4銘柄以上 / セクター制約=同一セクター最大3</div><div class="logic-rule"><b>ヒステリシス:</b> ENTRY≤20 / WATCH 21-35 / EXIT&gt;35</div>`],
     ["Layer 2: 銘柄選定（PRISM-R固有）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:4px 0">OLS回帰モデル（63日ローリング）</div><div class="logic-rule"><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code></div><div class="logic-rule"><b>自己除外:</b> テーマ平均から銘柄i自身を除外（平均4.7銘柄/テーマで歪み防止）</div><div class="logic-rule"><b>出力:</b> α63（残差α）/ β63（傾き）/ r²_63（決定係数）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">Shrinkage関数（hard filterの代替）</div><div class="logic-rule"><code>shrink(r²): r²&lt;0.10→r²×2 | 0.10-0.50→線形補間 | r²&gt;0.50→1.0</code></div><div class="logic-rule">設計意図: 小ユニバースで候補枯渇を防ぎつつ、低信頼度αを縮小</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">スコア</div><div class="logic-rule"><code>score = α63 × shrink(r²_63)</code></div><div class="logic-rule">各テーマからscore最大の1銘柄を選定。重複禁止。</div>`],
-    ["Layer 3: ポートフォリオ制約（PRISM共通）",`<div class="logic-rule"><b>ウェイト:</b> 等ウェイト 10銘柄×10%</div><div class="logic-rule"><b>リバランス:</b> 20営業日ごと</div><div class="logic-rule"><b>MinHold:</b> 20営業日（実証済みコア）</div><div class="logic-rule"><b>SectorCap:</b> 35%</div>`],
+    ["Layer 3: W5b一貫性加重（PRISM-R固有）",`<div style="font-size:10px;line-height:1.6"><b>3期間モメンタムの一貫性でウェイトを決定:</b><br><code>R252_ex1m = (1+R252)/(1+R21) - 1</code> (12-1 momentum)<br><code>pos_count = Σ𝟙(R63>0, R126>0, R252_ex1m>0)</code><br><code>raw_weight = pos_count × (1 + avg_positive_ret)</code><br><code>weight = normalize + 30%キャップ</code><br><br><b>BT改善:</b> vs等ウェイト Sharpe +0.01, CAGR +37pt, MaxDD +2.5pt改善, 2022年 -10%→+2%<br><b>BEAST:</b> キャップなし参考値（CAGR↑ Sharpe↓）</div>`],
+    ["Layer 4: ポートフォリオ制約（PRISM共通）",`<div class="logic-rule"><b>リバランス:</b> 20営業日ごと</div><div class="logic-rule"><b>MinHold:</b> 20営業日（実証済みコア）</div><div class="logic-rule"><b>SectorCap:</b> 同一セクター最大3</div>`],
     ["A4 vs A5-R 構造差",`<table class="logic-table"><tr><th></th><th>A4 (PRISM)</th><th>A5-R (PRISM-R)</th></tr><tr><td>Layer 2</td><td>raw 1M return最大</td><td>α63×shrink(r²)</td></tr><tr><td>選定の性質</td><td>先月最も上がった銘柄</td><td>構造的α最大の銘柄</td></tr><tr><td>Turnover</td><td>93%/リバランス</td><td>83%（持続性高い）</td></tr><tr><td>PIT感応度</td><td>テーマ構成に依存</td><td>テーマ構成+OLS推定値（より高い）</td></tr><tr><td>Tech比率</td><td>標準</td><td>純超過収益の76%</td></tr><tr><td>Top5集中度</td><td>26%</td><td>38%（やや集中）</td></tr></table><div class="logic-rule">⚠ A5-Rは「A4の上位互換」ではなく「Tech優位局面で効きやすい、正の歪みを持つ、やや集中型のresidual-alpha overlay」</div>`],
     ["トリガー（T1〜T5）— EXIT CONSTITUTION v2",`<div class="logic-rule"><b>T1: K-gate反転</b> — 退出理由ではなく容量変更シグナル。</div><div class="logic-rule"><b>T2: テーマ脱落 (rank &gt; 35)</b> — 正式な退出ドライバ。ヒステリシス: entry≤20 / watch 21-35 / exit &gt;35。</div><div class="logic-rule"><b>T3: 加速→減速 ⓘ diagnostic only</b> — 単独では退出しない。theme score内のacceleration情報と二重計上の恐れ。</div><div class="logic-rule"><b>T4: TRAIL8_ALERT</b> — peak比-8% trailing DD alert。<b>auto-sell無効</b>。未検証のためalert-only。</div><div class="logic-rule"><b>T5: 新規参入</b> — 押し出し圧力。単独退出理由ではない。</div>`],
     ["売却ロジック（EXIT CONSTITUTION v2）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:6px 0 4px">3層分離アーキテクチャ</div><div class="logic-rule"><b>Layer A: Signal Exit</b> — ターゲット除外判定。T2(rank&gt;35)が正式退出ドライバ。T3はdiagnostic only。</div><div class="logic-rule"><b>Layer B: Execution Permission</b> — 実行制約。MinHold 20営業日が唯一の実証済みコア。TRAIL8=alert-only。</div><div class="logic-rule"><b>Layer C: Portfolio Reconciliation</b> — blocked銘柄のcap整合。最優先governance論点。</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">売却判定フロー</div><div class="logic-rule">① target_weightsに含まれる → <b>HOLD_TARGET</b></div><div class="logic-rule">② target外 + holding_days &lt; 20 → <b>🔒 HOLD_BLOCKED</b>（MinHold）</div><div class="logic-rule">③ target外 + holding_days ≥ 20 → <b>SELL_EXPIRED</b></div><div class="logic-rule">④ TRAIL8発火 → <b>⚠️ ALERT のみ</b>（auto-sell無効）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">cap violation時の優先順位</div><div class="logic-rule">1. Data integrity / delisting → 即時売却（MinHold無視）</div><div class="logic-rule">2. atk_cap（hard） → blocked銘柄の比例縮小を許可</div><div class="logic-rule">3. MinHold → 裁量売却禁止だが、cap対応の縮小は許可</div><div class="logic-rule">4. sector_cap → legacy blocked=soft / new buys=hard</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">blocked weight処理</div><div class="logic-rule">blocked銘柄は atk_cap違反時のみ縮小許可。sector_capでは不可。</div><div style="font-size:10px;font-weight:700;color:var(--text-sub);margin:8px 0 4px">パイプライン分離</div><div class="logic-rule"><b>Order pipeline:</b> テーマ選定→target→MinHold→cap repair→注文</div><div class="logic-rule"><b>Monitoring pipeline:</b> TRAIL8 / T3 / peak DD（注文権限なし）</div>`],
@@ -339,26 +340,32 @@ function calcR(){
   const rawCap=parseFloat(document.getElementById('rCapital').value)||0;
   const fx=parseFloat(document.getElementById('rFx').value)||150;
   const capUSD=window._rCcy==='JPY'?rawCap/fx:rawCap;
-  const w=0.10;let totalInvested=0;let html='';
+  let totalInvW5b=0;let totalInvB=0;let html='';
   picks.forEach(p=>{
     if(!p.price)return;
-    const target=capUSD*w;const shares=Math.floor(target/p.price);
-    const actual=shares*p.price;const actualPct=capUSD>0?(actual/capUSD)*100:0;
-    const dev=actualPct-10;totalInvested+=actual;
+    const w=p.w5b_weight||0.10;const bw=p.beast_weight||0.10;
+    const g2t=capUSD*w;const g2s=Math.floor(g2t/p.price);const g2a=g2s*p.price;const g2pct=capUSD>0?(g2a/capUSD)*100:0;
+    const bt=capUSD*bw;const bs=Math.floor(bt/p.price);const ba=bs*p.price;const bpct=capUSD>0?(ba/capUSD)*100:0;
+    totalInvW5b+=g2a;totalInvB+=ba;
     html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b> <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
+    html+=`<td class="num" style="font-weight:700;color:var(--purple)">${(w*100).toFixed(1)}%</td>`;
+    html+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
-    html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${dev>=0?'pos':'neg'}">実${actualPct.toFixed(1)}% (${dev>=0?'+':''}${dev.toFixed(1)}%)</span></td></tr>`;
+    html+=`<td class="num"><span class="shares">${g2s}株</span> <span class="dev ${g2pct-w*100>=0?'pos':'neg'}">実${g2pct.toFixed(1)}%</span></td>`;
+    html+=`<td class="num" style="color:#D85A30"><span class="shares">${bs}株</span> <span style="font-size:8px">実${bpct.toFixed(1)}%</span></td></tr>`;
   });
   document.getElementById('rRebalBody').innerHTML=html;
-  const residual=capUSD-totalInvested;const residualPct=capUSD>0?(residual/capUSD)*100:0;
+  const resW=capUSD-totalInvW5b;const resB=capUSD-totalInvB;
+  const resPctW=capUSD>0?(resW/capUSD)*100:0;const resPctB=capUSD>0?(resB/capUSD)*100:0;
   const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
   const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
-  let sh=`<div class="prod-summary"><span>実投資額 <b>${fmtD(totalInvested)}</b>`;
-  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvested)})`;
-  sh+=`</span><span>未使用現金 <b style="color:${residualPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(residual)} (${residualPct.toFixed(1)}%)</b>`;
-  if(window._rCcy==='JPY')sh+=` (${fmtY(residual)})`;
-  sh+=`</span></div>`;
+  let sh=`<div class="prod-summary"><span style="color:var(--purple)">W5b投資額 <b>${fmtD(totalInvW5b)}</b>`;
+  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvW5b)})`;
+  sh+=`</span><span style="color:var(--purple)">余り <b style="color:${resPctW>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resW)} (${resPctW.toFixed(1)}%)</b></span></div>`;
+  sh+=`<div class="prod-summary" style="margin-top:4px"><span style="color:#D85A30">🔥投資額 <b>${fmtD(totalInvB)}</b>`;
+  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvB)})`;
+  sh+=`</span><span style="color:#D85A30">余り <b style="color:${resPctB>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resB)} (${resPctB.toFixed(1)}%)</b></span></div>`;
   document.getElementById('rRebalSummary').innerHTML=sh;
 }
 setTimeout(()=>{if(window._prismR_picks)calcR();},500);
@@ -367,19 +374,33 @@ function initPrismRChart(){
 fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).then(cr=>{
   const ctx=document.getElementById('cumChartR');
   if(!ctx)return;
-  const fwd = cr.forward_overlay || {dates:[],a5:[],SPY:[]};
+  const fwd = cr.forward_overlay || {dates:[],a5:[],a5w5b:[],beast:[],SPY:[]};
   const lastBT_a5 = cr.a5[cr.a5.length-1] || 1;
   const lastBT_spy = cr.SPY[cr.SPY.length-1] || 1;
+  const btW5b = cr.a5w5b || [];
+  const btBeast = cr.beast || [];
+  const lastBT_w5b = btW5b[btW5b.length-1] || 1;
+  const lastBT_beast = btBeast[btBeast.length-1] || 1;
   const fwdA5 = (fwd.a5||[]).map(g => Math.round(lastBT_a5 * g * 1e6) / 1e6);
+  const fwdW5b = (fwd.a5w5b||[]).map(g => Math.round(lastBT_w5b * g * 1e6) / 1e6);
+  const fwdBeast = (fwd.beast||[]).map(g => Math.round(lastBT_beast * g * 1e6) / 1e6);
   const fwdSPY = (fwd.SPY||[]).map(g => Math.round(lastBT_spy * g * 1e6) / 1e6);
+  const padN = fwd.dates.filter(d => !cr.dates.includes(d)).length;
   const allDates = [...cr.dates, ...fwd.dates.filter(d => !cr.dates.includes(d))];
-  const btA5 = [...cr.a5, ...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
-  const btSPY = [...cr.SPY, ...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
+  const btA5 = [...cr.a5, ...new Array(padN).fill(null)];
+  const btW5bPad = [...btW5b, ...new Array(padN).fill(null)];
+  const btBeastPad = [...btBeast, ...new Array(padN).fill(null)];
+  const btSPY = [...cr.SPY, ...new Array(padN).fill(null)];
   const fwdA5Full = [...new Array(cr.dates.length - 1).fill(null), lastBT_a5, ...fwdA5];
+  const fwdW5bFull = [...new Array(cr.dates.length - 1).fill(null), lastBT_w5b, ...fwdW5b];
+  const fwdBeastFull = [...new Array(cr.dates.length - 1).fill(null), lastBT_beast, ...fwdBeast];
   const fwdSPYFull = [...new Array(cr.dates.length - 1).fill(null), lastBT_spy, ...fwdSPY];
   window._cumChartR=new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
-    {label:'A5-R BT(参考)',data:btA5,borderColor:'rgba(124,58,237,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
-    {label:'A5-R 実績',data:fwdA5Full,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'A5-R BT(等W)',data:btA5,borderColor:'rgba(124,58,237,0.3)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'W5b BT',data:btW5bPad,borderColor:'rgba(124,58,237,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
+    {label:'BEAST BT',data:btBeastPad,borderColor:'rgba(216,90,48,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[6,3]},
+    {label:'W5b 実績',data:fwdW5bFull,borderColor:'#7c3aed',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'BEAST 実績',data:fwdBeastFull,borderColor:'#D85A30',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fwdSPYFull,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
   ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,
@@ -389,16 +410,19 @@ fetch('/api/prism-r/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).th
       y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   const st=cr.stats;
   const mkRow=(name,color,cagr,maxdd,sharpe,sortino,calmar)=>`<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:6px;background:${color};margin-bottom:4px"><div style="font-size:10px;font-weight:700;min-width:50px;color:var(--text-main)">${name}</div><div style="display:flex;gap:6px;flex:1"><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">CAGR</div><div style="font-size:11px;font-weight:700">${cagr}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">MaxDD</div><div style="font-size:11px;font-weight:700">${maxdd}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sharpe</div><div style="font-size:11px;font-weight:700">${sharpe}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sortino</div><div style="font-size:11px;font-weight:700">${sortino}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Calmar</div><div style="font-size:11px;font-weight:700">${calmar}</div></div></div></div>`;
+  const cal=(s)=>s.cagr&&s.maxdd?Math.abs(s.cagr/s.maxdd).toFixed(2):'0';
   document.getElementById('cumStatsR').innerHTML=
-    mkRow('PRISM-R','rgba(124,58,237,0.06)',(st.a5.cagr*100).toFixed(1)+'%',(st.a5.maxdd*100).toFixed(1)+'%',st.a5.sharpe.toFixed(2),(st.a5.sortino||0).toFixed(2),(st.a5.calmar||0).toFixed(2))+
-    mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',(st.SPY.maxdd*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.sortino||0).toFixed(2),(st.SPY.calmar||0).toFixed(2));
-  const ann=cr.annual;const years=Object.keys(ann.a5).sort();
+    mkRow('W5b','rgba(124,58,237,0.06)',((st.a5w5b||st.a5).cagr*100).toFixed(1)+'%',((st.a5w5b||st.a5).maxdd*100).toFixed(1)+'%',(st.a5w5b||st.a5).sharpe.toFixed(2),((st.a5w5b||st.a5).sortino||0).toFixed(2),cal(st.a5w5b||st.a5))+
+    (st.a5beast?mkRow('🔥BEAST','rgba(216,90,48,0.06)',(st.a5beast.cagr*100).toFixed(1)+'%',(st.a5beast.maxdd*100).toFixed(1)+'%',st.a5beast.sharpe.toFixed(2),(st.a5beast.sortino||0).toFixed(2),cal(st.a5beast)):'')+
+    mkRow('等W(参考)','rgba(0,0,0,0.02)',(st.a5.cagr*100).toFixed(1)+'%',(st.a5.maxdd*100).toFixed(1)+'%',st.a5.sharpe.toFixed(2),(st.a5.sortino||0).toFixed(2),cal(st.a5))+
+    mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',(st.SPY.maxdd*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.sortino||0).toFixed(2),cal(st.SPY));
+  const ann=cr.annual;const years=Object.keys(ann.a5w5b||ann.a5).sort();
   let tb='';
   years.forEach(y=>{
-    const a5v=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=a5v-sv;
+    const wv=(ann.a5w5b||ann.a5)[y]||0,bv=(ann.a5beast||{})[y]||0,ev=ann.a5[y]||0,sv=ann.SPY[y]||0,diff=wv-sv;
     const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
-    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(a5v)};font-weight:700">${f(a5v)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(wv)};font-weight:700">${f(wv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(ev)};font-size:9px">${f(ev)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
   });
   document.getElementById('annualBodyR').innerHTML=tb;
 }).catch(e=>console.warn('cumulative chart error:',e));

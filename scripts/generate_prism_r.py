@@ -131,7 +131,11 @@ j = len(dates_all) - 1  # latest date
 dt = dates_all[j]
 dt63 = set(dates_all[max(0,j-62):j+1])
 dt21 = set(dates_all[max(0,j-20):j+1])
+dt126 = set(dates_all[max(0,j-125):j+1])
+dt252 = set(dates_all[max(0,j-251):j+1])
 sub = panel[panel['date'].isin(dt63)]
+sub126 = panel[panel['date'].isin(dt126)]
+sub252 = panel[panel['date'].isin(dt252)]
 
 # Theme scoring
 tm = sub.groupby('theme')['ticker'].nunique()
@@ -341,6 +345,52 @@ snrb_overlap_a5 = sum(1 for c in comparisons if c['a5_snrb_same'])
 bfm2_themes = [c for c in comparisons if c['in_bfm2']]
 bfm2_overlap_base = sum(1 for c in comparisons if c['in_bfm2'])
 cra_overlap_snrb = sum(1 for c in comparisons if c['snrb_cra_same'])
+
+# === W5b Consistency Weighting for PRISM-R (a5_pick) ===
+w5b_data = {}
+for c in comparisons:
+    th = c['theme']
+    # Compute R63/R126/R252/R21 per theme
+    td63v = sub[sub['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
+    r63 = cumret(td63v) if len(td63v) >= 63 else np.nan
+    r21 = cumret(td63v[-21:]) if len(td63v) >= 21 else np.nan
+    td126v = sub126[sub126['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
+    r126 = cumret(td126v) if len(td126v) >= 63 else np.nan
+    td252v = sub252[sub252['theme']==th].groupby('date')['theme_ret'].first().sort_index().values
+    r252 = cumret(td252v) if len(td252v) >= 126 else np.nan
+    r252ex1m = ((1+r252)/(1+r21)-1) if np.isfinite(r252) and np.isfinite(r21) and abs(1+r21)>1e-8 else np.nan
+    horizons = [r63, r126, r252ex1m]
+    valid = [v for v in horizons if np.isfinite(v)]
+    if len(valid) >= 2:
+        pos_count = sum(1 for v in valid if v > 0)
+        avg_ret = float(np.mean([max(v,0) for v in valid]))
+        raw_w = pos_count * (1 + avg_ret)
+    else:
+        pos_count = 0; avg_ret = 0; raw_w = 1.0
+    w5b_data[th] = {'raw_weight': raw_w, 'pos_count': pos_count, 'r252ex1m': r252ex1m}
+# Normalize + 30% cap
+total_raw = sum(d['raw_weight'] for d in w5b_data.values())
+beast_total = total_raw
+if total_raw > 0:
+    for th in w5b_data: w5b_data[th]['weight'] = w5b_data[th]['raw_weight'] / total_raw
+else:
+    for th in w5b_data: w5b_data[th]['weight'] = 1.0 / max(len(w5b_data), 1)
+for _ in range(5):
+    ws = np.array([w5b_data[th]['weight'] for th in w5b_data])
+    excess = np.maximum(ws - 0.30, 0)
+    if excess.sum() < 1e-6: break
+    under = ws < 0.30; ws = np.minimum(ws, 0.30)
+    if under.any(): ws[under] += excess.sum() * (ws[under] / ws[under].sum())
+    ws = ws / ws.sum()
+    for i, th in enumerate(w5b_data): w5b_data[th]['weight'] = round(float(ws[i]), 4)
+# Add to comparisons
+for c in comparisons:
+    th = c['theme']
+    wd = w5b_data.get(th, {})
+    c['w5b_weight'] = round(wd.get('weight', 1.0/max(len(comparisons),1)), 4)
+    c['beast_weight'] = round(wd.get('raw_weight', 1.0) / beast_total, 4) if beast_total > 0 else round(1.0/max(len(comparisons),1), 4)
+    c['w5b_pos_count'] = wd.get('pos_count', 0)
+    c['w5b_r252ex1m'] = round(wd.get('r252ex1m', 0), 4) if np.isfinite(wd.get('r252ex1m', np.nan)) else None
 # === Dip Sleeve Diagnostics ===
 DIP_PATH = ROOT / 'data' / 'stock-themes-api' / 'dip_alerts.json'
 dip_sleeve = []
