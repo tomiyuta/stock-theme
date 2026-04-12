@@ -77,7 +77,7 @@ Promise.all([
 
   // === 3. Portfolio ===
   h+=`<div class="section-title">📊 G2-MAX ポートフォリオ</div>`;
-  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">6テーマ集中 × raw α63 — ${comp.comparisons?.length||0}銘柄</div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">6テーマ集中 × split-window α — ${comp.comparisons?.length||0}銘柄</div>`;
   h+=`<table class="tbl"><tr><th>#</th><th>テーマ</th><th>銘柄</th><th>価格</th><th>α63</th></tr>`;
   (comp.comparisons||[]).forEach((c,i)=>{
     const s = c.stocks?.[0] || {};
@@ -173,7 +173,7 @@ Promise.all([
   const arch=[
     ["設計思想",`<div style="font-size:10px;line-height:1.6;padding:6px;background:rgba(225,29,72,0.04);border-radius:4px"><b>G2-MAX</b> = CAGR最大化専用のW5b一貫性加重raw α戦略<br>PRISM-RQ（Sharpe/Calmar重視）とは<b>目的関数が異なる</b><br>Ablation BTで「集中+raw α+W5b加重」がCAGR最大の構成と確認</div>`],
     ["Layer 1: 6テーマ集中 + Corr Budget",`<div style="font-size:10px;line-height:1.6"><code>ThemeScore = 0.50×rank(R63) + 0.30×rank(R126) + 0.20×rank(R21)</code><br><br><b>選定:</b> 上位からgreedy採用、相関制約 max_corr &lt; 0.80<br><b>テーマ数:</b> 6（Sharpe最大2.80 / MaxDD最良-44%の最適点）<br><b>sector cap:</b> なし<br><b>BFM-v2 veto:</b> なし</div>`],
-    ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定</div>`],
+    ["Layer 2: Split-Window Raw α",`<div style="font-size:10px;line-height:1.6"><b>Split-Window OLS（β=126日、α=63日、自己除外）:</b><br><code>β/R²: 126日OLSで安定推定</code><br><code>α形成: 直近63日の残差平均</code><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63|126（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α最大を選定</div>`],
     ["Layer 3: W5b一貫性加重",`<div style="font-size:10px;line-height:1.6"><b>3期間モメンタムの一貫性でウェイトを決定:</b><br><code>R252_ex1m = (1+R252)/(1+R21) - 1</code> (12-1 momentum)<br><code>pos_count = Σ𝟙(R63>0, R126>0, R252_ex1m>0)</code><br><code>avg_ret = mean(max(R63,0), max(R126,0), max(R252_ex1m,0))</code><br><code>raw_weight = pos_count × (1 + avg_ret)</code><br><code>weight = normalize + 30%キャップ</code><br><br><b>直感:</b> 3期間全てで上昇しているテーマ（真のトレンド）に多く配分。1期間だけ正のテーマ（ノイズ）は減量。<br><br><b>vs 等ウェイト:</b> CAGR +52pt, Sharpe +0.14, 2022年DD -28%→-14%改善</div>`],
     ["防御装置",`<div style="font-size:10px;line-height:1.6"><b>残すもの:</b><br>• Correlation budget（同一因子の重複ベット回避）<br>• Data integrity / delisting 系 hard exit<br><br><b>外すもの:</b><br>• BFM-v2 veto（CAGR -14pt）<br>• SNRb（CAGR -9.5pt）<br>• shrink(r²)<br>• sector cap<br>• Vol overlay<br>• panic de-gearing（今回のBTでは無効）</div>`],
     ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に敏感。</b><br>6テーマ集中 + raw α + W5b加重は「今のテーマ構成で過去を計算」の影響を受けやすい構成。<br>CAGR 231%のうちPIT上方バイアスの割合は不明。<br>forward実績で下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
