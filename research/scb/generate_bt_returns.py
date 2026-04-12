@@ -32,6 +32,18 @@ def ols_ab(y, x):
     r2 = 1-ss_res/ss_tot if ss_tot>1e-12 else np.nan
     return a*n, b, r2
 
+def split_alpha(y_long, x_long, y_short, x_short):
+    mask=np.isfinite(y_long)&np.isfinite(x_long);yl,xl=y_long[mask],x_long[mask];nl=len(yl)
+    if nl<20:return np.nan,np.nan,np.nan
+    xm,ym=xl.mean(),yl.mean();xd=xl-xm;vx=np.dot(xd,xd)/(nl-1)
+    if vx<1e-12:return np.nan,np.nan,np.nan
+    b=np.dot(xd,yl-ym)/(nl-1)/vx;a=ym-b*xm
+    ss=float(np.sum((yl-a-b*xl)**2));st=float(np.sum((yl-ym)**2))
+    r2=1-ss/st if st>1e-12 else np.nan
+    ms=np.isfinite(y_short)&np.isfinite(x_short);ys,xs=y_short[ms],x_short[ms];ns=len(ys)
+    if ns<10:return np.nan,b,r2
+    return float(np.mean(ys-b*xs)*ns),b,r2
+
 def cumret(arr):
     a = np.asarray(arr, dtype=float); a = a[np.isfinite(a)]
     return float(np.expm1(np.log1p(a).sum())) if len(a) else np.nan
@@ -101,7 +113,13 @@ for pos in range(len(rebal_idx)-1):
             r21d = tkd[tkd['date'].isin(dt21)]
             raw_1m = cumret(r21d['ret'].values) if len(r21d)>=10 else np.nan
             s4[tk] = raw_1m if np.isfinite(raw_1m) else -999
-            a63,b63,r2_63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
+            # Split-window: β/R² from 126d, α from 63d
+            tkd126 = sub126[(sub126['theme']==th)&(sub126['ticker']==tk)].sort_values('date')
+            if len(tkd126) >= 20:
+                a63,b63,r2_63 = split_alpha(tkd126['ret'].values, tkd126['theme_ex_self'].values,
+                                            tkd['ret'].values, tkd['theme_ex_self'].values)
+            else:
+                a63,b63,r2_63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
             shrk = shrink_r2(r2_63) if np.isfinite(r2_63) else 0
             s5[tk] = a63*shrk if np.isfinite(a63) else -999
             # DEF: 12-7 month alpha

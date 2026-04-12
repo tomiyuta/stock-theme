@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-12T10:41:53.304206",
+  "generated_at": "2026-04-12T22:01:47.892593",
   "version": "PRISM-RQ_v1",
   "status": "SHADOW",
   "pit_safe": false,
@@ -10,8 +10,8 @@
   "frozen_params": {
     "alpha_window": 63,
     "theme_score": "0.70×rank(mom63)+0.30×rank(decel)",
-    "stock_score": "α63×shrink(r²_63)",
-    "stock_score_snrb": "(α63/resid_vol63)×shrink(r²_63)",
+    "stock_score": "split-window: β/R²=126d, α=63d → α_cum×shrink(R²_126)",
+    "stock_score_snrb": "(α_split63|126/resid_vol)×shrink(R²_126)",
     "bfm2_filter": "veto: breadth<30pct, conc>80pct, vol>80pct from top25",
     "cra_v1": "SNRb × (0.70 + 0.30 × AuditScore), AuditScore from st sign/tval",
     "top_themes": 10,

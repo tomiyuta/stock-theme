@@ -91,6 +91,28 @@ def ols_ab(y, x):
     resid_vol = float(np.std(resid, ddof=1)*np.sqrt(n)) if n>2 else np.nan
     return a*n, b, r2, resid_vol
 
+def split_alpha(y_long, x_long, y_short, x_short):
+    """Split-window: β/R² from long window (126d), α from short window (63d)."""
+    mask = np.isfinite(y_long) & np.isfinite(x_long)
+    yl, xl = y_long[mask], x_long[mask]; nl = len(yl)
+    if nl < 20: return np.nan, np.nan, np.nan, np.nan
+    xm, ym = xl.mean(), yl.mean(); xd = xl - xm; vx = np.dot(xd, xd)/(nl-1)
+    if vx < 1e-12: return np.nan, np.nan, np.nan, np.nan
+    b_long = np.dot(xd, yl-ym)/(nl-1) / vx
+    a_long = ym - b_long*xm
+    resid_long = yl - a_long - b_long*xl
+    ss = float(np.sum(resid_long**2)); st = float(np.sum((yl-ym)**2))
+    r2_long = 1-ss/st if st>1e-12 else np.nan
+    mask_s = np.isfinite(y_short) & np.isfinite(x_short)
+    ys, xs = y_short[mask_s], x_short[mask_s]; ns = len(ys)
+    if ns < 10: return np.nan, b_long, r2_long, np.nan
+    resid_short = ys - b_long*xs
+    alpha_daily = np.mean(resid_short) - a_long  # remove long-window intercept bias
+    alpha_daily = np.mean(ys - b_long*xs)  # simpler: just mean of residuals using long β
+    alpha_cum = alpha_daily * ns
+    resid_vol = float(np.std(resid_short, ddof=1)*np.sqrt(ns)) if ns > 2 else np.nan
+    return alpha_cum, b_long, r2_long, resid_vol
+
 def cumret(arr):
     a = np.asarray(arr, dtype=float); a = a[np.isfinite(a)]
     return float(np.expm1(np.log1p(a).sum())) if len(a) else np.nan
@@ -234,14 +256,22 @@ comparisons = []
 used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set(); used_cra = set()
 for rank_i, th in enumerate(sel):
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
+    ths126 = sub126[(sub126['theme']==th) & sub126['ret'].notna()]
     tks = ths['ticker'].unique()
     if len(tks) < MIN_M: continue
     all_stocks = []
     for tk in tks:
         tkd = ths[ths['ticker']==tk].sort_values('date')
+        tkd126 = ths126[ths126['ticker']==tk].sort_values('date')
         r21d = tkd[tkd['date'].isin(dt21)]
         raw_1m = cumret(r21d['ret'].values) if len(r21d)>=10 else np.nan
-        a63, b63, r2_63, rvol63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
+        # Split-window: β/R² from 126d, α from 63d
+        if len(tkd126) >= 20:
+            a63, b63, r2_63, rvol63 = split_alpha(
+                tkd126['ret'].values, tkd126['theme_ex_self'].values,
+                tkd['ret'].values, tkd['theme_ex_self'].values)
+        else:
+            a63, b63, r2_63, rvol63 = ols_ab(tkd['ret'].values, tkd['theme_ex_self'].values)
         shrk = shrink_r2(r2_63) if np.isfinite(r2_63) else 0
         score5 = a63*shrk if np.isfinite(a63) else -999
         # A5-SNRb score: (alpha_cum / resid_vol) × shrink(r²)
@@ -505,8 +535,8 @@ output = {
     'frozen_params': {
         'alpha_window': 63,
         'theme_score': '0.70×rank(mom63)+0.30×rank(decel)',
-        'stock_score': 'α63×shrink(r²_63)',
-        'stock_score_snrb': '(α63/resid_vol63)×shrink(r²_63)',
+        'stock_score': 'split-window: β/R²=126d, α=63d → α_cum×shrink(R²_126)',
+        'stock_score_snrb': '(α_split63|126/resid_vol)×shrink(R²_126)',
         'bfm2_filter': 'veto: breadth<30pct, conc>80pct, vol>80pct from top25',
         'cra_v1': 'SNRb × (0.70 + 0.30 × AuditScore), AuditScore from st sign/tval',
         'top_themes': 10, 'picks_per_theme': 1,

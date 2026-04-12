@@ -2261,3 +2261,47 @@ split-window単独 (H0_O1):
   ② Bear Sharpe計算方法がPhase 1-4 BTと異なる（絶対値は非比較可能、Δのみ有効）
   ③ 次ステップ: split-window (H0_O1) をPRISM-Rの本番コードに実装
 ```
+
+
+---
+
+## ChatGPT 3名全会一致: split-window実装判定 (2026-04-12)
+
+### 判定
+
+```
+採用:  H0_O1 = split-window (β=126d, α形成=63d) → 本番実装
+維持:  H1_O0 = 6-2mo formation → DEF参考枝として別建て維持
+棄却:  H1_O1 = split-window + 6-2mo → 反相乗的、棄却
+
+適用対象:
+  ✅ PRISM-R:  OLS α63×shrink(R²) → split-window直接適用
+  ✅ PRISM-RQ: SNRb×shrink(R²) → 同じスクリプトで同時改善
+  △ G2-MAX:   raw α63 (shrinkなし) → 部分適用可能だが2変更になる
+  ❌ PRISM:    OLS不使用 → 適用不可
+```
+
+### ChatGPT全員の合意理由
+
+```
+1. split-windowはFREE LUNCH (CAGR+4.6pt, Sharpe+0.11, MaxDD不変)
+2. β推定を長くするのはrolling OLS文献で標準的
+3. 形成窓と推定窓を分離する方が統計的に自然
+4. 6-2moとの組み合わせは反相乗的 = 同じ信号源を二重に削る
+5. shrink(R²)は今は変えない（因果帰属を壊さないため）
+```
+
+### 実装仕様
+
+```
+変更前: ols_ab(y_63d, x_63d) → α_cum63, β_63, R²_63
+変更後: split_alpha(y_126d, x_126d, y_63d, x_63d) → α_cum_63|126, β_126, R²_126
+
+Step 1: β/R²推定 (126d)
+  r_i(s) = a + b*r_theme_ex_self(s) + u, s ∈ [t-125...t]
+Step 2: α形成 (63d)
+  alpha_daily = mean(r_i(s) - β_126*r_theme_ex_self(s)), s ∈ [t-62...t]
+  alpha_cum = alpha_daily × 63
+Step 3: スコア
+  score = alpha_cum × shrink(R²_126)
+```
