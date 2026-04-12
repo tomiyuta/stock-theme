@@ -1021,3 +1021,55 @@ BEAST (W5b nocap)   283.1%  102.9%   2.750   5.690   -49.8%    2,236x     29.1%
   「G2-MAXでもまだ物足りない」場合の参考値。
   実装はしない。
 ```
+
+
+---
+
+## BEAST ChatGPT Review Memo (2026-04-12)
+
+### 判定: Research Alpha Candidate（Production Approved ではない）
+
+```
+ChatGPT #1: 性能A+ / 実運用信頼度B- / 監査前提の採用候補
+ChatGPT #2: 性能A+ / 監査状態:未承認 / 運用判定:Paper trade/小口限定まで
+```
+
+### 評価サマリー
+
+```
+強み:
+  ① 収益力が異常に高い（CAGR 278%）
+  ② リスク調整後も極めて良い（Sharpe 2.70, Sortino 6.34）
+  ③ 下方偏差ベースでも優秀
+  ④ DDを踏んでもCAGRが圧倒
+
+弱み:
+  ① MaxDD -46.7% は Red（-40%超はヘッジ/regime filterの説明責任が必要）
+  ② 高集中 × 高ベータ × トレンド追随 = モメンタムクラッシュ脆弱性
+  ③ 高成績すぎて過学習・データ漏洩・相場適合の疑い
+  ④ 実運用ではturnover/slippage/税コストで大幅劣化の可能性
+
+性格: 「戦車ではなくレーシングカー。速いが路面が変わると死ぬ」
+```
+
+### 必須監査項目（7本、未実施）
+
+```
+1. 仕様凍結: ルールを1ファイルに固定
+2. PIT + delisting込み再計算: ここで崩れるなら即終了
+3. gross / net / stress-cost 3本並列: grossのみは無価値
+4. CSCV / PBO: family全体で実施、PBO<10%=Green
+5. DSR: 試行回数Mを正直に入れる、DSR≥0.95=Green
+6. rolling / expanding Walk-Forward: OOS retention確認
+7. panic/high-vol/rebound slice: MaxDDの正体を分解
+```
+
+### 現時点のラベル
+
+```
+BEAST = Research Alpha Candidate
+  → Paper trade / 小口限定まで
+  → 最大の論点は「過学習」ではなく「尾部リスクと実装現実性」
+  → MaxDD -46.7%は「不運な月があった」ではなく
+    「戦略が何で壊れるかをまだ理解していないサイン」
+```
