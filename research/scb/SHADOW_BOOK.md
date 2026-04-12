@@ -1906,3 +1906,93 @@ E_stk12_7:     DD専門枝（MaxDD -34.5%最良）
   △ Fmix blend → 追加効果なし（Phase 4）
   △ partial de-theming → 効果ゼロ（Phase 4）
 ```
+
+
+---
+
+## stock-themes.com Data Audit for Quality/Earnings Research (2026-04-12)
+
+### 結論: 財務データは存在しない。ただし統計的quality proxyは構築可能。
+
+### stock-themes.com が持つデータ
+
+```
+1. beta_alpha_all.json（208テーマ × 全銘柄 × 7期間）
+   期間: 5D, 10D, 1M, 2M, 3M, 6M, 12M
+   各期間のフィールド:
+     alpha, alpha_ann, alpha_pval, alpha_tval,
+     beta, individual_factor, r2,
+     theme_factor, theme_return
+   → 7期間 × 9フィールド = 63変数/銘柄/テーマ
+
+2. theme_ranking.json（全テーマ × 銘柄パフォーマンス）
+   期間: 日中, 1日, 5日, 10日, 1ヶ月, 2ヶ月, 3ヶ月, 半年, 1年
+   → 8期間のリターン/銘柄
+
+3. stock_meta.json（915銘柄）
+   sector, industry, mc(大型/中型/小型), price, exchange
+
+4. dip_alerts.json（テーマ単位のdip signal）
+   29パターン × win_rate × med_excess
+```
+
+### stock-themes.com が持たないデータ
+
+```
+❌ EPS / earnings surprise / SUE
+❌ revenue / revenue growth
+❌ ROE / ROA / gross profitability
+❌ margins (gross/operating/net)
+❌ leverage / debt-to-equity
+❌ cash flow / FCF
+❌ book value
+❌ analyst estimates / revisions
+❌ PE ratio / PB ratio
+```
+
+### beta_alpha_all.jsonから構築可能なquality proxy
+
+```
+① Alpha Stability Score
+   = 7期間のうちalpha_ann > 0の期間数 / 7
+   意味: 多くの期間で正のαを持つ銘柄 = 安定したα生成器
+
+② Alpha T-value Quality
+   = mean(abs(alpha_tval)) across periods
+   意味: t値が高い = αが統計的に有意 = ノイズではない
+
+③ R² Consistency
+   = mean(r2) across periods
+   意味: テーマとの連動が安定 = systematic behavior
+
+④ Multi-Period Performance Consistency（theme_rankingから）
+   = 8期間のうちリターン > 0の期間数 / 8
+   意味: W5bと同じ発想を銘柄レベルに適用
+
+⑤ Market Cap Filter
+   = stock_metaのmc ≠ 'micro' AND mc ≠ 'small'
+   意味: junk/low-liquidity銘柄の除外
+```
+
+### 外部データなしで可能な改善
+
+```
+A. beta_alpha quality proxy → Phase 4で失敗したquality overlayを
+   stock-themes固有のデータで再構築可能
+   → BT検証で効果測定が必要
+
+B. market cap filter → junk winner排除
+   → 即実装可能、データは既にstock_metaに存在
+
+C. multi-period consistency → stock-level W5b
+   → theme_ranking APIから取得可能
+```
+
+### 外部データが必要な改善（stock-themes不可）
+
+```
+→ SEC companyfacts API（無料）: EPS/revenue/profitability
+→ Sharadar（有料）: 25年のfundamentals + delisting
+→ FMP API（freemium）: analyst estimates + earnings surprise
+→ yfinance info（無料/制限あり）: trailingPE, returnOnEquity等
+```
