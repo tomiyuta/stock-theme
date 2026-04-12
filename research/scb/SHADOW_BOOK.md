@@ -1845,3 +1845,64 @@ Phase 4:    9バリアント → Fmix/de-theming/qualityは追加効果なし
 最終結論: F_stk6_2（現行theme + 銘柄選定6-2ヶ月horizon）が最適解。
   CAGR -6pt（許容範囲）でBear Sharpe 3倍改善。
 ```
+
+
+---
+
+## ChatGPT Final Judgment on Bear Research (2026-04-12)
+
+### 確定した3つの中核知見
+
+```
+1. 主レバーはranking horizon（capでもoverlayでもない）
+   → Novy-Marx: 12-7ヶ月のintermediate horizonが予測力最高
+   → BT確認: F_stk6_2がBear Sharpe 3倍改善
+
+2. Theme層には情報がある — residual化は不適合
+   → Moskowitz-Grinblatt: industry momentumがstock momentumの多くを説明
+   → Ehsani-Linnainmaa: stock momentumはfactor momentumの間接タイミング
+   → BT確認: residual系はCAGR 20-28%に崩壊
+
+3. Overlay（vol/kill switch）は「リスク整形」であって「シグナル修理」ではない
+   → Wang-Yan: downside vol > total vol だが Bear問題は解決しない
+   → BT確認: vol scalingでBear Sharpe不変
+```
+
+### 戦略ラベル
+
+```
+F_stk6_2:      本番候補（CAGR 105% Bear +0.44 実務最適）
+A_current:     現行基準（比較用ベンチマーク）
+G_both12_7:    Bear専門枝（研究用ベンチマーク）
+E_stk12_7:     DD専門枝（MaxDD -34.5%最良）
+```
+
+### ChatGPT推奨の次セッション優先順位
+
+```
+1位: F_stk6_2をPRISM-Rに実装
+  → 33バリアント研究で「効くもの」が分離済み
+  → deployment-level validationが必要
+
+2位: Quality dataソース調査
+  → SEC companyfacts API（無料、XBRLベース）
+  → Sharadar（25年fundamentals、active/delisted coverage）
+  → FMP（analyst estimates API含む）
+
+3位: downside_vol_30 overlayの最終採否（本体ではなく補助）
+```
+
+### Bear研究の全体統計
+
+```
+総バリアント数: 33 + 24(vol) + 7(kill switch) + 8(cap) + 10(audit) = 82バリアント
+総実行時間: ~30分
+主要発見:
+  ✅ intermediate horizon → Bear Sharpe 3倍改善（Phase 1-2で発見）
+  ❌ residual momentum → 信号破壊
+  ❌ binary kill switch → whipsawで逆効果
+  ❌ vol scaling → Sharpe改善だがBear不変
+  ❌ quality proxy → データが粗すぎ（Phase 4で失敗）
+  △ Fmix blend → 追加効果なし（Phase 4）
+  △ partial de-theming → 効果ゼロ（Phase 4）
+```
