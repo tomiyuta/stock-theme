@@ -263,17 +263,21 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
   const lastBT=cr.a5[cr.a5.length-1]||1;const lastSPY=cr.SPY[cr.SPY.length-1]||1;
   const btBeast=cr.beast||[];
   const fwdA5=(fwd.a5||[]).map(g=>Math.round(lastBT*g*1e6)/1e6);
+  const lastBeast=btBeast[btBeast.length-1]||1;
+  const fwdBeast=(fwd.beast||[]).map(g=>Math.round(lastBeast*g*1e6)/1e6);
   const fwdSPY=(fwd.SPY||[]).map(g=>Math.round(lastSPY*g*1e6)/1e6);
   const allDates=[...cr.dates,...fwd.dates.filter(d=>!cr.dates.includes(d))];
   const btA5=[...cr.a5,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const btBeastPad=[...btBeast,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const btSPY=[...cr.SPY,...new Array(fwd.dates.filter(d=>!cr.dates.includes(d)).length).fill(null)];
   const fA5=[...new Array(cr.dates.length-1).fill(null),lastBT,...fwdA5];
+  const fBeast=[...new Array(cr.dates.length-1).fill(null),lastBeast,...fwdBeast];
   const fSPY=[...new Array(cr.dates.length-1).fill(null),lastSPY,...fwdSPY];
   window._cumChartG2=new Chart(ctx,{type:'line',data:{labels:allDates,datasets:[
     {label:'G2 BT(参考)',data:btA5,borderColor:'rgba(225,29,72,0.4)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'BEAST BT',data:btBeastPad,borderColor:'rgba(216,90,48,0.5)',borderWidth:1.5,pointRadius:0,fill:false,borderDash:[6,3]},
     {label:'G2 実績',data:fA5,borderColor:'#e11d48',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
+    {label:'BEAST 実績',data:fBeast,borderColor:'#D85A30',borderWidth:2.5,pointRadius:fwd.dates.length>0?3:0,fill:false},
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fSPY,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
   ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,

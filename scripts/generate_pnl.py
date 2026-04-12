@@ -286,7 +286,8 @@ def compute_prism_g2_pnl():
             s = c['stocks'][0]
             tk = s['ticker']
             w5b_w = c.get('w5b_weight', 1.0/max(len(comp.get('comparisons',[])),1))
-            current_picks[tk] = {'theme': c.get('theme_name', ''), 'price': s.get('price', 0), 'weight': w5b_w}
+            beast_w = c.get('beast_weight', w5b_w)
+            current_picks[tk] = {'theme': c.get('theme_name', ''), 'price': s.get('price', 0), 'weight': w5b_w, 'beast_weight': beast_w}
     for tk, info in current_picks.items():
         if tk not in vledger['positions']:
             vledger['positions'][tk] = {'entry_date': snapshot_date, 'entry_price': info['price'], 'theme': info['theme'], 'status': 'active'}
@@ -295,20 +296,23 @@ def compute_prism_g2_pnl():
             vledger['positions'][tk]['status'] = 'closed'
             vledger['positions'][tk]['exit_date'] = snapshot_date
     save_json(vledger_path, vledger)
-    positions = []; total_inv = 0.0; total_cur = 0.0
+    positions = []; total_inv = 0.0; total_cur = 0.0; beast_inv = 0.0; beast_cur = 0.0
     for tk, info in current_picks.items():
         vp = vledger['positions'].get(tk, {})
         ep = vp.get('entry_price', info['price']); cp = info['price']
         w = info.get('weight', 1.0/max(len(current_picks),1))
+        bw = info.get('beast_weight', w)
         pnl = (cp - ep) / ep if ep > 0 else 0
         positions.append({'ticker': tk, 'theme': info['theme'], 'entry_price': round(ep,2), 'current_price': round(cp,2), 'weight': round(w,4), 'pnl_pct': round(pnl,4)})
         total_inv += ep * w; total_cur += cp * w
+        beast_inv += ep * bw; beast_cur += cp * bw
     total_pnl = (total_cur - total_inv) / total_inv if total_inv > 0 else 0
+    beast_pnl = (beast_cur - beast_inv) / beast_inv if beast_inv > 0 else 0
     closed = [{'ticker':tk,'theme':v.get('theme',''),'entry_date':v.get('entry_date',''),'exit_date':v.get('exit_date',''),'entry_price':v.get('entry_price',0)} for tk,v in vledger['positions'].items() if v.get('status')=='closed']
     result = {'as_of_date': snapshot_date, 'strategy': 'G2-MAX', 'status': 'SHADOW_VIRTUAL',
-              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4), 'closed_count': len(closed)}, 'positions': positions, 'closed_positions': closed}
+              'summary': {'total_positions': len(positions), 'total_pnl_pct': round(total_pnl, 4), 'beast_pnl_pct': round(beast_pnl, 4), 'closed_count': len(closed)}, 'positions': positions, 'closed_positions': closed}
     save_json(API_PRISM_G2 / 'pnl.json', result)
-    print(f'G2-MAX P&L: {len(positions)} positions, total={total_pnl:+.2%}')
+    print(f'G2-MAX P&L: {len(positions)} positions, total={total_pnl:+.2%}, beast={beast_pnl:+.2%}')
     return result
 
 # =============================================================
@@ -339,7 +343,17 @@ def update_forward_overlay():
         
         # Only update if as_of date is newer than last forward entry
         if fwd['dates'] and as_of <= fwd['dates'][-1]:
-            print(f'{label} forward: already up to date ({as_of})')
+            # Backfill beast if missing (G2-MAX only)
+            if label == 'G2-MAX' and ('beast' not in fwd or len(fwd.get('beast',[])) < len(fwd['dates'])):
+                beast_pnl = pnl.get('summary', {}).get('beast_pnl_pct', total_pnl)
+                if 'beast' not in fwd: fwd['beast'] = []
+                while len(fwd['beast']) < len(fwd['dates']):
+                    fwd['beast'].append(round(1 + beast_pnl, 6))
+                cum['forward_overlay'] = fwd
+                save_json(cum_path, cum)
+                print(f'{label} forward: backfilled beast ({len(fwd["beast"])} entries)')
+            else:
+                print(f'{label} forward: already up to date ({as_of})')
             continue
         
         # Append daily snapshot (will be aggregated to monthly on chart side)
@@ -351,6 +365,13 @@ def update_forward_overlay():
             fwd['a4'].append(round(1 + total_pnl, 6))
         else:
             fwd['a5'].append(round(1 + total_pnl, 6))
+        
+        # BEAST forward overlay (G2-MAX only)
+        if label == 'G2-MAX':
+            beast_pnl = pnl.get('summary', {}).get('beast_pnl_pct', total_pnl)
+            if 'beast' not in fwd:
+                fwd['beast'] = []
+            fwd['beast'].append(round(1 + beast_pnl, 6))
         
         # SPY: fetch from last known price in constituents or use 0
         # We'll compute SPY return from the BT boundary
