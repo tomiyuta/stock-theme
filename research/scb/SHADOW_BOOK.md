@@ -1181,3 +1181,68 @@ C. Tail dependence分解（3番手）
    top 1%/top 5日/top 10日を除いたCAGR/Sharpe/Calmar
    → 崩れればDSR REDの意味がさらに重くなる
 ```
+
+
+---
+
+## ChatGPT Cap Grid + Tail Decomp Specs (2026-04-12)
+
+### B_CAP_GRID_SPEC v1.0 — 要約
+
+```
+目的: capが concentration をどこまで削り、どこで alpha dilution に転じるかを探索
+方法: cap以外を完全凍結し、capだけを変える one-factor experiment
+
+Phase B1: 静的 hard-cap ラダー
+  uncapped / 50% / 40% / 35% / 30% / 25% / 20% / 15%
+  優先順: 30→25→20→35→40→15→uncapped→50
+
+Phase B2: redistribution比較（B1上位2仕様のみ）
+  pro-rata vs rank-score
+
+Phase B3: adaptive cap（B1/B2勝者1本のみ）
+  regime-adaptive / breadth-adaptive / vol-adaptive
+
+判定: Composite score
+  30% OOS/Net/Calmar + 30% MaxDD/Recovery/Bear + 20% DSR/skew/kurt + 20% concentration
+
+事前仮説: cap25とcap30が本命
+```
+
+### C_TAIL_DECOMP_SPEC v1.0 — 要約
+
+```
+目的: Sharpeの見かけの良さの源泉を分解 + DSRを押し下げている要因を特定
+
+4層分解:
+  C1: Distribution tail — best/worst day removal sensitivity
+  C2: Higher-moment panel — skew/kurtosis/DSR by subsample
+  C3: Top-5 DD archaeology — 各DDの構造分解
+  C4: ES/CED block — serial-loss fragility vs jump-loss
+  C5: ES contribution — 銘柄/テーマ別tail寄与
+  C6: Incremental ratio contribution — Sharpe/Calmar寄与分解
+  C7: Regime-conditioned tail map — state別tail分布
+  C8: Tail concentration scoreboard — 最終1枚サマリー
+
+実行順: B1→C1→C3→C4→C5→C7→B2→B3→bear kill switch統合
+```
+
+### ChatGPT最終判定
+
+```
+BEAST: 「偽アルファ」ではない。しかし単独で本番採用できる完成戦略でもない。
+  → アルファの実在性: 一定程度あり
+  → 汎化性: 想定より良い
+  → 実装耐性: 想定より良い
+  → 尾部リスク: 依然として重い
+  → bear regime脆弱性: 構造的
+  → 統計的信頼度: まだ弱い
+
+W5b(cap30): BEASTより運用体として完成度が高い
+  → Sharpe上, MaxDD浅, cap集中抑制, 弱点を設計的に潰した結果
+
+最重要発見:
+  ① 主犯 = bear regimeでの構造的脆弱性（過学習ではない）
+  ② DSR RED = Sharpe無価値ではなく「額面通り信じるな」
+  ③ W5b優位 = 偶然ではなく設計差で説明可能
+```
