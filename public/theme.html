@@ -55,7 +55,7 @@ const SEC_JA={"Technology":"テクノロジー","Healthcare":"ヘルスケア","
 const SP500=new Set(["AAPL","ABBV","ABT","ACN","ADBE","ADI","ADM","ADP","ADSK","AEP","AMAT","AMD","AMGN","AMT","AMZN","ANET","ANSS","AON","APD","APH","AVGO","AXP","BA","BAC","BK","BKNG","BKR","BLK","BMY","BR","BRK.B","BSX","BX","C","CAT","CB","CDNS","CEG","CHTR","CI","CL","CMCSA","CME","CMG","CMS","CNP","COF","COP","COST","CRM","CRWD","CSCO","CTAS","CTSH","CVS","CVX","D","DD","DE","DHR","DIS","DLR","DOW","DUK","DVN","DXCM","EA","ECL","EMR","ENPH","EOG","EQIX","ETN","EW","EXC","EXPE","F","FANG","FAST","FCX","FDX","FI","FISV","FTNT","GD","GE","GEHC","GILD","GIS","GLW","GM","GOOG","GOOGL","GS","GWW","HAL","HCA","HD","HON","HPQ","HUM","IBM","ICE","IDXX","INTC","INTU","ISRG","ITW","JCI","JNJ","JPM","KHC","KLAC","KMB","KO","KR","LEN","LIN","LLY","LMT","LOW","LRCX","LULU","LYV","MA","MAR","MCD","MCHP","MCK","MCO","MDLZ","MDT","MELI","MET","META","MMM","MNST","MO","MOH","MPC","MPWR","MRK","MRNA","MS","MSCI","MSFT","MSI","MU","NCLH","NEE","NFLX","NKE","NOC","NOW","NSC","NVDA","NVR","NXPI","O","ODFL","OKE","ON","ORCL","ORLY","OXY","PANW","PAYC","PAYX","PEP","PFE","PG","PGR","PLD","PM","PNC","POOL","PPG","PRU","PSA","PSX","PYPL","QCOM","RCL","REGN","RMD","ROP","ROST","RTX","SBUX","SCHW","SHW","SLB","SNPS","SO","SPG","SRE","STE","STZ","SYK","T","TDG","TGT","TJX","TMO","TMUS","TSLA","TSN","TT","TTD","TTWO","TXN","TYL","UNH","UNP","UPS","URI","USB","V","VICI","VLO","VRSK","VRTX","VZ","WBA","WBD","WEC","WELL","WFC","WM","WMT","WST","XOM","XYL","YUM","ZBH","ZTS"]);
 const slug=location.pathname.replace("/theme/","").replace(/\/$/,"");
 Promise.all([
-  fetch("/api/theme_ranking.json").then(r=>r.json()),
+  fetch("/api/theme_ranking.json?t="+Date.now()).then(r=>r.json()),
   fetch("/api/stock_meta.json?v=2").then(r=>r.json()).catch(()=>({})),
   fetch("/api/alpha_beta.json?v=2").then(r=>r.json()).catch(()=>({})),
   fetch("/api/theme-details/"+slug+".json?v=2").then(r=>r.json()).catch(()=>null),
@@ -224,7 +224,7 @@ Promise.all([
 });
   </script>
 <script>
-(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+(async()=>{try{const r=await fetch('/api/theme_ranking.json?t='+Date.now());const d=await r.json();
 const el=document.getElementById('headerMeta');if(el&&d.last_update){
 el.innerHTML=(el.innerHTML||'')+
 '<div class="last-updated">データ更新: '+d.last_update+'</div>';}

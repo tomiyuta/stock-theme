@@ -93,7 +93,7 @@ const MACRO={
 };
 const NAMES={SPY:"S&P500",QQQ:"NASDAQ100",IWM:"Russell2000",RSP:"S&P500均等",XLK:"テクノロジー",XLE:"エネルギー",XLF:"金融",XLV:"ヘルスケア",XLI:"資本財",XLC:"通信",XLY:"一般消費財",XLP:"生活必需品",XLRE:"不動産",XLU:"公益",XLB:"素材",TLT:"米国債20Y+",TLH:"米国債10-20Y",IEF:"米国債7-10Y",IEI:"米国債3-7Y",SHY:"米国債1-3Y",SHV:"米国債短期",HYG:"ハイイールド社債",MBB:"MBS",GLD:"金",SLV:"銀",USO:"原油",UNG:"天然ガス",CPER:"銅",IBIT:"ビットコイン",EWJ:"日本",MCHI:"中国",INDA:"インド",EWZ:"ブラジル",EWY:"韓国",EWT:"台湾",EWU:"英国",EZU:"ユーロ圏",EWC:"カナダ",EWA:"豪州"};
 let allEtfs=[];
-fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
+fetch("/api/theme_ranking.json?t="+Date.now()).then(r=>r.json()).then(data=>{
   allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
   window._allThemes=data.all_themes||[];
   const periods=(data.all_periods||[]).filter(p=>p!=="日中");
@@ -264,7 +264,7 @@ function toggleDipStocks(elId, alertIdx){
 
 </script>
 <script>
-(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+(async()=>{try{const r=await fetch('/api/theme_ranking.json?t='+Date.now());const d=await r.json();
 const el=document.getElementById('headerMeta');if(el&&d.last_update){
 el.innerHTML=(el.innerHTML||'')+
 '<div class="last-updated">データ更新: '+d.last_update+'</div>';}

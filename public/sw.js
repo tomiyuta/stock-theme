@@ -1,5 +1,5 @@
-const CACHE = "st-v7";
-const STATIC = ["/styles.css", "/app.js"];
+const CACHE = "st-v8";
+const STATIC = ["/styles.css"];
 
 self.addEventListener("install", e => {
   e.waitUntil(caches.open(CACHE).then(c => c.addAll(STATIC)));

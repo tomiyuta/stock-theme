@@ -19,6 +19,18 @@
         { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=600" },
         { "key": "Access-Control-Allow-Origin", "value": "*" }
       ]
+    },
+    {
+      "source": "/(prism|prism-r|prism-rq|prism-g2|map|market-movers|infographic)",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/sw.js",
+      "headers": [
+        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+      ]
     }
   ]
 }

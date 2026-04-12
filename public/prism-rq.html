@@ -329,7 +329,7 @@ fetch('/api/prism-rq/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
   <a class="nav-item active" href="/prism-rq"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><circle cx="12" cy="12" r="3" fill="currentColor"/></svg></span><span style="color:var(--purple)">RQ</span></a>
       <a class="nav-item" href="/prism-g2"><span class="nav-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5"/><path d="M7 14l5-8 5 8" fill="currentColor"/></svg></span><span style="color:#e11d48">G2</span></a>
 </nav>
-<script>(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();const el=document.getElementById('headerMeta');if(el&&d.last_update){el.innerHTML='<div class="last-updated">データ更新: '+d.last_update+'</div>';}}catch(e){}})();</script>
+<script>(async()=>{try{const r=await fetch('/api/theme_ranking.json?t='+Date.now());const d=await r.json();const el=document.getElementById('headerMeta');if(el&&d.last_update){el.innerHTML='<div class="last-updated">データ更新: '+d.last_update+'</div>';}}catch(e){}})();</script>
 
 <script>
 function toggleLogScale(chartVar, toggleId, isLog) {

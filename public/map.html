@@ -39,7 +39,7 @@ const NAMES={XLB:"素材",XLC:"通信",XLE:"エネルギー",XLF:"金融",XLI:"�
 let allEtfs=[];
 const fmt=v=>v==null?"—":(v>=0?"+":"")+((v*100).toFixed(1))+"%";
 function tileColor(v){if(v==null)return"#aaa";const a=Math.min(Math.abs(v*100)/5,1);if(v>=0){const r=Math.round(102-102*a),g=Math.round(187-37*a),b=Math.round(106-106*a);return`rgb(${r},${g},${b})`}else{const r=Math.round(239-41*a),g=Math.round(83-83*a),b=Math.round(80-80*a);return`rgb(${r},${g},${b})`}}
-fetch("/api/theme_ranking.json").then(r=>r.json()).then(data=>{
+fetch("/api/theme_ranking.json?t="+Date.now()).then(r=>r.json()).then(data=>{
   allEtfs=(data.all_themes||[]).filter(t=>t.isETF);
   const periods=(data.all_periods||[]).filter(p=>p!=="日中");
   document.getElementById("pbar").innerHTML=periods.map(p=>'<button class="period-btn'+(p===period?" active":"")+'" onclick="setP(this,\''+p+'\')">'+((PL[p])||p)+'</button>').join("");
@@ -55,7 +55,7 @@ function renderMap(){
 }
   </script>
 <script>
-(async()=>{try{const r=await fetch('/api/theme_ranking.json');const d=await r.json();
+(async()=>{try{const r=await fetch('/api/theme_ranking.json?t='+Date.now());const d=await r.json();
 const el=document.getElementById('headerMeta');if(el&&d.last_update){
 el.innerHTML=(el.innerHTML||'')+
 '<div class="last-updated">データ更新: '+d.last_update+'</div>';}
