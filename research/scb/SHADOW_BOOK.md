@@ -1073,3 +1073,63 @@ BEAST = Research Alpha Candidate
   → MaxDD -46.7%は「不運な月があった」ではなく
     「戦略が何で壊れるかをまだ理解していないサイン」
 ```
+
+
+---
+
+## BEAST Audit Results (2026-04-12, beast_audit.py 598d682)
+
+### Rubric Summary
+
+```
+TEST                              RESULT        THRESHOLD       VERDICT
+─────────────────────────────────────────────────────────────────────
+Walk-Forward OOS retention        70.2%         ≥50%            ✅ PASS
+Cost 2x Calmar                    2.23          >1.5            ✅ PASS
+Param perturbation sign           5/6           all positive    ❌ FAIL
+DSR confidence                    58.0%         ≥95%=Green      🔴 RED
+MaxDD                             -43.2%        >-40%           🔴 RED
+Annual turnover                   1046%         documented      ⚠ HIGH
+PIT/delisting                     NOT TESTED    pass            ⚠ PENDING
+CSCV/PBO                          NOT TESTED    <10%            ⚠ PENDING
+```
+
+### Critical Findings
+
+```
+1. DSR RED (58%): Sharpe 1.68は108試行後の期待最大値(1.09)を上回るが、
+   日次リターンの歪度(5.1)と尖度(78.9)が極端に高く、統計的信頼度が低い。
+   → Sharpeが見た目ほど信頼できない
+
+2. Bear Market Collapse: SPY 63d<0局面でSharpe=-0.40, CAGR=-19%
+   → モメンタムクラッシュの構造的脆弱性がChatGPT指摘通り確認された
+
+3. MaxDD #1: -43.2% (2021-11→2022-07, 163日下落→239日回復 = 計402日)
+   MaxDD #2: -43.0% (2025-02→2025-04, 42日下落→124日回復)
+   → 2回とも-40%超え。偶発ではなく構造的
+
+4. 集中度: max single weight=51.5%, Effective N min=3.4
+   → 実質3銘柄に過半集中する月がある
+
+5. Turnover 1046%/年: 極端に高い。実務的にはスプレッド30bpでも
+   Sharpe retention=88%を維持するが、税コストは未考慮
+
+6. 前半/後半: Sharpe 2.24→2.03 (安定だが後半低下)
+   Rolling Sharpe: 0.26〜2.31 (大幅変動)
+```
+
+### 結論更新
+
+```
+BEAST = Research Alpha Candidate のまま変更なし
+
+追加で確定した事項:
+  - 構造的にベア相場で壊れる（Sharpe -0.40）
+  - DSRがRED（統計的信頼度不十分）
+  - 高集中 + 高turnover + 高尾度 = レーシングカー特性の数値的裏付け
+  - ただしcost耐性は意外に高い（2x costでもCalmar>1.5）
+  - OOS retention 70%は合格水準
+
+W5b(cap30)が運用戦略として正しい選択であることが監査で再確認された。
+BEAST nocapは参考値としてダッシュボード表示を継続。
+```
