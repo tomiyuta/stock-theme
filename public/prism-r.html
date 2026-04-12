@@ -143,7 +143,7 @@ Promise.all([
   let h='';
   // 1. Shadow Status Card
   h+=`<div class="gate-card shadow"><div class="gate-state">PRISM-R: ${meta.status||'SHADOW'}</div>`;
-  h+=`<div class="gate-detail">α63×shrink(r²) | 20営業日リバランス | sector_cap=3</div>`;
+  h+=`<div class="gate-detail">split-window α(β126d/α63d) × shrink(r²) | W5b加重 | 20営業日リバランス</div>`;
   h+=`<div class="gate-atk">観測モード — A4 live維持</div></div>`;
   // 2. PIT Warning
   h+=`<div style="margin:6px 12px;padding:6px 10px;border-radius:4px;font-size:9px;background:rgba(245,158,11,0.08);color:#b45309;border:1px solid rgba(245,158,11,0.2)">⚠ 研究用: テーマ構成のPIT問題あり。絶対CAGRは採用根拠にしない。相対差分のみ有効。</div>`;
@@ -315,7 +315,7 @@ Promise.all([
   // 9. Investment Logic Cards (MECE)
   h+=`<div class="section-title">📐 PRISM-R 投資ロジック</div>`;
   const lcards=[
-    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）を差し替え＋Layer 3（W5b加重）を追加したshadow overlay戦略。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M → 等ウェイト</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>α63 × shrink(r²)</code> → Layer 3: W5b一貫性加重（30%cap）</div>`],
+    ["アーキテクチャ概要",`<div class="logic-rule">PRISM-Rは、PRISMのLayer 2（銘柄選定）を差し替え＋Layer 3（W5b加重）を追加したshadow overlay戦略。</div><div class="logic-rule"><b>PRISM:</b> Layer 1 → Layer 2: raw 1M → 等ウェイト</div><div class="logic-rule"><b>PRISM-R:</b> Layer 1 → Layer 2: <code>split-window α(β126d/α63d) × shrink(r²)</code> → Layer 3: W5b一貫性加重（30%cap）</div><div class="logic-rule"><b>split-window:</b> β/R²は126日OLSで安定推定、αは直近63日で鮮度を維持。推定窓と形成窓の分離により推定品質向上。</div>`],
     ["Layer 1: テーマ選定（PRISM共通）",`<div class="logic-rule"><b>5因子スコア:</b> z(ret_3m)×1.0 + z(加速度)×0.6 + consensus×0.75 + sector_pass×0.5 − z(vol)×0.6</div><div class="logic-rule"><b>選定:</b> 上位10テーマ / 適格=4銘柄以上 / セクター制約=同一セクター最大3</div><div class="logic-rule"><b>ヒステリシス:</b> ENTRY≤20 / WATCH 21-35 / EXIT&gt;35</div>`],
     ["Layer 2: 銘柄選定（PRISM-R固有）",`<div style="font-size:10px;font-weight:700;color:var(--purple);margin:4px 0">OLS回帰モデル（63日ローリング）</div><div class="logic-rule"><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code></div><div class="logic-rule"><b>自己除外:</b> テーマ平均から銘柄i自身を除外（平均4.7銘柄/テーマで歪み防止）</div><div class="logic-rule"><b>出力:</b> α63（残差α）/ β63（傾き）/ r²_63（決定係数）</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">Shrinkage関数（hard filterの代替）</div><div class="logic-rule"><code>shrink(r²): r²&lt;0.10→r²×2 | 0.10-0.50→線形補間 | r²&gt;0.50→1.0</code></div><div class="logic-rule">設計意図: 小ユニバースで候補枯渇を防ぎつつ、低信頼度αを縮小</div><div style="font-size:10px;font-weight:700;color:var(--purple);margin:8px 0 4px">スコア</div><div class="logic-rule"><code>score = α63 × shrink(r²_63)</code></div><div class="logic-rule">各テーマからscore最大の1銘柄を選定。重複禁止。</div>`],
     ["Layer 3: W5b一貫性加重（PRISM-R固有）",`<div style="font-size:10px;line-height:1.6"><b>3期間モメンタムの一貫性でウェイトを決定:</b><br><code>R252_ex1m = (1+R252)/(1+R21) - 1</code> (12-1 momentum)<br><code>pos_count = Σ𝟙(R63>0, R126>0, R252_ex1m>0)</code><br><code>raw_weight = pos_count × (1 + avg_positive_ret)</code><br><code>weight = normalize + 30%キャップ</code><br><br><b>BT改善:</b> vs等ウェイト Sharpe +0.01, CAGR +37pt, MaxDD +2.5pt改善, 2022年 -10%→+2%<br><b>BEAST:</b> キャップなし参考値（CAGR↑ Sharpe↓）</div>`],
