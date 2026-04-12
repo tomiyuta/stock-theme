@@ -1411,3 +1411,31 @@ off率: 退避時間が長すぎてalphaを殺していないか
 ❌ crowding指標を一次トリガーにする（監視のみ）
 ❌ beta hedgeを主役にする（vol scaling + cash retreatが筋）
 ```
+
+
+---
+
+## Kill Switch BT Results (2026-04-12, d371aad)
+
+### 結論: ChatGPT設計のkill switchは逆効果。Vol scalingが唯一有効。
+
+```
+K4_fullKS: Bear Sharpe -0.94（ベースライン-0.40より大幅悪化）
+  原因: 2022年に6ヶ月で5回の状態遷移（whipsaw）
+  → DDは食らうが回復は逃す
+
+K2_volscale: Bear Sharpe -0.10（ベースラインから+0.30改善）★唯一の勝者
+  CAGR retention: 93.6%
+  連続的調整 > 離散的switch
+
+ChatGPTの処方箋の何が正しく何が間違っていたか:
+  ✅ 「panic stateでのhigh-vol reboundが主犯」→ 正しい
+  ✅ 「vol scalingはcash retreatより効く」→ BT確認
+  ❌ 「4層state machineが有効」→ whipsawで逆効果
+  ❌ 「NORMAL/CAUTION/KILL離散遷移」→ 連続調整に劣る
+  △ 「SMA200フィルタは外殻の安全装置」→ 回復を逃して逆効果
+
+次のアクション:
+  vol scaling単独の最適化（target vol 20-60%のグリッド）を行い、
+  cap25 + vol scalingの組み合わせが最終候補となるか検証。
+```
