@@ -1516,3 +1516,180 @@ Blitz-Huij-Martens (2011): residual momentumがtotal momentumより良い
 Fan et al (2022): formation-period高vol銘柄はmomentum効果を失う
 Faber (2007): トレンドフィルタはDD改善に有効だがwhipsaw注意
 ```
+
+
+---
+
+## 全検証の最終記録 (2026-04-12)
+
+### セッション全体の研究フロー
+
+```
+W5b研究 → 全戦略比較 → 正しいスコアリング修正 → PRISM-R W5b採用
+→ BEAST ChatGPT評価 → BEAST institutional audit (10テスト)
+→ Cap grid (8水準) → Kill switch BT (7バリアント)
+→ Vol scaling optimization (24バリアント) → Cap30 vs Cap25精査
+```
+
+### 1. W5b一貫性加重の効果（正しいスコアリング使用）
+
+```
+戦略         W0 Sharpe   W5b Sharpe   ΔSharpe   採否
+PRISM          1.356       1.447       +0.091    ⏳ shadow並走（実運用戦略）
+PRISM-R        1.559       1.753       +0.194    ✅ 採用（cap30）
+PRISM-RQ       1.030       0.973       -0.057    ❌ 有害（等ウェイト維持）
+G2-MAX         2.847       2.986       +0.139    ✅ 採用済み（cap30）
+
+結論: raw α系（PRISM/PRISM-R/G2-MAX）にW5bが有効、SNRb系に無効
+```
+
+### 2. 誤ったBTの修正記録
+
+```
+誤り: backtest_w5b_all.py がPRISM/PRISM-RにG2-MAXのスコアリングを適用
+  → テーマ選定式、銘柄選定方式、相関フィルタの3点が全て異なっていた
+  → 結果が10〜50倍過大に表示されていた
+
+修正: backtest_w5b_correct.py で generate_bt_returns.py と同一ロジックに修正
+  → W0がダッシュボードBTとほぼ一致することを確認
+  PRISM: 50.2%≈49.2% ✅  PRISM-R: 66.9%≈65.6% ✅
+```
+
+### 3. BEAST Institutional Audit (10テスト)
+
+```
+✅ PASS:
+  Walk-Forward OOS retention: 70.2% (≥50%)
+  Cost 2x Calmar: 2.23 (>1.5)
+
+❌ FAIL:
+  Parameter perturbation: 5/6 positive
+  DSR confidence: 58.0% (RED, ≥95%必要)
+  MaxDD: -43.2% (RED, >-40%必要)
+
+⚠ 注意:
+  Annual turnover: 1046% (極端)
+  PIT/delisting: 未テスト
+  CSCV/PBO: 未テスト
+
+ChatGPT判定: Research Alpha Candidate / Production不可
+```
+
+### 4. Cap Grid Comparison (B1: 8水準)
+
+```
+    Cap    CAGR   Sharpe  MaxDD   DSR    BearS
+  nocap  108.1%  1.683  -43.2%  58.0%  -0.404
+  cap50  108.2%  1.685  -43.2%  58.1%  -0.404
+  cap40  108.2%  1.696  -43.2%  58.0%  -0.401
+  cap35  108.0%  1.705  -43.0%  58.0%  -0.406
+  cap30  105.3%  1.761  -42.4%  59.9%  -0.405  ← 現行
+  cap25  101.8%  1.819  -41.9%  62.8%  -0.401
+  cap20   95.3%  1.835  -41.4%  66.5%  -0.401
+  cap15   84.4%  1.770  -41.5%  70.6%  -0.422
+
+発見:
+  ① Sharpe: nocap→cap20まで単調増加、cap15で反転（alpha dilution開始）
+  ② DSR: capを締めるほど単調改善
+  ③ MaxDD: 全水準で-41〜-43% → capではMaxDD解決不能
+  ④ Bear Sharpe: 全水準で≒-0.40 → capではbear解決不能
+```
+
+### 5. Tail Decomposition (C1-C7)
+
+```
+C1 (best/worst removal, cap30):
+  top5d除去: CAGR retention=59% (YELLOW)
+  bot5d除去: CAGR=130%(+24%), Sharpe=2.22(+26%)
+  → right-tail dependence = YELLOW（少数日依存は中程度）
+
+C4 (ES/CED):
+  CED/ES比 ≒ 0.37 → serial-loss fragility moderate
+
+C5 (ES contribution):
+  Top3 share = -0.5% → GREEN（特定銘柄に集中していない）
+
+C7 (regime map, cap30):
+  Bull+HighVol: CAGR=366% Sharpe=5.61
+  Bear+LowVol:  CAGR=-81% Sharpe=-1.95 ← 構造的崩壊
+  Worst 10%月の57%がbear regime
+```
+
+### 6. Kill Switch BT (7バリアント)
+
+```
+B0_cap30:         CAGR=105% Sharpe=1.75 MaxDD=-42% Bear=-0.41
+B1_cap25:         CAGR=101% Sharpe=1.81 MaxDD=-42% Bear=-0.40
+K1_sma200:        CAGR= 89% Sharpe=1.69 MaxDD=-42% Bear=-0.90 ❌ 回復を逃す
+K2_volscale:      CAGR= 95% Sharpe=1.72 MaxDD=-45% Bear=-0.10 ★（アーティファクト疑い）
+K3_sma+vol:       CAGR= 82% Sharpe=1.58 MaxDD=-44% Bear=-0.83 ❌
+K4_fullKS:        CAGR= 89% Sharpe=1.68 MaxDD=-46% Bear=-0.94 ❌ whipsaw
+K5_fullKS+vol:    CAGR= 82% Sharpe=1.58 MaxDD=-53% Bear=-1.05 ❌ 最悪
+
+結論: Binary kill switch は全て逆効果。
+  2022年に6ヶ月で5回の状態遷移 = whipsawの嵐。
+  K2_volscaleのBear Sharpe -0.10はrebalance-level実装によるアーティファクト。
+```
+
+### 7. Vol Scaling Optimization (24バリアント)
+
+```
+Phase 1 (Total Vol, cap25ベース):
+  vol20: CAGR=43% Sharpe=1.80 MaxDD=-24% Bear=-0.34
+  vol30: CAGR=65% Sharpe=1.89 MaxDD=-35% Bear=-0.39
+  vol40: CAGR=85% Sharpe=1.92 MaxDD=-44% Bear=-0.42
+
+Phase 2 (Downside Vol, 全水準でtotal volに勝る):
+  dvol25: CAGR=67% Sharpe=1.95 MaxDD=-30% Bear=-0.40
+  dvol30: CAGR=81% Sharpe=2.00 MaxDD=-36% Bear=-0.42  ← 最良バランス
+  dvol40: CAGR=104% Sharpe=2.05 MaxDD=-46% Bear=-0.50
+
+Phase 3 (Blend):
+  50raw+50vs: CAGR=94% Sharpe=1.93 MaxDD=-43% Bear=-0.41
+  → blendではBear改善なし
+
+結論: vol scalingはSharpe/MaxDD改善に有効だがBear Sharpe不変。
+  日次実装ではBear Sharpe≒-0.40が全バリアントで不変。
+  vol scalingは「リスク整形器」であり「Bear修正器」ではない。
+```
+
+### 8. Cap30 vs Cap25の最終判定
+
+```
+                cap30        cap25        差分
+CAGR           105.3%       101.8%      -3.5pt
+Sharpe          1.761        1.819      +0.058
+MaxDD          -42.4%       -41.9%      +0.5pt
+DSR             59.9%        62.8%      +2.9pt
+Bear Sharpe    -0.405       -0.401      +0.004
+Calmar          2.48         2.43       -0.05
+
+cap binding差: 73回中2回のみ差異
+
+判定: 統計的に区別不能なノイズ範囲内。
+  cap30を維持。移行コストに見合わない。
+  BT上の数百分の1の違いで実装変更するのは過学習と同構造。
+```
+
+### 最終的な現行最適解
+
+```
+╔══════════════════════════════════════════════════════════════╗
+║  現行構成（変更なし）:                                         ║
+║    PRISM:     等ウェイト（実運用）                              ║
+║    PRISM-R:   W5b cap30 ← 維持                              ║
+║    PRISM-RQ:  等ウェイト ← 維持                               ║
+║    G2-MAX:    W5b cap30 ← 維持                              ║
+║                                                              ║
+║  棄却済み:                                                    ║
+║    ❌ BEAST (nocap): DSR RED, MaxDD RED                      ║
+║    ❌ Binary kill switch: 全バリアント逆効果                    ║
+║    ❌ Cap25移行: cap30と統計的に区別不能                        ║
+║    ❌ Vol scaling単独: Bear Sharpe不変                        ║
+║                                                              ║
+║  未解決:                                                      ║
+║    ⏳ Bear Sharpe ≒ -0.40（構造的、銘柄選定ロジックの問題）     ║
+║    ⏳ downside_vol_30の採否（リスク整形装置として研究継続）      ║
+║    ⏳ 銘柄選定再設計（residual/12-7/earnings/formation-vol）   ║
+╚══════════════════════════════════════════════════════════════╝
+```
