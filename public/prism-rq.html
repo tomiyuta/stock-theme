@@ -504,13 +504,14 @@ function calcRQ(){
     const dp=p.def_price||p.price;const dt_=capUSD*dw;const ds=Math.floor(dt_/dp);const da=ds*dp;const dpct=capUSD>0?(da/capUSD)*100:0;
     totalEW+=ea;totalDef+=da;
     const defDiff=p.def_ticker&&p.def_ticker!==p.ticker?` <span style="font-size:8px;color:#228B22">🛡${p.def_ticker}</span>`:'';
+    const defPriceTag=p.def_ticker&&p.def_ticker!==p.ticker?`<div style="font-size:8px;color:#228B22">🛡$${dp.toLocaleString()}</div>`:'';
     html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b>${defDiff}</td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
     html+=`<td class="num" style="font-weight:700;color:var(--purple)">${(ew*100).toFixed(0)}%</td>`;
     html+=`<td class="num" style="font-weight:700;color:#228B22">${(dw*100).toFixed(0)}%</td>`;
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
     html+=`<td class="num"><span class="shares">${es}株</span> <span class="dev ${epct-ew*100>=0?'pos':'neg'}">実${epct.toFixed(1)}%</span></td>`;
-    html+=`<td class="num" style="color:#228B22"><span style="font-size:12px;font-weight:800">${ds}株</span> <span style="font-size:9px">実${dpct.toFixed(1)}%</span></td></tr>`;
+    html+=`<td class="num" style="color:#228B22"><span style="font-size:12px;font-weight:800">${ds}株</span> <span style="font-size:9px">実${dpct.toFixed(1)}%</span>${defPriceTag}</td></tr>`;
   });
   document.getElementById('rqRebalBody').innerHTML=html;
   const resEW=capUSD-totalEW;const resDef=capUSD-totalDef;

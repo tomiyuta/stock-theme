@@ -385,6 +385,7 @@ function calcR(){
     const dp=p.def_price||p.price;const dt_=capUSD*dw;const ds=Math.floor(dt_/dp);const da=ds*dp;const dpct=capUSD>0?(da/capUSD)*100:0;
     totalInvW5b+=g2a;totalInvB+=ba;totalInvDef+=da;
     const defDiff=p.def_ticker&&p.def_ticker!==p.ticker?` <span style="font-size:8px;color:#228B22">🛡${p.def_ticker}</span>`:'';
+    const defPriceTag=p.def_ticker&&p.def_ticker!==p.ticker?`<div style="font-size:8px;color:#228B22">🛡$${dp.toLocaleString()}</div>`:'';
     html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b>${defDiff} <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
     html+=`<td style="font-size:9px">${p.theme}</td>`;
     html+=`<td class="num" style="font-weight:700;color:var(--purple)">${(w*100).toFixed(1)}%</td>`;
@@ -393,7 +394,7 @@ function calcR(){
     html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
     html+=`<td class="num"><span class="shares">${g2s}株</span> <span class="dev ${g2pct-w*100>=0?'pos':'neg'}">実${g2pct.toFixed(1)}%</span></td>`;
     html+=`<td class="num" style="color:#D85A30"><span class="shares">${bs}株</span> <span style="font-size:8px">実${bpct.toFixed(1)}%</span></td>`;
-    html+=`<td class="num" style="color:#228B22"><span class="shares">${ds}株</span> <span style="font-size:8px">実${dpct.toFixed(1)}%</span></td></tr>`;
+    html+=`<td class="num" style="color:#228B22"><span class="shares">${ds}株</span> <span style="font-size:8px">実${dpct.toFixed(1)}%</span>${defPriceTag}</td></tr>`;
   });
   document.getElementById('rRebalBody').innerHTML=html;
   const resW=capUSD-totalInvW5b;const resB=capUSD-totalInvB;const resDef=capUSD-totalInvDef;
