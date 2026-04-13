@@ -76,5 +76,65 @@ price_df.to_csv(price_path, index=False)
 if not rank_df.empty:
     rank_df.to_csv(rank_path, index=False)
 
+# === 4. Strategy picks snapshot (all strategies) ===
+picks_rows = []
+for label, comp_path in [
+    ('prism-r', API / 'prism-r' / 'shadow_comparison.json'),
+    ('prism-g2', API / 'prism-g2' / 'shadow_comparison.json'),
+]:
+    if not comp_path.exists(): continue
+    comp = json.load(open(comp_path))
+    for c in comp.get('comparisons', []):
+        row = {
+            'strategy': label,
+            'theme': c.get('theme', ''),
+            'theme_name': c.get('theme_name', ''),
+            'rank': c.get('rank', ''),
+            'a4_pick': c.get('a4_pick', c.get('pick', '')),
+            'a5_pick': c.get('a5_pick', ''),
+            'snrb_pick': c.get('snrb_pick', ''),
+            'def_pick': c.get('def_pick', ''),
+            'w5b_weight': c.get('w5b_weight', ''),
+            'beast_weight': c.get('beast_weight', ''),
+            'def_weight': c.get('def_weight', ''),
+        }
+        picks_rows.append(row)
+
+# PRISM (A4) picks from snapshot
+prism_snap = API / 'prism' / 'signals.json'
+if prism_snap.exists():
+    sig = json.load(open(prism_snap))
+    themes = sig.get('selected_themes', [])
+    stocks = sig.get('selected_stocks', [])
+    weights = sig.get('production_portfolio', {}).get('weights', {})
+    gate = sig.get('gate_state', '')
+    for i, tk in enumerate(stocks):
+        picks_rows.append({
+            'strategy': 'prism',
+            'theme': themes[i] if i < len(themes) else '',
+            'theme_name': themes[i] if i < len(themes) else '',
+            'rank': i + 1,
+            'a4_pick': tk,
+            'a5_pick': '', 'snrb_pick': '', 'def_pick': '',
+            'w5b_weight': str(weights.get(tk, '')),
+            'beast_weight': '',
+            'def_weight': '',
+            'gate_state': gate,
+        })
+
+picks_df = pd.DataFrame(picks_rows)
+picks_df['snapshot_date'] = today
+picks_df['retrieved_at'] = datetime.now().isoformat()
+picks_path = SNAP_DIR / f'strategy_picks_{today}.csv'
+picks_df.to_csv(picks_path, index=False)
+
+# === 5. Gate state snapshot (PRISM only) ===
+gate_path = API / 'prism' / 'gate.json'
+if gate_path.exists():
+    import shutil
+    shutil.copy2(gate_path, SNAP_DIR / f'gate_{today}.json')
+
+n_strategies = picks_df.strategy.nunique()
 print(f'PIT snapshot {today}: {mem_df.theme.nunique()} themes, '
-      f'{mem_df.ticker.nunique()} tickers, {len(price_df)} prices → {SNAP_DIR}/')
+      f'{mem_df.ticker.nunique()} tickers, {len(price_df)} prices, '
+      f'{n_strategies} strategies ({len(picks_df)} picks) → {SNAP_DIR}/')
