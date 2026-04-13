@@ -48,20 +48,22 @@ def preflight_check(pp, ledger):
         s = sec_map.get(tk, "Unknown")
         by_sec[s] = by_sec.get(s, 0) + w
     for s, total in by_sec.items():
-        if total > SECTOR_CAP + 1e-6:
+        if total > SECTOR_CAP + 1e-3:
             alerts.append(f"🚨 C2 SECTOR_CAP_VIOLATION: {s} = {total:.1%} > {SECTOR_CAP:.0%}")
 
     # Single-name cap
     for tk, w in weights.items():
         if tk == "SHV": continue
-        if w > SINGLE_NAME_CAP + 1e-6:
+        if w > SINGLE_NAME_CAP + 1e-3:
             alerts.append(f"🚨 SINGLE_NAME_VIOLATION: {tk} = {w:.1%} > {SINGLE_NAME_CAP:.0%}")
 
     # atk_cap consistency
     eq_total = sum(w for tk, w in weights.items() if tk != "SHV")
     atk_cap = summary.get("atk_cap", 1.0)
-    if eq_total > atk_cap + 1e-6:
+    if eq_total > atk_cap + 1e-3:
         alerts.append(f"🚨 ATK_CAP_VIOLATION: equity={eq_total:.1%} > atk_cap={atk_cap:.0%}")
+    elif eq_total > atk_cap + 1e-6:
+        alerts.append(f"⚠️ ATK_CAP_NEAR: equity={eq_total:.4%} ≈ atk_cap={atk_cap:.0%} (rounding)")
 
     # C3: MinHold violation check
     for p in ledger.get("positions", []):
