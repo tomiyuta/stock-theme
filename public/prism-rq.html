@@ -54,6 +54,11 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .prod-table .dev{font-size:9px}.prod-table .dev.neg{color:var(--red)}.prod-table .dev.pos{color:var(--green)}
 .prod-summary{margin-top:8px;font-size:10px;display:flex;justify-content:space-between;padding:6px;background:rgba(0,0,0,0.02);border-radius:4px}
 .prod-meta{font-size:9px;color:var(--text-sub);margin-top:6px}
+.strat-tabs{display:flex;gap:0;border-bottom:1.5px solid rgba(0,0,0,0.1);margin-bottom:10px}
+.strat-tab{flex:1;padding:8px 0;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text-sub);border-bottom:2px solid transparent;transition:all 0.15s}
+.strat-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.strat-tab:hover{color:var(--text-main)}
+.strat-panel{display:none}.strat-panel.active{display:block}
 </style>
 </head>
 <body>
@@ -224,10 +229,12 @@ Promise.all([
   h+=`<div class="prod-big-wrap"><span class="prod-big-sign" id="rqCcySign">$</span><input id="rqCapital" class="prod-big-input" type="text" value="10,000" oninput="calcRQ()"></div>`;
   h+=`<div class="prod-conv-row"><span id="rqConvDisplay">≈ ¥---</span><span style="font-size:10px;color:var(--text-sub)">exchangerate-api.com</span></div>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">等W%</th><th style="text-align:right;color:#228B22">🛡DEF</th><th style="text-align:right">株価</th><th style="text-align:right">等W株数</th><th style="text-align:right;color:#228B22">🛡株数</th></tr></thead>`;
-  h+=`<tbody id="rqRebalBody"></tbody></table>`;
-  h+=`<div id="rqRebalSummary"></div>`;
-  h+=`<div class="prod-meta">等W = 10%均等配分 | 🛡DEF = 12-7mo intermediate α（等ウェイト）| DEF銘柄が異なる場合🛡表示</div>`;
+  h+=`<div class="strat-tabs">`;
+  h+=`<button class="strat-tab active" onclick="switchRQTab('ew')">等W (SNRb)</button>`;
+  h+=`<button class="strat-tab" onclick="switchRQTab('def')">🛡DEF</button>`;
+  h+=`</div>`;
+  h+=`<div id="rqTabEw" class="strat-panel active"><table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">配分%</th><th style="text-align:right">株価</th><th style="text-align:right">株数</th></tr></thead><tbody id="rqBodyEw"></tbody></table><div id="rqSumEw"></div><div class="prod-meta">SNRb = α/残差Vol正規化 × 10%等ウェイト</div></div>`;
+  h+=`<div id="rqTabDef" class="strat-panel"><table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">配分%</th><th style="text-align:right">株価</th><th style="text-align:right">株数</th></tr></thead><tbody id="rqBodyDef"></tbody></table><div id="rqSumDef"></div><div class="prod-meta">🛡DEF = 12-7mo intermediate α × 等ウェイト（Tier 1主力候補）</div></div>`;
   h+=`</div>`;
 
   // === 8. BT Comparison Tables ===
@@ -491,40 +498,40 @@ function fetchRQFx(){
     icon.style.transform='rotate(0deg)';calcRQ();
   }).catch(()=>{dot.style.background='#E24B4A';time.textContent='取得失敗';icon.style.transform='rotate(0deg)';});
 }
+function switchRQTab(tab){
+  document.querySelectorAll('#rqMain .strat-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#rqMain .strat-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`[onclick="switchRQTab('${tab}')"]`).classList.add('active');
+  document.getElementById('rqTab'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.add('active');
+}
 function calcRQ(){
   const picks=window._prismRQ_picks;if(!picks)return;
   const rawCap=parseFloat(document.getElementById('rqCapital').value.replace(/,/g,''))||0;
   const fx=window._rqFx||150;
   const capUSD=window._rqCcy==='JPY'?rawCap/fx:rawCap;
-  let totalEW=0;let totalDef=0;let html='';
-  picks.forEach(p=>{
-    if(!p.price)return;
-    const ew=0.10;const dw=p.def_weight||0.10;
-    const et=capUSD*ew;const es=Math.floor(et/p.price);const ea=es*p.price;const epct=capUSD>0?(ea/capUSD)*100:0;
-    const dp=p.def_price||p.price;const dt_=capUSD*dw;const ds=Math.floor(dt_/dp);const da=ds*dp;const dpct=capUSD>0?(da/capUSD)*100:0;
-    totalEW+=ea;totalDef+=da;
-    const defDiff=p.def_ticker&&p.def_ticker!==p.ticker?` <span style="font-size:8px;color:#228B22">🛡${p.def_ticker}</span>`:'';
-    const defPriceTag=p.def_ticker&&p.def_ticker!==p.ticker?`<div style="font-size:8px;color:#228B22">🛡$${dp.toLocaleString()}</div>`:'';
-    html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b>${defDiff}</td>`;
-    html+=`<td style="font-size:9px">${p.theme}</td>`;
-    html+=`<td class="num" style="font-weight:700;color:var(--purple)">${(ew*100).toFixed(0)}%</td>`;
-    html+=`<td class="num" style="font-weight:700;color:#228B22">${(dw*100).toFixed(0)}%</td>`;
-    html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
-    html+=`<td class="num"><span class="shares">${es}株</span> <span class="dev ${epct-ew*100>=0?'pos':'neg'}">実${epct.toFixed(1)}%</span></td>`;
-    html+=`<td class="num" style="color:#228B22"><span style="font-size:12px;font-weight:800">${ds}株</span> <span style="font-size:9px">実${dpct.toFixed(1)}%</span>${defPriceTag}</td></tr>`;
-  });
-  document.getElementById('rqRebalBody').innerHTML=html;
-  const resEW=capUSD-totalEW;const resDef=capUSD-totalDef;
-  const resPctEW=capUSD>0?(resEW/capUSD)*100:0;const resPctD=capUSD>0?(resDef/capUSD)*100:0;
   const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
   const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
-  let sh=`<div class="prod-summary"><span style="color:var(--purple)">等W投資額 <b>${fmtD(totalEW)}</b>`;
-  if(window._rqCcy==='JPY')sh+=` (${fmtY(totalEW)})`;
-  sh+=`</span><span style="color:var(--purple)">余り <b style="color:${resPctEW>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resEW)} (${resPctEW.toFixed(1)}%)</b></span></div>`;
-  sh+=`<div class="prod-summary" style="margin-top:4px"><span style="color:#228B22">🛡DEF投資額 <b>${fmtD(totalDef)}</b>`;
-  if(window._rqCcy==='JPY')sh+=` (${fmtY(totalDef)})`;
-  sh+=`</span><span style="color:#228B22">余り <b style="color:${resPctD>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resDef)} (${resPctD.toFixed(1)}%)</b></span></div>`;
-  document.getElementById('rqRebalSummary').innerHTML=sh;
+  function buildTab(bodyId,sumId,weightKey,priceKey,tickerKey,color){
+    let html='';let totalInv=0;
+    picks.forEach(p=>{
+      const pr=p[priceKey]||p.price;if(!pr)return;
+      const w=p[weightKey]||0.10;const tk=p[tickerKey]||p.ticker;
+      const amt=capUSD*w;const shares=Math.floor(amt/pr);const inv=shares*pr;
+      const realPct=capUSD>0?(inv/capUSD)*100:0;totalInv+=inv;
+      html+=`<tr><td><b style="color:${color}">${tk}</b></td><td style="font-size:9px">${p.theme}</td>`;
+      html+=`<td class="num" style="font-weight:700;color:${color}">${(w*100).toFixed(1)}%</td>`;
+      html+=`<td class="num">$${pr.toLocaleString()}</td>`;
+      html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${realPct-w*100>=0?'pos':'neg'}">実${realPct.toFixed(1)}%</span></td></tr>`;
+    });
+    document.getElementById(bodyId).innerHTML=html;
+    const res=capUSD-totalInv;const resPct=capUSD>0?(res/capUSD)*100:0;
+    let sh=`<div class="prod-summary"><span style="color:${color}">投資額 <b>${fmtD(totalInv)}</b>`;
+    if(window._rqCcy==='JPY')sh+=` (${fmtY(totalInv)})`;
+    sh+=`</span><span>余り <b style="color:${resPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(res)} (${resPct.toFixed(1)}%)</b></span></div>`;
+    document.getElementById(sumId).innerHTML=sh;
+  }
+  buildTab('rqBodyEw','rqSumEw','def_weight','price','ticker','var(--purple)');
+  buildTab('rqBodyDef','rqSumDef','def_weight','def_price','def_ticker','#228B22');
   const convEl=document.getElementById('rqConvDisplay');
   if(convEl){if(window._rqCcy==='USD')convEl.textContent='≈ ¥'+Math.round(rawCap*fx).toLocaleString();else convEl.textContent='≈ $'+Math.round(rawCap/fx).toLocaleString();}
 }

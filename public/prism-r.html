@@ -120,6 +120,11 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 .prod-table .shares{font-size:12px;font-weight:800;color:var(--purple)}
 .prod-table .dev{font-size:9px}.prod-table .dev.neg{color:var(--red)}.prod-table .dev.pos{color:var(--green)}
 .prod-summary{margin-top:8px;font-size:10px;display:flex;justify-content:space-between;padding:6px;background:rgba(0,0,0,0.02);border-radius:4px}
+.strat-tabs{display:flex;gap:0;border-bottom:1.5px solid rgba(0,0,0,0.1);margin-bottom:10px}
+.strat-tab{flex:1;padding:8px 0;font-size:11px;font-weight:600;border:none;background:none;cursor:pointer;color:var(--text-sub);border-bottom:2px solid transparent;transition:all 0.15s}
+.strat-tab.active{color:var(--purple);border-bottom-color:var(--purple)}
+.strat-tab:hover{color:var(--text-main)}
+.strat-panel{display:none}.strat-panel.active{display:block}
 </style>
 </head>
 <body>
@@ -241,10 +246,14 @@ Promise.all([
   h+=`<div class="prod-big-wrap"><span class="prod-big-sign" id="rCcySign">$</span><input id="rCapital" class="prod-big-input" type="text" value="10,000" oninput="calcR()"></div>`;
   h+=`<div class="prod-conv-row"><span id="rConvDisplay">≈ ¥---</span><span style="font-size:10px;color:var(--text-sub)">exchangerate-api.com</span></div>`;
   h+=`</div>`;
-  h+=`<table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">W5b%</th><th style="text-align:right;color:#D85A30">🔥%</th><th style="text-align:right;color:#228B22">🛡DEF</th><th style="text-align:right">株価</th><th style="text-align:right">W5b株数</th><th style="text-align:right;color:#D85A30">🔥株数</th><th style="text-align:right;color:#228B22">🛡株数</th></tr></thead>`;
-  h+=`<tbody id="rRebalBody"></tbody></table>`;
-  h+=`<div id="rRebalSummary"></div>`;
-  h+=`<div class="prod-meta">W5b = 30%キャップ | 🔥 = キャップなし | 🛡DEF = 12-7mo intermediate α（等ウェイト）</div>`;
+  h+=`<div class="strat-tabs">`;
+  h+=`<button class="strat-tab active" onclick="switchRTab('w5b')">W5b</button>`;
+  h+=`<button class="strat-tab" onclick="switchRTab('beast')">🔥BEAST</button>`;
+  h+=`<button class="strat-tab" onclick="switchRTab('def')">🛡DEF</button>`;
+  h+=`</div>`;
+  h+=`<div id="rTabW5b" class="strat-panel active"><table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">配分%</th><th style="text-align:right">株価</th><th style="text-align:right">株数</th></tr></thead><tbody id="rBodyW5b"></tbody></table><div id="rSumW5b"></div><div class="prod-meta">W5b = 一貫性加重 × 30%キャップ</div></div>`;
+  h+=`<div id="rTabBeast" class="strat-panel"><table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">配分%</th><th style="text-align:right">株価</th><th style="text-align:right">株数</th></tr></thead><tbody id="rBodyBeast"></tbody></table><div id="rSumBeast"></div><div class="prod-meta">🔥BEAST = 一貫性加重 × キャップなし（集中リスク大）</div></div>`;
+  h+=`<div id="rTabDef" class="strat-panel"><table class="prod-table"><thead><tr><th>銘柄</th><th>テーマ</th><th style="text-align:right">配分%</th><th style="text-align:right">株価</th><th style="text-align:right">株数</th></tr></thead><tbody id="rBodyDef"></tbody></table><div id="rSumDef"></div><div class="prod-meta">🛡DEF = 12-7mo intermediate α × 等ウェイト（Tier 1主力候補, Sharpe 1.03）</div></div>`;
   h+=`</div>`;
   // Cumulative Returns Chart (案C: BT破線 + forward実線)
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
@@ -371,46 +380,43 @@ function fetchRFx(){
     icon.style.transform='rotate(0deg)';calcR();
   }).catch(()=>{dot.style.background='#E24B4A';time.textContent='取得失敗';icon.style.transform='rotate(0deg)';});
 }
+function switchRTab(tab){
+  document.querySelectorAll('#prismMain .strat-tab').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('#prismMain .strat-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelector(`[onclick="switchRTab('${tab}')"]`).classList.add('active');
+  document.getElementById('rTab'+tab.charAt(0).toUpperCase()+tab.slice(1)).classList.add('active');
+}
 function calcR(){
   const picks=window._prismR_picks;if(!picks)return;
   const rawCap=parseFloat(document.getElementById('rCapital').value.replace(/,/g,''))||0;
   const fx=window._rFx||150;
   const capUSD=window._rCcy==='JPY'?rawCap/fx:rawCap;
-  let totalInvW5b=0;let totalInvB=0;let totalInvDef=0;let html='';
-  picks.forEach(p=>{
-    if(!p.price)return;
-    const w=p.w5b_weight||0.10;const bw=p.beast_weight||0.10;const dw=p.def_weight||0.10;
-    const g2t=capUSD*w;const g2s=Math.floor(g2t/p.price);const g2a=g2s*p.price;const g2pct=capUSD>0?(g2a/capUSD)*100:0;
-    const bt=capUSD*bw;const bs=Math.floor(bt/p.price);const ba=bs*p.price;const bpct=capUSD>0?(ba/capUSD)*100:0;
-    const dp=p.def_price||p.price;const dt_=capUSD*dw;const ds=Math.floor(dt_/dp);const da=ds*dp;const dpct=capUSD>0?(da/capUSD)*100:0;
-    totalInvW5b+=g2a;totalInvB+=ba;totalInvDef+=da;
-    const defDiff=p.def_ticker&&p.def_ticker!==p.ticker?` <span style="font-size:8px;color:#228B22">🛡${p.def_ticker}</span>`:'';
-    const defPriceTag=p.def_ticker&&p.def_ticker!==p.ticker?`<div style="font-size:8px;color:#228B22">🛡$${dp.toLocaleString()}</div>`:'';
-    html+=`<tr><td><b style="color:var(--purple)">${p.ticker}</b>${defDiff} <span style="font-size:8px;color:var(--text-sub)">α${p.alpha63!=null?p.alpha63.toFixed(2):''}</span></td>`;
-    html+=`<td style="font-size:9px">${p.theme}</td>`;
-    html+=`<td class="num" style="font-weight:700;color:var(--purple)">${(w*100).toFixed(1)}%</td>`;
-    html+=`<td class="num" style="font-weight:700;color:#D85A30">${(bw*100).toFixed(1)}%</td>`;
-    html+=`<td class="num" style="font-weight:700;color:#228B22">${(dw*100).toFixed(1)}%</td>`;
-    html+=`<td class="num">$${p.price.toLocaleString()}</td>`;
-    html+=`<td class="num"><span class="shares">${g2s}株</span> <span class="dev ${g2pct-w*100>=0?'pos':'neg'}">実${g2pct.toFixed(1)}%</span></td>`;
-    html+=`<td class="num" style="color:#D85A30"><span class="shares">${bs}株</span> <span style="font-size:8px">実${bpct.toFixed(1)}%</span></td>`;
-    html+=`<td class="num" style="color:#228B22"><span class="shares">${ds}株</span> <span style="font-size:8px">実${dpct.toFixed(1)}%</span>${defPriceTag}</td></tr>`;
-  });
-  document.getElementById('rRebalBody').innerHTML=html;
-  const resW=capUSD-totalInvW5b;const resB=capUSD-totalInvB;const resDef=capUSD-totalInvDef;
-  const resPctW=capUSD>0?(resW/capUSD)*100:0;const resPctB=capUSD>0?(resB/capUSD)*100:0;const resPctD=capUSD>0?(resDef/capUSD)*100:0;
   const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
   const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
-  let sh=`<div class="prod-summary"><span style="color:var(--purple)">W5b投資額 <b>${fmtD(totalInvW5b)}</b>`;
-  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvW5b)})`;
-  sh+=`</span><span style="color:var(--purple)">余り <b style="color:${resPctW>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resW)} (${resPctW.toFixed(1)}%)</b></span></div>`;
-  sh+=`<div class="prod-summary" style="margin-top:4px"><span style="color:#D85A30">🔥投資額 <b>${fmtD(totalInvB)}</b>`;
-  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvB)})`;
-  sh+=`</span><span style="color:#D85A30">余り <b style="color:${resPctB>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resB)} (${resPctB.toFixed(1)}%)</b></span></div>`;
-  sh+=`<div class="prod-summary" style="margin-top:4px"><span style="color:#228B22">🛡DEF投資額 <b>${fmtD(totalInvDef)}</b>`;
-  if(window._rCcy==='JPY')sh+=` (${fmtY(totalInvDef)})`;
-  sh+=`</span><span style="color:#228B22">余り <b style="color:${resPctD>15?'var(--red)':'var(--text-main)'}"> ${fmtD(resDef)} (${resPctD.toFixed(1)}%)</b></span></div>`;
-  document.getElementById('rRebalSummary').innerHTML=sh;
+  function buildTab(getId,picks,weightKey,priceKey,tickerKey,color){
+    let html='';let totalInv=0;
+    picks.forEach(p=>{
+      const pr=p[priceKey]||p.price;if(!pr)return;
+      const w=p[weightKey]||0.10;
+      const tk=p[tickerKey]||p.ticker;
+      const amt=capUSD*w;const shares=Math.floor(amt/pr);const inv=shares*pr;
+      const realPct=capUSD>0?(inv/capUSD)*100:0;totalInv+=inv;
+      html+=`<tr><td><b style="color:${color}">${tk}</b></td>`;
+      html+=`<td style="font-size:9px">${p.theme}</td>`;
+      html+=`<td class="num" style="font-weight:700;color:${color}">${(w*100).toFixed(1)}%</td>`;
+      html+=`<td class="num">$${pr.toLocaleString()}</td>`;
+      html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${realPct-w*100>=0?'pos':'neg'}">実${realPct.toFixed(1)}%</span></td></tr>`;
+    });
+    document.getElementById(getId+'Body').innerHTML=html;
+    const res=capUSD-totalInv;const resPct=capUSD>0?(res/capUSD)*100:0;
+    let sh=`<div class="prod-summary"><span style="color:${color}">投資額 <b>${fmtD(totalInv)}</b>`;
+    if(window._rCcy==='JPY')sh+=` (${fmtY(totalInv)})`;
+    sh+=`</span><span>余り <b style="color:${resPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(res)} (${resPct.toFixed(1)}%)</b></span></div>`;
+    document.getElementById(getId+'Sum').innerHTML=sh;
+  }
+  buildTab('rW5b',picks,'w5b_weight','price','ticker','var(--purple)');
+  buildTab('rBeast',picks,'beast_weight','price','ticker','#D85A30');
+  buildTab('rDef',picks,'def_weight','def_price','def_ticker','#228B22');
   const convEl=document.getElementById('rConvDisplay');
   if(convEl){if(window._rCcy==='USD')convEl.textContent='≈ ¥'+Math.round(rawCap*fx).toLocaleString();else convEl.textContent='≈ $'+Math.round(rawCap/fx).toLocaleString();}
 }
