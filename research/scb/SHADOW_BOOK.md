@@ -2536,3 +2536,43 @@ Main governance effect:
 - Directional claims usable with caution
 - Forward PIT-safe evidence (capture_snapshot.py) remains primary promotion standard
 - Silver Layer rules unchanged: relative comparisons only, no absolute CAGR for decisions
+
+
+---
+
+## Strategy Hierarchy (post-PIT Review, 2026-04-13)
+
+### Frozen Labels
+
+```
+DEF     = risk-adjusted flagship candidate (25yr best Sharpe 1.03)
+A4      = core baseline strategy (simple momentum, robust)
+A5      = research branch / alpha overlay (25yr: A4≧A5, not primary)
+G2-MAX  = return maximization lab (absolute values non-canonical)
+W5b     = A5 with consistency weighting (follows A5 hierarchy)
+BEAST   = uncapped W5b variant (experimental)
+BFM-v2  = risk-managed L1 alternative (clock running, no new development)
+```
+
+### Decision Rules
+
+```
+- A5を戦略の核として説明しない
+- DEFを主力候補として位置づける
+- A4をシンプルな基準戦略として維持
+- G2-MAXの絶対CAGR/累積倍率を成果として提示しない
+- forward PIT蓄積が昇格の唯一の基準
+```
+
+### Next Research: 2×2 Canonical Tournament
+
+```
+             L2=A4 stock    L2=A5 alpha
+L1=A4 theme  A4-core        A4+alpha
+L1=DEF theme DEF-core       DEF+alpha
+
+Purpose: 
+  - alpha layer必要性の最終判定
+  - DEF昇格の最終判定
+  - interaction効果の有無
+```

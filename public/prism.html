@@ -415,11 +415,11 @@ Promise.all([
 <div class="logic-rule">BM3（セクターETFローテーション）CAGR +6.1% ≈ BM2（SPY/SHY切替）+6.2%。共にSPY B&H +11.0%を大幅に下回る。Layer 1の役割は"alpha源泉"ではなく"フィルタ"。</div>
 `],
     ["🔬 長期検証: 未確定の事項",`
-<div style="font-size:10px;font-weight:700;color:var(--gold);margin:6px 0 4px">⚠️ 未確定1: テーマ層（Layer 2）の長期効果</div>
-<div class="logic-rule">短期126日間ではテーマ層がSharpeを0.83→1.76に改善（+0.93）。これは制約の改善効果（+0.14）の6.6倍大きい。</div>
-<div class="logic-rule">しかし長期では未検証。理由: 207テーマの定義は2024-2026年の市場構造に基づくものであり、2008年時点にはこの分類が存在しなかった。現在の定義を過去に投影すると、構成銘柄バイアス（生存銘柄に偏る）とテーマ存在バイアス（当時なかったテーマに投資したことになる）が発生する。</div>
-<div class="logic-rule">仮説: テーマ層は"短中期のalpha抽出フィルター"として有効だが、長期alphaの源泉であるかは不明。</div>
-<div class="logic-rule">検証方法: ①Forward蓄積60日（2026-06-09目標）でreconstructedとの比較 ②GICS Sub-Industry代替によるテーマ層近似の長期検証（研究段階）。</div>
+<div style="font-size:10px;font-weight:700;color:var(--gold);margin:6px 0 4px">⚠️ 未確定1: テーマ層（Layer 2）の長期効果 → 部分解決</div>
+<div class="logic-rule"><b>解決済み:</b> 25年PIT BT（Upper/Middle/Stress 3ビュー）で、テーマ戦略群の対SPY優位が全て維持された。テーマ層の構造的価値は頑健。</div>
+<div class="logic-rule"><b>新発見:</b> 25年ではA5（α補正）がA4（純モメンタム）を上回らない（全3ビューでA4≧A5）。5年のA5優位は期間依存であり、α scoringの付加価値は限定的。</div>
+<div class="logic-rule"><b>未解決:</b> テーマ構成のM汚染（勝者選択、敗者欠落、テーマ事後定義）は完全には除去されていない（PIT chapter = Closed-Silver）。絶対CAGR値は信頼不能。</div>
+<div class="logic-rule">検証方法: ①Forward蓄積（capture_snapshot.py稼働中）②B3 full bootstrap（未実行）③loser injection（未実行）。</div>
 
 <div style="font-size:10px;font-weight:700;color:var(--gold);margin:8px 0 4px">⚠️ 未確定2: K-gateの長期CAGRコスト</div>
 <div class="logic-rule">BM5でのK-gate適用: CAGR +14.3%→+7.6%（半減）。これはCLOSED期間が長期では長くなるため。ただしPRISMはテーマ層を持つため、テーマ層がCLOSED期間中にも30%枠内で良い銘柄を選べるなら、CAGRコストはBM5ほど深刻でない可能性がある。</div>
@@ -431,14 +431,17 @@ Promise.all([
 <div class="logic-rule">stock-themes.comがテーマ定義を変更した場合、PRISMの銘柄選定に影響が生じる。member_hashで差分検出は可能だが、発生頻度・影響度は未実測。</div>
 `],
     ["🔬 長期検証: PRISMの構造的位置づけ",`
-<div class="logic-rule"><b>PRISMの本質（長期検証で判明）:</b></div>
+<div class="logic-rule"><b>PRISMの本質（長期検証+PIT Review で判明）:</b></div>
 <table class="logic-table"><tr><th>役割</th><th>コンポーネント</th><th>長期検証</th></tr>
-<tr><td>Alpha源泉</td><td>個別株モメンタム（テーマ経由）</td><td>個別株: 確定 / テーマ: 未確定</td></tr>
+<tr><td>Alpha源泉</td><td>テーマ層モメンタム（A4）</td><td>✅ 25年 全3ビューでSPY超過</td></tr>
+<tr><td>Alpha補助</td><td>α推定（A5, split-window）</td><td>⚠️ 25年ではA4≧A5（付加価値限定的）</td></tr>
 <tr><td>Alpha保持装置</td><td>MinHold 20日 / SectorCap 35%</td><td>✅ 24年間で普遍的有効</td></tr>
 <tr><td>リスク調整装置</td><td>K-gate（80/50/30）</td><td>✅ Sharpe最大、変更根拠なし</td></tr>
-<tr><td>フィルタ</td><td>セクターDM（Layer 1）</td><td>⚠️ 長期alpha無し、フィルタとしてのみ機能</td></tr></table>
-<div class="logic-rule" style="margin-top:8px"><b>要約:</b> 制約は確定した土台。テーマ層は有望だが未確定。K-gateは正の価値を持つリスク調整装置であり、現行設定を維持。</div>
-<div class="logic-rule"><b>次の検証:</b> Forward蓄積60日（目標2026-06-09）でテーマ層の実運用効果を測定。それまでは戦略パラメータを凍結し、Paper Tradingでオペレーション整合性を確認する。</div>
+<tr><td>防御最適</td><td>DEF（12-7mo intermediate）</td><td>✅ 25年Sharpe最良（1.03）</td></tr>
+<tr><td>フィルタ</td><td>セクターDM（Layer 1）</td><td>⚠️ 長期alpha無し、フィルタのみ</td></tr></table>
+<div class="logic-rule" style="margin-top:8px"><b>要約:</b> テーマ層のモメンタム構造が主要エッジ。制約は確定した土台。α scoring（A5）は補助的。DEFが最良リスク調整。</div>
+<div class="logic-rule"><b>戦略階層（PIT Review後）:</b> DEF＝主力候補(Sharpe最良) / A4＝コア基準(シンプル堅牢) / A5＝研究枝(overlay) / G2-MAX＝実験室(絶対値禁止)</div>
+<div class="logic-rule"><b>次の検証:</b> Forward PIT蓄積で実運用効果を測定。2×2 canonical tournament（A4/DEF × A4stock/A5alpha）でarchitecture最終決定。</div>
 `]
   ];
   cards.forEach(([title,body])=>{
