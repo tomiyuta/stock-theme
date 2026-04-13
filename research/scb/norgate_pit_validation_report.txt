@@ -1,0 +1,26 @@
+CHECK-01: Active symbols = 13937 (PASS)
+CHECK-02: Delisted symbols = 20886 (PASS)
+CHECK-03: Price fetch failure rate = 0.00% (0/34823) (PASS)
+CHECK-04: S&P500 members on 2015-01-02: 502 (PASS)
+CHECK-04: S&P500 members on 2016-02-18: 504 (PASS)
+CHECK-04: S&P500 members on 2017-04-03: 505 (PASS)
+CHECK-04: S&P500 members on 2018-05-17: 505 (PASS)
+CHECK-04: S&P500 members on 2019-07-03: 505 (PASS)
+CHECK-05: Russell3000 members on 2015-01-02: 3030 (PASS)
+CHECK-05: Russell3000 members on 2016-02-18: 2961 (PASS)
+CHECK-05: Russell3000 members on 2017-04-03: 2928 (PASS)
+CHECK-05: Russell3000 members on 2018-05-17: 2930 (PASS)
+CHECK-05: Russell3000 members on 2019-07-03: 3002 (PASS)
+CHECK-06: Theme panel close match rate = 0.9979 (PASS)
+CHECK-07: SPY return corr vs SPY_BH_daily.csv port_ret = 1.000000 (PASS)
+
+Total FAIL checks: 0
+
+
+Elapsed_sec: 850.7
+US price rows: 74238508
+Membership rows: 74238508
+ETF rows: 236449
+Theme v2 rows: 4609548
+
+Price errors (first 80):

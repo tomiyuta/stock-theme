@@ -5,3 +5,14 @@ node_modules/
 .DS_Store
 .vercel
 .env*.local
+
+# Norgate PIT datasets (too large for git)
+research/scb/norgate_us_prices.parquet
+research/scb/norgate_index_membership.parquet
+research/scb/norgate_us_metadata.parquet
+research/scb/norgate_etf_prices.parquet
+research/scb/norgate_theme_panel_v2.parquet
+research/scb/norgate_theme_panel.parquet
+research/scb/prices.parquet
+research/scb/ticker_meta.parquet
+research/scb/theme_daily_panel.parquet

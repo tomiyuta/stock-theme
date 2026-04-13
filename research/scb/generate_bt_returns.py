@@ -4,8 +4,8 @@ import pandas as pd, numpy as np, json, time, warnings, sys
 warnings.filterwarnings('ignore')
 t0 = time.time()
 
-panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel.parquet')
-meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/ticker_meta.parquet')
+panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel_v2.parquet')
+meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_us_metadata.parquet')
 print(f'Panel: {len(panel):,} rows | {panel.theme.nunique()} themes | {panel.ticker.nunique()} tickers')
 
 panel = panel.sort_values(['theme','ticker','date']).reset_index(drop=True)
@@ -17,7 +17,7 @@ panel['theme_ex_self'] = np.where(panel['n_day']>1, (panel['sum_ret']-panel['ret
 dates_all = sorted(panel['date'].unique())
 tk_ret = panel[['date','ticker','ret']].drop_duplicates(['date','ticker']).dropna(subset=['ret'])
 tk_wide = tk_ret.pivot(index='date', columns='ticker', values='ret').sort_index()
-meta_sec = meta.set_index('ticker')['sector'].to_dict()
+meta_sec = meta.set_index('ticker')['gics_sector'].to_dict()
 psec = panel[['theme','ticker']].drop_duplicates()
 psec['sector'] = psec['ticker'].map(meta_sec)
 theme_sector = psec.groupby('theme')['sector'].agg(lambda x: x.mode().iloc[0] if x.notna().any() else 'Unk')
