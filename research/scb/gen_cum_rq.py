@@ -4,15 +4,15 @@ warnings.filterwarnings('ignore')
 t0 = time.time()
 
 # Re-run BFM-v2 backtest to capture daily returns
-panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel.parquet')
-meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/ticker_meta.parquet')
+panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel_v2.parquet')
+meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_us_metadata.parquet')
 panel = panel.sort_values(['theme','ticker','date']).reset_index(drop=True)
 panel['ret'] = panel.groupby(['theme','ticker'])['close'].pct_change()
 agg = panel.dropna(subset=['ret']).groupby(['date','theme'])['ret'].agg(sum_ret='sum', n_day='count').reset_index()
 panel = panel.merge(agg, on=['date','theme'], how='left')
 panel['theme_ret'] = panel['sum_ret'] / panel['n_day']
 panel['theme_ex_self'] = np.where(panel['n_day']>1, (panel['sum_ret']-panel['ret'])/(panel['n_day']-1), np.nan)
-psec = panel[['theme','ticker']].drop_duplicates().merge(meta[['ticker','sector']], on='ticker', how='left')
+psec = panel[['theme','ticker']].drop_duplicates().merge(meta[['ticker','gics_sector']].rename(columns={'gics_sector':'sector'}), on='ticker', how='left')
 theme_sector = psec.groupby('theme')['sector'].agg(lambda x: x.mode().iloc[0] if x.notna().any() else 'Unk')
 dates_all = sorted(panel['date'].unique())
 tk_wide = panel.pivot_table(index='date', columns='ticker', values='ret', aggfunc='first')

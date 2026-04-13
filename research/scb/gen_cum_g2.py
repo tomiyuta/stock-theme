@@ -3,8 +3,8 @@ import pandas as pd, numpy as np, time, warnings, json
 warnings.filterwarnings('ignore')
 t0 = time.time()
 
-panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel.parquet')
-meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/ticker_meta.parquet')
+panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_theme_panel_v2.parquet')
+meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_us_metadata.parquet')
 panel = panel.sort_values(['theme','ticker','date']).reset_index(drop=True)
 panel['ret'] = panel.groupby(['theme','ticker'])['close'].pct_change()
 agg = panel.dropna(subset=['ret']).groupby(['date','theme'])['ret'].agg(sum_ret='sum', n_day='count').reset_index()
