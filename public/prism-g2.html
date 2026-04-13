@@ -145,7 +145,7 @@ Promise.all([
 
   // === 7. Annual Performance ===
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
-  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th style="color:#D85A30">BEAST</th><th>SPY</th><th>G2-SPY</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
+  h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th style="color:#D85A30">BEAST</th><th>SPY</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
   h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（集中型のため特に重い）。forward実績でのみ判断。</div></div>`;
 
   // === 8. Ablation BT Comparison ===
@@ -303,10 +303,10 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
     mkRow('SPY','rgba(0,0,0,0.03)',(st.SPY.cagr*100).toFixed(1)+'%',(st.SPY.maxdd*100).toFixed(1)+'%',st.SPY.sharpe.toFixed(2),(st.SPY.sortino||0).toFixed(2),(st.SPY.calmar||0).toFixed(2));
   const ann=cr.annual;const years=Object.keys(ann.a5).sort();let tb='';
   years.forEach(y=>{
-    const gv=ann.a5[y]||0,bv=(ann.beast||{})[y]||0,sv=ann.SPY[y]||0,diff=gv-sv;
+    const gv=ann.a5[y]||0,bv=(ann.beast||{})[y]||0,sv=ann.SPY[y]||0;
     const f=v=>(v>=0?'+':'')+(v*100).toFixed(1)+'%';
     const c=v=>v>=0?'color:var(--green)':'color:var(--red)';
-    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(gv)};font-weight:700">${f(gv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(sv)}">${f(sv)}</td><td style="${c(diff)};font-weight:600">${f(diff)}</td></tr>`;
+    tb+=`<tr><td style="font-weight:600">${y}</td><td style="${c(gv)};font-weight:700">${f(gv)}</td><td style="${c(bv)};color:#D85A30">${f(bv)}</td><td style="${c(sv)}">${f(sv)}</td></tr>`;
   });
   document.getElementById('annualBodyG2').innerHTML=tb;
 }).catch(e=>console.warn('G2 chart error:',e));}
