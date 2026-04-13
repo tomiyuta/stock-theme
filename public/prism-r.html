@@ -393,7 +393,7 @@ function calcR(){
   const capUSD=window._rCcy==='JPY'?rawCap/fx:rawCap;
   const fmtD=v=>'$'+v.toLocaleString(undefined,{minimumFractionDigits:0,maximumFractionDigits:0});
   const fmtY=v=>'¥'+Math.round(v*fx).toLocaleString();
-  function buildTab(getId,picks,weightKey,priceKey,tickerKey,color){
+  function buildTab(prefix,sumPrefix,suffix,picks,weightKey,priceKey,tickerKey,color){
     let html='';let totalInv=0;
     picks.forEach(p=>{
       const pr=p[priceKey]||p.price;if(!pr)return;
@@ -407,16 +407,16 @@ function calcR(){
       html+=`<td class="num">$${pr.toLocaleString()}</td>`;
       html+=`<td class="num"><span class="shares">${shares}株</span> <span class="dev ${realPct-w*100>=0?'pos':'neg'}">実${realPct.toFixed(1)}%</span></td></tr>`;
     });
-    document.getElementById(getId+'Body').innerHTML=html;
+    document.getElementById(prefix+suffix).innerHTML=html;
     const res=capUSD-totalInv;const resPct=capUSD>0?(res/capUSD)*100:0;
     let sh=`<div class="prod-summary"><span style="color:${color}">投資額 <b>${fmtD(totalInv)}</b>`;
     if(window._rCcy==='JPY')sh+=` (${fmtY(totalInv)})`;
     sh+=`</span><span>余り <b style="color:${resPct>15?'var(--red)':'var(--text-main)'}"> ${fmtD(res)} (${resPct.toFixed(1)}%)</b></span></div>`;
-    document.getElementById(getId+'Sum').innerHTML=sh;
+    document.getElementById(sumPrefix+suffix).innerHTML=sh;
   }
-  buildTab('rW5b',picks,'w5b_weight','price','ticker','var(--purple)');
-  buildTab('rBeast',picks,'beast_weight','price','ticker','#D85A30');
-  buildTab('rDef',picks,'def_weight','def_price','def_ticker','#228B22');
+  buildTab('rBody','rSum','W5b',picks,'w5b_weight','price','ticker','var(--purple)');
+  buildTab('rBody','rSum','Beast',picks,'beast_weight','price','ticker','#D85A30');
+  buildTab('rBody','rSum','Def',picks,'def_weight','def_price','def_ticker','#228B22');
   const convEl=document.getElementById('rConvDisplay');
   if(convEl){if(window._rCcy==='USD')convEl.textContent='≈ ¥'+Math.round(rawCap*fx).toLocaleString();else convEl.textContent='≈ $'+Math.round(rawCap/fx).toLocaleString();}
 }
