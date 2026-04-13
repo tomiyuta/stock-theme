@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-10",
-  "generated_at": "2026-04-12T22:01:47.889588",
+  "generated_at": "2026-04-13T22:21:09.667261",
   "version": "PRISM-RQ_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -468,6 +468,7 @@
       "snrb_pick": "PTEN",
       "bfm2_pick": "PTEN",
       "cra_pick": "PTEN",
+      "def_pick": "HP",
       "same": false,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -484,6 +485,7 @@
           "score_a5": 0.0084,
           "score_snrb": 0.0273,
           "score_cra": 0.0214,
+          "score_def": -0.0108,
           "cra_audit": {
             "c1_sign3m": 0.0,
             "c2_sign6m": 0.0,
@@ -513,6 +515,7 @@
           "score_a5": -0.0232,
           "score_snrb": -0.1427,
           "score_cra": -0.1127,
+          "score_def": 0.0725,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -542,6 +545,7 @@
           "score_a5": 0.1129,
           "score_snrb": 0.4755,
           "score_cra": 0.4399,
+          "score_def": -0.0109,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -571,6 +575,7 @@
           "score_a5": 0.1581,
           "score_snrb": 0.8718,
           "score_cra": 0.8064,
+          "score_def": -0.0386,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -600,6 +605,7 @@
           "score_a5": -0.0352,
           "score_snrb": -0.1706,
           "score_cra": -0.1348,
+          "score_def": -0.0733,
           "cra_audit": {
             "c1_sign3m": 0.0,
             "c2_sign6m": 1.0,
@@ -622,7 +628,8 @@
       "w5b_weight": 0.0871,
       "beast_weight": 0.0871,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 0.9483
+      "w5b_r252ex1m": 0.9483,
+      "def_weight": 0.1
     },
     {
       "theme": "dc-optical-device",
@@ -640,6 +647,7 @@
       "snrb_pick": "VIAV",
       "bfm2_pick": null,
       "cra_pick": "VIAV",
+      "def_pick": "LITE",
       "same": false,
       "a5_snrb_same": false,
       "snrb_cra_same": true,
@@ -656,6 +664,7 @@
           "score_a5": 0.5987,
           "score_snrb": 0.7951,
           "score_cra": 0.7355,
+          "score_def": -0.3538,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -685,6 +694,7 @@
           "score_a5": 0.1954,
           "score_snrb": 0.7705,
           "score_cra": 0.7127,
+          "score_def": 0.2074,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -714,6 +724,7 @@
           "score_a5": -0.187,
           "score_snrb": -1.0249,
           "score_cra": -0.9865,
+          "score_def": -0.1447,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -743,6 +754,7 @@
           "score_a5": 0.2057,
           "score_snrb": 0.8871,
           "score_cra": 0.7008,
+          "score_def": 0.1564,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -772,6 +784,7 @@
           "score_a5": 0.0993,
           "score_snrb": 0.4081,
           "score_cra": 0.3775,
+          "score_def": -0.1103,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -801,6 +814,7 @@
           "score_a5": 0.1851,
           "score_snrb": 0.539,
           "score_cra": 0.5188,
+          "score_def": 0.5466,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -830,6 +844,7 @@
           "score_a5": -0.1936,
           "score_snrb": -0.4191,
           "score_cra": -0.4191,
+          "score_def": 0.0187,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -859,6 +874,7 @@
           "score_a5": -0.2218,
           "score_snrb": -0.7195,
           "score_cra": -0.7195,
+          "score_def": 0.071,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -888,6 +904,7 @@
           "score_a5": 0.3423,
           "score_snrb": 1.1351,
           "score_cra": 1.1351,
+          "score_def": -0.0147,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -910,7 +927,8 @@
       "w5b_weight": 0.1521,
       "beast_weight": 0.1521,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 3.4314
+      "w5b_r252ex1m": 3.4314,
+      "def_weight": 0.1
     },
     {
       "theme": "semi-component",
@@ -928,6 +946,7 @@
       "snrb_pick": "UCTT",
       "bfm2_pick": null,
       "cra_pick": "UCTT",
+      "def_pick": "AEIS",
       "same": true,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -944,6 +963,7 @@
           "score_a5": 0.1538,
           "score_snrb": 0.7493,
           "score_cra": 0.6931,
+          "score_def": 0.425,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -973,6 +993,7 @@
           "score_a5": 0.1384,
           "score_snrb": 0.3992,
           "score_cra": 0.2974,
+          "score_def": -0.5925,
           "cra_audit": {
             "c1_sign3m": 0.0,
             "c2_sign6m": 0.0,
@@ -1002,6 +1023,7 @@
           "score_a5": -0.0776,
           "score_snrb": -0.4222,
           "score_cra": -0.3336,
+          "score_def": 0.284,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1031,6 +1053,7 @@
           "score_a5": 0.2275,
           "score_snrb": 0.8989,
           "score_cra": 0.8315,
+          "score_def": -0.0841,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1053,7 +1076,8 @@
       "w5b_weight": 0.1248,
       "beast_weight": 0.1248,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 1.9488
+      "w5b_r252ex1m": 1.9488,
+      "def_weight": 0.1
     },
     {
       "theme": "infra-contractors",
@@ -1071,6 +1095,7 @@
       "snrb_pick": "MTZ",
       "bfm2_pick": "MTZ",
       "cra_pick": "MTZ",
+      "def_pick": "STRL",
       "same": true,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -1087,6 +1112,7 @@
           "score_a5": -0.086,
           "score_snrb": -0.8535,
           "score_cra": -0.7895,
+          "score_def": 0.0349,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1116,6 +1142,7 @@
           "score_a5": 0.0504,
           "score_snrb": 0.4849,
           "score_cra": 0.4667,
+          "score_def": 0.0917,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1145,6 +1172,7 @@
           "score_a5": 0.2232,
           "score_snrb": 2.2599,
           "score_cra": 2.2599,
+          "score_def": -0.0538,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1174,6 +1202,7 @@
           "score_a5": 0.0757,
           "score_snrb": 0.8691,
           "score_cra": 0.8039,
+          "score_def": -0.0631,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1203,6 +1232,7 @@
           "score_a5": -0.1474,
           "score_snrb": -0.9954,
           "score_cra": -0.9954,
+          "score_def": 0.3113,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1225,7 +1255,8 @@
       "w5b_weight": 0.093,
       "beast_weight": 0.093,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 1.6629
+      "w5b_r252ex1m": 1.6629,
+      "def_weight": 0.1
     },
     {
       "theme": "dc-optical-ems",
@@ -1243,6 +1274,7 @@
       "snrb_pick": "AAOI",
       "bfm2_pick": null,
       "cra_pick": "AAOI",
+      "def_pick": "FN",
       "same": true,
       "a5_snrb_same": false,
       "snrb_cra_same": true,
@@ -1259,6 +1291,7 @@
           "score_a5": 0.6706,
           "score_snrb": 0.8838,
           "score_cra": 0.8175,
+          "score_def": 0.0965,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1288,6 +1321,7 @@
           "score_a5": -0.1003,
           "score_snrb": -0.4172,
           "score_cra": -0.3296,
+          "score_def": 0.1609,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1317,6 +1351,7 @@
           "score_a5": -0.1747,
           "score_snrb": -0.5852,
           "score_cra": -0.5413,
+          "score_def": 0.3604,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1346,6 +1381,7 @@
           "score_a5": 0.0679,
           "score_snrb": 0.2197,
           "score_cra": 0.1736,
+          "score_def": -0.1801,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1375,6 +1411,7 @@
           "score_a5": 0.0494,
           "score_snrb": 0.2077,
           "score_cra": 0.1922,
+          "score_def": 0.0112,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1397,7 +1434,8 @@
       "w5b_weight": 0.1339,
       "beast_weight": 0.1339,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 2.5269
+      "w5b_r252ex1m": 2.5269,
+      "def_weight": 0.1
     },
     {
       "theme": "oil-supermajors-non-us",
@@ -1415,6 +1453,7 @@
       "snrb_pick": "PBR",
       "bfm2_pick": "PBR",
       "cra_pick": "PBR",
+      "def_pick": "BP",
       "same": false,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -1431,6 +1470,7 @@
           "score_a5": -0.0991,
           "score_snrb": -0.9968,
           "score_cra": -0.9968,
+          "score_def": 0.1371,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1460,6 +1500,7 @@
           "score_a5": 0.2484,
           "score_snrb": 1.8195,
           "score_cra": 1.7513,
+          "score_def": -0.0334,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1489,6 +1530,7 @@
           "score_a5": -0.0274,
           "score_snrb": -0.3189,
           "score_cra": -0.3069,
+          "score_def": 0.0331,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1518,6 +1560,7 @@
           "score_a5": 0.1059,
           "score_snrb": 1.3111,
           "score_cra": 1.2619,
+          "score_def": -0.0186,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1540,7 +1583,8 @@
       "w5b_weight": 0.0753,
       "beast_weight": 0.0753,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 0.5465
+      "w5b_r252ex1m": 0.5465,
+      "def_weight": 0.1
     },
     {
       "theme": "refinary",
@@ -1558,6 +1602,7 @@
       "snrb_pick": "PARR",
       "bfm2_pick": "PARR",
       "cra_pick": "PARR",
+      "def_pick": "PARR",
       "same": true,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -1574,6 +1619,7 @@
           "score_a5": -0.0887,
           "score_snrb": -0.6769,
           "score_cra": -0.6769,
+          "score_def": 0.2188,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1603,6 +1649,7 @@
           "score_a5": 0.0681,
           "score_snrb": 0.4209,
           "score_cra": 0.3325,
+          "score_def": 0.2154,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1632,6 +1679,7 @@
           "score_a5": 0.0446,
           "score_snrb": 0.4273,
           "score_cra": 0.3376,
+          "score_def": -0.0347,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1661,6 +1709,7 @@
           "score_a5": 0.2709,
           "score_snrb": 1.4894,
           "score_cra": 1.4336,
+          "score_def": 0.3917,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1690,6 +1739,7 @@
           "score_a5": -0.1171,
           "score_snrb": -0.5914,
           "score_cra": -0.547,
+          "score_def": -0.199,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1719,6 +1769,7 @@
           "score_a5": -0.0694,
           "score_snrb": -0.7177,
           "score_cra": -0.567,
+          "score_def": -0.1616,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1748,6 +1799,7 @@
           "score_a5": 0.0244,
           "score_snrb": 0.2315,
           "score_cra": 0.2228,
+          "score_def": -0.1088,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1770,7 +1822,8 @@
       "w5b_weight": 0.0842,
       "beast_weight": 0.0842,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 1.4254
+      "w5b_r252ex1m": 1.4254,
+      "def_weight": 0.1
     },
     {
       "theme": "onsite-power",
@@ -1788,6 +1841,7 @@
       "snrb_pick": "GEV",
       "bfm2_pick": "GEV",
       "cra_pick": "GEV",
+      "def_pick": "BE",
       "same": true,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -1804,6 +1858,7 @@
           "score_a5": -0.1244,
           "score_snrb": -0.3118,
           "score_cra": -0.2884,
+          "score_def": 0.2277,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1833,6 +1888,7 @@
           "score_a5": 0.0767,
           "score_snrb": 0.6182,
           "score_cra": 0.5718,
+          "score_def": 0.0404,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1862,6 +1918,7 @@
           "score_a5": -0.0254,
           "score_snrb": -0.1723,
           "score_cra": -0.1361,
+          "score_def": -0.0036,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1891,6 +1948,7 @@
           "score_a5": 0.2112,
           "score_snrb": 1.4677,
           "score_cra": 1.4127,
+          "score_def": 0.1023,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -1920,6 +1978,7 @@
           "score_a5": 0.1034,
           "score_snrb": 0.4648,
           "score_cra": 0.3672,
+          "score_def": 0.0325,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -1942,7 +2001,8 @@
       "w5b_weight": 0.1012,
       "beast_weight": 0.1012,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 2.1118
+      "w5b_r252ex1m": 2.1118,
+      "def_weight": 0.1
     },
     {
       "theme": "pub-construction-electric",
@@ -1960,6 +2020,7 @@
       "snrb_pick": "PWR",
       "bfm2_pick": "PWR",
       "cra_pick": "PWR",
+      "def_pick": "DY",
       "same": false,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -1976,6 +2037,7 @@
           "score_a5": -0.1819,
           "score_snrb": -1.3728,
           "score_cra": -1.3213,
+          "score_def": 0.1137,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2005,6 +2067,7 @@
           "score_a5": 0.218,
           "score_snrb": 2.7085,
           "score_cra": 2.607,
+          "score_def": 0.0238,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2034,6 +2097,7 @@
           "score_a5": 0.049,
           "score_snrb": 0.4487,
           "score_cra": 0.3545,
+          "score_def": -0.037,
           "cra_audit": {
             "c1_sign3m": 0.0,
             "c2_sign6m": 1.0,
@@ -2063,6 +2127,7 @@
           "score_a5": 0.066,
           "score_snrb": 0.6743,
           "score_cra": 0.5327,
+          "score_def": -0.0174,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -2085,7 +2150,8 @@
       "w5b_weight": 0.0869,
       "beast_weight": 0.0869,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 1.356
+      "w5b_r252ex1m": 1.356,
+      "def_weight": 0.1
     },
     {
       "theme": "dividend",
@@ -2103,6 +2169,7 @@
       "snrb_pick": "COP",
       "bfm2_pick": null,
       "cra_pick": "COP",
+      "def_pick": "ABBV",
       "same": false,
       "a5_snrb_same": true,
       "snrb_cra_same": true,
@@ -2119,6 +2186,7 @@
           "score_a5": -0.0174,
           "score_snrb": -0.1466,
           "score_cra": -0.1466,
+          "score_def": 0.1469,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2148,6 +2216,7 @@
           "score_a5": -0.0056,
           "score_snrb": -0.0408,
           "score_cra": -0.0378,
+          "score_def": -0.0596,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2177,6 +2246,7 @@
           "score_a5": -0.0066,
           "score_snrb": -0.0609,
           "score_cra": -0.0481,
+          "score_def": -0.1928,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -2206,6 +2276,7 @@
           "score_a5": 0.0165,
           "score_snrb": 0.1132,
           "score_cra": 0.1047,
+          "score_def": -0.0056,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2235,6 +2306,7 @@
           "score_a5": 0.0057,
           "score_snrb": 0.0489,
           "score_cra": 0.047,
+          "score_def": 0.0336,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2264,6 +2336,7 @@
           "score_a5": 0.0113,
           "score_snrb": 0.0813,
           "score_cra": 0.0752,
+          "score_def": 0.0,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2293,6 +2366,7 @@
           "score_a5": -0.0191,
           "score_snrb": -0.198,
           "score_cra": -0.1564,
+          "score_def": -0.0042,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -2322,6 +2396,7 @@
           "score_a5": 0.007,
           "score_snrb": 0.0398,
           "score_cra": 0.0315,
+          "score_def": 0.0171,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 0.0,
@@ -2351,6 +2426,7 @@
           "score_a5": 0.0128,
           "score_snrb": 0.0855,
           "score_cra": 0.0791,
+          "score_def": 0.0022,
           "cra_audit": {
             "c1_sign3m": 1.0,
             "c2_sign6m": 1.0,
@@ -2373,31 +2449,10 @@
       "w5b_weight": 0.0617,
       "beast_weight": 0.0617,
       "w5b_pos_count": 3,
-      "w5b_r252ex1m": 0.3493
+      "w5b_r252ex1m": 0.3493,
+      "def_weight": 0.1
     }
   ],
-  "virtual_exits": [
-    {
-      "ticker": "MTSI",
-      "prev_theme": "光接続：トランシーバ",
-      "prev_rank": 5,
-      "reason": "removed_from_target"
-    },
-    {
-      "ticker": "VZ",
-      "prev_theme": "高配当",
-      "prev_rank": 10,
-      "reason": "removed_from_target"
-    }
-  ],
-  "virtual_entries": [
-    {
-      "ticker": "MRVL",
-      "theme": "光接続：トランシーバ"
-    },
-    {
-      "ticker": "COP",
-      "theme": "高配当"
-    }
-  ]
+  "virtual_exits": [],
+  "virtual_entries": []
 }

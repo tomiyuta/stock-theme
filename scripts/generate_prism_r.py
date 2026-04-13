@@ -155,9 +155,11 @@ dt63 = set(dates_all[max(0,j-62):j+1])
 dt21 = set(dates_all[max(0,j-20):j+1])
 dt126 = set(dates_all[max(0,j-125):j+1])
 dt252 = set(dates_all[max(0,j-251):j+1])
+dt_7_12 = set(dates_all[max(0,j-251):max(0,j-146)])  # months 7-12 ago for DEF
 sub = panel[panel['date'].isin(dt63)]
 sub126 = panel[panel['date'].isin(dt126)]
 sub252 = panel[panel['date'].isin(dt252)]
+sub_7_12 = panel[panel['date'].isin(dt_7_12)]
 
 # Theme scoring
 tm = sub.groupby('theme')['ticker'].nunique()
@@ -253,7 +255,7 @@ if len(theme_daily_rets) >= 2:
 
 # Stock scoring + comparison
 comparisons = []
-used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set(); used_cra = set()
+used4 = set(); used5 = set(); used_snrb = set(); used_bfm2 = set(); used_cra = set(); used_def = set()
 for rank_i, th in enumerate(sel):
     ths = sub[(sub['theme']==th) & sub['ret'].notna()]
     ths126 = sub126[(sub126['theme']==th) & sub126['ret'].notna()]
@@ -282,6 +284,14 @@ for rank_i, th in enumerate(sel):
         # CRA-v1: confirmation overlay on SNRb
         cra_audit_score, cra_detail = cra_audit(th, tk, a63)
         score_cra = score_snrb * (0.70 + 0.30 * cra_audit_score) if score_snrb > -999 else -999
+        # DEF: 12-7 month intermediate alpha
+        tkd_7_12 = sub_7_12[(sub_7_12['theme']==th)&(sub_7_12['ticker']==tk)].sort_values('date')
+        if len(tkd_7_12) >= 10:
+            a_def, _, r2_def, _ = ols_ab(tkd_7_12['ret'].values, tkd_7_12['theme_ex_self'].values)
+            shrk_def = shrink_r2(r2_def) if np.isfinite(r2_def) else 0
+            score_def = a_def * shrk_def if np.isfinite(a_def) else -999
+        else:
+            score_def = -999
         latest = panel[(panel['theme']==th)&(panel['ticker']==tk)&(panel['date']==dt)]
         price = float(latest['close'].iloc[0]) if len(latest)>0 else None
         mi = meta_d.get(tk, {})
@@ -296,6 +306,7 @@ for rank_i, th in enumerate(sel):
             'score_a5': round(score5, 4) if score5 > -999 else None,
             'score_snrb': round(score_snrb, 4) if score_snrb > -999 else None,
             'score_cra': round(score_cra, 4) if score_cra > -999 else None,
+            'score_def': round(score_def, 4) if score_def > -999 else None,
             'cra_audit': cra_detail if cra_detail else None,
             'price': round(price, 2) if price else None,
             'sector': mi.get('sector', ''), 'mc': mi.get('mc', ''),
@@ -329,6 +340,12 @@ for rank_i, th in enumerate(sel):
     for s in s_cra:
         if s['ticker'] not in used_cra and s['score_cra'] is not None:
             cra_tk = s['ticker']; used_cra.add(cra_tk); break
+    # DEF pick: 12-7 month intermediate alpha
+    s_def = sorted(all_stocks, key=lambda x: -(x['score_def'] or -999))
+    def_tk = None
+    for s in s_def:
+        if s['ticker'] not in used_def and s['score_def'] is not None:
+            def_tk = s['ticker']; used_def.add(def_tk); break
     # Theme state per EXIT CONSTITUTION v2
     full_rank = int(ts['score'].rank(ascending=False).loc[th])
     theme_state = 'ENTRY' if full_rank <= 20 else 'WATCH' if full_rank <= 35 else 'EXIT'
@@ -341,7 +358,7 @@ for rank_i, th in enumerate(sel):
         'decel': round(float(ts.loc[th, 'decel']), 4),
         'theme_score': round(float(ts.loc[th, 'score']), 3),
         'n_members': len(tks),
-        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk, 'bfm2_pick': bfm2_tk, 'cra_pick': cra_tk,
+        'a4_pick': a4_tk, 'a5_pick': a5_tk, 'snrb_pick': snrb_tk, 'bfm2_pick': bfm2_tk, 'cra_pick': cra_tk, 'def_pick': def_tk,
         'same': a4_tk == a5_tk, 'a5_snrb_same': a5_tk == snrb_tk, 'snrb_cra_same': snrb_tk == cra_tk,
         'in_bfm2': th in sel_bfm2,
         'stocks': all_stocks
@@ -421,6 +438,7 @@ for c in comparisons:
     c['beast_weight'] = round(wd.get('raw_weight', 1.0) / beast_total, 4) if beast_total > 0 else round(1.0/max(len(comparisons),1), 4)
     c['w5b_pos_count'] = wd.get('pos_count', 0)
     c['w5b_r252ex1m'] = round(wd.get('r252ex1m', 0), 4) if np.isfinite(wd.get('r252ex1m', np.nan)) else None
+    c['def_weight'] = round(1.0 / max(len(comparisons), 1), 4)  # DEF uses equal weight
 # === Dip Sleeve Diagnostics ===
 DIP_PATH = ROOT / 'data' / 'stock-themes-api' / 'dip_alerts.json'
 dip_sleeve = []
