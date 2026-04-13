@@ -262,8 +262,9 @@ def calc_stats(monthly_rets):
     sortino = float(np.mean(r)/np.std(down,ddof=1)*np.sqrt(12)) if len(down)>1 and np.std(down)>0 else 0
     wealth = np.cumprod(1+r); peak = np.maximum.accumulate(wealth)
     dd = wealth/peak-1; mdd = float(dd.min())
+    calmar = cagr/abs(mdd) if abs(mdd)>1e-8 else 0
     return {'cagr':round(cagr,4),'sharpe':round(sharpe,4),'sortino':round(sortino,4),
-            'maxdd':round(mdd,4),'n_months':n}
+            'calmar':round(calmar,4),'maxdd':round(mdd,4),'n_months':n}
 
 stats = {col: calc_stats(monthly[col].values) for col in ['a4','a5','a5w5b','a5beast','a5def','SPY']}
 

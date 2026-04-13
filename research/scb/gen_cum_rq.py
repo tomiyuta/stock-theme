@@ -158,6 +158,8 @@ vol_rq = float(np.std(arr,ddof=1)*np.sqrt(252))
 sharpe_rq = cagr_rq/vol_rq if vol_rq>1e-8 else 0
 eq=np.cumprod(1+arr); peak=np.maximum.accumulate(eq)
 maxdd_rq = float(((eq-peak)/peak).min())
+down_rq = arr[arr<0]; sortino_rq = cagr_rq/(float(np.std(down_rq,ddof=1)*np.sqrt(252)) if len(down_rq)>1 else 1)
+calmar_rq = cagr_rq/abs(maxdd_rq) if abs(maxdd_rq)>1e-8 else 0
 
 spy_arr = spy_ret.reindex(df.index).fillna(0).values; spy_arr=spy_arr[np.isfinite(spy_arr)]
 n_s=len(spy_arr); yrs_s=n_s/252
@@ -166,6 +168,8 @@ vol_spy=float(np.std(spy_arr,ddof=1)*np.sqrt(252))
 sharpe_spy=cagr_spy/vol_spy if vol_spy>1e-8 else 0
 eq_s=np.cumprod(1+spy_arr); pk_s=np.maximum.accumulate(eq_s)
 maxdd_spy=float(((eq_s-pk_s)/pk_s).min())
+down_spy=spy_arr[spy_arr<0]; sortino_spy=cagr_spy/(float(np.std(down_spy,ddof=1)*np.sqrt(252)) if len(down_spy)>1 else 1)
+calmar_spy=cagr_spy/abs(maxdd_spy) if abs(maxdd_spy)>1e-8 else 0
 
 output = {
     'dates': dates_str,
@@ -175,8 +179,8 @@ output = {
     'ret_SPY': [round(float(v),4) for v in spy_monthly.values],
     'annual': {'a5': annual_rq, 'SPY': annual_spy},
     'stats': {
-        'a5': {'cagr':round(cagr_rq,4),'sharpe':round(sharpe_rq,4),'maxdd':round(maxdd_rq,4),'n_months':len(dates_str)},
-        'SPY': {'cagr':round(cagr_spy,4),'sharpe':round(sharpe_spy,4),'maxdd':round(maxdd_spy,4),'n_months':len(dates_str)},
+        'a5': {'cagr':round(cagr_rq,4),'sharpe':round(sharpe_rq,4),'sortino':round(sortino_rq,4),'calmar':round(calmar_rq,4),'maxdd':round(maxdd_rq,4),'n_months':len(dates_str)},
+        'SPY': {'cagr':round(cagr_spy,4),'sharpe':round(sharpe_spy,4),'sortino':round(sortino_spy,4),'calmar':round(calmar_spy,4),'maxdd':round(maxdd_spy,4),'n_months':len(dates_str)},
     },
     'meta': {'strategy':'PRISM-RQ (BFM-v2 + A5-SNRb)','source':'Norgate BT','pit_warning':True},
     'forward_overlay': {'dates':[],'a5':[],'SPY':[]}

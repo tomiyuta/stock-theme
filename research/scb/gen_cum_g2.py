@@ -146,15 +146,21 @@ arr=np.array(daily_ret_g2); arr=arr[np.isfinite(arr)]; n=len(arr); yrs=n/252
 cagr=(1+float(np.expm1(np.log1p(arr).sum())))**(1/yrs)-1
 vol=float(np.std(arr,ddof=1)*np.sqrt(252)); sharpe=cagr/vol if vol>1e-8 else 0
 eq=np.cumprod(1+arr); pk=np.maximum.accumulate(eq); maxdd=float(((eq-pk)/pk).min())
+down=arr[arr<0]; sortino=cagr/(float(np.std(down,ddof=1)*np.sqrt(252)) if len(down)>1 else 1)
+calmar=cagr/abs(maxdd) if abs(maxdd)>1e-8 else 0
 sa=spy_ret.reindex(df.index).fillna(0).values; sa=sa[np.isfinite(sa)]
 ns=len(sa); ys=ns/252; cagr_s=(1+float(np.expm1(np.log1p(sa).sum())))**(1/ys)-1
 vol_s=float(np.std(sa,ddof=1)*np.sqrt(252)); sh_s=cagr_s/vol_s if vol_s>1e-8 else 0
 eq_s=np.cumprod(1+sa); pk_s=np.maximum.accumulate(eq_s); maxdd_s=float(((eq_s-pk_s)/pk_s).min())
+down_s=sa[sa<0]; sortino_s=cagr_s/(float(np.std(down_s,ddof=1)*np.sqrt(252)) if len(down_s)>1 else 1)
+calmar_s=cagr_s/abs(maxdd_s) if abs(maxdd_s)>1e-8 else 0
 # BEAST stats
 ab=np.array(daily_ret_beast); ab=ab[np.isfinite(ab)]; nb=len(ab); yb=nb/252
 cagr_b=(1+float(np.expm1(np.log1p(ab).sum())))**(1/yb)-1
 vol_b=float(np.std(ab,ddof=1)*np.sqrt(252)); sh_b=cagr_b/vol_b if vol_b>1e-8 else 0
 eq_b=np.cumprod(1+ab); pk_b=np.maximum.accumulate(eq_b); maxdd_b=float(((eq_b-pk_b)/pk_b).min())
+down_b=ab[ab<0]; sortino_b=cagr_b/(float(np.std(down_b,ddof=1)*np.sqrt(252)) if len(down_b)>1 else 1)
+calmar_b=cagr_b/abs(maxdd_b) if abs(maxdd_b)>1e-8 else 0
 
 output={
     'dates':dates_str,
@@ -166,9 +172,9 @@ output={
     'ret_SPY':[round(float(v),4) for v in ms.values],
     'annual':{'a5':ann_g2,'beast':ann_beast,'SPY':ann_spy},
     'stats':{
-        'a5':{'cagr':round(cagr,4),'sharpe':round(sharpe,4),'maxdd':round(maxdd,4),'n_months':len(dates_str)},
-        'beast':{'cagr':round(cagr_b,4),'sharpe':round(sh_b,4),'maxdd':round(maxdd_b,4),'n_months':len(dates_str)},
-        'SPY':{'cagr':round(cagr_s,4),'sharpe':round(sh_s,4),'maxdd':round(maxdd_s,4),'n_months':len(dates_str)},
+        'a5':{'cagr':round(cagr,4),'sharpe':round(sharpe,4),'sortino':round(sortino,4),'calmar':round(calmar,4),'maxdd':round(maxdd,4),'n_months':len(dates_str)},
+        'beast':{'cagr':round(cagr_b,4),'sharpe':round(sh_b,4),'sortino':round(sortino_b,4),'calmar':round(calmar_b,4),'maxdd':round(maxdd_b,4),'n_months':len(dates_str)},
+        'SPY':{'cagr':round(cagr_s,4),'sharpe':round(sh_s,4),'sortino':round(sortino_s,4),'calmar':round(calmar_s,4),'maxdd':round(maxdd_s,4),'n_months':len(dates_str)},
     },
     'meta':{'strategy':'G2-MAX (6-theme W5b consistency-weighted raw α)','source':'Norgate BT','pit_warning':True},
     'forward_overlay':{'dates':[],'a5':[],'SPY':[]}
