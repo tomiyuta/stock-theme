@@ -13,10 +13,12 @@ panel['theme_ret'] = panel['sum_ret'] / panel['n_day']
 panel['theme_ex_self'] = np.where(panel['n_day']>1, (panel['sum_ret']-panel['ret'])/(panel['n_day']-1), np.nan)
 dates_all = sorted(panel['date'].unique())
 tk_wide = panel.pivot_table(index='date', columns='ticker', values='ret', aggfunc='first')
-import yfinance as yf
-spy = yf.download('SPY', start='2020-01-01', end='2027-01-01', progress=False)
-spy_ret = spy['Close'].pct_change().dropna()
-spy_ret.index = pd.to_datetime(spy_ret.index).tz_localize(None)
+# Load SPY from Norgate ETF (full history from 1993)
+_etf = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_etf_prices.parquet', columns=['date','ticker','close'])
+_spy = _etf[_etf.ticker == 'SPY'][['date','close']].sort_values('date').set_index('date')
+spy_ret = _spy['close'].pct_change().dropna()
+spy_ret.index = pd.to_datetime(spy_ret.index)
+del _etf, _spy
 
 def cumret(arr):
     a=np.asarray(arr,dtype=float); a=a[np.isfinite(a)]

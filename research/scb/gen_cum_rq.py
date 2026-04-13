@@ -17,11 +17,12 @@ theme_sector = psec.groupby('theme')['sector'].agg(lambda x: x.mode().iloc[0] if
 dates_all = sorted(panel['date'].unique())
 tk_wide = panel.pivot_table(index='date', columns='ticker', values='ret', aggfunc='first')
 
-# Load SPY for benchmark
-import yfinance as yf
-spy = yf.download('SPY', start='2020-01-01', end='2026-12-31', progress=False)
-spy_ret = spy['Close'].pct_change().dropna()
-spy_ret.index = pd.to_datetime(spy_ret.index).tz_localize(None)
+# Load SPY from Norgate ETF (full history from 1993)
+_etf = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_etf_prices.parquet', columns=['date','ticker','close'])
+_spy = _etf[_etf.ticker == 'SPY'][['date','close']].sort_values('date').set_index('date')
+spy_ret = _spy['close'].pct_change().dropna()
+spy_ret.index = pd.to_datetime(spy_ret.index)
+del _etf, _spy
 
 def ols_full(y, x):
     mask = np.isfinite(y)&np.isfinite(x); y,x = y[mask],x[mask]; n=len(y)
