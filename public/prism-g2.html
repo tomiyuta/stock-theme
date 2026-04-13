@@ -138,8 +138,8 @@ Promise.all([
 
   // === 6. Cumulative Returns Chart ===
   h+=`<div class="section-title">📈 累積リターン推移（BT 参考値）</div>`;
-  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX vs SPY — 5年Norgate BT ⚠PIT汚染参考値</div>`;
-  h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartG2Toggle"><button class="active" onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',false)">線形</button><button onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',true)">対数</button></div></div><canvas id="cumChartG2"></canvas></div>`;
+  h+=`<div class="card"><div class="card-title" style="color:var(--g2)">G2-MAX vs SPY — 25年Norgate BT ⚠PIT汚染参考値</div>`;
+  h+=`<div style="position:relative;height:280px;margin-bottom:12px"><div style="display:flex;align-items:center;margin-bottom:4px"><div class="log-toggle" id="cumChartG2Toggle"><button onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',false)">線形</button><button class="active" onclick="toggleLogScale('_cumChartG2','cumChartG2Toggle',true)">対数</button></div></div><canvas id="cumChartG2"></canvas></div>`;
   h+=`<div id="cumStatsG2" style="margin-top:12px"></div>`;
   h+=`</div>`;
 
@@ -193,9 +193,9 @@ Promise.all([
   // === 11. Strategy Comparison ===
   h+=`<div class="section-title" style="color:var(--text-sub)">🏷️ 戦略系譜</div>`;
   h+=`<div style="margin:4px 12px;padding:8px;border-radius:6px;background:var(--card-bg);font-size:8px;line-height:1.8;color:var(--text-sub)">`;
-  h+=`<b style="color:var(--blue)">PRISM-R</b> CAGR=65.6% Sharpe=1.34 MaxDD=-35.6% — baseline (A5-lite)<br>`;
-  h+=`<b style="color:var(--purple)">PRISM-RQ</b> CAGR=43.8% Sharpe=1.60 MaxDD=-23.9% — risk-adjusted (BFM-v2+SNRb)<br>`;
-  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=230.7% Sharpe=2.94 MaxDD=-45.0% — CAGR-max (W5b consistency-weighted raw α)`;
+  h+=`<b style="color:var(--blue)">PRISM-R</b> CAGR=27.2% Sharpe=0.87 MaxDD=-54.6% — baseline (A5-lite W5b)<br>`;
+  h+=`<b style="color:var(--purple)">PRISM-RQ</b> CAGR=26.3% Sharpe=0.92 MaxDD=-54.1% — risk-adjusted (BFM-v2+SNRb)<br>`;
+  h+=`<b style="color:var(--g2)">G2-MAX</b> CAGR=149.5% Sharpe=1.63 MaxDD=-58.9% — CAGR-max (W5b consistency-weighted raw α)`;
   h+=`</div>`;
 
   document.getElementById('g2Main').innerHTML=h;
@@ -293,8 +293,8 @@ fetch('/api/prism-g2/cumulative_returns.json?t='+Date.now()).then(r=>r.json()).t
     {label:'SPY BT',data:btSPY,borderColor:'rgba(156,163,175,0.4)',borderWidth:1,pointRadius:0,fill:false,borderDash:[4,3]},
     {label:'SPY 実績',data:fSPY,borderColor:'#9ca3af',borderWidth:2,pointRadius:fwd.dates.length>0?3:0,fill:false}
   ]},options:{responsive:true,maintainAspectRatio:false,layout:{padding:{bottom:8}},interaction:{mode:'index',intersect:false},spanGaps:false,
-    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>c.dataset.label+': '+c.parsed.y.toFixed(2)+'x'}}},
-    scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},y:{ticks:{font:{size:9},callback:v=>v.toFixed(1)+'x'},grid:{color:'rgba(0,0,0,0.04)'}}}}});
+    plugins:{legend:{position:'top',labels:{font:{size:10},boxWidth:12}},tooltip:{callbacks:{label:c=>{const v=c.parsed.y;if(v>=1e9)return c.dataset.label+': '+(v/1e9).toFixed(1)+'Bx';if(v>=1e6)return c.dataset.label+': '+(v/1e6).toFixed(1)+'Mx';if(v>=1e3)return c.dataset.label+': '+(v/1e3).toFixed(1)+'Kx';return c.dataset.label+': '+v.toFixed(2)+'x'}}}},
+    scales:{x:{type:'category',ticks:{maxTicksLimit:8,maxRotation:45,font:{size:8}},grid:{display:false}},y:{type:'logarithmic',ticks:{font:{size:9},callback:v=>{if(v>=1e9)return(v/1e9).toFixed(0)+'Bx';if(v>=1e6)return(v/1e6).toFixed(0)+'Mx';if(v>=1e3)return(v/1e3).toFixed(0)+'Kx';return v.toFixed(1)+'x'}},grid:{color:'rgba(0,0,0,0.04)'}}}}});
   const st=cr.stats;
   const mkRow=(name,color,cagr,maxdd,sharpe,sortino,calmar)=>`<div style="display:flex;align-items:center;gap:6px;padding:8px 10px;border-radius:6px;background:${color};margin-bottom:4px"><div style="font-size:10px;font-weight:700;min-width:50px;color:var(--text-main)">${name}</div><div style="display:flex;gap:6px;flex:1"><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">CAGR</div><div style="font-size:11px;font-weight:700">${cagr}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">MaxDD</div><div style="font-size:11px;font-weight:700">${maxdd}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sharpe</div><div style="font-size:11px;font-weight:700">${sharpe}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Sortino</div><div style="font-size:11px;font-weight:700">${sortino}</div></div><div style="flex:1;text-align:center"><div style="font-size:7px;color:var(--text-sub)">Calmar</div><div style="font-size:11px;font-weight:700">${calmar}</div></div></div></div>`;
   document.getElementById('cumStatsG2').innerHTML=
