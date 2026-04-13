@@ -8,8 +8,15 @@ panel = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norg
 meta = pd.read_parquet('/Users/yutatomi/Downloads/stock-theme/research/scb/norgate_us_metadata.parquet')
 print(f'Panel: {len(panel):,} rows | {panel.theme.nunique()} themes | {panel.ticker.nunique()} tickers')
 
+# Data quality filters: exclude OTC periods + clamp extreme returns
+if 'on_major_exchange' in panel.columns:
+    n_before = len(panel)
+    panel = panel[panel.on_major_exchange == 1].copy()
+    print(f'  OTC filter: {n_before:,} → {len(panel):,} rows ({len(panel)/n_before*100:.1f}%)')
+
 panel = panel.sort_values(['theme','ticker','date']).reset_index(drop=True)
 panel['ret'] = panel.groupby(['theme','ticker'])['close'].pct_change()
+panel['ret'] = panel['ret'].clip(-0.50, 2.00)  # Clamp: -50% to +200% daily
 agg = panel.dropna(subset=['ret']).groupby(['date','theme'])['ret'].agg(sum_ret='sum', n_day='count').reset_index()
 panel = panel.merge(agg, on=['date','theme'], how='left')
 panel['theme_ret'] = panel['sum_ret'] / panel['n_day']

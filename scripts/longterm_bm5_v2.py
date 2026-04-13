@@ -32,16 +32,19 @@ print(f"  SP500 ever-members: {len(sp500_ever)}")
 
 # Only load prices for SP500 ever-members (saves memory)
 stk_prices = prices[prices.ticker.isin(sp500_ever)].copy()
+stk_prices['ticker'] = stk_prices['ticker'].astype(str)
 stk_wide = stk_prices.pivot_table(index="date", columns="ticker", values="close", aggfunc="first")
 stk_wide = stk_wide.sort_index()
 print(f"  Stock price matrix: {stk_wide.shape}")
 
 # SP500 membership: pivot to wide
-sp500_mem = membership[membership.ticker.isin(sp500_ever)][["date","ticker","in_sp500"]]
+sp500_mem = membership[membership.ticker.isin(sp500_ever)][["date","ticker","in_sp500"]].copy()
+sp500_mem['ticker'] = sp500_mem['ticker'].astype(str)
 sp500_wide = sp500_mem.pivot_table(index="date", columns="ticker", values="in_sp500", aggfunc="first").fillna(0)
 sp500_wide = sp500_wide.sort_index().reindex(stk_wide.index, method='ffill').fillna(0)
 
 # ETF prices: pivot
+etf_prices['ticker'] = etf_prices['ticker'].astype(str)
 etf_wide = etf_prices.pivot_table(index="date", columns="ticker", values="close", aggfunc="first").sort_index()
 
 spy_px = etf_wide["SPY"].dropna()
@@ -67,11 +70,13 @@ print(f"Monthly rebalance dates: {len(me_dates)} months, {me_dates[0].date()} ~ 
 def gate(d):
     if d not in spy_px.index or d not in shy_px.index:
         return 'CLOSED', 0.30
-    loc = spy_px.index.get_loc(d)
-    if loc < LB: return 'CLOSED', 0.30
-    lb_d = spy_px.index[loc - LB]
-    spy_r = spy_px.loc[d] / spy_px.loc[lb_d] - 1
-    shy_r = shy_px.loc[d] / shy_px.loc[lb_d] - 1
+    loc_spy = spy_px.index.get_loc(d)
+    loc_shy = shy_px.index.get_loc(d)
+    if loc_spy < LB or loc_shy < LB: return 'CLOSED', 0.30
+    lb_spy = spy_px.index[loc_spy - LB]
+    lb_shy = shy_px.index[loc_shy - LB]
+    spy_r = spy_px.loc[d] / spy_px.loc[lb_spy] - 1
+    shy_r = shy_px.loc[d] / shy_px.loc[lb_shy] - 1
     exc = spy_r - shy_r
     if exc > 0: return 'OPEN', 0.80
     if exc > -0.02: return 'MID', 0.50
