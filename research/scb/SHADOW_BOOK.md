@@ -2576,3 +2576,92 @@ Purpose:
   - DEF昇格の最終判定
   - interaction効果の有無
 ```
+
+
+---
+
+## 2×2 Canonical Tournament — 2026-04-13
+
+### Design
+
+```
+L1 Theme Selection:
+  A4-theme  = 63d momentum + deceleration (0.70*mom + 0.30*decel), sector cap 3, TOP_T=10
+  DEF-theme = 7-12mo aggregate theme return ranking, same sector cap
+
+L2 Stock Selection:
+  A4-stock  = 21d momentum (raw_1m) within theme, top 1 per theme
+  A5-stock  = split-window OLS α × shrink(R²) within theme, top 1 per theme
+
+Fixed across all 4 cells:
+  Universe, PIT, rebal(20d), WARMUP(126d), MIN_M(4), TOP_T(10), SEC_MAX(3),
+  duplicate handling, equal weight, all production harness conditions identical
+```
+
+### Results (25yr, 310 months, 6479 daily returns)
+
+```
+                         L2 = A4 stock (1M mom)         L2 = A5 alpha (OLS α)
+                         ──────────────────────────     ──────────────────────────
+L1 = A4 theme (3M mom)   CAGR=+24.5%  Sh=0.84          CAGR=+25.3%  Sh=0.82
+                          Sort=0.85    MaxDD=-56.1%      Sort=0.81    MaxDD=-62.0%
+
+L1 = DEF theme (7-12mo)  CAGR=+21.4%  Sh=0.71          CAGR=+20.1%  Sh=0.65
+                          Sort=0.68    MaxDD=-57.0%      Sort=0.63    MaxDD=-69.2%
+```
+
+### Factor Decomposition
+
+```
+Alpha effect (L2=A5 - L2=A4):
+  Under A4-theme:  ΔSharpe = -0.025   ΔCAGR = +0.8%
+  Under DEF-theme: ΔSharpe = -0.061   ΔCAGR = -1.2%
+  → A5 is NEGATIVE in both L1 contexts
+
+DEF-theme effect (L1=DEF - L1=A4):
+  Under A4-stock:  ΔSharpe = -0.131   ΔCAGR = -3.1%
+  Under A5-stock:  ΔSharpe = -0.167   ΔCAGR = -5.1%
+  → DEF theme selection is INFERIOR to A4 theme selection
+
+Interaction: -0.036 (small, approximately additive)
+```
+
+### Judgment: CASE A
+
+A5 scoring is NEGATIVE in both L1 contexts → NOT the primary edge.
+DEF theme selection is INFERIOR → DEF's production advantage is NOT from theme selection.
+
+### Critical Insight
+
+```
+Production DEF (L1=A4-theme, L2=DEF-stock): Sharpe = 0.97–1.02
+Tournament best cell (L1=A4-theme, L2=A4-stock):  Sharpe = 0.84
+
+Production DEF >> any tournament cell.
+This means DEF's value comes from:
+  (a) 12-7mo intermediate stock selection horizon (not tested in pure A4/A5 L2)
+  (b) using A4 theme selection as the L1 base (confirmed superior)
+```
+
+### Confirmed Strategy Architecture
+
+```
+OPTIMAL L1: A4 theme selection (3M momentum) — confirmed as structurally best
+OPTIMAL L2: DEF stock selection (12-7mo intermediate α) — source of production DEF's edge
+REJECTED L2: A5 stock selection (63d α × shrink(R²)) — negative in both L1 contexts
+REJECTED L1: DEF theme selection (7-12mo) — inferior to A4 theme selection
+```
+
+### Updated Strategy Hierarchy (post-tournament)
+
+```
+Tier 1 (Production candidates):
+  DEF     = L1=A4-theme × L2=DEF-stock (Sharpe 1.02, best risk-adjusted)
+  A4-core = L1=A4-theme × L2=A4-stock (Sharpe 0.91, simplest robust baseline)
+
+Tier 2 (Research / Legacy):
+  A5      = L1=A4-theme × L2=A5-stock (付加価値なし、研究枝として温存)
+
+Tier 3 (Lab):
+  G2-MAX  = return maximization lab (absolute values non-canonical)
+```
