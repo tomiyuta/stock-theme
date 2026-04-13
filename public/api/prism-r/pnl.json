@@ -1,19 +1,19 @@
 {
   "as_of_date": "2026-04-10",
-  "generated_at": "2026-04-12T11:34:35.829955",
+  "generated_at": "2026-04-13T09:50:29.020564",
   "strategy": "PRISM-R",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0236,
-    "beast_pnl_pct": 0.0236,
+    "total_pnl_pct": 0.0249,
+    "beast_pnl_pct": 0.0249,
     "winners": 6,
     "losers": 1,
     "best": "AAOI",
     "best_pnl": 0.1298,
     "worst": "PTEN",
     "worst_pnl": -0.0089,
-    "closed_count": 3
+    "closed_count": 5
   },
   "positions": [
     {
@@ -24,7 +24,7 @@
       "entry_price": 133.3,
       "current_price": 150.6,
       "weight": 0.1521,
-      "alpha63": 0.882,
+      "alpha63": 0.832,
       "pnl_pct": 0.1298,
       "pnl_weighted": 0.01974
     },
@@ -36,7 +36,7 @@
       "entry_price": 59.46,
       "current_price": 62.77,
       "weight": 0.0842,
-      "alpha63": 0.291,
+      "alpha63": 0.271,
       "pnl_pct": 0.0557,
       "pnl_weighted": 0.004687
     },
@@ -48,7 +48,7 @@
       "entry_price": 72.78,
       "current_price": 75.81,
       "weight": 0.1248,
-      "alpha63": 0.171,
+      "alpha63": 0.228,
       "pnl_pct": 0.0416,
       "pnl_weighted": 0.005196
     },
@@ -60,7 +60,7 @@
       "entry_price": 20.69,
       "current_price": 21.51,
       "weight": 0.0753,
-      "alpha63": 0.272,
+      "alpha63": 0.287,
       "pnl_pct": 0.0396,
       "pnl_weighted": 0.002984
     },
@@ -72,7 +72,7 @@
       "entry_price": 968.02,
       "current_price": 991.32,
       "weight": 0.1012,
-      "alpha63": 0.273,
+      "alpha63": 0.279,
       "pnl_pct": 0.0241,
       "pnl_weighted": 0.002436
     },
@@ -84,19 +84,19 @@
       "entry_price": 357.37,
       "current_price": 361.22,
       "weight": 0.093,
-      "alpha63": 0.224,
+      "alpha63": 0.223,
       "pnl_pct": 0.0108,
       "pnl_weighted": 0.001002
     },
     {
-      "ticker": "MTSI",
+      "ticker": "MRVL",
       "theme": "光接続：トランシーバ",
       "theme_state": "ENTRY",
       "entry_date": "2026-04-10",
-      "entry_price": 258.11,
-      "current_price": 258.11,
+      "entry_price": 128.49,
+      "current_price": 128.49,
       "weight": 0.1339,
-      "alpha63": 0.09,
+      "alpha63": 0.176,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
@@ -108,19 +108,19 @@
       "entry_price": 585.36,
       "current_price": 585.36,
       "weight": 0.0869,
-      "alpha63": 0.092,
+      "alpha63": 0.066,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
     {
-      "ticker": "VZ",
+      "ticker": "COP",
       "theme": "高配当",
       "theme_state": "ENTRY",
       "entry_date": "2026-04-10",
-      "entry_price": 46.04,
-      "current_price": 46.04,
+      "entry_price": 122.55,
+      "current_price": 122.55,
       "weight": 0.0617,
-      "alpha63": 0.081,
+      "alpha63": 0.184,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
@@ -132,7 +132,7 @@
       "entry_price": 10.14,
       "current_price": 10.05,
       "weight": 0.0871,
-      "alpha63": 0.186,
+      "alpha63": 0.219,
       "pnl_pct": -0.0089,
       "pnl_weighted": -0.000773
     }
@@ -158,6 +158,20 @@
       "entry_date": "2026-04-09",
       "exit_date": "2026-04-10",
       "entry_price": 119.38
+    },
+    {
+      "ticker": "MTSI",
+      "theme": "光接続：トランシーバ",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-10",
+      "entry_price": 258.11
+    },
+    {
+      "ticker": "VZ",
+      "theme": "高配当",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-10",
+      "entry_price": 46.04
     }
   ]
 }

@@ -70,7 +70,9 @@
       "entry_date": "2026-04-10",
       "entry_price": 258.11,
       "theme": "光接続：トランシーバ",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-10",
+      "exit_price": 0
     },
     "PWR": {
       "entry_date": "2026-04-10",
@@ -81,6 +83,20 @@
     "VZ": {
       "entry_date": "2026-04-10",
       "entry_price": 46.04,
+      "theme": "高配当",
+      "status": "closed",
+      "exit_date": "2026-04-10",
+      "exit_price": 0
+    },
+    "MRVL": {
+      "entry_date": "2026-04-10",
+      "entry_price": 128.49,
+      "theme": "光接続：トランシーバ",
+      "status": "active"
+    },
+    "COP": {
+      "entry_date": "2026-04-10",
+      "entry_price": 122.55,
       "theme": "高配当",
       "status": "active"
     }

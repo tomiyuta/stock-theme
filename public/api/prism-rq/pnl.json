@@ -5,7 +5,7 @@
   "summary": {
     "total_positions": 10,
     "total_pnl_pct": 0.0,
-    "closed_count": 0
+    "closed_count": 2
   },
   "positions": [
     {
@@ -27,10 +27,10 @@
       "pnl_weighted": 0.0
     },
     {
-      "ticker": "AEIS",
+      "ticker": "UCTT",
       "theme": "半導体製造装置：部品",
-      "entry_price": 379.64,
-      "current_price": 379.64,
+      "entry_price": 75.81,
+      "current_price": 75.81,
       "weight": 0.1,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
@@ -90,14 +90,29 @@
       "pnl_weighted": 0.0
     },
     {
-      "ticker": "LMT",
+      "ticker": "COP",
       "theme": "高配当",
-      "entry_price": 613.72,
-      "current_price": 613.72,
+      "entry_price": 122.55,
+      "current_price": 122.55,
       "weight": 0.1,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     }
   ],
-  "closed_positions": []
+  "closed_positions": [
+    {
+      "ticker": "AEIS",
+      "theme": "半導体製造装置：部品",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-10",
+      "entry_price": 379.64
+    },
+    {
+      "ticker": "LMT",
+      "theme": "高配当",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-10",
+      "entry_price": 613.72
+    }
+  ]
 }

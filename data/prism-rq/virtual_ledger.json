@@ -16,7 +16,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 379.64,
       "theme": "半導体製造装置：部品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-10"
     },
     "MTZ": {
       "entry_date": "2026-04-10",
@@ -57,6 +58,19 @@
     "LMT": {
       "entry_date": "2026-04-10",
       "entry_price": 613.72,
+      "theme": "高配当",
+      "status": "closed",
+      "exit_date": "2026-04-10"
+    },
+    "UCTT": {
+      "entry_date": "2026-04-10",
+      "entry_price": 75.81,
+      "theme": "半導体製造装置：部品",
+      "status": "active"
+    },
+    "COP": {
+      "entry_date": "2026-04-10",
+      "entry_price": 122.55,
       "theme": "高配当",
       "status": "active"
     }

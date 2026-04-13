@@ -1,14 +1,14 @@
 {
   "tickers": [
     "AAOI",
-    "AEIS",
+    "COP",
     "GEV",
-    "LMT",
     "MTZ",
     "PARR",
     "PBR",
     "PTEN",
     "PWR",
+    "UCTT",
     "VIAV"
   ],
   "picks": [
@@ -25,9 +25,9 @@
       "date": "2026-04-10"
     },
     {
-      "ticker": "AEIS",
+      "ticker": "UCTT",
       "theme": "半導体製造装置：部品",
-      "price": 379.64,
+      "price": 75.81,
       "date": "2026-04-10"
     },
     {
@@ -67,9 +67,9 @@
       "date": "2026-04-10"
     },
     {
-      "ticker": "LMT",
+      "ticker": "COP",
       "theme": "高配当",
-      "price": 613.72,
+      "price": 122.55,
       "date": "2026-04-10"
     }
   ],

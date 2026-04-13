@@ -1,15 +1,15 @@
 {
   "tickers": [
     "AAOI",
+    "COP",
     "GEV",
-    "MTSI",
+    "MRVL",
     "MTZ",
     "PARR",
     "PBR",
     "PTEN",
     "PWR",
-    "UCTT",
-    "VZ"
+    "UCTT"
   ],
   "picks": [
     {
@@ -37,9 +37,9 @@
       "date": "2026-04-10"
     },
     {
-      "ticker": "MTSI",
+      "ticker": "MRVL",
       "theme": "光接続：トランシーバ",
-      "price": 258.11,
+      "price": 128.49,
       "date": "2026-04-10"
     },
     {
@@ -67,9 +67,9 @@
       "date": "2026-04-10"
     },
     {
-      "ticker": "VZ",
+      "ticker": "COP",
       "theme": "高配当",
-      "price": 46.04,
+      "price": 122.55,
       "date": "2026-04-10"
     }
   ],

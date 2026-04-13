@@ -183,6 +183,15 @@ output = {
 }
 out_path = '/Users/yutatomi/Downloads/stock-theme/public/api/prism-rq/cumulative_returns.json'
 import os; os.makedirs(os.path.dirname(out_path), exist_ok=True)
+# Preserve existing forward_overlay
+if os.path.exists(out_path):
+    try:
+        existing=json.load(open(out_path))
+        efwd=existing.get('forward_overlay',{})
+        if efwd.get('dates'):
+            output['forward_overlay']=efwd
+            print(f'Preserved forward_overlay: {len(efwd["dates"])} entries')
+    except: pass
 with open(out_path, 'w') as f: json.dump(output, f, indent=2)
 print(f'Done in {time.time()-t0:.1f}s')
 print(f'PRISM-RQ: CAGR={cagr_rq:.1%} Sharpe={sharpe_rq:.3f} MaxDD={maxdd_rq:.1%}')

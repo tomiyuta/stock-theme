@@ -293,6 +293,19 @@ out_prismr = Path('/Users/yutatomi/Downloads/stock-theme/public/api/prism-r')
 out_prism.mkdir(parents=True, exist_ok=True)
 out_prismr.mkdir(parents=True, exist_ok=True)
 
+# Preserve existing forward_overlay from both files
+for out_path in [out_prism, out_prismr]:
+    cum_file = out_path / 'cumulative_returns.json'
+    if cum_file.exists():
+        try:
+            existing = json.load(open(cum_file))
+            existing_fwd = existing.get('forward_overlay', {})
+            if existing_fwd.get('dates'):
+                output['forward_overlay'] = existing_fwd
+                print(f'Preserved forward_overlay: {len(existing_fwd["dates"])} entries from {out_path.name}')
+                break
+        except: pass
+
 with open(out_prism / 'cumulative_returns.json', 'w') as f:
     json.dump(output, f, ensure_ascii=False)
 with open(out_prismr / 'cumulative_returns.json', 'w') as f:
