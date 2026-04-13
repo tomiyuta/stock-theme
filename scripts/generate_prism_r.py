@@ -613,6 +613,14 @@ meta_out = {
 with open(OUT / 'meta.json', 'w') as f:
     json.dump(meta_out, f, ensure_ascii=False, indent=2)
 
+# Also write PRISM-RQ meta.json (separate from PRISM-R)
+OUT_RQ = API / 'prism-rq'
+OUT_RQ.mkdir(parents=True, exist_ok=True)
+meta_rq = dict(meta_out)
+meta_rq['version'] = 'PRISM-RQ_v1'
+with open(OUT_RQ / 'meta.json', 'w') as f:
+    json.dump(meta_rq, f, ensure_ascii=False, indent=2)
+
 comp_size = (OUT / 'shadow_comparison.json').stat().st_size / 1024
 print(f'PRISM-RQ: {len(comparisons)} themes, overlap={overlap}/{len(comparisons)}, '
       f'snrb_overlap={snrb_overlap_a5}/{len(comparisons)}, '

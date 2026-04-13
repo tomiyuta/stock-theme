@@ -61,6 +61,11 @@ jobs:
           mkdir -p data/prism-g2
           python scripts/generate_pnl.py
 
+      - name: Capture PIT snapshot (forward accumulation)
+        run: |
+          mkdir -p data/pit-snapshots
+          python scripts/capture_pit_snapshot.py
+
       - name: Commit and push
         run: |
           git config user.name "github-actions[bot]"
