@@ -2403,3 +2403,136 @@ BT再生成:
   research/scb/bear_phase3.py → Phase 3 (e3d89fe)
   research/scb/bear_phase4.py → Phase 4 (c3794b6)
 ```
+
+
+---
+
+## PIT Review Checkpoint — 2026-04-13
+
+**Status: CLOSED_SILVER (provisional, not Gold/final)**
+**Effect on live strategy: none**
+**Effect on interpretation of historical backtests: material**
+
+### Summary
+
+A comprehensive PIT review was conducted on historical theme-membership contamination.
+B1 (IPO filter), D1 (diff measurement), E4-lite (3-tier bounds), and winner-alpha
+stress-lite were executed in sequence. ChatGPT dual-review was conducted at each stage.
+
+### Key Findings
+
+#### 1. B1 (IPO filter) is a no-op
+
+The Norgate price join already excludes pre-IPO members implicitly.
+Panel construction naturally limits each date to tickers with existing price data.
+Therefore, "未存在銘柄の先読み" was never the binding contamination channel.
+
+Evidence: B1 filter removed 0 rows from 4,609,548 (0.0%).
+Temporal coverage confirms natural filtering:
+  2000: 426/846 tickers (50%) — missing tickers simply have no price rows
+  2010: 545/846 (64%)
+  2020: 751/846 (89%)
+  2026: 846/846 (100%)
+
+#### 2. Dominant remaining contamination channels
+
+- **Winner selection bias**: current frozen members are retrospective survivors
+- **Loser omission**: 0 delisted tickers in frozen membership (complete loser erasure)
+- **Ex post theme definition**: themes like "AI半導体コア" may not have existed in 2000
+
+#### 3. Over 25 years, A5 does NOT outperform A4
+
+```
+Production BT (25yr, 310 months):
+              CAGR    Sharpe  MaxDD
+  A4 等W     +24.4%   0.91   -51.4%   ← A4 wins on Sharpe
+  A5 α63    +25.2%   0.88   -57.8%
+  W5b        +27.2%   0.87   -54.6%
+  BEAST      +26.1%   0.84   -61.5%
+  DEF        +26.8%   1.03   -52.5%   ← best Sharpe
+  SPY         +8.1%   0.59   -50.8%
+```
+
+This reversal (vs 5yr BT where A5 > A4) is NOT explained by PIT contamination.
+Both Upper and Middle tiers show A4 > A5. It is period dependence.
+
+#### 4. Theme-layer excess over SPY is robust
+
+All tested strategies exceed SPY in Upper, Middle, and Stress views.
+This structural value of the theme layer is the most reliable historical finding.
+
+#### 5. E4-lite bounds (Upper / Middle / Stress)
+
+```
+                    UPPER (207テーマ)    MIDDLE (45テーマ,IPO<2005)   STRESS (30%α haircut)
+Strategy          CAGR   Sharpe MaxDD   CAGR   Sharpe MaxDD         CAGR   Sharpe MaxDD
+A4 等W           +24.4%  0.91  -51.4%  +17.6%  0.85  -43.0%       +24.3%  0.90  -51.4%
+A5 α63          +25.2%  0.88  -57.8%  +16.3%  0.80  -54.3%       +25.6%  0.89  -56.5%
+W5b              +27.2%  0.87  -54.6%  +17.3%  0.81  -52.8%       +27.5%  0.89  -52.9%
+DEF              +26.8%  1.03  -52.5%  +16.8%  0.85  -54.2%       +26.7%  1.02  -52.5%
+SPY               +8.1%  0.59  -50.8%   +8.1%  0.59  -50.8%        +8.1%  0.59  -50.8%
+```
+
+Middle is a low-contamination / low-novelty subset (NOT a true lower bound).
+CAGR ~35% lower in Middle mixes contamination removal with opportunity loss.
+
+#### 6. Winner-alpha haircut stress (30%) is immaterial
+
+Stress-lite specification: at each rebalance, top 2 α scores per theme
+are reduced by 30%. This targets winner selection bias in α estimation.
+
+Result: ΔSharpe ≈ 0 for all strategies (max -0.01).
+This does NOT prove theme structure is the sole edge source.
+It indicates that winner-alpha overweighting within surviving frozen
+membership is not a major driver under the tested specification.
+
+### Interpretation
+
+This review does NOT eliminate PIT contamination.
+It does NOT prove that theme structure is the sole source of edge.
+
+It does establish:
+- Pre-IPO contamination channel is already neutralized (B1 = no-op)
+- Winner-alpha bias within survivors does not materially change conclusions
+- The most reliable claim is "theme layer > SPY"
+- The least reliable claim is "A5 > A4" and "absolute CAGR values"
+
+### Reliability Classification (post-PIT review)
+
+```
+MORE RELIABLE:
+  ✅ Theme layer > SPY (directional, all 3 views confirm)
+  ✅ A4 ≥ A5 over 25yr sample (directional, all 3 views confirm)
+  ✅ DEF has best risk-adjusted profile (Sharpe leader in Upper)
+
+LESS RELIABLE:
+  ⚠ Absolute CAGR / Sharpe magnitudes (Middle shows ~35% CAGR haircut)
+  ⚠ A5 superiority over A4 (5yr finding, not supported in 25yr)
+  ⚠ Any claim depending on exact historical membership fidelity
+
+NOT TESTED:
+  ❌ Loser omission impact (no delisted injection performed)
+  ❌ Ex post theme definition impact (theme existence not verified)
+  ❌ Full lower-bound reconstruction
+```
+
+### Remaining Open Items
+
+```
+Still unresolved (deferred to future phases):
+  - Loser omission: full adversarial injection with GICS donor pool
+  - Ex post theme definition: theme existence verification pre-2010
+  - C1 (GICS proxy): high-purity themes only, current GICS ≠ fully PIT
+  - B3 full bootstrap: 4 scenarios × 200-500 passes
+  - Historical GICS vendor (S&P Global / Compustat): cost/benefit TBD
+  - TNIC text-based classification: research-grade, not immediate
+```
+
+### Operational Implication
+
+No live strategy change triggered.
+Main governance effect:
+- Historical absolute values remain non-canonical
+- Directional claims usable with caution
+- Forward PIT-safe evidence (capture_snapshot.py) remains primary promotion standard
+- Silver Layer rules unchanged: relative comparisons only, no absolute CAGR for decisions
