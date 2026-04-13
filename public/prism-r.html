@@ -125,8 +125,12 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <body>
 <div class="prism-header">
   <div class="prism-title">PRISM-<span style="color:var(--purple)">R</span></div>
-  <div class="prism-sub">Residual Alpha Shadow Book</div>
-  <div id="prismDate" class="prism-badge" style="background:rgba(124,58,237,0.08);color:var(--purple)">Loading...</div>
+  <div class="prism-sub">DEF = Tier 1 主力候補 | A5 = Tier 2 研究枝</div>
+  <div style="margin-top:4px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap">
+    <div class="prism-badge" style="background:rgba(0,200,83,0.08);color:#00a844">DEF Sharpe 1.03</div>
+    <div class="prism-badge" style="background:rgba(124,58,237,0.08);color:var(--purple)">PIT Silver</div>
+  </div>
+  <div id="prismDate" class="prism-badge" style="background:rgba(124,58,237,0.08);color:var(--purple);margin-top:2px">Loading...</div>
   <div id="headerMeta"></div>
 </div>
 <div id="prismMain"><div style="padding:40px;text-align:center;color:var(--text-sub)">読み込み中...</div></div>
@@ -249,7 +253,7 @@ Promise.all([
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>W5b</th><th style="color:#D85A30">BEAST</th><th style="color:#228B22">DEF</th><th>等W</th><th>SPY</th><th>W5b-SPY</th></tr></thead><tbody id="annualBodyR"></tbody></table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（A4より重い）。production判断はforward PIT-safeデータのみ。</div></div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT Silver: テーマ層>SPYは頑健。A5のA4に対する優位は25年で不成立。絶対CAGR値は参考。DEF(Sharpe1.03)が最良。</div></div>`;
 
   // 4. Promotion Progress
   const fwd=meta.forward_rebalances||0,tgt=meta.target_rebalances||18,pct=Math.min(100,Math.round(fwd/tgt*100));

@@ -33,7 +33,11 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <body>
 <div style="padding:16px 12px 4px;text-align:center">
   <div style="font-size:20px;font-weight:900;letter-spacing:1px">PRISM-<span style="color:var(--purple)">RQ</span></div>
-  <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Residual-SNR + Quality Filter</div>
+  <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Tier 2 研究枝 — 四半期リバランス検証</div>
+  <div style="margin-top:4px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap">
+    <span style="font-size:8px;padding:2px 6px;border-radius:3px;background:rgba(234,179,8,0.1);color:#b8860b;font-weight:700">A5ベース — α付加価値は限定的</span>
+    <span style="font-size:8px;padding:2px 6px;border-radius:3px;background:rgba(0,200,83,0.08);color:#00a844;font-weight:700">PIT Silver</span>
+  </div>
   <div id="headerMeta"></div>
 </div>
 <div id="rqMain"><div style="padding:40px;text-align:center;color:var(--text-sub)">Loading...</div></div>
@@ -215,7 +219,7 @@ Promise.all([
   // === 8c. Annual Performance Table ===
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>PRISM-RQ</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBodyRQ"></tbody></table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり。production判断はforward PIT-safeデータのみ。</div></div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT Silver: A5ベースのため α付加価値は限定的（25年でA4≧A5）。四半期リバランス効果は独立研究テーマ。</div></div>`;
 
   // === 9. Forward Clock ===
   h+=`<div style="margin:8px 12px;font-size:10px;font-weight:700;color:var(--text-main)">Forward Clock</div>`;

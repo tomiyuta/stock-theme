@@ -54,8 +54,9 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <body>
 <div style="padding:16px 12px 4px;text-align:center">
   <div style="font-size:20px;font-weight:900;letter-spacing:1px">G2-<span style="color:var(--g2)">MAX</span></div>
-  <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Concentrated Cluster-Aware Raw Residual Momentum</div>
-  <div style="font-size:8px;color:var(--g2);margin-top:2px">⚠ CAGR最大化専用 — MaxDD -45%覚悟の攻撃型戦略</div>
+  <div style="font-size:10px;color:var(--text-sub);margin-top:2px">Tier 3 実験室 — 制約研究・集中リスク検証専用</div>
+  <div style="font-size:8px;color:#c0392b;margin-top:2px;font-weight:700">⚠ 絶対値は全てartifact（M汚染感応度: 致命的）。成果として引用禁止。</div>
+  <div style="margin-top:3px"><span style="font-size:8px;padding:2px 6px;border-radius:3px;background:rgba(192,57,43,0.08);color:#c0392b;font-weight:700">PIT Silver — 累積127億倍は実現不能</span></div>
   <div id="headerMeta"></div>
 </div>
 <div id="g2Main"><div style="padding:40px;text-align:center;color:var(--text-sub)">Loading...</div></div>
@@ -146,7 +147,7 @@ Promise.all([
   // === 7. Annual Performance ===
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="card"><table class="tbl"><thead><tr><th>年</th><th>G2-MAX</th><th style="color:#D85A30">BEAST</th><th>SPY</th></tr></thead><tbody id="annualBodyG2"></tbody></table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり（集中型のため特に重い）。forward実績でのみ判断。</div></div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT Silver: M汚染感応度=致命的（6テーマ集中）。絶対値は全てartifact。制約研究・集中リスク検証用途のみ。</div></div>`;
 
   // === 8. Ablation BT Comparison ===
   h+=`<div class="section-title">🔬 Ablation BT（戦略間比較）</div>`;
@@ -176,7 +177,7 @@ Promise.all([
     ["Layer 2: Raw Self-Excluded α63",`<div style="font-size:10px;line-height:1.6"><b>OLS回帰（63日、自己除外）:</b><br><code>r_i(d) = α + β × r_theme_ex_self(d) + ε</code><br><br><b>スコア:</b> raw α_cum63（SNRb/shrink不使用）<br><b>各テーマ1銘柄:</b> α63最大を選定</div>`],
     ["Layer 3: W5b一貫性加重",`<div style="font-size:10px;line-height:1.6"><b>3期間モメンタムの一貫性でウェイトを決定:</b><br><code>R252_ex1m = (1+R252)/(1+R21) - 1</code> (12-1 momentum)<br><code>pos_count = Σ𝟙(R63>0, R126>0, R252_ex1m>0)</code><br><code>avg_ret = mean(max(R63,0), max(R126,0), max(R252_ex1m,0))</code><br><code>raw_weight = pos_count × (1 + avg_ret)</code><br><code>weight = normalize + 30%キャップ</code><br><br><b>直感:</b> 3期間全てで上昇しているテーマ（真のトレンド）に多く配分。1期間だけ正のテーマ（ノイズ）は減量。<br><br><b>vs 等ウェイト:</b> CAGR +52pt, Sharpe +0.14, 2022年DD -28%→-14%改善</div>`],
     ["防御装置",`<div style="font-size:10px;line-height:1.6"><b>残すもの:</b><br>• Correlation budget（同一因子の重複ベット回避）<br>• Data integrity / delisting 系 hard exit<br><br><b>外すもの:</b><br>• BFM-v2 veto（CAGR -14pt）<br>• SNRb（CAGR -9.5pt）<br>• shrink(r²)<br>• sector cap<br>• Vol overlay<br>• panic de-gearing（今回のBTでは無効）</div>`],
-    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染に敏感。</b><br>6テーマ集中 + raw α + W5b加重は「今のテーマ構成で過去を計算」の影響を受けやすい構成。<br>CAGR 231%のうちPIT上方バイアスの割合は不明。<br>forward実績で下がる可能性が高い。<br><br>production判断はforward PIT-safe実績のみ。BT値は方向確認のみに使用。</div>`],
+    ["PIT汚染の影響",`<div style="font-size:10px;line-height:1.6;color:var(--g2)"><b>G2-MAXはPIT汚染感応度が致命的。</b><br>6テーマ集中 + raw α + W5b加重 → frozen membershipの勝者バイアスが全戦略中最大。<br>CAGR +149%、累積127億倍は完全なartifact。成果として引用禁止。<br>月次+240%（2021-01）は実運用で再現不能。<br><br>Tier 3 実験室: 制約の有効性検証、集中リスク研究、cap/ranking感度実験にのみ使用。<br>W5bキャップ(30%)の構造的価値（vs BEAST）は相対比較として一定の根拠あり。</div>`],
   ];
   arch.forEach(([title,body])=>{
     h+=`<div style="margin:4px 12px;border-radius:6px;border:1px solid rgba(0,0,0,0.06);overflow:hidden;cursor:pointer" onclick="this.querySelector('.abody').style.display=this.querySelector('.abody').style.display==='block'?'none':'block'">`;

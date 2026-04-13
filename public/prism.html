@@ -150,7 +150,11 @@ body{font-family:'Noto Sans JP',-apple-system,sans-serif;background:var(--bg);co
 <div class="prism-header">
   <div class="prism-title">PRISM</div>
   <div class="prism-sub">Portfolio Regime & Investment Signal Machine</div>
-  <div id="prismDate" class="prism-badge">Loading...</div>
+  <div style="margin-top:4px;display:flex;gap:4px;justify-content:center;flex-wrap:wrap">
+    <div class="prism-badge">Tier 1 コア基準</div>
+    <div class="prism-badge" style="background:rgba(0,200,83,0.08);color:#00a844">PIT Silver</div>
+  </div>
+  <div id="prismDate" class="prism-badge" style="margin-top:2px">Loading...</div>
   <div id="headerMeta"></div>
 </div>
 <div id="prismMain"></div>
@@ -321,7 +325,7 @@ Promise.all([
   h+=`</div>`;
   h+=`<div class="section-title">📊 年次パフォーマンス（BT 参考値）</div>`;
   h+=`<div class="bm-card"><table class="bm-table"><thead><tr><th>年</th><th>A4</th><th>SPY</th><th>差分</th></tr></thead><tbody id="annualBody"></tbody></table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT汚染あり。production判断はforward PIT-safeデータのみ。</div></div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">⚠ PIT Silver: テーマ層>SPYは頑健（全3ビュー確認済）。A4はコア基準戦略。絶対CAGR値は参考。</div></div>`;
 
   // Layer 1
   const secSorted=[...sectors].sort((a,b)=>b.ret_3m-a.ret_3m);
