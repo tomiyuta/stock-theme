@@ -154,12 +154,12 @@ Promise.all([
   h+=`<div class="card"><div class="card-title">CAGR最大化 ablation ladder</div>`;
   h+=`<table class="tbl"><tr><th>Strategy</th><th>CAGR</th><th>Sharpe</th><th>MaxDD</th><th>Terminal</th></tr>`;
   const abl=[
-    ['G0 A5-lite','67.2%','1.565','-42.0%','19.1x'],
-    ['G1 5テーマ集中','145.3%','2.179','-48.7%','172.8x'],
-    ['G2 6テーマ W5b ★','230.7%','2.935','-45.0%','—'],
-    ['🔥 BEAST (W5b nocap)','278.0%','2.704','-46.7%','—'],
-    ['G3a α/σ²','64.6%','1.576','-39.3%','17.5x'],
-    ['G4 Kelly sizing','36.6%','0.838','-51.9%','6.0x'],
+    ['G0 A5-lite <span style="font-size:7px;color:var(--text-sub)">(5yr)</span>','67.2%','1.576','-42.0%','19.1x'],
+    ['G1 5テーマ集中 <span style="font-size:7px;color:var(--text-sub)">(5yr)</span>','145.3%','2.179','-48.7%','172.8x'],
+    ['G2 6テーマ W5b ★','149.5%','1.63','-58.9%','—'],
+    ['🔥 BEAST (W5b nocap)','132.6%','0.87','-71.8%','—'],
+    ['G3a α/σ² <span style="font-size:7px;color:var(--text-sub)">(5yr)</span>','64.6%','1.576','-39.3%','17.5x'],
+    ['G4 Kelly <span style="font-size:7px;color:var(--text-sub)">(5yr)</span>','36.6%','0.838','-51.9%','6.0x'],
   ];
   abl.forEach(([s,c,sh,md,t])=>{
     const best=s.includes('★');const beast=s.includes('BEAST');

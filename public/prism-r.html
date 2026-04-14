@@ -272,17 +272,16 @@ Promise.all([
   h+=`<div class="prog-bar-wrap"><div class="prog-bar-fill" style="width:${pct}%"></div></div>`;
   h+=`<div class="prog-steps"><span>0</span><span>12 pilot</span><span>18 review</span><span>24 strong</span></div>`;
   h+=`<div class="prod-meta" style="margin-top:6px">次回: ${meta.next_rebalance_est||'—'}</div></div>`;
-  // 5. Backtest Reference
-  const b=meta.backtest_5yr||{};
-  h+=`<div class="section-title">📊 5年拡張バックテスト（参考値）</div>`;
-  h+=`<div class="bm-card"><div class="bm-title">73リバランス / 2020-01 ~ 2026-04 / Norgate Platinum</div>`;
+  // 5. Backtest Reference (25yr)
+  const b=meta.backtest_25yr||meta.backtest_5yr||{};
+  h+=`<div class="section-title">📊 25年バックテスト（参考値）</div>`;
+  h+=`<div class="bm-card"><div class="bm-title">310リバランス / 2000-07 ~ 2026-04 / Norgate Platinum PIT Silver</div>`;
   h+=`<table class="bm-table"><tr><th>指標</th><th>A4 (raw 1M)</th><th>A5-R (α×shrink)</th><th>差分</th></tr>`;
-  h+=`<tr><td>Sharpe</td><td>${b.a4_sharpe||'—'}</td><td class="best">${b.a5_sharpe||'—'}</td><td>+${b.sharpe_diff||'—'}</td></tr>`;
-  h+=`<tr><td>MaxDD</td><td>${b.a4_maxdd||'—'}</td><td class="worst">${b.a5_maxdd||'—'}</td><td>-2.3pt</td></tr>`;
-  h+=`<tr><td>月次diff</td><td colspan="2" style="text-align:center">${b.monthly_diff||'—'}/月</td><td>勝率 ${b.monthly_win_rate||'—'}</td></tr>`;
-  h+=`<tr><td>Sign test</td><td colspan="2" style="text-align:center">p=${b.sign_test_p||'—'}</td><td class="worst">有意でない</td></tr>`;
-  h+=`<tr><td>Tech比率</td><td colspan="2" style="text-align:center">${b.tech_share_net||'—'}</td><td class="worst">純超過収益の76%</td></tr></table>`;
-  h+=`<div class="prod-meta" style="margin-top:6px">⚠ PIT汚染含む研究値。production判断はforward PIT-safeのみ。</div></div>`;
+  h+=`<tr><td>Sharpe</td><td class="best">${b.a4_sharpe||'—'}</td><td>${b.a5_sharpe||'—'}</td><td>${b.sharpe_diff||'—'}</td></tr>`;
+  h+=`<tr><td>MaxDD</td><td class="best">${b.a4_maxdd||'—'}</td><td class="worst">${b.a5_maxdd||'—'}</td><td>${b.maxdd_diff||'—'}</td></tr>`;
+  h+=`<tr><td>CAGR</td><td>${b.a4_cagr||'—'}</td><td>${b.a5_cagr||'—'}</td><td>${b.cagr_diff||'—'}</td></tr>`;
+  h+=`<tr><td>Calmar</td><td class="best">${b.a4_calmar||'—'}</td><td>${b.a5_calmar||'—'}</td><td>${b.calmar_diff||'—'}</td></tr></table>`;
+  h+=`<div class="prod-meta" style="margin-top:6px">⚠ PIT Silver: テーマ層>SPYは頑健だがA5のA4に対する優位は25年で不成立。絶対CAGR値は参考。</div></div>`;
   // 6. Shadow Comparison
   h+=`<div class="section-title">🔀 Shadow比較 — ${comp.snapshot_date}</div>`;
   comp.comparisons.forEach(c=>{

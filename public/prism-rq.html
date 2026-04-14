@@ -239,29 +239,29 @@ Promise.all([
 
   // === 8. BT Comparison Tables ===
   h+=`<div class="section-title">🔬 Historical BT（PIT汚染参考値）</div>`;
-  // SNRb vs A5-lite
-  h+=`<div class="card"><div class="card-title">A5-SNRb vs Base（Layer 2差分）</div>`;
-  h+=`<table class="tbl"><tr><th>指標</th><th>Base+SNRb</th><th>差 vs A5-lite</th><th>判定</th></tr>`;
+  // SNRb vs A4 (Layer 2 comparison, 25yr)
+  h+=`<div class="card"><div class="card-title">A5 vs A4（Layer 2差分 — 25年BT）</div>`;
+  h+=`<table class="tbl"><tr><th>指標</th><th>A5 (SNRb)</th><th>A4 (1M)</th><th>差</th><th>判定</th></tr>`;
   const snrbBT = [
-    ['CAGR','57.5%','-9.5pt','❌'],['Vol','39.3%','-3.6pt','✅'],['Sharpe','1.461','-0.098','❌'],
-    ['Calmar','1.551','-0.043','❌'],['MaxDD','-37.1%','+4.9pt','✅'],['Top5集中','-','-4.2pt','✅']
+    ['CAGR','25.2%','24.4%','+0.8pt','—'],['Vol','31.0%','28.6%','+2.4pt','❌'],['Sharpe','0.88','0.91','-0.03','❌'],
+    ['Calmar','0.44','0.47','-0.03','❌'],['MaxDD','-57.8%','-51.4%','-6.4pt','❌']
   ];
-  snrbBT.forEach(([m,v,d,j])=>{ h+=`<tr><td>${m}</td><td>${v}</td><td>${d}</td><td>${j}</td></tr>`; });
+  snrbBT.forEach(([m,v1,v2,d,j])=>{ h+=`<tr><td>${m}</td><td>${v1}</td><td>${v2}</td><td>${d}</td><td>${j}</td></tr>`; });
   h+=`</table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">A5-SNRb = primary research-shadow。典型月ではA5-liteが優位だが、集中度・MaxDDを改善。</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">25年BTではA5のA4に対する優位は不成立（PIT Review CLOSED_SILVER結論）。Sharpe/Calmar/MaxDD全てA4が優位。</div>`;
   h+=`</div>`;
 
-  // BFM-v2 vs Base
-  h+=`<div class="card"><div class="card-title">BFM-v2 + SNRb vs Base + SNRb（Layer 1差分）</div>`;
-  h+=`<table class="tbl"><tr><th>指標</th><th>Base+SNRb</th><th>BFM-v2+SNRb</th><th>差</th><th>判定</th></tr>`;
+  // BFM-v2 vs Base (Layer 1 comparison, 25yr)
+  h+=`<div class="card"><div class="card-title">BFM-v2+Q vs Base（Layer 1差分 — 25年BT）</div>`;
+  h+=`<table class="tbl"><tr><th>指標</th><th>Base (PRISM-R)</th><th>BFM-v2+Q (RQ)</th><th>差</th><th>判定</th></tr>`;
   const bfmBT = [
-    ['CAGR','57.8%','43.8%','-14.0pt','❌'],['Vol','39.3%','27.4%','-12.0pt','✅'],
-    ['Sharpe','1.471','1.601','+0.130','✅✅'],['Calmar','1.561','1.829','+0.269','✅✅'],
-    ['MaxDD','-37.1%','-23.9%','+13.1pt','✅✅']
+    ['CAGR','25.2%','26.6%','+1.4pt','✅'],['Vol','31.0%','24.6%','-6.4pt','✅'],
+    ['Sharpe','0.88','0.93','+0.05','✅'],['Calmar','0.44','0.49','+0.05','✅'],
+    ['MaxDD','-57.8%','-54.1%','+3.7pt','✅']
   ];
   bfmBT.forEach(([m,v1,v2,d,j])=>{ h+=`<tr><td>${m}</td><td>${v1}</td><td>${v2}</td><td>${d}</td><td>${j}</td></tr>`; });
   h+=`</table>`;
-  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">BFM-v2 = Sharpe/Calmar/MaxDD改善を達成した初の候補。risk-managed alternative（replacementではない）。</div>`;
+  h+=`<div style="font-size:8px;color:var(--text-sub);margin-top:4px">BFM-v2+Q(PRISM-RQ) = BFM品質フィルタ+四半期リバランス。25年BTでSharpe/Vol/MaxDD全指標改善。</div>`;
   h+=`</div>`;
 
   // === 8b. Cumulative Returns Chart ===

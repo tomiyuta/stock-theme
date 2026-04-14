@@ -612,17 +612,20 @@ meta_out = {
     'target_rebalances': 18,
     'next_rebalance_est': '',
     'frozen_params': output['frozen_params'],
-    'backtest_5yr': {
-        'a4_sharpe': 1.29, 'a5_sharpe': 1.41, 'sharpe_diff': 0.12,
-        'monthly_diff': '+1.13%', 'monthly_win_rate': '53%',
-        'sign_test_p': 0.360, 'tech_share_net': '76%',
-        'a5_maxdd': '-42.0%', 'a4_maxdd': '-39.7%'
+    'backtest_25yr': {
+        'a4_sharpe': 0.91, 'a5_sharpe': 0.88, 'sharpe_diff': '-0.03',
+        'a4_cagr': '24.4%', 'a5_cagr': '25.2%', 'cagr_diff': '+0.8pt',
+        'a4_maxdd': '-51.4%', 'a5_maxdd': '-57.8%', 'maxdd_diff': '-6.4pt',
+        'a4_calmar': 0.47, 'a5_calmar': 0.44, 'calmar_diff': '-0.03',
+        'bt_months': 310, 'bt_period': '2000-07 ~ 2026-04',
+        'pit_status': 'CLOSED_SILVER',
+        'conclusion': 'A5>A4は25年で不成立。テーマ層>SPYは頑健。'
     },
-    'snrb_backtest_5yr': {
-        'snrb_sharpe': 1.46, 'snrb_cagr': '57.5%', 'snrb_vol': '39.3%',
-        'snrb_maxdd': '-37.1%', 'snrb_calmar': 1.55,
-        'snrb_top5_share': '34.1%',
-        'status': 'research-shadow (independent forward clock)'
+    'snrb_backtest_25yr': {
+        'rq_sharpe': 0.93, 'rq_cagr': '26.6%', 'rq_vol': '24.6%',
+        'rq_maxdd': '-54.1%', 'rq_calmar': 0.49,
+        'base_sharpe': 0.88, 'base_cagr': '25.2%', 'base_vol': '31.0%',
+        'status': 'research-shadow (BFM-v2+Q = Sharpe/Vol/MaxDD全改善)'
     }
 }
 with open(OUT / 'meta.json', 'w') as f:
