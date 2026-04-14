@@ -3,47 +3,47 @@
     "AAOI",
     "AEIS",
     "AMKR",
-    "APD",
     "BKSY",
+    "ETN",
     "MU"
   ],
   "picks": [
     {
       "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
-      "price": 153.19,
-      "date": "2026-04-13"
+      "theme": "光接続：インフラ",
+      "price": 146.39,
+      "date": "2026-04-14"
     },
     {
       "ticker": "AEIS",
       "theme": "半導体製造装置：部品",
-      "price": 378.94,
-      "date": "2026-04-13"
+      "price": 385.73,
+      "date": "2026-04-14"
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
-      "price": 426.56,
-      "date": "2026-04-13"
+      "price": 465.66,
+      "date": "2026-04-14"
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
-      "price": 34.79,
-      "date": "2026-04-13"
-    },
-    {
-      "ticker": "APD",
-      "theme": "半導体：材料・消耗品",
-      "price": 298.65,
-      "date": "2026-04-13"
+      "price": 32.04,
+      "date": "2026-04-14"
     },
     {
       "ticker": "AMKR",
       "theme": "半導体受託製造",
-      "price": 60.44,
-      "date": "2026-04-13"
+      "price": 61.32,
+      "date": "2026-04-14"
+    },
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "price": 401.9,
+      "date": "2026-04-14"
     }
   ],
-  "date": "2026-04-13"
+  "date": "2026-04-14"
 }

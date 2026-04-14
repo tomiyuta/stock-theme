@@ -1,15 +1,16 @@
 {
   "tickers": [
+    "AER",
     "BHP",
     "BKR",
     "DY",
     "ETN",
-    "FTI",
+    "FIX",
+    "FTAI",
     "HUBB",
     "MTZ",
     "ODFL",
     "SLB",
-    "TS",
     "VALE",
     "XPO"
   ],
@@ -17,37 +18,37 @@
     {
       "ticker": "MTZ",
       "theme": "",
-      "price": 361.22,
+      "price": 365.55,
       "date": ""
     },
     {
       "ticker": "DY",
       "theme": "",
-      "price": 393.0,
-      "date": ""
-    },
-    {
-      "ticker": "ODFL",
-      "theme": "",
-      "price": 208.35,
+      "price": 396.95,
       "date": ""
     },
     {
       "ticker": "XPO",
       "theme": "",
-      "price": 212.74,
+      "price": 212.15,
+      "date": ""
+    },
+    {
+      "ticker": "ODFL",
+      "theme": "",
+      "price": 207.63,
       "date": ""
     },
     {
       "ticker": "VALE",
       "theme": "",
-      "price": 16.96,
+      "price": 17.45,
       "date": ""
     },
     {
       "ticker": "BHP",
       "theme": "",
-      "price": 76.81,
+      "price": 78.1,
       "date": ""
     },
     {
@@ -59,31 +60,37 @@
     {
       "ticker": "BKR",
       "theme": "",
-      "price": 62.83,
+      "price": 62.56,
       "date": ""
     },
     {
-      "ticker": "FTI",
+      "ticker": "FTAI",
       "theme": "",
-      "price": 73.79,
+      "price": 261.5,
       "date": ""
     },
     {
-      "ticker": "TS",
+      "ticker": "AER",
       "theme": "",
-      "price": 59.89,
+      "price": 148.6,
       "date": ""
     },
     {
-      "ticker": "ETN",
+      "ticker": "FIX",
       "theme": "",
-      "price": 403.0,
+      "price": 1627.81,
       "date": ""
     },
     {
       "ticker": "HUBB",
       "theme": "",
-      "price": 536.01,
+      "price": 539.79,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 403.36,
       "date": ""
     }
   ],

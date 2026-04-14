@@ -28,7 +28,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 298.71,
       "theme": "半導体：材料・消耗品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-14"
     },
     "ETN": {
       "entry_date": "2026-04-10",

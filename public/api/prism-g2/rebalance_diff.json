@@ -1,51 +1,59 @@
 {
-  "as_of": "2026-04-13",
+  "as_of": "2026-04-14",
   "prev_date": "2026-04-13",
-  "added": [],
-  "removed": [],
-  "unchanged": [
+  "added": [
     {
-      "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
-      "price": 153.19,
-      "date": "2026-04-13"
-    },
-    {
-      "ticker": "AEIS",
-      "theme": "半導体製造装置：部品",
-      "price": 378.94,
-      "date": "2026-04-13"
-    },
-    {
-      "ticker": "AMKR",
-      "theme": "半導体受託製造",
-      "price": 60.44,
-      "date": "2026-04-13"
-    },
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "price": 401.9,
+      "date": "2026-04-14"
+    }
+  ],
+  "removed": [
     {
       "ticker": "APD",
       "theme": "半導体：材料・消耗品",
       "price": 298.65,
       "date": "2026-04-13"
+    }
+  ],
+  "unchanged": [
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：インフラ",
+      "price": 146.39,
+      "date": "2026-04-14"
+    },
+    {
+      "ticker": "AEIS",
+      "theme": "半導体製造装置：部品",
+      "price": 385.73,
+      "date": "2026-04-14"
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "半導体受託製造",
+      "price": 61.32,
+      "date": "2026-04-14"
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
-      "price": 34.79,
-      "date": "2026-04-13"
+      "price": 32.04,
+      "date": "2026-04-14"
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
-      "price": 426.56,
-      "date": "2026-04-13"
+      "price": 465.66,
+      "date": "2026-04-14"
     }
   ],
   "summary": {
     "total_now": 6,
     "total_prev": 6,
-    "added": 0,
-    "removed": 0,
-    "unchanged": 6
+    "added": 1,
+    "removed": 1,
+    "unchanged": 5
   }
 }

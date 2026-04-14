@@ -7,12 +7,12 @@
       "entry_date": "2026-04-09",
       "entry_price": 16.18,
       "holding_days": 2,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Basic Materials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 16.96
+      "peak_price_since_entry": 17.45
     },
     {
       "ticker": "RIO",
@@ -59,12 +59,12 @@
       "entry_date": "2026-04-09",
       "entry_price": 348.11,
       "holding_days": 2,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 361.22
+      "peak_price_since_entry": 365.55
     },
     {
       "ticker": "DY",
@@ -72,12 +72,12 @@
       "entry_date": "2026-04-09",
       "entry_price": 381.0,
       "holding_days": 2,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 393.0
+      "peak_price_since_entry": 396.95
     },
     {
       "ticker": "SBS",
@@ -137,12 +137,12 @@
       "entry_date": "2026-04-09",
       "entry_price": 527.21,
       "holding_days": 2,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 536.01
+      "peak_price_since_entry": 539.79
     },
     {
       "ticker": "ETN",
@@ -150,12 +150,12 @@
       "entry_date": "2026-04-09",
       "entry_price": 385.58,
       "holding_days": 2,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 403.0
+      "peak_price_since_entry": 403.36
     },
     {
       "ticker": "ODFL",
@@ -163,7 +163,7 @@
       "entry_date": "2026-04-10",
       "entry_price": 209.5,
       "holding_days": 1,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
@@ -176,7 +176,7 @@
       "entry_date": "2026-04-10",
       "entry_price": 211.73,
       "holding_days": 1,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Industrials",
       "theme_at_entry": "",
       "min_hold_days": 20,
@@ -215,12 +215,12 @@
       "entry_date": "2026-04-14",
       "entry_price": 76.81,
       "holding_days": 0,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Basic Materials",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 76.81
+      "peak_price_since_entry": 78.1
     },
     {
       "ticker": "SLB",
@@ -228,7 +228,7 @@
       "entry_date": "2026-04-14",
       "entry_price": 51.92,
       "holding_days": 0,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Energy",
       "theme_at_entry": "",
       "min_hold_days": 20,
@@ -241,7 +241,7 @@
       "entry_date": "2026-04-14",
       "entry_price": 62.83,
       "holding_days": 0,
-      "target_weight": 0.0417,
+      "target_weight": 0.0385,
       "sector": "Energy",
       "theme_at_entry": "",
       "min_hold_days": 20,
@@ -273,6 +273,45 @@
       "min_hold_days": 20,
       "eligible_to_exit": false,
       "peak_price_since_entry": 59.89
+    },
+    {
+      "ticker": "FTAI",
+      "status": "active",
+      "entry_date": "2026-04-14",
+      "entry_price": 261.5,
+      "holding_days": 0,
+      "target_weight": 0.0385,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 261.5
+    },
+    {
+      "ticker": "AER",
+      "status": "active",
+      "entry_date": "2026-04-14",
+      "entry_price": 148.6,
+      "holding_days": 0,
+      "target_weight": 0.0385,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 148.6
+    },
+    {
+      "ticker": "FIX",
+      "status": "active",
+      "entry_date": "2026-04-14",
+      "entry_price": 1627.81,
+      "holding_days": 0,
+      "target_weight": 0.0385,
+      "sector": "Industrials",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 1627.81
     }
   ],
   "metadata": {
