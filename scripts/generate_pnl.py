@@ -354,18 +354,21 @@ def update_forward_overlay():
         
         # Only update if as_of date is newer than last forward entry
         if fwd['dates'] and as_of <= fwd['dates'][-1]:
-            # Backfill beast/w5b if missing (G2-MAX and PRISM-R)
-            if label in ('G2-MAX','PRISM-R') and ('beast' not in fwd or len(fwd.get('beast',[])) < len(fwd['dates'])):
-                beast_pnl = pnl.get('summary', {}).get('beast_pnl_pct', total_pnl)
-                if 'beast' not in fwd: fwd['beast'] = []
-                while len(fwd['beast']) < len(fwd['dates']):
-                    fwd['beast'].append(round(1 + beast_pnl, 6))
-                if 'a5w5b' not in fwd: fwd['a5w5b'] = []
-                while len(fwd['a5w5b']) < len(fwd['dates']):
-                    fwd['a5w5b'].append(round(1 + total_pnl, 6))
+            # Repair any length mismatches in existing data
+            n_dates = len(fwd['dates'])
+            repaired = []
+            for key in list(fwd.keys()):
+                if key == 'dates' or not isinstance(fwd.get(key), list):
+                    continue
+                if len(fwd[key]) < n_dates:
+                    pad_val = fwd[key][-1] if fwd[key] else round(1 + total_pnl, 6)
+                    while len(fwd[key]) < n_dates:
+                        fwd[key].append(pad_val)
+                    repaired.append(f'{key}={len(fwd[key])}')
+            if repaired:
                 cum['forward_overlay'] = fwd
                 save_json(cum_path, cum)
-                print(f'{label} forward: backfilled beast+w5b ({len(fwd["beast"])} entries)')
+                print(f'{label} forward: repaired {",".join(repaired)} to match dates={n_dates}')
             else:
                 print(f'{label} forward: already up to date ({as_of})')
             continue
@@ -398,6 +401,28 @@ def update_forward_overlay():
             while len(spy_val) < len(fwd['dates']):
                 spy_val.append(1.0)
             fwd['SPY'] = spy_val
+        
+        # === Ensure all series have same length as dates ===
+        n_dates = len(fwd['dates'])
+        for key in list(fwd.keys()):
+            if key == 'dates':
+                continue
+            series = fwd[key]
+            if not isinstance(series, list):
+                continue
+            if len(series) < n_dates:
+                # Pad with last known value, or primary strategy value, or 1.0
+                if series:
+                    pad_val = series[-1]
+                elif pnl_key == 'a4' and key in ('a5', 'a5w5b', 'beast', 'def') and fwd.get('a4'):
+                    pad_val = fwd['a4'][-1]
+                elif pnl_key == 'a5' and key in ('a4', 'def') and fwd.get('a5'):
+                    pad_val = fwd['a5'][-1]
+                else:
+                    pad_val = round(1 + total_pnl, 6)
+                while len(series) < n_dates:
+                    series.append(pad_val)
+                fwd[key] = series
         
         cum['forward_overlay'] = fwd
         save_json(cum_path, cum)
