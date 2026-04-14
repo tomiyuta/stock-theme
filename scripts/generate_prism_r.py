@@ -5,10 +5,25 @@ Runs as part of daily_update.yml after build_for_vercel.py.
 Input:  public/api/theme-details/*.json + public/api/stock_meta.json + public/api/theme_ranking.json
 Output: public/api/prism-r/shadow_comparison.json + public/api/prism-r/meta.json
 """
-import json, os, sys
+import json, os, sys, math
 import numpy as np
 import pandas as pd
 from pathlib import Path
+
+class NaNSafeEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+            return None
+        return super().default(obj)
+
+def sanitize_nan(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: sanitize_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize_nan(v) for v in obj]
+    return obj
 from datetime import datetime
 
 SCRIPT_DIR = Path(__file__).resolve().parent
@@ -585,7 +600,7 @@ output = {
     'virtual_entries': virtual_entries
 }
 with open(OUT / 'shadow_comparison.json', 'w') as f:
-    json.dump(output, f, ensure_ascii=False, indent=2)
+    json.dump(sanitize_nan(output), f, ensure_ascii=False, indent=2)
 
 meta_out = {
     'snapshot_date': str(dt.date()),

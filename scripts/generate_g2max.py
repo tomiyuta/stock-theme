@@ -1,9 +1,18 @@
 """Generate G2-MAX snapshot: 6 themes (corr budget) × raw self-excluded α63 × W5b consistency weighting.
 Output: public/api/prism-g2/shadow_comparison.json + meta.json
 """
-import json, os, sys, numpy as np, pandas as pd
+import json, os, sys, math, numpy as np, pandas as pd
 from pathlib import Path
 from datetime import datetime
+
+def sanitize_nan(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
+        return None
+    if isinstance(obj, dict):
+        return {k: sanitize_nan(v) for k, v in obj.items()}
+    if isinstance(obj, list):
+        return [sanitize_nan(v) for v in obj]
+    return obj
 
 SCRIPT_DIR = Path(__file__).resolve().parent
 ROOT = SCRIPT_DIR.parent
@@ -237,7 +246,7 @@ output = {
 }
 
 with open(OUT / 'shadow_comparison.json', 'w') as f:
-    json.dump(output, f, ensure_ascii=False, indent=2)
+    json.dump(sanitize_nan(output), f, ensure_ascii=False, indent=2)
 meta_out = {'status': 'SHADOW', 'version': 'G2-MAX_v1', 'snapshot_date': str(dt.date()),
             'forward_rebalances': 0, 'target_rebalances': 18}
 with open(OUT / 'meta.json', 'w') as f:

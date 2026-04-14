@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-13",
-  "generated_at": "2026-04-14T00:15:43.958588",
+  "generated_at": "2026-04-14T09:37:24.499644",
   "version": "PRISM-RQ_v1",
   "status": "SHADOW",
   "frozen_params": {
@@ -33,11 +33,11 @@
   },
   "correlation_diagnostics": {
     "n_themes": 10,
-    "avg_pairwise_corr": NaN,
-    "max_pairwise_corr": NaN,
-    "min_pairwise_corr": NaN,
+    "avg_pairwise_corr": 0.338,
+    "max_pairwise_corr": 0.966,
+    "min_pairwise_corr": -0.122,
     "n_high_corr_pairs": 12,
-    "effective_n_themes": 1.0
+    "effective_n_themes": 2.5
   },
   "bfm2_quality_features": {
     "gas-fracking": {
@@ -72,7 +72,7 @@
     },
     "onsite-power": {
       "breadth63": 1.0,
-      "concentration63": 0.24130625323397067,
+      "concentration63": 0.2413062532339707,
       "theme_vol63": 0.463671640174805
     },
     "pub-construction-electric": {

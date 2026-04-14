@@ -1,6 +1,6 @@
 {
   "snapshot_date": "2026-04-13",
-  "generated_at": "2026-04-14T00:15:49.479427",
+  "generated_at": "2026-04-14T09:37:27.101199",
   "version": "G2-MAX_v1",
   "status": "SHADOW",
   "strategy": "G2-MAX: 6-theme W5b consistency-weighted raw residual momentum",
@@ -18,8 +18,8 @@
     "picks": 6,
     "correlation": {
       "n_themes": 6,
-      "avg_corr": NaN,
-      "max_corr": NaN
+      "avg_corr": 0.526,
+      "max_corr": 0.765
     },
     "w5b": {
       "avg_pos_count": 3.0,
