@@ -1,19 +1,61 @@
 {
   "as_of": "",
   "prev_date": "",
-  "added": [],
-  "removed": [],
-  "unchanged": [
+  "added": [
+    {
+      "ticker": "BHP",
+      "theme": "",
+      "price": 76.81,
+      "date": ""
+    },
+    {
+      "ticker": "BKR",
+      "theme": "",
+      "price": 62.83,
+      "date": ""
+    },
+    {
+      "ticker": "DY",
+      "theme": "",
+      "price": 393.0,
+      "date": ""
+    },
+    {
+      "ticker": "FTI",
+      "theme": "",
+      "price": 73.79,
+      "date": ""
+    },
+    {
+      "ticker": "MTZ",
+      "theme": "",
+      "price": 361.22,
+      "date": ""
+    },
+    {
+      "ticker": "SLB",
+      "theme": "",
+      "price": 51.92,
+      "date": ""
+    },
+    {
+      "ticker": "TS",
+      "theme": "",
+      "price": 59.89,
+      "date": ""
+    },
+    {
+      "ticker": "VALE",
+      "theme": "",
+      "price": 16.96,
+      "date": ""
+    }
+  ],
+  "removed": [
     {
       "ticker": "APD",
       "theme": "",
       "price": 297.74,
-      "date": ""
-    },
-    {
-      "ticker": "ETN",
-      "theme": "",
-      "price": 400.44,
       "date": ""
     },
     {
@@ -23,21 +65,9 @@
       "date": ""
     },
     {
-      "ticker": "HUBB",
-      "theme": "",
-      "price": 534.67,
-      "date": ""
-    },
-    {
       "ticker": "LIN",
       "theme": "",
       "price": 503.3,
-      "date": ""
-    },
-    {
-      "ticker": "ODFL",
-      "theme": "",
-      "price": 209.5,
       "date": ""
     },
     {
@@ -57,19 +87,39 @@
       "theme": "",
       "price": 41.06,
       "date": ""
+    }
+  ],
+  "unchanged": [
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 403.0,
+      "date": ""
+    },
+    {
+      "ticker": "HUBB",
+      "theme": "",
+      "price": 536.01,
+      "date": ""
+    },
+    {
+      "ticker": "ODFL",
+      "theme": "",
+      "price": 208.35,
+      "date": ""
     },
     {
       "ticker": "XPO",
       "theme": "",
-      "price": 211.73,
+      "price": 212.74,
       "date": ""
     }
   ],
   "summary": {
-    "total_now": 10,
+    "total_now": 12,
     "total_prev": 10,
-    "added": 0,
-    "removed": 0,
-    "unchanged": 10
+    "added": 8,
+    "removed": 6,
+    "unchanged": 4
   }
 }

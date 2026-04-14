@@ -34,6 +34,13 @@
       "entry_date": "2026-04-10",
       "entry_price": 403.0,
       "theme": "DC変圧器・スイッチギア",
+      "status": "closed",
+      "exit_date": "2026-04-13"
+    },
+    "AMKR": {
+      "entry_date": "2026-04-13",
+      "entry_price": 60.44,
+      "theme": "半導体受託製造",
       "status": "active"
     }
   },

@@ -2292,22 +2292,29 @@
     }
   },
   "meta": {
-    "strategy": "G2-MAX (6-theme W5b consistency-weighted raw \u03b1)",
+    "strategy": "G2-MAX (6-theme W5b consistency-weighted raw α)",
     "source": "Norgate BT",
     "pit_warning": true
   },
   "forward_overlay": {
     "dates": [
-      "2026-04-10"
+      "2026-04-10",
+      "2026-04-13"
     ],
     "a5": [
-      1.0
+      1.0,
+      1.0082
     ],
     "SPY": [
+      1.0,
       1.0
     ],
     "beast": [
-      1.0
+      1.0,
+      1.0082
+    ],
+    "a5w5b": [
+      1.0082
     ]
   }
 }

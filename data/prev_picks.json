@@ -1,75 +1,89 @@
 {
   "tickers": [
-    "APD",
+    "BHP",
+    "BKR",
+    "DY",
     "ETN",
-    "GWW",
+    "FTI",
     "HUBB",
-    "LIN",
+    "MTZ",
     "ODFL",
-    "SBS",
-    "WCC",
-    "WTRG",
+    "SLB",
+    "TS",
+    "VALE",
     "XPO"
   ],
   "picks": [
     {
+      "ticker": "MTZ",
+      "theme": "",
+      "price": 361.22,
+      "date": ""
+    },
+    {
+      "ticker": "DY",
+      "theme": "",
+      "price": 393.0,
+      "date": ""
+    },
+    {
       "ticker": "ODFL",
       "theme": "",
-      "price": 209.5,
+      "price": 208.35,
       "date": ""
     },
     {
       "ticker": "XPO",
       "theme": "",
-      "price": 211.73,
+      "price": 212.74,
       "date": ""
     },
     {
-      "ticker": "SBS",
+      "ticker": "VALE",
       "theme": "",
-      "price": 32.99,
+      "price": 16.96,
       "date": ""
     },
     {
-      "ticker": "WTRG",
+      "ticker": "BHP",
       "theme": "",
-      "price": 41.06,
+      "price": 76.81,
       "date": ""
     },
     {
-      "ticker": "APD",
+      "ticker": "SLB",
       "theme": "",
-      "price": 297.74,
+      "price": 51.92,
       "date": ""
     },
     {
-      "ticker": "LIN",
+      "ticker": "BKR",
       "theme": "",
-      "price": 503.3,
+      "price": 62.83,
       "date": ""
     },
     {
-      "ticker": "WCC",
+      "ticker": "FTI",
       "theme": "",
-      "price": 299.52,
+      "price": 73.79,
       "date": ""
     },
     {
-      "ticker": "GWW",
+      "ticker": "TS",
       "theme": "",
-      "price": 1172.21,
+      "price": 59.89,
       "date": ""
     },
     {
       "ticker": "ETN",
       "theme": "",
-      "price": 400.44,
+      "price": 403.0,
       "date": ""
     },
     {
       "ticker": "HUBB",
       "theme": "",
-      "price": 534.67,
+      "price": 536.01,
       "date": ""
     }
   ],

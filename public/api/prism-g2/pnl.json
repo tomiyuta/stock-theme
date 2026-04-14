@@ -1,62 +1,70 @@
 {
-  "as_of_date": "2026-04-10",
+  "as_of_date": "2026-04-13",
   "strategy": "G2-MAX",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 6,
-    "total_pnl_pct": 0.0,
-    "beast_pnl_pct": 0.0,
-    "closed_count": 0
+    "total_pnl_pct": 0.0082,
+    "beast_pnl_pct": 0.0082,
+    "closed_count": 1
   },
   "positions": [
     {
       "ticker": "AAOI",
       "theme": "光接続：トランシーバ",
       "entry_price": 150.6,
-      "current_price": 150.6,
-      "weight": 0.1727,
-      "pnl_pct": 0.0
+      "current_price": 153.19,
+      "weight": 0.1708,
+      "pnl_pct": 0.0172
     },
     {
       "ticker": "AEIS",
       "theme": "半導体製造装置：部品",
       "entry_price": 379.64,
-      "current_price": 379.64,
-      "weight": 0.1609,
-      "pnl_pct": 0.0
+      "current_price": 378.94,
+      "weight": 0.1578,
+      "pnl_pct": -0.0018
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
       "entry_price": 420.59,
-      "current_price": 420.59,
-      "weight": 0.2861,
-      "pnl_pct": 0.0
+      "current_price": 426.56,
+      "weight": 0.2862,
+      "pnl_pct": 0.0142
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
       "entry_price": 34.14,
-      "current_price": 34.14,
-      "weight": 0.1354,
-      "pnl_pct": 0.0
+      "current_price": 34.79,
+      "weight": 0.131,
+      "pnl_pct": 0.019
     },
     {
       "ticker": "APD",
       "theme": "半導体：材料・消耗品",
       "entry_price": 298.71,
-      "current_price": 298.71,
-      "weight": 0.139,
-      "pnl_pct": 0.0
+      "current_price": 298.65,
+      "weight": 0.1375,
+      "pnl_pct": -0.0002
     },
     {
-      "ticker": "ETN",
-      "theme": "DC変圧器・スイッチギア",
-      "entry_price": 403.0,
-      "current_price": 403.0,
-      "weight": 0.1058,
+      "ticker": "AMKR",
+      "theme": "半導体受託製造",
+      "entry_price": 60.44,
+      "current_price": 60.44,
+      "weight": 0.1167,
       "pnl_pct": 0.0
     }
   ],
-  "closed_positions": []
+  "closed_positions": [
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-13",
+      "entry_price": 403.0
+    }
+  ]
 }

@@ -1,89 +1,75 @@
 {
-  "as_of": "2026-04-10",
+  "as_of": "2026-04-13",
   "prev_date": "2026-04-10",
-  "added": [
-    {
-      "ticker": "COP",
-      "theme": "高配当",
-      "price": 122.55,
-      "date": "2026-04-10"
-    },
-    {
-      "ticker": "MRVL",
-      "theme": "光接続：トランシーバ",
-      "price": 128.49,
-      "date": "2026-04-10"
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "MTSI",
-      "theme": "光接続：トランシーバ",
-      "price": 258.11,
-      "date": "2026-04-10"
-    },
-    {
-      "ticker": "VZ",
-      "theme": "高配当",
-      "price": 46.04,
-      "date": "2026-04-10"
-    }
-  ],
+  "added": [],
+  "removed": [],
   "unchanged": [
     {
       "ticker": "AAOI",
       "theme": "光接続：インフラ",
-      "price": 150.6,
-      "date": "2026-04-10"
+      "price": 153.19,
+      "date": "2026-04-13"
+    },
+    {
+      "ticker": "COP",
+      "theme": "高配当",
+      "price": 123.62,
+      "date": "2026-04-13"
     },
     {
       "ticker": "GEV",
       "theme": "オンサイト電源",
-      "price": 991.32,
-      "date": "2026-04-10"
+      "price": 991.12,
+      "date": "2026-04-13"
+    },
+    {
+      "ticker": "MRVL",
+      "theme": "光接続：トランシーバ",
+      "price": 131.3,
+      "date": "2026-04-13"
     },
     {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
-      "price": 361.22,
-      "date": "2026-04-10"
+      "price": 365.55,
+      "date": "2026-04-13"
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
-      "price": 62.77,
-      "date": "2026-04-10"
+      "price": 65.81,
+      "date": "2026-04-13"
     },
     {
       "ticker": "PBR",
       "theme": "スーパーメジャー：米国外",
-      "price": 21.51,
-      "date": "2026-04-10"
+      "price": 21.97,
+      "date": "2026-04-13"
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
-      "price": 10.05,
-      "date": "2026-04-10"
+      "price": 10.56,
+      "date": "2026-04-13"
     },
     {
       "ticker": "PWR",
       "theme": "インフラ工事：電力/通信",
-      "price": 585.36,
-      "date": "2026-04-10"
+      "price": 595.84,
+      "date": "2026-04-13"
     },
     {
       "ticker": "UCTT",
       "theme": "半導体製造装置：部品",
-      "price": 75.81,
-      "date": "2026-04-10"
+      "price": 76.96,
+      "date": "2026-04-13"
     }
   ],
   "summary": {
     "total_now": 10,
     "total_prev": 10,
-    "added": 2,
-    "removed": 2,
-    "unchanged": 8
+    "added": 0,
+    "removed": 0,
+    "unchanged": 10
   }
 }

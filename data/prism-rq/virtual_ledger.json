@@ -10,7 +10,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 41.79,
       "theme": "光接続：インフラ",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-13"
     },
     "AEIS": {
       "entry_date": "2026-04-10",
@@ -72,6 +73,12 @@
       "entry_date": "2026-04-10",
       "entry_price": 122.55,
       "theme": "高配当",
+      "status": "active"
+    },
+    "GLW": {
+      "entry_date": "2026-04-13",
+      "entry_price": 175.17,
+      "theme": "光接続：インフラ",
       "status": "active"
     }
   },
