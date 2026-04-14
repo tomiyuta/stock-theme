@@ -1,22 +1,8 @@
 {
   "as_of": "2026-04-13",
-  "prev_date": "2026-04-10",
-  "added": [
-    {
-      "ticker": "GLW",
-      "theme": "光接続：インフラ",
-      "price": 175.17,
-      "date": "2026-04-13"
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "VIAV",
-      "theme": "光接続：インフラ",
-      "price": 41.79,
-      "date": "2026-04-10"
-    }
-  ],
+  "prev_date": "2026-04-13",
+  "added": [],
+  "removed": [],
   "unchanged": [
     {
       "ticker": "AAOI",
@@ -34,6 +20,12 @@
       "ticker": "GEV",
       "theme": "オンサイト電源",
       "price": 991.12,
+      "date": "2026-04-13"
+    },
+    {
+      "ticker": "GLW",
+      "theme": "光接続：インフラ",
+      "price": 175.17,
       "date": "2026-04-13"
     },
     {
@@ -76,8 +68,8 @@
   "summary": {
     "total_now": 10,
     "total_prev": 10,
-    "added": 1,
-    "removed": 1,
-    "unchanged": 9
+    "added": 0,
+    "removed": 0,
+    "unchanged": 10
   }
 }

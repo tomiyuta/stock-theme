@@ -1,22 +1,8 @@
 {
   "as_of": "2026-04-13",
-  "prev_date": "2026-04-10",
-  "added": [
-    {
-      "ticker": "AMKR",
-      "theme": "半導体受託製造",
-      "price": 60.44,
-      "date": "2026-04-13"
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "ETN",
-      "theme": "DC変圧器・スイッチギア",
-      "price": 403.0,
-      "date": "2026-04-10"
-    }
-  ],
+  "prev_date": "2026-04-13",
+  "added": [],
+  "removed": [],
   "unchanged": [
     {
       "ticker": "AAOI",
@@ -28,6 +14,12 @@
       "ticker": "AEIS",
       "theme": "半導体製造装置：部品",
       "price": 378.94,
+      "date": "2026-04-13"
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "半導体受託製造",
+      "price": 60.44,
       "date": "2026-04-13"
     },
     {
@@ -52,8 +44,8 @@
   "summary": {
     "total_now": 6,
     "total_prev": 6,
-    "added": 1,
-    "removed": 1,
-    "unchanged": 5
+    "added": 0,
+    "removed": 0,
+    "unchanged": 6
   }
 }

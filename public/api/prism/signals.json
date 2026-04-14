@@ -927,32 +927,20 @@
     }
   },
   "trigger_candidates": {
-    "T1_gate_flip": true,
+    "T1_gate_flip": false,
     "T2_theme_drop": [],
-    "T3_accel_flip": [
-      "産業ガス"
-    ],
+    "T3_accel_flip": [],
     "T4_dd": [],
-    "T5_new_entry": [
-      "インフラ工事：電力/通信",
-      "多角化資源",
-      "掘削サービス",
-      "掘削機器"
-    ],
+    "T5_new_entry": [],
     "theme_membership_diff": {
-      "added": [
+      "added": [],
+      "removed": [],
+      "unchanged": [
         "インフラ工事：電力/通信",
+        "トラック輸送",
         "多角化資源",
         "掘削サービス",
-        "掘削機器"
-      ],
-      "removed": [
-        "水道",
-        "産業ガス",
-        "産業資材流通"
-      ],
-      "unchanged": [
-        "トラック輸送",
+        "掘削機器",
         "電源インフラ"
       ]
     },
