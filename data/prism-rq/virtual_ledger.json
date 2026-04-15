@@ -70,7 +70,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 75.81,
       "theme": "半導体製造装置：部品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-15"
     },
     "COP": {
       "entry_date": "2026-04-10",
@@ -108,6 +109,19 @@
       "entry_date": "2026-04-14",
       "entry_price": 115.57,
       "theme": "電力：規制事業者",
+      "status": "closed",
+      "exit_date": "2026-04-15"
+    },
+    "SNDK": {
+      "entry_date": "2026-04-15",
+      "entry_price": 891.72,
+      "theme": "データストレージ",
+      "status": "active"
+    },
+    "VZ": {
+      "entry_date": "2026-04-15",
+      "entry_price": 45.03,
+      "theme": "高配当",
       "status": "active"
     }
   },

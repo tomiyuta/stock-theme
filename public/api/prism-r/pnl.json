@@ -1,19 +1,19 @@
 {
-  "as_of_date": "2026-04-14",
-  "generated_at": "2026-04-14T22:39:30.697875",
+  "as_of_date": "2026-04-15",
+  "generated_at": "2026-04-15T22:37:51.873942",
   "strategy": "PRISM-R",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0237,
-    "beast_pnl_pct": 0.0237,
-    "winners": 4,
-    "losers": 1,
+    "total_pnl_pct": 0.0013,
+    "beast_pnl_pct": 0.0013,
+    "winners": 3,
+    "losers": 6,
     "best": "AAOI",
-    "best_pnl": 0.0982,
-    "worst": "PTEN",
-    "worst_pnl": -0.0256,
-    "closed_count": 10
+    "best_pnl": 0.0694,
+    "worst": "AXTI",
+    "worst_pnl": -0.0649,
+    "closed_count": 12
   },
   "positions": [
     {
@@ -22,11 +22,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 133.3,
-      "current_price": 146.39,
-      "weight": 0.1589,
-      "alpha63": 0.851,
-      "pnl_pct": 0.0982,
-      "pnl_weighted": 0.015604
+      "current_price": 142.55,
+      "weight": 0.1415,
+      "alpha63": 0.852,
+      "pnl_pct": 0.0694,
+      "pnl_weighted": 0.009819
     },
     {
       "ticker": "PARR",
@@ -34,11 +34,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 59.46,
-      "current_price": 63.26,
-      "weight": 0.0891,
-      "alpha63": 0.303,
-      "pnl_pct": 0.0639,
-      "pnl_weighted": 0.005694
+      "current_price": 62.2,
+      "weight": 0.0813,
+      "alpha63": 0.262,
+      "pnl_pct": 0.0461,
+      "pnl_weighted": 0.003746
     },
     {
       "ticker": "MTZ",
@@ -46,45 +46,21 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 357.37,
-      "current_price": 365.89,
-      "weight": 0.0953,
-      "alpha63": 0.24,
-      "pnl_pct": 0.0238,
-      "pnl_weighted": 0.002272
+      "current_price": 365.07,
+      "weight": 0.0861,
+      "alpha63": 0.257,
+      "pnl_pct": 0.0215,
+      "pnl_weighted": 0.001855
     },
     {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
+      "ticker": "SNDK",
+      "theme": "データストレージ",
       "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 20.69,
-      "current_price": 21.01,
-      "weight": 0.0775,
-      "alpha63": 0.281,
-      "pnl_pct": 0.0155,
-      "pnl_weighted": 0.001199
-    },
-    {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 67.3,
-      "current_price": 67.3,
-      "weight": 0.1166,
-      "alpha63": 1.04,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "ICHR",
-      "theme": "半導体製造装置：部品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 64.01,
-      "current_price": 64.01,
-      "weight": 0.1342,
-      "alpha63": 0.216,
+      "entry_date": "2026-04-15",
+      "entry_price": 891.72,
+      "current_price": 891.72,
+      "weight": 0.2211,
+      "alpha63": 0.292,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
@@ -94,35 +70,23 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-14",
       "entry_price": 322.07,
-      "current_price": 322.07,
-      "weight": 0.089,
-      "alpha63": 0.06,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "current_price": 320.43,
+      "weight": 0.0804,
+      "alpha63": 0.045,
+      "pnl_pct": -0.0051,
+      "pnl_weighted": -0.000409
     },
     {
-      "ticker": "MOD",
-      "theme": "熱管理インフラ",
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
       "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 253.66,
-      "current_price": 253.66,
-      "weight": 0.0831,
-      "alpha63": 0.3,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "ETR",
-      "theme": "電力：規制事業者",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 115.57,
-      "current_price": 115.57,
-      "weight": 0.0592,
-      "alpha63": 0.097,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "entry_date": "2026-04-09",
+      "entry_price": 20.69,
+      "current_price": 20.54,
+      "weight": 0.069,
+      "alpha63": 0.264,
+      "pnl_pct": -0.0072,
+      "pnl_weighted": -0.0005
     },
     {
       "ticker": "PTEN",
@@ -130,11 +94,47 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 10.14,
-      "current_price": 9.88,
-      "weight": 0.097,
-      "alpha63": 0.253,
-      "pnl_pct": -0.0256,
-      "pnl_weighted": -0.002487
+      "current_price": 9.92,
+      "weight": 0.0868,
+      "alpha63": 0.21,
+      "pnl_pct": -0.0217,
+      "pnl_weighted": -0.001883
+    },
+    {
+      "ticker": "VZ",
+      "theme": "高配当",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-10",
+      "entry_price": 46.04,
+      "current_price": 45.03,
+      "weight": 0.0574,
+      "alpha63": 0.122,
+      "pnl_pct": -0.0219,
+      "pnl_weighted": -0.001259
+    },
+    {
+      "ticker": "MOD",
+      "theme": "熱管理インフラ",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-14",
+      "entry_price": 253.66,
+      "current_price": 238.14,
+      "weight": 0.073,
+      "alpha63": 0.308,
+      "pnl_pct": -0.0612,
+      "pnl_weighted": -0.004466
+    },
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-14",
+      "entry_price": 67.3,
+      "current_price": 62.93,
+      "weight": 0.1034,
+      "alpha63": 1.011,
+      "pnl_pct": -0.0649,
+      "pnl_weighted": -0.006714
     }
   ],
   "closed_positions": [
@@ -207,6 +207,20 @@
       "entry_date": "2026-04-10",
       "exit_date": "2026-04-14",
       "entry_price": 122.55
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-15",
+      "entry_price": 64.01
+    },
+    {
+      "ticker": "ETR",
+      "theme": "電力：規制事業者",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-15",
+      "entry_price": 115.57
     }
   ]
 }

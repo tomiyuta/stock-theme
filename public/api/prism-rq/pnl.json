@@ -1,99 +1,99 @@
 {
-  "as_of_date": "2026-04-14",
+  "as_of_date": "2026-04-15",
   "strategy": "PRISM-RQ",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0034,
-    "closed_count": 8
+    "total_pnl_pct": -0.0105,
+    "closed_count": 10
   },
   "positions": [
-    {
-      "ticker": "PTEN",
-      "theme": "天然ガス掘削：米",
-      "entry_price": 10.05,
-      "current_price": 9.88,
-      "weight": 0.1,
-      "pnl_pct": -0.0169,
-      "pnl_weighted": -0.001692
-    },
     {
       "ticker": "PBR",
       "theme": "スーパーメジャー：米国外",
       "entry_price": 21.51,
-      "current_price": 21.01,
+      "current_price": 20.54,
       "weight": 0.1,
-      "pnl_pct": -0.0232,
-      "pnl_weighted": -0.002325
+      "pnl_pct": -0.0451,
+      "pnl_weighted": -0.00451
     },
     {
-      "ticker": "PARR",
-      "theme": "石油精製",
-      "entry_price": 62.77,
-      "current_price": 63.26,
+      "ticker": "PTEN",
+      "theme": "天然ガス掘削：米",
+      "entry_price": 10.05,
+      "current_price": 9.92,
       "weight": 0.1,
-      "pnl_pct": 0.0078,
-      "pnl_weighted": 0.000781
-    },
-    {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "entry_price": 361.22,
-      "current_price": 365.89,
-      "weight": 0.1,
-      "pnl_pct": 0.0129,
-      "pnl_weighted": 0.001293
+      "pnl_pct": -0.0129,
+      "pnl_weighted": -0.001294
     },
     {
       "ticker": "VIAV",
       "theme": "光接続：インフラ",
       "entry_price": 41.79,
-      "current_price": 40.78,
+      "current_price": 39.26,
       "weight": 0.1,
-      "pnl_pct": -0.0242,
-      "pnl_weighted": -0.002417
+      "pnl_pct": -0.0605,
+      "pnl_weighted": -0.006054
     },
     {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "entry_price": 67.3,
-      "current_price": 67.3,
+      "ticker": "SNDK",
+      "theme": "データストレージ",
+      "entry_price": 891.72,
+      "current_price": 891.72,
       "weight": 0.1,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
     {
-      "ticker": "UCTT",
-      "theme": "半導体製造装置：部品",
-      "entry_price": 75.81,
-      "current_price": 76.92,
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "entry_price": 361.22,
+      "current_price": 365.07,
       "weight": 0.1,
-      "pnl_pct": 0.0146,
-      "pnl_weighted": 0.001464
+      "pnl_pct": 0.0107,
+      "pnl_weighted": 0.001066
     },
     {
-      "ticker": "MYRG",
-      "theme": "インフラ工事：電力/通信",
-      "entry_price": 322.07,
-      "current_price": 322.07,
+      "ticker": "PARR",
+      "theme": "石油精製",
+      "entry_price": 62.77,
+      "current_price": 62.2,
       "weight": 0.1,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "pnl_pct": -0.0091,
+      "pnl_weighted": -0.000908
     },
     {
       "ticker": "MOD",
       "theme": "熱管理インフラ",
       "entry_price": 253.66,
-      "current_price": 253.66,
+      "current_price": 238.14,
       "weight": 0.1,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "pnl_pct": -0.0612,
+      "pnl_weighted": -0.006118
     },
     {
-      "ticker": "ETR",
-      "theme": "電力：規制事業者",
-      "entry_price": 115.57,
-      "current_price": 115.57,
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "entry_price": 67.3,
+      "current_price": 62.93,
+      "weight": 0.1,
+      "pnl_pct": -0.0649,
+      "pnl_weighted": -0.006493
+    },
+    {
+      "ticker": "MYRG",
+      "theme": "インフラ工事：電力/通信",
+      "entry_price": 322.07,
+      "current_price": 320.43,
+      "weight": 0.1,
+      "pnl_pct": -0.0051,
+      "pnl_weighted": -0.000509
+    },
+    {
+      "ticker": "VZ",
+      "theme": "高配当",
+      "entry_price": 45.03,
+      "current_price": 45.03,
       "weight": 0.1,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
@@ -143,6 +143,13 @@
       "entry_price": 613.72
     },
     {
+      "ticker": "UCTT",
+      "theme": "半導体製造装置：部品",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-15",
+      "entry_price": 75.81
+    },
+    {
       "ticker": "COP",
       "theme": "高配当",
       "entry_date": "2026-04-10",
@@ -155,6 +162,13 @@
       "entry_date": "2026-04-13",
       "exit_date": "2026-04-14",
       "entry_price": 175.17
+    },
+    {
+      "ticker": "ETR",
+      "theme": "電力：規制事業者",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-15",
+      "entry_price": 115.57
     }
   ]
 }
