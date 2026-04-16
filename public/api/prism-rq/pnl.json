@@ -1,102 +1,102 @@
 {
-  "as_of_date": "2026-04-15",
+  "as_of_date": "2026-04-16",
   "strategy": "PRISM-RQ",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": -0.0105,
-    "closed_count": 10
+    "total_pnl_pct": 0.0046,
+    "closed_count": 12
   },
   "positions": [
+    {
+      "ticker": "SNDK",
+      "theme": "データストレージ",
+      "entry_price": 891.72,
+      "current_price": 919.47,
+      "weight": 0.1,
+      "pnl_pct": 0.0311,
+      "pnl_weighted": 0.003112
+    },
     {
       "ticker": "PBR",
       "theme": "スーパーメジャー：米国外",
       "entry_price": 21.51,
-      "current_price": 20.54,
+      "current_price": 21.5,
       "weight": 0.1,
-      "pnl_pct": -0.0451,
-      "pnl_weighted": -0.00451
+      "pnl_pct": -0.0005,
+      "pnl_weighted": -4.6e-05
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
       "entry_price": 10.05,
-      "current_price": 9.92,
+      "current_price": 10.41,
       "weight": 0.1,
-      "pnl_pct": -0.0129,
-      "pnl_weighted": -0.001294
-    },
-    {
-      "ticker": "VIAV",
-      "theme": "光接続：インフラ",
-      "entry_price": 41.79,
-      "current_price": 39.26,
-      "weight": 0.1,
-      "pnl_pct": -0.0605,
-      "pnl_weighted": -0.006054
-    },
-    {
-      "ticker": "SNDK",
-      "theme": "データストレージ",
-      "entry_price": 891.72,
-      "current_price": 891.72,
-      "weight": 0.1,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "pnl_pct": 0.0358,
+      "pnl_weighted": 0.003582
     },
     {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
       "entry_price": 361.22,
-      "current_price": 365.07,
+      "current_price": 358.14,
       "weight": 0.1,
-      "pnl_pct": 0.0107,
-      "pnl_weighted": 0.001066
+      "pnl_pct": -0.0085,
+      "pnl_weighted": -0.000853
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
       "entry_price": 62.77,
-      "current_price": 62.2,
+      "current_price": 63.71,
       "weight": 0.1,
-      "pnl_pct": -0.0091,
-      "pnl_weighted": -0.000908
+      "pnl_pct": 0.015,
+      "pnl_weighted": 0.001498
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "entry_price": 63.68,
+      "current_price": 63.68,
+      "weight": 0.1,
+      "pnl_pct": 0.0,
+      "pnl_weighted": 0.0
     },
     {
       "ticker": "MOD",
       "theme": "熱管理インフラ",
       "entry_price": 253.66,
-      "current_price": 238.14,
+      "current_price": 235.25,
       "weight": 0.1,
-      "pnl_pct": -0.0612,
-      "pnl_weighted": -0.006118
+      "pnl_pct": -0.0726,
+      "pnl_weighted": -0.007258
     },
     {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "entry_price": 67.3,
-      "current_price": 62.93,
-      "weight": 0.1,
-      "pnl_pct": -0.0649,
-      "pnl_weighted": -0.006493
-    },
-    {
-      "ticker": "MYRG",
+      "ticker": "PWR",
       "theme": "インフラ工事：電力/通信",
-      "entry_price": 322.07,
-      "current_price": 320.43,
+      "entry_price": 585.36,
+      "current_price": 587.42,
       "weight": 0.1,
-      "pnl_pct": -0.0051,
-      "pnl_weighted": -0.000509
+      "pnl_pct": 0.0035,
+      "pnl_weighted": 0.000352
+    },
+    {
+      "ticker": "VIAV",
+      "theme": "光接続：インフラ",
+      "entry_price": 41.79,
+      "current_price": 41.16,
+      "weight": 0.1,
+      "pnl_pct": -0.0151,
+      "pnl_weighted": -0.001508
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
       "entry_price": 45.03,
-      "current_price": 45.03,
+      "current_price": 46.78,
       "weight": 0.1,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "pnl_pct": 0.0389,
+      "pnl_weighted": 0.003886
     }
   ],
   "closed_positions": [
@@ -162,6 +162,20 @@
       "entry_date": "2026-04-13",
       "exit_date": "2026-04-14",
       "entry_price": 175.17
+    },
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-16",
+      "entry_price": 67.3
+    },
+    {
+      "ticker": "MYRG",
+      "theme": "インフラ工事：電力/通信",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-16",
+      "entry_price": 322.07
     },
     {
       "ticker": "ETR",

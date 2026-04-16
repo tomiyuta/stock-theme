@@ -1,61 +1,68 @@
 {
   "tickers": [
+    "ADI",
+    "AMD",
     "BHP",
-    "DY",
-    "HAL",
-    "MTZ",
-    "ODFL",
-    "SLB",
-    "VALE",
-    "XPO"
+    "CLS",
+    "GEV",
+    "HUBB",
+    "MRVL",
+    "TXN",
+    "VALE"
   ],
   "picks": [
     {
-      "ticker": "MTZ",
+      "ticker": "MRVL",
       "theme": "",
-      "price": 365.89,
+      "price": 134.6,
       "date": ""
     },
     {
-      "ticker": "DY",
+      "ticker": "AMD",
       "theme": "",
-      "price": 392.25,
+      "price": 258.12,
       "date": ""
     },
     {
-      "ticker": "XPO",
+      "ticker": "GEV",
       "theme": "",
-      "price": 212.66,
+      "price": 985.92,
       "date": ""
     },
     {
-      "ticker": "ODFL",
+      "ticker": "HUBB",
       "theme": "",
-      "price": 210.41,
+      "price": 526.94,
+      "date": ""
+    },
+    {
+      "ticker": "TXN",
+      "theme": "",
+      "price": 216.29,
+      "date": ""
+    },
+    {
+      "ticker": "ADI",
+      "theme": "",
+      "price": 347.94,
+      "date": ""
+    },
+    {
+      "ticker": "CLS",
+      "theme": "",
+      "price": 381.94,
       "date": ""
     },
     {
       "ticker": "VALE",
       "theme": "",
-      "price": 17.68,
+      "price": 17.62,
       "date": ""
     },
     {
       "ticker": "BHP",
       "theme": "",
-      "price": 79.17,
-      "date": ""
-    },
-    {
-      "ticker": "SLB",
-      "theme": "",
-      "price": 51.49,
-      "date": ""
-    },
-    {
-      "ticker": "HAL",
-      "theme": "",
-      "price": 37.51,
+      "price": 79.47,
       "date": ""
     }
   ],

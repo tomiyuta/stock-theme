@@ -91,13 +91,15 @@
       "entry_date": "2026-04-14",
       "entry_price": 67.3,
       "theme": "半導体：材料・消耗品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-16"
     },
     "MYRG": {
       "entry_date": "2026-04-14",
       "entry_price": 322.07,
       "theme": "インフラ工事：電力/通信",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-16"
     },
     "MOD": {
       "entry_date": "2026-04-14",
@@ -122,6 +124,12 @@
       "entry_date": "2026-04-15",
       "entry_price": 45.03,
       "theme": "高配当",
+      "status": "active"
+    },
+    "ICHR": {
+      "entry_date": "2026-04-16",
+      "entry_price": 63.68,
+      "theme": "半導体製造装置：部品",
       "status": "active"
     }
   },

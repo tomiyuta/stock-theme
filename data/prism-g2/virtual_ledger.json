@@ -10,7 +10,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 379.64,
       "theme": "半導体製造装置：部品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-16"
     },
     "MU": {
       "entry_date": "2026-04-10",
@@ -48,6 +49,12 @@
       "entry_date": "2026-04-15",
       "entry_price": 86.91,
       "theme": "宇宙：衛星通信",
+      "status": "active"
+    },
+    "AEHR": {
+      "entry_date": "2026-04-16",
+      "entry_price": 80.85,
+      "theme": "半導体製造装置：後工程",
       "status": "active"
     }
   },

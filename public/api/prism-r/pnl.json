@@ -1,19 +1,19 @@
 {
-  "as_of_date": "2026-04-15",
-  "generated_at": "2026-04-15T22:37:51.873942",
+  "as_of_date": "2026-04-16",
+  "generated_at": "2026-04-16T22:32:56.682068",
   "strategy": "PRISM-R",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0013,
-    "beast_pnl_pct": 0.0013,
-    "winners": 3,
-    "losers": 6,
+    "total_pnl_pct": 0.0267,
+    "beast_pnl_pct": 0.0267,
+    "winners": 7,
+    "losers": 3,
     "best": "AAOI",
-    "best_pnl": 0.0694,
-    "worst": "AXTI",
-    "worst_pnl": -0.0649,
-    "closed_count": 12
+    "best_pnl": 0.1802,
+    "worst": "MOD",
+    "worst_pnl": -0.0726,
+    "closed_count": 13
   },
   "positions": [
     {
@@ -22,11 +22,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 133.3,
-      "current_price": 142.55,
-      "weight": 0.1415,
-      "alpha63": 0.852,
-      "pnl_pct": 0.0694,
-      "pnl_weighted": 0.009819
+      "current_price": 157.32,
+      "weight": 0.1391,
+      "alpha63": 0.874,
+      "pnl_pct": 0.1802,
+      "pnl_weighted": 0.025065
     },
     {
       "ticker": "PARR",
@@ -34,47 +34,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 59.46,
-      "current_price": 62.2,
-      "weight": 0.0813,
-      "alpha63": 0.262,
-      "pnl_pct": 0.0461,
-      "pnl_weighted": 0.003746
-    },
-    {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 357.37,
-      "current_price": 365.07,
-      "weight": 0.0861,
-      "alpha63": 0.257,
-      "pnl_pct": 0.0215,
-      "pnl_weighted": 0.001855
-    },
-    {
-      "ticker": "SNDK",
-      "theme": "データストレージ",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-15",
-      "entry_price": 891.72,
-      "current_price": 891.72,
-      "weight": 0.2211,
-      "alpha63": 0.292,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
-    },
-    {
-      "ticker": "MYRG",
-      "theme": "インフラ工事：電力/通信",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 322.07,
-      "current_price": 320.43,
-      "weight": 0.0804,
-      "alpha63": 0.045,
-      "pnl_pct": -0.0051,
-      "pnl_weighted": -0.000409
+      "current_price": 63.71,
+      "weight": 0.0808,
+      "alpha63": 0.247,
+      "pnl_pct": 0.0715,
+      "pnl_weighted": 0.005775
     },
     {
       "ticker": "PBR",
@@ -82,11 +46,23 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 20.69,
-      "current_price": 20.54,
-      "weight": 0.069,
-      "alpha63": 0.264,
-      "pnl_pct": -0.0072,
-      "pnl_weighted": -0.0005
+      "current_price": 21.5,
+      "weight": 0.0685,
+      "alpha63": 0.259,
+      "pnl_pct": 0.0391,
+      "pnl_weighted": 0.002682
+    },
+    {
+      "ticker": "SNDK",
+      "theme": "データストレージ",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-15",
+      "entry_price": 891.72,
+      "current_price": 919.47,
+      "weight": 0.2253,
+      "alpha63": 0.31,
+      "pnl_pct": 0.0311,
+      "pnl_weighted": 0.007011
     },
     {
       "ticker": "PTEN",
@@ -94,11 +70,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 10.14,
-      "current_price": 9.92,
-      "weight": 0.0868,
-      "alpha63": 0.21,
-      "pnl_pct": -0.0217,
-      "pnl_weighted": -0.001883
+      "current_price": 10.41,
+      "weight": 0.0863,
+      "alpha63": 0.259,
+      "pnl_pct": 0.0266,
+      "pnl_weighted": 0.002298
     },
     {
       "ticker": "VZ",
@@ -106,11 +82,47 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-10",
       "entry_price": 46.04,
-      "current_price": 45.03,
-      "weight": 0.0574,
-      "alpha63": 0.122,
-      "pnl_pct": -0.0219,
-      "pnl_weighted": -0.001259
+      "current_price": 46.78,
+      "weight": 0.0556,
+      "alpha63": 0.143,
+      "pnl_pct": 0.0161,
+      "pnl_weighted": 0.000894
+    },
+    {
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 357.37,
+      "current_price": 358.14,
+      "weight": 0.0823,
+      "alpha63": 0.242,
+      "pnl_pct": 0.0022,
+      "pnl_weighted": 0.000177
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-14",
+      "entry_price": 64.01,
+      "current_price": 63.68,
+      "weight": 0.1138,
+      "alpha63": 0.217,
+      "pnl_pct": -0.0052,
+      "pnl_weighted": -0.000587
+    },
+    {
+      "ticker": "MYRG",
+      "theme": "インフラ工事：電力/通信",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-14",
+      "entry_price": 322.07,
+      "current_price": 315.26,
+      "weight": 0.0776,
+      "alpha63": 0.043,
+      "pnl_pct": -0.0211,
+      "pnl_weighted": -0.001641
     },
     {
       "ticker": "MOD",
@@ -118,23 +130,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-14",
       "entry_price": 253.66,
-      "current_price": 238.14,
-      "weight": 0.073,
-      "alpha63": 0.308,
-      "pnl_pct": -0.0612,
-      "pnl_weighted": -0.004466
-    },
-    {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 67.3,
-      "current_price": 62.93,
-      "weight": 0.1034,
-      "alpha63": 1.011,
-      "pnl_pct": -0.0649,
-      "pnl_weighted": -0.006714
+      "current_price": 235.25,
+      "weight": 0.0706,
+      "alpha63": 0.299,
+      "pnl_pct": -0.0726,
+      "pnl_weighted": -0.005124
     }
   ],
   "closed_positions": [
@@ -207,6 +207,13 @@
       "entry_date": "2026-04-10",
       "exit_date": "2026-04-14",
       "entry_price": 122.55
+    },
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-16",
+      "entry_price": 67.3
     },
     {
       "ticker": "ICHR",

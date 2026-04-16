@@ -1,7 +1,7 @@
 {
   "tickers": [
     "AAOI",
-    "AEIS",
+    "AEHR",
     "AMKR",
     "ASTS",
     "BKSY",
@@ -11,39 +11,39 @@
     {
       "ticker": "AAOI",
       "theme": "光接続：インフラ",
-      "price": 142.55,
-      "date": "2026-04-15"
-    },
-    {
-      "ticker": "AEIS",
-      "theme": "半導体製造装置：部品",
-      "price": 374.32,
-      "date": "2026-04-15"
+      "price": 157.32,
+      "date": "2026-04-16"
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
-      "price": 33.08,
-      "date": "2026-04-15"
+      "price": 39.0,
+      "date": "2026-04-16"
+    },
+    {
+      "ticker": "AEHR",
+      "theme": "半導体製造装置：後工程",
+      "price": 80.85,
+      "date": "2026-04-16"
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
-      "price": 456.23,
-      "date": "2026-04-15"
+      "price": 457.23,
+      "date": "2026-04-16"
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "カスタムAI半導体",
+      "price": 62.9,
+      "date": "2026-04-16"
     },
     {
       "ticker": "ASTS",
       "theme": "宇宙：衛星通信",
-      "price": 86.91,
-      "date": "2026-04-15"
-    },
-    {
-      "ticker": "AMKR",
-      "theme": "半導体受託製造",
-      "price": 59.72,
-      "date": "2026-04-15"
+      "price": 90.94,
+      "date": "2026-04-16"
     }
   ],
-  "date": "2026-04-15"
+  "date": "2026-04-16"
 }

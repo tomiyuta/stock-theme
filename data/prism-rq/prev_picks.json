@@ -1,77 +1,77 @@
 {
   "tickers": [
-    "AXTI",
+    "ICHR",
     "MOD",
     "MTZ",
-    "MYRG",
     "PARR",
     "PBR",
     "PTEN",
+    "PWR",
     "SNDK",
     "VIAV",
     "VZ"
   ],
   "picks": [
     {
+      "ticker": "SNDK",
+      "theme": "データストレージ",
+      "price": 919.47,
+      "date": "2026-04-16"
+    },
+    {
       "ticker": "PBR",
       "theme": "スーパーメジャー：米国外",
-      "price": 20.54,
-      "date": "2026-04-15"
+      "price": 21.5,
+      "date": "2026-04-16"
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
-      "price": 9.92,
-      "date": "2026-04-15"
-    },
-    {
-      "ticker": "VIAV",
-      "theme": "光接続：インフラ",
-      "price": 39.26,
-      "date": "2026-04-15"
-    },
-    {
-      "ticker": "SNDK",
-      "theme": "データストレージ",
-      "price": 891.72,
-      "date": "2026-04-15"
+      "price": 10.41,
+      "date": "2026-04-16"
     },
     {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
-      "price": 365.07,
-      "date": "2026-04-15"
+      "price": 358.14,
+      "date": "2026-04-16"
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
-      "price": 62.2,
-      "date": "2026-04-15"
+      "price": 63.71,
+      "date": "2026-04-16"
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "price": 63.68,
+      "date": "2026-04-16"
     },
     {
       "ticker": "MOD",
       "theme": "熱管理インフラ",
-      "price": 238.14,
-      "date": "2026-04-15"
+      "price": 235.25,
+      "date": "2026-04-16"
     },
     {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "price": 62.93,
-      "date": "2026-04-15"
-    },
-    {
-      "ticker": "MYRG",
+      "ticker": "PWR",
       "theme": "インフラ工事：電力/通信",
-      "price": 320.43,
-      "date": "2026-04-15"
+      "price": 587.42,
+      "date": "2026-04-16"
+    },
+    {
+      "ticker": "VIAV",
+      "theme": "光接続：インフラ",
+      "price": 41.16,
+      "date": "2026-04-16"
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
-      "price": 45.03,
-      "date": "2026-04-15"
+      "price": 46.78,
+      "date": "2026-04-16"
     }
   ],
-  "date": "2026-04-15"
+  "date": "2026-04-16"
 }

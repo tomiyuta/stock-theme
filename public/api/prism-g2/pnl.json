@@ -1,64 +1,71 @@
 {
-  "as_of_date": "2026-04-15",
+  "as_of_date": "2026-04-16",
   "strategy": "G2-MAX",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 6,
-    "total_pnl_pct": 0.0338,
-    "beast_pnl_pct": 0.0338,
-    "closed_count": 2
+    "total_pnl_pct": 0.0727,
+    "beast_pnl_pct": 0.0728,
+    "closed_count": 3
   },
   "positions": [
     {
       "ticker": "AAOI",
       "theme": "光接続：インフラ",
       "entry_price": 150.6,
-      "current_price": 142.55,
-      "weight": 0.1843,
-      "pnl_pct": -0.0535
-    },
-    {
-      "ticker": "AEIS",
-      "theme": "半導体製造装置：部品",
-      "entry_price": 379.64,
-      "current_price": 374.32,
-      "weight": 0.1512,
-      "pnl_pct": -0.014
+      "current_price": 157.32,
+      "weight": 0.1877,
+      "pnl_pct": 0.0446
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
       "entry_price": 34.14,
-      "current_price": 33.08,
-      "weight": 0.1223,
-      "pnl_pct": -0.031
+      "current_price": 39.0,
+      "weight": 0.131,
+      "pnl_pct": 0.1424
+    },
+    {
+      "ticker": "AEHR",
+      "theme": "半導体製造装置：後工程",
+      "entry_price": 80.85,
+      "current_price": 80.85,
+      "weight": 0.1388,
+      "pnl_pct": 0.0
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
       "entry_price": 420.59,
-      "current_price": 456.23,
-      "weight": 0.288,
-      "pnl_pct": 0.0847
+      "current_price": 457.23,
+      "weight": 0.3,
+      "pnl_pct": 0.0871
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "カスタムAI半導体",
+      "entry_price": 60.44,
+      "current_price": 62.9,
+      "weight": 0.1,
+      "pnl_pct": 0.0407
     },
     {
       "ticker": "ASTS",
       "theme": "宇宙：衛星通信",
       "entry_price": 86.91,
-      "current_price": 86.91,
-      "weight": 0.1385,
-      "pnl_pct": 0.0
-    },
-    {
-      "ticker": "AMKR",
-      "theme": "半導体受託製造",
-      "entry_price": 60.44,
-      "current_price": 59.72,
-      "weight": 0.1156,
-      "pnl_pct": -0.0119
+      "current_price": 90.94,
+      "weight": 0.1425,
+      "pnl_pct": 0.0464
     }
   ],
   "closed_positions": [
+    {
+      "ticker": "AEIS",
+      "theme": "半導体製造装置：部品",
+      "entry_date": "2026-04-10",
+      "exit_date": "2026-04-16",
+      "entry_price": 379.64
+    },
     {
       "ticker": "APD",
       "theme": "半導体：材料・消耗品",
