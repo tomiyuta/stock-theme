@@ -208,7 +208,10 @@ input[type="number"],input[type="text"],select,textarea{font-size:16px!important
   font-weight:400;
   line-height:1;
 }
-@media(max-width:420px){
-  /* 超小画面では外部 link を非表示 (コアナビを優先) */
-  .nav-item.external{display:none}
+/* iPhone 小型機 (<=380px) で font-size を縮小して 9 items 収める */
+@media(max-width:380px){
+  .bottom-nav .nav-item{font-size:8px;padding:3px 1px;min-width:0}
+  .bottom-nav .nav-item.external{padding-left:4px !important}
+  .bottom-nav .nav-icon svg{width:16px;height:16px}
+  .bottom-nav .nav-item.external .ext-mark{font-size:7px}
 }
