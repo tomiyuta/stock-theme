@@ -3,33 +3,73 @@
   "outputDirectory": "public",
   "framework": null,
   "rewrites": [
-    { "source": "/theme/:slug", "destination": "/theme.html" },
-    { "source": "/map", "destination": "/map.html" },
-    { "source": "/market-movers", "destination": "/market-movers.html" },
-    { "source": "/infographic", "destination": "/infographic.html" },
-    { "source": "/prism", "destination": "/prism.html" },
-    { "source": "/prism-r", "destination": "/prism-r.html" },
-    { "source": "/prism-rq", "destination": "/prism-rq.html" },
-    { "source": "/prism-g2", "destination": "/prism-g2.html" }
+    {
+      "source": "/theme/:slug",
+      "destination": "/theme.html"
+    },
+    {
+      "source": "/map",
+      "destination": "/map.html"
+    },
+    {
+      "source": "/market-movers",
+      "destination": "/market-movers.html"
+    },
+    {
+      "source": "/infographic",
+      "destination": "/infographic.html"
+    },
+    {
+      "source": "/prism",
+      "destination": "/prism.html"
+    },
+    {
+      "source": "/prism-r",
+      "destination": "/prism-r.html"
+    },
+    {
+      "source": "/prism-rq",
+      "destination": "/prism-rq.html"
+    },
+    {
+      "source": "/prism-g2",
+      "destination": "/prism-g2.html"
+    },
+    {
+      "source": "/health",
+      "destination": "/health.html"
+    }
   ],
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=300, s-maxage=600" },
-        { "key": "Access-Control-Allow-Origin", "value": "*" }
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=300, s-maxage=600"
+        },
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
       ]
     },
     {
-      "source": "/(prism|prism-r|prism-rq|prism-g2|map|market-movers|infographic)",
+      "source": "/(prism|prism-r|prism-rq|prism-g2|map|market-movers|infographic|health)",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
       ]
     },
     {
       "source": "/sw.js",
       "headers": [
-        { "key": "Cache-Control", "value": "no-cache, no-store, must-revalidate" }
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
       ]
     }
   ]
