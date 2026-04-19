@@ -190,3 +190,25 @@ body{font-size:13px}
 input[type="number"],input[type="text"],select,textarea{font-size:16px!important;-webkit-appearance:none}
 /* Scrollable table wrapper */
 .table-scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -2px;padding:0 2px}
+
+/* ========== External nav link (健康診断 → opengrail/monitor) ========== */
+.nav-item.external{
+  position:relative;
+  opacity:0.78;
+  border-left:1px solid rgba(128,128,128,0.15);
+  padding-left:6px !important;
+}
+.nav-item.external:hover{opacity:1}
+.nav-item.external .ext-mark{
+  position:absolute;
+  top:1px;
+  right:2px;
+  font-size:8px;
+  color:var(--text-sub);
+  font-weight:400;
+  line-height:1;
+}
+@media(max-width:420px){
+  /* 超小画面では外部 link を非表示 (コアナビを優先) */
+  .nav-item.external{display:none}
+}
