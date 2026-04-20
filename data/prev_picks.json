@@ -2,67 +2,123 @@
   "tickers": [
     "ADI",
     "AMD",
+    "AMKR",
+    "ARM",
     "BHP",
+    "CC",
     "CLS",
+    "ETN",
+    "FLEX",
     "GEV",
-    "HUBB",
+    "JBL",
+    "MCHP",
     "MRVL",
+    "NXPI",
+    "SOLS",
     "TXN",
     "VALE"
   ],
   "picks": [
     {
+      "ticker": "FLEX",
+      "theme": "",
+      "price": 81.83,
+      "date": ""
+    },
+    {
+      "ticker": "JBL",
+      "theme": "",
+      "price": 321.69,
+      "date": ""
+    },
+    {
       "ticker": "MRVL",
       "theme": "",
-      "price": 134.6,
+      "price": 139.69,
       "date": ""
     },
     {
       "ticker": "AMD",
       "theme": "",
-      "price": 258.12,
+      "price": 278.39,
+      "date": ""
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "",
+      "price": 67.37,
+      "date": ""
+    },
+    {
+      "ticker": "ARM",
+      "theme": "",
+      "price": 166.73,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 406.21,
       "date": ""
     },
     {
       "ticker": "GEV",
       "theme": "",
-      "price": 985.92,
+      "price": 1002.75,
       "date": ""
     },
     {
-      "ticker": "HUBB",
+      "ticker": "MCHP",
       "theme": "",
-      "price": 526.94,
+      "price": 78.76,
+      "date": ""
+    },
+    {
+      "ticker": "NXPI",
+      "theme": "",
+      "price": 216.03,
       "date": ""
     },
     {
       "ticker": "TXN",
       "theme": "",
-      "price": 216.29,
+      "price": 229.82,
       "date": ""
     },
     {
       "ticker": "ADI",
       "theme": "",
-      "price": 347.94,
+      "price": 371.45,
       "date": ""
     },
     {
       "ticker": "CLS",
       "theme": "",
-      "price": 381.94,
+      "price": 396.01,
       "date": ""
     },
     {
       "ticker": "VALE",
       "theme": "",
-      "price": 17.62,
+      "price": 17.78,
       "date": ""
     },
     {
       "ticker": "BHP",
       "theme": "",
-      "price": 79.47,
+      "price": 80.45,
+      "date": ""
+    },
+    {
+      "ticker": "SOLS",
+      "theme": "",
+      "price": 81.2,
+      "date": ""
+    },
+    {
+      "ticker": "CC",
+      "theme": "",
+      "price": 23.18,
       "date": ""
     }
   ],

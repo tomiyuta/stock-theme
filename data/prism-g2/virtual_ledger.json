@@ -49,7 +49,8 @@
       "entry_date": "2026-04-15",
       "entry_price": 86.91,
       "theme": "宇宙：衛星通信",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-20"
     },
     "AEHR": {
       "entry_date": "2026-04-16",
