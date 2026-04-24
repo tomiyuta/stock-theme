@@ -141,6 +141,7 @@ def shrink_r2(r2v):
 def cra_audit(theme_slug, ticker, self_alpha):
     """CRA-v1: Consensus Residual Alpha confirmation from stock-themes."""
     ba_theme = st_beta_alpha.get(theme_slug, {}).get('data', {})
+    if not isinstance(ba_theme, dict): ba_theme = {}
     ba_tk = ba_theme.get(ticker, {})
     if not ba_tk: return 0.0, {}
     a3m = ba_tk.get('3M', {}); a6m = ba_tk.get('6M', {})
@@ -517,7 +518,9 @@ try:
             cd_entry['monotonic_ratio'] = round(float(np.sum(diffs > 0) / max(len(diffs), 1)), 3)
             cd_entry['jumpiness'] = round(float(np.std(diffs) / (np.abs(np.mean(diffs)) + 1e-8)), 2)
         # Multi-horizon alpha sign consistency
-        ba_tk = ba_data.get(th_slug, {}).get('data', {}).get(tk, {})
+        ba_theme_data = ba_data.get(th_slug, {}).get('data', {})
+        if not isinstance(ba_theme_data, dict): ba_theme_data = {}
+        ba_tk = ba_theme_data.get(tk, {})
         if ba_tk:
             n_pos = sum(1 for p in ['5D','10D','1M','2M','3M','6M','12M']
                        if ba_tk.get(p, {}).get('alpha', 0) > 0)

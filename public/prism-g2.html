@@ -225,7 +225,7 @@ function fetchG2Fx(){
   fetch('https://api.exchangerate-api.com/v4/latest/USD').then(r=>r.json()).then(d=>{
     g2fx=d.rates?.JPY||150;rate.textContent='¥'+g2fx.toFixed(2);
     dot.style.background='#1D9E75';const now=new Date();
-    time.textContent=now.getHours()+':'+String(now.getMinutes()).padStart(2,'0')+'取得';
+    time.textContent=now.toLocaleTimeString('ja-JP',{timeZone:'Asia/Tokyo',hour:'2-digit',minute:'2-digit',hour12:false})+' JST取得';
     icon.style.transform='rotate(0deg)';calcG2();
   }).catch(()=>{dot.style.background='#E24B4A';time.textContent='取得失敗';icon.style.transform='rotate(0deg)';});
 }
