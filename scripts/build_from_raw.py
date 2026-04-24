@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import json, os
 from pathlib import Path
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "scripts" / "theme_ranking_raw.json"
@@ -27,7 +27,7 @@ def main():
         "restrictions_enabled": False,
         "user_tier": "self-hosted",
         "data_source": raw.get("data_source", "daily"),
-        "last_update": raw.get("last_update", datetime.now().strftime("%Y-%m-%d %H:%M:%S")),
+        "last_update": raw.get("last_update", datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S")),
         "latest_stock_date": raw.get("latest_stock_date", ""),
         "is_market_open": False,
     }

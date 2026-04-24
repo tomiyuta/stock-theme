@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """GitHub Actions用: yfinance → public/api/ へJSON出力"""
 import json, time, os
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 from pathlib import Path
 import pandas as pd
 import numpy as np
@@ -129,7 +129,7 @@ def main():
     ranking = {"all_themes":theme_res+etf_res+stock_res,"themes":theme_res[:50],
         "all_periods":list(PM.keys()),"periods":list(PM.keys()),
         "ranking_limited":False,"restrictions_enabled":False,"user_tier":"self-hosted",
-        "data_source":"yfinance","last_update":datetime.now().strftime("%Y-%m-%d %H:%M:%S"),
+        "data_source":"yfinance","last_update":datetime.now(timezone(timedelta(hours=9))).strftime("%Y-%m-%d %H:%M:%S"),
         "latest_stock_date":prices.index[-1].strftime("%Y-%m-%d"),"is_market_open":False}
     with open(API/"theme_ranking.json","w",encoding="utf-8") as f: json.dump(ranking,f,ensure_ascii=False)
     print(f"✓ theme_ranking.json ({len(theme_res)} themes)")
