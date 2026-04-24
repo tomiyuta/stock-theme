@@ -139,6 +139,12 @@
       "entry_price": 321.75,
       "theme": "熱管理インフラ",
       "status": "active"
+    },
+    "PL": {
+      "entry_date": "2026-04-24",
+      "entry_price": 35.44,
+      "theme": "宇宙：地球観測",
+      "status": "active"
     }
   },
   "history": [],

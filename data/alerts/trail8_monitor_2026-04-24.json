@@ -3,8 +3,8 @@
   "trail8_alerts": [
     {
       "ticker": "FTAI",
-      "drop": -0.12745697896749528,
-      "reason": "gap_stop(-12.7%)"
+      "drop": -0.09927342256214153,
+      "reason": "gap_stop(-9.9%)"
     }
   ],
   "auto_sell_enabled": false,

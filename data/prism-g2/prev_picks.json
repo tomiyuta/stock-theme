@@ -1,9 +1,9 @@
 {
   "tickers": [
     "AAOI",
+    "ACDC",
     "AEHR",
     "AMKR",
-    "BKSY",
     "ETN",
     "MU"
   ],
@@ -11,39 +11,39 @@
     {
       "ticker": "AAOI",
       "theme": "光接続：インフラ",
-      "price": 137.73,
-      "date": "2026-04-23"
+      "price": 162.17,
+      "date": "2026-04-24"
     },
     {
       "ticker": "AEHR",
       "theme": "半導体製造装置：後工程",
-      "price": 95.51,
-      "date": "2026-04-23"
+      "price": 95.91,
+      "date": "2026-04-24"
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
-      "price": 481.72,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "BKSY",
-      "theme": "宇宙：地球観測",
-      "price": 38.44,
-      "date": "2026-04-23"
+      "price": 496.72,
+      "date": "2026-04-24"
     },
     {
       "ticker": "AMKR",
       "theme": "カスタムAI半導体",
-      "price": 72.91,
-      "date": "2026-04-23"
+      "price": 78.1,
+      "date": "2026-04-24"
     },
     {
       "ticker": "ETN",
       "theme": "DC変圧器・スイッチギア",
-      "price": 424.5,
-      "date": "2026-04-23"
+      "price": 423.92,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "ACDC",
+      "theme": "天然ガス掘削：米",
+      "price": 7.38,
+      "date": "2026-04-24"
     }
   ],
-  "date": "2026-04-23"
+  "date": "2026-04-24"
 }

@@ -23,7 +23,8 @@
       "entry_date": "2026-04-10",
       "entry_price": 34.14,
       "theme": "宇宙：地球観測",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-24"
     },
     "APD": {
       "entry_date": "2026-04-10",
@@ -56,6 +57,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 80.85,
       "theme": "半導体製造装置：後工程",
+      "status": "active"
+    },
+    "ACDC": {
+      "entry_date": "2026-04-24",
+      "entry_price": 7.38,
+      "theme": "天然ガス掘削：米",
       "status": "active"
     }
   },

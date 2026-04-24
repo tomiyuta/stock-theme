@@ -155,7 +155,7 @@
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 413.87
+      "peak_price_since_entry": 424.5
     },
     {
       "ticker": "ODFL",
@@ -332,12 +332,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 134.6,
       "holding_days": 2,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 157.32
+      "peak_price_since_entry": 165.56
     },
     {
       "ticker": "AMD",
@@ -345,12 +345,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 258.12,
       "holding_days": 2,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 303.46
+      "peak_price_since_entry": 305.33
     },
     {
       "ticker": "GEV",
@@ -363,7 +363,7 @@
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 1127.56
+      "peak_price_since_entry": 1149.53
     },
     {
       "ticker": "TXN",
@@ -371,12 +371,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 216.29,
       "holding_days": 2,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 236.31
+      "peak_price_since_entry": 282.23
     },
     {
       "ticker": "ADI",
@@ -384,12 +384,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 347.94,
       "holding_days": 2,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 381.42
+      "peak_price_since_entry": 403.88
     },
     {
       "ticker": "CLS",
@@ -397,7 +397,7 @@
       "entry_date": "2026-04-16",
       "entry_price": 381.94,
       "holding_days": 2,
-      "target_weight": 0.0318,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
@@ -410,12 +410,12 @@
       "entry_date": "2026-04-20",
       "entry_price": 81.83,
       "holding_days": 1,
-      "target_weight": 0.0318,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 81.83
+      "peak_price_since_entry": 86.9
     },
     {
       "ticker": "JBL",
@@ -436,12 +436,12 @@
       "entry_date": "2026-04-20",
       "entry_price": 67.37,
       "holding_days": 1,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 72.25
+      "peak_price_since_entry": 72.91
     },
     {
       "ticker": "ARM",
@@ -449,12 +449,12 @@
       "entry_date": "2026-04-20",
       "entry_price": 166.73,
       "holding_days": 1,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 196.57
+      "peak_price_since_entry": 204.61
     },
     {
       "ticker": "MCHP",
@@ -462,12 +462,12 @@
       "entry_date": "2026-04-20",
       "entry_price": 78.76,
       "holding_days": 1,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 82.48
+      "peak_price_since_entry": 90.64
     },
     {
       "ticker": "NXPI",
@@ -475,12 +475,12 @@
       "entry_date": "2026-04-20",
       "entry_price": 216.03,
       "holding_days": 1,
-      "target_weight": 0.0389,
+      "target_weight": 0.0269,
       "sector": "Technology",
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 225.75
+      "peak_price_since_entry": 241.16
     },
     {
       "ticker": "SOLS",
@@ -506,7 +506,7 @@
       "theme_at_entry": "",
       "min_hold_days": 20,
       "eligible_to_exit": false,
-      "peak_price_since_entry": 24.04
+      "peak_price_since_entry": 24.19
     },
     {
       "ticker": "JBHT",
@@ -533,6 +533,45 @@
       "min_hold_days": 20,
       "eligible_to_exit": false,
       "peak_price_since_entry": 422.65
+    },
+    {
+      "ticker": "SANM",
+      "status": "active",
+      "entry_date": "2026-04-24",
+      "entry_price": 180.02,
+      "holding_days": 0,
+      "target_weight": 0.0269,
+      "sector": "Technology",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 180.02
+    },
+    {
+      "ticker": "ON",
+      "status": "active",
+      "entry_date": "2026-04-24",
+      "entry_price": 97.78,
+      "holding_days": 0,
+      "target_weight": 0.0269,
+      "sector": "Technology",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 97.78
+    },
+    {
+      "ticker": "VICR",
+      "status": "active",
+      "entry_date": "2026-04-24",
+      "entry_price": 260.13,
+      "holding_days": 0,
+      "target_weight": 0.0269,
+      "sector": "Technology",
+      "theme_at_entry": "",
+      "min_hold_days": 20,
+      "eligible_to_exit": false,
+      "peak_price_since_entry": 260.13
     }
   ],
   "metadata": {
@@ -541,6 +580,6 @@
   },
   "cash_proxy": {
     "ticker": "SHV",
-    "weight": 0.2735
+    "weight": 0.4618
   }
 }

@@ -1,10 +1,10 @@
 {
-  "as_of_date": "2026-04-23",
+  "as_of_date": "2026-04-24",
   "strategy": "PRISM-RQ",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.1012,
+    "total_pnl_pct": 0.0419,
     "closed_count": 14
   },
   "positions": [
@@ -12,91 +12,91 @@
       "ticker": "AXTI",
       "theme": "半導体：材料・消耗品",
       "entry_price": 67.3,
-      "current_price": 75.27,
+      "current_price": 76.16,
       "weight": 0.1,
-      "pnl_pct": 0.1184,
-      "pnl_weighted": 0.011842
+      "pnl_pct": 0.1316,
+      "pnl_weighted": 0.013165
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
       "entry_price": 10.05,
-      "current_price": 11.14,
+      "current_price": 11.33,
       "weight": 0.1,
-      "pnl_pct": 0.1085,
-      "pnl_weighted": 0.010846
+      "pnl_pct": 0.1274,
+      "pnl_weighted": 0.012736
     },
     {
       "ticker": "ICHR",
       "theme": "半導体製造装置：部品",
       "entry_price": 63.68,
-      "current_price": 68.41,
+      "current_price": 70.93,
       "weight": 0.1,
-      "pnl_pct": 0.0743,
-      "pnl_weighted": 0.007428
-    },
-    {
-      "ticker": "VIAV",
-      "theme": "光接続：インフラ",
-      "entry_price": 41.79,
-      "current_price": 46.15,
-      "weight": 0.1,
-      "pnl_pct": 0.1043,
-      "pnl_weighted": 0.010433
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "entry_price": 21.51,
-      "current_price": 21.27,
-      "weight": 0.1,
-      "pnl_pct": -0.0112,
-      "pnl_weighted": -0.001116
+      "pnl_pct": 0.1139,
+      "pnl_weighted": 0.011385
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
       "entry_price": 62.77,
-      "current_price": 63.79,
+      "current_price": 64.19,
       "weight": 0.1,
-      "pnl_pct": 0.0162,
-      "pnl_weighted": 0.001625
+      "pnl_pct": 0.0226,
+      "pnl_weighted": 0.002262
     },
     {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "entry_price": 361.22,
-      "current_price": 382.88,
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "entry_price": 21.51,
+      "current_price": 20.87,
       "weight": 0.1,
-      "pnl_pct": 0.06,
-      "pnl_weighted": 0.005996
+      "pnl_pct": -0.0298,
+      "pnl_weighted": -0.002975
+    },
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：トランシーバ",
+      "entry_price": 150.6,
+      "current_price": 162.17,
+      "weight": 0.1,
+      "pnl_pct": 0.0768,
+      "pnl_weighted": 0.007683
     },
     {
       "ticker": "VRT",
       "theme": "熱管理インフラ",
       "entry_price": 321.75,
-      "current_price": 321.75,
+      "current_price": 323.46,
+      "weight": 0.1,
+      "pnl_pct": 0.0053,
+      "pnl_weighted": 0.000531
+    },
+    {
+      "ticker": "PL",
+      "theme": "宇宙：地球観測",
+      "entry_price": 35.44,
+      "current_price": 35.44,
       "weight": 0.1,
       "pnl_pct": 0.0,
       "pnl_weighted": 0.0
     },
     {
-      "ticker": "GEV",
-      "theme": "DC変圧器・スイッチギア",
-      "entry_price": 991.32,
-      "current_price": 1149.53,
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "entry_price": 361.22,
+      "current_price": 376.12,
       "weight": 0.1,
-      "pnl_pct": 0.1596,
-      "pnl_weighted": 0.01596
+      "pnl_pct": 0.0412,
+      "pnl_weighted": 0.004125
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
       "entry_price": 45.03,
-      "current_price": 47.22,
+      "current_price": 46.38,
       "weight": 0.1,
-      "pnl_pct": 0.0486,
-      "pnl_weighted": 0.004863
+      "pnl_pct": 0.03,
+      "pnl_weighted": 0.002998
     }
   ],
   "closed_positions": [

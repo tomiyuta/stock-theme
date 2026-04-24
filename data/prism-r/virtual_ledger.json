@@ -10,7 +10,9 @@
       "entry_date": "2026-04-09",
       "entry_price": 10.14,
       "theme": "天然ガス掘削：米",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-24",
+      "exit_price": 0
     },
     "VIAV": {
       "entry_date": "2026-04-09",
@@ -162,6 +164,18 @@
       "entry_date": "2026-04-23",
       "entry_price": 321.75,
       "theme": "熱管理インフラ",
+      "status": "active"
+    },
+    "LBRT": {
+      "entry_date": "2026-04-24",
+      "entry_price": 32.74,
+      "theme": "天然ガス掘削：米",
+      "status": "active"
+    },
+    "PL": {
+      "entry_date": "2026-04-24",
+      "entry_price": 35.44,
+      "theme": "宇宙：地球観測",
       "status": "active"
     }
   },

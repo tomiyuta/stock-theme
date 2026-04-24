@@ -1,13 +1,21 @@
 {
-  "as_of": "2026-04-23",
-  "prev_date": "2026-04-20",
+  "as_of": "2026-04-24",
+  "prev_date": "2026-04-23",
   "added": [
     {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "price": 75.27,
-      "date": "2026-04-23"
+      "ticker": "AAOI",
+      "theme": "光接続：トランシーバ",
+      "price": 162.17,
+      "date": "2026-04-24"
     },
+    {
+      "ticker": "PL",
+      "theme": "宇宙：地球観測",
+      "price": 35.44,
+      "date": "2026-04-24"
+    }
+  ],
+  "removed": [
     {
       "ticker": "GEV",
       "theme": "DC変圧器・スイッチギア",
@@ -15,81 +23,67 @@
       "date": "2026-04-23"
     },
     {
-      "ticker": "VRT",
-      "theme": "熱管理インフラ",
-      "price": 321.75,
-      "date": "2026-04-23"
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "MOD",
-      "theme": "熱管理インフラ",
-      "price": 251.5,
-      "date": "2026-04-20"
-    },
-    {
-      "ticker": "PWR",
-      "theme": "インフラ工事：電力/通信",
-      "price": 604.97,
-      "date": "2026-04-20"
-    },
-    {
-      "ticker": "SNDK",
-      "theme": "データストレージ",
-      "price": 913.02,
-      "date": "2026-04-20"
-    }
-  ],
-  "unchanged": [
-    {
-      "ticker": "ICHR",
-      "theme": "半導体製造装置：部品",
-      "price": 68.41,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "price": 382.88,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "PARR",
-      "theme": "石油精製",
-      "price": 63.79,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "price": 21.27,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "PTEN",
-      "theme": "天然ガス掘削：米",
-      "price": 11.14,
-      "date": "2026-04-23"
-    },
-    {
       "ticker": "VIAV",
       "theme": "光接続：インフラ",
       "price": 46.15,
       "date": "2026-04-23"
+    }
+  ],
+  "unchanged": [
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "price": 76.16,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "price": 70.93,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "price": 376.12,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "PARR",
+      "theme": "石油精製",
+      "price": 64.19,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "price": 20.87,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "PTEN",
+      "theme": "天然ガス掘削：米",
+      "price": 11.33,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "VRT",
+      "theme": "熱管理インフラ",
+      "price": 323.46,
+      "date": "2026-04-24"
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
-      "price": 47.22,
-      "date": "2026-04-23"
+      "price": 46.38,
+      "date": "2026-04-24"
     }
   ],
   "summary": {
     "total_now": 10,
     "total_prev": 10,
-    "added": 3,
-    "removed": 3,
-    "unchanged": 7
+    "added": 2,
+    "removed": 2,
+    "unchanged": 8
   }
 }

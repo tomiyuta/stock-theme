@@ -2,12 +2,12 @@
   "tickers": [
     "AAOI",
     "AXTI",
-    "GEV",
     "ICHR",
+    "LBRT",
     "MTZ",
     "PARR",
     "PBR",
-    "PTEN",
+    "PL",
     "VRT",
     "VZ"
   ],
@@ -15,63 +15,63 @@
     {
       "ticker": "AXTI",
       "theme": "半導体：材料・消耗品",
-      "price": 75.27,
-      "date": "2026-04-23"
+      "price": 76.16,
+      "date": "2026-04-24"
     },
     {
-      "ticker": "PTEN",
+      "ticker": "LBRT",
       "theme": "天然ガス掘削：米",
-      "price": 11.14,
-      "date": "2026-04-23"
+      "price": 32.74,
+      "date": "2026-04-24"
     },
     {
       "ticker": "ICHR",
       "theme": "半導体製造装置：部品",
-      "price": 68.41,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "AAOI",
-      "theme": "光接続：インフラ",
-      "price": 137.73,
-      "date": "2026-04-23"
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "price": 21.27,
-      "date": "2026-04-23"
+      "price": 70.93,
+      "date": "2026-04-24"
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
-      "price": 63.79,
-      "date": "2026-04-23"
+      "price": 64.19,
+      "date": "2026-04-24"
     },
     {
-      "ticker": "MTZ",
-      "theme": "電気工事・施工",
-      "price": 382.88,
-      "date": "2026-04-23"
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "price": 20.87,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：トランシーバ",
+      "price": 162.17,
+      "date": "2026-04-24"
     },
     {
       "ticker": "VRT",
       "theme": "熱管理インフラ",
-      "price": 321.75,
-      "date": "2026-04-23"
+      "price": 323.46,
+      "date": "2026-04-24"
     },
     {
-      "ticker": "GEV",
-      "theme": "DC変圧器・スイッチギア",
-      "price": 1149.53,
-      "date": "2026-04-23"
+      "ticker": "PL",
+      "theme": "宇宙：地球観測",
+      "price": 35.44,
+      "date": "2026-04-24"
+    },
+    {
+      "ticker": "MTZ",
+      "theme": "電気工事・施工",
+      "price": 376.12,
+      "date": "2026-04-24"
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
-      "price": 47.22,
-      "date": "2026-04-23"
+      "price": 46.38,
+      "date": "2026-04-24"
     }
   ],
-  "date": "2026-04-23"
+  "date": "2026-04-24"
 }

@@ -3,6 +3,38 @@
   "prev_date": "",
   "added": [
     {
+      "ticker": "CLS",
+      "theme": "",
+      "price": 391.6,
+      "date": ""
+    },
+    {
+      "ticker": "FLEX",
+      "theme": "",
+      "price": 86.9,
+      "date": ""
+    },
+    {
+      "ticker": "ON",
+      "theme": "",
+      "price": 97.78,
+      "date": ""
+    },
+    {
+      "ticker": "SANM",
+      "theme": "",
+      "price": 180.02,
+      "date": ""
+    },
+    {
+      "ticker": "VICR",
+      "theme": "",
+      "price": 260.13,
+      "date": ""
+    }
+  ],
+  "removed": [
+    {
       "ticker": "AVGO",
       "theme": "",
       "price": 422.65,
@@ -33,109 +65,77 @@
       "date": ""
     }
   ],
-  "removed": [
-    {
-      "ticker": "BHP",
-      "theme": "",
-      "price": 80.45,
-      "date": ""
-    },
-    {
-      "ticker": "CLS",
-      "theme": "",
-      "price": 396.01,
-      "date": ""
-    },
-    {
-      "ticker": "FLEX",
-      "theme": "",
-      "price": 81.83,
-      "date": ""
-    },
-    {
-      "ticker": "JBL",
-      "theme": "",
-      "price": 321.69,
-      "date": ""
-    },
-    {
-      "ticker": "VALE",
-      "theme": "",
-      "price": 17.78,
-      "date": ""
-    }
-  ],
   "unchanged": [
     {
       "ticker": "ADI",
       "theme": "",
-      "price": 381.42,
+      "price": 403.88,
       "date": ""
     },
     {
       "ticker": "AMD",
       "theme": "",
-      "price": 303.46,
+      "price": 305.33,
       "date": ""
     },
     {
       "ticker": "AMKR",
       "theme": "",
-      "price": 72.25,
+      "price": 72.91,
       "date": ""
     },
     {
       "ticker": "ARM",
       "theme": "",
-      "price": 196.57,
+      "price": 204.61,
       "date": ""
     },
     {
       "ticker": "CC",
       "theme": "",
-      "price": 24.04,
+      "price": 24.19,
       "date": ""
     },
     {
       "ticker": "ETN",
       "theme": "",
-      "price": 413.87,
+      "price": 424.5,
       "date": ""
     },
     {
       "ticker": "GEV",
       "theme": "",
-      "price": 1127.56,
+      "price": 1149.53,
       "date": ""
     },
     {
       "ticker": "MCHP",
       "theme": "",
-      "price": 82.48,
+      "price": 90.64,
       "date": ""
     },
     {
       "ticker": "MRVL",
       "theme": "",
-      "price": 157.32,
+      "price": 165.56,
       "date": ""
     },
     {
       "ticker": "NXPI",
       "theme": "",
-      "price": 225.75,
+      "price": 241.16,
       "date": ""
     },
     {
       "ticker": "SOLS",
       "theme": "",
-      "price": 81.34,
+      "price": 81.05,
       "date": ""
     },
     {
       "ticker": "TXN",
       "theme": "",
-      "price": 236.31,
+      "price": 282.23,
       "date": ""
     }
   ],
