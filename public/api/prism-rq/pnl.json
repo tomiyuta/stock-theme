@@ -1,102 +1,102 @@
 {
-  "as_of_date": "2026-04-20",
+  "as_of_date": "2026-04-23",
   "strategy": "PRISM-RQ",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0212,
-    "closed_count": 12
+    "total_pnl_pct": 0.1012,
+    "closed_count": 14
   },
   "positions": [
     {
-      "ticker": "SNDK",
-      "theme": "データストレージ",
-      "entry_price": 891.72,
-      "current_price": 913.02,
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "entry_price": 67.3,
+      "current_price": 75.27,
       "weight": 0.1,
-      "pnl_pct": 0.0239,
-      "pnl_weighted": 0.002389
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "entry_price": 21.51,
-      "current_price": 20.76,
-      "weight": 0.1,
-      "pnl_pct": -0.0349,
-      "pnl_weighted": -0.003487
-    },
-    {
-      "ticker": "ICHR",
-      "theme": "半導体製造装置：部品",
-      "entry_price": 63.68,
-      "current_price": 64.46,
-      "weight": 0.1,
-      "pnl_pct": 0.0122,
-      "pnl_weighted": 0.001225
-    },
-    {
-      "ticker": "VIAV",
-      "theme": "光接続：インフラ",
-      "entry_price": 41.79,
-      "current_price": 44.62,
-      "weight": 0.1,
-      "pnl_pct": 0.0677,
-      "pnl_weighted": 0.006772
+      "pnl_pct": 0.1184,
+      "pnl_weighted": 0.011842
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
       "entry_price": 10.05,
-      "current_price": 9.77,
+      "current_price": 11.14,
       "weight": 0.1,
-      "pnl_pct": -0.0279,
-      "pnl_weighted": -0.002786
+      "pnl_pct": 0.1085,
+      "pnl_weighted": 0.010846
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "entry_price": 63.68,
+      "current_price": 68.41,
+      "weight": 0.1,
+      "pnl_pct": 0.0743,
+      "pnl_weighted": 0.007428
+    },
+    {
+      "ticker": "VIAV",
+      "theme": "光接続：インフラ",
+      "entry_price": 41.79,
+      "current_price": 46.15,
+      "weight": 0.1,
+      "pnl_pct": 0.1043,
+      "pnl_weighted": 0.010433
+    },
+    {
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "entry_price": 21.51,
+      "current_price": 21.27,
+      "weight": 0.1,
+      "pnl_pct": -0.0112,
+      "pnl_weighted": -0.001116
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
       "entry_price": 62.77,
-      "current_price": 59.14,
+      "current_price": 63.79,
       "weight": 0.1,
-      "pnl_pct": -0.0578,
-      "pnl_weighted": -0.005783
+      "pnl_pct": 0.0162,
+      "pnl_weighted": 0.001625
     },
     {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
       "entry_price": 361.22,
-      "current_price": 371.59,
+      "current_price": 382.88,
       "weight": 0.1,
-      "pnl_pct": 0.0287,
-      "pnl_weighted": 0.002871
+      "pnl_pct": 0.06,
+      "pnl_weighted": 0.005996
     },
     {
-      "ticker": "MOD",
+      "ticker": "VRT",
       "theme": "熱管理インフラ",
-      "entry_price": 253.66,
-      "current_price": 251.5,
+      "entry_price": 321.75,
+      "current_price": 321.75,
       "weight": 0.1,
-      "pnl_pct": -0.0085,
-      "pnl_weighted": -0.000852
+      "pnl_pct": 0.0,
+      "pnl_weighted": 0.0
     },
     {
-      "ticker": "PWR",
-      "theme": "インフラ工事：電力/通信",
-      "entry_price": 585.36,
-      "current_price": 604.97,
+      "ticker": "GEV",
+      "theme": "DC変圧器・スイッチギア",
+      "entry_price": 991.32,
+      "current_price": 1149.53,
       "weight": 0.1,
-      "pnl_pct": 0.0335,
-      "pnl_weighted": 0.00335
+      "pnl_pct": 0.1596,
+      "pnl_weighted": 0.01596
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
       "entry_price": 45.03,
-      "current_price": 46.44,
+      "current_price": 47.22,
       "weight": 0.1,
-      "pnl_pct": 0.0313,
-      "pnl_weighted": 0.003131
+      "pnl_pct": 0.0486,
+      "pnl_weighted": 0.004863
     }
   ],
   "closed_positions": [
@@ -178,11 +178,25 @@
       "entry_price": 322.07
     },
     {
+      "ticker": "MOD",
+      "theme": "熱管理インフラ",
+      "entry_date": "2026-04-14",
+      "exit_date": "2026-04-23",
+      "entry_price": 253.66
+    },
+    {
       "ticker": "ETR",
       "theme": "電力：規制事業者",
       "entry_date": "2026-04-14",
       "exit_date": "2026-04-15",
       "entry_price": 115.57
+    },
+    {
+      "ticker": "SNDK",
+      "theme": "データストレージ",
+      "entry_date": "2026-04-15",
+      "exit_date": "2026-04-23",
+      "entry_price": 891.72
     }
   ]
 }

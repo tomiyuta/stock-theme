@@ -105,7 +105,8 @@
       "entry_date": "2026-04-14",
       "entry_price": 253.66,
       "theme": "熱管理インフラ",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-23"
     },
     "ETR": {
       "entry_date": "2026-04-14",
@@ -118,7 +119,8 @@
       "entry_date": "2026-04-15",
       "entry_price": 891.72,
       "theme": "データストレージ",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-23"
     },
     "VZ": {
       "entry_date": "2026-04-15",
@@ -130,6 +132,12 @@
       "entry_date": "2026-04-16",
       "entry_price": 63.68,
       "theme": "半導体製造装置：部品",
+      "status": "active"
+    },
+    "VRT": {
+      "entry_date": "2026-04-23",
+      "entry_price": 321.75,
+      "theme": "熱管理インフラ",
       "status": "active"
     }
   },

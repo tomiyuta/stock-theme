@@ -3,27 +3,47 @@
   "prev_date": "",
   "added": [
     {
-      "ticker": "AMKR",
+      "ticker": "AVGO",
       "theme": "",
-      "price": 67.37,
+      "price": 422.65,
       "date": ""
     },
     {
-      "ticker": "ARM",
+      "ticker": "DY",
       "theme": "",
-      "price": 166.73,
+      "price": 408.05,
       "date": ""
     },
     {
-      "ticker": "CC",
+      "ticker": "JBHT",
       "theme": "",
-      "price": 23.18,
+      "price": 247.03,
       "date": ""
     },
     {
-      "ticker": "ETN",
+      "ticker": "MTZ",
       "theme": "",
-      "price": 406.21,
+      "price": 376.5,
+      "date": ""
+    },
+    {
+      "ticker": "XPO",
+      "theme": "",
+      "price": 221.12,
+      "date": ""
+    }
+  ],
+  "removed": [
+    {
+      "ticker": "BHP",
+      "theme": "",
+      "price": 80.45,
+      "date": ""
+    },
+    {
+      "ticker": "CLS",
+      "theme": "",
+      "price": 396.01,
       "date": ""
     },
     {
@@ -39,29 +59,9 @@
       "date": ""
     },
     {
-      "ticker": "MCHP",
+      "ticker": "VALE",
       "theme": "",
-      "price": 78.76,
-      "date": ""
-    },
-    {
-      "ticker": "NXPI",
-      "theme": "",
-      "price": 216.03,
-      "date": ""
-    },
-    {
-      "ticker": "SOLS",
-      "theme": "",
-      "price": 81.2,
-      "date": ""
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "HUBB",
-      "theme": "",
-      "price": 526.94,
+      "price": 17.78,
       "date": ""
     }
   ],
@@ -69,57 +69,81 @@
     {
       "ticker": "ADI",
       "theme": "",
-      "price": 371.45,
+      "price": 381.42,
       "date": ""
     },
     {
       "ticker": "AMD",
       "theme": "",
-      "price": 278.39,
+      "price": 303.46,
       "date": ""
     },
     {
-      "ticker": "BHP",
+      "ticker": "AMKR",
       "theme": "",
-      "price": 80.45,
+      "price": 72.25,
       "date": ""
     },
     {
-      "ticker": "CLS",
+      "ticker": "ARM",
       "theme": "",
-      "price": 396.01,
+      "price": 196.57,
+      "date": ""
+    },
+    {
+      "ticker": "CC",
+      "theme": "",
+      "price": 24.04,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 413.87,
       "date": ""
     },
     {
       "ticker": "GEV",
       "theme": "",
-      "price": 1002.75,
+      "price": 1127.56,
+      "date": ""
+    },
+    {
+      "ticker": "MCHP",
+      "theme": "",
+      "price": 82.48,
       "date": ""
     },
     {
       "ticker": "MRVL",
       "theme": "",
-      "price": 139.69,
+      "price": 157.32,
+      "date": ""
+    },
+    {
+      "ticker": "NXPI",
+      "theme": "",
+      "price": 225.75,
+      "date": ""
+    },
+    {
+      "ticker": "SOLS",
+      "theme": "",
+      "price": 81.34,
       "date": ""
     },
     {
       "ticker": "TXN",
       "theme": "",
-      "price": 229.82,
-      "date": ""
-    },
-    {
-      "ticker": "VALE",
-      "theme": "",
-      "price": 17.78,
+      "price": 236.31,
       "date": ""
     }
   ],
   "summary": {
     "total_now": 17,
-    "total_prev": 9,
-    "added": 9,
-    "removed": 1,
-    "unchanged": 8
+    "total_prev": 17,
+    "added": 5,
+    "removed": 5,
+    "unchanged": 12
   }
 }

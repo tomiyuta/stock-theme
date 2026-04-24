@@ -1,61 +1,61 @@
 {
-  "as_of_date": "2026-04-20",
+  "as_of_date": "2026-04-23",
   "strategy": "G2-MAX",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 6,
-    "total_pnl_pct": 0.0596,
-    "beast_pnl_pct": 0.0596,
+    "total_pnl_pct": 0.0986,
+    "beast_pnl_pct": 0.0986,
     "closed_count": 4
   },
   "positions": [
     {
       "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
+      "theme": "光接続：インフラ",
       "entry_price": 150.6,
-      "current_price": 163.47,
-      "weight": 0.1747,
-      "pnl_pct": 0.0855
+      "current_price": 137.73,
+      "weight": 0.2014,
+      "pnl_pct": -0.0855
     },
     {
       "ticker": "AEHR",
       "theme": "半導体製造装置：後工程",
       "entry_price": 80.85,
-      "current_price": 90.15,
-      "weight": 0.1464,
-      "pnl_pct": 0.115
-    },
-    {
-      "ticker": "BKSY",
-      "theme": "宇宙：地球観測",
-      "entry_price": 34.14,
-      "current_price": 37.42,
-      "weight": 0.133,
-      "pnl_pct": 0.0961
-    },
-    {
-      "ticker": "APD",
-      "theme": "半導体：材料・消耗品",
-      "entry_price": 298.71,
-      "current_price": 296.15,
-      "weight": 0.1424,
-      "pnl_pct": -0.0086
+      "current_price": 95.51,
+      "weight": 0.1502,
+      "pnl_pct": 0.1813
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
       "entry_price": 420.59,
-      "current_price": 448.42,
-      "weight": 0.3,
-      "pnl_pct": 0.0662
+      "current_price": 481.72,
+      "weight": 0.2875,
+      "pnl_pct": 0.1453
+    },
+    {
+      "ticker": "BKSY",
+      "theme": "宇宙：地球観測",
+      "entry_price": 34.14,
+      "current_price": 38.44,
+      "weight": 0.1487,
+      "pnl_pct": 0.126
     },
     {
       "ticker": "AMKR",
       "theme": "カスタムAI半導体",
       "entry_price": 60.44,
-      "current_price": 69.44,
-      "weight": 0.1035,
-      "pnl_pct": 0.1489
+      "current_price": 72.91,
+      "weight": 0.1075,
+      "pnl_pct": 0.2063
+    },
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "entry_price": 403.0,
+      "current_price": 424.5,
+      "weight": 0.1046,
+      "pnl_pct": 0.0533
     }
   ],
   "closed_positions": [

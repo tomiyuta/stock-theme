@@ -4,121 +4,121 @@
     "AMD",
     "AMKR",
     "ARM",
-    "BHP",
+    "AVGO",
     "CC",
-    "CLS",
+    "DY",
     "ETN",
-    "FLEX",
     "GEV",
-    "JBL",
+    "JBHT",
     "MCHP",
     "MRVL",
+    "MTZ",
     "NXPI",
     "SOLS",
     "TXN",
-    "VALE"
+    "XPO"
   ],
   "picks": [
     {
-      "ticker": "FLEX",
-      "theme": "",
-      "price": 81.83,
-      "date": ""
-    },
-    {
-      "ticker": "JBL",
-      "theme": "",
-      "price": 321.69,
-      "date": ""
-    },
-    {
       "ticker": "MRVL",
       "theme": "",
-      "price": 139.69,
+      "price": 157.32,
       "date": ""
     },
     {
       "ticker": "AMD",
       "theme": "",
-      "price": 278.39,
-      "date": ""
-    },
-    {
-      "ticker": "AMKR",
-      "theme": "",
-      "price": 67.37,
+      "price": 303.46,
       "date": ""
     },
     {
       "ticker": "ARM",
       "theme": "",
-      "price": 166.73,
+      "price": 196.57,
       "date": ""
     },
     {
-      "ticker": "ETN",
+      "ticker": "AMKR",
       "theme": "",
-      "price": 406.21,
+      "price": 72.25,
       "date": ""
     },
     {
       "ticker": "GEV",
       "theme": "",
-      "price": 1002.75,
+      "price": 1127.56,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 413.87,
       "date": ""
     },
     {
       "ticker": "MCHP",
       "theme": "",
-      "price": 78.76,
+      "price": 82.48,
       "date": ""
     },
     {
       "ticker": "NXPI",
       "theme": "",
-      "price": 216.03,
+      "price": 225.75,
       "date": ""
     },
     {
       "ticker": "TXN",
       "theme": "",
-      "price": 229.82,
+      "price": 236.31,
       "date": ""
     },
     {
       "ticker": "ADI",
       "theme": "",
-      "price": 371.45,
+      "price": 381.42,
       "date": ""
     },
     {
-      "ticker": "CLS",
+      "ticker": "MTZ",
       "theme": "",
-      "price": 396.01,
+      "price": 376.5,
       "date": ""
     },
     {
-      "ticker": "VALE",
+      "ticker": "DY",
       "theme": "",
-      "price": 17.78,
+      "price": 408.05,
       "date": ""
     },
     {
-      "ticker": "BHP",
+      "ticker": "JBHT",
       "theme": "",
-      "price": 80.45,
+      "price": 247.03,
+      "date": ""
+    },
+    {
+      "ticker": "XPO",
+      "theme": "",
+      "price": 221.12,
+      "date": ""
+    },
+    {
+      "ticker": "AVGO",
+      "theme": "",
+      "price": 422.65,
       "date": ""
     },
     {
       "ticker": "SOLS",
       "theme": "",
-      "price": 81.2,
+      "price": 81.34,
       "date": ""
     },
     {
       "ticker": "CC",
       "theme": "",
-      "price": 23.18,
+      "price": 24.04,
       "date": ""
     }
   ],

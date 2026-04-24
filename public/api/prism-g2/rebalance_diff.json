@@ -1,7 +1,15 @@
 {
-  "as_of": "2026-04-20",
-  "prev_date": "2026-04-16",
+  "as_of": "2026-04-23",
+  "prev_date": "2026-04-20",
   "added": [
+    {
+      "ticker": "ETN",
+      "theme": "DC変圧器・スイッチギア",
+      "price": 424.5,
+      "date": "2026-04-23"
+    }
+  ],
+  "removed": [
     {
       "ticker": "APD",
       "theme": "半導体：材料・消耗品",
@@ -9,44 +17,36 @@
       "date": "2026-04-20"
     }
   ],
-  "removed": [
-    {
-      "ticker": "ASTS",
-      "theme": "宇宙：衛星通信",
-      "price": 90.94,
-      "date": "2026-04-16"
-    }
-  ],
   "unchanged": [
     {
       "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
-      "price": 163.47,
-      "date": "2026-04-20"
+      "theme": "光接続：インフラ",
+      "price": 137.73,
+      "date": "2026-04-23"
     },
     {
       "ticker": "AEHR",
       "theme": "半導体製造装置：後工程",
-      "price": 90.15,
-      "date": "2026-04-20"
+      "price": 95.51,
+      "date": "2026-04-23"
     },
     {
       "ticker": "AMKR",
       "theme": "カスタムAI半導体",
-      "price": 69.44,
-      "date": "2026-04-20"
+      "price": 72.91,
+      "date": "2026-04-23"
     },
     {
       "ticker": "BKSY",
       "theme": "宇宙：地球観測",
-      "price": 37.42,
-      "date": "2026-04-20"
+      "price": 38.44,
+      "date": "2026-04-23"
     },
     {
       "ticker": "MU",
       "theme": "データストレージ",
-      "price": 448.42,
-      "date": "2026-04-20"
+      "price": 481.72,
+      "date": "2026-04-23"
     }
   ],
   "summary": {
