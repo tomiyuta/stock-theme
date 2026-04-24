@@ -298,7 +298,10 @@ for rank_i, th in enumerate(sel):
         else:
             score_snrb = -999
         # CRA-v1: confirmation overlay on SNRb
-        cra_audit_score, cra_detail = cra_audit(th, tk, a63)
+        try:
+            cra_audit_score, cra_detail = cra_audit(th, tk, a63)
+        except Exception:
+            cra_audit_score, cra_detail = 0.0, {}
         score_cra = score_snrb * (0.70 + 0.30 * cra_audit_score) if score_snrb > -999 else -999
         # DEF: 12-7 month intermediate alpha
         tkd_7_12 = sub_7_12[(sub_7_12['theme']==th)&(sub_7_12['ticker']==tk)].sort_values('date')
