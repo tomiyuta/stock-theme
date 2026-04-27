@@ -2,27 +2,27 @@
   "benchmark": "SPY",
   "cash_proxy": "SHV",
   "lookback_days": 63,
-  "benchmark_ret_3m": 0.0387,
+  "benchmark_ret_3m": 0.0352,
   "cash_ret_3m": 0.0087,
-  "excess_3m": 0.03,
+  "excess_3m": 0.026500000000000003,
   "gate_state": "OPEN",
   "atk_cap": 0.8,
   "equity_axis": {
-    "spy_ret_3m": 0.0387,
-    "qqq_ret_3m": 0.0674,
+    "spy_ret_3m": 0.0352,
+    "qqq_ret_3m": 0.0633,
     "shv_ret_3m": 0.0087,
-    "equity_excess_3m": 0.03
+    "equity_excess_3m": 0.0265
   },
   "credit_axis": {
     "lqd_excess_3m": -0.0087,
-    "hyg_excess_3m": -0.0022,
-    "hyg_minus_lqd_3m": 0.0065
+    "hyg_excess_3m": -0.0023,
+    "hyg_minus_lqd_3m": 0.0064
   },
   "hard_asset_axis": {
-    "gld_excess_3m": -0.0627,
-    "xle_minus_spy_3m": 0.125
+    "gld_excess_3m": -0.0836,
+    "xle_minus_spy_3m": 0.1257
   },
   "duration_axis": {
-    "tlt_ret_3m": -0.0028
+    "tlt_ret_3m": -0.0125
   }
 }

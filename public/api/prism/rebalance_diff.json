@@ -3,93 +3,43 @@
   "prev_date": "",
   "added": [
     {
-      "ticker": "CLS",
+      "ticker": "AEIS",
       "theme": "",
-      "price": 391.6,
+      "price": 387.24,
       "date": ""
     },
     {
-      "ticker": "FLEX",
+      "ticker": "BE",
       "theme": "",
-      "price": 86.9,
-      "date": ""
-    },
-    {
-      "ticker": "ON",
-      "theme": "",
-      "price": 97.78,
-      "date": ""
-    },
-    {
-      "ticker": "SANM",
-      "theme": "",
-      "price": 180.02,
-      "date": ""
-    },
-    {
-      "ticker": "VICR",
-      "theme": "",
-      "price": 260.13,
-      "date": ""
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "AVGO",
-      "theme": "",
-      "price": 422.65,
+      "price": 231.17,
       "date": ""
     },
     {
       "ticker": "DY",
       "theme": "",
-      "price": 408.05,
+      "price": 410.72,
       "date": ""
     },
     {
-      "ticker": "JBHT",
+      "ticker": "FIX",
       "theme": "",
-      "price": 247.03,
+      "price": 1726.12,
+      "date": ""
+    },
+    {
+      "ticker": "MKSI",
+      "theme": "",
+      "price": 280.98,
       "date": ""
     },
     {
       "ticker": "MTZ",
       "theme": "",
-      "price": 376.5,
-      "date": ""
-    },
-    {
-      "ticker": "XPO",
-      "theme": "",
-      "price": 221.12,
+      "price": 376.12,
       "date": ""
     }
   ],
-  "unchanged": [
-    {
-      "ticker": "ADI",
-      "theme": "",
-      "price": 403.88,
-      "date": ""
-    },
-    {
-      "ticker": "AMD",
-      "theme": "",
-      "price": 305.33,
-      "date": ""
-    },
-    {
-      "ticker": "AMKR",
-      "theme": "",
-      "price": 72.91,
-      "date": ""
-    },
-    {
-      "ticker": "ARM",
-      "theme": "",
-      "price": 204.61,
-      "date": ""
-    },
+  "removed": [
     {
       "ticker": "CC",
       "theme": "",
@@ -97,27 +47,9 @@
       "date": ""
     },
     {
-      "ticker": "ETN",
-      "theme": "",
-      "price": 424.5,
-      "date": ""
-    },
-    {
-      "ticker": "GEV",
-      "theme": "",
-      "price": 1149.53,
-      "date": ""
-    },
-    {
       "ticker": "MCHP",
       "theme": "",
       "price": 90.64,
-      "date": ""
-    },
-    {
-      "ticker": "MRVL",
-      "theme": "",
-      "price": 165.56,
       "date": ""
     },
     {
@@ -131,19 +63,93 @@
       "theme": "",
       "price": 81.05,
       "date": ""
+    }
+  ],
+  "unchanged": [
+    {
+      "ticker": "ADI",
+      "theme": "",
+      "price": 399.57,
+      "date": ""
+    },
+    {
+      "ticker": "AMD",
+      "theme": "",
+      "price": 347.8,
+      "date": ""
+    },
+    {
+      "ticker": "AMKR",
+      "theme": "",
+      "price": 78.11,
+      "date": ""
+    },
+    {
+      "ticker": "ARM",
+      "theme": "",
+      "price": 234.81,
+      "date": ""
+    },
+    {
+      "ticker": "CLS",
+      "theme": "",
+      "price": 410.21,
+      "date": ""
+    },
+    {
+      "ticker": "ETN",
+      "theme": "",
+      "price": 423.92,
+      "date": ""
+    },
+    {
+      "ticker": "FLEX",
+      "theme": "",
+      "price": 91.41,
+      "date": ""
+    },
+    {
+      "ticker": "GEV",
+      "theme": "",
+      "price": 1149.19,
+      "date": ""
+    },
+    {
+      "ticker": "MRVL",
+      "theme": "",
+      "price": 164.31,
+      "date": ""
+    },
+    {
+      "ticker": "ON",
+      "theme": "",
+      "price": 98.4,
+      "date": ""
+    },
+    {
+      "ticker": "SANM",
+      "theme": "",
+      "price": 192.16,
+      "date": ""
     },
     {
       "ticker": "TXN",
       "theme": "",
-      "price": 282.23,
+      "price": 277.17,
+      "date": ""
+    },
+    {
+      "ticker": "VICR",
+      "theme": "",
+      "price": 273.53,
       "date": ""
     }
   ],
   "summary": {
-    "total_now": 17,
+    "total_now": 19,
     "total_prev": 17,
-    "added": 5,
-    "removed": 5,
-    "unchanged": 12
+    "added": 6,
+    "removed": 4,
+    "unchanged": 13
   }
 }

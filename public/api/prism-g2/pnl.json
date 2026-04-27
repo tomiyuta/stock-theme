@@ -1,61 +1,61 @@
 {
-  "as_of_date": "2026-04-24",
+  "as_of_date": "2026-04-27",
   "strategy": "G2-MAX",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 6,
-    "total_pnl_pct": 0.1426,
-    "beast_pnl_pct": 0.1426,
-    "closed_count": 5
+    "total_pnl_pct": 0.1496,
+    "beast_pnl_pct": 0.1496,
+    "closed_count": 6
   },
   "positions": [
+    {
+      "ticker": "MU",
+      "theme": "データストレージ",
+      "entry_price": 420.59,
+      "current_price": 524.56,
+      "weight": 0.2753,
+      "pnl_pct": 0.2472
+    },
     {
       "ticker": "AAOI",
       "theme": "光接続：インフラ",
       "entry_price": 150.6,
-      "current_price": 162.17,
-      "weight": 0.2146,
-      "pnl_pct": 0.0768
+      "current_price": 145.78,
+      "weight": 0.1989,
+      "pnl_pct": -0.032
     },
     {
       "ticker": "AEHR",
       "theme": "半導体製造装置：後工程",
       "entry_price": 80.85,
-      "current_price": 95.91,
-      "weight": 0.1575,
-      "pnl_pct": 0.1863
-    },
-    {
-      "ticker": "MU",
-      "theme": "データストレージ",
-      "entry_price": 420.59,
-      "current_price": 496.72,
-      "weight": 0.2836,
-      "pnl_pct": 0.181
+      "current_price": 88.48,
+      "weight": 0.1518,
+      "pnl_pct": 0.0944
     },
     {
       "ticker": "AMKR",
       "theme": "カスタムAI半導体",
       "entry_price": 60.44,
-      "current_price": 78.1,
-      "weight": 0.1157,
-      "pnl_pct": 0.2922
+      "current_price": 75.62,
+      "weight": 0.1141,
+      "pnl_pct": 0.2512
     },
     {
       "ticker": "ETN",
       "theme": "DC変圧器・スイッチギア",
       "entry_price": 403.0,
-      "current_price": 423.92,
-      "weight": 0.1073,
-      "pnl_pct": 0.0519
+      "current_price": 416.77,
+      "weight": 0.1067,
+      "pnl_pct": 0.0342
     },
     {
-      "ticker": "ACDC",
-      "theme": "天然ガス掘削：米",
-      "entry_price": 7.38,
-      "current_price": 7.38,
-      "weight": 0.1212,
-      "pnl_pct": 0.0
+      "ticker": "BKSY",
+      "theme": "宇宙：地球観測",
+      "entry_price": 34.14,
+      "current_price": 33.21,
+      "weight": 0.1532,
+      "pnl_pct": -0.0272
     }
   ],
   "closed_positions": [
@@ -93,6 +93,13 @@
       "entry_date": "2026-04-15",
       "exit_date": "2026-04-20",
       "entry_price": 86.91
+    },
+    {
+      "ticker": "ACDC",
+      "theme": "天然ガス掘削：米",
+      "entry_date": "2026-04-24",
+      "exit_date": "2026-04-27",
+      "entry_price": 7.38
     }
   ]
 }

@@ -132,7 +132,8 @@
       "entry_date": "2026-04-16",
       "entry_price": 63.68,
       "theme": "半導体製造装置：部品",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-27"
     },
     "VRT": {
       "entry_date": "2026-04-23",

@@ -1,47 +1,21 @@
 {
-  "as_of": "2026-04-24",
-  "prev_date": "2026-04-23",
+  "as_of": "2026-04-27",
+  "prev_date": "2026-04-24",
   "added": [
     {
-      "ticker": "LBRT",
-      "theme": "天然ガス掘削：米",
-      "price": 32.74,
-      "date": "2026-04-24"
-    },
-    {
-      "ticker": "PL",
-      "theme": "宇宙：地球観測",
-      "price": 35.44,
-      "date": "2026-04-24"
-    }
-  ],
-  "removed": [
-    {
-      "ticker": "GEV",
-      "theme": "DC変圧器・スイッチギア",
-      "price": 1149.53,
-      "date": "2026-04-23"
+      "ticker": "MRVL",
+      "theme": "光接続：トランシーバ",
+      "price": 158.21,
+      "date": "2026-04-27"
     },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
-      "price": 11.14,
-      "date": "2026-04-23"
+      "price": 11.46,
+      "date": "2026-04-27"
     }
   ],
-  "unchanged": [
-    {
-      "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
-      "price": 162.17,
-      "date": "2026-04-24"
-    },
-    {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "price": 76.16,
-      "date": "2026-04-24"
-    },
+  "removed": [
     {
       "ticker": "ICHR",
       "theme": "半導体製造装置：部品",
@@ -49,34 +23,60 @@
       "date": "2026-04-24"
     },
     {
+      "ticker": "LBRT",
+      "theme": "天然ガス掘削：米",
+      "price": 32.74,
+      "date": "2026-04-24"
+    }
+  ],
+  "unchanged": [
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：インフラ",
+      "price": 145.78,
+      "date": "2026-04-27"
+    },
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "price": 70.15,
+      "date": "2026-04-27"
+    },
+    {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
-      "price": 376.12,
-      "date": "2026-04-24"
+      "price": 385.89,
+      "date": "2026-04-27"
     },
     {
       "ticker": "PARR",
       "theme": "石油精製",
-      "price": 64.19,
-      "date": "2026-04-24"
+      "price": 64.35,
+      "date": "2026-04-27"
     },
     {
       "ticker": "PBR",
       "theme": "スーパーメジャー：米国外",
-      "price": 20.87,
-      "date": "2026-04-24"
+      "price": 20.96,
+      "date": "2026-04-27"
+    },
+    {
+      "ticker": "PL",
+      "theme": "宇宙：地球観測",
+      "price": 35.45,
+      "date": "2026-04-27"
     },
     {
       "ticker": "VRT",
       "theme": "熱管理インフラ",
-      "price": 323.46,
-      "date": "2026-04-24"
+      "price": 322.43,
+      "date": "2026-04-27"
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
-      "price": 46.38,
-      "date": "2026-04-24"
+      "price": 47.1,
+      "date": "2026-04-27"
     }
   ],
   "summary": {

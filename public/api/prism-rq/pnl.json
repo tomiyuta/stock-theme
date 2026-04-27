@@ -1,102 +1,102 @@
 {
-  "as_of_date": "2026-04-24",
+  "as_of_date": "2026-04-27",
   "strategy": "PRISM-RQ",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0419,
-    "closed_count": 14
+    "total_pnl_pct": 0.0278,
+    "closed_count": 15
   },
   "positions": [
-    {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "entry_price": 67.3,
-      "current_price": 76.16,
-      "weight": 0.1,
-      "pnl_pct": 0.1316,
-      "pnl_weighted": 0.013165
-    },
     {
       "ticker": "PTEN",
       "theme": "天然ガス掘削：米",
       "entry_price": 10.05,
-      "current_price": 11.33,
+      "current_price": 11.46,
       "weight": 0.1,
-      "pnl_pct": 0.1274,
-      "pnl_weighted": 0.012736
-    },
-    {
-      "ticker": "ICHR",
-      "theme": "半導体製造装置：部品",
-      "entry_price": 63.68,
-      "current_price": 70.93,
-      "weight": 0.1,
-      "pnl_pct": 0.1139,
-      "pnl_weighted": 0.011385
-    },
-    {
-      "ticker": "PARR",
-      "theme": "石油精製",
-      "entry_price": 62.77,
-      "current_price": 64.19,
-      "weight": 0.1,
-      "pnl_pct": 0.0226,
-      "pnl_weighted": 0.002262
-    },
-    {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
-      "entry_price": 21.51,
-      "current_price": 20.87,
-      "weight": 0.1,
-      "pnl_pct": -0.0298,
-      "pnl_weighted": -0.002975
-    },
-    {
-      "ticker": "AAOI",
-      "theme": "光接続：トランシーバ",
-      "entry_price": 150.6,
-      "current_price": 162.17,
-      "weight": 0.1,
-      "pnl_pct": 0.0768,
-      "pnl_weighted": 0.007683
-    },
-    {
-      "ticker": "VRT",
-      "theme": "熱管理インフラ",
-      "entry_price": 321.75,
-      "current_price": 323.46,
-      "weight": 0.1,
-      "pnl_pct": 0.0053,
-      "pnl_weighted": 0.000531
+      "pnl_pct": 0.1403,
+      "pnl_weighted": 0.01403
     },
     {
       "ticker": "PL",
       "theme": "宇宙：地球観測",
       "entry_price": 35.44,
-      "current_price": 35.44,
+      "current_price": 35.45,
       "weight": 0.1,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "pnl_pct": 0.0003,
+      "pnl_weighted": 2.8e-05
+    },
+    {
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
+      "entry_price": 67.3,
+      "current_price": 70.15,
+      "weight": 0.1,
+      "pnl_pct": 0.0423,
+      "pnl_weighted": 0.004235
+    },
+    {
+      "ticker": "PARR",
+      "theme": "石油精製",
+      "entry_price": 62.77,
+      "current_price": 64.35,
+      "weight": 0.1,
+      "pnl_pct": 0.0252,
+      "pnl_weighted": 0.002517
+    },
+    {
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "entry_price": 21.51,
+      "current_price": 20.96,
+      "weight": 0.1,
+      "pnl_pct": -0.0256,
+      "pnl_weighted": -0.002557
+    },
+    {
+      "ticker": "VIAV",
+      "theme": "光接続：インフラ",
+      "entry_price": 41.79,
+      "current_price": 44.92,
+      "weight": 0.1,
+      "pnl_pct": 0.0749,
+      "pnl_weighted": 0.00749
+    },
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：トランシーバ",
+      "entry_price": 150.6,
+      "current_price": 145.78,
+      "weight": 0.1,
+      "pnl_pct": -0.032,
+      "pnl_weighted": -0.003201
+    },
+    {
+      "ticker": "VRT",
+      "theme": "熱管理インフラ",
+      "entry_price": 321.75,
+      "current_price": 322.43,
+      "weight": 0.1,
+      "pnl_pct": 0.0021,
+      "pnl_weighted": 0.000211
     },
     {
       "ticker": "MTZ",
       "theme": "電気工事・施工",
       "entry_price": 361.22,
-      "current_price": 376.12,
+      "current_price": 385.89,
       "weight": 0.1,
-      "pnl_pct": 0.0412,
-      "pnl_weighted": 0.004125
+      "pnl_pct": 0.0683,
+      "pnl_weighted": 0.00683
     },
     {
       "ticker": "VZ",
       "theme": "高配当",
       "entry_price": 45.03,
-      "current_price": 46.38,
+      "current_price": 47.1,
       "weight": 0.1,
-      "pnl_pct": 0.03,
-      "pnl_weighted": 0.002998
+      "pnl_pct": 0.046,
+      "pnl_weighted": 0.004597
     }
   ],
   "closed_positions": [
@@ -197,6 +197,13 @@
       "entry_date": "2026-04-15",
       "exit_date": "2026-04-23",
       "entry_price": 891.72
+    },
+    {
+      "ticker": "ICHR",
+      "theme": "半導体製造装置：部品",
+      "entry_date": "2026-04-16",
+      "exit_date": "2026-04-27",
+      "entry_price": 63.68
     }
   ]
 }

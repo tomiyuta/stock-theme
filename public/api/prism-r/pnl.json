@@ -1,56 +1,56 @@
 {
-  "as_of_date": "2026-04-24",
-  "generated_at": "2026-04-24T22:35:01.815107",
+  "as_of_date": "2026-04-27",
+  "generated_at": "2026-04-27T22:43:08.205728",
   "strategy": "PRISM-R",
   "status": "SHADOW_VIRTUAL",
   "summary": {
     "total_positions": 10,
-    "total_pnl_pct": 0.0756,
-    "beast_pnl_pct": 0.0756,
-    "winners": 8,
+    "total_pnl_pct": 0.0809,
+    "beast_pnl_pct": 0.0809,
+    "winners": 10,
     "losers": 0,
-    "best": "AAOI",
-    "best_pnl": 0.2166,
+    "best": "MRVL",
+    "best_pnl": 0.2313,
     "worst": "PL",
-    "worst_pnl": 0.0,
-    "closed_count": 17
+    "worst_pnl": 0.0003,
+    "closed_count": 18
   },
   "positions": [
     {
-      "ticker": "AAOI",
+      "ticker": "MRVL",
       "theme": "光接続：トランシーバ",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-10",
+      "entry_price": 128.49,
+      "current_price": 158.21,
+      "weight": 0.1338,
+      "alpha63": 0.468,
+      "pnl_pct": 0.2313,
+      "pnl_weighted": 0.030948
+    },
+    {
+      "ticker": "PTEN",
+      "theme": "天然ガス掘削：米",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 10.14,
+      "current_price": 11.46,
+      "weight": 0.0935,
+      "alpha63": 0.286,
+      "pnl_pct": 0.1302,
+      "pnl_weighted": 0.012172
+    },
+    {
+      "ticker": "AAOI",
+      "theme": "光接続：インフラ",
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 133.3,
-      "current_price": 162.17,
-      "weight": 0.1451,
-      "alpha63": 1.045,
-      "pnl_pct": 0.2166,
-      "pnl_weighted": 0.031426
-    },
-    {
-      "ticker": "AXTI",
-      "theme": "半導体：材料・消耗品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 67.3,
-      "current_price": 76.16,
-      "weight": 0.1201,
-      "alpha63": 1.413,
-      "pnl_pct": 0.1316,
-      "pnl_weighted": 0.015811
-    },
-    {
-      "ticker": "ICHR",
-      "theme": "半導体製造装置：部品",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-14",
-      "entry_price": 64.01,
-      "current_price": 70.93,
-      "weight": 0.1246,
-      "alpha63": 0.281,
-      "pnl_pct": 0.1081,
-      "pnl_weighted": 0.01347
+      "current_price": 145.78,
+      "weight": 0.1523,
+      "alpha63": 0.708,
+      "pnl_pct": 0.0936,
+      "pnl_weighted": 0.014259
     },
     {
       "ticker": "PARR",
@@ -58,11 +58,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 59.46,
-      "current_price": 64.19,
-      "weight": 0.0866,
-      "alpha63": 0.354,
-      "pnl_pct": 0.0795,
-      "pnl_weighted": 0.006889
+      "current_price": 64.35,
+      "weight": 0.0878,
+      "alpha63": 0.337,
+      "pnl_pct": 0.0822,
+      "pnl_weighted": 0.007221
     },
     {
       "ticker": "MTZ",
@@ -70,23 +70,23 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-09",
       "entry_price": 357.37,
-      "current_price": 376.12,
-      "weight": 0.0944,
-      "alpha63": 0.212,
-      "pnl_pct": 0.0525,
-      "pnl_weighted": 0.004953
+      "current_price": 385.89,
+      "weight": 0.0904,
+      "alpha63": 0.217,
+      "pnl_pct": 0.0798,
+      "pnl_weighted": 0.007214
     },
     {
-      "ticker": "PBR",
-      "theme": "スーパーメジャー：米国外",
+      "ticker": "AXTI",
+      "theme": "半導体：材料・消耗品",
       "theme_state": "ENTRY",
-      "entry_date": "2026-04-09",
-      "entry_price": 20.69,
-      "current_price": 20.87,
-      "weight": 0.072,
-      "alpha63": 0.138,
-      "pnl_pct": 0.0087,
-      "pnl_weighted": 0.000626
+      "entry_date": "2026-04-14",
+      "entry_price": 67.3,
+      "current_price": 70.15,
+      "weight": 0.1153,
+      "alpha63": 1.321,
+      "pnl_pct": 0.0423,
+      "pnl_weighted": 0.004883
     },
     {
       "ticker": "VZ",
@@ -94,11 +94,23 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-10",
       "entry_price": 46.04,
-      "current_price": 46.38,
+      "current_price": 47.1,
       "weight": 0.0609,
-      "alpha63": 0.14,
-      "pnl_pct": 0.0074,
-      "pnl_weighted": 0.00045
+      "alpha63": 0.162,
+      "pnl_pct": 0.023,
+      "pnl_weighted": 0.001402
+    },
+    {
+      "ticker": "PBR",
+      "theme": "スーパーメジャー：米国外",
+      "theme_state": "ENTRY",
+      "entry_date": "2026-04-09",
+      "entry_price": 20.69,
+      "current_price": 20.96,
+      "weight": 0.0716,
+      "alpha63": 0.166,
+      "pnl_pct": 0.013,
+      "pnl_weighted": 0.000934
     },
     {
       "ticker": "VRT",
@@ -106,23 +118,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-23",
       "entry_price": 321.75,
-      "current_price": 323.46,
-      "weight": 0.0811,
-      "alpha63": 0.253,
-      "pnl_pct": 0.0053,
-      "pnl_weighted": 0.000431
-    },
-    {
-      "ticker": "LBRT",
-      "theme": "天然ガス掘削：米",
-      "theme_state": "ENTRY",
-      "entry_date": "2026-04-24",
-      "entry_price": 32.74,
-      "current_price": 32.74,
-      "weight": 0.0959,
-      "alpha63": 0.217,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "current_price": 322.43,
+      "weight": 0.0773,
+      "alpha63": 0.277,
+      "pnl_pct": 0.0021,
+      "pnl_weighted": 0.000163
     },
     {
       "ticker": "PL",
@@ -130,11 +130,11 @@
       "theme_state": "ENTRY",
       "entry_date": "2026-04-24",
       "entry_price": 35.44,
-      "current_price": 35.44,
-      "weight": 0.1192,
-      "alpha63": 0.153,
-      "pnl_pct": 0.0,
-      "pnl_weighted": 0.0
+      "current_price": 35.45,
+      "weight": 0.1173,
+      "alpha63": 0.135,
+      "pnl_pct": 0.0003,
+      "pnl_weighted": 3.3e-05
     }
   ],
   "closed_positions": [
@@ -256,6 +256,13 @@
       "entry_date": "2026-04-15",
       "exit_date": "2026-04-23",
       "entry_price": 891.72
+    },
+    {
+      "ticker": "LBRT",
+      "theme": "天然ガス掘削：米",
+      "entry_date": "2026-04-24",
+      "exit_date": "2026-04-27",
+      "entry_price": 32.74
     }
   ]
 }

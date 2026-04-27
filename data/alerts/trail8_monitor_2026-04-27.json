@@ -1,0 +1,12 @@
+{
+  "date": "2026-04-27",
+  "trail8_alerts": [
+    {
+      "ticker": "FTAI",
+      "drop": -0.10956022944550671,
+      "reason": "gap_stop(-11.0%)"
+    }
+  ],
+  "auto_sell_enabled": false,
+  "note": "EXIT_CONSTITUTION_v2: monitoring only"
+}

@@ -170,7 +170,9 @@
       "entry_date": "2026-04-24",
       "entry_price": 32.74,
       "theme": "天然ガス掘削：米",
-      "status": "active"
+      "status": "closed",
+      "exit_date": "2026-04-27",
+      "exit_price": 0
     },
     "PL": {
       "entry_date": "2026-04-24",
